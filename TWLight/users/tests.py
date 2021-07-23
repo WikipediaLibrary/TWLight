@@ -1920,3 +1920,39 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
         self.assertNotIn("Expiry date: ", content)
+
+    def test_user_collections_has_open_application(self):
+        """
+        Tests that the Go to application button is shown when an application is open
+        """
+
+        old_app = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.PENDING,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn("Go to application", content)

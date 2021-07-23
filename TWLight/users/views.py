@@ -933,7 +933,7 @@ class MyLibraryView(TemplateView):
                     "date_expires": user_authorization.date_expires,
                     "is_valid": user_authorization.is_valid,
                     "latest_sent_app": user_authorization.get_latest_sent_app,
-                    "has_open_app": open_app,
+                    "open_app": open_app,
                     "has_expired": has_expired,
                 }
             )
