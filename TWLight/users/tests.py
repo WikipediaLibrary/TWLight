@@ -356,7 +356,7 @@ class ViewsTestCase(TestCase):
         app.refresh_from_db()
         self.assertNotIn("Withdraw", response.render().content.decode("utf-8"))
 
-    def test_my_library_page_has_authorizations(self):
+    def test_my_library_authorizations_and_collections(self):
 
         # a coordinator with a session.
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -478,6 +478,38 @@ class ViewsTestCase(TestCase):
         # Check for manual auths
         for partner in manual_partners:
             self.assertTrue(partner in response_manual_partners)
+
+        # Get collections
+        request = factory.get(reverse("users:redesigned_my_library"))
+        request.user = self.user_editor
+        response = views.MyLibraryView.as_view()(request)
+
+        # Check user_collection partner_id_set
+        user_auths = Authorization.objects.filter(user=self.user_editor).distinct()
+        test_partner_id_set = set()
+        for user_auth in user_auths:
+            if user_auth.is_valid:
+                for partner in user_auth.partners.all():
+                    test_partner_id_set.add(partner.pk)
+
+        self.assertEqual(response.context_data["partner_id_set"], test_partner_id_set)
+
+        # Check available_collection partner_id_set
+        available_collections = response.context_data["available_collections"]
+        available_collections_partner_id_set = set()
+        for collection in available_collections:
+            available_collections_partner_id_set.add(collection["pk"])
+
+        test_available_partner_id_set = set()
+        available_partners = Partner.objects.exclude(
+            authorization_method__in=[Partner.BUNDLE]
+        ).exclude(id__in=test_partner_id_set)
+        for partner in available_partners:
+            test_available_partner_id_set.add(partner.pk)
+
+        self.assertEqual(
+            available_collections_partner_id_set, test_available_partner_id_set
+        )
 
     def test_return_authorization(self):
         # Simulate a valid user trying to return their access
