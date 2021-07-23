@@ -26,6 +26,7 @@ from django.contrib import messages
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import to_language
 
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
@@ -57,7 +58,7 @@ def get_languages_from_locale_subdirectories(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
             for lang_code, lang_data in languages.items():
                 autonym = lang_data[-1]
-                if locale_dir == lang_code:
+                if to_language(locale_dir) == lang_code:
                     current_languages += [(lang_code, autonym)]
     return sorted(set(current_languages))
 
