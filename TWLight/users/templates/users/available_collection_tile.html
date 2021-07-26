@@ -1,0 +1,47 @@
+{% load i18n %}
+<div class="col-lg-4 col-md-6 col-sm-12">
+  <div class="card collection-tile">
+    {% if available_collection.partner_logo %}
+      <a href="{% url 'partners:detail' available_collection.pk %}" class="text-center">
+        <img src="{{ available_collection.partner_logo }}" class="card-img-top library-tile-image"
+            alt="{{ available_collection.partner_name }} logo">
+      </a>
+    {% else %}
+      <a href="{% url 'partners:detail' available_collection.pk %}" class="text-center">
+        <img src="..." class="card-img-top" alt="{{ available_collection.partner_name }} logo">
+      </a>
+    {% endif %}
+    <div class="card-body">
+      <p class="card-text">{{ available_collection.short_description|safe }}</p>
+      <hr>
+      <p class="card-text small">
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports. {% endcomment %}
+        <strong> {% trans "Languages: " %} </strong>
+        {% if available_collection.languages %}
+          {% for language in available_collection.languages%}
+            {{ language }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        {% else %}
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show. {% endcomment %}
+          {% trans "Language(s) not known" %}
+        {% endif %}
+      </p>
+      <p class="card-text">
+        {% if available_collection.tags %}
+          {% for tag_key, tag_value in available_collection.tags.items %}
+            <a href="#" class="badge badge-pill collection-tags">
+              {{ tag_value }}
+            </a>
+          {% endfor %}
+        {% endif %}
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="{% url 'applications:apply_single' available_collection.pk %}"
+          class="btn access-apply-button" type="button" name="button">
+        {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access. {% endcomment %}
+        {% trans "Apply" %}
+      </a>
+    </div>
+  </div>
+</div>

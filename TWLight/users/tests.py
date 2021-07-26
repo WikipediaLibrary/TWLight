@@ -34,6 +34,7 @@ from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor, Authorization
+from .views import MyLibraryView
 
 from TWLight.users.helpers.editor_data import (
     editor_valid,
@@ -356,7 +357,7 @@ class ViewsTestCase(TestCase):
         app.refresh_from_db()
         self.assertNotIn("Withdraw", response.render().content.decode("utf-8"))
 
-    def test_my_library_page_has_authorizations(self):
+    def test_my_library_authorizations_and_collections(self):
 
         # a coordinator with a session.
         coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
@@ -478,6 +479,39 @@ class ViewsTestCase(TestCase):
         # Check for manual auths
         for partner in manual_partners:
             self.assertTrue(partner in response_manual_partners)
+
+        # Get collections
+        request = factory.get(reverse("users:redesigned_my_library"))
+        request.user = self.user_editor
+        response = views.MyLibraryView.as_view()(request)
+
+        # Check user_collection partner_id_set
+        user_auths = Authorization.objects.filter(user=self.user_editor).distinct()
+        test_partner_id_set = set()
+        for user_auth in user_auths:
+            for partner in user_auth.partners.all():
+                test_partner_id_set.add(partner.pk)
+                for partner in user_auth.partners.all():
+                    test_partner_id_set.add(partner.pk)
+
+        self.assertEqual(response.context_data["partner_id_set"], test_partner_id_set)
+
+        # Check available_collection partner_id_set
+        available_collections = response.context_data["available_collections"]
+        available_collections_partner_id_set = set()
+        for collection in available_collections:
+            available_collections_partner_id_set.add(collection["pk"])
+
+        test_available_partner_id_set = set()
+        available_partners = Partner.objects.exclude(
+            authorization_method__in=[Partner.BUNDLE]
+        ).exclude(id__in=test_partner_id_set)
+        for partner in available_partners:
+            test_available_partner_id_set.add(partner.pk)
+
+        self.assertEqual(
+            available_collections_partner_id_set, test_available_partner_id_set
+        )
 
     def test_return_authorization(self):
         # Simulate a valid user trying to return their access
@@ -1724,3 +1758,202 @@ class ManagementCommandsTestCase(TestCase):
         self.editor.refresh_from_db()
 
         self.assertFalse(self.editor.wp_bundle_eligible)
+
+
+class MyLibraryViewsTest(TestCase):
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.user_coordinator = UserFactory(username="Jon Snow")
+        cls.editor = EditorFactory()
+        cls.editor.wp_bundle_eligible = True
+        cls.editor.save()
+        get_coordinators().user_set.add(cls.user_coordinator)
+
+    def test_user_collections(self):
+        """
+        Tests that only user collections are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertIn(escape(self.bundle_partner_3.company_name), content)
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+
+        # TODO: This must be changed to assertNotIn when work in T285556 is made
+        self.assertIn(escape(self.proxy_partner_2.company_name), content)
+
+    def test_user_collections_show_expiry_date_extend(self):
+        """
+        Tests that the expiry date and the Extend button are shown
+        """
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        someday = date.today() + timedelta(days=60)
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+        authorization.date_expires = someday
+        authorization.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        someday_fmt = datetime.strftime(someday, "%b %d, %Y")
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(someday_fmt, content)
+        self.assertIn("Extend", content)
+
+    def test_user_collections_show_expiry_date_renew(self):
+        """
+        Tests that the expiry date and the Renew button are shown
+        """
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        someday = date.today() - timedelta(days=60)
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+        authorization.date_expires = someday
+        authorization.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        someday_fmt = datetime.strftime(someday, "%b %d, %Y")
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(someday_fmt, content)
+        self.assertIn("Renew", content)
+
+    def test_user_collections_show_expiry_date_not_shown(self):
+        """
+        Tests that the expiry date is not shown
+        """
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+        authorization.date_expires = None
+        authorization.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertNotIn("Expiry date: ", content)
+
+    def test_user_collections_has_open_application(self):
+        """
+        Tests that the Go to application button is shown when an application is open
+        """
+
+        old_app = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.PENDING,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn("Go to application", content)

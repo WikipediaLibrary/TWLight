@@ -18,6 +18,7 @@ html {
 
 body {
   background-color: white;
+  text-align: right;
 }
 
 /* Different buffers for the footer based on screen size */
@@ -544,6 +545,94 @@ and (min-device-width : 1025px) {
 @-ms-keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
+}
+
+/*
+----------------------------------------------------------------------------
+NEW MY LIBRARY CSS
+--------------------------------------------------------------------------
+*/
+.collection-tile{
+    margin: 0px 0px 105px 0px;
+}
+
+.library-tile-image{
+    max-height: 255px;
+    max-width: 275px;
+    padding: 10px 0px 0px 0px;
+}
+
+.collection-tags{
+    color: #000000;
+    background-color: #E0E0E0;
+}
+
+.collection-tags:hover{
+    color: #000000;
+    background-color: #AAADB0;
+}
+
+.expiry-date-text{
+    font-size: 14px;
+    text-align: left;
+}
+
+.access-apply-button{
+    color: #FFFFFF;
+    background-color: #3366CC;
+    width: 40%;
+    float: right;
+}
+
+.access-apply-button:hover{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.renew-extend-button{
+    border: 1px solid #8E8E8E;
+    background-color: #FFFFFF;
+    width: 40%;
+    float: left;
+}
+
+.renew-extend-button:hover{
+    text-decoration: underline;
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .access-apply-button{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .renew-extend-button{
+        border: 1px solid #8E8E8E;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
+}
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .access-apply-button{
+        color: #FFFFFF;
+        background-color: #3366CC;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .renew-extend-button{
+        border: 1px solid #8E8E8E;
+        background-color: #FFFFFF;
+        width: 100%;
+    }
 }
 
 /*

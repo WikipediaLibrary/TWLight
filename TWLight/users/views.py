@@ -25,8 +25,10 @@ from django.utils.http import is_safe_url
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 from django.utils import timezone
+from django.utils.translation import get_language
 
-from TWLight.resources.models import Partner
+from TWLight.resources.helpers import get_partner_description, get_tag_names
+from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
     SelfOnly,
@@ -837,3 +839,169 @@ class WithdrawApplication(RedirectView):
 
 class MyLibraryView(TemplateView):
     template_name = "users/redesigned_my_library.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        language_code = get_language()
+
+        self._build_user_collection_object(context, language_code)
+        self._build_available_collection_object(
+            context, language_code, context["partner_id_set"]
+        )
+
+        context["bundle_authorization"] = Partner.BUNDLE
+        context["proxy_authorization"] = Partner.PROXY
+
+        return context
+
+    def _build_user_collection_object(self, context, language_code):
+        """
+        Helper function to build a user collections object that will
+        fill the My Collections section of the redesigned My Library
+        template
+        ----------
+        context : dict
+            The context dictionary
+        language_code: str
+            The language code that some tags and descriptions will be translated to
+
+        Returns
+        -------
+        dict
+            The context dictionary with the user collections added
+        """
+        editor = Editor.objects.get(pk=self.request.user.editor.pk)
+
+        user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
+
+        user_authorization_obj = []
+        partner_id_set = set()
+        for user_authorization in user_authorizations:
+            user_authorization_partner_obj = []
+            for user_authorization_partner in user_authorization.partners.all():
+                # Obtaining translated partner description
+                partner_short_description_key = "{pk}_short_description".format(
+                    pk=user_authorization_partner.pk
+                )
+                partner_description_key = "{pk}_description".format(
+                    pk=user_authorization_partner.pk
+                )
+                partner_descriptions = get_partner_description(
+                    language_code,
+                    partner_short_description_key,
+                    partner_description_key,
+                )
+                try:
+                    partner_logo = user_authorization_partner.logos.logo.url
+                except PartnerLogo.DoesNotExist:
+                    partner_logo = None
+                # Getting tags from locale files
+                translated_tags = get_tag_names(
+                    language_code, user_authorization_partner.new_tags
+                )
+                user_authorization_partner_obj.append(
+                    {
+                        "pk": user_authorization_partner.pk,
+                        "partner_name": user_authorization_partner.company_name,
+                        "partner_logo": partner_logo,
+                        "short_description": partner_descriptions["short_description"],
+                        "description": partner_descriptions["description"],
+                        "languages": user_authorization_partner.get_languages,
+                        "tags": translated_tags,
+                        "authorization_method": user_authorization_partner.authorization_method,
+                        "access_url": user_authorization_partner.get_access_url,
+                    }
+                )
+                partner_id_set.add(user_authorization_partner.pk)
+
+            open_app = user_authorization.get_open_app
+
+            if user_authorization.date_expires:
+                if user_authorization.date_expires < date.today():
+                    has_expired = True
+                else:
+                    has_expired = False
+            else:
+                has_expired = False
+
+            user_authorization_obj.append(
+                {
+                    "pk": user_authorization.pk,
+                    "partners": user_authorization_partner_obj,
+                    "date_authorized": user_authorization.date_authorized,
+                    "date_expires": user_authorization.date_expires,
+                    "is_valid": user_authorization.is_valid,
+                    "latest_sent_app": user_authorization.get_latest_sent_app,
+                    "open_app": open_app,
+                    "has_expired": has_expired,
+                }
+            )
+
+        context["partner_id_set"] = partner_id_set
+        context["user_collections"] = user_authorization_obj
+        return context
+
+    def _build_available_collection_object(
+        self, context, language_code, partner_id_set
+    ):
+        """
+        Helper function to build an available collections object that will
+        fill the Available Collections section of the redesigned My Library
+        template
+        ----------
+        context : dict
+            The context dictionary
+        language_code: str
+            The language code that some tags and descriptions will be translated to
+        partner_id_set: set
+            A set of partner IDs which are to be excluded from the query because
+            they're already in the My Collections section of the interface
+
+        Returns
+        -------
+        dict
+            The context dictionary with the available collections added
+        """
+        # Available collections do not include bundle partners and collections
+        # that the user is already authorized to access
+        available_collections = Partner.objects.exclude(
+            authorization_method__in=[Partner.BUNDLE]
+        ).exclude(id__in=partner_id_set)
+
+        available_collection_obj = []
+        for available_collection in available_collections:
+            # Obtaining translated partner description
+            partner_short_description_key = "{pk}_short_description".format(
+                pk=available_collection.pk
+            )
+            partner_description_key = "{pk}_description".format(
+                pk=available_collection.pk
+            )
+            partner_descriptions = get_partner_description(
+                language_code, partner_short_description_key, partner_description_key
+            )
+            try:
+                partner_logo = available_collection.logos.logo.url
+            except PartnerLogo.DoesNotExist:
+                partner_logo = None
+
+            # Getting tags from locale files
+            translated_tags = get_tag_names(
+                language_code, available_collection.new_tags
+            )
+            available_collection_obj.append(
+                {
+                    "pk": available_collection.pk,
+                    "partner_name": available_collection.company_name,
+                    "partner_logo": partner_logo,
+                    "short_description": partner_descriptions["short_description"],
+                    "description": partner_descriptions["description"],
+                    "languages": available_collection.get_languages,
+                    "tags": translated_tags,
+                }
+            )
+
+        context["available_collections"] = available_collection_obj
+
+        return context
