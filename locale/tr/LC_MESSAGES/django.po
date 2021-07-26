@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-20 16:49+0000\n"
-"PO-Revision-Date: 2021-07-22 11:17:04+0000\n"
+"PO-Revision-Date: 2021-07-26 11:18:04+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -275,7 +275,7 @@ msgstr "1 ay"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:167
 msgid "Finalized"
-msgstr ""
+msgstr "Kesinleşti"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:336
@@ -2267,7 +2267,7 @@ msgstr "Daha fazla gör"
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
 msgid "Over 90 of the world's top subscription-only databases, free for Wikipedians of all backgrounds"
-msgstr "90'dan fazla dünyanın en iyi yalnızca abonelik veritabanlarından biri, tüm geçmişlerden Vikipedistler için ücretsiz"
+msgstr "Yalnızca abonelik gerektiren 90'dan fazla iş ortağıyla dünyanın en iyi veritabanı, her kesimden Vikipedistlere erişim serbesttir"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:32
@@ -2281,7 +2281,7 @@ msgstr "Vikipedi ile oturum açın"
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
-msgstr ""
+msgstr "Öne çıkan"
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43

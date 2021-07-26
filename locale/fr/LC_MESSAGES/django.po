@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-20 16:50+0000\n"
-"PO-Revision-Date: 2021-07-22 11:17:02+0000\n"
+"PO-Revision-Date: 2021-07-26 11:18:02+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -275,7 +275,7 @@ msgstr "1 mois"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:167
 msgid "Finalized"
-msgstr ""
+msgstr "Finalisé"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:336
@@ -2270,15 +2270,13 @@ msgstr "Voir plus"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
-#, fuzzy
 msgid "Over 90 of the world's top subscription-only databases, free for Wikipedians of all backgrounds"
-msgstr "\n      Plus de 90 des meilleures bases de données\n      au monde à inscription obligatoire, libres\n      pour les Wikipédiens de tous horizons\n      "
+msgstr "Plus de 90 des meilleures bases de données au monde à inscription obligatoire, libres pour les Wikipédiens de tous horizons"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:32
-#, fuzzy
 msgid "Meet this criteria for automatic access"
-msgstr "\n      Correspondre à ce critère pour un accès automatique\n      "
+msgstr "Correspondre à ce critère pour un accès automatique"
 
 #: TWLight/templates/login_partial.html:54
 msgid "Login via Wikipedia"
@@ -2287,13 +2285,12 @@ msgstr "Connexion via Wikipédia"
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
-msgstr ""
+msgstr "Mis en avant"
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
-#, fuzzy
 msgid "More"
-msgstr "Plus d’infos"
+msgstr "Plus"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16

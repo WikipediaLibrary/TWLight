@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hedda",
 			"Joseph"
 		]
 	},
@@ -16,7 +17,7 @@
 	"social-sciences_tag": "Sosyal Bilimler",
 	"history_tag": "Tarih",
 	"culture_tag": "Kültür",
-	"life-sciences_tag": "Hayat Bilimleri",
+	"life-sciences_tag": "Yaşam Bilimleri",
 	"health-sciences_tag": "Sağlık Bilimleri",
 	"earth-sciences_tag": "Yer Bilimleri",
 	"technology_tag": "Teknoloji"

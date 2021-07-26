@@ -15,8 +15,8 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-20 16:49+0000\n"
-"PO-Revision-Date: 2021-07-22 11:17:03+0000\n"
-"Language: pt-BR\n"
+"PO-Revision-Date: 2021-07-26 11:18:03+0000\n"
+"Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2021-07-21 06:15:27+0000\n"
@@ -269,7 +269,7 @@ msgstr "1 mês"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:167
 msgid "Finalized"
-msgstr ""
+msgstr "Finalizado"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:336
@@ -2280,12 +2280,12 @@ msgstr "\n      Atenda aos critérios para acesso automático\n      "
 
 #: TWLight/templates/login_partial.html:54
 msgid "Login via Wikipedia"
-msgstr "Acessar pela Wikipédia"
+msgstr "Entrar via Wikipédia"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
-msgstr ""
+msgstr "Destacado"
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
