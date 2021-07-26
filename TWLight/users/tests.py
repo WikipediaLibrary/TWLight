@@ -489,7 +489,6 @@ class ViewsTestCase(TestCase):
         user_auths = Authorization.objects.filter(user=self.user_editor).distinct()
         test_partner_id_set = set()
         for user_auth in user_auths:
-        for user_auth in user_auths:
             for partner in user_auth.partners.all():
                 test_partner_id_set.add(partner.pk)
                 for partner in user_auth.partners.all():
