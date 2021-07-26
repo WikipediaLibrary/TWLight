@@ -940,6 +940,8 @@ class MyLibraryView(TemplateView):
 
         context["partner_id_set"] = partner_id_set
         context["user_collections"] = user_authorization_obj
+        context["number_user_collections"] = len(partner_id_set)
+
         return context
 
     def _build_available_collection_object(
@@ -1003,5 +1005,6 @@ class MyLibraryView(TemplateView):
             )
 
         context["available_collections"] = available_collection_obj
+        context["number_available_collections"] = len(available_collection_obj)
 
         return context

@@ -548,6 +548,33 @@ and (min-device-width : 1025px) {
 NEW MY LIBRARY CSS
 --------------------------------------------------------------------------
 */
+.collections-nav{
+    margin-bottom: 40px;
+}
+.collection-nav-separator{
+    border-right: 1px solid #000000;
+}
+.collection-tab-item{
+    font-family: Roboto;
+    font-size: 18px;
+    color: #000000;
+}
+
+.collection-tab-item.active{
+    text-decoration: underline;
+}
+
+.collection-tab-item:hover{
+    font-family: Roboto;
+    color: #000000;
+    text-decoration: underline;
+}
+
+/*
+----------------------------------------------------------------------------
+NEW MY LIBRARY COLLECTION TILES CSS
+--------------------------------------------------------------------------
+*/
 .collection-tile{
     margin: 0px 0px 105px 0px;
 }
