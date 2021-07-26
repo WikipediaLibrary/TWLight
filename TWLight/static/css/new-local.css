@@ -570,6 +570,35 @@ NEW MY LIBRARY CSS
     text-decoration: underline;
 }
 
+.applications-item{
+    position: absolute;
+    right: 0px;
+}
+
+.applications-link{
+    font-family: Roboto;
+    font-size: 14px;
+    color: #3366CC;
+    text-decoration: underline;
+}
+.applications-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .collection-nav-separator{
+        border-right: 0px;
+    }
+    .applications-item{
+        position: absolute;
+        right: 0px;
+        top: 135px;
+    }
+}
 /*
 ----------------------------------------------------------------------------
 NEW MY LIBRARY COLLECTION TILES CSS

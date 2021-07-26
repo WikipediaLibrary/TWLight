@@ -843,19 +843,21 @@ class MyLibraryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        editor = Editor.objects.get(pk=self.request.user.editor.pk)
         language_code = get_language()
 
-        self._build_user_collection_object(context, language_code)
+        self._build_user_collection_object(context, language_code, editor)
         self._build_available_collection_object(
             context, language_code, context["partner_id_set"]
         )
 
+        context["editor"] = editor
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
 
         return context
 
-    def _build_user_collection_object(self, context, language_code):
+    def _build_user_collection_object(self, context, language_code, editor):
         """
         Helper function to build a user collections object that will
         fill the My Collections section of the redesigned My Library
@@ -865,14 +867,14 @@ class MyLibraryView(TemplateView):
             The context dictionary
         language_code: str
             The language code that some tags and descriptions will be translated to
+        editor: Editor
+            The Editor object that will serve to filter authorizations
 
         Returns
         -------
         dict
             The context dictionary with the user collections added
         """
-        editor = Editor.objects.get(pk=self.request.user.editor.pk)
-
         user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
 
         user_authorization_obj = []
