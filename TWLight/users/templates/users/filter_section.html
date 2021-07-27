@@ -1,0 +1,67 @@
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#filterNavbar" aria-controls="filterNavbar" aria-expanded="false"
+      aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="filterNavbar" class="collapse navbar-collapse filter-container">
+    <div class="row filter-title-container">
+      <p class="filter-title">
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section. {% endcomment %}
+        {% trans "Filters: " %}
+      </p>
+      <a href="#" class="reset-filters-link">
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections. {% endcomment %}
+        {% trans "Reset filters" %}
+      </a>
+    </div>
+    <form>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input form-control-sm" id="instantAccessCheck">
+        <label class="form-check-label col-form-label-sm" for="instantAccessCheck">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have instant access. {% endcomment %}
+          {% trans "Instant access" %}
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input form-control-sm" id="multiStepCheck">
+        <label class="form-check-label col-form-label-sm" for="multiStepCheck">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have by multi-step access. {% endcomment %}
+          {% trans "Multi-step access" %}
+        </label>
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="form-group">
+        <label for="languagesDropdown" class="col-form-label-sm">
+          Languages:
+        </label>
+        <select class="form-control form-control-sm" id="languagesDropdown">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subjectsDropdown" class="col-form-label-sm">
+          Subjects:
+        </label>
+        <select class="form-control form-control-sm" id="subjectsDropdown">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="dropdown-divider"></div>
+      <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Filter collections" aria-label="Filter">
+      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+  </div>
+</nav>

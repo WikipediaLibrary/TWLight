@@ -586,6 +586,29 @@ NEW MY LIBRARY CSS
     text-decoration: none;
 }
 
+.filter-container{
+    flex-direction: column;
+}
+.filter-title-container{
+    width: 100%;
+}
+.filter-title{
+    text-align: left;
+    font-size: 15px;
+}
+
+.reset-filters-link{
+    text-align: right;
+    font-size: 15px;
+    color: #3366CC;
+    text-decoration: underline;
+}
+.reset-filters-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+
+
 /* Smartphones */
 @media only screen
 and (min-device-width : 320px)

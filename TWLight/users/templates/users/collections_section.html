@@ -1,0 +1,48 @@
+{% load i18n %}
+<div class="row">
+  <ul id="collectionsTab" class="nav collections-nav flex-column flex-sm-row" role="tablist">
+    <li class="nav-item collection-nav-separator" role="presentation">
+      <a id="user-collections-tab" class="nav-link collection-tab-item active" data-toggle="tab" href="#user-collections"
+          role="tab" aria-controls="user-collections" aria-selected="true">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to. {% endcomment %}
+          {% trans "My Collections " %} ({{ number_user_collections }})
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a id="available-collections-tab" class="nav-link collection-tab-item" data-toggle="tab" href="#available-collections"
+          role="tab" aria-controls="available-collections" aria-selected="false">
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to. {% endcomment %}
+        {% trans "Available Collections " %} ({{ number_available_collections }})
+      </a>
+    </li>
+  </ul>
+  <div class="applications-item">
+    <a href="{% url 'users:my_applications' editor.pk %}" class="nav-link applications-link">
+      {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications. {% endcomment %}
+      {% trans "View my applications >" %}
+    </a>
+  </div>
+</div>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="user-collections" role="tabpanel" aria-labelledby="user-collections-tab">
+    <!-- User Collections -->
+    <div class="row">
+        {% for user_collection in user_collections %}
+          {% for user_collection_partner in user_collection.partners%}
+            {% include "users/user_collection_tile.html" %}
+          {% endfor %}
+        {% endfor %}
+    </div>
+  </div>
+
+  <div class="tab-pane" id="available-collections" role="tabpanel" aria-labelledby="available-collections-tab">
+    <!-- Available Collections -->
+    <div class="row">
+        {% for available_collection in available_collections %}
+          {% include "users/available_collection_tile.html" %}
+        {% endfor %}
+    </div>
+  </div>
+</div>
