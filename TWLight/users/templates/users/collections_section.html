@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="row">
+<div class="row collections-section-container">
   <ul id="collectionsTab" class="nav collections-nav flex-column flex-sm-row" role="tablist">
     <li class="nav-item collection-nav-separator" role="presentation">
       <a id="user-collections-tab" class="nav-link collection-tab-item active" data-toggle="tab" href="#user-collections"
@@ -26,7 +26,7 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="user-collections" role="tabpanel" aria-labelledby="user-collections-tab">
+  <div id="user-collections" class="tab-pane active collections-pane" role="tabpanel" aria-labelledby="user-collections-tab">
     <!-- User Collections -->
     <div class="row">
         {% for user_collection in user_collections %}
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="tab-pane" id="available-collections" role="tabpanel" aria-labelledby="available-collections-tab">
+  <div id="available-collections" class="tab-pane collections-pane" role="tabpanel" aria-labelledby="available-collections-tab">
     <!-- Available Collections -->
     <div class="row">
         {% for available_collection in available_collections %}

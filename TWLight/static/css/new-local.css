@@ -572,7 +572,7 @@ NEW MY LIBRARY CSS
 
 .applications-item{
     position: absolute;
-    right: 0px;
+    right: 15px;
 }
 
 .applications-link{
@@ -585,9 +585,9 @@ NEW MY LIBRARY CSS
     color: #3366CC;
     text-decoration: none;
 }
-
 .filter-container{
     flex-direction: column;
+    margin-top: 40px;
 }
 .filter-title-container{
     width: 100%;
@@ -598,10 +598,11 @@ NEW MY LIBRARY CSS
 }
 
 .reset-filters-link{
-    text-align: right;
     font-size: 15px;
     color: #3366CC;
     text-decoration: underline;
+    position: absolute;
+    right: 0px;
 }
 .reset-filters-link:hover{
     color: #3366CC;
@@ -618,8 +619,7 @@ and (max-device-width : 480px) {
     }
     .applications-item{
         position: absolute;
-        right: 0px;
-        top: 135px;
+        right: 5px;
     }
 }
 /*
@@ -627,6 +627,9 @@ and (max-device-width : 480px) {
 NEW MY LIBRARY COLLECTION TILES CSS
 --------------------------------------------------------------------------
 */
+.collections-pane{
+    margin-right: 15px;
+}
 .collection-tile{
     margin: 0px 0px 105px 0px;
 }
