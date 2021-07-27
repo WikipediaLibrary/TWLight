@@ -622,6 +622,28 @@ and (max-device-width : 480px) {
         right: 5px;
     }
 }
+
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .collection-tab-item{
+        font-family: Roboto;
+        font-size: 16px;
+        color: #000000;
+    }
+    .applications-link{
+        font-family: Roboto;
+        font-size: 13px;
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -25px;
+    }
+}
 /*
 ----------------------------------------------------------------------------
 NEW MY LIBRARY COLLECTION TILES CSS
