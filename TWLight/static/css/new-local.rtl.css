@@ -552,10 +552,18 @@ and (min-device-width : 1025px) {
 NEW MY LIBRARY CSS
 --------------------------------------------------------------------------
 */
+.collections-pane{
+    margin-right: 15px;
+}
 .collection-tile{
     margin: 0px 0px 105px 0px;
 }
-
+.tile-partner-link{
+    max-height: 255px;
+    max-width: 275px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .library-tile-image{
     max-height: 255px;
     max-width: 275px;
@@ -580,7 +588,7 @@ NEW MY LIBRARY CSS
 .access-apply-button{
     color: #FFFFFF;
     background-color: #3366CC;
-    width: 40%;
+    width: 45%;
     float: right;
 }
 

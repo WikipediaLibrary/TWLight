@@ -2,12 +2,12 @@
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if user_collection_partner.partner_logo %}
-      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="text-center">
+      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="tile-partner-link">
         <img src="{{ user_collection_partner.partner_logo }}" class="card-img-top library-tile-image"
           alt="{{ user_collection_partner.partner_name }} logo">
       </a>
     {% else %}
-      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="text-center">
+      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="tile-partner-link">
         <img src="..." class="card-img-top" alt="{{ user_collection_partner.partner_name }} logo">
       </a>
     {% endif %}

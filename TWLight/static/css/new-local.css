@@ -683,7 +683,12 @@ NEW MY LIBRARY COLLECTION TILES CSS
 .collection-tile{
     margin: 0px 0px 105px 0px;
 }
-
+.tile-partner-link{
+    max-height: 255px;
+    max-width: 275px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .library-tile-image{
     max-height: 255px;
     max-width: 275px;
