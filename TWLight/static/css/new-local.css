@@ -556,7 +556,7 @@ NEW MY LIBRARY CSS
 }
 .collection-tab-item{
     font-family: Roboto;
-    font-size: 18px;
+    font-size: 24px;
     color: #000000;
 }
 
@@ -629,8 +629,9 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     .collection-tab-item{
         font-family: Roboto;
-        font-size: 16px;
+        font-size: 20px;
         color: #000000;
+        text-align: center;
     }
     .applications-link{
         font-family: Roboto;
@@ -642,6 +643,33 @@ and (max-device-width : 1024px) {
         position: absolute;
         right: 10px;
         top: -25px;
+    }
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .collection-tab-item{
+        font-family: Roboto;
+        color: #000000;
+        text-align: center;
+    }
+    .applications-link{
+        font-family: Roboto;
+        font-size: 13px;
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -25px;
+    }
+    .collections-nav{
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 /*
@@ -680,7 +708,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
 .access-apply-button{
     color: #FFFFFF;
     background-color: #3366CC;
-    width: 40%;
+    width: 45%;
 }
 
 .access-apply-button:hover{

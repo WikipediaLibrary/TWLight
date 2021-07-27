@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="col-lg-4 col-md-6 col-sm-12">
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if available_collection.partner_logo %}
       <a href="{% url 'partners:detail' available_collection.pk %}" class="text-center">
@@ -38,7 +38,7 @@
     </div>
     <div class="card-footer">
       <a href="{% url 'applications:apply_single' available_collection.pk %}"
-          class="btn access-apply-button" type="button" name="button">
+          class="btn btn-sm access-apply-button" type="button" name="button">
         {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access. {% endcomment %}
         {% trans "Apply" %}
       </a>
