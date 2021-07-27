@@ -35,6 +35,21 @@
           {% endfor %}
         {% endfor %}
     </div>
+    <!-- Expired User Collections -->
+    {% if expired_user_collections %}
+      <hr>
+      <h3>
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section. {% endcomment %}
+        {% trans "Expired" %}
+      </h3>
+      <div class="row">
+        {% for user_collection in expired_user_collections %}
+          {% for user_collection_partner in user_collection.partners%}
+            {% include "users/user_collection_tile.html" %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
   <div id="available-collections" class="tab-pane collections-pane" role="tabpanel" aria-labelledby="available-collections-tab">

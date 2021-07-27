@@ -875,11 +875,52 @@ class MyLibraryView(TemplateView):
         dict
             The context dictionary with the user collections added
         """
-        user_authorizations = Authorization.objects.filter(user=editor.user).distinct()
+        today = datetime.date.today()
+        user_authorizations = Authorization.objects.filter(
+            Q(date_expires__gte=today) | Q(date_expires=None), user=editor.user
+        )
 
-        user_authorization_obj = []
+        expired_user_authorizations = Authorization.objects.filter(
+            date_expires__lt=today, user=editor.user
+        )
+
         partner_id_set = set()
-        for user_authorization in user_authorizations:
+
+        context["user_collections"] = self._build_authorization_object(
+            user_authorizations, language_code, partner_id_set
+        )
+        context["expired_user_collections"] = self._build_authorization_object(
+            expired_user_authorizations, language_code, partner_id_set
+        )
+
+        context["partner_id_set"] = partner_id_set
+        context["number_user_collections"] = len(partner_id_set)
+
+        return context
+
+    def _build_authorization_object(
+        self, authorization_queryset, language_code, partner_id_set
+    ):
+        """
+        Helper function to convert an Authorization queryset to an object that the
+        view can parse
+        ----------
+        authorization_queryset : Queryset<Authorization>
+            The authorization queryset
+        language_code: str
+            The language code that some tags and descriptions will be translated to
+        partner_id_set: set
+            A set that will be filled with partner IDs. These partners will be excluded
+            in the Available Collections section
+
+        Returns
+        -------
+        list
+            A list that contains the transformed Authorization queryset
+        """
+        user_authorization_obj = []
+
+        for user_authorization in authorization_queryset:
             user_authorization_partner_obj = []
             for user_authorization_partner in user_authorization.partners.all():
                 # Obtaining translated partner description
@@ -940,11 +981,7 @@ class MyLibraryView(TemplateView):
                 }
             )
 
-        context["partner_id_set"] = partner_id_set
-        context["user_collections"] = user_authorization_obj
-        context["number_user_collections"] = len(partner_id_set)
-
-        return context
+        return user_authorization_obj
 
     def _build_available_collection_object(
         self, context, language_code, partner_id_set
