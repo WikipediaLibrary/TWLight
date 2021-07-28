@@ -18,7 +18,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
 
       # Runs a single command using the runners shell
       - name: Coveralls reporting check
-        run: curl -s -o /dev/null -w '%{http_code}' https://coveralls.io/builds/$(git rev-parse HEAD~).json
+        run: curl -f -s -o /dev/null -w '%{http_code}' https://coveralls.io/builds/$(git rev-parse HEAD~).json
