@@ -672,6 +672,15 @@ and (max-device-width : 480px) {
         margin-right: auto;
     }
 }
+@media screen
+and (min-width : 320px)
+and (max-width : 1440px) {
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -25px;
+    }
+}
 /*
 ----------------------------------------------------------------------------
 NEW MY LIBRARY COLLECTION TILES CSS
@@ -692,7 +701,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
 .library-tile-image{
     max-height: 255px;
     max-width: 275px;
-    padding: 10px 0px 0px 0px;
+    padding: 10px 10px 0px 10px;
 }
 
 .collection-tags{
@@ -763,6 +772,17 @@ and (max-device-width : 1024px) {
         border: 1px solid #8E8E8E;
         background-color: #FFFFFF;
         width: 100%;
+    }
+}
+
+/* Change image width on some medium-sized screens */
+@media screen
+and (min-width : 768px)
+and (max-width : 1440px) {
+    .library-tile-image{
+        max-height: 175px;
+        max-width: 195px;
+        padding: 10px 0px 0px 0px;
     }
 }
 
