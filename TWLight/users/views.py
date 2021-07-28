@@ -1004,11 +1004,24 @@ class MyLibraryView(TemplateView):
         dict
             The context dictionary with the available collections added
         """
-        # Available collections do not include bundle partners and collections
-        # that the user is already authorized to access
-        available_collections = Partner.objects.exclude(
-            authorization_method__in=[Partner.BUNDLE]
-        ).exclude(id__in=partner_id_set)
+        if self.request.user.is_staff:
+            messages.add_message(
+                self.request,
+                messages.INFO,
+                "Because you are a staff member, this page may include "
+                "Partners who are not yet available to all users.",
+            )
+            available_collections = (
+                Partner.even_not_available.order_by("company_name")
+                .exclude(authorization_method__in=[Partner.BUNDLE])
+                .exclude(id__in=partner_id_set)
+            )
+        else:
+            # Available collections do not include bundle partners and collections
+            # that the user is already authorized to access
+            available_collections = Partner.objects.exclude(
+                authorization_method__in=[Partner.BUNDLE]
+            ).exclude(id__in=partner_id_set)
 
         available_collection_obj = []
         for available_collection in available_collections:
