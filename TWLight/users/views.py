@@ -27,6 +27,7 @@ from django_comments.models import Comment
 from django.utils import timezone
 from django.utils.translation import get_language
 
+from TWLight.resources.filters import PartnerFilter
 from TWLight.resources.helpers import get_partner_description, get_tag_names
 from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.view_mixins import (
@@ -922,7 +923,12 @@ class MyLibraryView(TemplateView):
 
         for user_authorization in authorization_queryset:
             user_authorization_partner_obj = []
-            for user_authorization_partner in user_authorization.partners.all():
+            partner_filtered_list = PartnerFilter(
+                self.request.GET,
+                queryset=user_authorization.partners.all(),
+                language_code=language_code,
+            )
+            for user_authorization_partner in partner_filtered_list.qs:
                 # Obtaining translated partner description
                 partner_short_description_key = "{pk}_short_description".format(
                     pk=user_authorization_partner.pk
@@ -1023,8 +1029,16 @@ class MyLibraryView(TemplateView):
                 authorization_method__in=[Partner.BUNDLE]
             ).exclude(id__in=partner_id_set)
 
+        partner_filtered_list = PartnerFilter(
+            self.request.GET,
+            queryset=available_collections,
+            language_code=language_code,
+        )
+
+        context["filter"] = partner_filtered_list
+
         available_collection_obj = []
-        for available_collection in available_collections:
+        for available_collection in partner_filtered_list.qs:
             # Obtaining translated partner description
             partner_short_description_key = "{pk}_short_description".format(
                 pk=available_collection.pk

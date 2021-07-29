@@ -609,6 +609,10 @@ NEW MY LIBRARY CSS
     text-decoration: none;
 }
 
+.collection-filter-button{
+    margin-top: 20px;
+}
+
 
 /* Smartphones */
 @media only screen

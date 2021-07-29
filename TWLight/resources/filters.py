@@ -18,6 +18,13 @@ class PartnerFilter(django_filters.FilterSet):
             kwargs.pop("language_code")
         super(PartnerFilter, self).__init__(*args, **kwargs)
         self.filters["tags"].extra.update({"choices": get_tag_choices(language_code)})
+        # Add CSS classes to style widgets
+        self.filters["tags"].field.widget.attrs.update(
+            {"class": "form-control form-control-sm"}
+        )
+        self.filters["languages"].field.widget.attrs.update(
+            {"class": "form-control form-control-sm"}
+        )
 
     class Meta:
         model = Partner
