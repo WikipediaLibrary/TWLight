@@ -193,6 +193,8 @@ def get_tag_choices(language_code: str = "en"):
 
         tag_choices.append(tag_tuple)
 
+    tag_choices.sort(key=lambda a: a[1])
+
     TAG_CHOICES = tuple(tag_choices)
 
     return TAG_CHOICES
