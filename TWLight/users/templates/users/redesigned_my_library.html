@@ -15,3 +15,16 @@
   </div>
 
 {% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    // Dynamically add classes to the django-filter generated labels
+    labelLanguages = document.querySelector("[for=id_languages]")
+    labelTags = document.querySelector("[for=id_tags]")
+
+    labelLanguages.classList.add("collection-filter-label");
+    labelTags.classList.add("collection-filter-label");
+
+  </script>
+
+{% endblock %}

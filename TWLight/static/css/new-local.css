@@ -609,6 +609,12 @@ NEW MY LIBRARY CSS
     text-decoration: none;
 }
 
+.collection-filter-label{
+    font-size: 14px;
+    text-align: left;
+    font-weight: 500;
+}
+
 .collection-filter-button{
     margin-top: 20px;
 }
