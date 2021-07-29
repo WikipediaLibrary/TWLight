@@ -613,6 +613,13 @@ NEW MY LIBRARY CSS
     margin-top: 20px;
 }
 
+.v-divider{
+    margin-left:10px;
+    margin-right:15px;
+    width:1px;
+    border-left:1px solid #DFE1E5;
+}
+
 
 /* Smartphones */
 @media only screen
@@ -719,14 +726,14 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 
 .expiry-date-text{
-    font-size: 14px;
+    font-size: 13px;
     text-align: right;
 }
 
 .access-apply-button{
     color: #FFFFFF;
     background-color: #3366CC;
-    width: 45%;
+    width: 50%;
 }
 
 .access-apply-button:hover{
@@ -789,6 +796,15 @@ and (max-width : 1440px) {
         padding: 10px 0px 0px 0px;
     }
 }
+
+@media screen
+and (min-width : 320px)
+and (max-width : 581px){
+    .collection-nav-separator{
+        border-right: 0px;
+    }
+}
+
 
 /*
 ----------------------------------------------------------------------------

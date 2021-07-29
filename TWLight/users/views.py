@@ -1011,12 +1011,6 @@ class MyLibraryView(TemplateView):
             The context dictionary with the available collections added
         """
         if self.request.user.is_staff:
-            messages.add_message(
-                self.request,
-                messages.INFO,
-                "Because you are a staff member, this page may include "
-                "Partners who are not yet available to all users.",
-            )
             available_collections = (
                 Partner.even_not_available.order_by("company_name")
                 .exclude(authorization_method__in=[Partner.BUNDLE])
