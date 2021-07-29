@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Minh Nguyen"
+		]
+	},
+	"languages-and-literature_tag": "Ngôn ngữ và văn học",
+	"multidisciplinary_tag": "Đa ngành",
+	"physical-sciences_tag": "Khoa học vật lý",
+	"music_tag": "Âm nhạc",
+	"art_tag": "Nghệ thuật",
+	"business-and-economics_tag": "Kinh doanh và kinh tế",
+	"law_tag": "Luật pháp",
+	"education_tag": "Giáo dục",
+	"philosophy-and-religion_tag": "Triết học và tôn giáo",
+	"social-sciences_tag": "Khoa học xã hội",
+	"history_tag": "Lịch sử",
+	"culture_tag": "Văn hóa",
+	"life-sciences_tag": "Khoa học sự sống",
+	"health-sciences_tag": "Khoa học sức khỏe",
+	"earth-sciences_tag": "Khoa học Trái Đất",
+	"technology_tag": "Công nghệ"
+}

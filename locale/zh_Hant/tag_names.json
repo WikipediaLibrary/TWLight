@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"languages-and-literature_tag": "語言與文學",
+	"multidisciplinary_tag": "多門學科",
+	"physical-sciences_tag": "物理科學",
+	"music_tag": "音樂",
+	"art_tag": "藝術",
+	"business-and-economics_tag": "商業與經濟",
+	"law_tag": "法律",
+	"education_tag": "教育",
+	"philosophy-and-religion_tag": "哲學與宗教",
+	"social-sciences_tag": "社會科學",
+	"history_tag": "歷史",
+	"culture_tag": "文化",
+	"life-sciences_tag": "生命科學",
+	"health-sciences_tag": "健康科學",
+	"earth-sciences_tag": "地球科學",
+	"technology_tag": "技術"
+}
