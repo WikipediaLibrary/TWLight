@@ -928,6 +928,10 @@ class MyLibraryView(TemplateView):
                 queryset=user_authorization.partners.all(),
                 language_code=language_code,
             )
+            # If there are no collections after filtering, we will skip this auth
+            if partner_filtered_list.qs.count() == 0:
+                break
+
             for user_authorization_partner in partner_filtered_list.qs:
                 # Obtaining translated partner description
                 partner_short_description_key = "{pk}_short_description".format(
