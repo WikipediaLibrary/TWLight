@@ -61,7 +61,7 @@
           {% if user_collection.latest_sent_app %}
             {% if not user_collection.has_expired %}
               <a href="{{ user_collection_partner.access_url }}" class="btn btn-sm access-apply-button"
-                    type="button" name="button" target="_blank">
+                    type="button" name="button" target="_blank" rel="noopener">
                 {% if user_collection_partner.authorization_method != proxy_authorization %}
                     {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
                     {% trans "Go to site" %}
@@ -85,7 +85,7 @@
         {% endif %}
       {% else %}
           <a href="{{ user_collection_partner.access_url }}" class="btn btn-sm access-apply-button"
-                  type="button" name="button" target="_blank">
+                  type="button" name="button" target="_blank" rel="noopener">
               {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
               {% trans "Access collection" %}
           </a>
