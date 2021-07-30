@@ -627,20 +627,6 @@ NEW MY LIBRARY CSS
     border-left:1px solid #DFE1E5;
 }
 
-
-/* Smartphones */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-    .collection-nav-separator{
-        border-right: 0px;
-    }
-    .applications-item{
-        position: absolute;
-        right: 5px;
-    }
-}
-
 /* Tablets */
 @media only screen
 and (min-device-width : 768px)
@@ -668,6 +654,16 @@ and (max-device-width : 1024px) {
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+    .collections-section-container{
+        margin-top: 10px;
+    }
+    .collection-nav-separator{
+        border-right: 0px;
+    }
+    .applications-item{
+        position: absolute;
+        right: 5px;
+    }
     .collection-tab-item{
         font-family: Roboto;
         color: #000000;
