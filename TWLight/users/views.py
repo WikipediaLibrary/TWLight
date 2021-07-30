@@ -930,66 +930,68 @@ class MyLibraryView(TemplateView):
             )
             # If there are no collections after filtering, we will skip this auth
             if partner_filtered_list.qs.count() == 0:
-                break
+                continue
+            else:
+                for user_authorization_partner in partner_filtered_list.qs:
+                    # Obtaining translated partner description
+                    partner_short_description_key = "{pk}_short_description".format(
+                        pk=user_authorization_partner.pk
+                    )
+                    partner_description_key = "{pk}_description".format(
+                        pk=user_authorization_partner.pk
+                    )
+                    partner_descriptions = get_partner_description(
+                        language_code,
+                        partner_short_description_key,
+                        partner_description_key,
+                    )
+                    try:
+                        partner_logo = user_authorization_partner.logos.logo.url
+                    except PartnerLogo.DoesNotExist:
+                        partner_logo = None
+                    # Getting tags from locale files
+                    translated_tags = get_tag_names(
+                        language_code, user_authorization_partner.new_tags
+                    )
+                    user_authorization_partner_obj.append(
+                        {
+                            "pk": user_authorization_partner.pk,
+                            "partner_name": user_authorization_partner.company_name,
+                            "partner_logo": partner_logo,
+                            "short_description": partner_descriptions[
+                                "short_description"
+                            ],
+                            "description": partner_descriptions["description"],
+                            "languages": user_authorization_partner.get_languages,
+                            "tags": translated_tags,
+                            "authorization_method": user_authorization_partner.authorization_method,
+                            "access_url": user_authorization_partner.get_access_url,
+                        }
+                    )
+                    partner_id_set.add(user_authorization_partner.pk)
 
-            for user_authorization_partner in partner_filtered_list.qs:
-                # Obtaining translated partner description
-                partner_short_description_key = "{pk}_short_description".format(
-                    pk=user_authorization_partner.pk
-                )
-                partner_description_key = "{pk}_description".format(
-                    pk=user_authorization_partner.pk
-                )
-                partner_descriptions = get_partner_description(
-                    language_code,
-                    partner_short_description_key,
-                    partner_description_key,
-                )
-                try:
-                    partner_logo = user_authorization_partner.logos.logo.url
-                except PartnerLogo.DoesNotExist:
-                    partner_logo = None
-                # Getting tags from locale files
-                translated_tags = get_tag_names(
-                    language_code, user_authorization_partner.new_tags
-                )
-                user_authorization_partner_obj.append(
-                    {
-                        "pk": user_authorization_partner.pk,
-                        "partner_name": user_authorization_partner.company_name,
-                        "partner_logo": partner_logo,
-                        "short_description": partner_descriptions["short_description"],
-                        "description": partner_descriptions["description"],
-                        "languages": user_authorization_partner.get_languages,
-                        "tags": translated_tags,
-                        "authorization_method": user_authorization_partner.authorization_method,
-                        "access_url": user_authorization_partner.get_access_url,
-                    }
-                )
-                partner_id_set.add(user_authorization_partner.pk)
+                open_app = user_authorization.get_open_app
 
-            open_app = user_authorization.get_open_app
-
-            if user_authorization.date_expires:
-                if user_authorization.date_expires < date.today():
-                    has_expired = True
+                if user_authorization.date_expires:
+                    if user_authorization.date_expires < date.today():
+                        has_expired = True
+                    else:
+                        has_expired = False
                 else:
                     has_expired = False
-            else:
-                has_expired = False
 
-            user_authorization_obj.append(
-                {
-                    "pk": user_authorization.pk,
-                    "partners": user_authorization_partner_obj,
-                    "date_authorized": user_authorization.date_authorized,
-                    "date_expires": user_authorization.date_expires,
-                    "is_valid": user_authorization.is_valid,
-                    "latest_sent_app": user_authorization.get_latest_sent_app,
-                    "open_app": open_app,
-                    "has_expired": has_expired,
-                }
-            )
+                user_authorization_obj.append(
+                    {
+                        "pk": user_authorization.pk,
+                        "partners": user_authorization_partner_obj,
+                        "date_authorized": user_authorization.date_authorized,
+                        "date_expires": user_authorization.date_expires,
+                        "is_valid": user_authorization.is_valid,
+                        "latest_sent_app": user_authorization.get_latest_sent_app,
+                        "open_app": open_app,
+                        "has_expired": has_expired,
+                    }
+                )
 
         return user_authorization_obj
 
