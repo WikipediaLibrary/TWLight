@@ -123,14 +123,14 @@ class Application(models.Model):
     account_email = models.EmailField(blank=True, null=True)
 
     REQUESTED_ACCESS_DURATION_CHOICES = (
-        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
-        (12, _("12 months")),
-        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
-        (6, _("6 months")),
-        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
-        (3, _("3 months")),
         # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
         (1, _("1 month")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
+        (3, _("3 months")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
+        (6, _("6 months")),
+        # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
+        (12, _("12 months")),
     )
 
     requested_access_duration = models.IntegerField(
