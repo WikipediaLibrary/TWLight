@@ -731,14 +731,13 @@ NEW MY LIBRARY CSS
     margin: 0px 0px 105px 0px;
 }
 .tile-partner-link{
-    max-height: 255px;
-    max-width: 275px;
+    max-height: 125px;
+    max-width: 270px;
     margin-left: auto;
     margin-right: auto;
 }
 .library-tile-image{
-    max-height: 255px;
-    max-width: 275px;
+    max-height: 125px;
     padding: 10px 10px 0px 10px;
 }
 
@@ -820,8 +819,8 @@ and (max-device-width : 1024px) {
 and (min-width : 768px)
 and (max-width : 1440px) {
     .library-tile-image{
-        max-height: 175px;
-        max-width: 195px;
+        max-height: 80px;
+        max-width: 190px;
         padding: 10px 0px 0px 0px;
     }
 }
