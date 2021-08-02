@@ -2,9 +2,8 @@ name: Coveralls Reporting Check
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
+  schedule:
+      - cron: "0 0 * * *"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -23,4 +22,4 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Coveralls reporting check
-        run: curl -f -s -o /dev/null -w '%{http_code}' https://coveralls.io/builds/$(git rev-parse HEAD~).json
+        run: "curl -f -s -o /dev/null -w '%{http_code}' https://coveralls.io/builds/$(git rev-parse HEAD).json || curl -f -s -o /dev/null -w '%{http_code}' https://coveralls.io/builds/$(git rev-parse HEAD~).json"
