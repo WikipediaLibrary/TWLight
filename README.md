@@ -18,6 +18,5 @@ Further project documentation is available in the [Wiki](https://github.com/Wiki
 
 [![Build Status](https://travis-ci.com/WikipediaLibrary/TWLight.svg?branch=master)](https://travis-ci.com/WikipediaLibrary/TWLight)
 
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=WikipediaLibrary/TWLight)](https://dependabot.com)
-
-[![Coverage Status](https://coveralls.io/repos/github/WikipediaLibrary/TWLight/badge.svg?branch=master)](https://coveralls.io/github/WikipediaLibrary/TWLight?branch=master) - master branch
+[![Coveralls ](https://github.com/WikipediaLibrary/TWLight/actions/workflows/coveralls_check.yml/badge.svg)](https://github.com/WikipediaLibrary/TWLight/actions/workflows/coveralls_check.yml)
+[![Coverage Status](https://coveralls.io/repos/github/WikipediaLibrary/TWLight/badge.svg?branch=master)](https://coveralls.io/github/WikipediaLibrary/TWLight?branch=master)
