@@ -577,6 +577,7 @@ NEW MY LIBRARY CSS
 .applications-item{
     position: absolute;
     left: 15px;
+    top: 10px;
 }
 
 .applications-link{
@@ -652,7 +653,7 @@ and (max-device-width : 1024px) {
     .applications-item{
         position: absolute;
         left: 10px;
-        top: -25px;
+        top: -20px;
     }
 }
 
@@ -665,10 +666,6 @@ and (max-device-width : 480px) {
     }
     .collection-nav-separator{
         border-left: 0px;
-    }
-    .applications-item{
-        position: absolute;
-        left: 5px;
     }
     .collection-tab-item{
         font-family: Roboto;
