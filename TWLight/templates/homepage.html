@@ -331,6 +331,10 @@
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     });
+    // Getting the "More info" translation from the first button element
+    var partnerButtons = document.getElementsByClassName("partner-glider-button");
+    var partnerText = partnerButtons[0].innerText;
+
     function toggleDescription(partnerId) {
       // Before toggling the description, search if there are any descriptions
       // already toggled and flip them to the image
@@ -347,7 +351,6 @@
           partnerContainer.classList.toggle("partner-description-toggled");
         }
       }
-
       toggleElement("partner-image-" + partnerId);
       toggleElement("partner-description-" + partnerId);
       togglePartnerButton(partnerId);
@@ -372,7 +375,7 @@
       if (partnerImage.classList.contains("invisible")) {
         partnerButton.innerHTML = "Less info";
       } else {
-        partnerButton.innerHTML = "More info";
+        partnerButton.innerHTML = partnerText;
       }
     }
   </script>
