@@ -323,8 +323,7 @@ nav .divider {
     }
 
     .site-title {
-    	font-family: Roboto;
-        padding: 10px 0px 0px 0px;
+    	display: none;
     }
 
     .logo-header {

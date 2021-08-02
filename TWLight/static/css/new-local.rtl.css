@@ -106,6 +106,9 @@ and (max-device-width : 480px) {
     	float: right;
     	padding: 0px 0px 10px 10px;
     }
+    .site-title{
+        display: none;
+    }
 }
 
 /*
