@@ -122,7 +122,7 @@ class Application(models.Model):
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
 
-    REQUESTED_ACCESS_DURATION_CHOICES = ( 
+    REQUESTED_ACCESS_DURATION_CHOICES = (
         # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
         (1, _("1 month")),
         # Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
