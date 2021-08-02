@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-26 18:23+0000\n"
-"PO-Revision-Date: 2021-07-29 11:17:06+0000\n"
+"PO-Revision-Date: 2021-08-02 11:16:02+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2912,17 +2912,17 @@ msgstr "與其他人分享您用於出版者資源的使用者名稱、密碼、
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:142
 msgid "Automatically scraping or downloading restricted content from publishers;"
-msgstr "自動抓取或下載來自出版方的受限內容，"
+msgstr "自動抓取或下載來自出版方的受限內容。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:148
 msgid "Systematically making printed or electronic copies of multiple extracts of restricted content available for any purpose;"
-msgstr "有系統地針對多個有限制可用內容的摘錄，製作出用於任何目的之列印或電子複本；"
+msgstr "有系統地針對多個有限制可用內容的摘錄，製作出用於任何目的之列印或電子複本。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:154
 msgid "Data mining metadata without permission—for example, in order to use metadata for auto-created stub articles;"
-msgstr "未經許可之下對詮釋資料進行資料探勘—例如使用詮釋資料來自動化建立小條目；"
+msgstr "未經許可之下對詮釋資料進行資料探勘—例如使用詮釋資料來自動化建立小條目。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:160

@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-07-26 18:23+0000\n"
-"PO-Revision-Date: 2021-07-29 11:17:03+0000\n"
+"PO-Revision-Date: 2021-08-02 11:15:58+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,7 +88,7 @@ msgstr "نام کاربری"
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
 #: TWLight/applications/forms.py:370 TWLight/applications/helpers.py:97
 msgid "Partner name"
-msgstr "نام پایگاه مورد نظر"
+msgstr "نام پایگاه"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:386
@@ -245,7 +245,7 @@ msgstr "تأیید نشده"
 #. Translators: This is the status of an application that has been sent to a partner upon approval.
 #: TWLight/applications/models.py:62
 msgid "Sent to partner"
-msgstr "ارسال‌شده به پایگاه مورد نظر"
+msgstr "ارسال‌شده به پایگاه"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:64
@@ -275,7 +275,7 @@ msgstr "۱ ماه"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:167
 msgid "Finalized"
-msgstr ""
+msgstr "نهایی"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:336
@@ -367,7 +367,7 @@ msgstr "ماه(ها)"
 #: TWLight/applications/views.py:640 TWLight/applications/views.py:719
 #: TWLight/templates/dashboard.html:157
 msgid "Partner"
-msgstr "پایگاه مورد نظر"
+msgstr "پایگاه"
 
 #. Translators: This labels the partner as waitlisted (if that's the case) to help coordinators better assess application.
 #. Translators: On the page where users can apply for multiple partners, this text indicates the partner has been waitlisted i.e. no more accounts are available.
@@ -1155,26 +1155,26 @@ msgstr "شکست"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "یک درخواست معلق."
+msgstr[0] "%(counter)s درخواست در انتظار."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "یک درخواست در حال بررسی."
+msgstr[0] "%(counter)s درخواست در حال بررسی."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "%(approved_count)s درخواست‌های تأییدشده."
+msgstr[0] "%(counter)s درخواست تأییدشده"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
@@ -2203,9 +2203,8 @@ msgstr "توزیع زبان کاربران"
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:14
 #: TWLight/templates/header_partial_b4.html:11
-#, fuzzy
 msgid "The Wikipedia Library home"
-msgstr "کتابخانهٔ ویکی‌پدیا"
+msgstr "صفحهٔ اصلی کتابخانهٔ ویکی‌پدیا"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
 #: TWLight/templates/header_partial_b3.html:35
@@ -2217,14 +2216,13 @@ msgstr "بررسی"
 #: TWLight/templates/header_partial_b3.html:41
 #: TWLight/templates/header_partial_b4.html:38
 msgid "Send data to partners"
-msgstr "ارسال اطلاعات به پایگاه‌های مورد نظر"
+msgstr "ارسال اطلاعات به پایگاه‌ها"
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
 #: TWLight/templates/header_partial_b3.html:49
 #: TWLight/templates/header_partial_b4.html:46
-#, fuzzy
 msgid "Suggest a collection"
-msgstr "دسترسی به مجموعه"
+msgstr "پیشنهاد یک مجموعه"
 
 #: TWLight/templates/header_partial_b3.html:62
 #: TWLight/templates/header_partial_b4.html:59
@@ -2277,15 +2275,13 @@ msgstr "بیش‌تر"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
-#, fuzzy
 msgid "Over 90 of the world's top subscription-only databases, free for Wikipedians of all backgrounds"
-msgstr "\n      بیش از ۹۰ پایگاه معتبر جهانی\n      پایگاه‌های اشتراک پولی به‌صورت رایگان\n      برای ویکی‌نویس‌ها با زمینه‌های گوناگون\n      "
+msgstr "بیش از ۹۰ پایگاه دانش غیر رایگان برتر جهان، رایگان برای ویکی‌نویس‌ها"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:32
-#, fuzzy
 msgid "Meet this criteria for automatic access"
-msgstr "\n      این معیارها را برای دسترسی خودکار داشته‌باشید\n      "
+msgstr "برآورده کردن این معیار برای دسترسی خودکار"
 
 #: TWLight/templates/login_partial.html:54
 msgid "Login via Wikipedia"
@@ -2294,13 +2290,12 @@ msgstr "ورود از طریق ویکی‌پدیا"
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
-msgstr ""
+msgstr "برگزیده"
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
-#, fuzzy
 msgid "More"
-msgstr "اطلاعات بیش‌تر"
+msgstr "بیش‌تر"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:16
@@ -2444,9 +2439,8 @@ msgstr "دیگر نمی‌توانید از طریق کارت عضویت کتا�
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #: TWLight/users/templates/users/available_collection_tile.html:19
 #: TWLight/users/templates/users/user_collection_tile.html:19
-#, fuzzy
 msgid "Languages: "
-msgstr "زبان"
+msgstr "زبان‌ها: "
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:12
@@ -2788,9 +2782,8 @@ msgstr "صفحهٔ معرفی پایگاه"
 
 #. Translators: Hovertext for when renewals for a partner is not available and the renew button is disabled.
 #: TWLight/users/templates/users/resource_tile.html:118
-#, fuzzy
 msgid "Renewals are not available for this partner"
-msgstr "هماهنگ‌کننده برای پایگاه مورد نظر (در صورت وجود)"
+msgstr "هماهنگ‌کننده برای پایگاه (در صورت وجود)"
 
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/resource_tile.html:122
@@ -3063,15 +3056,13 @@ msgstr "با علامت زدن این کادر و کلیک روی «ارسال»
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:44
-#, fuzzy
 msgid "Expiry date: "
-msgstr "منقضی‌شده در"
+msgstr "تاریخ انقضا: "
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:58
-#, fuzzy
 msgid "Go to application"
-msgstr "تاریخ درخواست"
+msgstr "برو به درخواست"
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:8
