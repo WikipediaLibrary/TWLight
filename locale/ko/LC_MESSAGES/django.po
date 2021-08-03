@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-03 17:50+0000\n"
+"POT-Creation-Date: 2021-08-03 18:16+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:04+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1881,6 +1881,7 @@ msgstr "언어를 알 수 없음"
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner.
 #. Translators: A button that reveals more information about a collection.
 #: TWLight/resources/templates/resources/partner_tile.html:84
+#: TWLight/templates/homepage.html:377
 #: TWLight/templates/partner_carousel.html:80
 msgid "More info"
 msgstr "더 많은 정보"
@@ -2568,6 +2569,13 @@ msgstr ""
 #: TWLight/templates/home.html:115
 msgid "See more"
 msgstr "더 보기"
+
+#. Translators: This text will show when a user clicks on the More Info button and the partner description shows.
+#: TWLight/templates/homepage.html:374
+#, fuzzy
+#| msgid "More info"
+msgid "Less info"
+msgstr "더 많은 정보"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
