@@ -1765,11 +1765,26 @@ class MyLibraryViewsTest(TestCase):
     @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
-        cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_1 = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            new_tags={"tags": ["earth-sciences_tag"]},
+        )
+        cls.bundle_partner_2 = PartnerFactory(
+            authorization_method=Partner.BUNDLE, new_tags={"tags": ["art_tag"]}
+        )
+
         cls.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_3.new_tags = {"tags": ["art_tag"]}
+        cls.bundle_partner_3.save()
+
         cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_1.new_tags = {"tags": ["earth-sciences_tag"]}
+        cls.proxy_partner_1.save()
+
         cls.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_2.new_tags = {"tags": ["earth-sciences_tag"]}
+        cls.proxy_partner_2.save()
+
         cls.user_coordinator = UserFactory(username="Jon Snow")
         cls.editor = EditorFactory()
         cls.editor.wp_bundle_eligible = True
@@ -1822,8 +1837,8 @@ class MyLibraryViewsTest(TestCase):
         self.assertIn(escape(self.bundle_partner_2.company_name), content)
         self.assertIn(escape(self.bundle_partner_3.company_name), content)
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
-
-        # TODO: This must be changed to assertNotIn when work in T285556 is made
+        # Even though this partner is not visible, it still appears in the HTML
+        # render
         self.assertIn(escape(self.proxy_partner_2.company_name), content)
 
     def test_user_collections_show_expiry_date_extend(self):
@@ -1957,3 +1972,105 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
         self.assertIn("Go to application", content)
+
+    def test_collection_filters_art_tag(self):
+        """
+        Tests that only user collections that match the filter are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        url_with_art_tag_param = "{url}?tags=art_tag".format(url=url)
+        request = factory.get(url_with_art_tag_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertIn(escape(self.bundle_partner_3.company_name), content)
+
+        self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
+
+    def test_collection_filters_earth_sciences_tag(self):
+        """
+        Tests that only user collections that match the filter are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        url_with_earth_sciences_tag_param = "{url}?tags=earth-sciences_tag".format(
+            url=url
+        )
+        request = factory.get(url_with_earth_sciences_tag_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertNotIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_3.company_name), content)
+
+        self.assertIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(escape(self.proxy_partner_2.company_name), content)

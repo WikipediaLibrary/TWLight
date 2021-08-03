@@ -1,13 +1,13 @@
 {% load i18n %}
-<div class="col-lg-4 col-md-6 col-sm-12">
+<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if user_collection_partner.partner_logo %}
-      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="text-center">
+      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="tile-partner-link">
         <img src="{{ user_collection_partner.partner_logo }}" class="card-img-top library-tile-image"
           alt="{{ user_collection_partner.partner_name }} logo">
       </a>
     {% else %}
-      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="text-center">
+      <a href="{% url 'partners:detail' user_collection_partner.pk %}" class="tile-partner-link">
         <img src="..." class="card-img-top" alt="{{ user_collection_partner.partner_name }} logo">
       </a>
     {% endif %}
@@ -16,7 +16,7 @@
       <hr>
       <p class="card-text small">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports. {% endcomment %}
-        <strong> {% trans "Languages: " %} </strong>
+        <strong> {% trans "Languages" %}: </strong>
         {% if user_collection_partner.languages %}
           {% for language in user_collection_partner.languages%}
             {{ language }}{% if not forloop.last %}, {% endif %}
@@ -29,7 +29,7 @@
       <p class="card-text">
         {% if user_collection_partner.tags %}
           {% for tag_key, tag_value in user_collection_partner.tags.items %}
-            <a href="#" class="badge badge-pill collection-tags">
+            <a href="{% url 'users:redesigned_my_library' %}?tags={{ tag_key }}" class="badge badge-pill collection-tags">
               {{ tag_value }}
             </a>
           {% endfor %}
@@ -41,7 +41,7 @@
         {% if user_collection.date_expires %}
           <p class="expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
-            {% trans "Expiry date: " %} <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires|date:"M d, Y" }} </span>
+            {% trans "Expiry date" %}: <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires|date:"M d, Y" }} </span>
             {% if user_collection_partner.authorization_method == proxy_authorization and user_collection.is_valid %}
               {% comment %}Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource. {% endcomment %}
               <a href="{% url 'users:return_authorization' user_collection.pk %}"
@@ -52,7 +52,7 @@
           </p>
         {% endif %}
         {% if user_collection.open_app %}
-          <a href="{% url 'applications:evaluate' user_collection.open_app.pk %}" class="btn access-apply-button"
+          <a href="{% url 'applications:evaluate' user_collection.open_app.pk %}" class="btn btn-sm access-apply-button"
                 type="button" name="button">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application. {% endcomment %}
             {% trans "Go to application" %}
@@ -60,8 +60,8 @@
         {% else %}
           {% if user_collection.latest_sent_app %}
             {% if not user_collection.has_expired %}
-              <a href="{{ user_collection_partner.access_url }}" class="btn access-apply-button"
-                    type="button" name="button" target="_blank">
+              <a href="{{ user_collection_partner.access_url }}" class="btn btn-sm access-apply-button"
+                    type="button" name="button" target="_blank" rel="noopener">
                 {% if user_collection_partner.authorization_method != proxy_authorization %}
                     {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
                     {% trans "Go to site" %}
@@ -72,7 +72,7 @@
               </a>
             {% endif %}
             <a href="{% url 'applications:renew' user_collection.latest_sent_app.pk %}"
-                  class="btn renew-extend-button pull-right" type="button" name="button">
+                  class="btn btn-sm renew-extend-button pull-right" type="button" name="button">
               {% if user_collection.date_expires and user_collection.has_expired %}
                 {% comment %}Translators: Labels a button users can click to renew an expired account. {% endcomment %}
                 {% trans "Renew" %}
@@ -84,8 +84,8 @@
           {% endif %}
         {% endif %}
       {% else %}
-          <a href="{{ user_collection_partner.access_url }}" class="btn access-apply-button"
-                  type="button" name="button" target="_blank">
+          <a href="{{ user_collection_partner.access_url }}" class="btn btn-sm access-apply-button"
+                  type="button" name="button" target="_blank" rel="noopener">
               {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
               {% trans "Access collection" %}
           </a>

@@ -3,20 +3,28 @@
 
 {% block content %}
   {% include "header_partial_b4.html" %}
-  <!-- User Collections -->
+
   <div class="row">
-      {% for user_collection in user_collections %}
-        {% for user_collection_partner in user_collection.partners%}
-          {% include "users/user_collection_tile.html" %}
-        {% endfor %}
-      {% endfor %}
+    <div class="col-lg-2 col-md-3">
+      {% include "users/filter_section.html" %}
+    </div>
+    <div class="v-divider"></div>
+    <div class="col-lg-9 col-md-8 col-sm-12">
+      {% include "users/collections_section.html" %}
+    </div>
   </div>
 
-  <!-- Available Collections -->
-  <div class="row">
-      {% for available_collection in available_collections %}
-        {% include "users/available_collection_tile.html" %}
-      {% endfor %}
-  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    // Dynamically add classes to the django-filter generated labels
+    labelLanguages = document.querySelector("[for=id_languages]")
+    labelTags = document.querySelector("[for=id_tags]")
+
+    labelLanguages.classList.add("collection-filter-label");
+    labelTags.classList.add("collection-filter-label");
+
+  </script>
 
 {% endblock %}

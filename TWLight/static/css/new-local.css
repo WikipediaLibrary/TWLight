@@ -105,8 +105,18 @@ and (max-device-width : 480px) {
     	float: left;
     	padding: 0px 0px 10px 0px;
     }
+    .site-title {
+        display: none;
+    }
 }
 
+@media screen
+and (min-width : 320px)
+and (max-width : 480px) {
+    .site-title {
+        display: none;
+    }
+}
 /*
 ----------------------------------------------------------------------------
 LOGIN PARTIAL CSS
@@ -548,14 +558,170 @@ and (min-device-width : 1025px) {
 NEW MY LIBRARY CSS
 --------------------------------------------------------------------------
 */
-.collection-tile{
-    margin: 0px 0px 105px 0px;
+.collections-nav{
+    margin-bottom: 40px;
+}
+.collection-nav-separator{
+    border-right: 1px solid #565656;
+}
+.collection-tab-item{
+    font-family: Roboto;
+    font-size: 24px;
+    color: #565656;
 }
 
+.collection-tab-item.active{
+    color: #000000;
+    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #000000;
+}
+
+.collection-tab-item:hover{
+    font-family: Roboto;
+    color: #000000;
+    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #565656;
+}
+
+.applications-item{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.applications-link{
+    font-family: Roboto;
+    font-size: 14px;
+    color: #3366CC;
+    text-decoration: underline;
+}
+.applications-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+.filter-container{
+    flex-direction: column;
+    margin-top: 40px;
+}
+.filter-title-container{
+    width: 100%;
+}
+.filter-title{
+    text-align: left;
+    font-size: 15px;
+}
+
+.reset-filters-link{
+    font-size: 15px;
+    color: #3366CC;
+    text-decoration: underline;
+    position: absolute;
+    right: 0px;
+}
+.reset-filters-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+
+.collection-filter-label{
+    font-size: 14px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.collection-filter-button{
+    margin-top: 20px;
+}
+
+.v-divider{
+    margin-left:10px;
+    margin-right:15px;
+    width:1px;
+    border-left:1px solid #DFE1E5;
+}
+
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .collection-tab-item{
+        font-family: Roboto;
+        font-size: 20px;
+        color: #000000;
+        text-align: center;
+    }
+    .applications-link{
+        font-family: Roboto;
+        font-size: 13px;
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -20px;
+    }
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .collections-section-container{
+        margin-top: 10px;
+    }
+    .collection-nav-separator{
+        border-right: 0px;
+    }
+    .collection-tab-item{
+        font-family: Roboto;
+        color: #000000;
+        text-align: center;
+    }
+    .applications-link{
+        font-family: Roboto;
+        font-size: 13px;
+        color: #3366CC;
+        text-decoration: underline;
+    }
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -20px;
+    }
+    .collections-nav{
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media screen
+and (min-width : 320px)
+and (max-width : 1440px) {
+    .applications-item{
+        position: absolute;
+        right: 10px;
+        top: -25px;
+    }
+}
+/*
+----------------------------------------------------------------------------
+NEW MY LIBRARY COLLECTION TILES CSS
+--------------------------------------------------------------------------
+*/
+.collections-pane{
+    margin-right: 15px;
+}
+.collection-tile{
+    margin: 0px 0px 50px 0px;
+}
+.tile-partner-link{
+    max-height: 125px;
+    max-width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .library-tile-image{
-    max-height: 255px;
-    max-width: 275px;
-    padding: 10px 0px 0px 0px;
+    max-height: 125px;
+    padding: 10px 10px 0px 10px;
 }
 
 .collection-tags{
@@ -569,14 +735,14 @@ NEW MY LIBRARY CSS
 }
 
 .expiry-date-text{
-    font-size: 14px;
+    font-size: 13px;
     text-align: right;
 }
 
 .access-apply-button{
     color: #FFFFFF;
     background-color: #3366CC;
-    width: 40%;
+    width: 50%;
 }
 
 .access-apply-button:hover{
@@ -628,6 +794,26 @@ and (max-device-width : 1024px) {
         width: 100%;
     }
 }
+
+/* Change image width on some medium-sized screens */
+@media screen
+and (min-width : 768px)
+and (max-width : 1440px) {
+    .library-tile-image{
+        max-height: 80px;
+        max-width: 190px;
+        padding: 10px 0px 0px 0px;
+    }
+}
+
+@media screen
+and (min-width : 320px)
+and (max-width : 581px){
+    .collection-nav-separator{
+        border-right: 0px;
+    }
+}
+
 
 /*
 ----------------------------------------------------------------------------
