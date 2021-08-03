@@ -734,6 +734,11 @@ NEW MY LIBRARY COLLECTION TILES CSS
     background-color: #AAADB0;
 }
 
+.collection-not-available-badge{
+    color: #000000;
+    background-color: #FF8585;
+}
+
 .expiry-date-text{
     font-size: 13px;
     text-align: right;
