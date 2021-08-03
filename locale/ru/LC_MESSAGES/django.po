@@ -33,7 +33,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-03 17:09+0000\n"
+"POT-Creation-Date: 2021-08-03 17:51+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:05+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -777,7 +777,7 @@ msgstr "Нажмите «Подтвердить», чтобы продлить �
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:499
+#: TWLight/users/views.py:500
 msgid "Confirm"
 msgstr "Подтвердить"
 
@@ -3132,8 +3132,39 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #: TWLight/users/templates/users/available_collection_tile.html:19
 #: TWLight/users/templates/users/user_collection_tile.html:19
-msgid "Languages: "
-msgstr "Языки: "
+#, fuzzy
+#| msgid "Language"
+msgid "Languages"
+msgstr "Язык"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
+#: TWLight/users/templates/users/collections_section.html:8
+#, fuzzy
+#| msgid "Collections"
+msgid "My Collections "
+msgstr "Коллекции"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
+#: TWLight/users/templates/users/collections_section.html:15
+#, fuzzy
+#| msgid "Collections"
+msgid "Available Collections "
+msgstr "Коллекции"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
+#: TWLight/users/templates/users/collections_section.html:22
+#, fuzzy
+#| msgid "View application"
+msgid "View my applications >"
+msgstr "Посмотреть заявку"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
+#. Translators: Heading for the section which lists all of the user's expired collection.
+#: TWLight/users/templates/users/collections_section.html:43
+#: TWLight/users/templates/users/my_library.html:66
+#: TWLight/users/templates/users/my_library.html:99
+msgid "Expired"
+msgstr "Истекло"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:12
@@ -3370,6 +3401,39 @@ msgstr "обновить"
 msgid "Institutional affiliation"
 msgstr "Ваше учреждение"
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
+#: TWLight/users/templates/users/filter_section.html:13
+#, fuzzy
+#| msgid "Filter by..."
+msgid "Filters"
+msgstr "Фильтровать по..."
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
+#: TWLight/users/templates/users/filter_section.html:17
+#, fuzzy
+#| msgid "Current filters"
+msgid "Reset filters"
+msgstr "Текущие фильтры"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have instant access.
+#. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
+#: TWLight/users/templates/users/filter_section.html:27
+#: TWLight/users/templates/users/my_library.html:21
+msgid "Instant access"
+msgstr "Мгновенный доступ"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have by multi-step access.
+#: TWLight/users/templates/users/filter_section.html:34
+msgid "Multi-step access"
+msgstr ""
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
+#: TWLight/users/templates/users/filter_section.html:47
+#, fuzzy
+#| msgid "Filter by..."
+msgid "Filter"
+msgstr "Фильтровать по..."
+
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
@@ -3404,11 +3468,6 @@ msgstr ""
 "Продления либо не требуются, либо недоступны сейчас, или вы уже запросили "
 "продление."
 
-#. Translators: Tab label (1 of 2) for the page listing all partners which can accessed either via proxy or via bundle (direct access).
-#: TWLight/users/templates/users/my_library.html:21
-msgid "Instant access"
-msgstr "Мгновенный доступ"
-
 #. Translators: Tab label (2 of 2) for the page listing all partners which can accessed manually.
 #: TWLight/users/templates/users/my_library.html:36
 msgid "Individual access"
@@ -3418,12 +3477,6 @@ msgstr "Персональный доступ"
 #: TWLight/users/templates/users/my_library.html:60
 msgid "You have no active proxy/bundle collections."
 msgstr "У вас нет активных коллекций прокси/из набора."
-
-#. Translators: Heading for the section which lists all of the user's expired collection.
-#: TWLight/users/templates/users/my_library.html:66
-#: TWLight/users/templates/users/my_library.html:99
-msgid "Expired"
-msgstr "Истекло"
 
 #. Translators: On the collection page (individual access tab), this text is displayed when the user has no active collections.
 #: TWLight/users/templates/users/my_library.html:93
@@ -3450,7 +3503,7 @@ msgstr "Пароль"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:368
+#: TWLight/users/views.py:369
 msgid "Update"
 msgstr "Обновить"
 
@@ -4166,7 +4219,7 @@ msgstr ""
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:44
 #, fuzzy
-msgid "Expiry date: "
+msgid "Expiry date"
 msgstr "Истекло"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
@@ -4223,7 +4276,7 @@ msgid "Coordinators only"
 msgstr "Только для координаторов"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:147
+#: TWLight/users/views.py:148
 #, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -4233,7 +4286,7 @@ msgstr ""
 "координаторам оценить ваши заявки."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:260
+#: TWLight/users/views.py:261
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -4244,38 +4297,38 @@ msgstr ""
 "подумайте о смене настроек."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:268
+#: TWLight/users/views.py:269
 msgid "Your reminder email preferences are updated."
 msgstr "Настройки вашего электронного адреса для уведомлений обновлены."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:350 TWLight/users/views.py:431
-#: TWLight/users/views.py:484
+#: TWLight/users/views.py:351 TWLight/users/views.py:432
+#: TWLight/users/views.py:485
 msgid "You must be logged in to do that."
 msgstr "Для этого вы должны быть авторизованы."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:383
+#: TWLight/users/views.py:384
 msgid "Your information has been updated."
 msgstr "Ваша информация обновлена."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:415
+#: TWLight/users/views.py:416
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 "Оба значения не могут быть пустыми. Либо введите электронный адрес, либо "
 "поставьте галочку."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:443
+#: TWLight/users/views.py:444
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Ваш электронный адрес был изменён на {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:454
+#: TWLight/users/views.py:455
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -4285,7 +4338,7 @@ msgstr ""
 "электронной почти."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:818
+#: TWLight/users/views.py:819
 msgid "Access to {} has been returned."
 msgstr "Доступ к {} был отозван."
 
@@ -4337,3 +4390,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Languages: "
+#~ msgstr "Языки: "
