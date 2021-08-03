@@ -734,6 +734,11 @@ NEW MY LIBRARY COLLECTION TILES CSS
     background-color: #AAADB0;
 }
 
+.collection-waitlisted-badge{
+    color: #000000;
+    background-color: #F0AD4E;
+}
+
 .collection-not-available-badge{
     color: #000000;
     background-color: #FF8585;
