@@ -331,6 +331,7 @@
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     });
+
     function toggleDescription(partnerId) {
       // Before toggling the description, search if there are any descriptions
       // already toggled and flip them to the image
@@ -347,7 +348,6 @@
           partnerContainer.classList.toggle("partner-description-toggled");
         }
       }
-
       toggleElement("partner-image-" + partnerId);
       toggleElement("partner-description-" + partnerId);
       togglePartnerButton(partnerId);
@@ -370,9 +370,11 @@
       // If the invisible class exists in the partner image, then the button
       // needs to show "Less info"
       if (partnerImage.classList.contains("invisible")) {
-        partnerButton.innerHTML = "Less info";
+        {% comment %} Translators: This text will show when a user clicks on the More Info button and the partner description shows. {% endcomment %}
+        partnerButton.innerHTML = "{% trans 'Less info' %}";
       } else {
-        partnerButton.innerHTML = "More info";
+        {% comment %}Translators: A button that reveals more information about a collection.{% endcomment %}
+        partnerButton.innerHTML = "{% trans 'More info' %}";
       }
     }
   </script>
