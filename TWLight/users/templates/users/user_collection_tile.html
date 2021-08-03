@@ -16,7 +16,7 @@
       <hr>
       <p class="card-text small">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports. {% endcomment %}
-        <strong> {% trans "Languages: " %} </strong>
+        <strong> {% trans "Languages" %}: </strong>
         {% if user_collection_partner.languages %}
           {% for language in user_collection_partner.languages%}
             {{ language }}{% if not forloop.last %}, {% endif %}
@@ -41,7 +41,7 @@
         {% if user_collection.date_expires %}
           <p class="expiry-date-text">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired. {% endcomment %}
-            {% trans "Expiry date: " %} <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires|date:"M d, Y" }} </span>
+            {% trans "Expiry date" %}: <span {% if user_collection.has_expired %} class="text-danger" {% endif %}> {{ user_collection.date_expires|date:"M d, Y" }} </span>
             {% if user_collection_partner.authorization_method == proxy_authorization and user_collection.is_valid %}
               {% comment %}Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource. {% endcomment %}
               <a href="{% url 'users:return_authorization' user_collection.pk %}"
