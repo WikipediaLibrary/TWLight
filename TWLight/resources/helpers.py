@@ -45,8 +45,8 @@ def check_for_target_url_duplication_and_generate_error_message(
 
     if partner_duplicates_count != 0 or stream_duplicates_count != 0:
         validation_error_msg = (
-            "No two or more partners/streams can have the same target url. "
-            "The following partner(s)/stream(s) have the same target url: "
+            "No two or more partners/collections can have the same target url. "
+            "The following partner(s)/collection(s) have the same target url: "
         )
         validation_error_msg_partners = "None"
         validation_error_msg_streams = "None"
@@ -63,7 +63,7 @@ def check_for_target_url_duplication_and_generate_error_message(
             validation_error_msg
             + " Partner(s): "
             + validation_error_msg_partners
-            + ". Stream(s): "
+            + ". Collection(s): "
             + validation_error_msg_streams
             + "."
         )

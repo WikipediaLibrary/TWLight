@@ -51,13 +51,13 @@ def validate_language_code(code):
 class Language(models.Model):
     """
     We want to be able to indicate the language(s) of resources offered by a
-    Partner or in a Stream.
+    Partner or in a Collection.
 
     While having a standalone model is kind of overkill, it offers the
     following advantages:
     * We need to be able to indicate multiple languages for a given Partner or
-      Stream.
-    * We will want to be able to filter Partners and Streams by language (e.g.
+      Collection.
+    * We will want to be able to filter Partners and Collections by language (e.g.
       in order to limit to the user's preferred language); we can't do that
       efficiently with something like django-multiselect or django-taggit.
     * In order to be able to filter by language, we also need to use a
@@ -196,7 +196,7 @@ class Partner(models.Model):
     accounts_available = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
-        help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level.",
+        help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific collection' is true, change accounts availability at the collection level.",
     )
 
     # Optional resource metadata
@@ -259,10 +259,10 @@ class Partner(models.Model):
         blank=True,
         null=True,
         default=None,
-        help_text="If True, users can only apply for one Stream at a time "
-        "from this Partner. If False, users can apply for multiple Streams at "
+        help_text="If True, users can only apply for one Collection at a time "
+        "from this Partner. If False, users can apply for multiple Collections at "
         "a time. This field must be filled in when Partners have multiple "
-        "Streams, but may be left blank otherwise.",
+        "Collections, but may be left blank otherwise.",
     )
 
     languages = models.ManyToManyField(
@@ -362,7 +362,7 @@ class Partner(models.Model):
             if self.mutually_exclusive is None:
                 raise ValidationError(
                     "Since this resource has multiple "
-                    "Streams, you must specify a value for mutually_exclusive."
+                    "Collections, you must specify a value for mutually_exclusive."
                 )
         if self.account_email and not self.registration_url:
             raise ValidationError(
@@ -472,10 +472,10 @@ class Stream(models.Model):
     Health & Life Sciences collection, which is distinct from its Social &
     Behavioral Sciences collection.
 
-    At present, Streams have no information other than their name and Partner
+    At present, Collections have no information other than their name and Partner
     (and an optional description). However, separating them in the database
     will make it easier to cope in future should partners start expecting
-    different application information for different Streams, or if they have
+    different application information for different Collections, or if they have
     distinct contact information, et cetera.
     """
 
@@ -490,7 +490,7 @@ class Stream(models.Model):
     )
     name = models.CharField(
         max_length=50,
-        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
+        help_text="Name of collection (e.g. 'Health and Behavioral Sciences). "
         "Will be user-visible and *not translated*. Do not include the "
         "name of the partner here.",
     )
@@ -504,7 +504,7 @@ class Stream(models.Model):
     description = models.TextField(
         blank=True,
         null=True,
-        help_text="Optional description of this stream's resources.",
+        help_text="Optional description of this collection's resources.",
     )
 
     languages = models.ManyToManyField(Language, blank=True)
@@ -554,7 +554,7 @@ class Stream(models.Model):
                 raise ValidationError({"target_url": validation_error_msg})
 
     def save(self, *args, **kwargs):
-        """Invalidate the rendered html stream description from cache"""
+        """Invalidate the rendered html collection description from cache"""
         super(Stream, self).save(*args, **kwargs)
         for code in RESOURCE_LANGUAGE_CODES:
             cache_key = make_template_fragment_key(

@@ -28,7 +28,7 @@ Optional/universal:
 Optional/unique:
     Questions/comments/concerns (free-text, all partnerships)
     Title requested (McFarland, Pelican)
-    Stream requested (OUP, T&F, Elsevier)
+    Collection requested (OUP, T&F, Elsevier)
     Agreement with Terms of Use (RSUK)
 """
 
