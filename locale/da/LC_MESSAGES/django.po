@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-02 17:07+0000\n"
+"POT-Creation-Date: 2021-08-03 17:08+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:02+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2592,7 +2592,13 @@ msgstr ""
 msgid "Meet this criteria for automatic access"
 msgstr ""
 
-#: TWLight/templates/login_partial.html:54
+#: TWLight/templates/login_partial.html:37
+msgid ""
+"This criteria grants you access to certain collections but not all. Some "
+"collections are accessible on a per application basis only."
+msgstr ""
+
+#: TWLight/templates/login_partial.html:57
 msgid "Login via Wikipedia"
 msgstr "Log ind med Wikipedia"
 

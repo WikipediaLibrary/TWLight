@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-02 17:08+0000\n"
+"POT-Creation-Date: 2021-08-03 17:09+0000\n"
 "PO-Revision-Date: 2021-08-02 11:16:02+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2757,7 +2757,13 @@ msgstr "超過 90 個的世界頂級訂閱制資料庫，身分為維基人都�
 msgid "Meet this criteria for automatic access"
 msgstr "滿足此自動取用標準"
 
-#: TWLight/templates/login_partial.html:54
+#: TWLight/templates/login_partial.html:37
+msgid ""
+"This criteria grants you access to certain collections but not all. Some "
+"collections are accessible on a per application basis only."
+msgstr ""
+
+#: TWLight/templates/login_partial.html:57
 msgid "Login via Wikipedia"
 msgstr "透過維基百科登入"
 

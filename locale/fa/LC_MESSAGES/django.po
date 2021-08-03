@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-02 17:07+0000\n"
+"POT-Creation-Date: 2021-08-03 17:09+0000\n"
 "PO-Revision-Date: 2021-08-02 11:15:58+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2895,7 +2895,13 @@ msgstr "بیش از ۹۰ پایگاه دانش غیر رایگان برتر جه
 msgid "Meet this criteria for automatic access"
 msgstr "برآورده کردن این معیار برای دسترسی خودکار"
 
-#: TWLight/templates/login_partial.html:54
+#: TWLight/templates/login_partial.html:37
+msgid ""
+"This criteria grants you access to certain collections but not all. Some "
+"collections are accessible on a per application basis only."
+msgstr ""
+
+#: TWLight/templates/login_partial.html:57
 msgid "Login via Wikipedia"
 msgstr "ورود از طریق ویکی‌پدیا"
 
