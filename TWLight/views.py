@@ -181,6 +181,9 @@ class NewHomePageView(TemplateView):
             )
         context["partners"] = partners_obj
 
+        # Translators: This text will show when a user clicks on the More Info button and the partner description shows.
+        context["less_info"] = _("Less info")
+
         return context
 
     def get(self, request):

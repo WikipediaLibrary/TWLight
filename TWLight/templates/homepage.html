@@ -334,6 +334,8 @@
     // Getting the "More info" translation from the first button element
     var partnerButtons = document.getElementsByClassName("partner-glider-button");
     var partnerText = partnerButtons[0].innerText;
+    // Getting the Less info text from the view
+    var lessInfo = "{{ less_info }}";
 
     function toggleDescription(partnerId) {
       // Before toggling the description, search if there are any descriptions
@@ -373,7 +375,7 @@
       // If the invisible class exists in the partner image, then the button
       // needs to show "Less info"
       if (partnerImage.classList.contains("invisible")) {
-        partnerButton.innerHTML = "Less info";
+        partnerButton.innerHTML = lessInfo;
       } else {
         partnerButton.innerHTML = partnerText;
       }
