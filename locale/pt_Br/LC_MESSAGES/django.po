@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-04 15:15+0000\n"
+"POT-Creation-Date: 2021-08-04 15:31+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:05+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:383
 #: TWLight/resources/templates/resources/partner_tile.html:87
 #: TWLight/templates/home.html:98
-#: TWLight/users/templates/users/available_collection_tile.html:43
+#: TWLight/users/templates/users/available_collection_tile.html:56
 #: TWLight/users/templates/users/resource_tile.html:134
 msgid "Apply"
 msgstr "Aplicar"
@@ -401,11 +401,14 @@ msgstr "Parceiro"
 #. Translators: On the page where users can apply for multiple partners, this text indicates the partner has been waitlisted i.e. no more accounts are available.
 #. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
 #. Translators: This is the text shwown to users when a partner is marked waitlisted.
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is waitlisted.
 #: TWLight/applications/templates/applications/application_evaluation.html:93
 #: TWLight/applications/templates/applications/request_for_application.html:52
 #: TWLight/resources/templates/resources/partner_detail.html:22
 #: TWLight/resources/templates/resources/partner_detail.html:355
 #: TWLight/resources/templates/resources/partner_tile.html:48
+#: TWLight/users/templates/users/available_collection_tile.html:40
+#: TWLight/users/templates/users/user_collection_tile.html:40
 msgid "Waitlisted"
 msgstr "Lista de espera"
 
@@ -3130,6 +3133,14 @@ msgstr ""
 msgid "Languages"
 msgstr "Idioma"
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
+#: TWLight/users/templates/users/available_collection_tile.html:46
+#: TWLight/users/templates/users/user_collection_tile.html:46
+#, fuzzy
+#| msgid "Not available"
+msgid "Not Available"
+msgstr "Não disponível"
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:8
 #, fuzzy
@@ -3526,7 +3537,7 @@ msgstr "Restringir"
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
 #: TWLight/users/templates/users/resource_tile.html:22
-#: TWLight/users/templates/users/user_collection_tile.html:49
+#: TWLight/users/templates/users/user_collection_tile.html:61
 msgid "Click to return this access"
 msgstr "Clique para retornar este acesso"
 
@@ -3553,15 +3564,15 @@ msgstr "Link para a página de inscrição de %(name)s"
 #. Translators: Users can click this button to access a collection they have access to.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/resource_tile.html:102
-#: TWLight/users/templates/users/user_collection_tile.html:70
-#: TWLight/users/templates/users/user_collection_tile.html:90
+#: TWLight/users/templates/users/user_collection_tile.html:82
+#: TWLight/users/templates/users/user_collection_tile.html:102
 msgid "Access collection"
 msgstr "Acessar coleção"
 
 #. Translators: Users can click this button to be taken to the website for a resource.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/resource_tile.html:105
-#: TWLight/users/templates/users/user_collection_tile.html:67
+#: TWLight/users/templates/users/user_collection_tile.html:79
 msgid "Go to site"
 msgstr "Ir para o site"
 
@@ -3577,13 +3588,13 @@ msgstr "As renovações não estão disponíveis para este parceiro"
 
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/resource_tile.html:122
-#: TWLight/users/templates/users/user_collection_tile.html:81
+#: TWLight/users/templates/users/user_collection_tile.html:93
 msgid "Extend"
 msgstr "Ampliar"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/resource_tile.html:125
-#: TWLight/users/templates/users/user_collection_tile.html:78
+#: TWLight/users/templates/users/user_collection_tile.html:90
 msgid "Renew"
 msgstr "Renovar"
 
@@ -4217,13 +4228,13 @@ msgstr ""
 "acesso através do programa Biblioteca da Wikipédia."
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
-#: TWLight/users/templates/users/user_collection_tile.html:44
+#: TWLight/users/templates/users/user_collection_tile.html:56
 #, fuzzy
 msgid "Expiry date"
 msgstr "Expirou em"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
-#: TWLight/users/templates/users/user_collection_tile.html:58
+#: TWLight/users/templates/users/user_collection_tile.html:70
 #, fuzzy
 msgid "Go to application"
 msgstr "Data da candidatura"
