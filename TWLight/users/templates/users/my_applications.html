@@ -61,7 +61,8 @@
         {% if app.status == app.APPROVED or app.status == app.PENDING or app.status == app.QUESTION %}
           <form action="{% url 'users:withdraw' user.editor.pk app.pk%}" class="m-2" method="post">
           {% csrf_token %}
-          <input type="submit" value="Withdraw" class="btn btn-danger btn-sm">
+          {% comment %}Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.{% endcomment %}
+          <input type="submit" value="{% trans "Withdraw" %}" class="btn btn-danger btn-sm">
           </form>
         {% endif %}
       </div>
