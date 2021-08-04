@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-04 15:32+0000\n"
+"POT-Creation-Date: 2021-08-04 17:44+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:03+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -3587,6 +3587,16 @@ msgstr "Télécharger"
 #: TWLight/users/templates/users/preferences.html:94
 msgid "Restrict"
 msgstr "Restreindre"
+
+#. Translators: This message invites users to give feedback on the new My Library UI.
+#: TWLight/users/templates/users/redesigned_my_library.html:9
+msgid ""
+"We're in the process of redesigning the library - further changes will be "
+"made over the coming weeks! We would love to hear your thoughts and feedback "
+"on our <a href=\"https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/"
+"Design_improvements\" class=\"alert-link\" target=\"_blank\" rel=\"noopener"
+"\"> project page </a> ."
+msgstr ""
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
 #: TWLight/users/templates/users/resource_tile.html:22

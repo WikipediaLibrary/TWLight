@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-04 15:31+0000\n"
+"POT-Creation-Date: 2021-08-04 17:44+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:02+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3179,6 +3179,16 @@ msgstr "Hent"
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:94
 msgid "Restrict"
+msgstr ""
+
+#. Translators: This message invites users to give feedback on the new My Library UI.
+#: TWLight/users/templates/users/redesigned_my_library.html:9
+msgid ""
+"We're in the process of redesigning the library - further changes will be "
+"made over the coming weeks! We would love to hear your thoughts and feedback "
+"on our <a href=\"https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/"
+"Design_improvements\" class=\"alert-link\" target=\"_blank\" rel=\"noopener"
+"\"> project page </a> ."
 msgstr ""
 
 #. Translators: A button when clicked takes users to a confirmation page to return their access for a particular resource.
