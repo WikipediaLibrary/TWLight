@@ -710,69 +710,6 @@ class AuthorizedUsers(APIView):
         return Response(serializer.data)
 
 
-class CollectionUserView(SelfOnly, ListView):
-    model = Editor
-    template_name = "users/my_library.html"
-
-    def get_object(self):
-        return Editor.objects.get(pk=self.request.user.editor.pk)
-
-    def get_context_data(self, **kwargs):
-        context = super(CollectionUserView, self).get_context_data(**kwargs)
-        editor = self.get_object()
-        today = datetime.date.today()
-        proxy_bundle_authorizations = Authorization.objects.filter(
-            Q(date_expires__gte=today) | Q(date_expires=None),
-            user=editor.user,
-            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).distinct()
-        proxy_bundle_authorizations_expired = Authorization.objects.filter(
-            user=editor.user,
-            date_expires__lt=today,
-            partners__authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        ).distinct()
-        manual_authorizations = Authorization.objects.filter(
-            Q(date_expires__gte=today) | Q(date_expires=None),
-            user=editor.user,
-            partners__authorization_method__in=[
-                Partner.EMAIL,
-                Partner.CODES,
-                Partner.LINK,
-            ],
-        ).order_by("partners")
-        manual_authorizations_expired = Authorization.objects.filter(
-            user=editor.user,
-            date_expires__lt=today,
-            partners__authorization_method__in=[
-                Partner.EMAIL,
-                Partner.CODES,
-                Partner.LINK,
-            ],
-        ).order_by("partners")
-
-        # Sort the querysets into more useful lists
-        manual_authorizations_list = sort_authorizations_into_resource_list(
-            manual_authorizations
-        )
-        manual_authorizations_expired_list = sort_authorizations_into_resource_list(
-            manual_authorizations_expired
-        )
-        proxy_bundle_authorizations_list = sort_authorizations_into_resource_list(
-            proxy_bundle_authorizations
-        )
-        proxy_bundle_authorizations_expired_list = (
-            sort_authorizations_into_resource_list(proxy_bundle_authorizations_expired)
-        )
-
-        context["proxy_bundle_authorizations"] = proxy_bundle_authorizations_list
-        context[
-            "proxy_bundle_authorizations_expired"
-        ] = proxy_bundle_authorizations_expired_list
-        context["manual_authorizations"] = manual_authorizations_list
-        context["manual_authorizations_expired"] = manual_authorizations_expired_list
-        return context
-
-
 class ListApplicationsUserView(SelfOnly, ListView):
     model = Editor
     template_name = "users/my_applications.html"

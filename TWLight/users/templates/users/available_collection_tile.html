@@ -29,7 +29,7 @@
       <p class="card-text">
         {% if available_collection.tags %}
           {% for tag_key, tag_value in available_collection.tags.items %}
-            <a href="{% url 'users:redesigned_my_library' %}?tags={{ tag_key }}" class="badge badge-pill collection-tags">
+            <a href="{% url 'users:my_library' %}?tags={{ tag_key }}" class="badge badge-pill collection-tags">
               {{ tag_value }}
             </a>
           {% endfor %}

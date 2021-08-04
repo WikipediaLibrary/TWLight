@@ -357,162 +357,6 @@ class ViewsTestCase(TestCase):
         app.refresh_from_db()
         self.assertNotIn("Withdraw", response.render().content.decode("utf-8"))
 
-    def test_my_library_authorizations_and_collections(self):
-
-        # a coordinator with a session.
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-        partner1 = PartnerFactory(
-            authorization_method=Partner.PROXY, status=Partner.AVAILABLE
-        )
-        app1 = ApplicationFactory(
-            status=Application.PENDING, editor=self.user_editor.editor, partner=partner1
-        )
-        partner1.coordinator = coordinator.user
-        partner1.save()
-        # coordinator will update the status
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": app1.pk}),
-            data={"status": Application.APPROVED},
-            follow=True,
-        )
-
-        partner2 = PartnerFactory(
-            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
-        )
-        partner2.coordinator = coordinator.user
-        partner2.save()
-
-        partner3 = PartnerFactory(
-            authorization_method=Partner.CODES, status=Partner.AVAILABLE
-        )
-        app3 = ApplicationFactory(
-            status=Application.PENDING, editor=self.user_editor.editor, partner=partner3
-        )
-        partner3.coordinator = coordinator.user
-        partner3.save()
-        # coordinator will update the status
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
-            data={"status": Application.APPROVED},
-            follow=True,
-        )
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": app3.pk}),
-            data={"status": Application.SENT},
-            follow=True,
-        )
-
-        partner4 = PartnerFactory(
-            authorization_method=Partner.EMAIL, status=Partner.AVAILABLE
-        )
-        app4 = ApplicationFactory(
-            status=Application.PENDING, editor=self.user_editor.editor, partner=partner4
-        )
-        partner4.coordinator = coordinator.user
-        partner4.save()
-        # coordinator will update the status
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": app4.pk}),
-            data={"status": Application.NOT_APPROVED},
-            follow=True,
-        )
-
-        partner5 = PartnerFactory(
-            authorization_method=Partner.LINK, status=Partner.AVAILABLE
-        )
-        app5 = ApplicationFactory(
-            status=Application.PENDING, editor=self.user_editor.editor, partner=partner5
-        )
-        partner5.coordinator = coordinator.user
-        partner5.save()
-        # coordinator will update the status
-        self.client.post(
-            reverse("applications:evaluate", kwargs={"pk": app5.pk}),
-            data={"status": Application.NOT_APPROVED},
-            follow=True,
-        )
-
-        partner6 = PartnerFactory(
-            authorization_method=Partner.BUNDLE, status=Partner.AVAILABLE
-        )
-        partner6.coordinator = coordinator.user
-        partner6.save()
-
-        self.editor1.update_bundle_authorization()
-
-        factory = RequestFactory()
-        request = factory.get(reverse("users:my_library"))
-        request.user = self.user_editor
-        response = views.CollectionUserView.as_view()(request)
-
-        # Proxy and bundle checks
-        proxy_partners = [partner1]
-        bundle_partners = [partner2, partner6]
-        response_proxy_bundle_auths = response.context_data[
-            "proxy_bundle_authorizations"
-        ]
-        response_proxy_bundle_partners = []
-        for collection in response_proxy_bundle_auths:
-            self.assertEqual(collection["authorization"].user, self.user_editor)
-            partners = collection["authorization"].partners.all()
-            for partner in partners:
-                response_proxy_bundle_partners.append(partner)
-
-        # Check for proxy auths
-        for partner in proxy_partners:
-            self.assertTrue(partner in response_proxy_bundle_partners)
-
-        # Check for bundle auths
-        for partner in bundle_partners:
-            self.assertTrue(partner in response_proxy_bundle_partners)
-
-        # Manual checks
-        manual_partners = [partner3]
-        response_manual_auths = response.context_data["manual_authorizations"]
-        response_manual_partners = []
-        for collection in response_manual_auths:
-            self.assertEqual(collection["authorization"].user, self.user_editor)
-            partners = collection["authorization"].partners.all()
-            for partner in partners:
-                response_manual_partners.append(partner)
-
-        # Check for manual auths
-        for partner in manual_partners:
-            self.assertTrue(partner in response_manual_partners)
-
-        # Get collections
-        request = factory.get(reverse("users:redesigned_my_library"))
-        request.user = self.user_editor
-        response = views.MyLibraryView.as_view()(request)
-
-        # Check user_collection partner_id_set
-        user_auths = Authorization.objects.filter(user=self.user_editor).distinct()
-        test_partner_id_set = set()
-        for user_auth in user_auths:
-            for partner in user_auth.partners.all():
-                test_partner_id_set.add(partner.pk)
-                for partner in user_auth.partners.all():
-                    test_partner_id_set.add(partner.pk)
-
-        self.assertEqual(response.context_data["partner_id_set"], test_partner_id_set)
-
-        # Check available_collection partner_id_set
-        available_collections = response.context_data["available_collections"]
-        available_collections_partner_id_set = set()
-        for collection in available_collections:
-            available_collections_partner_id_set.add(collection["pk"])
-
-        test_available_partner_id_set = set()
-        available_partners = Partner.objects.exclude(
-            authorization_method__in=[Partner.BUNDLE]
-        ).exclude(id__in=test_partner_id_set)
-        for partner in available_partners:
-            test_available_partner_id_set.add(partner.pk)
-
-        self.assertEqual(
-            available_collections_partner_id_set, test_available_partner_id_set
-        )
-
     def test_return_authorization(self):
         # Simulate a valid user trying to return their access
         editor = EditorCraftRoom(self, Terms=True, Coordinator=False)
@@ -1824,7 +1668,7 @@ class MyLibraryViewsTest(TestCase):
         )
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -1860,7 +1704,7 @@ class MyLibraryViewsTest(TestCase):
         authorization.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -1893,7 +1737,7 @@ class MyLibraryViewsTest(TestCase):
         authorization.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -1925,7 +1769,7 @@ class MyLibraryViewsTest(TestCase):
         authorization.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -1961,7 +1805,7 @@ class MyLibraryViewsTest(TestCase):
         )
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -2006,7 +1850,7 @@ class MyLibraryViewsTest(TestCase):
         )
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         url_with_art_tag_param = "{url}?tags=art_tag".format(url=url)
         request = factory.get(url_with_art_tag_param)
         request.user = self.editor.user
@@ -2056,7 +1900,7 @@ class MyLibraryViewsTest(TestCase):
         )
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         url_with_earth_sciences_tag_param = "{url}?tags=earth-sciences_tag".format(
             url=url
         )
@@ -2097,7 +1941,7 @@ class MyLibraryViewsTest(TestCase):
         authorization.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -2131,7 +1975,7 @@ class MyLibraryViewsTest(TestCase):
         authorization.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
@@ -2157,7 +2001,7 @@ class MyLibraryViewsTest(TestCase):
         self.editor.save()
 
         factory = RequestFactory()
-        url = reverse("users:redesigned_my_library")
+        url = reverse("users:my_library")
         request = factory.get(url)
         request.user = self.editor.user
         response = MyLibraryView.as_view()(request)
