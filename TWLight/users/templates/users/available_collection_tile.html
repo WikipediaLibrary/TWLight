@@ -34,11 +34,24 @@
             </a>
           {% endfor %}
         {% endif %}
+        {% if available_collection.is_waitlisted %}
+          <span class="badge badge-pill collection-waitlisted-badge">
+            {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is waitlisted. {% endcomment %}
+            {% trans "Waitlisted" %}
+          </span>
+        {% endif %}
+        {% if available_collection.is_not_available %}
+          <span class="badge badge-pill collection-not-available-badge">
+            {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available. {% endcomment %}
+            {% trans "Not Available" %}
+          </span>
+        {% endif %}
       </p>
     </div>
     <div class="card-footer">
       <a href="{% url 'applications:apply_single' available_collection.pk %}"
-          class="btn btn-sm access-apply-button" type="button" name="button">
+          class="btn btn-sm access-apply-button {% if available_collection.is_not_available %} disabled {% endif %}"
+          type="button" name="button">
         {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access. {% endcomment %}
         {% trans "Apply" %}
       </a>
