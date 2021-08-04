@@ -2074,3 +2074,97 @@ class MyLibraryViewsTest(TestCase):
         self.assertIn(escape(self.bundle_partner_1.company_name), content)
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
         self.assertIn(escape(self.proxy_partner_2.company_name), content)
+
+    def test_collection_show_waitlisted_badge(self):
+        """
+        Tests that the Waitlisted badge is shown because the authorization has expired
+        """
+        waitlisted_partner = PartnerFactory(
+            authorization_method=Partner.PROXY, status=Partner.WAITLIST
+        )
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=waitlisted_partner,
+            sent_by=self.user_coordinator,
+        )
+
+        someday = date.today() - timedelta(days=60)
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=waitlisted_partner
+        )
+        authorization.date_expires = someday
+        authorization.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(waitlisted_partner.company_name), content)
+        self.assertIn("Waitlisted", content)
+
+    def test_collection_dont_show_waitlisted_badge(self):
+        """
+        Tests that the Waitlisted badge is not shown because the authorization has not expired
+        """
+        waitlisted_partner = PartnerFactory(
+            authorization_method=Partner.PROXY, status=Partner.WAITLIST
+        )
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=waitlisted_partner,
+            sent_by=self.user_coordinator,
+        )
+
+        someday = date.today() + timedelta(days=60)
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=waitlisted_partner
+        )
+        authorization.date_expires = someday
+        authorization.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(waitlisted_partner.company_name), content)
+        self.assertNotIn("Waitlisted", content)
+
+    def test_collection_show_not_available_badge(self):
+        """
+        Tests that the Not Available badge is shown
+        """
+        not_available_partner = PartnerFactory(
+            authorization_method=Partner.PROXY, status=Partner.NOT_AVAILABLE
+        )
+
+        # Make the user staff so they can see unavailable collections
+        self.editor.user.is_staff = True
+        self.editor.user.save()
+        self.editor.save()
+
+        factory = RequestFactory()
+        url = reverse("users:redesigned_my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(not_available_partner.company_name), content)
+        self.assertIn("Not Available", content)

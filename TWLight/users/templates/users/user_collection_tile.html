@@ -34,6 +34,18 @@
             </a>
           {% endfor %}
         {% endif %}
+        {% if user_collection_partner.is_waitlisted and user_collection.has_expired %}
+          <span class="badge badge-pill collection-waitlisted-badge">
+            {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is waitlisted. {% endcomment %}
+            {% trans "Waitlisted" %}
+          </span>
+        {% endif %}
+        {% if user_collection_partner.is_not_available %}
+          <span class="badge badge-pill collection-not-available-badge">
+            {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available. {% endcomment %}
+            {% trans "Not Available" %}
+          </span>
+        {% endif %}
       </p>
     </div>
     <div class="card-footer">

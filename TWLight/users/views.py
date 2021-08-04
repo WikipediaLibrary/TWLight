@@ -966,6 +966,8 @@ class MyLibraryView(TemplateView):
                             "tags": translated_tags,
                             "authorization_method": user_authorization_partner.authorization_method,
                             "access_url": user_authorization_partner.get_access_url,
+                            "is_not_available": user_authorization_partner.is_not_available,
+                            "is_waitlisted": user_authorization_partner.is_waitlisted,
                         }
                     )
                     partner_id_set.add(user_authorization_partner.pk)
@@ -1067,6 +1069,8 @@ class MyLibraryView(TemplateView):
                     "description": partner_descriptions["description"],
                     "languages": available_collection.get_languages,
                     "tags": translated_tags,
+                    "is_not_available": available_collection.is_not_available,
+                    "is_waitlisted": available_collection.is_waitlisted,
                 }
             )
 
