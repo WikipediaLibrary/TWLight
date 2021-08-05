@@ -185,7 +185,10 @@ class NewHomePageView(TemplateView):
 
     def get(self, request):
         if request.user.is_authenticated:
-            return redirect("/home")
+            if request.user.editor.wp_bundle_eligible:
+                return redirect("/users/my_library")
+            else:
+                return redirect("/home")
         else:
             context = self.get_context_data()
             return render(request, "homepage.html", context)
