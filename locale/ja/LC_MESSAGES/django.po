@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-04 17:44+0000\n"
+"POT-Creation-Date: 2021-08-05 14:58+0000\n"
 "PO-Revision-Date: 2021-07-29 11:17:04+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -688,7 +688,7 @@ msgstr "まだ審査を受けていません。"
 #. Translators: On the page listing applications, this text is displayed when there aren't any applications to list.
 #: TWLight/applications/templates/applications/application_list_include.html:65
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:102
-#: TWLight/users/templates/users/my_applications.html:91
+#: TWLight/users/templates/users/my_applications.html:92
 msgid "No applications right now."
 msgstr "現在はまだ審査を受けていません。"
 
@@ -3402,18 +3402,23 @@ msgstr ""
 "Wikipedia_Library_Card_Platform\">translatewiki.net</a>で手伝うことができま"
 "す。"
 
+#. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
+#: TWLight/users/templates/users/my_applications.html:65
+msgid "Withdraw"
+msgstr ""
+
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
-#: TWLight/users/templates/users/my_applications.html:72
+#: TWLight/users/templates/users/my_applications.html:73
 msgid "Has your account expired?"
 msgstr "アカウントが期限切れではありませんか？"
 
 #. Translators: On the page listing applications, this text labels a link which users can click to request a renewal of their application.
-#: TWLight/users/templates/users/my_applications.html:75
+#: TWLight/users/templates/users/my_applications.html:76
 msgid "Request renewal"
 msgstr "更新を申請"
 
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
-#: TWLight/users/templates/users/my_applications.html:78
+#: TWLight/users/templates/users/my_applications.html:79
 msgid ""
 "Renewals are either not required, not available right now, or you have "
 "already requested a renewal."
