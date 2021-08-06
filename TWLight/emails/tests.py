@@ -703,3 +703,20 @@ class ProjectPage2021LaunchTest(TestCase):
         call_command("project_page_2021_launch")
 
         self.assertEqual(len(mail.outbox), 0)
+
+
+class TermsOfUseChangeEmailTest(TestCase):
+    @classmethod
+    @wrap_testdata
+    def setUpTestData(cls):
+        super().setUpTestData()
+        editor1 = EditorFactory(user__email="editor@example.com")
+        editor2 = EditorFactory(user__email="editor2@example.com")
+
+    def test_change_of_terms(self):
+        """
+        Adding an inactive user shouldn't send another email.
+        """
+        call_command("email_term_of_use_change")
+
+        self.assertEqual(len(mail.outbox), 2)
