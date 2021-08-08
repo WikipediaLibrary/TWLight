@@ -1840,7 +1840,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
                 escape(obj.__str__()), response.render().content.decode("utf-8")
             )
 
-    def test_list_object_visibility(self):
+    def test_list_deleted_object_visibility(self):
         url = reverse("applications:list")
         queryset = Application.objects.filter(
             status__in=[Application.PENDING, Application.QUESTION]
@@ -1849,14 +1849,14 @@ class ListApplicationsTest(BaseApplicationViewTest):
             url, views.ListApplicationsView, queryset
         )
 
-    def test_list_approved_object_visibility(self):
+    def test_list_approved_deleted_object_visibility(self):
         url = reverse("applications:list_approved")
         queryset = Application.objects.filter(status=Application.APPROVED)
         self._base_test_deleted_object_visibility(
             url, views.ListApprovedApplicationsView, queryset
         )
 
-    def test_list_rejected_object_visibility(self):
+    def test_list_rejected_deleted_object_visibility(self):
         url = reverse("applications:list_rejected")
         queryset = Application.objects.filter(
             status__in=[Application.NOT_APPROVED, Application.INVALID]
