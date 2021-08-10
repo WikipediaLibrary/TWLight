@@ -1,14 +1,25 @@
-import django_filters
+from django.utils.translation import gettext as _
 
 from .models import Language, Partner
 from .helpers import get_tag_choices
 
+import django_filters
+
 
 class PartnerFilter(django_filters.FilterSet):
+
     tags = django_filters.ChoiceFilter(
-        label="Tags", choices=get_tag_choices(), method="tags_filter"
+        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
+        label=_("Tags"),
+        choices=get_tag_choices(),
+        method="tags_filter",
     )
-    languages = django_filters.ModelChoiceFilter(queryset=Language.objects.all())
+
+    languages = django_filters.ModelChoiceFilter(
+        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
+        label=_("Languages"),
+        queryset=Language.objects.all(),
+    )
 
     def __init__(self, *args, **kwargs):
         # grab "language_code" from kwargs and then remove it so we can call super()
