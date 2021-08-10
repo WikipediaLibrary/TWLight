@@ -24,7 +24,7 @@ class ProjectPage2021Launch(object):
 
 
 class LibraryRedesignTermsUpdate(object):
-    launch_notice = Signal(providing_args=["user_wp_username", "user_email"])
+    launch_notice = Signal(providing_args=["user_wp_username", "user_email", "lang"])
 
 
 @receiver(pre_save, sender=Authorization)
