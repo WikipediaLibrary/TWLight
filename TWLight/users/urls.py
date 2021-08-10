@@ -33,7 +33,7 @@ urlpatterns = [
     ),
     url(
         r"^my_library/$",
-        login_required(views.CollectionUserView.as_view()),
+        login_required(views.MyLibraryView.as_view()),
         name="my_library",
     ),
     url(
@@ -56,10 +56,5 @@ urlpatterns = [
         r"^withdraw/(?P<pk>\d+)/(?P<id>\d+)/$",
         login_required(views.WithdrawApplication.as_view()),
         name="withdraw",
-    ),
-    url(
-        r"^redesigned_my_library/$",
-        login_required(views.MyLibraryView.as_view()),
-        name="redesigned_my_library",
     ),
 ]
