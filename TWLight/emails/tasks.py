@@ -198,10 +198,11 @@ def send_library_redesign_terms_update(sender, **kwargs):
     """
     user_wp_username = kwargs["user_wp_username"]
     user_email = kwargs["user_email"]
+    lang = kwargs["lang"]
 
     email = LibraryRedesignTermsUpdateEmail()
 
-    email.send(user_email, {"username": user_wp_username})
+    email.send(user_email, {"username": user_wp_username, "lang": lang})
 
 
 @receiver(comment_was_posted)
