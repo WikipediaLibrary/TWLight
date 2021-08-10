@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-10 15:06+0000\n"
+"POT-Creation-Date: 2021-08-10 18:38+0000\n"
 "PO-Revision-Date: 2021-08-09 11:16:54+0000\n"
 "Language: he\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1656,6 +1656,18 @@ msgstr "שפה"
 msgid "Number of users"
 msgstr "מספר המשתמשים"
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
+#: TWLight/resources/filters.py:13
+msgid "Tags"
+msgstr ""
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
+#: TWLight/resources/filters.py:20
+#: TWLight/users/templates/users/available_collection_tile.html:19
+#: TWLight/users/templates/users/user_collection_tile.html:19
+msgid "Languages"
+msgstr "שפות"
+
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
 msgid "Name of the potential partner"
@@ -3058,12 +3070,6 @@ msgstr ""
 "לא תוכל עוד לגשת למשאבים של <b>%(partner)s's</b> דרך פלטפורמת כרטיס הספרייה, "
 "אבל תוכל לבקש גישה מחדש באמצעות לחיצה על \"חידוש\", אם תשנה את דעתך.האם "
 "ברצונך באמת להזדכות על הגישה שלה?"
-
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/users/templates/users/available_collection_tile.html:19
-#: TWLight/users/templates/users/user_collection_tile.html:19
-msgid "Languages"
-msgstr "שפות"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:46

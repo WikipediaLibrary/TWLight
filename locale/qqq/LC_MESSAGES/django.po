@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-10 15:06+0000\n"
+"POT-Creation-Date: 2021-08-10 18:39+0000\n"
 "PO-Revision-Date: 2021-08-09 11:16:55+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1557,6 +1557,19 @@ msgstr "{{Identical|Language}}"
 msgid "Number of users"
 msgstr ""
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
+#: TWLight/resources/filters.py:13
+msgid "Tags"
+msgstr ""
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
+#: TWLight/resources/filters.py:20
+#: TWLight/users/templates/users/available_collection_tile.html:19
+#: TWLight/users/templates/users/user_collection_tile.html:19
+#, fuzzy
+msgid "Languages"
+msgstr "{{Identical|Language}}"
+
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
 msgid "Name of the potential partner"
@@ -2826,13 +2839,6 @@ msgid ""
 "Library Card platform, but can request access again by clicking 'renew', if "
 "you change your mind. Are you sure you want to return your access?"
 msgstr ""
-
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/users/templates/users/available_collection_tile.html:19
-#: TWLight/users/templates/users/user_collection_tile.html:19
-#, fuzzy
-msgid "Languages"
-msgstr "{{Identical|Language}}"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:46
