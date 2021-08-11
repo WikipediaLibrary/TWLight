@@ -859,7 +859,6 @@ class MyLibraryView(TemplateView):
         user_authorization_obj = []
 
         for user_authorization in authorization_queryset:
-            user_authorization_partner_obj = []
             partner_filtered_list = PartnerFilter(
                 self.request.GET,
                 queryset=user_authorization.partners.all(),
@@ -869,6 +868,17 @@ class MyLibraryView(TemplateView):
             if partner_filtered_list.qs.count() == 0:
                 continue
             else:
+
+                open_app = user_authorization.get_open_app
+
+                if user_authorization.date_expires:
+                    if user_authorization.date_expires < date.today():
+                        has_expired = True
+                    else:
+                        has_expired = False
+                else:
+                    has_expired = False
+
                 for user_authorization_partner in partner_filtered_list.qs:
                     # Obtaining translated partner description
                     partner_short_description_key = "{pk}_short_description".format(
@@ -890,49 +900,35 @@ class MyLibraryView(TemplateView):
                     translated_tags = get_tag_names(
                         language_code, user_authorization_partner.new_tags
                     )
-                    user_authorization_partner_obj.append(
+
+                    user_authorization_obj.append(
                         {
-                            "pk": user_authorization_partner.pk,
+                            "auth_pk": user_authorization.pk,
+                            "auth_date_authorized": user_authorization.date_authorized,
+                            "auth_date_expires": user_authorization.date_expires,
+                            "auth_is_valid": user_authorization.is_valid,
+                            "auth_latest_sent_app": user_authorization.get_latest_sent_app,
+                            "auth_open_app": open_app,
+                            "auth_has_expired": has_expired,
+                            "partner_pk": user_authorization_partner.pk,
                             "partner_name": user_authorization_partner.company_name,
                             "partner_logo": partner_logo,
-                            "short_description": partner_descriptions[
+                            "partner_short_description": partner_descriptions[
                                 "short_description"
                             ],
-                            "description": partner_descriptions["description"],
-                            "languages": user_authorization_partner.get_languages,
-                            "tags": translated_tags,
-                            "authorization_method": user_authorization_partner.authorization_method,
-                            "access_url": user_authorization_partner.get_access_url,
-                            "is_not_available": user_authorization_partner.is_not_available,
-                            "is_waitlisted": user_authorization_partner.is_waitlisted,
+                            "partner_description": partner_descriptions["description"],
+                            "partner_languages": user_authorization_partner.get_languages,
+                            "partner_tags": translated_tags,
+                            "partner_authorization_method": user_authorization_partner.authorization_method,
+                            "partner_access_url": user_authorization_partner.get_access_url,
+                            "partner_is_not_available": user_authorization_partner.is_not_available,
+                            "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
                         }
                     )
                     partner_id_set.add(user_authorization_partner.pk)
 
-                open_app = user_authorization.get_open_app
-
-                if user_authorization.date_expires:
-                    if user_authorization.date_expires < date.today():
-                        has_expired = True
-                    else:
-                        has_expired = False
-                else:
-                    has_expired = False
-
-                user_authorization_obj.append(
-                    {
-                        "pk": user_authorization.pk,
-                        "partners": user_authorization_partner_obj,
-                        "date_authorized": user_authorization.date_authorized,
-                        "date_expires": user_authorization.date_expires,
-                        "is_valid": user_authorization.is_valid,
-                        "latest_sent_app": user_authorization.get_latest_sent_app,
-                        "open_app": open_app,
-                        "has_expired": has_expired,
-                    }
-                )
-
-        return user_authorization_obj
+        # Sort by partner name
+        return sorted(user_authorization_obj, key=lambda k: k["partner_name"])
 
     def _build_available_collection_object(
         self, context, language_code, partner_id_set

@@ -30,9 +30,7 @@
     <!-- User Collections -->
     <div class="row">
         {% for user_collection in user_collections %}
-          {% for user_collection_partner in user_collection.partners%}
-            {% include "users/user_collection_tile.html" %}
-          {% endfor %}
+          {% include "users/user_collection_tile.html" %}
         {% endfor %}
     </div>
     <!-- Expired User Collections -->
@@ -44,9 +42,7 @@
       </h3>
       <div class="row">
         {% for user_collection in expired_user_collections %}
-          {% for user_collection_partner in user_collection.partners%}
-            {% include "users/user_collection_tile.html" %}
-          {% endfor %}
+          {% include "users/user_collection_tile.html" %}
         {% endfor %}
       </div>
     {% endif %}
