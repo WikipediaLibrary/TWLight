@@ -17,4 +17,5 @@ class Command(BaseCommand):
                 sender=self.__class__,
                 user_wp_username=editor.wp_username,
                 user_email=editor.user.email,
+                lang=editor.user.userprofile.lang,
             )
