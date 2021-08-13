@@ -388,7 +388,7 @@ class ViewMixinTests(TestCase):
 
         test.dispatch(req)
 
-    def test_email_required_2(self):
+    def test_email_required_for_superuser(self):
         """
         EmailRequired allows superusers (even without email)
         """
@@ -402,7 +402,7 @@ class ViewMixinTests(TestCase):
 
         test.dispatch(req)
 
-    def test_email_required_2(self):
+    def test_email_required_for_normal_user(self):
         """
         EmailRequired disallows users who fail the above criteria.
         """
