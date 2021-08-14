@@ -792,6 +792,16 @@ class MyLibraryView(TemplateView):
         context["editor"] = editor
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
+        context["bundle_criteria"] = {
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
+            _("500+ edits"): editor.wp_enough_edits,
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
+            _("6+ months editing"): editor.wp_account_old_enough,
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
+            _("10+ edits in the last month"): editor.wp_enough_recent_edits,
+            # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
+            _("No active blocks"): editor.wp_not_blocked,
+        }
 
         return context
 
