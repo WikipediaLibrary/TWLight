@@ -824,6 +824,52 @@ and (max-width : 581px){
     }
 }
 
+/*
+----------------------------------------------------------------------------
+ELIGIBILITY MODAL CSS
+--------------------------------------------------------------------------
+*/
+.eligibility-criteria-container{
+    width: 55%;
+}
+.eligibility-criteria{
+    font-family: Roboto;
+    font-size: 26px;
+    line-height: 50px;
+    font-weight: 300;
+}
+.eligibility-criteria i{
+    margin-right: 10px;
+}
+
+.dot{
+    height: 35px;
+    width: 35px;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    display: inline-flex;
+    color: #FFFFFF;
+    text-decoration: none;
+    right: 20px;
+    position: absolute;
+}
+
+.dot:hover{
+    color: #FFFFFF;
+}
+
+.question-mark{
+    font-size: 20px;
+    font-weight: 300;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.eligibility-modal-button{
+    width: 300px;
+    margin-left: 45px;
+}
+
 
 /*
 ----------------------------------------------------------------------------
