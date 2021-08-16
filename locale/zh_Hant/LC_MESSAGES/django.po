@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-11 23:36+0000\n"
-"PO-Revision-Date: 2021-08-12 11:15:56+0000\n"
+"PO-Revision-Date: 2021-08-16 11:16:39+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1369,7 +1369,6 @@ msgstr "標籤"
 #: TWLight/resources/filters.py:20
 #: TWLight/users/templates/users/available_collection_tile.html:19
 #: TWLight/users/templates/users/user_collection_tile.html:19
-#, fuzzy
 msgid "Languages"
 msgstr "語言"
 
@@ -1390,9 +1389,8 @@ msgid "Website"
 msgstr "網站"
 
 #: TWLight/resources/templates/resources/partner_detail.html:16
-#, fuzzy
 msgid "Back to My Library"
-msgstr "我的圖書館"
+msgstr "返回我的圖書館"
 
 #: TWLight/resources/templates/resources/partner_detail.html:21
 msgid "Back to partners"
@@ -2464,27 +2462,23 @@ msgstr "您不再能透過借閱卡平台來取用 <b>%(partner)s</b> 的資源�
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:46
 #: TWLight/users/templates/users/user_collection_tile.html:46
-#, fuzzy
 msgid "Not Available"
 msgstr "不可用"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:8
-#, fuzzy
 msgid "My Collections "
-msgstr "典藏"
+msgstr "典藏 "
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
 #: TWLight/users/templates/users/collections_section.html:15
-#, fuzzy
 msgid "Available Collections "
-msgstr "典藏"
+msgstr "可用典藏 "
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
 #: TWLight/users/templates/users/collections_section.html:22
-#, fuzzy
 msgid "View my applications >"
-msgstr "查看申請程序"
+msgstr "查看我的申請程序 >"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
 #: TWLight/users/templates/users/collections_section.html:41
@@ -2683,15 +2677,13 @@ msgstr "所屬機構"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/users/templates/users/filter_section.html:13
-#, fuzzy
 msgid "Filters"
-msgstr "篩選依..."
+msgstr "篩選"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
 #: TWLight/users/templates/users/filter_section.html:17
-#, fuzzy
 msgid "Reset filters"
-msgstr "目前篩選"
+msgstr "重新設定篩選"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have instant access.
 #: TWLight/users/templates/users/filter_section.html:27
@@ -2705,9 +2697,8 @@ msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
 #: TWLight/users/templates/users/filter_section.html:47
-#, fuzzy
 msgid "Filter"
-msgstr "篩選依..."
+msgstr "篩選"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2722,7 +2713,7 @@ msgstr "您可以在 <a href=\"https://translatewiki.net/wiki/Translating:Wikipe
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
 msgid "Withdraw"
-msgstr ""
+msgstr "撤回"
 
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
 #: TWLight/users/templates/users/my_applications.html:73

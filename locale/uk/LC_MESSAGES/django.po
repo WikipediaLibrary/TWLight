@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-11 23:35+0000\n"
-"PO-Revision-Date: 2021-08-12 11:15:56+0000\n"
+"PO-Revision-Date: 2021-08-16 11:16:39+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1672,9 +1672,8 @@ msgstr "Цей ресурс є частиною нашого <a href=\"%(about)s
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:556
-#, fuzzy
 msgid "Active accounts"
-msgstr "В середньому, облікових записів на користувача"
+msgstr "Активні облікові записи"
 
 #. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail.html:572
@@ -1689,7 +1688,7 @@ msgstr "Середня кількість днів від подачі до рі
 #. Translators: This is the header for total accounts on a per-collection level.
 #: TWLight/resources/templates/resources/partner_detail.html:604
 msgid "Active accounts (collections)"
-msgstr "Активні обліковки (колекції)"
+msgstr "Активні акаунти (колекції)"
 
 #. Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title.
 #: TWLight/resources/templates/resources/partner_list.html:10
@@ -1921,7 +1920,7 @@ msgstr "Про Бібліотеку Вікіпедії"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
 msgid "The Wikipedia Library provides free access to research materials to improve your ability to contribute content to Wikimedia projects."
-msgstr "Бібліотека Вікіпедії надає вільний доступ до дослідницьких матеріалів, щоб дати вам кращу можливість робити внесок до проектів Вікімедіа."
+msgstr "Бібліотека Вікіпедії надає вільний доступ до дослідницьких матеріалів, щоб дати вам кращу можливість робити внесок до проєктів Вікімедіа."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:18
@@ -1942,7 +1941,7 @@ msgstr "Хто може отримати доступ?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:42
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr "Будь-який активний редактор з хорошою репутацією може отримати доступ. Для видавців з лімітованим числом облікових записів заявки розглядаються залежно від потреб та внеску редактора. Якщо ви вважаєте, що вам допоможе доступ до одного з наших партнерських ресурсів, і ви є активним редактором у будь-якому проекті, підтримуваному Фондом Вікімедіа, будь ласка, подавайтеся."
+msgstr "Будь-який активний редактор з хорошою репутацією може отримати доступ. Для видавців з лімітованим числом облікових записів заявки розглядаються залежно від потреб та внеску редактора. Якщо ви вважаєте, що вам допоможе доступ до одного з наших партнерських ресурсів, і ви є активним редактором у будь-якому проєкті, підтримуваному Фондом Вікімедіа, будь ласка, подавайтеся."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:52
@@ -1957,17 +1956,17 @@ msgstr "Ви маєте обліковий запис, якому не менш�
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:63
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "Ви зробили щонайменше 500 редагувань у проектах Вікімедіа"
+msgstr "Ви зробили щонайменше 500 редагувань у проєктах Вікімедіа"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:67
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr "Ви зробити щонайменше 10 редагувань у проектах Вікімедіа за останній місяць"
+msgstr "Ви зробити щонайменше 10 редагувань у проєктах Вікімедіа за останній місяць"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr "Ви зараз не заблоковані у проекті Вікімедіа"
+msgstr "Ви зараз не заблоковані у проєкті Вікімедіа"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
@@ -2981,7 +2980,7 @@ msgstr "Ви можете переглядати сайт Бібліотеки �
 #: TWLight/users/templates/users/terms.html:212
 #, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
-msgstr "З метою адміністрування програми Бібліотеки Вікіпедії, ми зберігаємо програмні дані, які збираємо від вас, упродовж трьох років після вашого останнього входу в систему, поки ви не вилучите свій обліковий запис, як описано нижче. Ви можете увійти і перейти до <a href=\"%(profile_url)s\">своєї сторінки профілю</a>, щоб переглянути інформацію, пов'язану з вашим обліковим записом, і можете завантажити її у форматі JSON. Ви можете відкривати, оновлювати, обмежувати чи вилучати цю інформацію у будь-який час, окрім інформації, яка автоматично оновлюється з проектів. Якщо у вас є будь-які запитання чи застереження щодо обробки ваших даних, будь ласка, напишіть на <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
+msgstr "З метою адміністрування програми Бібліотеки Вікіпедії, ми зберігаємо програмні дані, які збираємо від вас, упродовж трьох років після вашого останнього входу в систему, поки ви не вилучите свій обліковий запис, як описано нижче. Ви можете увійти і перейти до <a href=\"%(profile_url)s\">своєї сторінки профілю</a>, щоб переглянути інформацію, пов'язану з вашим обліковим записом, і можете завантажити її у форматі JSON. Ви можете відкривати, оновлювати, обмежувати чи вилучати цю інформацію у будь-який час, окрім інформації, яка автоматично оновлюється з проєктів. Якщо у вас є будь-які запитання чи застереження щодо обробки ваших даних, будь ласка, напишіть на <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:219
