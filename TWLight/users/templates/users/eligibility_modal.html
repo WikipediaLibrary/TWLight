@@ -2,7 +2,7 @@
 
 <div id="eligibilityModal" class="modal fade" data-backdrop="static" data-keyboard="false"
     tabindex="-1" aria-labelledby="eligibilityModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header mx-auto">
         <p id="eligibilityModalLabel" class="modal-title text-center">
@@ -33,21 +33,21 @@
           </em>
         </p>
         <div class="row">
-          <div class="col-lg-5">
+          <div class="col-lg-5 col-md-12 col-sm-12">
             <a href="{% url 'users:home' %}" class="btn btn-outline-secondary
                 eligibility-modal-button">
               {% comment %}Translators: A button that takes users to their profile. {% endcomment %}
               {% trans "Profile/Settings" %}
             </a>
           </div>
-          <div class="col-lg-5">
+          <div class="col-lg-5 col-md-12 col-sm-12">
             <a href="{% url 'auth_logout' %}?next=/" class="btn btn-outline-secondary
                 eligibility-modal-button">
               {% comment %}Translators: A button to log out of The Wikipedia Library. {% endcomment %}
               {% trans "Log out" %}
             </a>
           </div>
-          <div class="col-lg-2">
+          <div class="col-lg-2 col-md-12 col-sm-12">
             <a href="{% url 'contact' %}" class="dot">
               <span class="question-mark"> ? </span>
             </a>
