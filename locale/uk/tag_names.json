@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"DDPAT"
+		]
+	},
+	"languages-and-literature_tag": "Мови та література",
+	"multidisciplinary_tag": "Багатопрофільний",
+	"physical-sciences_tag": "Фізичні науки",
+	"music_tag": "Музика",
+	"art_tag": "Мистецтво",
+	"business-and-economics_tag": "Бізнес та економіка",
+	"law_tag": "Закон",
+	"education_tag": "Освіта",
+	"philosophy-and-religion_tag": "Філософія та релігія",
+	"social-sciences_tag": "Соціальні науки",
+	"history_tag": "Історія",
+	"culture_tag": "Культура",
+	"life-sciences_tag": "Наука про життя",
+	"health-sciences_tag": "Науки про здоров'я",
+	"earth-sciences_tag": "Наук про Землю",
+	"technology_tag": "Технологія"
+}

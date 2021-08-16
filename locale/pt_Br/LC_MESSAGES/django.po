@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-11 23:35+0000\n"
-"PO-Revision-Date: 2021-08-12 11:15:55+0000\n"
+"PO-Revision-Date: 2021-08-16 11:16:38+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1398,9 +1398,8 @@ msgid "Website"
 msgstr "Site"
 
 #: TWLight/resources/templates/resources/partner_detail.html:16
-#, fuzzy
 msgid "Back to My Library"
-msgstr "Minha biblioteca"
+msgstr "Voltar para Minha biblioteca"
 
 #: TWLight/resources/templates/resources/partner_detail.html:21
 msgid "Back to partners"

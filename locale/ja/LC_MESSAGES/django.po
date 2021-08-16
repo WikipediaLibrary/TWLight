@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-11 23:36+0000\n"
-"PO-Revision-Date: 2021-08-12 11:15:54+0000\n"
+"PO-Revision-Date: 2021-08-16 11:16:37+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1376,7 +1376,6 @@ msgstr "タグ"
 #: TWLight/resources/filters.py:20
 #: TWLight/users/templates/users/available_collection_tile.html:19
 #: TWLight/users/templates/users/user_collection_tile.html:19
-#, fuzzy
 msgid "Languages"
 msgstr "言語"
 
@@ -1397,9 +1396,8 @@ msgid "Website"
 msgstr "ウェブサイト"
 
 #: TWLight/resources/templates/resources/partner_detail.html:16
-#, fuzzy
 msgid "Back to My Library"
-msgstr "私の図書館"
+msgstr "私の図書館へ戻る"
 
 #: TWLight/resources/templates/resources/partner_detail.html:21
 msgid "Back to partners"
