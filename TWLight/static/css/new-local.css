@@ -870,6 +870,61 @@ ELIGIBILITY MODAL CSS
     margin-left: 45px;
 }
 
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .eligibility-criteria-container{
+        width: 90%;
+    }
+    .eligibility-criteria{
+        font-family: Roboto;
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 300;
+    }
+    .eligibility-modal-button{
+        width: 200px;
+        margin-bottom: 10px;
+    }
+    .dot{
+        height: 35px;
+        width: 35px;
+        background-color: #C4C4C4;
+        border-radius: 50%;
+        display: inline-flex;
+        color: #FFFFFF;
+        text-decoration: none;
+        right: 10px;
+        bottom: 10px;
+        position: absolute;
+    }
+}
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .eligibility-criteria-container{
+        width: 75%;
+    }
+    .eligibility-modal-button{
+        width: 325px;
+        margin-bottom: 10px;
+    }
+    .dot{
+        height: 35px;
+        width: 35px;
+        background-color: #C4C4C4;
+        border-radius: 50%;
+        display: inline-flex;
+        color: #FFFFFF;
+        text-decoration: none;
+        right: 20px;
+        bottom: 10px;
+        position: absolute;
+    }
+}
+
 
 /*
 ----------------------------------------------------------------------------
