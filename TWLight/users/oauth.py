@@ -479,26 +479,18 @@ class OAuthCallbackView(View):
                         )
                         # Pop the 'next' parameter out of the QueryDict.
                         next = query_dict.pop("next")
-                        if "home" in next[0]:
-                            if user.editor.wp_bundle_eligible:
-                                # The user is bundle eligible, redirecting them directly
-                                # to My Library
-                                return_url = reverse_lazy("users:my_library")
-                            else:
-                                return_url = reverse_lazy("home")
-                        else:
-                            # Set the return url to the value of 'next'. Basic.
-                            return_url = next[0]
-                            # If there is anything left in the QueryDict after popping
-                            # 'next', append it to the return url. This preserves state
-                            # for filtered lists and redirected form submissions like
-                            # the partner suggestion form.
-                            if query_dict:
-                                return_url += "?" + urlencode(query_dict)
-                            logger.info(
-                                "User authenticated. Sending them on for "
-                                'post-login redirection per "next" parameter.'
-                            )
+                        # Set the return url to the value of 'next'. Basic.
+                        return_url = next[0]
+                        # If there is anything left in the QueryDict after popping
+                        # 'next', append it to the return url. This preserves state
+                        # for filtered lists and redirected form submissions like
+                        # the partner suggestion form.
+                        if query_dict:
+                            return_url += "?" + urlencode(query_dict)
+                        logger.info(
+                            "User authenticated. Sending them on for "
+                            'post-login redirection per "next" parameter.'
+                        )
                     except KeyError as e:
                         return_url = reverse_lazy("homepage")
                         logger.warning(e)
