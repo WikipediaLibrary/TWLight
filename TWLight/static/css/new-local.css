@@ -949,29 +949,6 @@ and (max-width : 1000px) {
     }
 }
 
-@media screen
-and (max-width : 450px) {
-    .eligibility-criteria-container{
-        width: 75%;
-    }
-    .eligibility-modal-button{
-        width: 300px;
-        margin-bottom: 10px;
-    }
-    .dot{
-        height: 35px;
-        width: 35px;
-        background-color: #C4C4C4;
-        border-radius: 50%;
-        display: inline-flex;
-        color: #FFFFFF;
-        text-decoration: none;
-        right: 10px;
-        bottom: 10px;
-        position: absolute;
-    }
-}
-
 
 /*
 ----------------------------------------------------------------------------
