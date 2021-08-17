@@ -6,6 +6,11 @@
 
   {% if not editor.wp_bundle_eligible %}
     {% include "users/eligibility_modal.html" %}
+    <noscript>
+      <div class="no-js-modal-overlay">
+        {% include "users/no_js_eligibility_modal.html" %}
+      </div>
+    </noscript>
   {% endif %}
 
   <div class="alert alert-dark text-center" role="alert">

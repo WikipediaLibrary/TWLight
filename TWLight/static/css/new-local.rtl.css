@@ -848,6 +848,24 @@ and (max-width : 1440px) {
 ELIGIBILITY MODAL CSS
 --------------------------------------------------------------------------
 */
+.no-js-modal-overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.no-js-card{
+    width: 45%;
+    position: absolute;
+    top: 125px;
+    left: 465px;
+}
 .eligibility-criteria-container{
     width: 55%;
 }
@@ -893,6 +911,12 @@ ELIGIBILITY MODAL CSS
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
+    .no-js-card{
+        width: 95%;
+        position: absolute;
+        top: 50px;
+        left: 15px;
+    }
     .eligibility-criteria-container{
         width: 90%;
     }
@@ -923,6 +947,12 @@ and (max-device-width : 480px) {
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
+    .no-js-card{
+        width: 65%;
+        position: absolute;
+        top: 50px;
+        left: 115px;
+    }
     .eligibility-criteria-container{
         width: 75%;
     }
@@ -947,6 +977,12 @@ and (max-device-width : 1024px) {
 @media screen
 and (min-width : 451px)
 and (max-width : 1000px) {
+    .no-js-card{
+        width: 65%;
+        position: absolute;
+        top: 50px;
+        left: 115px;
+    }
     .eligibility-criteria-container{
         width: 75%;
     }
@@ -965,6 +1001,16 @@ and (max-width : 1000px) {
         left: 20px;
         bottom: 10px;
         position: absolute;
+    }
+}
+
+@media screen
+and (max-width : 450px) {
+    .no-js-card{
+        width: 95%;
+        position: absolute;
+        top: 50px;
+        left: 15px;
     }
 }
 
