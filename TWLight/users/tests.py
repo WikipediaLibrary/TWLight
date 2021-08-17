@@ -2012,3 +2012,26 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertIn(escape(not_available_partner.company_name), content)
         self.assertIn("Not Available", content)
+
+    def test_user_not_eligible_eligibility_modal_shown(self):
+        """
+        Tests that, when a user is not eligible to access the library, the eligibility
+        modal will be shown
+        """
+        # Make the user not eligible so they can see the eligibility modal
+        self.editor.wp_bundle_eligible = False
+        self.editor.save()
+
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        request = factory.get(url)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        eligibility_message = "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
+
+        self.assertIn(eligibility_message, content)
