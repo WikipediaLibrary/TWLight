@@ -84,7 +84,7 @@ def _redirect_to_next_param(request):
     ):
         return next_param
     else:
-        return reverse_lazy("users:home")
+        return reverse_lazy("users:my_library")
 
 
 class UserDetailView(SelfOnly, TemplateView):
@@ -673,7 +673,7 @@ class TermsView(UpdateView):
             self.get_object().terms_of_use_date = datetime.date.today()
             self.get_object().save()
 
-            return reverse_lazy("homepage")
+            return reverse_lazy("users:my_library")
 
 
 class AuthorizedUsers(APIView):
