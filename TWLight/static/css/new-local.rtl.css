@@ -862,9 +862,7 @@ ELIGIBILITY MODAL CSS
 
 .no-js-card{
     width: 45%;
-    position: absolute;
-    top: 125px;
-    left: 465px;
+    margin: 150px auto 0px auto;
 }
 .eligibility-criteria-container{
     width: 55%;
@@ -876,7 +874,7 @@ ELIGIBILITY MODAL CSS
     font-weight: 300;
 }
 .eligibility-criteria i{
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .dot{
@@ -913,9 +911,7 @@ and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .no-js-card{
         width: 95%;
-        position: absolute;
-        top: 50px;
-        left: 15px;
+        margin: 0 auto;
     }
     .eligibility-criteria-container{
         width: 90%;
@@ -949,9 +945,7 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     .no-js-card{
         width: 65%;
-        position: absolute;
-        top: 50px;
-        left: 115px;
+        margin: 150px auto 0px auto;
     }
     .eligibility-criteria-container{
         width: 75%;
@@ -975,13 +969,20 @@ and (max-device-width : 1024px) {
 }
 
 @media screen
-and (min-width : 451px)
-and (max-width : 1000px) {
+and (min-width : 1025px)
+and (max-width : 1650px) {
     .no-js-card{
-        width: 65%;
-        position: absolute;
-        top: 50px;
-        left: 115px;
+        width: 75%;
+        margin: 150px auto 0px auto;
+    }
+}
+
+@media screen
+and (min-width : 451px)
+and (max-width : 1024px) {
+    .no-js-card{
+        width: 85%;
+        margin: 150px auto 0px auto;
     }
     .eligibility-criteria-container{
         width: 75%;
@@ -1008,9 +1009,18 @@ and (max-width : 1000px) {
 and (max-width : 450px) {
     .no-js-card{
         width: 95%;
-        position: absolute;
-        top: 50px;
-        left: 15px;
+        margin: 0 auto;
+    }
+    .eligibility-modal-button{
+        width: 300px;
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+    .eligibility-criteria{
+        font-family: Roboto;
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 300;
     }
 }
 

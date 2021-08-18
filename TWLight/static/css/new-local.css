@@ -951,10 +951,19 @@ and (max-device-width : 1024px) {
 }
 
 @media screen
-and (min-width : 451px)
+and (min-width : 1025px)
 and (max-width : 1650px) {
     .no-js-card{
-        width: 65%;
+        width: 75%;
+        margin: 150px auto 0px auto;
+    }
+}
+
+@media screen
+and (min-width : 451px)
+and (max-width : 1024px) {
+    .no-js-card{
+        width: 85%;
         margin: 150px auto 0px auto;
     }
     .eligibility-criteria-container{
@@ -983,6 +992,17 @@ and (max-width : 450px) {
     .no-js-card{
         width: 95%;
         margin: 0 auto;
+    }
+    .eligibility-modal-button{
+        width: 300px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+    }
+    .eligibility-criteria{
+        font-family: Roboto;
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 300;
     }
 }
 
