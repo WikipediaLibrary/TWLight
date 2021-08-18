@@ -901,6 +901,13 @@ class MyLibraryView(TemplateView):
                         language_code, user_authorization_partner.new_tags
                     )
 
+                    # Use the partner access url by default.
+                    access_url = user_authorization_partner.get_access_url
+                    # If the authorization is for a stream, and that stream has an access url, use it.
+                    stream = user_authorization.stream
+                    if stream and stream.get_access_url:
+                        access_url = stream.get_access_url
+
                     user_authorization_obj.append(
                         {
                             "auth_pk": user_authorization.pk,
@@ -920,7 +927,7 @@ class MyLibraryView(TemplateView):
                             "partner_languages": user_authorization_partner.get_languages,
                             "partner_tags": translated_tags,
                             "partner_authorization_method": user_authorization_partner.authorization_method,
-                            "partner_access_url": user_authorization_partner.get_access_url,
+                            "partner_access_url": access_url,
                             "partner_is_not_available": user_authorization_partner.is_not_available,
                             "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
                         }
