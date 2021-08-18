@@ -843,9 +843,7 @@ ELIGIBILITY MODAL CSS
 
 .no-js-card{
     width: 45%;
-    position: absolute;
-    top: 125px;
-    left: 465px;
+    margin: 150px auto 0px auto;
 }
 
 .eligibility-criteria-container{
@@ -895,9 +893,7 @@ and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .no-js-card{
         width: 95%;
-        position: absolute;
-        top: 50px;
-        left: 15px;
+        margin: 0 auto;
     }
     .eligibility-criteria-container{
         width: 90%;
@@ -931,9 +927,7 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     .no-js-card{
         width: 65%;
-        position: absolute;
-        top: 50px;
-        left: 115px;
+        margin: 150px auto 0px auto;
     }
     .eligibility-criteria-container{
         width: 75%;
@@ -958,12 +952,10 @@ and (max-device-width : 1024px) {
 
 @media screen
 and (min-width : 451px)
-and (max-width : 1000px) {
+and (max-width : 1650px) {
     .no-js-card{
         width: 65%;
-        position: absolute;
-        top: 50px;
-        left: 115px;
+        margin: 150px auto 0px auto;
     }
     .eligibility-criteria-container{
         width: 75%;
@@ -990,9 +982,7 @@ and (max-width : 1000px) {
 and (max-width : 450px) {
     .no-js-card{
         width: 95%;
-        position: absolute;
-        top: 50px;
-        left: 15px;
+        margin: 0 auto;
     }
 }
 
