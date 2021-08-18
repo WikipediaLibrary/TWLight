@@ -25,10 +25,11 @@
         {% if not editor.user.userprofile.terms_of_use %}
           <p class="text-danger eligibility-criteria">
             <i class="fa fa-times" aria-hidden="true"></i>
-            Not agreed to
-            <a href="{% url 'terms' %}" class="text-danger">
-              terms of use
-            </a>
+            {% url 'terms' as terms %}
+            {% comment %}Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.{% endcomment %}
+            {% blocktranslate trimmed %}
+              Agreed with <a href="{{ terms }}" class="text-danger"> terms of use </a>
+            {% endblocktranslate %}
           </p>
         {% endif %}
       </div>
