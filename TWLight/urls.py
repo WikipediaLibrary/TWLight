@@ -28,7 +28,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
-from .views import HomePageView, NewHomePageView
+from .views import NewHomePageView
 
 handler400 = "TWLight.views.bad_request"
 
@@ -90,5 +90,4 @@ urlpatterns = [
     url(r"^contact/$", ContactUsView.as_view(), name="contact"),
     url(r"^$", NewHomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
-    url(r"^home/$", login_required(HomePageView.as_view()), name="home"),
 ]
