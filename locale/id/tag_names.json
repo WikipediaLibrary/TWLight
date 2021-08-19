@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Farras"
+		]
+	},
+	"languages-and-literature_tag": "Bahasa dan Sastra",
+	"multidisciplinary_tag": "Multidisiplin",
+	"physical-sciences_tag": "Ilmu Fisik",
+	"music_tag": "Musik",
+	"art_tag": "Seni",
+	"business-and-economics_tag": "Ekonomi dan Bisnis",
+	"law_tag": "Hukum",
+	"education_tag": "Pendidikan",
+	"philosophy-and-religion_tag": "Filsafat dan Agama",
+	"social-sciences_tag": "Ilmu Sosial",
+	"history_tag": "Sejarah",
+	"culture_tag": "Budaya",
+	"life-sciences_tag": "Ilmu Kehidupan",
+	"health-sciences_tag": "Ilmu Kesehatan",
+	"earth-sciences_tag": "Ilmu Bumi",
+	"technology_tag": "Teknologi"
+}
