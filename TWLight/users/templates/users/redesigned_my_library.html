@@ -4,6 +4,10 @@
 {% block content %}
   {% include "header_partial_b4.html" %}
 
+  {% if not editor.wp_bundle_eligible %}
+    {% include "users/eligibility_modal.html" %}
+  {% endif %}
+
   <div class="alert alert-dark text-center" role="alert">
     {% comment %}Translators: This message invites users to give feedback on the new My Library UI.{% endcomment %}
     {% blocktranslate trimmed %}
@@ -36,7 +40,6 @@
 
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
-
   </script>
 
 {% endblock %}

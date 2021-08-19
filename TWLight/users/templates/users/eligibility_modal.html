@@ -1,0 +1,60 @@
+{% load i18n %}
+<div class="no-js-modal-overlay">
+  <div class="card no-js-card">
+    <div class="card-header">
+      <p class="modal-title text-center">
+        {% comment %}Translators: This message tells users that they are not eligible to access The Wikipedia Library content.{% endcomment %}
+        {% trans "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library." %}
+      </p>
+    </div>
+    <div class="card-body">
+      <div class="eligibility-criteria-container mx-auto">
+        {% for criteria_text, fulfills_criteria in bundle_criteria.items %}
+          {% if fulfills_criteria %}
+            <p class="eligibility-criteria">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              {{ criteria_text }}
+            </p>
+          {% else %}
+            <p class="text-danger eligibility-criteria">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              {{ criteria_text }}
+            </p>
+          {% endif %}
+        {% endfor %}
+        {% if not editor.user.userprofile.terms_of_use %}
+          <p class="text-danger eligibility-criteria">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            {% url 'terms' as terms %}
+            {% comment %}Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.{% endcomment %}
+            {% blocktranslate trimmed %}
+              Agreed with <a href="{{ terms }}" class="text-danger"> terms of use </a>
+            {% endblocktranslate %}
+          </p>
+        {% endif %}
+      </div>
+      <p class="text-center">
+        <em>
+          {% comment %}Translators: Instructions to refresh a user's data. {% endcomment %}
+          {% trans "To refresh your data, please log out and back in." %}
+        </em>
+      </p>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <a href="{% url 'users:home' %}" class="btn btn-outline-secondary
+              eligibility-modal-button">
+            {% comment %}Translators: A button that takes users to their profile. {% endcomment %}
+            {% trans "Profile/Settings" %}
+          </a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <a href="{% url 'auth_logout' %}?next=/" class="btn btn-outline-secondary
+              eligibility-modal-button">
+            {% comment %}Translators: A button to log out of The Wikipedia Library. {% endcomment %}
+            {% trans "Log out" %}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

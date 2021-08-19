@@ -4,14 +4,14 @@
 
 <nav id="top-nav" class="navbar navbar-expand-lg">
   <!-- logo -->
-  <a class="navbar-brand" href="{% url 'homepage' %}">
+  <a class="navbar-brand" href="{% url 'users:my_library' %}">
     <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
         alt="
           {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
           {% trans "The Wikipedia Library home" %}
         ">
   </a>
-  <a class="navbar-brand" href="{% url 'homepage' %}">
+  <a class="navbar-brand" href="{% url 'users:my_library' %}">
     <!-- site name -->
     {% comment %}Translators: Name of the project/tool.{% endcomment %}
     <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>

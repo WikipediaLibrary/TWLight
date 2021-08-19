@@ -845,6 +845,125 @@ and (max-width : 1440px) {
 
 /*
 ----------------------------------------------------------------------------
+ELIGIBILITY MODAL CSS
+--------------------------------------------------------------------------
+*/
+.no-js-modal-overlay{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.no-js-card{
+    width: 45%;
+    margin: 150px auto 0px auto;
+}
+.eligibility-criteria-container{
+    width: 55%;
+}
+.eligibility-criteria{
+    font-family: Roboto;
+    font-size: 26px;
+    line-height: 50px;
+    font-weight: 300;
+}
+.eligibility-criteria i{
+    margin-left: 10px;
+}
+
+.eligibility-modal-button{
+    width: 90%;
+}
+
+/* Smartphones */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+    .no-js-card{
+        width: 95%;
+        margin: 50px auto 0px auto;
+    }
+    .eligibility-criteria-container{
+        width: 90%;
+    }
+    .eligibility-criteria{
+        font-family: Roboto;
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 300;
+    }
+    .eligibility-modal-button{
+        width: 75%;
+        margin-bottom: 10px;
+    }
+}
+/* Tablets */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px) {
+    .no-js-card{
+        width: 65%;
+        margin: 150px auto 0px auto;
+    }
+    .eligibility-criteria-container{
+        width: 75%;
+    }
+    .eligibility-modal-button{
+        width: 95%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen
+and (min-width : 1025px)
+and (max-width : 1650px) {
+    .no-js-card{
+        width: 70%;
+        margin: 150px auto 0px auto;
+    }
+}
+
+@media screen
+and (min-width : 451px)
+and (max-width : 1024px) {
+    .no-js-card{
+        width: 85%;
+        margin: 150px auto 0px auto;
+    }
+    .eligibility-criteria-container{
+        width: 75%;
+    }
+    .eligibility-modal-button{
+        margin-bottom: 10px;
+    }
+}
+
+@media screen
+and (max-width : 450px) {
+    .no-js-card{
+        width: 95%;
+        margin: 50px auto 0px auto;
+    }
+    .eligibility-modal-button{
+        width: 95%;
+        margin-bottom: 10px;
+    }
+    .eligibility-criteria{
+        font-family: Roboto;
+        font-size: 22px;
+        line-height: 40px;
+        font-weight: 300;
+    }
+}
+
+/*
+----------------------------------------------------------------------------
 NEW FOOTER CSS
 --------------------------------------------------------------------------
 */
