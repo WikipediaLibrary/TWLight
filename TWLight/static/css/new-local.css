@@ -859,32 +859,8 @@ ELIGIBILITY MODAL CSS
     margin-right: 10px;
 }
 
-.dot{
-    height: 35px;
-    width: 35px;
-    background-color: #C4C4C4;
-    border-radius: 50%;
-    display: inline-flex;
-    color: #FFFFFF;
-    text-decoration: none;
-    right: 20px;
-    position: absolute;
-}
-
-.dot:hover{
-    color: #FFFFFF;
-}
-
-.question-mark{
-    font-size: 20px;
-    font-weight: 300;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 .eligibility-modal-button{
-    width: 300px;
-    margin-left: 45px;
+    width: 90%;
 }
 
 /* Smartphones */
@@ -893,7 +869,7 @@ and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .no-js-card{
         width: 95%;
-        margin: 0 auto;
+        margin: 50px auto 0px auto;
     }
     .eligibility-criteria-container{
         width: 90%;
@@ -905,20 +881,8 @@ and (max-device-width : 480px) {
         font-weight: 300;
     }
     .eligibility-modal-button{
-        width: 200px;
+        width: 75%;
         margin-bottom: 10px;
-    }
-    .dot{
-        height: 35px;
-        width: 35px;
-        background-color: #C4C4C4;
-        border-radius: 50%;
-        display: inline-flex;
-        color: #FFFFFF;
-        text-decoration: none;
-        right: 10px;
-        bottom: 10px;
-        position: absolute;
     }
 }
 /* Tablets */
@@ -933,20 +897,8 @@ and (max-device-width : 1024px) {
         width: 75%;
     }
     .eligibility-modal-button{
-        width: 325px;
+        width: 95%;
         margin-bottom: 10px;
-    }
-    .dot{
-        height: 35px;
-        width: 35px;
-        background-color: #C4C4C4;
-        border-radius: 50%;
-        display: inline-flex;
-        color: #FFFFFF;
-        text-decoration: none;
-        right: 20px;
-        bottom: 10px;
-        position: absolute;
     }
 }
 
@@ -954,7 +906,7 @@ and (max-device-width : 1024px) {
 and (min-width : 1025px)
 and (max-width : 1650px) {
     .no-js-card{
-        width: 75%;
+        width: 70%;
         margin: 150px auto 0px auto;
     }
 }
@@ -970,20 +922,7 @@ and (max-width : 1024px) {
         width: 75%;
     }
     .eligibility-modal-button{
-        width: 325px;
         margin-bottom: 10px;
-    }
-    .dot{
-        height: 35px;
-        width: 35px;
-        background-color: #C4C4C4;
-        border-radius: 50%;
-        display: inline-flex;
-        color: #FFFFFF;
-        text-decoration: none;
-        right: 20px;
-        bottom: 10px;
-        position: absolute;
     }
 }
 
@@ -991,12 +930,11 @@ and (max-width : 1024px) {
 and (max-width : 450px) {
     .no-js-card{
         width: 95%;
-        margin: 0 auto;
+        margin: 50px auto 0px auto;
     }
     .eligibility-modal-button{
-        width: 300px;
+        width: 95%;
         margin-bottom: 10px;
-        margin-left: 0px;
     }
     .eligibility-criteria{
         font-family: Roboto;
