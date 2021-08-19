@@ -621,17 +621,6 @@ A few spots just need padding instead of margin.
   min-height:350px;
 }
 
-.border-homepage {
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
-.read-more {
-  width:200px;
-  margin:0 auto 10px auto;
-  text-align:center;
-}
-
 .block-notice {
     padding: 0 10% 2em 10%;
     color: #df2e32;
