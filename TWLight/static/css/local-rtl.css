@@ -559,12 +559,6 @@ A few spots just need padding instead of margin.
   min-height:350px;
 }
 
-.read-more {
-  width:200px;
-  margin:auto;
-  text-align:center;
-}
-
 .btn-extra-large{
   padding-top:30px;
   padding-bottom:30px;
