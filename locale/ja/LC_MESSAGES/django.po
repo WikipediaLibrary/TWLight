@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-08-19 11:28+0000\n"
+"POT-Creation-Date: 2021-08-19 18:37+0000\n"
 "PO-Revision-Date: 2021-08-19 11:16:21+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,6 @@ msgstr ""
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
 #. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access.
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this is the heading of the box on the right, which contains information about collections to which users need to make an application.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access.
 #: TWLight/applications/forms.py:113
 #: TWLight/applications/templates/applications/request_for_application.html:64
@@ -38,7 +37,6 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:390
 #: TWLight/resources/templates/resources/partner_detail.html:393
 #: TWLight/resources/templates/resources/partner_tile.html:87
-#: TWLight/templates/home.html:98
 #: TWLight/users/templates/users/available_collection_tile.html:56
 msgid "Apply"
 msgstr "申請する"
@@ -1262,7 +1260,7 @@ msgstr ""
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:204 TWLight/templates/base.html:133
+#: TWLight/templates/about.html:195 TWLight/templates/base.html:133
 #: TWLight/templates/new_base.html:91
 msgid "Contact us"
 msgstr "連絡先"
@@ -1973,24 +1971,20 @@ msgid "List applications"
 msgstr "申請の一覧"
 
 #. Translators: This text labels a button taking users to their library.
-#. Translators: On the homepage, this message labels a button users can click to go to the 'My Library' page, which lists their available collections.
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.
 #. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
 #: TWLight/resources/templates/resources/partner_detail.html:475
-#: TWLight/templates/home.html:25
 #: TWLight/users/templates/users/editor_detail.html:21
 #: TWLight/users/templates/users/my_applications.html:10
 msgid "My Library"
 msgstr "私の図書館"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
-#. Translators: Shown on the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Library Bundle' is the set of resources which active users have automatic access to.
 #: TWLight/resources/templates/resources/partner_detail.html:477
 #: TWLight/resources/templates/resources/partner_detail.html:491
 #: TWLight/resources/templates/resources/partner_detail.html:505
 #: TWLight/resources/templates/resources/partner_detail.html:521
 #: TWLight/resources/templates/resources/partner_tile.html:19
-#: TWLight/templates/home.html:41
 msgid "Library Bundle"
 msgstr "図書館バンドル制度"
 
@@ -2040,9 +2034,7 @@ msgstr ""
 "す。"
 
 #. Translators: Buttton prompting users to log in.
-#. Translators: This message is shown on the button users click to log in to the website.
 #: TWLight/resources/templates/resources/partner_detail.html:519
-#: TWLight/templates/home.html:31
 msgid "Log in"
 msgstr "ログイン"
 
@@ -2416,86 +2408,98 @@ msgstr ""
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:52
-msgid ""
-"Any editor can apply for access, but there are a few basic requirements. "
-"These are also the minimum technical requirements for access to the Library "
-"Bundle (see below):"
+msgid "Any editor can use the library if they meet a few basic requirements:"
 msgstr ""
-"アクセス権の申請は誰でもできますが、基本的な必要条件がいくつかあります。同じ"
-"条件が図書館バンドル制度のアクセスに求められる最低の技術要件でもあります（下"
-"記ご参照）。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:59
+#: TWLight/templates/about.html:58
 msgid "You have an account that is a minimum of 6 months old"
 msgstr "登録から6ヶ月以上が経過したアカウントであること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:63
+#: TWLight/templates/about.html:62
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
 msgstr "ウィキメディアのプロジェクト群で500回以上の編集履歴があること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:67
+#: TWLight/templates/about.html:66
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
 msgstr "直近1ヶ月に10回以上編集していること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:71
+#: TWLight/templates/about.html:70
 msgid "You are not currently blocked from editing a Wikimedia project"
 msgstr ""
 "現状でウィキメディアのいずれのプロジェクトでもブロックを受けていないこと"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:75
+#: TWLight/templates/about.html:74
 msgid ""
 "You do not already have access to the resources you’re applying for through "
 "another library or institution"
 msgstr "別な図書館・機関を通じてその情報源へのアクセス権を得ていないこと"
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:81
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
+#: TWLight/templates/about.html:80
+#, fuzzy
+#| msgid ""
+#| "If your account is blocked on one or more Wikimedia projects, you may "
+#| "still be granted access to the Library Bundle. You will need to contact "
+#| "the Wikipedia Library team, who will review your blocks. If you have been "
+#| "blocked for content issues, most notably copyright violations, or have "
+#| "multiple long-term blocks, we may decline your request. Additionally, if "
+#| "your block status changes after being approved, you will need to request "
+#| "another review."
 msgid ""
-"If you don't quite meet the experience requirements but think you would "
-"still be a strong candidate for access, feel free to apply and you may still "
-"be considered."
+"If your account is blocked on one or more Wikimedia projects, you may still "
+"be granted access to The Wikipedia Library. You will need to contact the "
+"Wikipedia Library team, who will review your blocks. If you have been "
+"blocked for content issues, most notably copyright violations, or have "
+"multiple long-term blocks, we may decline your request. Additionally, if "
+"your block status changes after being approved, you will need to request "
+"another review."
 msgstr ""
-"もし編集履歴が規定に達していなくてもアクセス権の申請者としての強みがあると考"
-"える場合は、認可されるかどうか申請してみてください。"
+"もし利用者のアカウントがウィキメディアのプロジェクト1件以上でブロックされた場"
+"合も、図書館バンドル制度を継続して利用できる場合があります。ウィキペディア図"
+"書館の担当者に連絡して、ブロックの内容審査を申し込んでください。ブロックの原"
+"因がコンテンツ、とりわけ著作権違反である場合、または複数の長期ブロックを受け"
+"ている場合、利用をお断りする場合があります。この他、バンドル制度の利用承認後"
+"にブロックの状態が変わった利用者も、必ずブロックの内容審査を申し込んでくださ"
+"い。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:89
+#: TWLight/templates/about.html:91
 msgid "What do I do after I get access?"
 msgstr "アクセス権を取得したら何をしたらよいですか？"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:93
+#: TWLight/templates/about.html:95
 msgid "Approved editors <i>may</i> use their access to:"
 msgstr ""
 "認可された編集者はアクセス権を使って次の活動が<i>認められています</i>。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:97
+#: TWLight/templates/about.html:99
 msgid "Search, view, retrieve, and display partner content"
 msgstr "提携組織のコンテンツを検索したり、閲覧や取得、表示をする"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:101
+#: TWLight/templates/about.html:103
 msgid "Electronically save partner content"
 msgstr "提供組織のコンテンツを電子的に保存すること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:105
+#: TWLight/templates/about.html:107
 msgid "Print out single copies of partner content"
 msgstr "提携組織のコンテンツを1部のみプリントアウトする"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:111
+#: TWLight/templates/about.html:113
 msgid "Approved editors <i>should not</i>:"
 msgstr "認可された編集者の<i>禁止事項</i>："
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:115
+#: TWLight/templates/about.html:117
 msgid ""
 "Share their account logins or passwords with others, or sell their access to "
 "other parties"
@@ -2503,14 +2507,14 @@ msgstr ""
 "利用者のアカウントログイン情報、パスワードを第三者と共有もしくは譲渡すること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:119
+#: TWLight/templates/about.html:121
 msgid "Mass scrape or mass download partner content"
 msgstr ""
 "提携組織のコンテンツを大量に（無選別に）かき集めるもしくはダウンロードするこ"
 "と"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:123
+#: TWLight/templates/about.html:125
 msgid ""
 "Systematically make printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose"
@@ -2519,7 +2523,7 @@ msgstr ""
 "または電子コピーとして複製物を作成すること"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
-#: TWLight/templates/about.html:127
+#: TWLight/templates/about.html:129
 msgid ""
 "Datamine metadata without permission, in order, for instance, to use "
 "metadata for auto-created stub articles"
@@ -2528,7 +2532,7 @@ msgstr ""
 "こと"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:133
+#: TWLight/templates/about.html:135
 msgid ""
 "Respecting these agreements allows us to continue growing the partnerships "
 "available to the community."
@@ -2537,12 +2541,12 @@ msgstr ""
 "る道ができます。"
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:139
+#: TWLight/templates/about.html:141
 msgid "EZProxy"
 msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:143
+#: TWLight/templates/about.html:145
 msgid ""
 "EZProxy is a proxy server used to authenticate users for many Wikipedia "
 "Library partners. Users sign into EZProxy via the Library Card platform to "
@@ -2555,7 +2559,7 @@ msgstr ""
 "アドレスから利用者が使いたい情報源へアクセスが成立します。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:152
+#: TWLight/templates/about.html:154
 msgid ""
 "You may notice that when accessing resources via EZProxy that URLs are "
 "dynamically rewritten. This is why we recommend logging in via the Library "
@@ -2571,7 +2575,7 @@ msgstr ""
 "スであることを示します。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:161
+#: TWLight/templates/about.html:163
 msgid ""
 "Typically once you’ve logged in your session will remain active in your "
 "browser for up to two hours after you’ve finished searching. Note that use "
@@ -2584,7 +2588,7 @@ msgstr ""
 "ウザの再起動もお試しください。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:172
+#: TWLight/templates/about.html:174
 msgid ""
 "The Library Bundle is a collection of resources for which no application is "
 "required. If you meet the criteria laid out above, you will be authorized "
@@ -2600,32 +2604,13 @@ msgstr ""
 "ると望んでいます。バンドル制度のコンテンツはすべてEZProxy経由でアクセスしま"
 "す。"
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:182
-msgid ""
-"If your account is blocked on one or more Wikimedia projects, you may still "
-"be granted access to the Library Bundle. You will need to contact the "
-"Wikipedia Library team, who will review your blocks. If you have been "
-"blocked for content issues, most notably copyright violations, or have "
-"multiple long-term blocks, we may decline your request. Additionally, if "
-"your block status changes after being approved, you will need to request "
-"another review."
-msgstr ""
-"もし利用者のアカウントがウィキメディアのプロジェクト1件以上でブロックされた場"
-"合も、図書館バンドル制度を継続して利用できる場合があります。ウィキペディア図"
-"書館の担当者に連絡して、ブロックの内容審査を申し込んでください。ブロックの原"
-"因がコンテンツ、とりわけ著作権違反である場合、または複数の長期ブロックを受け"
-"ている場合、利用をお断りする場合があります。この他、バンドル制度の利用承認後"
-"にブロックの状態が変わった利用者も、必ずブロックの内容審査を申し込んでくださ"
-"い。"
-
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:192
+#: TWLight/templates/about.html:183
 msgid "Citation practices"
 msgstr "出典の付け方"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:196
+#: TWLight/templates/about.html:187
 msgid ""
 "Citation practices vary by project and even by article. Generally, we "
 "support editors citing where they found information, in a form that allows "
@@ -2639,7 +2624,7 @@ msgstr ""
 "のデータベースで参照したか、情報を両方とも記述することを意味します。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:208
+#: TWLight/templates/about.html:199
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
@@ -2852,77 +2837,12 @@ msgstr "提携組織にデータを送信"
 msgid "Suggest a collection"
 msgstr "コレクションを提案する"
 
+#. Translators: A button to log out of The Wikipedia Library.
 #: TWLight/templates/header_partial_b3.html:62
 #: TWLight/templates/header_partial_b4.html:59
+#: TWLight/users/templates/users/eligibility_modal.html:54
 msgid "Log out"
 msgstr "ログアウト"
-
-#. Translators: This message is shown on the website's home page (https://wikipedialibrary.wmflabs.org/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/templates/home.html:12
-msgid ""
-"The Wikipedia Library provides free access to research databases and "
-"collections."
-msgstr ""
-"ウィキペディア図書館は研究用データベースとコレクションに無料アクセス権を提供"
-"します。"
-
-#. Translators: A link users can click to read more about the project or the tool.
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), the 'Learn more' button takes users to the 'About' page.
-#: TWLight/templates/home.html:16 TWLight/templates/home.html:90
-msgid "Learn more"
-msgstr "詳細"
-
-#. Translators: Alt text for the Library Bundle logo.
-#: TWLight/templates/home.html:44
-msgid "A stack of books tied together with a ribbon, the Library Bundle icon"
-msgstr "図書館バンドル制度のアイコン。重ねてしばった本の束"
-
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this message is displayed to all users as the description of Library Bundle eligibility panel. 'Library Bundle' is the set of resources which active users have automatic access to.
-#: TWLight/templates/home.html:48
-#, python-format
-msgid ""
-"<p>Free and immediate access to a large selection of resources, spanning "
-"%(bundle_partner_count)s collections, if you meet the following criteria:</p>"
-msgstr ""
-"<p>広範な%(bundle_partner_count)s件のコレクションという情報源類から無料のアク"
-"セス権をこの場で受ける要件とは、次にあげる各点です。</p>"
-
-#. Translators: This message is shown on the homepage to users whose Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
-#: TWLight/templates/home.html:75
-#, python-format
-msgid ""
-"It looks like you have an active block on your account on at least one "
-"Wikimedia project. If you meet the other criteria you may still be permitted "
-"access to the Library Bundle - please <a href=\"%(contact_url)s\">contact "
-"us</a>."
-msgstr ""
-"あなたのアカウントはウィキメディアのプロジェクト1件以上で現在、ブロックを受け"
-"ているようです。その他の要件を満たす場合、図書館バンドル制度のアクセスを引き"
-"続き承認できる場合があります - ぜひ<a href=\"%(contact_url)s\">担当にご連絡く"
-"ださい</a>。"
-
-#. Translators: This message is shown on the homepage to users who meet the technical eligibility criteria for the Library Bundle.
-#: TWLight/templates/home.html:84
-#, python-format
-msgid ""
-"You meet the eligibility criteria! Check out <a href=\"%(library_url)s\">My "
-"Library</a> to see what you have access to."
-msgstr ""
-"登録要件に合格しました。アクセス権の対象は<a href=\"%(library_url)s\">私の図"
-"書館</a>を開いてご確認ください。"
-
-#. Translators: On the main page of the website (https://wikipedialibrary.wmflabs.org/), this text explains that some available collections require users to make an application, because we have a limited number of accounts to distribute.
-#: TWLight/templates/home.html:100
-msgid ""
-"Some collections have a limited number of concurrent users and require an "
-"application."
-msgstr ""
-"コレクションによっては同時に利用できる人数に上限を設け、申請を求めています。"
-
-#. Translators: This is text on a button on the homepage, which allows users to see more available collections to which they can apply.
-#: TWLight/templates/home.html:115
-msgid "See more"
-msgstr "表示を増やす"
 
 #. Translators: This text will show when a user clicks on the More Info button and the partner description shows.
 #: TWLight/templates/homepage.html:374
@@ -3395,6 +3315,31 @@ msgstr "更新する"
 msgid "Institutional affiliation"
 msgstr "利用者の所属機関"
 
+#. Translators: This message tells users that they are not eligible to access The Wikipedia Library content.
+#: TWLight/users/templates/users/eligibility_modal.html:7
+msgid ""
+"Sorry, your Wikipedia account doesn’t currently qualify to access The "
+"Wikipedia Library."
+msgstr ""
+
+#. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
+#: TWLight/users/templates/users/eligibility_modal.html:30
+#, fuzzy, python-format
+#| msgid "Has agreed to the site's <a href=\"%(terms_url)s\">terms of use</a>?"
+msgid ""
+"Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
+msgstr "当該のサイトの<a href=\"%(terms_url)s\">利用規約</a>に同意しましたか？"
+
+#. Translators: Instructions to refresh a user's data.
+#: TWLight/users/templates/users/eligibility_modal.html:39
+msgid "To refresh your data, please log out and back in."
+msgstr ""
+
+#. Translators: A button that takes users to their profile.
+#: TWLight/users/templates/users/eligibility_modal.html:47
+msgid "Profile/Settings"
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "Filters"
@@ -3507,7 +3452,7 @@ msgid "Restrict"
 msgstr "制限"
 
 #. Translators: This message invites users to give feedback on the new My Library UI.
-#: TWLight/users/templates/users/redesigned_my_library.html:9
+#: TWLight/users/templates/users/redesigned_my_library.html:13
 msgid ""
 "We're in the process of redesigning the library - further changes will be "
 "made over the coming weeks! We would love to hear your thoughts and feedback "
@@ -3547,7 +3492,9 @@ msgstr ""
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-msgid "Last updated 12 November 2019"
+#, fuzzy
+#| msgid "Last updated 12 November 2019"
+msgid "Last updated 11 August 2021"
 msgstr "最終更新2019年11月12日"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
@@ -3561,14 +3508,20 @@ msgid "Wikipedia Library Card Terms of Use and Privacy Statement"
 msgstr "ウィキペディア図書館カード利用規約と個人情報の声明"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:41
+#: TWLight/users/templates/users/terms.html:42
+#, fuzzy
+#| msgid ""
+#| "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The "
+#| "Wikipedia Library</a> has partnered with publishers around the world to "
+#| "allow users to access otherwise paywalled resources. This website allows "
+#| "users to apply simultaneously for access to multiple publishers’ "
+#| "materials, and makes the administration of and access to Wikipedia "
+#| "Library accounts easy and efficient."
 msgid ""
 "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The "
 "Wikipedia Library</a> has partnered with publishers around the world to "
 "allow users to access otherwise paywalled resources. This website allows "
-"users to apply simultaneously for access to multiple publishers’ materials, "
-"and makes the administration of and access to Wikipedia Library accounts "
-"easy and efficient."
+"Wikipedia editors to search and access these resources."
 msgstr ""
 "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/ja\">ウィキペ"
 "ディア図書館</a>は世界の出版社と提携関係を築き、利用者に本来なら有償（ペイ"
@@ -3577,7 +3530,7 @@ msgstr ""
 "セスならびに管理を効率よく簡略にします。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:48
+#: TWLight/users/templates/users/terms.html:52
 msgid ""
 "This program is administered by the Wikimedia Foundation (WMF). These terms "
 "of use and privacy notice pertain to your application for access to "
@@ -3595,21 +3548,34 @@ msgstr ""
 "用者に通知します。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:54
+#: TWLight/users/templates/users/terms.html:63
 msgid "Requirements for a Wikipedia Library Card Account"
 msgstr "ウィキペディア図書館カードのアカウント要件"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:58
+#: TWLight/users/templates/users/terms.html:67
+#, fuzzy
+#| msgid ""
+#| "Access to resources via The Wikipedia Library is reserved for community "
+#| "members who have demonstrated their commitment to the Wikimedia projects, "
+#| "and who will use their access to these resources to improve project "
+#| "content. To that end, in order to be eligible for the Wikipedia Library "
+#| "program, we require that you be registered for a user account on the "
+#| "projects. We give preference to users with at least 500 edits and six (6) "
+#| "months of activity, but these are not strict requirements. We ask that "
+#| "you do not request access to any publishers whose resources you can "
+#| "already access for free through your local library or university, or "
+#| "another institution or organization, in order to provide that opportunity "
+#| "to others."
 msgid ""
 "Access to resources via The Wikipedia Library is reserved for community "
 "members who have demonstrated their commitment to the Wikimedia projects, "
 "and who will use their access to these resources to improve project content. "
-"To that end, in order to be eligible for the Wikipedia Library program, we "
-"require that you be registered for a user account on the projects. We give "
-"preference to users with at least 500 edits and six (6) months of activity, "
-"but these are not strict requirements. We ask that you do not request access "
-"to any publishers whose resources you can already access for free through "
+"To that end, in order to be eligible for The Wikipedia Library, we require "
+"that you be registered for a user account on the projects, with at least 500 "
+"edits, six (6) months of activity, and 10+ edits in the last month. We ask "
+"that you do not request access to any publishers with a limited number of "
+"available accounts whose resources you can already access for free through "
 "your local library or university, or another institution or organization, in "
 "order to provide that opportunity to others."
 msgstr ""
@@ -3624,13 +3590,20 @@ msgstr ""
 "協力願います。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:65
+#: TWLight/users/templates/users/terms.html:83
+#, fuzzy
+#| msgid ""
+#| "Additionally, if you are currently blocked or banned from a Wikimedia "
+#| "project, applications to resources may be rejected or restricted. If you "
+#| "obtain a Wikipedia Library account, but a long-term block or ban is "
+#| "subsequently instituted against you on one of the projects, you may lose "
+#| "access to your Wikipedia Library account."
 msgid ""
 "Additionally, if you are currently blocked or banned from a Wikimedia "
 "project, applications to resources may be rejected or restricted. If you "
-"obtain a Wikipedia Library account, but a long-term block or ban is "
-"subsequently instituted against you on one of the projects, you may lose "
-"access to your Wikipedia Library account."
+"obtain a Wikipedia Library account, but a block or ban is subsequently "
+"instituted against you on one of the projects, you may lose access to your "
+"Wikipedia Library account."
 msgstr ""
 "前述に加え、現状で利用者が特定のウィキメディアのプロジェクトでブロックもしく"
 "は追放を受けている場合は、情報源への申請は却下もしくは制限の対象となる場合が"
@@ -3639,24 +3612,22 @@ msgstr ""
 "キペディア図書館アカウントへのアクセス権が失効する場合があります。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:72
+#: TWLight/users/templates/users/terms.html:93
 msgid ""
-"Wikipedia Library Card accounts do not expire. However, access to an "
-"individual publisher’s resources will generally lapse after one year, after "
-"which you will either need to apply for renewal or your account will "
-"automatically be renewed."
+"Your eligibility to access The Wikipedia Library is assessed at each login. "
+"While more than half of the library's content is provided via this automated "
+"eligibility check, access to other publisher's content may be time limited, "
+"typically lapsing after one year, after which you will usually need to apply "
+"for renewal."
 msgstr ""
-"ウィキペディア図書館カードに有効期限はありません。しかしながら、個別の出版社"
-"の情報源へのアクセス権は通常、1年で期限切れとなり、その後、利用者による更新申"
-"請が必要な場合と、自動的に更新される場合があります。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:78
+#: TWLight/users/templates/users/terms.html:103
 msgid "Applying via Your Wikipedia Library Card Account"
 msgstr "ウィキペディア図書館カードのアカウントから申請"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:82
+#: TWLight/users/templates/users/terms.html:107
 msgid ""
 "In order to apply for access to a partner resource, you must provide us with "
 "certain information, which we will use to evaluate your application. If your "
@@ -3672,7 +3643,7 @@ msgstr ""
 "のとします。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:89
+#: TWLight/users/templates/users/terms.html:119
 msgid ""
 "In addition to the basic information you provide to us, our system will "
 "retrieve some information directly from the Wikimedia projects: your "
@@ -3684,7 +3655,7 @@ msgstr ""
 "日、利用者ID番号、所属するグループ名の他、特筆するべき利用者権限。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:96
+#: TWLight/users/templates/users/terms.html:129
 msgid ""
 "Each time you log in to the Wikipedia Library Card Platform, this "
 "information will be automatically updated."
@@ -3693,7 +3664,7 @@ msgstr ""
 "更新されます。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:103
+#: TWLight/users/templates/users/terms.html:137
 msgid ""
 "We will ask you to provide us with some information about your history of "
 "contributions to the Wikimedia projects. Information on contribution history "
@@ -3704,7 +3675,7 @@ msgstr ""
 "査にたいへん役に立つものです。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:110
+#: TWLight/users/templates/users/terms.html:146
 msgid ""
 "The information you provide when creating your account will be visible to "
 "you while on the site but not to others unless they are approved Wikipedia "
@@ -3717,29 +3688,13 @@ msgstr ""
 "ネーター、WMF職員、WMF契約職員でウィキペディア図書館の業務遂行にこのデータの"
 "閲覧が必要な者とし、全員、秘密保持契約の対象です。"
 
-#. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:117
-msgid ""
-"The following limited information that you provide is public to all users by "
-"default: 1) when you created a Wikipedia Library Card account; 2) which "
-"publishers’ resources you have applied to access; 3) your rationale for "
-"accessing the resources of each partner to which you apply. Editors who do "
-"not wish to make points 2 and 3 public may opt out using a checkbox when "
-"filing an application."
-msgstr ""
-"以下の限定的な情報を皆さんが提供すると、既定では全ての利用者に公開されます。"
-"1) ウィキペディア図書館カードのアカウント作成日。2) アクセス権を申請した出版"
-"社の情報源。3) 個別の提携組織の情報源にアクセス権を申請した理由。このうち第2"
-"点と第3点を非公開にしたいと希望される場合は、申請画面でチェックボックスにレ点"
-"を入れて拒絶を選択できます。"
-
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:123
+#: TWLight/users/templates/users/terms.html:156
 msgid "Your Use of Publisher Resources"
 msgstr "出版社の情報源の利用"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:127
+#: TWLight/users/templates/users/terms.html:160
 msgid ""
 "In order to access an individual publisher’s resources, you must agree to "
 "that publisher’s terms of use and privacy policy. You agree that you will "
@@ -3753,16 +3708,20 @@ msgstr ""
 "ディア図書館を経由して出版社の情報源にアクセスする場合は禁止されています。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:136
+#: TWLight/users/templates/users/terms.html:173
+#, fuzzy
+#| msgid ""
+#| "Sharing your usernames, passwords, or any access codes for publisher "
+#| "resources with others;"
 msgid ""
-"Sharing your usernames, passwords, or any access codes for publisher "
-"resources with others;"
+"Sharing your Wikipedia account, usernames, passwords, or any access codes "
+"for publisher resources with others;"
 msgstr ""
 "利用者名、パスワードあるいは出版社の情報源のアクセスコードを他人と共有するこ"
 "と。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:142
+#: TWLight/users/templates/users/terms.html:180
 msgid ""
 "Automatically scraping or downloading restricted content from publishers;"
 msgstr ""
@@ -3770,7 +3729,7 @@ msgstr ""
 "ロードする："
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:148
+#: TWLight/users/templates/users/terms.html:186
 msgid ""
 "Systematically making printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose;"
@@ -3779,7 +3738,7 @@ msgstr ""
 "または電子コピーとして複製物を作成すること"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:154
+#: TWLight/users/templates/users/terms.html:193
 msgid ""
 "Data mining metadata without permission—for example, in order to use "
 "metadata for auto-created stub articles;"
@@ -3788,7 +3747,7 @@ msgstr ""
 "の自動作成に使用するため。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:160
+#: TWLight/users/templates/users/terms.html:200
 msgid ""
 "Using the access you receive through the Wikipedia Library for profit by "
 "selling access to your account or resources which you have through it."
@@ -3797,12 +3756,12 @@ msgstr ""
 "へのアクセスもしくはそれを経由して入手した情報源を有償で他者に販売すること。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:168
+#: TWLight/users/templates/users/terms.html:209
 msgid "External Search and Proxy Services"
 msgstr "外部の検索およびプロキシサービス"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:172
+#: TWLight/users/templates/users/terms.html:213
 msgid ""
 "Certain resources may only be accessed using an external search service, "
 "such as the EBSCO Discovery Service, or a proxy service, such as OCLC "
@@ -3815,7 +3774,7 @@ msgstr ""
 "場合は、当該の利用規約と個人情報方針を精査してください。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:179
+#: TWLight/users/templates/users/terms.html:223
 msgid ""
 "In addition, if you use OCLC EZProxy, please note that you may not use it "
 "for commercial purposes."
@@ -3824,12 +3783,12 @@ msgstr ""
 "にご注意ください。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:185
+#: TWLight/users/templates/users/terms.html:230
 msgid "Data Retention and Handling"
 msgstr "データ保持と取り扱い"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:189
+#: TWLight/users/templates/users/terms.html:234
 msgid ""
 "The Wikimedia Foundation and our service providers use your information for "
 "the legitimate purpose of providing Wikipedia Library services in support of "
@@ -3852,7 +3811,7 @@ msgstr ""
 "の貢献と提携先リソースを利用する理由。利用者がこれら利用規約に同意した日付。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:197
+#: TWLight/users/templates/users/terms.html:251
 #, python-format
 msgid ""
 "Each publisher who is a member of the Wikipedia Library program requires "
@@ -3875,12 +3834,18 @@ msgstr ""
 "の情報</a>ページに出版社別に掲載しましたので、ご参照ください。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:204
+#: TWLight/users/templates/users/terms.html:266
+#, fuzzy
+#| msgid ""
+#| "You can browse the Wikipedia Library site without logging in, but will "
+#| "need to log in to apply or access proprietary partner resources. We use "
+#| "the data provided by you via OAuth and Wikimedia API calls to assess your "
+#| "application for access and to process approved requests."
 msgid ""
-"You can browse the Wikipedia Library site without logging in, but will need "
-"to log in to apply or access proprietary partner resources. We use the data "
-"provided by you via OAuth and Wikimedia API calls to assess your application "
-"for access and to process approved requests."
+"Some Wikipedia Library pages are visible without logging in, but you will "
+"need to log in to apply or access proprietary partner resources. We use the "
+"data provided by you via OAuth and Wikimedia API calls to assess your "
+"application for access and to process approved requests."
 msgstr ""
 "ウィキペディア図書館サイトの閲覧にはログインは不要ですが、知的所有権の存在す"
 "る（プロプライエタリーな）提携組織の情報源のアクセス権申請もしくはアクセスに"
@@ -3889,8 +3854,20 @@ msgstr ""
 "済みの申請の処理にあたります。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:212
-#, python-format
+#: TWLight/users/templates/users/terms.html:277
+#, fuzzy, python-format
+#| msgid ""
+#| "In order to administer the Wikipedia Library program, we will retain the "
+#| "application data we collect from you for three years after your most "
+#| "recent login, unless you delete your account, as described below. You can "
+#| "log in and go to <a href=\"%(profile_url)s\">your profile page</a> in "
+#| "order to see the information associated with your account, and can "
+#| "download it in JSON format. You may access, update, restrict, or delete "
+#| "this information at any time, except for the information that is "
+#| "automatically retrieved from the projects. If you have any questions or "
+#| "concerns about the handling of your data, please contact <a href=\"mailto:"
+#| "wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card"
+#| "%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
 msgid ""
 "In order to administer the Wikipedia Library program, we will retain the "
 "application data we collect from you for three years after your most recent "
@@ -3901,8 +3878,8 @@ msgid ""
 "time, except for the information that is automatically retrieved from the "
 "projects. If you have any questions or concerns about the handling of your "
 "data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation"
-"\">wikipedialibrary@wikimedia.org</a>."
+"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> "
+"wikipedialibrary@wikimedia.org </a>."
 msgstr ""
 "ウィキペディア図書館プログラムの管理上、利用者から収集した申請情報は利用者が"
 "下記の手続きに従ってアカウントを削除しない限り、利用者の直近のログインから3年"
@@ -3916,7 +3893,7 @@ msgstr ""
 "ださい。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:219
+#: TWLight/users/templates/users/terms.html:294
 msgid ""
 "If you decide to disable your Wikipedia Library account, you can use the "
 "delete button on your profile to delete certain personal information "
@@ -3940,7 +3917,7 @@ msgstr ""
 "カウントの申請をする場合、必要な情報を全て最初から入力し直していただきます。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:226
+#: TWLight/users/templates/users/terms.html:310
 msgid ""
 "The Wikipedia Library is run by WMF Staff, Contractors, and approved "
 "volunteer Coordinators. The data associated with your account will be shared "
@@ -3966,7 +3943,7 @@ msgstr ""
 "の情報は第三者と共有することなく、以下に説明する状況を例外とします。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
-#: TWLight/users/templates/users/terms.html:233
+#: TWLight/users/templates/users/terms.html:327
 msgid ""
 "We may disclose any collected information when required by law, when we have "
 "your permission, when needed to protect our rights, privacy, safety, users, "
@@ -3981,7 +3958,7 @@ msgstr ""
 "れかのWMFの方針を徹底するため開示するものとします。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:240
+#: TWLight/users/templates/users/terms.html:338
 msgid ""
 "We take the security of your personal data seriously, and take reasonable "
 "precautions to ensure your data is protected. These precautions include "
@@ -3996,7 +3973,7 @@ msgstr ""
 "きません。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:247
+#: TWLight/users/templates/users/terms.html:349
 msgid ""
 "Please note that these terms do not control the use and handling of your "
 "data by the publishers and service providers whose resources you access or "
@@ -4008,12 +3985,12 @@ msgstr ""
 "せん。その情報は、先方の個別の個人情報方針をお読みください。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:253
+#: TWLight/users/templates/users/terms.html:357
 msgid "Important Note"
 msgstr "重要なご注意："
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:258
+#: TWLight/users/templates/users/terms.html:362
 msgid ""
 "The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
 "California. The Wikipedia Library program provides access to resources held "
@@ -4040,7 +4017,7 @@ msgstr ""
 "されます。)"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:267
+#: TWLight/users/templates/users/terms.html:381
 msgid ""
 "Please note that in the event of any differences in meaning or "
 "interpretation between the original English version of these terms and a "
@@ -4050,7 +4027,7 @@ msgstr ""
 "文が優先される点にご注意ください。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
-#: TWLight/users/templates/users/terms.html:276
+#: TWLight/users/templates/users/terms.html:392
 msgid ""
 "See also the <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy"
 "\">Wikimedia Foundation Privacy Policy</a>."
@@ -4059,22 +4036,22 @@ msgstr ""
 "キメディア財団の個人情報方針</a>もご参照ください。"
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:285
+#: TWLight/users/templates/users/terms.html:401
 msgid "Thank you!"
 msgstr "どうぞよろしくご検討ください。"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:289
+#: TWLight/users/templates/users/terms.html:405
 msgid "The Wikipedia Library Team"
 msgstr "ウィキメディア図書館チーム"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
-#: TWLight/users/templates/users/terms.html:291
+#: TWLight/users/templates/users/terms.html:407
 msgid "Wikimedia Foundation"
 msgstr "ウィキメディア財団"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:299
+#: TWLight/users/templates/users/terms.html:415
 msgid ""
 "By checking this box and clicking “Submit”, you agree that you have read the "
 "above terms and that you will adhere to the terms of use in your application "
@@ -4235,22 +4212,22 @@ msgid "Access to {} has been returned."
 msgstr "{}へのアクセスが成功しました。"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/views.py:52 TWLight/views.py:103
+#: TWLight/users/views.py:797 TWLight/views.py:31
 msgid "500+ edits"
 msgstr "編集履歴が500回以上あること"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/views.py:54 TWLight/views.py:105
+#: TWLight/users/views.py:799 TWLight/views.py:33
 msgid "6+ months editing"
 msgstr "6ヵ月超の編集活動"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/views.py:56 TWLight/views.py:107
+#: TWLight/users/views.py:801 TWLight/views.py:35
 msgid "10+ edits in the last month"
 msgstr "前月に10回以上の編集実績があること"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/views.py:58 TWLight/views.py:109
+#: TWLight/users/views.py:803 TWLight/views.py:37
 msgid "No active blocks"
 msgstr "現状でブロックを受けていないこと"
 
@@ -4282,3 +4259,94 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid ""
+#~ "Any editor can apply for access, but there are a few basic requirements. "
+#~ "These are also the minimum technical requirements for access to the "
+#~ "Library Bundle (see below):"
+#~ msgstr ""
+#~ "アクセス権の申請は誰でもできますが、基本的な必要条件がいくつかあります。同"
+#~ "じ条件が図書館バンドル制度のアクセスに求められる最低の技術要件でもあります"
+#~ "（下記ご参照）。"
+
+#~ msgid ""
+#~ "If you don't quite meet the experience requirements but think you would "
+#~ "still be a strong candidate for access, feel free to apply and you may "
+#~ "still be considered."
+#~ msgstr ""
+#~ "もし編集履歴が規定に達していなくてもアクセス権の申請者としての強みがあると"
+#~ "考える場合は、認可されるかどうか申請してみてください。"
+
+#~ msgid ""
+#~ "The Wikipedia Library provides free access to research databases and "
+#~ "collections."
+#~ msgstr ""
+#~ "ウィキペディア図書館は研究用データベースとコレクションに無料アクセス権を提"
+#~ "供します。"
+
+#~ msgid "Learn more"
+#~ msgstr "詳細"
+
+#~ msgid ""
+#~ "A stack of books tied together with a ribbon, the Library Bundle icon"
+#~ msgstr "図書館バンドル制度のアイコン。重ねてしばった本の束"
+
+#~ msgid ""
+#~ "<p>Free and immediate access to a large selection of resources, spanning "
+#~ "%(bundle_partner_count)s collections, if you meet the following criteria:"
+#~ "</p>"
+#~ msgstr ""
+#~ "<p>広範な%(bundle_partner_count)s件のコレクションという情報源類から無料の"
+#~ "アクセス権をこの場で受ける要件とは、次にあげる各点です。</p>"
+
+#~ msgid ""
+#~ "It looks like you have an active block on your account on at least one "
+#~ "Wikimedia project. If you meet the other criteria you may still be "
+#~ "permitted access to the Library Bundle - please <a href=\"%(contact_url)s"
+#~ "\">contact us</a>."
+#~ msgstr ""
+#~ "あなたのアカウントはウィキメディアのプロジェクト1件以上で現在、ブロックを"
+#~ "受けているようです。その他の要件を満たす場合、図書館バンドル制度のアクセス"
+#~ "を引き続き承認できる場合があります - ぜひ<a href=\"%(contact_url)s\">担当"
+#~ "にご連絡ください</a>。"
+
+#~ msgid ""
+#~ "You meet the eligibility criteria! Check out <a href=\"%(library_url)s"
+#~ "\">My Library</a> to see what you have access to."
+#~ msgstr ""
+#~ "登録要件に合格しました。アクセス権の対象は<a href=\"%(library_url)s\">私の"
+#~ "図書館</a>を開いてご確認ください。"
+
+#~ msgid ""
+#~ "Some collections have a limited number of concurrent users and require an "
+#~ "application."
+#~ msgstr ""
+#~ "コレクションによっては同時に利用できる人数に上限を設け、申請を求めていま"
+#~ "す。"
+
+#~ msgid "See more"
+#~ msgstr "表示を増やす"
+
+#~ msgid ""
+#~ "Wikipedia Library Card accounts do not expire. However, access to an "
+#~ "individual publisher’s resources will generally lapse after one year, "
+#~ "after which you will either need to apply for renewal or your account "
+#~ "will automatically be renewed."
+#~ msgstr ""
+#~ "ウィキペディア図書館カードに有効期限はありません。しかしながら、個別の出版"
+#~ "社の情報源へのアクセス権は通常、1年で期限切れとなり、その後、利用者による"
+#~ "更新申請が必要な場合と、自動的に更新される場合があります。"
+
+#~ msgid ""
+#~ "The following limited information that you provide is public to all users "
+#~ "by default: 1) when you created a Wikipedia Library Card account; 2) "
+#~ "which publishers’ resources you have applied to access; 3) your rationale "
+#~ "for accessing the resources of each partner to which you apply. Editors "
+#~ "who do not wish to make points 2 and 3 public may opt out using a "
+#~ "checkbox when filing an application."
+#~ msgstr ""
+#~ "以下の限定的な情報を皆さんが提供すると、既定では全ての利用者に公開されま"
+#~ "す。1) ウィキペディア図書館カードのアカウント作成日。2) アクセス権を申請し"
+#~ "た出版社の情報源。3) 個別の提携組織の情報源にアクセス権を申請した理由。こ"
+#~ "のうち第2点と第3点を非公開にしたいと希望される場合は、申請画面でチェック"
+#~ "ボックスにレ点を入れて拒絶を選択できます。"
