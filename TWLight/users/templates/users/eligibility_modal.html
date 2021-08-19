@@ -40,23 +40,18 @@
         </em>
       </p>
       <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <a href="{% url 'users:home' %}" class="btn btn-outline-secondary
               eligibility-modal-button">
             {% comment %}Translators: A button that takes users to their profile. {% endcomment %}
             {% trans "Profile/Settings" %}
           </a>
         </div>
-        <div class="col-lg-5 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <a href="{% url 'auth_logout' %}?next=/" class="btn btn-outline-secondary
               eligibility-modal-button">
             {% comment %}Translators: A button to log out of The Wikipedia Library. {% endcomment %}
             {% trans "Log out" %}
-          </a>
-        </div>
-        <div class="col-lg-2 col-md-12 col-sm-12">
-          <a href="{% url 'contact' %}" class="dot">
-            <span class="question-mark"> ? </span>
           </a>
         </div>
       </div>
