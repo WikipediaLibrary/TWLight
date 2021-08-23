@@ -22,40 +22,35 @@ class LoggedInUser(HttpUser):
 
     def login(self):
         if wpName and wpPassword:
-            get_login = self.client.get(
+            with self.client.get(
                 "/oauth/login/?next=/users/my_library/",
                 catch_response=True,
-            )
-            match = reWpLoginToken.search(get_login.text)
-
-            wpLoginToken = None
-            if match:
-                wpLoginToken = match.group(1)
-                post_data = {
-                    "wpName": wpName,
-                    "wpPassword": wpPassword,
-                    "wploginattempt": "Log+in",
-                    "wpEditToken": "+\\",
-                    "title": "Special:UserLogin",
-                    "authAction": "login",
-                    "force": "",
-                    "wpLoginToken": wpLoginToken,
-                }
-                post_login = self.client.post(
-                    get_login.url,
-                    post_data,
-                    catch_response=True,
-                )
-                if "sessionid" not in self.client.cookies:
-                    print("login failed: No cookies")
-                    print(post_login.url)
-                    post_login.failure("login failed: No cookies")
-                if post_login.status_code != 200:
-                    print("login failed: status code " + str(post_login.status_code))
-                    print(post_login.url)
-                    post_login.failure(
-                        "login failed: status code " + str(post_login.status_code)
-                    )
+            ) as get_login:
+                match = reWpLoginToken.search(get_login.text)
+                wpLoginToken = None
+                if match:
+                    wpLoginToken = match.group(1)
+                    post_data = {
+                        "wpName": wpName,
+                        "wpPassword": wpPassword,
+                        "wploginattempt": "Log+in",
+                        "wpEditToken": "+\\",
+                        "title": "Special:UserLogin",
+                        "authAction": "login",
+                        "force": "",
+                        "wpLoginToken": wpLoginToken,
+                    }
+                    with self.client.post(
+                        get_login.url,
+                        post_data,
+                        catch_response=True,
+                    ) as post_login:
+                        if "sessionid" not in self.client.cookies:
+                            post_login.failure("login failed: No sessionid")
+                        if post_login.status_code != 200:
+                            post_login.failure(
+                                "post_login status code: " + str(post_login.status_code)
+                            )
         else:
             raise Exception("login failed: credentials required.")
 
