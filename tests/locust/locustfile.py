@@ -23,7 +23,7 @@ class LoggedInUser(HttpUser):
     def login(self):
         if wpName and wpPassword:
             get_login = self.client.get(
-                "/oauth/login/?next=/home/",
+                "/oauth/login/?next=/users/my_library/",
                 catch_response=True,
             )
             match = reWpLoginToken.search(get_login.text)
@@ -46,12 +46,13 @@ class LoggedInUser(HttpUser):
                     post_data,
                     catch_response=True,
                 )
-                if "cookie" not in post_login.cookies:
+                if "sessionid" not in self.client.cookies:
                     print("login failed: No cookies")
+                    print(post_login.url)
                     post_login.failure("login failed: No cookies")
                 if post_login.status_code != 200:
                     print("login failed: status code " + str(post_login.status_code))
-                    print(self.client.cookies)
+                    print(post_login.url)
                     post_login.failure(
                         "login failed: status code " + str(post_login.status_code)
                     )
