@@ -1,5 +1,6 @@
 from os import environ
 import re
+from urllib.parse import urlparse
 from locust import HttpUser, task
 
 wpName = environ.get("WPNAME")
@@ -22,8 +23,10 @@ class LoggedInUser(HttpUser):
 
     def login(self):
         if wpName and wpPassword:
+            name = "/oauth/login/?next=/users/my_library/"
             with self.client.get(
-                "/oauth/login/?next=/users/my_library/",
+                name,
+                name=name,
                 catch_response=True,
             ) as get_login:
                 match = reWpLoginToken.search(get_login.text)
@@ -40,9 +43,12 @@ class LoggedInUser(HttpUser):
                         "force": "",
                         "wpLoginToken": wpLoginToken,
                     }
+                    url = urlparse(get_login.url)
+                    name = url.scheme + "://" + url.netloc + url.path
                     with self.client.post(
                         get_login.url,
                         post_data,
+                        name=name,
                         catch_response=True,
                     ) as post_login:
                         if "sessionid" not in self.client.cookies:
@@ -79,8 +85,10 @@ class LoggedInUser(HttpUser):
 
     @task(1)
     def post_applications(self):
+        name = "/applications/request/"
         with self.client.get(
-            "/applications/request/",
+            name,
+            name=name,
             allow_redirects=False,
             catch_response=True,
         ) as get_app_req:
@@ -88,6 +96,10 @@ class LoggedInUser(HttpUser):
                 get_app_req.failure(
                     "get_app_req status code: " + str(get_app_req.status_code)
                 )
+            url = urlparse(get_app_req.url)
+            this_host = url.scheme + "://" + url.netloc
+            if this_host != self.host:
+                get_app_req.failure("unexpected host: " + this_host)
             match = reCsrfMiddlewareToken.search(get_app_req.text)
             if match:
                 csrfMiddlewareToken = match.group(1)
@@ -151,6 +163,7 @@ class LoggedInUser(HttpUser):
                             "partner_19": "on",
                             "partner_83": "on",
                         },
+                        name=url.path,
                         catch_response=True,
                     ) as post_app_req:
                         if post_app_req.status_code != 200:
@@ -158,6 +171,10 @@ class LoggedInUser(HttpUser):
                                 "post_app_req status code: "
                                 + str(post_app_req.status_code)
                             )
+                            url = urlparse(post_app_req.url)
+                            this_host = url.scheme + "://" + url.netloc
+                            if this_host != self.host:
+                                post_app_req.failure("unexpected host: " + this_host)
                         with self.client.post(
                             post_app_req.url,
                             {
@@ -303,6 +320,7 @@ class LoggedInUser(HttpUser):
                                 "partner_83_comments": "Test",
                                 "submit": "Apply",
                             },
+                            name=url.path,
                             catch_response=True,
                         ) as post_app_apply:
                             if post_app_apply.status_code != 200:
@@ -310,3 +328,6 @@ class LoggedInUser(HttpUser):
                                     "post_app_apply status code: "
                                     + str(post_app_apply.status_code)
                                 )
+                            this_host = url.scheme + "://" + url.netloc
+                            if this_host != self.host:
+                                post_app_apply.failure("unexpected host: " + this_host)
