@@ -2,7 +2,7 @@
 {% load static %}
 {% load twlight_perms %}
 
-<nav id="top-nav" class="navbar navbar-expand-lg">
+<nav id="top-nav" class="navbar navbar-expand-xl">
   <!-- logo -->
   <a class="navbar-brand" href="{% url 'users:my_library' %}">
     <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
@@ -16,6 +16,25 @@
     {% comment %}Translators: Name of the project/tool.{% endcomment %}
     <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>
   </a>
+  <!-- EBSCO Search Box Begins -->
+  <form action="https://searchbox.ebsco.com/search/" target="_blank" class="ebsco-single-search">
+    <input name="schemaId" value="search" type="hidden" />
+    <input name="custid" value="ns253359" type="hidden" />
+    <input name="groupid" value="main" type="hidden" />
+    <input name="profid" value="eds" type="hidden" />
+    <input name="scope" value="site" type="hidden" />
+    <input name="site" value="eds-live" type="hidden" />
+    <input name="direct" value="true" type="hidden" />
+    <div class="input-group eds-searchbox">
+      {% comment %}Translators: Shown in the EBSCO Discovery Search input. {% endcomment %}
+      <input id="eb-sbb-search-input" name="bquery" type="text" class="eds-search-input"
+          placeholder="{% trans 'What are you looking for?' %}" />
+      {% comment %}Translators: Shown in the EBSCO Discovery Search button. {% endcomment %}
+      <input value="{% trans 'Search' %}" type="submit" class="btn eds-search-button" />
+    </div>
+  </form>
+  <!-- EBSCO Search Box Ends -->
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarTogglerTWL" aria-controls="navbarTogglerTWL"
       aria-expanded="false" aria-label="Toggle navigation">
