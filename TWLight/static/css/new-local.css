@@ -106,6 +106,7 @@ HEADER CSS
     border-radius: 2px 0 0 2px;
     padding: 5px;
     width: 500px;
+    font-size: 14px;
 }
 
 .eds-search-button{
@@ -119,6 +120,10 @@ HEADER CSS
     color: #FFFFFF !important;
     background-color: #3366CC !important;
     text-decoration: underline !important;
+}
+
+.eds-search-icon{
+    display: none;
 }
 
 /* Smartphones */
@@ -142,11 +147,17 @@ and (max-device-width : 480px) {
         border: 1px solid #3366CC;
         border-radius: 2px 0 0 2px;
         padding: 5px;
-        width: 150px;
-        font-size: 14px;
+        width: 159px;
+        font-size: 12px;
     }
     .navbar-toggler{
         padding: 4px;
+    }
+    .eds-search-icon{
+        display: block;
+    }
+    .eds-search-text{
+        display: none;
     }
 }
 
@@ -226,11 +237,17 @@ and (max-width : 557px) {
         border: 1px solid #3366CC;
         border-radius: 2px 0 0 2px;
         padding: 5px;
-        width: 150px;
-        font-size: 14px;
+        width: 159px;
+        font-size: 12px;
     }
     .navbar-toggler{
         padding: 4px;
+    }
+    .eds-search-icon{
+        display: block;
+    }
+    .eds-search-text{
+        display: none;
     }
 }
 
@@ -255,6 +272,9 @@ and (max-device-width : 1024px) {
 and (min-width : 320px)
 and (max-width : 748px) {
     .site-title {
+        display: none;
+    }
+    .site-title-anchor{
         display: none;
     }
 }
