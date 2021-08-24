@@ -3,87 +3,95 @@
 {% load twlight_perms %}
 
 <nav id="top-nav" class="navbar navbar-expand-xl">
-  <!-- logo -->
-  <a class="navbar-brand" href="{% url 'users:my_library' %}">
-    <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
-        alt="
-          {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
-          {% trans "The Wikipedia Library home" %}
-        ">
-  </a>
-  <a class="navbar-brand site-title-anchor" href="{% url 'users:my_library' %}">
-    <!-- site name -->
-    {% comment %}Translators: Name of the project/tool.{% endcomment %}
-    <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>
-  </a>
-  <!-- EBSCO Search Box Begins -->
-  <!-- <form action="https://searchbox.ebsco.com/search/" target="_blank" class="ebsco-single-search navbar-brand"> -->
-  <form action="https://search.ebscohost.com/login.aspx" target="_blank" class="ebsco-single-search navbar-brand">
-    <input name="schemaId" value="search" type="hidden" />
-    <input name="custid" value="ns253359" type="hidden" />
-    <input name="groupid" value="main" type="hidden" />
-    <input name="profid" value="eds" type="hidden" />
-    <input name="scope" value="site" type="hidden" />
-    <input name="site" value="eds-live" type="hidden" />
-    <input name="direct" value="true" type="hidden" />
-    <input name="authtype" value="url" type="hidden" />
-    <div class="input-group eds-searchbox">
-      {% comment %}Translators: Shown in the search input. {% endcomment %}
-      <input id="eb-sbb-search-input" name="bquery" type="text" class="eds-search-input"
-          placeholder="{% trans 'Search the library' %}" />
-      <button type="submit" class="btn eds-search-button">
-        {% comment %}Translators: Shown in the search button. {% endcomment %}
-        <span class="eds-search-text">{% trans 'Search' %}</span>
-        <i class="fa fa-search eds-search-icon"></i>
-      </button>
+  <div class="row top-nav-row">
+    <div class="col-lg-3 col-md-4 col-sm-2 col-1">
+      <!-- logo -->
+      <a class="navbar-brand" href="{% url 'users:my_library' %}">
+        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
+            alt="
+              {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+              {% trans "The Wikipedia Library home" %}
+            ">
+      </a>
+      <a class="navbar-brand site-title-anchor" href="{% url 'users:my_library' %}">
+        <!-- site name -->
+        {% comment %}Translators: Name of the project/tool.{% endcomment %}
+        <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>
+      </a>
     </div>
-  </form>
-  <!-- EBSCO Search Box Ends -->
+    <div class="col-lg-5 col-md-7 col-sm-6 col-9">
+      <!-- EBSCO Search Box Begins -->
+      <!-- <form action="https://searchbox.ebsco.com/search/" target="_blank" class="ebsco-single-search navbar-brand"> -->
+      <form action="https://search.ebscohost.com/login.aspx" target="_blank" class="ebsco-single-search">
+        <input name="schemaId" value="search" type="hidden" />
+        <input name="custid" value="ns253359" type="hidden" />
+        <input name="groupid" value="main" type="hidden" />
+        <input name="profid" value="eds" type="hidden" />
+        <input name="scope" value="site" type="hidden" />
+        <input name="site" value="eds-live" type="hidden" />
+        <input name="direct" value="true" type="hidden" />
+        <input name="authtype" value="url" type="hidden" />
+        <div class="input-group eds-searchbox">
+          {% comment %}Translators: Shown in the search input. {% endcomment %}
+          <input id="eb-sbb-search-input" name="bquery" type="text" class="eds-search-input"
+              placeholder="{% trans 'Search the library' %}" />
+          <button type="submit" class="btn eds-search-button">
+            {% comment %}Translators: Shown in the search button. {% endcomment %}
+            <span class="eds-search-text">{% trans 'Search' %}</span>
+            <i class="fa fa-search eds-search-icon"></i>
+          </button>
+        </div>
+      </form>
+      <!-- EBSCO Search Box Ends -->
+    </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
-      data-target="#navbarTogglerTWL" aria-controls="navbarTogglerTWL"
-      aria-expanded="false" aria-label="Toggle navigation">
-    <i class="navbar-toggler-icon fa fa-user"></i>
-    <i class="navbar-toggler-icon fa fa-arrow-down"></i>
-  </button>
+    <button class="navbar-toggler top-navbar-button" type="button" data-toggle="collapse"
+        data-target="#navbarTogglerTWL" aria-controls="navbarTogglerTWL"
+        aria-expanded="false" aria-label="Toggle navigation">
+      <i class="navbar-toggler-icon fa fa-user"></i>
+      <i class="navbar-toggler-icon fa fa-arrow-down"></i>
+    </button>
 
-  <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-end navbar-container">
-    <ul class="navbar-nav">
-      {% if user|coordinators_only %}
-      <li role="presentation" class="mobile-menu align-middle nav-item">
-        <a class="nav-link nav-links" href="{% url 'applications:list' %}">
-          {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
-          {% trans "Review" %}
-        </a>
-      </li>
-      <li role="presentation" class="mobile-menu align-middle nav-item">
-        <a class="nav-link nav-links" href="{% url 'applications:send' %}">
-          {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
-          {% trans "Send data to partners" %}
-        </a>
-      </li>
-      {% endif %}
-      <div class="dropdown-divider"></div>
-      <li role="presentation" class="mobile-menu align-middle nav-item">
-        <a class="nav-link nav-links" href="{% url 'suggest' %}">
-          {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
-          {% trans "Suggest a collection" %}
-        </a>
-      </li>
-      <div class="dropdown-divider"></div>
-      {% if user and user.is_authenticated %}
-        <li role="presentation" class="mobile-menu align-middle nav-item">
-          <a class="btn user-button" href="{% url 'users:home' %}">
-            {{ user.editor.wp_username }}
-          </a>
-        </li>
-        <li role="presentation" class="mobile-menu align-middle nav-item">
-          {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
-          <a class="nav-link nav-links" href="{% url 'auth_logout' %}?next=/">
-            {% trans "Log out" %}
-          </a>
-        </li>
-      {% endif %}
-    </ul>
+    <div class="col-lg-4 col-md-4 col-sm-1 col-1">
+      <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          {% if user|coordinators_only %}
+          <li role="presentation" class="mobile-menu align-middle nav-item">
+            <a class="nav-link nav-links" href="{% url 'applications:list' %}">
+              {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications. {% endcomment %}
+              {% trans "Review" %}
+            </a>
+          </li>
+          <li role="presentation" class="mobile-menu align-middle nav-item">
+            <a class="nav-link nav-links" href="{% url 'applications:send' %}">
+              {% comment %}Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup. {% endcomment %}
+              {% trans "Send data to partners" %}
+            </a>
+          </li>
+          {% endif %}
+          <div class="dropdown-divider"></div>
+          <li role="presentation" class="mobile-menu align-middle nav-item">
+            <a class="nav-link nav-links" href="{% url 'suggest' %}">
+              {% comment %}Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library. {% endcomment %}
+              {% trans "Suggest a collection" %}
+            </a>
+          </li>
+          <div class="dropdown-divider"></div>
+          {% if user and user.is_authenticated %}
+            <li role="presentation" class="mobile-menu align-middle nav-item">
+              <a class="btn user-button" href="{% url 'users:home' %}">
+                {{ user.editor.wp_username }}
+              </a>
+            </li>
+            <li role="presentation" class="mobile-menu align-middle nav-item">
+              {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+              <a class="nav-link nav-links" href="{% url 'auth_logout' %}?next=/">
+                {% trans "Log out" %}
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
