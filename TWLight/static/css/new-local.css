@@ -56,9 +56,7 @@ HEADER CSS
 }
 
 .logo-header {
-	height: 70px;
-	float: left;
-	padding: 0px 0px 10px 32px;
+	height: 55px;
 }
 
 #top-nav {
@@ -66,8 +64,8 @@ HEADER CSS
   background-color: #f8f8f8;
 }
 
-.navbar-container{
-    padding: 0px 50px 0px 0px;
+.top-nav-row{
+    width: 100%;
 }
 
 .mobile-menu {
@@ -96,8 +94,8 @@ HEADER CSS
     text-decoration: underline !important;
 }
 
-.eds-searchbox{
-    left: 250px;
+.ebsco-single-search{
+    margin-top: 15px;
 }
 
 .eds-search-input{
@@ -105,7 +103,7 @@ HEADER CSS
     border: 1px solid #3366CC;
     border-radius: 2px 0 0 2px;
     padding: 5px;
-    width: 500px;
+    width: 80%;
     font-size: 14px;
 }
 
@@ -126,156 +124,90 @@ HEADER CSS
     display: none;
 }
 
+.top-navbar-button{
+    margin-top: 15px;
+    height: 32px;
+}
+.top-navbar-button i{
+    width: 12px;
+}
+
 /* Smartphones */
 @media only screen
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .logo-header {
-    	height: 65px;
-    	float: left;
-    	padding: 0px 0px 10px 0px;
+    	height: 50px;
     }
-    .site-title {
-        display: none;
-    }
-    .eds-searchbox{
-        left: -10px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 159px;
-        font-size: 12px;
-    }
-    .navbar-toggler{
-        padding: 4px;
-    }
-    .eds-search-icon{
-        display: block;
-    }
-    .eds-search-text{
-        display: none;
-    }
-}
-
-@media screen
-and (min-width : 1440px)
-and (max-width : 1723px) {
-    .eds-searchbox{
-        left: 50px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 400px;
-    }
-}
-
-@media screen
-and (min-width : 1255px)
-and (max-width : 1439px) {
-    .eds-searchbox{
-        left: 20px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 255px;
-    }
-}
-
-@media screen
-and (min-width : 1025px)
-and (max-width : 1254px) {
-    .eds-searchbox{
-        left: 0px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 350px;
-    }
-}
-
-@media screen
-and (min-width : 558px)
-and (max-width : 1024px) {
-    .eds-searchbox{
-        left: 20px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 255px;
-    }
-}
-
-@media screen
-and (min-width : 320px)
-and (max-width : 557px) {
-    .eds-searchbox{
-        left: -10px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 159px;
-        font-size: 12px;
-    }
-    .navbar-toggler{
-        padding: 4px;
-    }
-    .eds-search-icon{
-        display: block;
-    }
-    .eds-search-text{
-        display: none;
-    }
-}
-
-/* Tablets */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px) {
-    .eds-searchbox{
-        left: 20px;
-    }
-
-    .eds-search-input{
-        background: #fff;
-        border: 1px solid #3366CC;
-        border-radius: 2px 0 0 2px;
-        padding: 5px;
-        width: 255px;
-    }
-}
-
-@media screen
-and (min-width : 320px)
-and (max-width : 748px) {
     .site-title {
         display: none;
     }
     .site-title-anchor{
         display: none;
+    }
+    .ebsco-single-search{
+        margin: 15px 0px 0px 10px;
+    }
+    .eds-search-icon{
+        display: block;
+    }
+    .eds-search-text{
+        display: none;
+    }
+    .eds-search-input{
+        background: #fff;
+        border: 1px solid #3366CC;
+        border-radius: 2px 0 0 2px;
+        padding: 5px;
+        width: 75%;
+        font-size: 14px;
+    }
+}
+
+@media screen
+and (min-width : 320px)
+and (max-width : 1025px) {
+    .site-title {
+        display: none;
+    }
+    .site-title-anchor{
+        display: none;
+    }
+    .logo-header {
+    	height: 50px;
+    }
+    .ebsco-single-search{
+        margin: 15px 0px 0px 15px;
+    }
+    .eds-search-icon{
+        display: block;
+    }
+    .eds-search-text{
+        display: none;
+    }
+    .eds-search-input{
+        background: #fff;
+        border: 1px solid #3366CC;
+        border-radius: 2px 0 0 2px;
+        padding: 5px;
+        width: 75%;
+        font-size: 14px;
+    }
+}
+
+@media screen
+and (min-width : 320px)
+and (max-width : 360px) {
+    .col-9{
+        max-width: 70% !important;
+    }
+    .eds-search-input{
+        background: #fff;
+        border: 1px solid #3366CC;
+        border-radius: 2px 0 0 2px;
+        padding: 5px;
+        width: 70%;
+        font-size: 14px;
     }
 }
 /*
