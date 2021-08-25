@@ -215,12 +215,12 @@
       <div class="col-xs-12 col-sm-8">
         {{ object.comments }}
       </div>
-    {% endif %}    
+    {% endif %}
   </div>
 
   {% comment %}Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.{% endcomment %}
   <h2>{% trans 'Recent Applications (last 90 days)' %}</h2>
-  
+
   {% if recent_apps|length > 0 %}
     <div class="table-responsive">
       <table class="table table-hover">
@@ -267,7 +267,7 @@
     {% get_comment_form for object as form %}
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-3">
-        <form action="{% comment_form_target %}" method="POST">
+        <form method="POST" action="{% comment_form_target %}">
           {% csrf_token %}
           <label for="{{ form.comment.id }}" class="control-label">
               {{ form.comment.label|safe }}
@@ -299,7 +299,7 @@
   <h2>{% trans 'User' %}</h2>
 
   {% include 'users/editor_detail_data.html' %}
-    
+
   {% comment %}Translators: This is the title of the section of an application page which lists the history of status changes.{% endcomment %}
   <h2>{% trans 'Revision history' %}</h2>
 
@@ -352,6 +352,6 @@
     {% empty %}
       {% comment %}Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.{% endcomment %}
       <li>{% trans 'No previous versions.' %}</li>
-    {% endfor %}      
+    {% endfor %}
   </ul>
 {% endblock %}

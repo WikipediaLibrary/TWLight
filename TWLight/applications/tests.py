@@ -3392,7 +3392,7 @@ class EvaluateApplicationTest(TestCase):
         response = views.EvaluateApplicationView.as_view()(
             request, pk=self.restricted_application.pk
         )
-        self.assertNotIn("<form", response.render().content.decode("utf-8"))
+        self.assertNotIn("<form method=", response.render().content.decode("utf-8"))
 
     def test_deleted_user_app_visibility(self):
         # If a user deletes their data, any applications
