@@ -930,8 +930,36 @@ class EditorModelTestCase(TestCase):
         )
         self.assertFalse(valid)
 
+        # Oauth says the account is too new, but global_userinfo says it's fine
+        global_userinfo["editcount"] = 500
+        self.editor.update_editcount(global_userinfo["editcount"])
+        enough_edits = editor_enough_edits(self.editor.wp_editcount)
+        identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
+
+        # Oauth says the account is fine, but global_userinfo says it's too new
+        global_userinfo["editcount"] = 500
+        global_userinfo["registration"] = datetime.today()
+        self.editor.update_editcount(global_userinfo["editcount"])
+        enough_edits = editor_enough_edits(self.editor.wp_editcount)
+        identity["registered"] = (datetime.today() - timedelta(days=365)).strftime(
+            "%Y%m%d%H%M%S"
+        )
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+        )
+        self.assertTrue(valid)
+
         # Account created too recently
         global_userinfo["editcount"] = 500
+        global_userinfo["registration"] = datetime.today()
         self.editor.update_editcount(global_userinfo["editcount"])
         enough_edits = editor_enough_edits(self.editor.wp_editcount)
         identity["registered"] = datetime.today().strftime("%Y%m%d%H%M%S")
@@ -944,6 +972,7 @@ class EditorModelTestCase(TestCase):
 
         # Edge case: this shouldn't work.
         almost_6_months_ago = datetime.today() - timedelta(days=181)
+        global_userinfo["registration"] = almost_6_months_ago
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
@@ -954,6 +983,7 @@ class EditorModelTestCase(TestCase):
 
         # Edge case: this should work.
         almost_6_months_ago = datetime.today() - timedelta(days=182)
+        global_userinfo["registration"] = almost_6_months_ago
         identity["registered"] = almost_6_months_ago.strftime("%Y%m%d%H%M%S")
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
