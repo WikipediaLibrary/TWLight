@@ -357,6 +357,15 @@ nav .divider {
     .site-title {
     	display: none;
     }
+    .site-title-anchor{
+        display: none;
+    }
+    .eds-search-icon{
+        display: block;
+    }
+    .eds-search-text{
+        display: none;
+    }
 }
 
 /* Portrait phones and smaller */
