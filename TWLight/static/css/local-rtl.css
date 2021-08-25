@@ -122,6 +122,10 @@ header {
     color: #000000;
 }
 
+.library-header{
+    width: 100%;
+}
+
 .logo-header {
 	height: 70px;
 	float: right;
@@ -229,6 +233,40 @@ header {
     text-decoration: underline !important;
 }
 
+.ebsco-single-search{
+    margin-top: 15px;
+}
+
+.eds-searchbox{
+    width: 100%;
+}
+
+.eds-search-input{
+    background: #fff;
+    border: 1px solid #3366CC;
+    border-radius: 2px 0 0 2px;
+    padding: 5px;
+    width: 80%;
+    font-size: 14px;
+}
+
+.eds-search-button{
+    font-family: Roboto;
+    color: #FFFFFF;
+    background-color: #3366CC;
+    border-radius: 0 2px 2px 0;
+}
+
+.eds-search-button:hover {
+    color: #FFFFFF !important;
+    background-color: #3366CC !important;
+    text-decoration: underline !important;
+}
+
+.eds-search-icon{
+    display: none;
+}
+
 .nav-greeting {
   height: 40px;
   line-height: 40px;
@@ -253,6 +291,13 @@ nav .divider {
 	font-size:.9em;
 }
 }
+
+@media (max-width: 768px){
+    .site-title {
+    	display: none;
+    }
+}
+
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
