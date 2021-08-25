@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import json
 import logging
 import urllib.request, urllib.error, urllib.parse
@@ -71,17 +71,35 @@ def editor_reg_date(identity: dict, global_userinfo: dict):
     -------
     datetime.date
     """
-    # Try oauth registration date first.  If it's not valid, try the global_userinfo date
+
+    reg_dates = []
+    # Try oauth registration date.
     try:
-        reg_date = datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+        reg_dates.append(
+            datetime.strptime(identity["registered"], "%Y%m%d%H%M%S").date()
+        )
     except (TypeError, ValueError):
-        try:
-            reg_date = datetime.strptime(
+        pass
+    # Try global_userinfo date
+    try:
+        reg_dates.append(
+            datetime.strptime(
                 global_userinfo["registration"], "%Y-%m-%dT%H:%M:%SZ"
             ).date()
-        except (TypeError, ValueError):
-            reg_date = None
-    return reg_date
+        )
+    except (TypeError, ValueError):
+        pass
+
+    # List sorting is a handy way to get the oldest date.
+    reg_dates.sort()
+    reg_date = reg_dates[0]
+
+    # If we got a date, return it.
+    if isinstance(reg_date, date):
+        return reg_date
+    # If we got something unexpected, return None.
+    else:
+        return None
 
 
 def editor_enough_edits(editcount: int):
@@ -143,7 +161,7 @@ def editor_account_old_enough(wp_registered: datetime.date):
     if wp_registered is None:
         return False
     # Check: registered >= 6 months ago
-    return datetime.today().date() - timedelta(days=182) >= wp_registered
+    return date.today() - timedelta(days=182) >= wp_registered
 
 
 def editor_valid(
