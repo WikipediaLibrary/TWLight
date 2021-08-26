@@ -279,7 +279,12 @@ class Partner(models.Model):
     )
 
     # New tag model that uses JSONField instead of Taggit to make tags translatable
-    new_tags = models.JSONField(null=True, default=None, blank=True)
+    new_tags = models.JSONField(
+        null=True,
+        default=None,
+        blank=True,
+        help_text="Enter a valid Tag in the form &ltTagName_tag&gt.",
+    )
 
     # Non-universal form fields
     # --------------------------------------------------------------------------
@@ -406,11 +411,6 @@ class Partner(models.Model):
             if not self.target_url:
                 raise ValidationError("Proxy and Bundle partners require a target URL.")
 
-    def get_absolute_url(self):
-        return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
-
-    def save(self, *args, **kwargs):
-        super(Partner, self).save(*args, **kwargs)
         # If new_tags is not empty, validate with JSONSchema
         if self.new_tags is not None:
             try:
@@ -422,6 +422,9 @@ class Partner(models.Model):
                 raise ValidationError(
                     "Error trying to insert a tag: the JSON is invalid"
                 )
+
+    def get_absolute_url(self):
+        return reverse_lazy("partners:detail", kwargs={"pk": self.pk})
 
     @property
     def get_languages(self):
