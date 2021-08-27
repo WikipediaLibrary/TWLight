@@ -8,19 +8,13 @@ wpName = environ.get("WPNAME")
 wpPassword = environ.get("WPPASSWORD")
 reCsrfMiddlewareToken = re.compile(
     r'<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">',
-    re.DOTALL,
 )
 reWpLoginToken = re.compile(
-    r'<input name="wpLoginToken" type="hidden" value="([^"+\\]+\+\\)"/>', re.DOTALL
+    r'<input name="wpLoginToken" type="hidden" value="([^"+\\]+\+\\)"/>',
 )
 reMyApplicationsUrl = re.compile(
-    r"<a href='(/users/my_applications/\d+/)'>My Applications</a>", re.DOTALL
+    r"<a href='(/users/my_applications/\d+/)'>My Applications</a>",
 )
-reWithdrawApplicationsForm = re.compile(
-    r'^\s*<form action="(/users/withdraw/\d+/\d+/)" class="m-2" method="post">$\n^\s*<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">$\n^\s*<input type="submit" value="Withdraw" class="btn btn-danger btn-sm">$\n^\s*</form>',
-    re.DOTALL | re.MULTILINE,
-)
-form = []
 
 
 class FormParser(HTMLParser):
@@ -89,35 +83,40 @@ class LoggedInUser(HttpUser):
                 name,
                 name=name,
                 catch_response=True,
+                stream=True,
             ) as get_login:
-                match = reWpLoginToken.search(get_login.text)
-                wpLoginToken = None
-                if match:
+                if any(
+                    (match := reWpLoginToken.search(line))
+                    for line in get_login.iter_lines(decode_unicode=True)
+                ):
                     wpLoginToken = match.group(1)
-                    post_data = {
-                        "wpName": wpName,
-                        "wpPassword": wpPassword,
-                        "wploginattempt": "Log+in",
-                        "wpEditToken": "+\\",
-                        "title": "Special:UserLogin",
-                        "authAction": "login",
-                        "force": "",
-                        "wpLoginToken": wpLoginToken,
-                    }
-                    url = urlparse(get_login.url)
-                    name = url.scheme + "://" + url.netloc + url.path
-                    with self.client.post(
-                        get_login.url,
-                        post_data,
-                        name=name,
-                        catch_response=True,
-                    ) as post_login:
-                        if "sessionid" not in self.client.cookies:
-                            post_login.failure("login failed: No sessionid")
-                        if post_login.status_code != 200:
-                            post_login.failure(
-                                "post_login status code: " + str(post_login.status_code)
-                            )
+                    if wpLoginToken:
+                        post_data = {
+                            "wpName": wpName,
+                            "wpPassword": wpPassword,
+                            "wploginattempt": "Log+in",
+                            "wpEditToken": "+\\",
+                            "title": "Special:UserLogin",
+                            "authAction": "login",
+                            "force": "",
+                            "wpLoginToken": wpLoginToken,
+                        }
+                        url = urlparse(get_login.url)
+                        name = url.scheme + "://" + url.netloc + url.path
+                        with self.client.post(
+                            get_login.url,
+                            post_data,
+                            name=name,
+                            catch_response=True,
+                            stream=True,
+                        ) as post_login:
+                            if "sessionid" not in self.client.cookies:
+                                post_login.failure("login failed: No sessionid")
+                            if post_login.status_code != 200:
+                                post_login.failure(
+                                    "post_login status code: "
+                                    + str(post_login.status_code)
+                                )
         else:
             raise Exception("login failed: credentials required.")
 
@@ -152,6 +151,7 @@ class LoggedInUser(HttpUser):
             name=name,
             allow_redirects=False,
             catch_response=True,
+            stream=True,
         ) as get_app_req:
             if get_app_req.status_code != 200:
                 get_app_req.failure(
@@ -161,8 +161,10 @@ class LoggedInUser(HttpUser):
             this_host = url.scheme + "://" + url.netloc
             if this_host != self.host:
                 get_app_req.failure("unexpected host: " + this_host)
-            match = reCsrfMiddlewareToken.search(get_app_req.text)
-            if match:
+            if any(
+                (match := reCsrfMiddlewareToken.search(line))
+                for line in get_app_req.iter_lines(decode_unicode=True)
+            ):
                 csrfMiddlewareToken = match.group(1)
                 if csrfMiddlewareToken:
                     with self.client.post(
@@ -226,6 +228,7 @@ class LoggedInUser(HttpUser):
                         },
                         name=url.path,
                         catch_response=True,
+                        stream=True,
                     ) as post_app_req:
                         if post_app_req.status_code != 200:
                             post_app_req.failure(
@@ -383,6 +386,7 @@ class LoggedInUser(HttpUser):
                             },
                             name=url.path,
                             catch_response=True,
+                            stream=True,
                         ) as post_app_apply:
                             if post_app_apply.status_code != 200:
                                 post_app_apply.failure(
@@ -403,9 +407,13 @@ class LoggedInUser(HttpUser):
                                             path,
                                             name="/users/my_applications/<user>/",
                                             catch_response=True,
+                                            stream=True,
                                         ) as get_my_apps:
                                             myAppsParser = FormParser()
-                                            myAppsParser.feed(get_my_apps.text)
+                                            for line in get_my_apps.iter_lines(
+                                                decode_unicode=True
+                                            ):
+                                                myAppsParser.feed(line)
                                             forms = myAppsParser.return_data()
                                             for form in forms:
                                                 with self.client.post(
