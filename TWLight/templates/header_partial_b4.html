@@ -3,21 +3,19 @@
 {% load twlight_perms %}
 
 {% get_current_language as LANGUAGE_CODE %}
-<nav id="top-nav" class="navbar navbar-expand-xl">
+<nav id="top-nav" class="navbar navbar-expand-md">
   <div class="row top-nav-row">
-    <div class="col-lg-3 col-md-4 col-sm-2 col-1">
+    <div class="col-lg-3 col-md-5 col-sm-2 col-1">
       <!-- logo -->
       <a class="navbar-brand" href="{% url 'users:my_library' %}">
-        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo-header"
+        <img src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="logo-header"
             alt="
               {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
               {% trans "The Wikipedia Library home" %}
             ">
-      </a>
-      <a class="navbar-brand site-title-anchor" href="{% url 'users:my_library' %}">
         <!-- site name -->
         {% comment %}Translators: Name of the project/tool.{% endcomment %}
-        <p class="site-title align-middle"> {% trans "The Wikipedia Library" %} </p>
+        <span class="site-title align-middle"> {% trans "The Wikipedia Library" %} </span>
       </a>
     </div>
     <div class="col-lg-5 col-md-7 col-sm-6 col-9">
@@ -54,8 +52,8 @@
       <i class="navbar-toggler-icon fa fa-arrow-down"></i>
     </button>
 
-    <div class="col-lg-4 col-md-4 col-sm-1 col-1">
-      <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-end">
+    <div class="col-lg-4 col-md-8 col-sm-3 col-12 offset-md-4 offset-lg-0">
+      <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-lg-end justify-content-md-end">
         <ul class="navbar-nav">
           {% if user|coordinators_only %}
           <li role="presentation" class="mobile-menu align-middle nav-item">

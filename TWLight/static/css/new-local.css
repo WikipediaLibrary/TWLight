@@ -142,9 +142,6 @@ and (max-device-width : 480px) {
     .site-title {
         display: none;
     }
-    .site-title-anchor{
-        display: none;
-    }
     .ebsco-single-search{
         margin: 15px 0px 0px 10px;
     }
@@ -166,11 +163,8 @@ and (max-device-width : 480px) {
 
 @media screen
 and (min-width : 320px)
-and (max-width : 1025px) {
+and (max-width : 768px) {
     .site-title {
-        display: none;
-    }
-    .site-title-anchor{
         display: none;
     }
     .logo-header {
