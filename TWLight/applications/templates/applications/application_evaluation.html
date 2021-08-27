@@ -267,7 +267,7 @@
     {% get_comment_form for object as form %}
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-md-3">
-        <form method="POST" action="{% comment_form_target %}">
+        <form id="comment-form" method="POST" action="{% comment_form_target %}">
           {% csrf_token %}
           <label for="{{ form.comment.id }}" class="control-label">
               {{ form.comment.label|safe }}

@@ -1041,6 +1041,8 @@ class EvaluateApplicationView(
         form = super(EvaluateApplicationView, self).get_form(form_class)
 
         form.helper = FormHelper()
+        # Set a form ID to make it easier to test
+        form.helper.form_id = "set-status-form"
         form.helper.add_input(
             Submit(
                 "submit",

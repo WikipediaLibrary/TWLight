@@ -3376,7 +3376,8 @@ class EvaluateApplicationTest(TestCase):
         response = views.EvaluateApplicationView.as_view()(
             request, pk=self.application.pk
         )
-        self.assertIn("<form", response.render().content.decode("utf-8"))
+        self.assertIn('id="set-status-form"', response.render().content.decode("utf-8"))
+        self.assertIn('id="comment-form"', response.render().content.decode("utf-8"))
 
     def test_form_not_present_restricted(self):
         factory = RequestFactory()
@@ -3392,7 +3393,10 @@ class EvaluateApplicationTest(TestCase):
         response = views.EvaluateApplicationView.as_view()(
             request, pk=self.restricted_application.pk
         )
-        self.assertNotIn("<form method=", response.render().content.decode("utf-8"))
+        self.assertNotIn(
+            'id="set-status-form"', response.render().content.decode("utf-8")
+        )
+        self.assertNotIn('id="comment-form"', response.render().content.decode("utf-8"))
 
     def test_deleted_user_app_visibility(self):
         # If a user deletes their data, any applications
