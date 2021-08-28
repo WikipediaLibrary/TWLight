@@ -283,11 +283,7 @@ class Partner(models.Model):
         null=True,
         default=None,
         blank=True,
-<<<<<<< HEAD
-        help_text="Enter a valid Tag in the form &ltTagName_tag&gt.",
-=======
-        help_text="Tag must be a valid JSON tag. Tag should be in the form of &ltTagName_tag&gt.",
->>>>>>> Change server error to admin error.
+        help_text="Tag must be a valid JSON schema. Tag should be in the form of TagName_tag.",
     )
 
     # Non-universal form fields
@@ -415,10 +411,7 @@ class Partner(models.Model):
             if not self.target_url:
                 raise ValidationError("Proxy and Bundle partners require a target URL.")
 
-<<<<<<< HEAD
         # If new_tags is not empty, validate with JSONSchema
-=======
->>>>>>> Change server error to admin error.
         if self.new_tags is not None:
             try:
                 validate(
