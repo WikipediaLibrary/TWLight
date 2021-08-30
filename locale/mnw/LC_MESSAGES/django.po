@@ -3,12 +3,13 @@
 #
 # Author: Aue Nai
 # Author: Htawmonzel
+# Author: 咽頭べさ
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-25 17:23+0000\n"
-"PO-Revision-Date: 2021-08-26 11:27:38+0000\n"
+"PO-Revision-Date: 2021-08-30 11:24:34+0000\n"
 "Language: mnw\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -250,7 +251,7 @@ msgstr ""
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:131
 msgid "6 months"
-msgstr ""
+msgstr "၆ ဂိတုဂမၠိုင်"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:133
