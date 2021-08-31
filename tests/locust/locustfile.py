@@ -191,6 +191,12 @@ class LoggedInUser(HttpUser):
                     this_host = str(url.scheme) + "://" + str(url.netloc)
                     if this_host == self.host:
                         get_collection_content.failure("unexpected host: " + this_host)
+                    # We're streaming the response to generate traffic to the access url while minimizing memory usage
+                    if get_collection_content:
+                        for line in get_collection_content.iter_lines(
+                            decode_unicode=True
+                        ):
+                            pass
 
     @task(1)
     def get_users(self):
@@ -502,7 +508,9 @@ class LoggedInUser(HttpUser):
                                                         post_withdraw_app.url
                                                     )
                                                     this_host = (
-                                                        str(url.scheme) + "://" + str(url.netloc)
+                                                        str(url.scheme)
+                                                        + "://"
+                                                        + str(url.netloc)
                                                     )
                                                     if this_host != self.host:
                                                         post_withdraw_app.failure(
