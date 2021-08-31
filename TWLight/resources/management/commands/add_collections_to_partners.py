@@ -110,29 +110,3 @@ class Command(BaseCommand):
                     new_partner.languages.set(stream.languages.all())
                 elif stream.partner.languages.all():
                     new_partner.languages.set(stream.partner.languages.all())
-
-                # Link old partner's contacts, videos and logos to new partner
-
-                contacts = Contact.objects.filter(
-                    partner__company_name__contains=stream.partner.company_name
-                )
-                if contacts:
-                    new_partner.contacts.add(*contacts)
-
-                videos = Video.objects.filter(
-                    partner__company_name__contains=stream.partner.company_name
-                )
-                if videos:
-                    new_partner.videos.add(*videos)
-
-                logo = PartnerLogo.objects.filter(
-                    partner__company_name__contains=stream.partner.company_name
-                )
-
-                if logo.count() >= 1:
-                    try:
-                        new_partner.logos = logo[0]
-                        new_partner.logos.save()
-                        new_partner.save()
-                    except PartnerLogo.DoesNotExist:
-                        pass
