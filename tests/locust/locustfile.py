@@ -159,7 +159,7 @@ class LoggedInUser(HttpUser):
             wpUsers.append(self.user)
             self.user = {}
 
-    @task(1)
+    @task(10)
     def get_my_library(self):
         name = "/users/my_library/"
         with self.client.get(
@@ -198,13 +198,13 @@ class LoggedInUser(HttpUser):
                         ):
                             pass
 
-    @task(1)
+    @task(10)
     def get_users(self):
         self.client.get(
             "/users/",
         )
 
-    @task(1)
+    @task(10)
     def get_partners(self):
         self.client.get(
             "/partners/",
