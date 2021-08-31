@@ -115,10 +115,10 @@ class AuthorizationInline(admin.StackedInline):
 
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline, AuthorizationInline]
-    list_display = ["username", "get_wp_username", "is_staff"]
+    list_display = ["username", "get_wp_username", "email", "is_staff"]
     list_filter = ["is_staff", "is_active", "is_superuser"]
     default_filters = ["is_active__exact=1"]
-    search_fields = ["editor__wp_username", "username"]
+    search_fields = ["editor__wp_username", "username", "email"]
 
     def get_wp_username(self, user):
         if hasattr(user, "editor"):
