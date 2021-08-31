@@ -17,7 +17,36 @@ reMyApplicationsUrl = re.compile(
 )
 
 
-class FormParser(HTMLParser):
+class MyCollectionsAccessParser(HTMLParser):
+    def __init__(self, *args, **kwargs):
+        self.hrefs = []
+        self.href = None
+        super().__init__()
+
+    def return_data(self):
+        return self.hrefs
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            for i, attr in enumerate(attrs):
+                prev_attr = None
+                if 0 <= i - 1 < len(attrs):
+                    prev_attr = attrs[i - 1]
+                if (
+                    attr[0] == "class"
+                    and attr[1] == "btn btn-sm access-apply-button"
+                    and prev_attr
+                    and prev_attr[0] == "href"
+                ):
+                    self.href = prev_attr[1]
+
+    def handle_endtag(self, tag):
+        if tag == "a" and self.href is not None:
+            self.hrefs.append(self.href)
+            self.href = None
+
+
+class MyAppsWithdrawParser(HTMLParser):
     def __init__(self, *args, **kwargs):
         self.forms = []
         self.form = {}
@@ -44,24 +73,24 @@ class FormParser(HTMLParser):
             and self.form["action"] is not None
         ):
             for i, attr in enumerate(attrs):
-                nextAttr = None
+                next_attr = None
                 if 0 <= i + 1 < len(attrs):
-                    nextAttr = attrs[i + 1]
+                    next_attr = attrs[i + 1]
                 if (
                     attr[0] == "name"
                     and attr[1] == "csrfmiddlewaretoken"
-                    and nextAttr
-                    and nextAttr[0] == "value"
+                    and next_attr
+                    and next_attr[0] == "value"
                 ):
-                    self.form["csrfmiddlewaretoken"] = nextAttr[1]
+                    self.form["csrfmiddlewaretoken"] = next_attr[1]
                 if (
                     attr[0] == "type"
                     and attr[1] == "submit"
-                    and nextAttr
-                    and nextAttr[0] == "value"
-                    and nextAttr[1] == "Withdraw"
+                    and next_attr
+                    and next_attr[0] == "value"
+                    and next_attr[1] == "Withdraw"
                 ):
-                    self.form["submit"] = nextAttr[1]
+                    self.form["submit"] = next_attr[1]
 
     def handle_endtag(self, tag):
         if tag == "form":
@@ -91,8 +120,8 @@ class LoggedInUser(HttpUser):
                     (match := reWpLoginToken.search(line))
                     for line in get_login.iter_lines(decode_unicode=True)
                 ):
-                    wpLoginToken = match.group(1)
-                    if wpLoginToken:
+                    wp_login_token = match.group(1)
+                    if wp_login_token:
                         post_data = {
                             "wpName": self.user["wpName"],
                             "wpPassword": self.user["wpPassword"],
@@ -101,10 +130,10 @@ class LoggedInUser(HttpUser):
                             "title": "Special:UserLogin",
                             "authAction": "login",
                             "force": "",
-                            "wpLoginToken": wpLoginToken,
+                            "wpLoginToken": wp_login_token,
                         }
                         url = urlparse(get_login.url)
-                        name = url.scheme + "://" + url.netloc + url.path
+                        name = str(url.scheme) + "://" + str(url.netloc) + str(url.path)
                         with self.client.post(
                             get_login.url,
                             post_data,
@@ -132,9 +161,36 @@ class LoggedInUser(HttpUser):
 
     @task(1)
     def get_my_library(self):
-        get_my_library = self.client.get(
-            "/users/my_library/",
-        )
+        name = "/users/my_library/"
+        with self.client.get(
+            name,
+            name=name,
+            catch_response=True,
+            stream=True,
+        ) as get_my_library:
+            if get_my_library.status_code != 200:
+                get_my_library.failure(
+                    "get_my_library status code: " + str(get_my_library.status_code)
+                )
+
+            my_collections_parser = MyCollectionsAccessParser()
+            for line in get_my_library.iter_lines(decode_unicode=True):
+                my_collections_parser.feed(line)
+            hrefs = my_collections_parser.return_data()
+            for href in hrefs:
+                with self.client.get(
+                    href, name=href, catch_response=True, stream=True
+                ) as get_collection_content:
+                    if get_collection_content.status_code >= 400:
+                        get_collection_content.failure(
+                            href
+                            + " failed with status code: "
+                            + str(get_collection_content.status_code)
+                        )
+                    url = urlparse(get_collection_content.url)
+                    this_host = str(url.scheme) + "://" + str(url.netloc)
+                    if this_host == self.host:
+                        get_collection_content.failure("unexpected host: " + this_host)
 
     @task(1)
     def get_users(self):
@@ -163,19 +219,19 @@ class LoggedInUser(HttpUser):
                     "get_app_req status code: " + str(get_app_req.status_code)
                 )
             url = urlparse(get_app_req.url)
-            this_host = url.scheme + "://" + url.netloc
+            this_host = str(url.scheme) + "://" + str(url.netloc)
             if this_host != self.host:
                 get_app_req.failure("unexpected host: " + this_host)
             if any(
                 (match := reCsrfMiddlewareToken.search(line))
                 for line in get_app_req.iter_lines(decode_unicode=True)
             ):
-                csrfMiddlewareToken = match.group(1)
-                if csrfMiddlewareToken:
+                csrf_middleware_token = match.group(1)
+                if csrf_middleware_token:
                     with self.client.post(
                         get_app_req.url,
                         {
-                            "csrfmiddlewaretoken": csrfMiddlewareToken,
+                            "csrfmiddlewaretoken": csrf_middleware_token,
                             "partner_24": "on",
                             "partner_49": "on",
                             "partner_60": "on",
@@ -241,13 +297,13 @@ class LoggedInUser(HttpUser):
                                 + str(post_app_req.status_code)
                             )
                             url = urlparse(post_app_req.url)
-                            this_host = url.scheme + "://" + url.netloc
+                            this_host = str(url.scheme) + "://" + str(url.netloc)
                             if this_host != self.host:
                                 post_app_req.failure("unexpected host: " + this_host)
                         with self.client.post(
                             post_app_req.url,
                             {
-                                "csrfmiddlewaretoken": csrfMiddlewareToken,
+                                "csrfmiddlewaretoken": csrf_middleware_token,
                                 "real_name": "Test",
                                 "affiliation": "Test",
                                 "partner_24_rationale": "Test",
@@ -414,12 +470,12 @@ class LoggedInUser(HttpUser):
                                             catch_response=True,
                                             stream=True,
                                         ) as get_my_apps:
-                                            myAppsParser = FormParser()
+                                            my_apps_parser = MyAppsWithdrawParser()
                                             for line in get_my_apps.iter_lines(
                                                 decode_unicode=True
                                             ):
-                                                myAppsParser.feed(line)
-                                            forms = myAppsParser.return_data()
+                                                my_apps_parser.feed(line)
+                                            forms = my_apps_parser.return_data()
                                             for form in forms:
                                                 with self.client.post(
                                                     form["action"],
@@ -446,7 +502,7 @@ class LoggedInUser(HttpUser):
                                                         post_withdraw_app.url
                                                     )
                                                     this_host = (
-                                                        url.scheme + "://" + url.netloc
+                                                        str(url.scheme) + "://" + str(url.netloc)
                                                     )
                                                     if this_host != self.host:
                                                         post_withdraw_app.failure(
