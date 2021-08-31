@@ -34,7 +34,15 @@
                   <input name="site" value="eds-live" type="hidden" />
                   <input name="direct" value="true" type="hidden" />
                   <input name="authtype" value="url" type="hidden" />
-                  <input name="lang" value="{{ LANGUAGE_CODE }}" type="hidden" />
+                  {% if LANGUAGE_CODE == "pt" %}
+                    <input name="lang" value="pt-pt" type="hidden" />
+                  {% elif LANGUAGE_CODE == "zh-hans" %}
+                    <input name="lang" value="zh-cn" type="hidden" />
+                  {% elif LANGUAGE_CODE == "zh-hant" %}
+                    <input name="lang" value="zh-tw" type="hidden" />
+                  {% else %}
+                    <input name="lang" value="{{ LANGUAGE_CODE }}" type="hidden" />
+                  {% endif %}
                   <div class="input-group eds-searchbox">
                     {% comment %}Translators: Shown in the search input. {% endcomment %}
                     <input id="eb-sbb-search-input" name="bquery" type="text"
