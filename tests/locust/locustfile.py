@@ -18,24 +18,46 @@ reMyApplicationsUrl = re.compile(
 )
 
 
+def user_valid(user):
+    if all(
+        key in user
+        for key in (
+            "reuse",
+            "wpName",
+            "wpPassword",
+        )
+    ):
+        return True
+    else:
+        raise Exception("login failed: credentials required.")
+        return False
+
+
+def user_reusable(user):
+    # reuse = true if the user may have multiple simultaneous sessions.
+    if user["reuse"] == True:
+        return True
+    else:
+        return False
+
+
 class LoggedInUser(HttpUser):
     def on_start(self):
         """
         Login a random user from wpUsers.
         """
+        self.user = {}
         random.shuffle(wpUsers)
-        # reuse = true if the user may have multiple simultaneous sessions.
-        if "reuse" in wpUsers[0] and wpUsers[0]["reuse"] == True:
-            self.user = wpUsers[0]
-        else:
-            self.user = wpUsers.pop(0)
-        if self.user and "wpName" in self.user and "wpPassword" in self.user:
+        if user_valid(wpUsers[0]):
+            if user_reusable(wpUsers[0]):
+                self.user = wpUsers[0]
+            else:
+                self.user = wpUsers.pop(0)
             self.login()
-        else:
-            raise Exception("login failed: credentials required.")
 
     def on_stop(self):
-        self.logout()
+        if user_valid(self.user):
+            self.logout()
 
     def login(self):
         name = "/oauth/login/?next=/users/my_library/"
@@ -82,17 +104,7 @@ class LoggedInUser(HttpUser):
             "/accounts/logout/?next=/",
         )
         # if the user wasn't reusable, return them to the pool now that we're done.
-        if not (
-            all(
-                key in self.user
-                for key in (
-                    "reuse",
-                    "wpName",
-                    "wpPassword",
-                )
-            )
-            and self.user["reuse"] == True
-        ):
+        if not user_reusable(self.user):
             wpUsers.append(self.user)
         self.user = {}
 
@@ -149,308 +161,313 @@ class LoggedInUser(HttpUser):
 
     @task(1)
     def post_applications(self):
-        name = "/applications/request/"
-        with self.client.get(
-            name,
-            name=name,
-            allow_redirects=False,
-            catch_response=True,
-            stream=True,
-        ) as get_app_req:
-            if get_app_req.status_code != 200:
-                get_app_req.failure(
-                    "get_app_req status code: " + str(get_app_req.status_code)
-                )
-            url = urlparse(get_app_req.url)
-            this_host = str(url.scheme) + "://" + str(url.netloc)
-            if this_host != self.host:
-                get_app_req.failure("unexpected host: " + this_host)
-            if any(
-                (match := reCsrfMiddlewareToken.search(line))
-                for line in get_app_req.iter_lines(decode_unicode=True)
-            ):
-                csrf_middleware_token = match.group(1)
-                if csrf_middleware_token:
-                    with self.client.post(
-                        get_app_req.url,
-                        {
-                            "csrfmiddlewaretoken": csrf_middleware_token,
-                            "partner_24": "on",
-                            "partner_49": "on",
-                            "partner_60": "on",
-                            "partner_62": "on",
-                            "partner_102": "on",
-                            "partner_11": "on",
-                            "partner_47": "on",
-                            "partner_73": "on",
-                            "partner_63": "on",
-                            "partner_31": "on",
-                            "partner_58": "on",
-                            "partner_79": "on",
-                            "partner_15": "on",
-                            "partner_74": "on",
-                            "partner_71": "on",
-                            "partner_9": "on",
-                            "partner_56": "on",
-                            "partner_44": "on",
-                            "partner_43": "on",
-                            "partner_22": "on",
-                            "partner_68": "on",
-                            "partner_77": "on",
-                            "partner_72": "on",
-                            "partner_18": "on",
-                            "partner_41": "on",
-                            "partner_80": "on",
-                            "partner_16": "on",
-                            "partner_112": "on",
-                            "partner_40": "on",
-                            "partner_53": "on",
-                            "partner_111": "on",
-                            "partner_27": "on",
-                            "partner_26": "on",
-                            "partner_81": "on",
-                            "partner_17": "on",
-                            "partner_39": "on",
-                            "partner_38": "on",
-                            "partner_110": "on",
-                            "partner_100": "on",
-                            "partner_37": "on",
-                            "partner_69": "on",
-                            "partner_30": "on",
-                            "partner_20": "on",
-                            "partner_21": "on",
-                            "partner_50": "on",
-                            "partner_67": "on",
-                            "partner_108": "on",
-                            "partner_103": "on",
-                            "partner_10": "on",
-                            "partner_70": "on",
-                            "partner_12": "on",
-                            "partner_76": "on",
-                            "partner_19": "on",
-                            "partner_83": "on",
-                        },
-                        name=url.path,
-                        catch_response=True,
-                        stream=True,
-                    ) as post_app_req:
-                        if post_app_req.status_code != 200:
-                            post_app_req.failure(
-                                "post_app_req status code: "
-                                + str(post_app_req.status_code)
-                            )
-                            url = urlparse(post_app_req.url)
-                            this_host = str(url.scheme) + "://" + str(url.netloc)
-                            if this_host != self.host:
-                                post_app_req.failure("unexpected host: " + this_host)
+        if user_valid(self.user) and not user_reusable(self.user):
+            name = "/applications/request/"
+            with self.client.get(
+                name,
+                name=name,
+                allow_redirects=False,
+                catch_response=True,
+                stream=True,
+            ) as get_app_req:
+                if get_app_req.status_code != 200:
+                    get_app_req.failure(
+                        "get_app_req status code: " + str(get_app_req.status_code)
+                    )
+                url = urlparse(get_app_req.url)
+                this_host = str(url.scheme) + "://" + str(url.netloc)
+                if this_host != self.host:
+                    get_app_req.failure("unexpected host: " + this_host)
+                if any(
+                    (match := reCsrfMiddlewareToken.search(line))
+                    for line in get_app_req.iter_lines(decode_unicode=True)
+                ):
+                    csrf_middleware_token = match.group(1)
+                    if csrf_middleware_token:
                         with self.client.post(
-                            post_app_req.url,
+                            get_app_req.url,
                             {
                                 "csrfmiddlewaretoken": csrf_middleware_token,
-                                "real_name": "Test",
-                                "affiliation": "Test",
-                                "partner_24_rationale": "Test",
-                                "partner_24_comments": "Test",
-                                "partner_49_rationale": "Test",
-                                "partner_49_comments": "Test",
-                                "partner_60_requested_access_duration": "1",
-                                "partner_60_rationale": "Test",
-                                "partner_60_comments": "Test",
-                                "partner_62_requested_access_duration": "1",
-                                "partner_62_rationale": "Test",
-                                "partner_62_comments": "Test",
-                                "partner_102_agreement_with_terms_of_use": "on",
-                                "partner_102_rationale": "Test",
-                                "partner_102_comments": "Test",
-                                "partner_11_rationale": "Test",
-                                "partner_11_comments": "Test",
-                                "partner_47_rationale": "Test",
-                                "partner_47_comments": "Test",
-                                "partner_73_rationale": "Test",
-                                "partner_73_comments": "Test",
-                                "partner_63_requested_access_duration": "1",
-                                "partner_63_rationale": "Test",
-                                "partner_63_comments": "Test",
-                                "partner_31_requested_access_duration": "1",
-                                "partner_31_rationale": "Test",
-                                "partner_31_comments": "Test",
-                                "partner_58_requested_access_duration": "1",
-                                "partner_58_rationale": "Test",
-                                "partner_58_comments": "Test",
-                                "partner_79_rationale": "Test",
-                                "partner_79_comments": "Test",
-                                "partner_15_rationale": "Test",
-                                "partner_15_comments": "Test",
-                                "partner_74_rationale": "Test",
-                                "partner_74_comments": "Test",
-                                "partner_71_rationale": "Test",
-                                "partner_71_comments": "Test",
-                                "partner_9_requested_access_duration": "1",
-                                "partner_9_rationale": "Test",
-                                "partner_9_comments": "Test",
-                                "partner_56_rationale": "Test",
-                                "partner_56_comments": "Test",
-                                "partner_44_requested_access_duration": "1",
-                                "partner_44_rationale": "Test",
-                                "partner_44_comments": "Test",
-                                "partner_43_requested_access_duration": "1",
-                                "partner_43_rationale": "Test",
-                                "partner_43_comments": "Test",
-                                "partner_22_specific_stream": "17",
-                                "partner_22_requested_access_duration": "1",
-                                "partner_22_rationale": "Test",
-                                "partner_22_comments": "Test",
-                                "partner_68_rationale": "Test",
-                                "partner_68_comments": "Test",
-                                "partner_77_requested_access_duration": "1",
-                                "partner_77_rationale": "Test",
-                                "partner_77_comments": "Test",
-                                "partner_72_specific_title": "Test",
-                                "partner_72_rationale": "Test",
-                                "partner_72_comments": "Test",
-                                "partner_18_rationale": "Test",
-                                "partner_18_comments": "Test",
-                                "partner_41_requested_access_duration": "1",
-                                "partner_41_rationale": "Test",
-                                "partner_41_comments": "Test",
-                                "partner_80_specific_title": "Test",
-                                "partner_80_rationale": "Test",
-                                "partner_80_comments": "Test",
-                                "partner_16_specific_title": "Test",
-                                "partner_16_rationale": "Test",
-                                "partner_16_comments": "Test",
-                                "partner_112_rationale": "Test",
-                                "partner_112_comments": "Test",
-                                "partner_40_rationale": "Test",
-                                "partner_40_comments": "Test",
-                                "partner_53_requested_access_duration": "1",
-                                "partner_53_rationale": "Test",
-                                "partner_53_comments": "Test",
-                                "partner_111_rationale": "Test",
-                                "partner_111_comments": "Test",
-                                "partner_27_rationale": "Test",
-                                "partner_27_comments": "Test",
-                                "partner_26_account_email": "test@example.com",
-                                "partner_26_rationale": "Test",
-                                "partner_26_comments": "Test",
-                                "partner_81_rationale": "Test",
-                                "partner_81_comments": "Test",
-                                "partner_17_requested_access_duration": "1",
-                                "partner_17_rationale": "Test",
-                                "partner_17_comments": "Test",
-                                "partner_39_rationale": "Test",
-                                "partner_39_comments": "Test",
-                                "partner_38_requested_access_duration": "1",
-                                "partner_38_rationale": "Test",
-                                "partner_38_comments": "Test",
-                                "partner_110_rationale": "Test",
-                                "partner_110_comments": "Test",
-                                "partner_100_specific_stream": "31",
-                                "partner_100_requested_access_duration": "1",
-                                "partner_100_rationale": "Test",
-                                "partner_100_comments": "Test",
-                                "partner_37_rationale": "Test",
-                                "partner_37_comments": "Test",
-                                "partner_69_requested_access_duration": "1",
-                                "partner_69_rationale": "Test",
-                                "partner_69_comments": "Test",
-                                "partner_30_rationale": "Test",
-                                "partner_30_comments": "Test",
-                                "partner_20_requested_access_duration": "1",
-                                "partner_20_rationale": "Test",
-                                "partner_20_comments": "Test",
-                                "partner_21_requested_access_duration": "1",
-                                "partner_21_rationale": "Test",
-                                "partner_21_comments": "Test",
-                                "partner_50_rationale": "Test",
-                                "partner_50_comments": "Test",
-                                "partner_67_specific_stream": "28",
-                                "partner_67_requested_access_duration": "1",
-                                "partner_67_rationale": "Test",
-                                "partner_67_comments": "Test",
-                                "partner_108_rationale": "Test",
-                                "partner_108_comments": "Test",
-                                "partner_103_account_email": "test@example.com",
-                                "partner_103_rationale": "Test",
-                                "partner_103_comments": "Test",
-                                "partner_10_requested_access_duration": "1",
-                                "partner_10_rationale": "Test",
-                                "partner_10_comments": "Test",
-                                "partner_70_rationale": "Test",
-                                "partner_70_comments": "Test",
-                                "partner_12_rationale": "Test",
-                                "partner_12_comments": "Test",
-                                "partner_76_rationale": "Test",
-                                "partner_76_comments": "Test",
-                                "partner_19_rationale": "Test",
-                                "partner_19_comments": "Test",
-                                "partner_83_rationale": "Test",
-                                "partner_83_comments": "Test",
-                                "submit": "Apply",
+                                "partner_24": "on",
+                                "partner_49": "on",
+                                "partner_60": "on",
+                                "partner_62": "on",
+                                "partner_102": "on",
+                                "partner_11": "on",
+                                "partner_47": "on",
+                                "partner_73": "on",
+                                "partner_63": "on",
+                                "partner_31": "on",
+                                "partner_58": "on",
+                                "partner_79": "on",
+                                "partner_15": "on",
+                                "partner_74": "on",
+                                "partner_71": "on",
+                                "partner_9": "on",
+                                "partner_56": "on",
+                                "partner_44": "on",
+                                "partner_43": "on",
+                                "partner_22": "on",
+                                "partner_68": "on",
+                                "partner_77": "on",
+                                "partner_72": "on",
+                                "partner_18": "on",
+                                "partner_41": "on",
+                                "partner_80": "on",
+                                "partner_16": "on",
+                                "partner_112": "on",
+                                "partner_40": "on",
+                                "partner_53": "on",
+                                "partner_111": "on",
+                                "partner_27": "on",
+                                "partner_26": "on",
+                                "partner_81": "on",
+                                "partner_17": "on",
+                                "partner_39": "on",
+                                "partner_38": "on",
+                                "partner_110": "on",
+                                "partner_100": "on",
+                                "partner_37": "on",
+                                "partner_69": "on",
+                                "partner_30": "on",
+                                "partner_20": "on",
+                                "partner_21": "on",
+                                "partner_50": "on",
+                                "partner_67": "on",
+                                "partner_108": "on",
+                                "partner_103": "on",
+                                "partner_10": "on",
+                                "partner_70": "on",
+                                "partner_12": "on",
+                                "partner_76": "on",
+                                "partner_19": "on",
+                                "partner_83": "on",
                             },
                             name=url.path,
                             catch_response=True,
                             stream=True,
-                        ) as post_app_apply:
-                            if post_app_apply.status_code != 200:
-                                post_app_apply.failure(
-                                    "post_app_apply status code: "
-                                    + str(post_app_apply.status_code)
+                        ) as post_app_req:
+                            if post_app_req.status_code != 200:
+                                post_app_req.failure(
+                                    "post_app_req status code: "
+                                    + str(post_app_req.status_code)
                                 )
-                            this_host = url.scheme + "://" + url.netloc
-                            if this_host != self.host:
-                                post_app_apply.failure("unexpected host: " + this_host)
-                            if "messages" in self.client.cookies:
-                                match = reMyApplicationsUrl.search(
-                                    self.client.cookies["messages"]
-                                )
-                                if match:
-                                    path = match.group(1)
-                                    if path:
-                                        with self.client.get(
-                                            path,
-                                            name="/users/my_applications/<user>/",
-                                            catch_response=True,
-                                            stream=True,
-                                        ) as get_my_apps:
-                                            my_apps_parser = MyAppsWithdrawParser()
-                                            for line in get_my_apps.iter_lines(
-                                                decode_unicode=True
-                                            ):
-                                                my_apps_parser.feed(line)
-                                            forms = my_apps_parser.return_data()
-                                            for form in forms:
-                                                with self.client.post(
-                                                    form["action"],
-                                                    {
-                                                        "csrfmiddlewaretoken": form[
-                                                            "csrfmiddlewaretoken"
-                                                        ],
-                                                        "submit": form["submit"],
-                                                    },
-                                                    name="/users/withdraw/<user>/<app>/",
-                                                    catch_response=True,
-                                                ) as post_withdraw_app:
-                                                    if (
-                                                        post_withdraw_app.status_code
-                                                        >= 400
-                                                    ):
-                                                        post_withdraw_app.failure(
-                                                            "post_withdraw_app status code: "
-                                                            + str(
-                                                                post_withdraw_app.status_code
+                                url = urlparse(post_app_req.url)
+                                this_host = str(url.scheme) + "://" + str(url.netloc)
+                                if this_host != self.host:
+                                    post_app_req.failure(
+                                        "unexpected host: " + this_host
+                                    )
+                            with self.client.post(
+                                post_app_req.url,
+                                {
+                                    "csrfmiddlewaretoken": csrf_middleware_token,
+                                    "real_name": "Test",
+                                    "affiliation": "Test",
+                                    "partner_24_rationale": "Test",
+                                    "partner_24_comments": "Test",
+                                    "partner_49_rationale": "Test",
+                                    "partner_49_comments": "Test",
+                                    "partner_60_requested_access_duration": "1",
+                                    "partner_60_rationale": "Test",
+                                    "partner_60_comments": "Test",
+                                    "partner_62_requested_access_duration": "1",
+                                    "partner_62_rationale": "Test",
+                                    "partner_62_comments": "Test",
+                                    "partner_102_agreement_with_terms_of_use": "on",
+                                    "partner_102_rationale": "Test",
+                                    "partner_102_comments": "Test",
+                                    "partner_11_rationale": "Test",
+                                    "partner_11_comments": "Test",
+                                    "partner_47_rationale": "Test",
+                                    "partner_47_comments": "Test",
+                                    "partner_73_rationale": "Test",
+                                    "partner_73_comments": "Test",
+                                    "partner_63_requested_access_duration": "1",
+                                    "partner_63_rationale": "Test",
+                                    "partner_63_comments": "Test",
+                                    "partner_31_requested_access_duration": "1",
+                                    "partner_31_rationale": "Test",
+                                    "partner_31_comments": "Test",
+                                    "partner_58_requested_access_duration": "1",
+                                    "partner_58_rationale": "Test",
+                                    "partner_58_comments": "Test",
+                                    "partner_79_rationale": "Test",
+                                    "partner_79_comments": "Test",
+                                    "partner_15_rationale": "Test",
+                                    "partner_15_comments": "Test",
+                                    "partner_74_rationale": "Test",
+                                    "partner_74_comments": "Test",
+                                    "partner_71_rationale": "Test",
+                                    "partner_71_comments": "Test",
+                                    "partner_9_requested_access_duration": "1",
+                                    "partner_9_rationale": "Test",
+                                    "partner_9_comments": "Test",
+                                    "partner_56_rationale": "Test",
+                                    "partner_56_comments": "Test",
+                                    "partner_44_requested_access_duration": "1",
+                                    "partner_44_rationale": "Test",
+                                    "partner_44_comments": "Test",
+                                    "partner_43_requested_access_duration": "1",
+                                    "partner_43_rationale": "Test",
+                                    "partner_43_comments": "Test",
+                                    "partner_22_specific_stream": "17",
+                                    "partner_22_requested_access_duration": "1",
+                                    "partner_22_rationale": "Test",
+                                    "partner_22_comments": "Test",
+                                    "partner_68_rationale": "Test",
+                                    "partner_68_comments": "Test",
+                                    "partner_77_requested_access_duration": "1",
+                                    "partner_77_rationale": "Test",
+                                    "partner_77_comments": "Test",
+                                    "partner_72_specific_title": "Test",
+                                    "partner_72_rationale": "Test",
+                                    "partner_72_comments": "Test",
+                                    "partner_18_rationale": "Test",
+                                    "partner_18_comments": "Test",
+                                    "partner_41_requested_access_duration": "1",
+                                    "partner_41_rationale": "Test",
+                                    "partner_41_comments": "Test",
+                                    "partner_80_specific_title": "Test",
+                                    "partner_80_rationale": "Test",
+                                    "partner_80_comments": "Test",
+                                    "partner_16_specific_title": "Test",
+                                    "partner_16_rationale": "Test",
+                                    "partner_16_comments": "Test",
+                                    "partner_112_rationale": "Test",
+                                    "partner_112_comments": "Test",
+                                    "partner_40_rationale": "Test",
+                                    "partner_40_comments": "Test",
+                                    "partner_53_requested_access_duration": "1",
+                                    "partner_53_rationale": "Test",
+                                    "partner_53_comments": "Test",
+                                    "partner_111_rationale": "Test",
+                                    "partner_111_comments": "Test",
+                                    "partner_27_rationale": "Test",
+                                    "partner_27_comments": "Test",
+                                    "partner_26_account_email": "test@example.com",
+                                    "partner_26_rationale": "Test",
+                                    "partner_26_comments": "Test",
+                                    "partner_81_rationale": "Test",
+                                    "partner_81_comments": "Test",
+                                    "partner_17_requested_access_duration": "1",
+                                    "partner_17_rationale": "Test",
+                                    "partner_17_comments": "Test",
+                                    "partner_39_rationale": "Test",
+                                    "partner_39_comments": "Test",
+                                    "partner_38_requested_access_duration": "1",
+                                    "partner_38_rationale": "Test",
+                                    "partner_38_comments": "Test",
+                                    "partner_110_rationale": "Test",
+                                    "partner_110_comments": "Test",
+                                    "partner_100_specific_stream": "31",
+                                    "partner_100_requested_access_duration": "1",
+                                    "partner_100_rationale": "Test",
+                                    "partner_100_comments": "Test",
+                                    "partner_37_rationale": "Test",
+                                    "partner_37_comments": "Test",
+                                    "partner_69_requested_access_duration": "1",
+                                    "partner_69_rationale": "Test",
+                                    "partner_69_comments": "Test",
+                                    "partner_30_rationale": "Test",
+                                    "partner_30_comments": "Test",
+                                    "partner_20_requested_access_duration": "1",
+                                    "partner_20_rationale": "Test",
+                                    "partner_20_comments": "Test",
+                                    "partner_21_requested_access_duration": "1",
+                                    "partner_21_rationale": "Test",
+                                    "partner_21_comments": "Test",
+                                    "partner_50_rationale": "Test",
+                                    "partner_50_comments": "Test",
+                                    "partner_67_specific_stream": "28",
+                                    "partner_67_requested_access_duration": "1",
+                                    "partner_67_rationale": "Test",
+                                    "partner_67_comments": "Test",
+                                    "partner_108_rationale": "Test",
+                                    "partner_108_comments": "Test",
+                                    "partner_103_account_email": "test@example.com",
+                                    "partner_103_rationale": "Test",
+                                    "partner_103_comments": "Test",
+                                    "partner_10_requested_access_duration": "1",
+                                    "partner_10_rationale": "Test",
+                                    "partner_10_comments": "Test",
+                                    "partner_70_rationale": "Test",
+                                    "partner_70_comments": "Test",
+                                    "partner_12_rationale": "Test",
+                                    "partner_12_comments": "Test",
+                                    "partner_76_rationale": "Test",
+                                    "partner_76_comments": "Test",
+                                    "partner_19_rationale": "Test",
+                                    "partner_19_comments": "Test",
+                                    "partner_83_rationale": "Test",
+                                    "partner_83_comments": "Test",
+                                    "submit": "Apply",
+                                },
+                                name=url.path,
+                                catch_response=True,
+                                stream=True,
+                            ) as post_app_apply:
+                                if post_app_apply.status_code != 200:
+                                    post_app_apply.failure(
+                                        "post_app_apply status code: "
+                                        + str(post_app_apply.status_code)
+                                    )
+                                this_host = url.scheme + "://" + url.netloc
+                                if this_host != self.host:
+                                    post_app_apply.failure(
+                                        "unexpected host: " + this_host
+                                    )
+                                if "messages" in self.client.cookies:
+                                    match = reMyApplicationsUrl.search(
+                                        self.client.cookies["messages"]
+                                    )
+                                    if match:
+                                        path = match.group(1)
+                                        if path:
+                                            with self.client.get(
+                                                path,
+                                                name="/users/my_applications/<user>/",
+                                                catch_response=True,
+                                                stream=True,
+                                            ) as get_my_apps:
+                                                my_apps_parser = MyAppsWithdrawParser()
+                                                for line in get_my_apps.iter_lines(
+                                                    decode_unicode=True
+                                                ):
+                                                    my_apps_parser.feed(line)
+                                                forms = my_apps_parser.return_data()
+                                                for form in forms:
+                                                    with self.client.post(
+                                                        form["action"],
+                                                        {
+                                                            "csrfmiddlewaretoken": form[
+                                                                "csrfmiddlewaretoken"
+                                                            ],
+                                                            "submit": form["submit"],
+                                                        },
+                                                        name="/users/withdraw/<user>/<app>/",
+                                                        catch_response=True,
+                                                    ) as post_withdraw_app:
+                                                        if (
+                                                            post_withdraw_app.status_code
+                                                            >= 400
+                                                        ):
+                                                            post_withdraw_app.failure(
+                                                                "post_withdraw_app status code: "
+                                                                + str(
+                                                                    post_withdraw_app.status_code
+                                                                )
                                                             )
+                                                        url = urlparse(
+                                                            post_withdraw_app.url
                                                         )
-                                                    url = urlparse(
-                                                        post_withdraw_app.url
-                                                    )
-                                                    this_host = (
-                                                        str(url.scheme)
-                                                        + "://"
-                                                        + str(url.netloc)
-                                                    )
-                                                    if this_host != self.host:
-                                                        post_withdraw_app.failure(
-                                                            "unexpected host: "
-                                                            + this_host
+                                                        this_host = (
+                                                            str(url.scheme)
+                                                            + "://"
+                                                            + str(url.netloc)
                                                         )
+                                                        if this_host != self.host:
+                                                            post_withdraw_app.failure(
+                                                                "unexpected host: "
+                                                                + this_host
+                                                            )
