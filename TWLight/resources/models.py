@@ -14,6 +14,7 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy, reverse
 from django.db import models
 from django_countries.fields import CountryField
+from django.utils.safestring import mark_safe
 
 from TWLight.resources.helpers import (
     check_for_target_url_duplication_and_generate_error_message,
@@ -284,7 +285,7 @@ class Partner(models.Model):
         null=True,
         default=None,
         blank=True,
-        help_text="Tag must be a valid JSON schema. Tag should be in the form of TagName_tag.",
+        help_text="Tag must be a valid JSON schema. Tag should be in the form of tag-name_tag.",
     )
 
     # Non-universal form fields
@@ -421,7 +422,9 @@ class Partner(models.Model):
                 )
             except JSONSchemaValidationError:
                 raise ValidationError(
-                    "Error trying to insert a tag: the JSON is invalid"
+                    mark_safe(
+                        "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+                    )
                 )
 
     def get_absolute_url(self):

@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             field=models.JSONField(
                 blank=True,
                 default=None,
-                help_text="Tag must be a valid JSON schema. Tag should be in the form of TagName_tag.",
+                help_text="Tag must be a valid JSON schema. Tag should be in the form of tag-name_tag.",
                 null=True,
             ),
         ),
