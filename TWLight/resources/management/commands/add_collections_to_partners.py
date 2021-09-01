@@ -1,4 +1,8 @@
+import json
 from django.core.management.base import BaseCommand
+
+from django.conf import settings
+from django.core.exceptions import FieldDoesNotExist
 
 from TWLight.resources.models import (
     Partner,
@@ -31,12 +35,38 @@ class Command(BaseCommand):
             partner__company_name__contains="Springer Nature"
         )
 
-        self._turn_stream_to_partner(elsevier_streams)
-        self._turn_stream_to_partner(future_science_streams)
-        self._turn_stream_to_partner(rilm_streams)
-        self._turn_stream_to_partner(springer_nature_streams)
+        elsevier_stream_and_partner_ids = self._turn_stream_to_partner(elsevier_streams)
+        future_science_stream_and_partner_ids = self._turn_stream_to_partner(
+            future_science_streams
+        )
+        rilm_stream_and_partner_ids = self._turn_stream_to_partner(rilm_streams)
+        springer_nature_stream_and_partner_ids = self._turn_stream_to_partner(
+            springer_nature_streams
+        )
+
+        elsevier_descriptions = self._add_stream_descriptions(
+            elsevier_stream_and_partner_ids
+        )
+        future_science_descriptions = self._add_stream_descriptions(
+            future_science_stream_and_partner_ids
+        )
+        rilm_descriptions = self._add_stream_descriptions(rilm_stream_and_partner_ids)
+        springer_nature_descriptions = self._add_stream_descriptions(
+            springer_nature_stream_and_partner_ids
+        )
+
+        descriptions_dict = self._merge_dictionaries(
+            elsevier_descriptions,
+            future_science_descriptions,
+            rilm_descriptions,
+            springer_nature_descriptions,
+        )
+
+        self._write_descriptions_file(descriptions_dict)
 
     def _turn_stream_to_partner(self, streams):
+
+        stream_and_partner_ids = []
 
         for stream in streams:
             stream_partner_information = {}
@@ -110,3 +140,53 @@ class Command(BaseCommand):
                     new_partner.languages.set(stream.languages.all())
                 elif stream.partner.languages.all():
                     new_partner.languages.set(stream.partner.languages.all())
+
+                stream_and_partner_ids.append(
+                    {"stream_id": stream.pk, "partner_id": new_partner.pk}
+                )
+
+        return stream_and_partner_ids
+
+    def _add_stream_descriptions(self, stream_and_partner_ids):
+        """ """
+        stream_descriptions = {}
+        language_codes = [l[0] for l in settings.LANGUAGES]
+        for stream_and_partner_id in stream_and_partner_ids:
+            stream = Stream.objects.filter(pk=stream_and_partner_id["stream_id"])
+
+            if stream.count() >= 1:
+                for language in language_codes:
+                    description_string = "description_{locale}".format(locale=language)
+                    # Check if a field description_locale exists
+                    try:
+                        description_object = Stream._meta.get_field(description_string)
+                        description_value = description_object.value_from_object(
+                            stream[0]
+                        )
+                    except FieldDoesNotExist:
+                        description_value = ""
+
+                    if description_value != "" or description_value is not None:
+                        stream_description_key = (
+                            "{partner_id}_description_{language}".format(
+                                partner_id=stream_and_partner_id["partner_id"],
+                                language=language,
+                            )
+                        )
+                        stream_descriptions[stream_description_key] = description_value
+
+        return stream_descriptions
+
+    def _merge_dictionaries(self, *args):
+        output = {}
+        for arg in args:
+            output.update(arg)
+        return output
+
+    def _write_descriptions_file(self, descriptions_dict):
+        twlight_home = settings.TWLIGHT_HOME
+        filename = "{twlight_home}/temp_stream_descriptions.json".format(
+            twlight_home=twlight_home,
+        )
+        with open(filename, "w") as descriptions_file:
+            descriptions_file.write(json.dumps(descriptions_dict, indent=4))
