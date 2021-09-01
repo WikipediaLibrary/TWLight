@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 import json
 from os import environ
+import random
 import re
 from urllib.parse import urlparse
 from locust import HttpUser, task
@@ -100,64 +101,81 @@ class MyAppsWithdrawParser(HTMLParser):
 
 class LoggedInUser(HttpUser):
     def on_start(self):
-        self.user = {}
-        self.login()
+        """
+        Login a random user from wpUsers.
+        """
+        random.shuffle(wpUsers)
+        # reuse = true if the user may have multiple simultaneous sessions.
+        if "reuse" in wpUsers[0] and wpUsers[0]["reuse"] == True:
+            self.user = wpUsers[0]
+        else:
+            self.user = wpUsers.pop(0)
+        if self.user and "wpName" in self.user and "wpPassword" in self.user:
+            self.login()
+        else:
+            raise Exception("login failed: credentials required.")
 
     def on_stop(self):
         self.logout()
 
     def login(self):
-        self.user = wpUsers.pop(0)
-        if self.user and self.user["wpName"] and self.user["wpPassword"]:
-            name = "/oauth/login/?next=/users/my_library/"
-            with self.client.get(
-                name,
-                name=name,
-                catch_response=True,
-                stream=True,
-            ) as get_login:
-                if any(
-                    (match := reWpLoginToken.search(line))
-                    for line in get_login.iter_lines(decode_unicode=True)
-                ):
-                    wp_login_token = match.group(1)
-                    if wp_login_token:
-                        post_data = {
-                            "wpName": self.user["wpName"],
-                            "wpPassword": self.user["wpPassword"],
-                            "wploginattempt": "Log+in",
-                            "wpEditToken": "+\\",
-                            "title": "Special:UserLogin",
-                            "authAction": "login",
-                            "force": "",
-                            "wpLoginToken": wp_login_token,
-                        }
-                        url = urlparse(get_login.url)
-                        name = str(url.scheme) + "://" + str(url.netloc) + str(url.path)
-                        with self.client.post(
-                            get_login.url,
-                            post_data,
-                            name=name,
-                            catch_response=True,
-                            stream=True,
-                        ) as post_login:
-                            if "sessionid" not in self.client.cookies:
-                                post_login.failure("login failed: No sessionid")
-                            if post_login.status_code != 200:
-                                post_login.failure(
-                                    "post_login status code: "
-                                    + str(post_login.status_code)
-                                )
-        else:
-            raise Exception("login failed: credentials required.")
+        name = "/oauth/login/?next=/users/my_library/"
+        with self.client.get(
+            name,
+            name=name,
+            catch_response=True,
+            stream=True,
+        ) as get_login:
+            if any(
+                (match := reWpLoginToken.search(line))
+                for line in get_login.iter_lines(decode_unicode=True)
+            ):
+                wp_login_token = match.group(1)
+                if wp_login_token:
+                    post_data = {
+                        "wpName": self.user["wpName"],
+                        "wpPassword": self.user["wpPassword"],
+                        "wploginattempt": "Log+in",
+                        "wpEditToken": "+\\",
+                        "title": "Special:UserLogin",
+                        "authAction": "login",
+                        "force": "",
+                        "wpLoginToken": wp_login_token,
+                    }
+                    url = urlparse(get_login.url)
+                    name = str(url.scheme) + "://" + str(url.netloc) + str(url.path)
+                    with self.client.post(
+                        get_login.url,
+                        post_data,
+                        name=name,
+                        catch_response=True,
+                        stream=True,
+                    ) as post_login:
+                        if "sessionid" not in self.client.cookies:
+                            post_login.failure("login failed: No sessionid")
+                        if post_login.status_code != 200:
+                            post_login.failure(
+                                "post_login status code: " + str(post_login.status_code)
+                            )
 
     def logout(self):
         self.client.get(
             "/accounts/logout/?next=/",
         )
-        if self.user["wpName"] and self.user["wpPassword"]:
+        # if the user wasn't reusable, return them to the pool now that we're done.
+        if not (
+            all(
+                key in self.user
+                for key in (
+                    "reuse",
+                    "wpName",
+                    "wpPassword",
+                )
+            )
+            and self.user["reuse"] == True
+        ):
             wpUsers.append(self.user)
-            self.user = {}
+        self.user = {}
 
     @task(10)
     def get_my_library(self):
