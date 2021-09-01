@@ -41,21 +41,11 @@ class MyAppsWithdrawParser(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         if tag == "form":
-            self.form = {
-                "action": None,
-                "csrfmiddlewaretoken": None,
-                "submit": None,
-            }
             for attr in attrs:
                 if attr[0] == "action":
                     self.form["action"] = attr[1]
 
-        if (
-            tag == "input"
-            and self.form
-            and "action" in self.form
-            and self.form["action"] is not None
-        ):
+        if tag == "input" and "action" in self.form:
             for i, attr in enumerate(attrs):
                 next_attr = None
                 if 0 <= i + 1 < len(attrs):
@@ -78,5 +68,13 @@ class MyAppsWithdrawParser(HTMLParser):
 
     def handle_endtag(self, tag):
         if tag == "form":
-            self.forms.append(self.form)
+            if all(
+                key in self.form
+                for key in (
+                    "action",
+                    "csrfmiddlewaretoken",
+                    "submit",
+                )
+            ):
+                self.forms.append(self.form)
             self.form = {}
