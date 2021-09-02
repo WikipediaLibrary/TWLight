@@ -60,6 +60,7 @@ class LoggedInUser(HttpUser):
             self.logout()
 
     def login(self):
+        print("Logging in " + self.user["wpName"])
         name = "/oauth/login/?next=/users/my_library/"
         with self.client.get(
             name,
@@ -172,7 +173,9 @@ class LoggedInUser(HttpUser):
             ) as get_app_req:
                 if get_app_req.status_code != 200:
                     get_app_req.failure(
-                        "get_app_req status code: " + str(get_app_req.status_code)
+                        self.user["wpName"]
+                        + " got get_app_req status code: "
+                        + str(get_app_req.status_code)
                     )
                 url = urlparse(get_app_req.url)
                 this_host = str(url.scheme) + "://" + str(url.netloc)
