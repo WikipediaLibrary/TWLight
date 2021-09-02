@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.core.exceptions import FieldDoesNotExist
 
+from TWLight.applications.models import Application
 from TWLight.resources.models import (
     Partner,
     Stream,
@@ -11,6 +12,7 @@ from TWLight.resources.models import (
     Contact,
     Video,
 )
+from TWLight.users.models import Authorization
 
 
 class Command(BaseCommand):
@@ -44,25 +46,28 @@ class Command(BaseCommand):
             springer_nature_streams
         )
 
-        elsevier_descriptions = self._add_stream_descriptions(
-            elsevier_stream_and_partner_ids
-        )
-        future_science_descriptions = self._add_stream_descriptions(
-            future_science_stream_and_partner_ids
-        )
-        rilm_descriptions = self._add_stream_descriptions(rilm_stream_and_partner_ids)
-        springer_nature_descriptions = self._add_stream_descriptions(
+        # self._create_descriptions(
+        #     elsevier_stream_and_partner_ids,
+        #     future_science_stream_and_partner_ids,
+        #     rilm_stream_and_partner_ids,
+        #     springer_nature_stream_and_partner_ids,
+        # )
+
+        self._assign_applications_to_new_partners(elsevier_stream_and_partner_ids)
+        self._assign_applications_to_new_partners(future_science_stream_and_partner_ids)
+        self._assign_applications_to_new_partners(rilm_stream_and_partner_ids)
+        self._assign_applications_to_new_partners(
             springer_nature_stream_and_partner_ids
         )
 
-        descriptions_dict = self._merge_dictionaries(
-            elsevier_descriptions,
-            future_science_descriptions,
-            rilm_descriptions,
-            springer_nature_descriptions,
+        self._assign_authorizations_to_new_partners(elsevier_stream_and_partner_ids)
+        self._assign_authorizations_to_new_partners(
+            future_science_stream_and_partner_ids
         )
-
-        self._write_descriptions_file(descriptions_dict)
+        self._assign_authorizations_to_new_partners(rilm_stream_and_partner_ids)
+        self._assign_authorizations_to_new_partners(
+            springer_nature_stream_and_partner_ids
+        )
 
     def _turn_stream_to_partner(self, streams):
 
@@ -147,6 +152,34 @@ class Command(BaseCommand):
 
         return stream_and_partner_ids
 
+    def _create_descriptions(
+        self,
+        elsevier_stream_and_partner_ids,
+        future_science_stream_and_partner_ids,
+        rilm_stream_and_partner_ids,
+        springer_nature_stream_and_partner_ids,
+    ):
+
+        elsevier_descriptions = self._add_stream_descriptions(
+            elsevier_stream_and_partner_ids
+        )
+        future_science_descriptions = self._add_stream_descriptions(
+            future_science_stream_and_partner_ids
+        )
+        rilm_descriptions = self._add_stream_descriptions(rilm_stream_and_partner_ids)
+        springer_nature_descriptions = self._add_stream_descriptions(
+            springer_nature_stream_and_partner_ids
+        )
+
+        descriptions_dict = self._merge_dictionaries(
+            elsevier_descriptions,
+            future_science_descriptions,
+            rilm_descriptions,
+            springer_nature_descriptions,
+        )
+
+        self._write_descriptions_file(descriptions_dict)
+
     def _add_stream_descriptions(self, stream_and_partner_ids):
         """ """
         stream_descriptions = {}
@@ -190,3 +223,28 @@ class Command(BaseCommand):
         )
         with open(filename, "w") as descriptions_file:
             descriptions_file.write(json.dumps(descriptions_dict, indent=4))
+
+    def _assign_applications_to_new_partners(self, stream_and_partner_ids):
+        for stream_and_partner_id in stream_and_partner_ids:
+            applications = Application.objects.filter(
+                specific_stream=stream_and_partner_id["stream_id"]
+            )
+            print(applications)
+            print(stream_and_partner_id["partner_id"])
+            new_partner = Partner.objects.get(pk=stream_and_partner_id["partner_id"])
+            for application in applications:
+                application.partner = new_partner
+                application.save()
+
+    def _assign_authorizations_to_new_partners(self, stream_and_partner_ids):
+        for stream_and_partner_id in stream_and_partner_ids:
+            authorizations = Authorization.objects.filter(
+                stream=stream_and_partner_id["stream_id"]
+            )
+            print(authorizations)
+            print(stream_and_partner_id["partner_id"])
+            new_partner = Partner.objects.get(pk=stream_and_partner_id["partner_id"])
+            for authorization in authorizations:
+                authorization.stream = None
+                authorization.partners.set([new_partner])
+                authorization.save()
