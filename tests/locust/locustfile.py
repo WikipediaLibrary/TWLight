@@ -3,6 +3,7 @@ import json
 from os import environ
 import random
 import re
+from requests.cookies import CookieConflictError
 from urllib.parse import urlparse
 from locust import HttpUser, task
 
@@ -94,10 +95,28 @@ class LoggedInUser(HttpUser):
                         stream=True,
                     ) as post_login:
                         if "sessionid" not in self.client.cookies:
-                            post_login.failure("login failed: No sessionid")
+                            post_login.failure(
+                                "login failed: no sessionid for " + self.user["wpName"]
+                            )
+                        try:
+                            if not (
+                                "centralauth_User" in self.client.cookies
+                                and self.client.cookies["centralauth_User"]
+                                == self.user["wpName"]
+                            ):
+                                post_login.failure(
+                                    "login failed: no centralauth_User for "
+                                    + self.user["wpName"]
+                                )
+                        except CookieConflictError as e:
+                            post_login.failure(e)
+
                         if post_login.status_code != 200:
                             post_login.failure(
-                                "post_login status code: " + str(post_login.status_code)
+                                "login failed: post_login status code for "
+                                + self.user["wpName"]
+                                + " is "
+                                + str(post_login.status_code)
                             )
 
     def logout(self):
@@ -250,19 +269,20 @@ class LoggedInUser(HttpUser):
                             catch_response=True,
                             stream=True,
                         ) as post_app_req:
+                            url = urlparse(post_app_req.url)
+                            name = url.path
                             if post_app_req.status_code != 200:
                                 post_app_req.failure(
                                     "post_app_req status code: "
                                     + str(post_app_req.status_code)
                                 )
-                                url = urlparse(post_app_req.url)
                                 this_host = str(url.scheme) + "://" + str(url.netloc)
                                 if this_host != self.host:
                                     post_app_req.failure(
                                         "unexpected host: " + this_host
                                     )
                             with self.client.post(
-                                post_app_req.url,
+                                name,
                                 {
                                     "csrfmiddlewaretoken": csrf_middleware_token,
                                     "real_name": "Test",
@@ -406,14 +426,20 @@ class LoggedInUser(HttpUser):
                                     "partner_83_comments": "Test",
                                     "submit": "Apply",
                                 },
-                                name=url.path,
+                                name=name,
                                 catch_response=True,
                                 stream=True,
                             ) as post_app_apply:
+                                url = urlparse(post_app_apply.url)
+                                name = url.path
                                 if post_app_apply.status_code != 200:
                                     post_app_apply.failure(
-                                        "post_app_apply status code: "
-                                        + str(post_app_apply.status_code)
+                                        "post_app_apply status code for "
+                                        + self.user["wpName"]
+                                        + " is "
+                                        + str(post_login.status_code)
+                                        + " at "
+                                        + name
                                     )
                                 this_host = url.scheme + "://" + url.netloc
                                 if this_host != self.host:
