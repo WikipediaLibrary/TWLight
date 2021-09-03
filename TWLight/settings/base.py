@@ -13,10 +13,10 @@ If you want to use production settings, you are now done.  If not, you will also
 need to set the environment variables indicated in the README.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+https://docs.djangoproject.com/en/dev/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
+https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 import os
