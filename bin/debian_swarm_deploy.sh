@@ -88,7 +88,6 @@ echo "Setting up crontab. *WARNING* This will create duplicate jobs if run repea
 (crontab -l 2>/dev/null; echo "# Run django_cron tasks.") | crontab -
 (crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t \$(docker ps -q -f name=${TWLIGHT_STACK_ENV}_twlight) /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
 (crontab -l 2>/dev/null; echo "# Update the running TWLight service if there is a new image. The initial pull is just to verify that the image is valid. Otherwise an inaccessible image could break the service.") | crontab -
-(crontab -l 2>/dev/null; echo '*/5 * * * *  docker pull quay.io/wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH} >/dev/null && docker service update --image quay.io/wikipedialibrary/twlight:branch_${TWLIGHT_GIT_BRANCH} ${TWLIGHT_STACK_ENV}_twlight') | crontab -
-
+(crontab -l 2>/dev/null; echo '*/5 * * * *  /srv/TWLight/bin/./twlight_docker_deploy.sh ${TWLIGHT_STACK_ENV} branch_${TWLIGHT_GIT_BRANCH}') | crontab -
 EOF
 sudo su --login twlight /usr/bin/env bash -c "${TWLIGHT}"
