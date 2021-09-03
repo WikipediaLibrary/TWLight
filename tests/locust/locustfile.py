@@ -99,11 +99,10 @@ class LoggedInUser(HttpUser):
                                 "login failed: no sessionid for " + self.user["wpName"]
                             )
                         try:
-                            if not (
-                                "centralauth_User" in self.client.cookies
-                                and self.client.cookies["centralauth_User"]
-                                == self.user["wpName"]
-                            ):
+                            centralauth_user = self.client.cookies.get(
+                                "centralauth_User", domain=".meta.wikimedia.org"
+                            )
+                            if centralauth_user != self.user["wpName"]:
                                 post_login.failure(
                                     "login failed: no centralauth_User for "
                                     + self.user["wpName"]
@@ -148,7 +147,7 @@ class LoggedInUser(HttpUser):
             hrefs = my_collections_parser.return_data()
             for href in hrefs:
                 with self.client.get(
-                    href, name=href, catch_response=True, stream=True
+                    href, name=href, catch_response=True, stream=True, verify=False
                 ) as get_collection_content:
                     if get_collection_content.status_code >= 400:
                         get_collection_content.failure(
