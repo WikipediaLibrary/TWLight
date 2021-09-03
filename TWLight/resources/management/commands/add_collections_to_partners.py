@@ -2,6 +2,7 @@ import json
 from django.core.management.base import BaseCommand
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.core.exceptions import FieldDoesNotExist
 
 from TWLight.applications.models import Application
@@ -17,11 +18,6 @@ from TWLight.users.models import Authorization
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        # Get Elsevier streams
-        elsevier_streams = Stream.objects.filter(
-            partner__company_name__contains="Elsevier ScienceDirect"
-        )
-
         # Get Future Science Group streams
         future_science_streams = Stream.objects.filter(
             partner__company_name__contains="Future Science Group"
@@ -37,7 +33,6 @@ class Command(BaseCommand):
             partner__company_name__contains="Springer Nature"
         )
 
-        elsevier_stream_and_partner_ids = self._turn_stream_to_partner(elsevier_streams)
         future_science_stream_and_partner_ids = self._turn_stream_to_partner(
             future_science_streams
         )
@@ -46,21 +41,18 @@ class Command(BaseCommand):
             springer_nature_streams
         )
 
-        # self._create_descriptions(
-        #     elsevier_stream_and_partner_ids,
-        #     future_science_stream_and_partner_ids,
-        #     rilm_stream_and_partner_ids,
-        #     springer_nature_stream_and_partner_ids,
-        # )
+        self._create_descriptions(
+            future_science_stream_and_partner_ids,
+            rilm_stream_and_partner_ids,
+            springer_nature_stream_and_partner_ids,
+        )
 
-        self._assign_applications_to_new_partners(elsevier_stream_and_partner_ids)
         self._assign_applications_to_new_partners(future_science_stream_and_partner_ids)
         self._assign_applications_to_new_partners(rilm_stream_and_partner_ids)
         self._assign_applications_to_new_partners(
             springer_nature_stream_and_partner_ids
         )
 
-        self._assign_authorizations_to_new_partners(elsevier_stream_and_partner_ids)
         self._assign_authorizations_to_new_partners(
             future_science_stream_and_partner_ids
         )
@@ -68,6 +60,12 @@ class Command(BaseCommand):
         self._assign_authorizations_to_new_partners(
             springer_nature_stream_and_partner_ids
         )
+
+        # Once applications and authorizations are reassigned, we can safely
+        # delete the streams
+        future_science_streams.delete()
+        rilm_streams.delete()
+        springer_nature_streams.delete()
 
     def _turn_stream_to_partner(self, streams):
 
@@ -138,7 +136,7 @@ class Command(BaseCommand):
                 company_name=stream_partner_information["company_name"]
             ).count()
 
-            if partner_check < 1:
+            if partner_check == 0:
                 new_partner = Partner.objects.create(**stream_partner_information)
 
                 if stream.languages.all():
@@ -154,15 +152,10 @@ class Command(BaseCommand):
 
     def _create_descriptions(
         self,
-        elsevier_stream_and_partner_ids,
         future_science_stream_and_partner_ids,
         rilm_stream_and_partner_ids,
         springer_nature_stream_and_partner_ids,
     ):
-
-        elsevier_descriptions = self._add_stream_descriptions(
-            elsevier_stream_and_partner_ids
-        )
         future_science_descriptions = self._add_stream_descriptions(
             future_science_stream_and_partner_ids
         )
@@ -172,7 +165,6 @@ class Command(BaseCommand):
         )
 
         descriptions_dict = self._merge_dictionaries(
-            elsevier_descriptions,
             future_science_descriptions,
             rilm_descriptions,
             springer_nature_descriptions,
@@ -185,17 +177,17 @@ class Command(BaseCommand):
         stream_descriptions = {}
         language_codes = [l[0] for l in settings.LANGUAGES]
         for stream_and_partner_id in stream_and_partner_ids:
-            stream = Stream.objects.filter(pk=stream_and_partner_id["stream_id"])
+            stream = Stream.objects.filter(
+                pk=stream_and_partner_id["stream_id"]
+            ).first()
 
-            if stream.count() >= 1:
+            if stream:
                 for language in language_codes:
                     description_string = "description_{locale}".format(locale=language)
                     # Check if a field description_locale exists
                     try:
                         description_object = Stream._meta.get_field(description_string)
-                        description_value = description_object.value_from_object(
-                            stream[0]
-                        )
+                        description_value = description_object.value_from_object(stream)
                     except FieldDoesNotExist:
                         description_value = ""
 
@@ -229,11 +221,20 @@ class Command(BaseCommand):
             applications = Application.objects.filter(
                 specific_stream=stream_and_partner_id["stream_id"]
             )
-            print(applications)
-            print(stream_and_partner_id["partner_id"])
-            new_partner = Partner.objects.get(pk=stream_and_partner_id["partner_id"])
+            new_partner = Partner.objects.filter(
+                pk=stream_and_partner_id["partner_id"]
+            ).first()
+            # Some applicartions have Jason's personal account in the sent_by
+            # field. Since that account is no longer staff, we will replace it
+            # with Jason's WMF account
+            jsn_sherman = User.objects.get(username=49305455)
+            j_sherman = User.objects.get(username=49828274)
             for application in applications:
                 application.partner = new_partner
+                application.specific_stream = None
+                if application.sent_by:
+                    if application.sent_by.pk == jsn_sherman.pk:
+                        application.sent_by = j_sherman
                 application.save()
 
     def _assign_authorizations_to_new_partners(self, stream_and_partner_ids):
@@ -241,10 +242,18 @@ class Command(BaseCommand):
             authorizations = Authorization.objects.filter(
                 stream=stream_and_partner_id["stream_id"]
             )
-            print(authorizations)
-            print(stream_and_partner_id["partner_id"])
-            new_partner = Partner.objects.get(pk=stream_and_partner_id["partner_id"])
+            new_partner = Partner.objects.filter(
+                pk=stream_and_partner_id["partner_id"]
+            ).first()
+            # Some applicartions have Jason's personal account in the sent_by
+            # field. Since that account is no longer staff, we will replace it
+            # with Jason's WMF account
+            jsn_sherman = User.objects.get(username=49305455)
+            j_sherman = User.objects.get(username=49828274)
             for authorization in authorizations:
-                authorization.stream = None
                 authorization.partners.set([new_partner])
+                authorization.stream = None
+                if authorization.authorizer:
+                    if authorization.authorizer.pk == jsn_sherman.pk:
+                        authorization.authorizer = j_sherman
                 authorization.save()
