@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-08-31 11:34+0000\n"
-"PO-Revision-Date: 2021-09-02 11:16:23+0000\n"
+"PO-Revision-Date: 2021-09-06 11:15:50+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2636,9 +2636,9 @@ msgstr ""
 
 #. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
 #: TWLight/users/templates/users/eligibility_modal.html:30
-#, fuzzy, python-format
+#, python-format
 msgid "Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
-msgstr "Concordou com as <a href=\"%(terms_url)s\">condições de utilização</a> do ''site''?"
+msgstr "Concordou com as <a href=\"%(terms)s\" class=\"text-danger\"> condições de utilização </a>"
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:39
@@ -2776,9 +2776,8 @@ msgstr "É um coordenador neste <i>site</i>. Se restringir o processamento dos s
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
 #: TWLight/users/templates/users/terms.html:24
-#, fuzzy
 msgid "Last updated 11 August 2021"
-msgstr "Última atualização a 12 de novembro de 2019"
+msgstr "Última atualização a 11 de agosto de 2021"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:28
@@ -2792,9 +2791,8 @@ msgstr "Condições de utilização e normas de privacidade do Cartão da Biblio
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:42
-#, fuzzy
 msgid "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The Wikipedia Library</a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows Wikipedia editors to search and access these resources."
-msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/pt\">A Biblioteca da Wikipédia</a> estabeleceu parcerias com editoras de todo o mundo para permitir que os utilizadores acedam a recursos que, de outra forma, seriam pagos. Este <i>site</i> da Internet permite que os utilizadores se candidatem simultaneamente a acesso ao conteúdo de várias editoras e torna fácil e eficiente a administração de contas da Biblioteca da Wikipédia, e o acesso às mesmas."
+msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/pt\">A Biblioteca da Wikipédia</a> estabeleceu parcerias com editoras de todo o mundo para permitir que os utilizadores acedam a recursos que, de outra forma, seriam pagos. Este <i>site</i> da Internet permite que os utilizadores da Wikipédia pesquisem e acedam a esses recursos."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:52
@@ -2808,9 +2806,8 @@ msgstr "Requisitos para uma conta Cartão da Biblioteca da Wikipédia"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:67
-#, fuzzy
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for The Wikipedia Library, we require that you be registered for a user account on the projects, with at least 500 edits, six (6) months of activity, and 10+ edits in the last month. We ask that you do not request access to any publishers with a limited number of available accounts whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "O acesso a recursos através da Biblioteca da Wikipédia está reservado a membros da comunidade que demonstraram o seu empenho nos projetos da Wikimedia e que usarão o acesso a estes recursos para melhorar os conteúdos do projeto. Assim, para ser elegível para o programa Biblioteca da Wikipédia, é necessário que tenha uma conta de utilizador nos projetos. Damos preferência a utilizadores com pelo menos 500 edições e seis (6) meses de atividade, mas estes requisitos não são absolutos. Pedimos que não solicite acesso a editoras cujos recursos já tenha à disposição de forma gratuita através da sua biblioteca ou universidade local, ou de outra instituição ou organização, para dar essa oportunidade a outros."
+msgstr "O acesso a recursos através da Biblioteca da Wikipédia está reservado a membros da comunidade que demonstraram o seu empenho nos projetos da Wikimedia e que usarão o acesso a estes recursos para melhorar os conteúdos do projeto. Assim, para ser elegível para o programa Biblioteca da Wikipédia, é necessário que tenha uma conta de utilizador nos projetos com, pelo menos, 500 edições, seis (6) meses de atividade e mais de 10 edições no último mês. Pedimos que não solicite acesso a editoras que têm um número limitado de contas mas cujos recursos já tenha à sua disposição de forma gratuita através da sua biblioteca ou universidade local, ou de outra instituição ou organização, para dar essa oportunidade a outros."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:83
