@@ -571,9 +571,16 @@ class PartnerModelTests(TestCase):
         """
         partner5 = PartnerFactory()
 
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+
         partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "earth-sciences_tag"]}
-        with self.assertRaises(ValidationError):
-            partner5.save()
+
+        self.assertRaises(ValidationError, partner5.clean)
+
+        try:
+            partner5.clean()
+        except ValidationError as e:
+            self.assertEqual([message], e.messages)
 
     def test_create_tags_error2(self):
         """
@@ -581,13 +588,19 @@ class PartnerModelTests(TestCase):
         """
         partner5 = PartnerFactory()
 
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+
         partner5.new_tags = {
             "tags": ["law_tag", "earth-sciences_tag"],
             "other_key": "error",
         }
 
-        with self.assertRaises(ValidationError):
-            partner5.save()
+        self.assertRaises(ValidationError, partner5.clean)
+
+        try:
+            partner5.clean()
+        except ValidationError as e:
+            self.assertEqual([message], e.messages)
 
     def test_create_tags_error3(self):
         """
@@ -597,10 +610,16 @@ class PartnerModelTests(TestCase):
         """
         partner6 = PartnerFactory()
 
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+
         partner6.new_tags = {}
 
-        with self.assertRaises(ValidationError):
-            partner6.save()
+        self.assertRaises(ValidationError, partner6.clean)
+
+        try:
+            partner6.clean()
+        except ValidationError as e:
+            self.assertEqual([message], e.messages)
 
 
 class WaitlistBehaviorTests(TestCase):
