@@ -5,7 +5,11 @@ import random
 import re
 from requests.cookies import CookieConflictError
 from urllib.parse import unquote_plus, urlparse
+import urllib3
 from locust import exception, HttpUser, task
+
+# Requests can't follow the chain of trust for hosted EZProxy certificates
+urllib3.disable_warnings()
 
 wp_users_filepath = path.abspath(
     path.join(path.dirname(__file__), "../../secrets/WP_USERS.json")
