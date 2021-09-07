@@ -5,7 +5,7 @@ import random
 import re
 from requests.cookies import CookieConflictError
 from urllib.parse import unquote, urlparse
-from locust import HttpUser, task
+from locust import exception, HttpUser, task
 
 wp_users_filepath = path.abspath(
     path.join(path.dirname(__file__), "../../secrets/WP_USERS.json")
@@ -70,7 +70,7 @@ class LoggedInUser(HttpUser):
             self.logout()
 
     def login(self):
-        print("Logging in " + self.user["wpName"])
+        print("Attempting login for " + self.user["wpName"])
         name = "/oauth/login/?next=/users/my_library/"
         with self.client.get(
             name,
@@ -103,11 +103,12 @@ class LoggedInUser(HttpUser):
                         catch_response=True,
                         stream=True,
                     ) as post_login:
-                        print(self.client.cookies)
+                        interrupt = False
                         if "sessionid" not in self.client.cookies:
                             post_login.failure(
                                 "login failed: no sessionid for " + self.user["wpName"]
                             )
+                            interrupt = True
                         try:
                             centralauth_user = unquote(
                                 self.client.cookies.get(
@@ -119,6 +120,7 @@ class LoggedInUser(HttpUser):
                                     "login failed: no centralauth_User for "
                                     + self.user["wpName"]
                                 )
+                                interrupt = True
                         except CookieConflictError as e:
                             post_login.failure(e)
 
@@ -129,6 +131,12 @@ class LoggedInUser(HttpUser):
                                 + " is "
                                 + str(post_login.status_code)
                             )
+                            interrupt = True
+                        if interrupt:
+                            # raise exception.InterruptTaskSet(reschedule=False)
+                            raise exception.StopUser()
+                        else:
+                            print("Logged in " + self.user["wpName"])
 
     def logout(self):
         self.client.get(
@@ -448,7 +456,7 @@ class LoggedInUser(HttpUser):
                                         "post_app_apply status code for "
                                         + self.user["wpName"]
                                         + " is "
-                                        + str(post_login.status_code)
+                                        + str(post_app_apply.status_code)
                                         + " at "
                                         + name
                                     )
