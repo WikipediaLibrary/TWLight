@@ -145,9 +145,6 @@ class Command(BaseCommand):
                 "country_of_residence"
             ] = stream.partner.country_of_residence
             stream_partner_information["specific_title"] = stream.partner.specific_title
-            stream_partner_information[
-                "specific_stream"
-            ] = stream.partner.specific_stream
             stream_partner_information["occupation"] = stream.partner.occupation
             stream_partner_information["affiliation"] = stream.partner.affiliation
             stream_partner_information[
