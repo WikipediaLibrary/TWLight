@@ -110,15 +110,27 @@ class LoggedInUser(HttpUser):
                             )
                             interrupt = True
                         try:
-                            centralauth_user = unquote(
-                                self.client.cookies.get(
-                                    "centralauth_User", domain=".meta.wikimedia.org"
-                                )
+                            centralauth_user = self.client.cookies.get(
+                                "centralauth_User", domain=".meta.wikimedia.org"
                             )
-                            if centralauth_user != self.user["wpName"]:
+                            if centralauth_user:
+                                centralauth_user = unquote(centralauth_user)
+                            else:
                                 post_login.failure(
                                     "login failed: no centralauth_User for "
                                     + self.user["wpName"]
+                                )
+                                interrupt = True
+
+                            if (
+                                centralauth_user
+                                and centralauth_user != self.user["wpName"]
+                            ):
+                                post_login.failure(
+                                    "login failed: mismatched centralauth_User for "
+                                    + self.user["wpName"]
+                                    + "\n got "
+                                    + centralauth_user
                                 )
                                 interrupt = True
                         except CookieConflictError as e:
