@@ -70,19 +70,13 @@ class Command(BaseCommand):
         # Once streams are deleted, we can safely delete the partners
 
         # Get Future Science Group partner
-        future_science_partner = Partner.objects.filter(
-            company_name__contains="Future Science Group"
-        )
+        future_science_partner = Partner.objects.filter(pk=22).first()
 
         # Get RILM partner
-        rilm_partner = Partner.objects.filter(
-            company_name__contains="Répertoire International de Littérature Musicale (RILM)"
-        )
+        rilm_partner = Partner.objects.filter(pk=100).first()
 
         # Get Springer Nature partner
-        springer_nature_partner = Partner.objects.filter(
-            company_name__contains="Springer Nature"
-        )
+        springer_nature_partner = Partner.objects.filter(pk=67).first()
 
         future_science_partner.delete()
         rilm_partner.delete()
