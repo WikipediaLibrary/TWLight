@@ -67,8 +67,40 @@ class Command(BaseCommand):
         rilm_streams.delete()
         springer_nature_streams.delete()
 
-    def _turn_stream_to_partner(self, streams):
+        # Once streams are deleted, we can safely delete the partners
 
+        # Get Future Science Group partner
+        future_science_partner = Partner.objects.filter(
+            company_name__contains="Future Science Group"
+        )
+
+        # Get RILM partner
+        rilm_partner = Partner.objects.filter(
+            company_name__contains="Répertoire International de Littérature Musicale (RILM)"
+        )
+
+        # Get Springer Nature partner
+        springer_nature_partner = Partner.objects.filter(
+            company_name__contains="Springer Nature"
+        )
+
+        future_science_partner.delete()
+        rilm_partner.delete()
+        springer_nature_partner.delete()
+
+    def _turn_stream_to_partner(self, streams):
+        """
+        Function that creates a partner out of a series of streams
+        ----------
+        streams : Queryset<Stream>
+            The streams that need to be turned into partners
+
+        Returns
+        -------
+        dict
+            A dictionary with the stream ID and the new partner ID that was created
+            from that stream's information
+        """
         stream_and_partner_ids = []
 
         for stream in streams:
@@ -156,6 +188,20 @@ class Command(BaseCommand):
         rilm_stream_and_partner_ids,
         springer_nature_stream_and_partner_ids,
     ):
+        """
+        Function that calls on other functions to create a partner's description
+        ----------
+        future_science_stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+        rilm_stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+        springer_nature_stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+
+        Returns
+        -------
+        None
+        """
         future_science_descriptions = self._add_stream_descriptions(
             future_science_stream_and_partner_ids
         )
@@ -173,7 +219,17 @@ class Command(BaseCommand):
         self._write_descriptions_file(descriptions_dict)
 
     def _add_stream_descriptions(self, stream_and_partner_ids):
-        """ """
+        """
+        Function that creates a dictionary from stream descriptions
+        ----------
+        stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+
+        Returns
+        -------
+        dict
+            A dictionary with stream descriptions
+        """
         stream_descriptions = {}
         language_codes = [l[0] for l in settings.LANGUAGES]
         for stream_and_partner_id in stream_and_partner_ids:
@@ -209,6 +265,16 @@ class Command(BaseCommand):
         return output
 
     def _write_descriptions_file(self, descriptions_dict):
+        """
+        Function that creates a dictionary from stream descriptions
+        ----------
+        descriptions_dict : dict
+            A dictionary with all stream descriptions
+
+        Returns
+        -------
+        None
+        """
         twlight_home = settings.TWLIGHT_HOME
         filename = "{twlight_home}/temp_stream_descriptions.json".format(
             twlight_home=twlight_home,
@@ -217,6 +283,16 @@ class Command(BaseCommand):
             descriptions_file.write(json.dumps(descriptions_dict, indent=4))
 
     def _assign_applications_to_new_partners(self, stream_and_partner_ids):
+        """
+        Function that reassigns applications to the newly created partners
+        ----------
+        stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+
+        Returns
+        -------
+        None
+        """
         for stream_and_partner_id in stream_and_partner_ids:
             applications = Application.objects.filter(
                 specific_stream=stream_and_partner_id["stream_id"]
@@ -238,6 +314,16 @@ class Command(BaseCommand):
                 application.save()
 
     def _assign_authorizations_to_new_partners(self, stream_and_partner_ids):
+        """
+        Function that reassigns authorizations to the newly created partners
+        ----------
+        stream_and_partner_ids : dict
+            A dictionary that contains the original stream ID and the newly created partner ID
+
+        Returns
+        -------
+        None
+        """
         for stream_and_partner_id in stream_and_partner_ids:
             authorizations = Authorization.objects.filter(
                 stream=stream_and_partner_id["stream_id"]
