@@ -7,7 +7,6 @@ from requests.cookies import CookieConflictError
 from urllib.parse import urlparse
 from locust import HttpUser, task
 
-wpUsers = json.loads(environ.get("WPUSERS"))
 reCsrfMiddlewareToken = re.compile(
     r'<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">',
 )
@@ -43,17 +42,21 @@ def user_reusable(user):
 
 
 class LoggedInUser(HttpUser):
+    def __init__(self, *args, **kwargs):
+        super(LoggedInUser, self).__init__(*args, **kwargs)
+        self.wpUsers = json.loads(environ.get("WPUSERS"))
+        self.user = {}
+
     def on_start(self):
         """
         Login a random user from wpUsers.
         """
-        self.user = {}
-        random.shuffle(wpUsers)
-        if user_valid(wpUsers[0]):
-            if user_reusable(wpUsers[0]):
-                self.user = wpUsers[0]
+        random.shuffle(self.wpUsers)
+        if user_valid(self.wpUsers[0]):
+            if user_reusable(self.wpUsers[0]):
+                self.user = self.wpUsers[0]
             else:
-                self.user = wpUsers.pop(0)
+                self.user = self.wpUsers.pop(0)
             self.login()
 
     def on_stop(self):
@@ -94,6 +97,7 @@ class LoggedInUser(HttpUser):
                         catch_response=True,
                         stream=True,
                     ) as post_login:
+                        print(self.client.cookies)
                         if "sessionid" not in self.client.cookies:
                             post_login.failure(
                                 "login failed: no sessionid for " + self.user["wpName"]
@@ -124,7 +128,7 @@ class LoggedInUser(HttpUser):
         )
         # if the user wasn't reusable, return them to the pool now that we're done.
         if not user_reusable(self.user):
-            wpUsers.append(self.user)
+            self.wpUsers.append(self.user)
         self.user = {}
 
     @task(10)
