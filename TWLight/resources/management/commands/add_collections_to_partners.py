@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import FieldDoesNotExist
+from django.db import connection
 
 from TWLight.applications.models import Application
 from TWLight.resources.models import (
@@ -284,25 +285,30 @@ class Command(BaseCommand):
         -------
         None
         """
+        # Some applicartions have Jason's personal account in the sent_by
+        # field. Since that account is no longer staff, we will replace it
+        # with Jason's WMF account
+        jsn_sherman = User.objects.get(username=49305455)
+        j_sherman = User.objects.get(username=49828274)
         for stream_and_partner_id in stream_and_partner_ids:
-            applications = Application.objects.filter(
-                specific_stream=stream_and_partner_id["stream_id"]
-            )
-            new_partner = Partner.objects.filter(
-                pk=stream_and_partner_id["partner_id"]
-            ).first()
-            # Some applicartions have Jason's personal account in the sent_by
-            # field. Since that account is no longer staff, we will replace it
-            # with Jason's WMF account
-            jsn_sherman = User.objects.get(username=49305455)
-            j_sherman = User.objects.get(username=49828274)
-            for application in applications:
-                application.partner = new_partner
-                application.specific_stream = None
-                if application.sent_by:
-                    if application.sent_by.pk == jsn_sherman.pk:
-                        application.sent_by = j_sherman
-                application.save()
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE applications_application SET partner_id = %s, specific_stream_id = NULL WHERE specific_stream_id = %s AND sent_by_id != %s",
+                    [
+                        stream_and_partner_id["partner_id"],
+                        stream_and_partner_id["stream_id"],
+                        jsn_sherman.pk,
+                    ],
+                )
+                cursor.execute(
+                    "UPDATE applications_application SET partner_id = %s, specific_stream_id = NULL, sent_by_id = %s WHERE specific_stream_id = %s AND sent_by_id = %s",
+                    [
+                        stream_and_partner_id["partner_id"],
+                        j_sherman.pk,
+                        stream_and_partner_id["stream_id"],
+                        jsn_sherman.pk,
+                    ],
+                )
 
     def _assign_authorizations_to_new_partners(self, stream_and_partner_ids):
         """
@@ -315,22 +321,37 @@ class Command(BaseCommand):
         -------
         None
         """
+        # Some applicartions have Jason's personal account in the sent_by
+        # field. Since that account is no longer staff, we will replace it
+        # with Jason's WMF account
+        jsn_sherman = User.objects.get(username=49305455)
+        j_sherman = User.objects.get(username=49828274)
         for stream_and_partner_id in stream_and_partner_ids:
             authorizations = Authorization.objects.filter(
                 stream=stream_and_partner_id["stream_id"]
             )
-            new_partner = Partner.objects.filter(
-                pk=stream_and_partner_id["partner_id"]
-            ).first()
-            # Some applicartions have Jason's personal account in the sent_by
-            # field. Since that account is no longer staff, we will replace it
-            # with Jason's WMF account
-            jsn_sherman = User.objects.get(username=49305455)
-            j_sherman = User.objects.get(username=49828274)
             for authorization in authorizations:
-                authorization.partners.set([new_partner])
-                authorization.stream = None
-                if authorization.authorizer:
-                    if authorization.authorizer.pk == jsn_sherman.pk:
-                        authorization.authorizer = j_sherman
-                authorization.save()
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "UPDATE users_authorization_partners SET partner_id = %s WHERE authorization_id = %s",
+                        [
+                            stream_and_partner_id["partner_id"],
+                            authorization.pk,
+                        ],
+                    )
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "UPDATE users_authorization SET stream_id = NULL WHERE stream_id = %s AND authorizer_id != %s",
+                    [
+                        stream_and_partner_id["stream_id"],
+                        jsn_sherman.pk,
+                    ],
+                )
+                cursor.execute(
+                    "UPDATE users_authorization SET stream_id = NULL, authorizer_id = %s WHERE stream_id = %s AND authorizer_id = %s",
+                    [
+                        j_sherman.pk,
+                        stream_and_partner_id["stream_id"],
+                        jsn_sherman.pk,
+                    ],
+                )
