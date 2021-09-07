@@ -11,6 +11,12 @@ wp_users_filepath = path.abspath(
     path.join(path.dirname(__file__), "../../secrets/WP_USERS.json")
 )
 
+wpUsers = []
+# Try to read the users file
+if path.isfile(wp_users_filepath):
+    with open(wp_users_filepath, "r") as wp_users_file:
+        wpUsers = json.load(wp_users_file)
+
 reCsrfMiddlewareToken = re.compile(
     r'<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">',
 )
@@ -48,26 +54,29 @@ def user_reusable(user):
 class LoggedInUser(HttpUser):
     def __init__(self, *args, **kwargs):
         super(LoggedInUser, self).__init__(*args, **kwargs)
-        if path.isfile(wp_users_filepath):
-            with open(wp_users_filepath, "r") as wp_users_file:
-                self.wpUsers = json.load(wp_users_file)
-                self.user = {}
+        self.user = {}
+        # Randomize the list and the first user
+        random.shuffle(wpUsers)
+        # Use valid users
+        if user_valid(wpUsers[0]):
+            if user_reusable(wpUsers[0]):
+                self.user = wpUsers[0]
+            else:
+                self.user = wpUsers.pop(0)
+        # Drop invalid users and stop
+        else:
+            wpUsers.pop(0)
+            raise exception.StopUser()
 
     def on_start(self):
         """
         Login a random user from wpUsers.
         """
-        random.shuffle(self.wpUsers)
-        if user_valid(self.wpUsers[0]):
-            if user_reusable(self.wpUsers[0]):
-                self.user = self.wpUsers[0]
-            else:
-                self.user = self.wpUsers.pop(0)
-            self.login()
+
+        self.login()
 
     def on_stop(self):
-        if user_valid(self.user):
-            self.logout()
+        self.logout()
 
     def login(self):
         print("Attempting login for " + self.user["wpName"])
@@ -156,7 +165,7 @@ class LoggedInUser(HttpUser):
         )
         # if the user wasn't reusable, return them to the pool now that we're done.
         if not user_reusable(self.user):
-            self.wpUsers.append(self.user)
+            wpUsers.append(self.user)
         self.user = {}
 
     @task(10)
