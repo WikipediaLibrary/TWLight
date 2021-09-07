@@ -1,11 +1,15 @@
 from helpers.parsers import MyCollectionsAccessParser, MyAppsWithdrawParser
 import json
-from os import environ
+from os import path
 import random
 import re
 from requests.cookies import CookieConflictError
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 from locust import HttpUser, task
+
+wp_users_filepath = path.abspath(
+    path.join(path.dirname(__file__), "../../secrets/WP_USERS.json")
+)
 
 reCsrfMiddlewareToken = re.compile(
     r'<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">',
@@ -44,8 +48,10 @@ def user_reusable(user):
 class LoggedInUser(HttpUser):
     def __init__(self, *args, **kwargs):
         super(LoggedInUser, self).__init__(*args, **kwargs)
-        self.wpUsers = json.loads(environ.get("WPUSERS"))
-        self.user = {}
+        if path.isfile(wp_users_filepath):
+            with open(wp_users_filepath, "r") as wp_users_file:
+                self.wpUsers = json.load(wp_users_file)
+                self.user = {}
 
     def on_start(self):
         """
@@ -103,8 +109,10 @@ class LoggedInUser(HttpUser):
                                 "login failed: no sessionid for " + self.user["wpName"]
                             )
                         try:
-                            centralauth_user = self.client.cookies.get(
-                                "centralauth_User", domain=".meta.wikimedia.org"
+                            centralauth_user = unquote(
+                                self.client.cookies.get(
+                                    "centralauth_User", domain=".meta.wikimedia.org"
+                                )
                             )
                             if centralauth_user != self.user["wpName"]:
                                 post_login.failure(
