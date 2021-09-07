@@ -4,7 +4,7 @@ from os import path
 import random
 import re
 from requests.cookies import CookieConflictError
-from urllib.parse import unquote, urlparse
+from urllib.parse import unquote_plus, urlparse
 from locust import exception, HttpUser, task
 
 wp_users_filepath = path.abspath(
@@ -114,7 +114,7 @@ class LoggedInUser(HttpUser):
                                 "centralauth_User", domain=".meta.wikimedia.org"
                             )
                             if centralauth_user:
-                                centralauth_user = unquote(centralauth_user)
+                                centralauth_user = unquote_plus(centralauth_user)
                             else:
                                 post_login.failure(
                                     "login failed: no centralauth_User for "
@@ -145,7 +145,7 @@ class LoggedInUser(HttpUser):
                             )
                             interrupt = True
                         if interrupt:
-                            # raise exception.InterruptTaskSet(reschedule=False)
+                            print(self.client.cookies)
                             raise exception.StopUser()
                         else:
                             print("Logged in " + self.user["wpName"])
