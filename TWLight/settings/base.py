@@ -123,7 +123,6 @@ TWLIGHT_APPS = [
     "TWLight.resources",
     "TWLight.applications",
     "TWLight.emails",
-    "TWLight.graphs",
     "TWLight.comments",
     "TWLight.api",
     "TWLight.ezproxy",

@@ -22,8 +22,8 @@ then
     for path in "${apps[@]}"; do
       # Strip 'TWLight.' from the front of each TWLIGHT_APP
       app=${path:8}
-      # skip emails, graphs, and i18n
-      if [ "${app}" = "emails" ] || [ "${app}" = "graphs" ] || [ "${app}" = "i18n" ]; then
+      # skip emails and i18n
+      if [ "${app}" = "emails" ] || [ "${app}" = "i18n" ]; then
         continue
       fi
       echo "createinitialrevisions ${app}"

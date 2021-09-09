@@ -320,3 +320,28 @@ def get_tags_json_schema():
     }
 
     return JSON_SCHEMA_TAGS
+
+
+def get_median(values_list):
+    """Given a list (of numbers), returns its median value."""
+    try:
+        for item in values_list:
+            assert isinstance(item, Number)
+    except AssertionError:
+        return 0
+
+    values_list.sort()
+    list_len = len(values_list)
+
+    if list_len < 1:
+        # Mathematically bogus, but will make graph display correctly.
+        median = 0
+    elif list_len % 2 == 1:
+        median = int(values_list[(list_len - 1) // 2])
+    else:
+        median = int(
+            (values_list[(list_len - 1) // 2] + values_list[1 + (list_len - 1) // 2])
+            // 2
+        )
+
+    return median

@@ -13,13 +13,12 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
-from TWLight.graphs.helpers import get_median
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 
 from .filters import PartnerFilter
 from .forms import SuggestionForm
-from .helpers import get_partner_description, get_tag_names
+from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Stream, Suggestion
 
 import logging
