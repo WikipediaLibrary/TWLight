@@ -3,7 +3,8 @@
 		"authors": [
 			"Jsn.sherman",
 			"Samwalton9 (WMF)",
-			"Sandro Halank (WMDE)"
+			"Sandro Halank (WMDE)",
+			"Suecarmol"
 		]
 	},
 	"24_short_description": "<strong>AAAS</strong> (The American Association for the Advancement of Science) ist „die größte allgemein-wissenschaftliche Gesellschaft der Welt.“\n\nSie bietet Zugang zu den Ressourcen auf ihrer Website sciencemag.org, die die Zeitschrift „Science“ (1880–heute) und andere wissenschaftliche Forschung, Nachrichten, Kommentare und Medien umfasst.",
@@ -110,5 +111,11 @@
 	"115_short_description": "<strong><em>Geo</em></strong> ist ein deutschsprachiges Magazin aus dem Verlag Gruner + Jahr, das Wissen und Informationen zu verschiedenen Themen der Welt zugänglich macht.",
 	"116_short_description": "<strong><em>Geo Epoche</em></strong> ist Teil der Geo-Reihe des Verlags Gruner + Jahr und erzählt Geschichten über zeitgeschichtlich relevante Menschen und dramatische Ereignisse, über Alltag und Kultur, Politik, Gesellschaft und Wissenschaft.",
 	"117_short_description": "<strong><em>art</em></strong> ist ein Kunstmagazin aus dem Verlag Gruner + Jahr. Es deckt das gesamte Spektrum der Kunst ab, von der klassischen Kunst bis zur zeitgenössischen Architektur, Fotografie, Design, Video- und Performancekunst.",
-	"118_short_description": "<strong>Oxford Research Encyclopedias</strong> umfasst von Experten begutachtete Übersichtsartikel zu einer Reihe von Fachgebieten."
+	"118_short_description": "<strong>Oxford Research Encyclopedias</strong> umfasst von Experten begutachtete Übersichtsartikel zu einer Reihe von Fachgebieten.",
+	"123_short_description": "<strong>Nature</strong> ist eine internationale wissenschaftliche Wochenzeitschrift.",
+	"124_short_description": "<strong>SpringerLink</strong> umfasst mehr als 26.000 E-Books und 2.000 wissenschaftliche Zeitschriften aus den Bereichen Naturwissenschaften, Wirtschaftswissenschaften, Ingenieurwissenschaften, Geisteswissenschaften, Sozialwissenschaften, Recht und Mathematik.",
+	"122_short_description": "<strong>RILM Music Encyclopedias</strong> ist eine Sammlung von mehr als 50 Titeln von 1775 bis heute, die mehr als 300.000 Einträge umfasst.",
+	"121_short_description": "<strong>MGG Online</strong> ist eine deutschsprachige Musikenzyklopädie, die neben der aktualisierten Online-Version auch Zugriff auf die Printausgabe von MGG (1994-2008) bietet.",
+	"120_short_description": "<strong>Future Science</strong> ist eine Sammlung von Ressourcen aus den Themenfeldern Biologie und Pharmakologie.",
+	"119_short_description": "<strong>Future Medicine</strong> ist eine Sammlung biomedizinischer Ressourcen."
 }
