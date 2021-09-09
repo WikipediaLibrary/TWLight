@@ -21,6 +21,10 @@ body {
   text-align: right;
 }
 
+.overflow-hidden{
+    overflow: hidden;
+}
+
 /* Different buffers for the footer based on screen size */
 @media (max-width: 767px) {
   body {
