@@ -231,6 +231,8 @@ SITE_ID = 1
 # Overwrite messages.ERROR to use danger instead, to play nice with bootstrap
 MESSAGE_TAGS = {messages.ERROR: "danger"}
 
+# Overwrite django default SESSION_COOKIE_AGE
+SESSION_COOKIE_AGE = 259200
 
 # INTERNATIONALIZATION CONFIGURATION
 # ------------------------------------------------------------------------------
