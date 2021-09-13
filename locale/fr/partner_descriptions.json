@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DreZhsh",
 			"Gomoko",
 			"VIGNERON",
 			"Verdy p"
@@ -110,5 +111,11 @@
 	"115_short_description": "<strong><em>Geo</em></strong> est une revue en langue allemande publiée par Gruner + Jahr, qui rend accessible la connaissance et l’information sur différents sujets dans le monde.",
 	"116_short_description": "<strong><em>Geo Epoche</em></strong> fait partie des séries de Geo publiées par Verlag Gruner + Jahr, et qui raconte des histoires sur les personnes importantes et les événements dramatiques, sur la vie de tous les jours et la culture, la politique, la société et la science.",
 	"117_short_description": "<strong><em>art</em></strong> est une revue d’art publiée par Gruner + Jahr. Elle couvre tout le spectre de l’art, de l’art classique à l’architecture contemporaine, la photographie, le design, la vidéo et le théâtre.",
-	"118_short_description": "<strong>Encyclopédies de recherche d’Oxford</strong> comprend des articles généraux relus par des pairs sous forme longue, parmi diverses disciplines."
+	"118_short_description": "<strong>Encyclopédies de recherche d’Oxford</strong> comprend des articles généraux relus par des pairs sous forme longue, parmi diverses disciplines.",
+	"123_short_description": "<strong>Nature</strong> est une revue scientifique internationale hebdomadaire.",
+	"124_short_description": "<strong>SpringerLink</strong> comprend plus de 26 000 livres électroniques et 2000 revues académiques dans les domaines des sciences, du commerce et de l'économie, de l'ingénierie, des sciences humaines, des sciences sociales, du droit et des mathématiques.",
+	"122_short_description": "<strong>RILM Music Encyclopedias</strong> sont une collection de plus de 50 titres - couvrant plus de 300 000 entrées - de 1775 à maintenant.",
+	"121_short_description": "<strong>MGG Online</strong> est une encyclopédie musicale en langue allemande, donnant accès à l'édition imprimée 1994-2008 de MGG en plus de la version en ligne actualisée.",
+	"120_short_description": "<strong>Future Science</strong> est une collection de ressources liées à la biologie et à la pharmacologie.",
+	"119_short_description": "<strong>Médecine du futur</strong> est une collection de ressources biomédicales."
 }
