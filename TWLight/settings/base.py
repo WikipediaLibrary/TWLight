@@ -108,9 +108,6 @@ THIRD_PARTY_APPS = [
     "django_cron",
     "django_filters",
     "modeltranslation",
-    # DO NOT CONFUSE THIS with requests, the Python URL library! This is
-    # django-request, the user analytics package.
-    "request",
     "django_countries",
     "rest_framework",
     "rest_framework.authtoken",
@@ -123,7 +120,6 @@ TWLIGHT_APPS = [
     "TWLight.resources",
     "TWLight.applications",
     "TWLight.emails",
-    "TWLight.graphs",
     "TWLight.comments",
     "TWLight.api",
     "TWLight.ezproxy",
@@ -380,20 +376,6 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 
 INSTALLED_APPS += ["djmail"]
-
-
-# DJANGO_REQUEST CONFIGURATION
-# ------------------------------------------------------------------------------
-
-MIDDLEWARE += ["request.middleware.RequestMiddleware"]
-
-# The following are set for privacy purposes. Note that, if some amount of
-# geographic tracking is desired, there is a REQUEST_ANONYMOUS_IP setting which
-# scrubs the last octet of the IP address, which could be used instead of
-# REQUEST_LOG_IP. There is not a way to get semi-granular user tracking (such
-# as tracking only authenticated vs anonymous users).
-REQUEST_LOG_IP = False
-REQUEST_LOG_USER = False
 
 # LOGGING CONFIGURATION
 # ------------------------------------------------------------------------------

@@ -22,7 +22,7 @@ INSTALLED_APPS += ["django_nose"]
 
 NOSE_ARGS = [
     #'--with-coverage',
-    "--cover-package=TWLight.applications,TWLight.emails,TWLight.graphs,TWLight.resources, TWLight.users",
+    "--cover-package=TWLight.applications,TWLight.emails,TWLight.resources, TWLight.users",
     #'--nologcapture',
     #'--cover-html',
     #'--cover-html-dir=htmlcov',
