@@ -1651,6 +1651,10 @@ class MyLibraryViewsTest(TestCase):
         cls.bundle_partner_3.new_tags = {"tags": ["art_tag"]}
         cls.bundle_partner_3.save()
 
+        cls.bundle_partner_4 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_4.new_tags = {"tags": ["multidisciplinary_tag"]}
+        cls.bundle_partner_4.save()
+
         cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
         cls.proxy_partner_1.new_tags = {"tags": ["earth-sciences_tag"]}
         cls.proxy_partner_1.save()
@@ -1659,9 +1663,9 @@ class MyLibraryViewsTest(TestCase):
         cls.proxy_partner_2.new_tags = {"tags": ["earth-sciences_tag"]}
         cls.proxy_partner_2.save()
 
-        cls.bundle_partner_4 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        cls.bundle_partner_4.new_tags = {"tags": ["multidisciplinary_tag"]}
-        cls.bundle_partner_4.save()
+        cls.proxy_partner_3 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_3.new_tags = {"tags": ["multidisciplinary_tag"]}
+        cls.proxy_partner_3.save()
 
         cls.user_coordinator = UserFactory(username="Jon Snow")
         cls.editor = EditorFactory()
@@ -1694,6 +1698,13 @@ class MyLibraryViewsTest(TestCase):
             sent_by=self.user_coordinator,
         )
 
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
         app_proxy_partner_1 = ApplicationFactory(
             status=Application.SENT,
             editor=self.editor,
@@ -1719,6 +1730,7 @@ class MyLibraryViewsTest(TestCase):
         # Even though this partner is not visible, it still appears in the HTML
         # render
         self.assertIn(escape(self.proxy_partner_2.company_name), content)
+        self.assertIn(escape(self.proxy_partner_3.company_name), content)
 
     def test_user_collections_show_expiry_date_extend(self):
         """
@@ -1877,6 +1889,13 @@ class MyLibraryViewsTest(TestCase):
             sent_by=self.user_coordinator,
         )
 
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
         app_proxy_partner_1 = ApplicationFactory(
             status=Application.SENT,
             editor=self.editor,
@@ -1899,6 +1918,7 @@ class MyLibraryViewsTest(TestCase):
         self.assertIn(escape(self.bundle_partner_3.company_name), content)
         # Multidisciplinary partners should also appear when filtering
         self.assertIn(escape(self.bundle_partner_4.company_name), content)
+        self.assertIn(escape(self.proxy_partner_3.company_name), content)
 
         self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
@@ -1929,6 +1949,13 @@ class MyLibraryViewsTest(TestCase):
             sent_by=self.user_coordinator,
         )
 
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
         app_proxy_partner_1 = ApplicationFactory(
             status=Application.SENT,
             editor=self.editor,
@@ -1953,6 +1980,7 @@ class MyLibraryViewsTest(TestCase):
         self.assertNotIn(escape(self.bundle_partner_3.company_name), content)
         # Multidisciplinary partners should also appear when filtering
         self.assertIn(escape(self.bundle_partner_4.company_name), content)
+        self.assertIn(escape(self.proxy_partner_3.company_name), content)
 
         self.assertIn(escape(self.bundle_partner_1.company_name), content)
         self.assertIn(escape(self.proxy_partner_1.company_name), content)

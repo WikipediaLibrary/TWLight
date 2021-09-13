@@ -43,17 +43,8 @@ class PartnerFilter(django_filters.FilterSet):
         fields = ["languages"]
 
     def tags_filter(self, queryset, name, value):
-        # Order by ascending tag order if tag name is before multidisciplinary
-        if value < "multidisciplinary_tag":
-            tag_filter = queryset.filter(
-                Q(new_tags__tags__contains=value)
-                | Q(new_tags__tags__contains="multidisciplinary_tag")
-            )
-        # Order by descending tag order if tag name is after multidisciplinary
-        else:
-            tag_filter = queryset.filter(
-                Q(new_tags__tags__contains=value)
-                | Q(new_tags__tags__contains="multidisciplinary_tag")
-            )
-
+        tag_filter = queryset.filter(
+            Q(new_tags__tags__contains=value)
+            | Q(new_tags__tags__contains="multidisciplinary_tag")
+        )
         return tag_filter
