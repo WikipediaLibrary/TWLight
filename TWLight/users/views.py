@@ -1024,7 +1024,9 @@ class MyLibraryView(TemplateView):
                 }
             )
 
-        context["available_collections"] = available_collection_obj
+        context["available_collections"] = sorted(
+            available_collection_obj, key=lambda k: k["partner_name"]
+        )
         context["number_available_collections"] = len(available_collection_obj)
 
         return context

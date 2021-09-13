@@ -1659,6 +1659,10 @@ class MyLibraryViewsTest(TestCase):
         cls.proxy_partner_2.new_tags = {"tags": ["earth-sciences_tag"]}
         cls.proxy_partner_2.save()
 
+        cls.bundle_partner_4 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_4.new_tags = {"tags": ["multidisciplinary_tag"]}
+        cls.bundle_partner_4.save()
+
         cls.user_coordinator = UserFactory(username="Jon Snow")
         cls.editor = EditorFactory()
         cls.editor.wp_bundle_eligible = True
@@ -1711,6 +1715,7 @@ class MyLibraryViewsTest(TestCase):
         self.assertIn(escape(self.bundle_partner_2.company_name), content)
         self.assertIn(escape(self.bundle_partner_3.company_name), content)
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(escape(self.bundle_partner_4.company_name), content)
         # Even though this partner is not visible, it still appears in the HTML
         # render
         self.assertIn(escape(self.proxy_partner_2.company_name), content)
@@ -1892,6 +1897,8 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertIn(escape(self.bundle_partner_2.company_name), content)
         self.assertIn(escape(self.bundle_partner_3.company_name), content)
+        # Multidisciplinary partners should also appear when filtering
+        self.assertIn(escape(self.bundle_partner_4.company_name), content)
 
         self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
@@ -1944,6 +1951,8 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertNotIn(escape(self.bundle_partner_2.company_name), content)
         self.assertNotIn(escape(self.bundle_partner_3.company_name), content)
+        # Multidisciplinary partners should also appear when filtering
+        self.assertIn(escape(self.bundle_partner_4.company_name), content)
 
         self.assertIn(escape(self.bundle_partner_1.company_name), content)
         self.assertIn(escape(self.proxy_partner_1.company_name), content)
