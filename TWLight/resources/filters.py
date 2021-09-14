@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.utils.translation import gettext as _
 
 from .models import Language, Partner
@@ -42,5 +43,8 @@ class PartnerFilter(django_filters.FilterSet):
         fields = ["languages"]
 
     def tags_filter(self, queryset, name, value):
-
-        return queryset.filter(new_tags__tags__contains=value)
+        tag_filter = queryset.filter(
+            Q(new_tags__tags__contains=value)
+            | Q(new_tags__tags__contains="multidisciplinary_tag")
+        )
+        return tag_filter
