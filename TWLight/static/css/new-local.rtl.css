@@ -575,13 +575,13 @@ NEW MY LIBRARY CSS
 
 .collection-tab-item.active{
     color: #000000;
-    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #000000;
+    box-shadow: inset 10px 0px 0 white, inset 0 -3px 0 #000000;
 }
 
 .collection-tab-item:hover{
     font-family: Roboto;
     color: #000000;
-    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #565656;
+    box-shadow: inset 10px 0px 0 white, inset 0 -3px 0 #565656;
 }
 
 .applications-item{
