@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-09-13 18:10+0000\n"
+"POT-Creation-Date: 2021-09-14 14:03+0000\n"
 "PO-Revision-Date: 2021-09-13 11:15:09+0000\n"
 "Language: en_gb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1612,12 +1612,12 @@ msgid "Missing EZProxy target URL."
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
-#: TWLight/resources/filters.py:13
+#: TWLight/resources/filters.py:14
 msgid "Tags"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/resources/filters.py:20
+#: TWLight/resources/filters.py:21
 #: TWLight/users/templates/users/available_collection_tile.html:19
 #: TWLight/users/templates/users/user_collection_tile.html:19
 msgid "Languages"
