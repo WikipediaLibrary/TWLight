@@ -808,6 +808,16 @@ NEW MY LIBRARY COLLECTION TILES CSS
 .collection-tile{
     margin: 0px 0px 50px 0px;
 }
+.searchable-icon{
+    color: #000000;
+    font-size: 20px;
+    padding: 5px 0px 0px 10px;
+}
+.partially-searchable-icon{
+    color: #AAADB0;
+    font-size: 20px;
+    padding: 5px 0px 0px 10px;
+}
 .tile-partner-link{
     max-height: 125px;
     max-width: 270px;
