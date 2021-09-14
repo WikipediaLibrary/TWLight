@@ -288,6 +288,23 @@ class Partner(models.Model):
         help_text="Tag must be a valid JSON schema. Tag should be in the form of tag-name_tag.",
     )
 
+    # Searchable status of a partner
+    SEARCHABLE = 0
+    NOT_SEARCHABLE = 1
+    PARTIALLY_SEARCHABLE = 2
+
+    SEARCHABLE_CHOICES = (
+        (SEARCHABLE, "Searchable"),
+        (NOT_SEARCHABLE, "Not searchable"),
+        (PARTIALLY_SEARCHABLE, "Partially searchable"),
+    )
+
+    searchable = models.IntegerField(
+        choices=SEARCHABLE_CHOICES,
+        default=NOT_SEARCHABLE,
+        help_text="Indicates whether a partner is searchable in EDS or not.",
+    )
+
     # Non-universal form fields
     # --------------------------------------------------------------------------
 
