@@ -561,24 +561,23 @@ NEW MY LIBRARY CSS
 .collections-nav{
     margin-bottom: 40px;
 }
-.collection-nav-separator{
-    border-right: 1px solid #565656;
-}
+
 .collection-tab-item{
     font-family: Roboto;
     font-size: 24px;
     color: #565656;
+    margin-right: 5px;
 }
 
 .collection-tab-item.active{
     color: #000000;
-    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #000000;
+    box-shadow: inset 10px 0px 0 white, inset 0 -3px 0 #000000;
 }
 
 .collection-tab-item:hover{
     font-family: Roboto;
     color: #000000;
-    box-shadow: inset 0 0px 0 white, inset 0 -3px 0 #565656;
+    box-shadow: inset 10px 0px 0 white, inset 0 -3px 0 #565656;
 }
 
 .applications-item{
@@ -668,9 +667,7 @@ and (max-device-width : 480px) {
     .collections-section-container{
         margin-top: 10px;
     }
-    .collection-nav-separator{
-        border-right: 0px;
-    }
+    
     .collection-tab-item{
         font-family: Roboto;
         color: #000000;
@@ -813,14 +810,6 @@ and (max-width : 1440px) {
         max-height: 80px;
         max-width: 190px;
         padding: 10px 0px 0px 0px;
-    }
-}
-
-@media screen
-and (min-width : 320px)
-and (max-width : 581px){
-    .collection-nav-separator{
-        border-right: 0px;
     }
 }
 
