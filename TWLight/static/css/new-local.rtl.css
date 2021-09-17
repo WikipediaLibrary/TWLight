@@ -709,6 +709,12 @@ NEW MY LIBRARY CSS
     color: #3366CC;
     text-decoration: none;
 }
+.key-section{
+    font-size: 15px;
+}
+.key-content{
+    font-size: 14px;
+}
 .filter-container{
     flex-direction: column;
     margin-top: 40px;
