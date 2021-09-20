@@ -11,7 +11,8 @@ class PartnerFilter(django_filters.FilterSet):
 
     tags = django_filters.ChoiceFilter(
         # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
-        label=_("Tags"),
+        #Reword 'Tags' to 'Topics'
+        label=_("Topics"),
         choices=get_tag_choices(),
         method="tags_filter",
     )
