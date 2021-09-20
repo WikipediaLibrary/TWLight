@@ -10,22 +10,27 @@
     <div class="key-section">
       {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons. {% endcomment %}
       <p>{% trans "Key"%}</p>
-      <p class="key-content">
+      <div class="icon-section">
         {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not.. {% endcomment %}
         <i class="fa fa-search searchable-icon" title="{% trans 'Searchable' %}"></i>
+      </div>
+      <div class="key-content">
         {% comment %}Translators: Text that describes a search icon. {% endcomment %}
         <em>{% trans "Collection is fully searchable via the search bar" %}</em>
-      </p>
-      <p class="key-content">
+      </div>
+      <br> <br>
+      <div class="icon-section">
         {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not.. {% endcomment %}
         <i class="fa fa-search partially-searchable-icon" title="{% trans 'Partially searchable' %}"></i>
+      </div>
+      <div class="key-content">
         {% comment %}Translators: Text that describes a search icon. {% endcomment %}
         <em>{% trans "Collection is only partially searchable via the search bar" %}</em>
-      </p>
-      <p class="key-content">
-        {% comment %}Translators: Text that explains when there is no search icon. {% endcomment %}
-        <em>{% trans "Other collections must be browsed individually" %}</em>
-      </p>
+      </div>
+      <br> <br>
+      {% comment %}Translators: Text that explains when there is no search icon. {% endcomment %}
+      <em class="key-additional-info">{% trans "Other collections must be browsed individually" %}</em>
+      <br> <br>
     </div>
     <div class="row filter-title-container">
       <p class="filter-title">

@@ -697,7 +697,19 @@ NEW MY LIBRARY CSS
 .key-section{
     font-size: 15px;
 }
+.icon-section{
+    display: inline-block;
+    vertical-align:middle;
+    width: 10%;
+}
 .key-content{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    width: 80%;
+    padding-left: 15px;
+}
+.key-additional-info{
     font-size: 14px;
 }
 .filter-container{
