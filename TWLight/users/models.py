@@ -205,6 +205,10 @@ class Editor(models.Model):
         default=False,
         help_text="Ignore the 'not currently blocked' criterion for access?",
     )
+    ignore_wp_bundle_eligible = models.BooleanField(
+        default=False,
+        help_text="Ignore all criteria for bundle access?",
+    )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(

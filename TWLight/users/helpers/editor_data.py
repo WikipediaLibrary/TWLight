@@ -210,7 +210,12 @@ def editor_bundle_eligible(editor: "Editor"):
     user_staff_or_superuser = editor.user.is_staff or editor.user.is_superuser
     # Users must accept the terms of use in order to be eligible for bundle access
     user_accepted_terms = editor.user.userprofile.terms_of_use
-    if (enough_edits_and_valid or user_staff_or_superuser) and user_accepted_terms:
+    wp_bundle_eligible = (
+        enough_edits_and_valid or user_staff_or_superuser
+    ) and user_accepted_terms
+    # Except for special users that we use for load testing
+    ignore_wp_bundle_eligible = editor.ignore_wp_bundle_eligible
+    if wp_bundle_eligible or ignore_wp_bundle_eligible:
         return True
     else:
         return False
