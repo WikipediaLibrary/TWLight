@@ -115,4 +115,14 @@
   <script>
     function viewUpvoters(e,suggestion,box){}
   </script>
+  {% if not user.is_authenticated %}
+    <script>
+      {% comment %}Translators: This is to show alert to login first if unauthenticated user tries to fill suggestion form and then will be redirected to login page. {% endcomment %} 
+      var redirectURL="{% url 'oauth_login' %}?next={% url 'suggest' %}";
+      $("#id_suggested_company_name,#id_description, #id_company_url").keyup(function() {
+          alert("You are not logged in. You can't suggest partners without login. You will be redirected to login page.");
+          document.location.href = redirectURL;
+      });
+    </script>
+  {% endif %}
 {% endblock javascript %}
