@@ -30,7 +30,8 @@ script:
   # Run tests
   - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_test.sh; fi
   # Submit test coverage report to coveralls
-  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ] && [ -n "${TRAVIS_BRANCH+isset}" ] && [ -n "${TRAVIS_JOB_ID+isset}" ] && [ -n "${COVERALLS_REPO_TOKEN+isset}" ]; then docker-compose exec -e COVERALLS_REPO_TOKEN -e TRAVIS_JOB_ID -e TRAVIS_BRANCH twlight /venv/bin/coveralls; fi
+  # TODO: Uncomment this once coveralls is back online
+  # - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ] && [ -n "${TRAVIS_BRANCH+isset}" ] && [ -n "${TRAVIS_JOB_ID+isset}" ] && [ -n "${COVERALLS_REPO_TOKEN+isset}" ]; then docker-compose exec -e COVERALLS_REPO_TOKEN -e TRAVIS_JOB_ID -e TRAVIS_BRANCH twlight /venv/bin/coveralls; fi
 
 # Deploy changes if the conditions are met.
 # Skip this steps if the job was fired by cron
