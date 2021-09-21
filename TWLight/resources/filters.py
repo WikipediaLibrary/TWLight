@@ -22,6 +22,12 @@ class PartnerFilter(django_filters.FilterSet):
         queryset=Language.objects.all(),
     )
 
+    searchable = django_filters.ChoiceFilter(
+        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
+        label=_("Searchable"),
+        choices=Partner.SEARCHABLE_CHOICES,
+    )
+
     def __init__(self, *args, **kwargs):
         # grab "language_code" from kwargs and then remove it so we can call super()
         language_code = None
@@ -35,6 +41,9 @@ class PartnerFilter(django_filters.FilterSet):
             {"class": "form-control form-control-sm"}
         )
         self.filters["languages"].field.widget.attrs.update(
+            {"class": "form-control form-control-sm"}
+        )
+        self.filters["searchable"].field.widget.attrs.update(
             {"class": "form-control form-control-sm"}
         )
 
