@@ -267,6 +267,17 @@ header {
     display: none;
 }
 
+.feedback-link{
+    float: left;
+    font-size: 12px;
+    color: #3366CC;
+    text-decoration: underline;
+}
+.feedback-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+
 .nav-greeting {
   height: 40px;
   line-height: 40px;

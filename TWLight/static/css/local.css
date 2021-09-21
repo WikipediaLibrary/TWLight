@@ -321,6 +321,17 @@ header {
     display: none;
 }
 
+.feedback-link{
+    float: right;
+    font-size: 12px;
+    color: #3366CC;
+    text-decoration: underline;
+}
+.feedback-link:hover{
+    color: #3366CC;
+    text-decoration: none;
+}
+
 @media (max-width:300px){
   #footer{
     position: relative;
