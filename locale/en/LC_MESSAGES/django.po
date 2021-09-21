@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-09-15 23:01+0000\n"
+"POT-Creation-Date: 2021-09-21 16:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,6 @@ msgstr ""
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
 #. Translators: On the partner detail page, this text labels the button which users can click to create an application.
-#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the partner's page, where they can find more information and apply for access.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access.
 #: TWLight/applications/forms.py:113
 #: TWLight/applications/templates/applications/request_for_application.html:64
@@ -29,7 +28,6 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:60
 #: TWLight/resources/templates/resources/partner_detail.html:390
 #: TWLight/resources/templates/resources/partner_detail.html:393
-#: TWLight/resources/templates/resources/partner_tile.html:87
 #: TWLight/users/templates/users/available_collection_tile.html:56
 msgid "Apply"
 msgstr ""
@@ -1410,7 +1408,7 @@ msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:14
-msgid "Tags"
+msgid "Topics"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
@@ -1793,14 +1791,6 @@ msgstr ""
 #: TWLight/users/templates/users/available_collection_tile.html:26
 #: TWLight/users/templates/users/user_collection_tile.html:26
 msgid "Language(s) not known"
-msgstr ""
-
-#. Translators: On the Browse page (https://wikipedialibrary.wmflabs.org/partners/), this labels the text on a button which takes the user to the bundle partner's page, where they can find more information about the partner.
-#. Translators: A button that reveals more information about a collection.
-#: TWLight/resources/templates/resources/partner_tile.html:84
-#: TWLight/templates/homepage.html:377
-#: TWLight/templates/partner_carousel.html:80
-msgid "More info"
 msgstr ""
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
@@ -2299,6 +2289,12 @@ msgstr ""
 msgid "Less info"
 msgstr ""
 
+#. Translators: A button that reveals more information about a collection.
+#: TWLight/templates/homepage.html:377
+#: TWLight/templates/partner_carousel.html:80
+msgid "More info"
+msgstr ""
+
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:21
 msgid ""
@@ -2415,7 +2411,7 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:688
+#: TWLight/users/models.py:692
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
