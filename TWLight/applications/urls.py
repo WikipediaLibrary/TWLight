@@ -17,14 +17,6 @@ urlpatterns = [
         name="partner_autocomplete",
     ),
     url(
-        r"^request/$",
-        login_required(views.RequestApplicationView.as_view()),
-        name="request",
-    ),
-    url(
-        r"^apply/$", login_required(views.SubmitApplicationView.as_view()), name="apply"
-    ),
-    url(
         r"^apply/(?P<pk>\d+)/$",
         login_required(views.SubmitSingleApplicationView.as_view()),
         name="apply_single",
