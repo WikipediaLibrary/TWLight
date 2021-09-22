@@ -738,12 +738,23 @@ NEW MY LIBRARY CSS
 
 .collection-filter-label{
     font-size: 14px;
-    text-align: left;
     font-weight: 500;
 }
 
-.collection-filter-button{
-    margin-top: 20px;
+.searchable-form{
+    font-size: 14px;
+    list-style: none;
+    padding: 0px;
+}
+
+label{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#id_searchable li label{
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .v-divider{
