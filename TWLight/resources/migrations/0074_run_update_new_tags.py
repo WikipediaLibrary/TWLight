@@ -3,7 +3,7 @@ from django.db import migrations
 
 
 def update_new_tags(apps, schema_editor):
-    call_command("update_new_tags")
+    pass
 
 
 class Migration(migrations.Migration):

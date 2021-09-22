@@ -694,6 +694,24 @@ NEW MY LIBRARY CSS
     color: #3366CC;
     text-decoration: none;
 }
+.key-section{
+    font-size: 15px;
+}
+.icon-section{
+    display: inline-block;
+    vertical-align:middle;
+    width: 10%;
+}
+.key-content{
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: middle;
+    width: 80%;
+    padding-left: 15px;
+}
+.key-additional-info{
+    font-size: 14px;
+}
 .filter-container{
     flex-direction: column;
     margin-top: 40px;
@@ -807,6 +825,16 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 .collection-tile{
     margin: 0px 0px 50px 0px;
+}
+.searchable-icon{
+    color: #000000;
+    font-size: 20px;
+    padding: 5px 0px 0px 10px;
+}
+.partially-searchable-icon{
+    color: #AAADB0;
+    font-size: 20px;
+    padding: 5px 0px 0px 10px;
 }
 .tile-partner-link{
     max-height: 125px;
