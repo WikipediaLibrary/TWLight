@@ -1,3 +1,4 @@
+from django import forms
 from django.db.models import Q
 from django.utils.translation import gettext as _
 
@@ -22,10 +23,11 @@ class PartnerFilter(django_filters.FilterSet):
         queryset=Language.objects.all(),
     )
 
-    searchable = django_filters.ChoiceFilter(
+    searchable = django_filters.MultipleChoiceFilter(
         # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
         label=_("Searchable"),
         choices=Partner.SEARCHABLE_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
     )
 
     def __init__(self, *args, **kwargs):
@@ -44,7 +46,7 @@ class PartnerFilter(django_filters.FilterSet):
             {"class": "form-control form-control-sm"}
         )
         self.filters["searchable"].field.widget.attrs.update(
-            {"class": "form-control form-control-sm"}
+            {"class": "searchable-form"}
         )
 
     class Meta:
