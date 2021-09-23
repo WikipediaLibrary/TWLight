@@ -118,6 +118,7 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
             partner_qs = Partner.objects.none()
         return partner_qs
 
+
 class _BaseSubmitApplicationView(
     EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView
 ):
