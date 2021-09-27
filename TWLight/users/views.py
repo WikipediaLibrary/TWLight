@@ -26,6 +26,8 @@ from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 from django.utils import timezone
 from django.utils.translation import get_language
+from django.utils import translation
+from django.conf import settings
 
 from TWLight.resources.filters import PartnerFilter
 from TWLight.resources.helpers import get_partner_description, get_tag_names
@@ -813,6 +815,16 @@ class MyLibraryView(TemplateView):
         }
 
         return context
+
+    def render_to_response(self, context, **response_kwargs):
+        user_language = self.request.user.userprofile.lang
+
+        translation.activate(user_language)
+        response = super(MyLibraryView, self).render_to_response(
+            context, **response_kwargs
+        )
+        response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+        return response
 
     def _build_user_collection_object(self, context, language_code, user):
         """
