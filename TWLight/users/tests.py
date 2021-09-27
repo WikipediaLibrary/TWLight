@@ -335,6 +335,8 @@ class ViewsTestCase(TestCase):
             request, pk=self.editor1.pk, id=app.pk
         )
         app.refresh_from_db()
+        # withdrawing application should set date closed
+        self.assertNotEqual(app.date_closed, None)
         self.assertEqual(app.status, Application.INVALID)
 
     def test_sent_application(self):

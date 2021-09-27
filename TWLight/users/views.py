@@ -769,7 +769,10 @@ class WithdrawApplication(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         withdraw_id = kwargs["id"]
         application_id = kwargs["pk"]
-        Application.objects.filter(pk=withdraw_id).update(status=Application.INVALID)
+        applications = Application.objects.filter(pk=withdraw_id)
+        for application in applications:
+            application.status = Application.INVALID
+            application.save()
         message = f"Your application has been withdrawn successfully. Head over to <a href='/users/my_applications/{application_id}'>My Applications</a> to view the status."
         messages.add_message(self.request, messages.SUCCESS, message)
         return super().get_redirect_url(*args, **kwargs)
