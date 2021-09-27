@@ -32,10 +32,6 @@
             <th>{% trans "Application approved" %}</th>
             {% comment %}Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal. {% endcomment %}
             <th>{% trans "Renewal?" %}</th>
-            {% if partner_streams %}
-              {% comment %}Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the collection the user applied for. {% endcomment %}
-              <th>{% trans "Collection" %}</th>
-            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -52,13 +48,6 @@
             <td>{{ application.date_closed }}</td>
             {% comment %}Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
             <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
-            {% if partner_streams %}
-              <td>
-              {% if application.specific_stream %}
-                {{ application.specific_stream }}
-              {% endif %}
-              </td>
-            {% endif %}
           </tr>
         {% endfor %}
         </tbody>
@@ -83,10 +72,6 @@
             <th>{% trans "Application approved" %}</th>
             {% comment %}Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal. {% endcomment %}
             <th>{% trans "Renewal?" %}</th>
-            {% if partner_streams %}
-              {% comment %}Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the collection the user applied for. {% endcomment %}
-              <th>{% trans "Collection" %}</th>
-            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -103,13 +88,6 @@
             <td>{{ application.date_closed }}</td>
             {% comment %}Translators: Denotes whether an application was a renewal request for a previous application. {% endcomment %}
             <td>{% if application.parent %}<i>{% trans "Renewal" %}</i>{% endif %}</td>
-            {% if partner_streams %}
-              <td>
-              {% if application.specific_stream %}
-                {{ application.specific_stream }}
-              {% endif %}
-              </td>
-            {% endif %}
           </tr>
         {% endfor %}
         </tbody>

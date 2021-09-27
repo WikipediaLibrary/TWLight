@@ -52,13 +52,12 @@ def validate_language_code(code):
 class Language(models.Model):
     """
     We want to be able to indicate the language(s) of resources offered by a
-    Partner or in a Stream.
+    Partner.
 
     While having a standalone model is kind of overkill, it offers the
     following advantages:
-    * We need to be able to indicate multiple languages for a given Partner or
-      Stream.
-    * We will want to be able to filter Partners and Streams by language (e.g.
+    * We need to be able to indicate multiple languages for a given Partner.
+    * We will want to be able to filter Partners by language (e.g.
       in order to limit to the user's preferred language); we can't do that
       efficiently with something like django-multiselect or django-taggit.
     * In order to be able to filter by language, we also need to use a
@@ -166,7 +165,7 @@ class Partner(models.Model):
         (WAITLIST, "Waitlisted"),
     )
 
-    # Authorization methods, used in both Partner and Stream
+    # Authorization methods
     EMAIL = 0
     CODES = 1
     PROXY = 2
@@ -197,7 +196,7 @@ class Partner(models.Model):
     accounts_available = models.PositiveSmallIntegerField(
         blank=True,
         null=True,
-        help_text="Add the number of new accounts to the existing value, not by resetting it to zero. If 'specific stream' is true, change accounts availability at the collection level.",
+        help_text="Add the number of new accounts to the existing value, not by resetting it to zero.",
     )
 
     # Optional resource metadata
@@ -256,16 +255,6 @@ class Partner(models.Model):
         "send users a URL to use to create an account.",
     )
 
-    mutually_exclusive = models.BooleanField(
-        blank=True,
-        null=True,
-        default=None,
-        help_text="If True, users can only apply for one Stream at a time "
-        "from this Partner. If False, users can apply for multiple Streams at "
-        "a time. This field must be filled in when Partners have multiple "
-        "Streams, but may be left blank otherwise.",
-    )
-
     languages = models.ManyToManyField(
         Language,
         blank=True,
@@ -315,11 +304,6 @@ class Partner(models.Model):
         help_text="Mark as true if this partner requires applicants to "
         "specify the title they want to access.",
     )
-    specific_stream = models.BooleanField(
-        default=False,
-        help_text="Mark as true if this partner requires applicants to "
-        "specify the database they want to access.",
-    )
     occupation = models.BooleanField(
         default=False,
         help_text="Mark as true if this partner requires applicants to "
@@ -365,12 +349,6 @@ class Partner(models.Model):
                 "When agreement with terms of use is "
                 "required, a link to terms of use must be provided."
             )
-        if self.streams.count() > 1:
-            if self.mutually_exclusive is None:
-                raise ValidationError(
-                    "Since this resource has multiple "
-                    "Streams, you must specify a value for mutually_exclusive."
-                )
         if self.account_email and not self.registration_url:
             raise ValidationError(
                 "When pre-registration is required, "
@@ -390,7 +368,7 @@ class Partner(models.Model):
             )
         if self.target_url:
             # Validate the form for the uniqueness of self.target_url across
-            # all PROXY and BUNDLE partners/streams.
+            # all PROXY and BUNDLE partners.
             validation_error_msg = (
                 check_for_target_url_duplication_and_generate_error_message(
                     self, partner=True
@@ -405,9 +383,7 @@ class Partner(models.Model):
             raise ValidationError(
                 "Partners with automatically sent messages require user instructions to be entered"
             )
-        if self.authorization_method in [self.PROXY, self.BUNDLE] and (
-            not self.specific_stream
-        ):
+        if self.authorization_method in [self.PROXY, self.BUNDLE]:
             # Validate that target_url should not be empty
             # when authorization method is PROXY or BUNDLE
             if not self.target_url:
@@ -472,122 +448,6 @@ class PartnerLogo(models.Model):
     )
 
 
-class Stream(models.Model):
-    """
-    A specific resource provided by a partner organization, when they offer
-    multiple resources that require separate applications. Example: Elsevier's
-    Health & Life Sciences collection, which is distinct from its Social &
-    Behavioral Sciences collection.
-
-    At present, Streams have no information other than their name and Partner
-    (and an optional description). However, separating them in the database
-    will make it easier to cope in future should partners start expecting
-    different application information for different Streams, or if they have
-    distinct contact information, et cetera.
-    """
-
-    class Meta:
-        app_label = "resources"
-        verbose_name = "collection"
-        verbose_name_plural = "collections"
-        ordering = ["partner", "name"]
-
-    partner = models.ForeignKey(
-        Partner, db_index=True, related_name="streams", on_delete=models.CASCADE
-    )
-    name = models.CharField(
-        max_length=50,
-        help_text="Name of stream (e.g. 'Health and Behavioral Sciences). "
-        "Will be user-visible and *not translated*. Do not include the "
-        "name of the partner here.",
-    )
-
-    accounts_available = models.PositiveSmallIntegerField(
-        blank=True,
-        null=True,
-        help_text="Add number of new accounts to the existing value, not by reseting it to zero.",
-    )
-
-    description = models.TextField(
-        blank=True,
-        null=True,
-        help_text="Optional description of this stream's resources.",
-    )
-
-    languages = models.ManyToManyField(Language, blank=True)
-
-    authorization_method = models.IntegerField(
-        choices=Partner.AUTHORIZATION_METHODS,
-        default=Partner.EMAIL,
-        help_text="Which authorization method does this collection use? "
-        "'Email' means the accounts are set up via email, and is the default. "
-        "Select 'Access Codes' if we send individual, or group, login details "
-        "or access codes. 'Proxy' means access delivered directly via EZProxy, "
-        "and Library Bundle is automated proxy-based access. 'Link' is if we "
-        "send users a URL to use to create an account.",
-    )
-
-    target_url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="Link to collection. Required for proxied collections; optional otherwise.",
-    )
-
-    user_instructions = models.TextField(
-        blank=True,
-        null=True,
-        help_text="Optional instructions for editors to use access codes "
-        "or free signup URLs for this collection. Sent via email upon "
-        "application approval (for links) or access code assignment.",
-    )
-
-    def __str__(self):
-        # Do not try to also return the partner name here (e.g.
-        # "Partnername: Streamname") because that will be hard to
-        # internationalize. Returning the atomic stream name gives us more
-        # options for how this is displayed in templates.
-        return self.name
-
-    def clean(self):
-        if self.target_url:
-            # Validate the form for the uniqueness of self.target_url across
-            # all PROXY and BUNDLE partners/streams.
-            validation_error_msg = (
-                check_for_target_url_duplication_and_generate_error_message(
-                    self, stream=True
-                )
-            )
-            if validation_error_msg:
-                raise ValidationError({"target_url": validation_error_msg})
-
-    def save(self, *args, **kwargs):
-        """Invalidate the rendered html stream description from cache"""
-        super(Stream, self).save(*args, **kwargs)
-        for code in RESOURCE_LANGUAGE_CODES:
-            cache_key = make_template_fragment_key(
-                "stream_description", [code, self.pk]
-            )
-            cache.delete(cache_key)
-
-    @property
-    def get_languages(self):
-        return ", ".join([p.__str__() for p in self.languages.all()])
-
-    @property
-    def get_access_url(self):
-        ezproxy_url = settings.TWLIGHT_EZPROXY_URL
-        access_url = None
-        if (
-            self.authorization_method in [Partner.PROXY, Partner.BUNDLE]
-            and ezproxy_url
-            and self.target_url
-        ):
-            access_url = ezproxy_url + "/login?url=" + self.target_url
-        elif self.target_url:
-            access_url = self.target_url
-        return access_url
-
-
 class Contact(models.Model):
     """
     A Partner may have one or more contact people. Most of this information is
@@ -620,7 +480,7 @@ class Contact(models.Model):
     )
 
     def __str__(self):
-        # As with Stream, do not return the partner name here.
+        # Do not return the partner name here.
         return self.full_name
 
 

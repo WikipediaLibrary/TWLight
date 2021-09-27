@@ -24,17 +24,9 @@ class Command(BaseCommand):
             partner__status=0,
         ).order_by("date_created", "editor", "partner")
         for application in sent_applications:
-            # Check if an authorization already exists.
-            if application.specific_stream:
-                existing_authorization = Authorization.objects.filter(
-                    user=application.user,
-                    partners=application.partner,
-                    stream=application.specific_stream,
-                )
-            else:
-                existing_authorization = Authorization.objects.filter(
-                    user=application.user, partners=application.partner
-                )
+            existing_authorization = Authorization.objects.filter(
+                user=application.user, partners=application.partner
+            )
             # In the case that there is no existing authorization, create a new one
             if existing_authorization.count() == 0:
                 authorization = Authorization()
@@ -44,9 +36,6 @@ class Command(BaseCommand):
                 authorization.save()
                 # We set the authorization date to the date the application was closed.
                 authorization.date_authorized = application.date_closed
-                if application.specific_stream:
-                    authorization.stream = application.specific_stream
-
                 authorization.partners.add(application.partner)
                 # If this is a proxy partner, and the requested_access_duration
                 # field is set to false, set (or reset) the expiry date

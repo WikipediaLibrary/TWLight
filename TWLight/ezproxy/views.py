@@ -43,8 +43,6 @@ class EZProxyAuth(ToURequired, View):
                 and authorization.get_authorization_method() == Partner.PROXY
             ):
                 group = "P" + repr(authorization.partners.get().pk)
-                if authorization.stream:
-                    group += "S" + repr(authorization.stream_id)
                 groups.append(group)
                 logger.info("{group}.".format(group=group))
 

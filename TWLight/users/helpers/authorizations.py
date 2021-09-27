@@ -17,17 +17,17 @@ def get_all_bundle_authorizations():
     ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
 
 
-def get_valid_partner_authorizations(partner_pk, stream_pk=None):
+def get_valid_partner_authorizations(partner_pk):
     """
     Retrieves the valid authorizations available for a particular
-    partner (or collections if stream_pk is not None). Valid authorizations are
-    authorizations with which we can operate, and is decided by certain conditions as
-    spelled out in the is_valid property of the Authorization model object (users/models.py).
+    partner. Valid authorizations are authorizations with which we can operate,
+    and is decided by certain conditions as spelled out in the is_valid property
+    of the Authorization model object (users/models.py).
     """
     today = datetime.date.today()
     try:
         # The filter below is equivalent to retrieving all authorizations for a partner
-        # and (or) stream and checking every authorization against the is_valid property
+        # and checking every authorization against the is_valid property
         # of the authorization model, and hence *must* be kept in sync with the logic in
         # TWLight.users.model.Authorization.is_valid property. We don't need to check for
         # partner_id__isnull since it is functionally covered by partners=partner_pk.
@@ -40,25 +40,19 @@ def get_valid_partner_authorizations(partner_pk, stream_pk=None):
             date_authorized__lte=today,
             partners=partner_pk,
         )
-        if stream_pk:
-            valid_authorizations = valid_authorizations.filter(stream=stream_pk)
 
         return valid_authorizations
     except Authorization.DoesNotExist:
         return Authorization.objects.none()
 
 
-def create_resource_dict(authorization, partner, stream):
+def create_resource_dict(authorization, partner):
     resource_item = {
         "partner": partner,
         "authorization": authorization,
-        "stream": stream,
     }
 
-    if stream:
-        access_url = stream.get_access_url
-    else:
-        access_url = partner.get_access_url
+    access_url = partner.get_access_url
     resource_item["access_url"] = access_url
 
     valid_authorization = authorization.is_valid
@@ -85,11 +79,7 @@ def sort_authorizations_into_resource_list(authorizations):
     if authorizations:
         for authorization in authorizations:
             for partner in authorization.partners.all():
-                stream = authorization.stream
-
-                resource_list.append(
-                    create_resource_dict(authorization, partner, stream)
-                )
+                resource_list.append(create_resource_dict(authorization, partner))
 
         # Alphabetise by name
         resource_list = sorted(

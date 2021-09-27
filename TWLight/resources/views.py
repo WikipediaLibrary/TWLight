@@ -19,7 +19,7 @@ from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, Edit
 from .filters import PartnerFilter
 from .forms import SuggestionForm
 from .helpers import get_partner_description, get_tag_names, get_median
-from .models import Partner, Stream, Suggestion
+from .models import Partner, Suggestion
 
 import logging
 
@@ -138,17 +138,6 @@ class PartnersDetailView(DetailView):
             partner
         )
 
-        partner_streams = Stream.objects.filter(partner=partner)
-        if partner_streams.count() > 0:
-            context["total_accounts_distributed_streams"] = {}
-
-            for stream in partner_streams:
-                context["total_accounts_distributed_streams"][
-                    stream
-                ] = count_valid_authorizations(partner, stream)
-        else:
-            context["total_accounts_distributed_streams"] = None
-
         context["total_users"] = Authorization.objects.filter(partners=partner).count()
 
         application_end_states = [
@@ -190,77 +179,36 @@ class PartnersDetailView(DetailView):
                 partner=partner,
                 editor=user.editor,
             )
-            if partner_streams.count() == 0:
-                if apps.count() > 0:
-                    # User has open applications, don't show 'apply',
-                    # but link to apps page
-                    context["has_open_apps"] = True
-                    if not partner.specific_title:
-                        self._evaluate_apply(context, partner)
-                try:
-                    Authorization.objects.get(partners=partner, user=user)
-                    # User has an authorization, don't show 'apply',
-                    # but link to collection page
-                    if not partner.specific_title:
-                        self._evaluate_apply(context, partner)
-                    self._evaluate_has_auths(context, user, partner)
-                except Authorization.DoesNotExist:
-                    pass
-                except Authorization.MultipleObjectsReturned:
-                    logger.info(
-                        "Multiple authorizations returned for partner {} and user {}".format(
-                            partner, user
-                        )
-                    )
-                    messages.add_message(
-                        self.request,
-                        messages.ERROR,
-                        # fmt: off
-                        # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-                        _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
-                        # fmt: on
-                    )
-            else:
-                authorizations = Authorization.objects.filter(
-                    partners=partner, user=user
-                )
-                if authorizations.count() == partner_streams.count():
-                    # User has correct number of auths, don't show 'apply',
-                    # but link to collection page, unless a partner is not bundle or proxy
+            if apps.count() > 0:
+                # User has open applications, don't show 'apply',
+                # but link to apps page
+                context["has_open_apps"] = True
+                if not partner.specific_title:
                     self._evaluate_apply(context, partner)
-                    self._evaluate_has_auths(context, user, partner)
-                    if apps.count() > 0:
-                        # User has open apps, link to apps page
-                        context["has_open_apps"] = True
-                else:
-                    auth_streams = []
-                    for each_authorization in authorizations:
-                        # We are interested in the streams of existing authorizations
-                        if each_authorization.stream in partner_streams:
-                            auth_streams.append(each_authorization.stream)
-                    if auth_streams:
-                        self._evaluate_has_auths(context, user, partner)
-                    no_auth_streams = partner_streams.exclude(
-                        name__in=auth_streams
-                    )  # streams with no corresponding authorizations – we'll want to know if these have apps
-                    if apps.count() > 0:
-                        # User has open apps, link to apps page
-                        context["has_open_apps"] = True
-                        # The idea behind the logic below is to find out if we have
-                        # at least a single stream the user hasn't applied to. If so,
-                        # we show the apply button; if not, we disable it.
-                        all_streams_have_apps = True
-                        for each_no_auth_stream in no_auth_streams:
-                            stream_has_app = False
-                            for each_app in apps:
-                                if each_app.specific_stream == each_no_auth_stream:
-                                    stream_has_app = True
-                                    break
-                            if not stream_has_app:
-                                all_streams_have_apps = False
-                                break
-                        if all_streams_have_apps:
-                            context["apply"] = False
+            try:
+                Authorization.objects.get(partners=partner, user=user)
+                # User has an authorization, don't show 'apply',
+                # but link to collection page
+                if not partner.specific_title:
+                    self._evaluate_apply(context, partner)
+                self._evaluate_has_auths(context, user, partner)
+            except Authorization.DoesNotExist:
+                pass
+            except Authorization.MultipleObjectsReturned:
+                logger.info(
+                    "Multiple authorizations returned for partner {} and user {}".format(
+                        partner, user
+                    )
+                )
+                messages.add_message(
+                    self.request,
+                    messages.ERROR,
+                    # fmt: off
+                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                    _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
+                    # fmt: on
+                )
+
         return context
 
     def get_queryset(self):
@@ -421,16 +369,11 @@ class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
 
         context["approved_applications"] = partner_applications.filter(
             status=Application.APPROVED
-        ).order_by("-date_closed", "specific_stream")
+        ).order_by("-date_closed")
 
         context["sent_applications"] = partner_applications.filter(
             status=Application.SENT
-        ).order_by("-date_closed", "specific_stream")
-
-        if Stream.objects.filter(partner=partner).count() > 0:
-            context["partner_streams"] = True
-        else:
-            context["partner_streams"] = False
+        ).order_by("-date_closed")
 
         return context
 

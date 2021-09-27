@@ -45,12 +45,7 @@
   </div>
 
   {% comment %}This block warns coordinators if the number of applications they are about to send exceeds the number of accounts available. {% endcomment %}
-  {% if unavailable_streams %}
-    <div class="well hidden-xs">
-      {% comment %}Translators: This message is shown when applications exceed the number of accounts available for each collection. {% endcomment %}
-      {% blocktranslate trimmed %}Applications for <strong>{{ unavailable_streams }}</strong> if sent, will exceed the total available accounts for the collections. Please proceed at your own discretion.{% endblocktranslate %}
-    </div>
-  {% elif total_apps_approved_or_sent %}
+  {% if total_apps_approved_or_sent %}
         {% if object.accounts_available < total_apps_approved_or_sent %}
           <div class="well hidden-xs">
             {% comment %}Translators: This message is shown when applications exceed the number of accounts available. {% endcomment %}

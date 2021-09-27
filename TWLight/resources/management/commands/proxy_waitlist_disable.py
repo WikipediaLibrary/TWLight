@@ -15,7 +15,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         all_partners = Partner.objects.filter(
             authorization_method=Partner.PROXY, status=Partner.WAITLIST
-        ).exclude(specific_stream=True, accounts_available__isnull=True)
+        ).exclude(accounts_available__isnull=True)
 
         for each_partner in all_partners:
             valid_authorizations = count_valid_authorizations(each_partner.pk)

@@ -34,7 +34,7 @@ from reversion import revisions as reversion
 from reversion.models import Version
 
 from TWLight.applications.signals import no_more_accounts
-from TWLight.resources.models import Partner, Stream, AccessCode
+from TWLight.resources.models import Partner, AccessCode
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, Editor
 from TWLight.view_mixins import (
@@ -53,7 +53,6 @@ from .helpers import (
     USER_FORM_FIELDS,
     PARTNER_FORM_OPTIONAL_FIELDS,
     PARTNER_FORM_BASE_FIELDS,
-    SPECIFIC_STREAM,
     get_output_for_application,
     count_valid_authorizations,
     get_accounts_available,
@@ -257,15 +256,11 @@ class _BaseSubmitApplicationView(
 
         field_params["user"] = user_fields
 
-        specific_stream = False
         for partner in partners:
             key = "partner_{id}".format(id=partner.id)
             fields = self._get_partner_fields(partner)
-            if SPECIFIC_STREAM in fields:
-                specific_stream = True
             field_params[key] = fields
-        if specific_stream:
-            kwargs["requested_user"] = self.request.user
+
         kwargs["field_params"] = field_params
 
         return form_class(**kwargs)
@@ -531,7 +526,7 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         partner = self._get_partners()[0]
         # if partner is collection or has specific title then
         # multiple applications are allowed
-        if partner.specific_title or partner.specific_stream:
+        if partner.specific_title:
             return False
 
         editor = Editor.objects.get(user=self.request.user)
@@ -936,10 +931,7 @@ class EvaluateApplicationView(
                 # We manually send a signal to waitlist the concerned partner if we've only one account available.
                 # This could be tweaked in the future to also waitlist partners with collections. We don't do that
                 # now since it's possible we have accounts left for distribution on other collections.
-                if (
-                    total_accounts_available_for_distribution == 1
-                    and app.specific_stream is None
-                ):
+                if total_accounts_available_for_distribution == 1:
                     no_more_accounts.send(
                         sender=self.__class__, partner_pk=app.partner.pk
                     )
@@ -984,11 +976,7 @@ class EvaluateApplicationView(
         app = self.object
         context["total_accounts_available_for_distribution"] = None
         # We show accounts available for proxy partners/collections in the evaluation page
-        if app.partner.authorization_method == Partner.PROXY or (
-            app.specific_stream.authorization_method == Partner.PROXY
-            if app.specific_stream
-            else False
-        ):
+        if app.partner.authorization_method == Partner.PROXY:
             context[
                 "total_accounts_available_for_distribution"
             ] = get_accounts_available(app)
@@ -1127,11 +1115,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # approval are greater than the number of accounts available.
         batch_update_failed = []
         batch_update_success = []
-        streams_distribution_flag = {}
         partners_distribution_flag = {}
 
         applications_per_partner = {}
-        applications_per_stream = {}
         waitlist_dict = {}
         all_apps = request.POST.getlist("applications")
         for each_app_pk in all_apps:
@@ -1145,58 +1131,13 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
                 continue
             # We loop through the list of applications (only proxy) counting the number of applications that
             # are to be approved for a particular partner or collection. The counts are then updated in
-            # applications_per_partner or applications_per_stream dictionaries depending on the application type.
+            # applications_per_partner dictionary depending on the application type.
             if is_proxy_and_application_approved(status, app=each_app):
-                if each_app.specific_stream is not None:
-                    app_count = applications_per_stream.get(each_app.specific_stream)
-                    if app_count is None:
-                        applications_per_stream[each_app.specific_stream.pk] = {
-                            "partner_pk": each_app.partner.pk,
-                            "app_count": 1,
-                        }
-                    else:
-                        applications_per_stream[each_app.specific_stream.pk][
-                            "app_count"
-                        ] += 1
+                app_count = applications_per_partner.get(each_app.partner.pk)
+                if app_count is None:
+                    applications_per_partner[each_app.partner.pk] = 1
                 else:
-                    app_count = applications_per_partner.get(each_app.partner.pk)
-                    if app_count is None:
-                        applications_per_partner[each_app.partner.pk] = 1
-                    else:
-                        applications_per_partner[each_app.partner.pk] += 1
-
-        # For applications that are for collections, we get the number of accounts available based
-        # on their active authorizations to ensure we have enough accounts available and set the
-        # boolean value for the corresponding stream_pk in the streams_distribution_flag dictionary.
-        for stream_pk, info in applications_per_stream.items():
-            total_accounts_available_per_stream = Stream.objects.filter(
-                pk=stream_pk
-            ).values("accounts_available")[0]["accounts_available"]
-            total_accounts_available_per_partner = Partner.objects.filter(
-                pk=info["partner_pk"]
-            ).values("accounts_available")[0]["accounts_available"]
-
-            total_accounts_available_for_distribution = None
-            if total_accounts_available_per_stream is not None:
-                valid_authorizations = count_valid_authorizations(
-                    info["partner_pk"], stream_pk
-                )
-                total_accounts_available_for_distribution = (
-                    total_accounts_available_per_stream - valid_authorizations
-                )
-            elif total_accounts_available_per_partner is not None:
-                valid_authorizations = count_valid_authorizations(info["partner_pk"])
-                total_accounts_available_for_distribution = (
-                    total_accounts_available_per_partner - valid_authorizations
-                )
-
-            if total_accounts_available_for_distribution is None:
-                streams_distribution_flag[stream_pk] = True
-            else:
-                if info["app_count"] > total_accounts_available_for_distribution:
-                    streams_distribution_flag[stream_pk] = False
-                else:
-                    streams_distribution_flag[stream_pk] = True
+                    applications_per_partner[each_app.partner.pk] += 1
 
         # For applications that are for partners, we get the number of accounts available based
         # on their valid authorizations to ensure we have enough accounts available and set the
@@ -1232,15 +1173,7 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
             # list with the application id or do nothing and update the batch_update_failed list.
             if is_proxy_and_application_approved(status, app):
                 if app.partner.status != Partner.WAITLIST:
-                    if (
-                        app.specific_stream is not None
-                        and streams_distribution_flag[app.specific_stream.pk] is True
-                    ):
-                        batch_update_success.append(app_pk)
-                        app.status = status
-                        app.sent_by = request.user
-                        app.save()
-                    elif partners_distribution_flag[app.partner.pk] is True:
+                    if partners_distribution_flag[app.partner.pk] is True:
                         batch_update_success.append(app_pk)
                         app.status = status
                         app.sent_by = request.user
@@ -1332,17 +1265,13 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             status=Application.APPROVED, editor__isnull=False
         ).exclude(editor__user__groups__name="restricted")
         app_outputs = {}
-        stream_outputs = []
-        list_unavailable_streams = []
 
         for app in apps:
             app_outputs[app] = get_output_for_application(app)
-            stream_outputs.append(app.specific_stream)
 
         context["app_outputs"] = app_outputs
 
-        # This part checks to see if there are applications from stream(s) with no accounts available.
-        # Additionally, supports send_partner template with total approved/sent applications.
+        # Supports send_partner template with total approved/sent applications.
         total_apps_approved = Application.objects.filter(
             partner=partner, status=Application.APPROVED
         ).count()
@@ -1353,39 +1282,12 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
 
         total_apps_approved_or_sent = total_apps_approved + total_apps_sent
 
-        partner_streams = Stream.objects.filter(partner=partner)
-        if partner_streams.count() > 0:
-
-            for stream in partner_streams:
-                if stream.accounts_available is not None:
-                    total_apps_approved_or_sent_stream = User.objects.filter(
-                        editor__applications__partner=partner,
-                        editor__applications__status__in=(
-                            Application.APPROVED,
-                            Application.SENT,
-                        ),
-                        editor__applications__specific_stream=stream,
-                    ).count()
-                    after_distribution = (
-                        stream.accounts_available - total_apps_approved_or_sent_stream
-                    )
-
-                    if after_distribution < 0 and (stream in stream_outputs):
-                        list_unavailable_streams.append(stream.name)
-
-            if list_unavailable_streams:
-                unavailable_streams = ", ".join(list_unavailable_streams)
-                context["unavailable_streams"] = unavailable_streams
+        # Provide context to template only if accounts_available field is set
+        if partner.accounts_available is not None:
+            context["total_apps_approved_or_sent"] = total_apps_approved_or_sent
 
         else:
-            context["unavailable_streams"] = None
-
-            # Provide context to template only if accounts_available field is set
-            if partner.accounts_available is not None:
-                context["total_apps_approved_or_sent"] = total_apps_approved_or_sent
-
-            else:
-                context["total_apps_approved_or_sent"] = None
+            context["total_apps_approved_or_sent"] = None
 
         available_access_codes = AccessCode.objects.filter(
             partner=partner, authorization__isnull=True
@@ -1474,17 +1376,10 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 # Access code object needs to be updated after the application
                 # to ensure that the authorization object has been created.
                 # This filtering should only ever find one object. There will
-                # always be a user and partner, and sometimes a stream.
-                if application.specific_stream:
-                    code_object.authorization = Authorization.objects.get(
-                        user=application.user,
-                        partners=application.partner,
-                        stream=application.specific_stream,
-                    )
-                else:
-                    code_object.authorization = Authorization.objects.get(
-                        user=application.user, partners=application.partner
-                    )
+                # always be a user and partner
+                code_object.authorization = Authorization.objects.get(
+                    user=application.user, partners=application.partner
+                )
                 code_object.save()
 
         messages.add_message(

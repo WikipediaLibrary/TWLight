@@ -10,7 +10,7 @@ from django_comments.models import Comment
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime, now
 from django.utils.translation import gettext as _
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
 
@@ -146,16 +146,9 @@ def post_revision_commit(sender, instance, **kwargs):
 
     if instance.status == Application.SENT:
         # Check if an authorization already exists.
-        if instance.specific_stream:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user,
-                partners=instance.partner,
-                stream=instance.specific_stream,
-            )
-        else:
-            existing_authorization = Authorization.objects.filter(
-                user=instance.user, partners=instance.partner
-            )
+        existing_authorization = Authorization.objects.filter(
+            user=instance.user, partners=instance.partner
+        )
 
         authorized_user = instance.user
         authorizer = instance.sent_by
@@ -175,9 +168,6 @@ def post_revision_commit(sender, instance, **kwargs):
                 )
             )
             return
-
-        if instance.specific_stream:
-            authorization.stream = instance.specific_stream
 
         authorization.user = authorized_user
         authorization.authorizer = authorizer
@@ -218,7 +208,6 @@ def post_revision_commit(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Partner)
-@receiver(post_save, sender=Stream)
 def invalidate_bundle_partner_applications(sender, instance, **kwargs):
     """
     Invalidates open applications for bundle partners.
@@ -228,8 +217,6 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
 
     if sender == Partner:
         partner = instance
-    elif sender == Stream:
-        partner = instance.partner
 
     if partner and partner.authorization_method == Partner.BUNDLE:
         # All open applications for this partner.

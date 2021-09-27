@@ -11,7 +11,7 @@ from reversion import revisions as reversion
 from reversion.models import Version
 from TWLight.users.models import Editor
 from TWLight.applications.models import Application
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 
 logger = logging.getLogger(__name__)
 
@@ -108,12 +108,8 @@ class Command(BaseCommand):
                             wp_username = self.normalize_wp_username(row[2])
                             editor = Editor.objects.get(wp_username=wp_username)
                             editor_id = editor.pk
-
-                            try:
-                                stream = Stream.objects.get(pk=specific_stream_id)
-                            except:
-                                specific_stream_id = None
-                                stream = None
+                            specific_stream_id = None
+                            stream = None
 
                             import_note = "Imported on " + str(date.today()) + "."
 
@@ -123,7 +119,6 @@ class Command(BaseCommand):
                                     date_created=date_created,
                                     date_closed=date_created,
                                     editor_id=editor_id,
-                                    specific_stream_id=specific_stream_id,
                                     specific_title=specific_title,
                                     imported=True,
                                     status=Application.SENT,
@@ -134,7 +129,6 @@ class Command(BaseCommand):
                                     date_created=date_created,
                                     date_closed=date_created,
                                     editor_id=editor_id,
-                                    specific_stream_id=specific_stream_id,
                                     specific_title=specific_title,
                                     comments=import_note,
                                     rationale=import_note,

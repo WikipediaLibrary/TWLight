@@ -43,7 +43,7 @@ from django.db.models import Q
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 from TWLight.users.helpers.validation import validate_partners, validate_authorizer
 
@@ -774,18 +774,6 @@ class Authorization(models.Model):
         help_text="The partner(s) for which the editor is authorized.",
     )
 
-    stream = models.ForeignKey(
-        Stream,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        # Limit to available partners.
-        limit_choices_to=(
-            models.Q(partner__status__in=[Partner.AVAILABLE, Partner.WAITLIST])
-        ),
-        help_text="The stream for which the editor is authorized.",
-    )
-
     reminder_email_sent = models.BooleanField(
         default=False,
         help_text="Have we sent a reminder email about this authorization?",
@@ -821,11 +809,6 @@ class Authorization(models.Model):
 
     # Try to return a useful object name, if fields were set appropriately.
     def __str__(self):
-        if self.stream:
-            stream_name = self.stream.name
-        else:
-            stream_name = None
-
         company_name = get_company_name(self)
 
         # In reality, we should always have an authorized user.
@@ -854,12 +837,11 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - " "company_name: {company_name} - stream_name: {stream_name}".format(
+        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - " "company_name: {company_name}".format(
             authorized_user=authorized_user,
             authorizer=authorizer,
             date_authorized=self.date_authorized,
             company_name=company_name,
-            stream_name=stream_name,
         )
 
     def get_latest_app(self):
@@ -871,19 +853,11 @@ class Authorization(models.Model):
         if self.partners.all().count() == 1 and self.user and self.user.editor:
             partner = self.partners.all()
             try:
-                if self.stream:
-                    return Application.objects.filter(
-                        ~Q(status=Application.NOT_APPROVED),
-                        partner__in=partner,
-                        specific_stream=self.stream,
-                        editor=self.user.editor,
-                    ).latest("id")
-                else:
-                    return Application.objects.filter(
-                        ~Q(status=Application.NOT_APPROVED),
-                        partner__in=partner,
-                        editor=self.user.editor,
-                    ).latest("id")
+                return Application.objects.filter(
+                    ~Q(status=Application.NOT_APPROVED),
+                    partner__in=partner,
+                    editor=self.user.editor,
+                ).latest("id")
             except Application.DoesNotExist:
                 return None
 
@@ -940,11 +914,9 @@ class Authorization(models.Model):
     def get_authorization_method(self):
         """
         For this authorization, returns the linked authorization
-        method of the partner or stream, as applicable
+        method of the partner, as applicable
         """
-        if self.stream:
-            authorization_method = self.stream.authorization_method
-        elif self.pk and self.partners.exists():
+        if self.pk and self.partners.exists():
             # Even if there is more than one partner, there should only be one authorization_method.
             authorization_method = (
                 self.partners.all()
@@ -961,7 +933,7 @@ class Authorization(models.Model):
     def is_bundle(self):
         """
         Returns True if this authorization is to a Bundle partner
-        or stream and False otherwise.
+        and False otherwise.
         """
         authorization_method = self.get_authorization_method()
 
@@ -973,7 +945,7 @@ class Authorization(models.Model):
     def is_accessed_via_proxy(self):
         """
         Do users access the collection for this authorization via the proxy, or not?
-        Returns True if the partner or stream has an authorization_method of Proxy or Bundle.
+        Returns True if the partner has an authorization_method of Proxy or Bundle.
         """
         authorization_method = self.get_authorization_method()
 

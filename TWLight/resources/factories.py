@@ -3,7 +3,7 @@ import factory
 
 import random
 from django.conf import settings
-from TWLight.resources.models import Partner, Stream, Video, Suggestion
+from TWLight.resources.models import Partner, Video, Suggestion
 
 
 class PartnerFactory(factory.django.DjangoModelFactory):
@@ -16,15 +16,6 @@ class PartnerFactory(factory.django.DjangoModelFactory):
     )
     terms_of_use = factory.Faker("uri", locale=random.choice(settings.FAKER_LOCALES))
     status = Partner.AVAILABLE  # not the default, but usually wanted in tests
-
-
-class StreamFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Stream
-        strategy = factory.CREATE_STRATEGY
-
-    partner = factory.SubFactory(PartnerFactory)
-    name = factory.Faker("bs", locale=random.choice(settings.FAKER_LOCALES))
 
 
 class SuggestionFactory(factory.django.DjangoModelFactory):

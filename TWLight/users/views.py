@@ -694,8 +694,6 @@ class AuthorizedUsers(APIView):
             message = "Couldn't find a partner with this ID."
             return Response(message, status=status.HTTP_404_NOT_FOUND)
 
-        # We're ignoring streams here, because the API operates at the partner
-        # level. This is fine for the use case we built it for (Wikilink tool)
         valid_partner_auths = get_valid_partner_authorizations(pk)
 
         # For Bundle partners, get auths for users who logged in within the last 2 weeks.
@@ -913,13 +911,7 @@ class MyLibraryView(TemplateView):
                     translated_tags = get_tag_names(
                         language_code, user_authorization_partner.new_tags
                     )
-
-                    # Use the partner access url by default.
                     access_url = user_authorization_partner.get_access_url
-                    # If the authorization is for a stream, and that stream has an access url, use it.
-                    stream = user_authorization.stream
-                    if stream and stream.get_access_url:
-                        access_url = stream.get_access_url
 
                     user_authorization_obj.append(
                         {

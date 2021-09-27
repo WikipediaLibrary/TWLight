@@ -298,42 +298,6 @@
               </div>
             </li>
           {% endif %}
-          {% if object.streams.all %}
-            <li class="timeline-inverted">
-              <div class="timeline-badge"><i class="fa fa-tags"></i>
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  {% comment %}Translators: If a partner has multiple collections which can be selected, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
-                  <h4 class="timeline-title">{% trans "Collections" %}</h4>
-                </div>
-                <div class="timeline-body">
-                  <ul>
-                    {% for stream in object.streams.all %}
-                    {% comment %}
-                      Cache lifetime should be None, which would be forever since we're
-                      invalidating on update. However, as 2017-04-06 a bug in django
-                      doesn't allow for None to be passed from here into cache.  The
-                      fix is in master, but not release.
-                      https://code.djangoproject.com/ticket/27882
-                      We filter out details and summary tags so that we always see
-                      the full content on the details page.
-                    {% endcomment %}
-                      <li><b>{{ stream }}</b>
-                        {% if stream.description %}&mdash;
-                          {% filter twlight_removetags:"details summary" %}
-                            {% cache 31536000 stream_description LANGUAGE_CODE stream.pk %}
-                              {{ stream.description | twlight_wikicode2html | safe }}
-                            {% endcache %}
-                          {% endfilter %}
-                        {% endif %}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              </div>
-            </li>
-          {% endif %}
           <li class="timeline-inverted">
             <div class="timeline-badge"><i class="fa fa-link"></i>
             </div>
@@ -469,34 +433,18 @@
             <div class="panel-body top-border">
               {% if user.is_authenticated %}
                 {% if user.editor.wp_bundle_eligible %}
-                  {% if partner.specific_stream %}
-                    {% comment %}Translators: This text labels a button taking users to their library. {% endcomment %}
-                    <a class="btn btn-primary btn-lg btn-block" href="{% url "users:my_library" %}">{% trans "My Library" %}</a><br />
-                    {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-                    <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                    {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-                    {% trans "Library bundle access" %}
-                    ">
-                    {% comment %}Translators: Text shown to authenticated, bundle eligible users when they need to visit My Library to access collections. {% endcomment %}
-                    {% blocktranslate trimmed %}
-                      You are eligible to access Library Bundle partners.
-                      Click the button above to go to your Library and browse
-                      collections from this partner.
-                    {% endblocktranslate %}
-                  {% else %}
-                    {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-                    <a class="btn btn-primary btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
-                    {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-                    <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-                    {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-                    {% trans "Library bundle access" %}
-                    ">
-                    {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
-                    {% blocktranslate trimmed %}
-                      You are eligible to access Library Bundle partners.
-                      Click the button above to access the collection.
-                    {% endblocktranslate %}
-                  {% endif %}
+                  {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+                  <a class="btn btn-primary btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+                  {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+                  <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+                  {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+                  {% trans "Library bundle access" %}
+                  ">
+                  {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+                  {% blocktranslate trimmed %}
+                    You are eligible to access Library Bundle partners.
+                    Click the button above to access the collection.
+                  {% endblocktranslate %}
                 {% else %}
                   {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
                   <a class="btn btn-primary btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
@@ -535,11 +483,6 @@
     </div>
   </div>
 
-
-{% comment %}
-  other stuff to do:
-    list streams
-{% endcomment %}
   {% if object.authorization_method is not object.BUNDLE %}
     <div class="row">
       <div class="col-xs-12 col-md-4">
@@ -597,13 +540,5 @@
         </div>
       </div>
     </div>
-
-    {% if total_accounts_distributed_streams %}
-      {% comment %}Translators: This is the header for total accounts on a per-collection level. {% endcomment %}
-      <h4>{% trans 'Active accounts (collections)' %}:</h4>
-      {% for stream, count in total_accounts_distributed_streams.items %}
-        <li>{{ stream }}: {{ count }}{% if stream.accounts_available %}/{{ stream.accounts_available }}{% endif %}</li>
-      {% endfor %}
-    {% endif %}
   {% endif %}
 {% endblock content %}
