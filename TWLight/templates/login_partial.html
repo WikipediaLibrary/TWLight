@@ -4,14 +4,20 @@
 {% load cache %}
 
 <div class="row col-12">
-  <!-- logo -->
-  <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
-  {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
-  {% trans "The Wikipedia Library" %}
-  ">
-  <!-- site name -->
-  {% comment %}Translators: Name of the project/tool.{% endcomment %}
-  <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
+  <div class="col-lg-9 col-md-12">
+    <!-- logo -->
+    <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+    {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
+    {% trans "The Wikipedia Library" %}
+    ">
+    <!-- site name -->
+    {% comment %}Translators: Name of the project/tool.{% endcomment %}
+    <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
+  </div>
+  <div class="col-lg-3 col-md-12">
+    <!-- language form -->
+    {% include 'language_form.html' %}
+  </div>
 </div>
 
 <div class="row">

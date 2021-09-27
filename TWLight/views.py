@@ -19,6 +19,7 @@ from TWLight.resources.helpers import get_partner_description, get_tag_dict
 import logging
 
 from django.views.defaults import ERROR_400_TEMPLATE_NAME, ERROR_PAGE_TEMPLATE
+from TWLight.forms import SetLanguageForm
 
 logger = logging.getLogger(__name__)
 
@@ -108,6 +109,7 @@ class NewHomePageView(TemplateView):
                 }
             )
         context["partners"] = partners_obj
+        context["language_form"] = SetLanguageForm()
 
         return context
 
