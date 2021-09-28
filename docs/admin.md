@@ -131,7 +131,7 @@ You can add one or more languages to the Language field. Use the green + to add 
 
 Right now TWLight sends one type of email: comment notifications whenever someone comments on an application. Recipients are 1) the editor who owns that application; 2) anyone else who has commented on that application.
 
-To make TWLight send additional emails, you (or your friendly neighborhood developer) will need to write more code. Unfortunately form emails cannot be handled through `/admin`, because database objects are not visible by default to the translation infrastructure. (This could be altered in future, using the modeltranslation app.) Storing emails as HTML in the codebase, with the `{% trans %}` or `{% blocktrans %}` tag, means they will automatically be provided to translators via Django's internationalization mechanism.
+To make TWLight send additional emails, you (or your friendly neighborhood developer) will need to write more code. Unfortunately form emails cannot be handled through `/admin`, because database objects are not visible by default to the translation infrastructure. Storing emails as HTML in the codebase, with the `{% trans %}` or `{% blocktrans %}` tag, means they will automatically be provided to translators via Django's internationalization mechanism.
 
 The existing `emails/tasks.py` provides a model for how additional emails can be incorporated into the codebase. The steps are:
 

@@ -107,7 +107,6 @@ THIRD_PARTY_APPS = [
     "django_comments",
     "django_cron",
     "django_filters",
-    "modeltranslation",
     "django_countries",
     "rest_framework",
     "rest_framework.authtoken",
@@ -125,7 +124,7 @@ TWLIGHT_APPS = [
     "TWLight.ezproxy",
 ]
 
-# dal (autocomplete_light) and modeltranslation must go before django.contrib.admin.
+# dal (autocomplete_light) must go before django.contrib.admin.
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + TWLIGHT_APPS
 
 # CRON CONFIGURATION
@@ -236,12 +235,6 @@ SESSION_COOKIE_AGE = 259200
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = "en"  # Sets site default language.
-
-# https://django-modeltranslation.readthedocs.io/en/latest/installation.html#advanced-settings
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = (
-    LANGUAGE_CODE  # sets the modeltranslation default language.
-)
 
 LOCALE_PATHS = [
     # makemessages looks for locale/ in the top level, not the project level.
