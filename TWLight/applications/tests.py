@@ -268,7 +268,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(9, len(list(output.keys())))
+        self.assertEqual(8, len(list(output.keys())))
 
     def test_application_output_2(self):
         """
