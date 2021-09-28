@@ -24,7 +24,7 @@ from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFacto
 from TWLight.users.groups import get_coordinators, get_restricted
 from TWLight.users.models import Authorization
 
-from .factories import PartnerFactory, StreamFactory, SuggestionFactory
+from .factories import PartnerFactory, SuggestionFactory
 from .helpers import (
     check_for_target_url_duplication_and_generate_error_message,
     get_partner_description_json_schema,
@@ -435,7 +435,6 @@ class PartnerModelTests(TestCase):
     def test_helper_function_for_target_url_uniqueness(self):
         partner1 = PartnerFactory(authorization_method=Partner.PROXY)
         partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-        stream1 = StreamFactory(authorization_method=Partner.PROXY)
 
         example_url = "https://www.example.com"
         partner1.target_url = example_url
@@ -458,9 +457,6 @@ class PartnerModelTests(TestCase):
         except ValidationError as e:
             self.assertEqual([msg], e.messages)
 
-        stream1.target_url = example_url
-        stream1.save()
-
         msg = check_for_target_url_duplication_and_generate_error_message(
             partner2, partner=True
         )
@@ -469,18 +465,8 @@ class PartnerModelTests(TestCase):
         # not self.
         self.assertNotIn(partner2.company_name, msg)
         self.assertIn(partner1.company_name, msg)
-        self.assertIn(stream1.name, msg)
-
-        msg = check_for_target_url_duplication_and_generate_error_message(
-            stream1, stream=True
-        )
 
         self.assertIsNotNone(msg)
-        self.assertRaises(ValidationError, stream1.clean)
-        try:
-            stream1.clean()
-        except ValidationError as e:
-            self.assertEqual([msg], e.messages)
 
     def test_user_instructions(self):
         partner1 = PartnerFactory(authorization_method=Partner.CODES)
@@ -539,21 +525,6 @@ class PartnerModelTests(TestCase):
         """
         partner2 = PartnerFactory(authorization_method=Partner.EMAIL)
         self.assertEqual(partner2.clean(), None)
-
-    def test_for_target_url_not_empty_when_authorization_method_is_proxy_or_bundle_3(
-        self,
-    ):
-        """
-        When partner’s authorization method is PROXY or BUNDLE and if it has a
-        specific stream then leaving target_url empty should not raise a ValidationError
-        """
-        # test for a partner with proxy authorization method
-        partner3 = PartnerFactory(authorization_method=Partner.PROXY)
-        partner3.requested_access_duration = (
-            True  # We don't want the ValidationError from requested_access_duration
-        )
-        partner3.specific_stream = True
-        self.assertEqual(partner3.clean(), None)
 
     def test_create_tags_success(self):
         """
@@ -783,28 +754,6 @@ class WaitlistBehaviorTests(TestCase):
         )
         for app in applications:
             self.assertEqual(app.waitlist_status, True)
-
-
-class StreamModelTests(TestCase):
-    @classmethod
-    @wrap_testdata
-    def setUpTestData(cls):
-        super().setUpTestData()
-        cls.lang_en, _ = Language.objects.get_or_create(language="en")
-        cls.lang_fr, _ = Language.objects.get_or_create(language="fr")
-
-    def test_get_languages(self):
-        stream = StreamFactory()
-
-        # At first, the list of languages should be empty.
-        self.assertFalse(stream.languages.all())
-
-        stream.languages.add(self.lang_en)
-        self.assertEqual(stream.get_languages, "English")
-
-        # Order isn't important.
-        stream.languages.add(self.lang_fr)
-        self.assertIn(stream.get_languages, ["English, français", "français, English"])
 
 
 class PartnerViewTests(TestCase):

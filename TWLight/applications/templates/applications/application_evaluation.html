@@ -146,16 +146,6 @@
       {% endif %}
     </div>
 
-    {% if object.specific_stream %}
-      <div class="col-xs-12 col-sm-4">
-        {% comment %}Translators: This labels the section of an application showing which collection of resources the user requested access to.{% endcomment %}
-        <strong>{% trans 'Collection requested' %}</strong>
-      </div>
-      <div class="col-xs-12 col-sm-8">
-        {{ object.specific_stream }}
-      </div>
-    {% endif %}
-
     {% if object.specific_title %}
       <div class="col-xs-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.{% endcomment %}
@@ -215,12 +205,12 @@
       <div class="col-xs-12 col-sm-8">
         {{ object.comments }}
       </div>
-    {% endif %}    
+    {% endif %}
   </div>
 
   {% comment %}Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.{% endcomment %}
   <h2>{% trans 'Recent Applications (last 90 days)' %}</h2>
-  
+
   {% if recent_apps|length > 0 %}
     <div class="table-responsive">
       <table class="table table-hover">
@@ -299,7 +289,7 @@
   <h2>{% trans 'User' %}</h2>
 
   {% include 'users/editor_detail_data.html' %}
-    
+
   {% comment %}Translators: This is the title of the section of an application page which lists the history of status changes.{% endcomment %}
   <h2>{% trans 'Revision history' %}</h2>
 
@@ -352,6 +342,6 @@
     {% empty %}
       {% comment %}Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.{% endcomment %}
       <li>{% trans 'No previous versions.' %}</li>
-    {% endfor %}      
+    {% endfor %}
   </ul>
 {% endblock %}

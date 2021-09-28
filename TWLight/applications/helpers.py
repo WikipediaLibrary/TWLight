@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 
 from .models import Application
 from ..users.helpers.authorizations import get_valid_partner_authorizations
@@ -28,7 +28,6 @@ Optional/universal:
 Optional/unique:
     Questions/comments/concerns (free-text, all partnerships)
     Title requested (McFarland, Pelican)
-    Stream requested (OUP, T&F, Elsevier)
     Agreement with Terms of Use (RSUK)
 """
 
@@ -39,7 +38,6 @@ OCCUPATION = "occupation"
 AFFILIATION = "affiliation"
 PARTNER = "partner"
 RATIONALE = "rationale"
-SPECIFIC_STREAM = "specific_stream"
 SPECIFIC_TITLE = "specific_title"
 COMMENTS = "comments"
 AGREEMENT_WITH_TERMS_OF_USE = "agreement_with_terms_of_use"
@@ -56,7 +54,6 @@ PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
 # These fields are displayed only when a specific partner requires that
 # information.
 PARTNER_FORM_OPTIONAL_FIELDS = [
-    SPECIFIC_STREAM,
     SPECIFIC_TITLE,
     AGREEMENT_WITH_TERMS_OF_USE,
     ACCOUNT_EMAIL,
@@ -74,7 +71,6 @@ FIELD_TYPES = {
         queryset=Partner.objects.all(), widget=forms.HiddenInput
     ),
     RATIONALE: forms.CharField(widget=forms.Textarea),
-    SPECIFIC_STREAM: forms.ModelChoiceField(queryset=Stream.objects.all()),
     SPECIFIC_TITLE: forms.CharField(max_length=128),
     COMMENTS: forms.CharField(widget=forms.Textarea, required=False),
     AGREEMENT_WITH_TERMS_OF_USE: forms.BooleanField(),
@@ -97,8 +93,6 @@ FIELD_LABELS = {
     PARTNER: _("Partner name"),
     # Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
     RATIONALE: _("Why do you want access to this resource?"),
-    # Translators: When filling out an application, users may need to specify a particular collection of resources they want access to
-    SPECIFIC_STREAM: _("Which collection do you want?"),
     # Translators: When filling out an application, users may need to specify a particular book they want access to
     SPECIFIC_TITLE: _("Which book do you want?"),
     # Translators: When filling out an application, users are given a text box where they can include any extra relevant information
@@ -122,8 +116,6 @@ SEND_DATA_FIELD_LABELS = {
     OCCUPATION: _("Occupation"),
     # Translators: When sending application data to partners, this is the text labelling a user's affiliation
     AFFILIATION: _("Affiliation"),
-    # Translators: When sending application data to partners, this is the text labelling the stream/collection a user requested
-    SPECIFIC_STREAM: _("Collection requested"),
     # Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
     SPECIFIC_TITLE: _("Title requested"),
     # Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
@@ -164,34 +156,20 @@ def get_output_for_application(app):
     return output
 
 
-def count_valid_authorizations(partner_pk, stream_pk=None):
+def count_valid_authorizations(partner_pk):
     """
     Retrieves the numbers of valid authorizations using the
     get_valid_partner_authorizations() method above.
     """
-    if stream_pk:
-        return get_valid_partner_authorizations(partner_pk, stream_pk).count()
-    else:
-        return get_valid_partner_authorizations(partner_pk).count()
+    return get_valid_partner_authorizations(partner_pk).count()
 
 
 def get_accounts_available(app):
     """
-    Because we allow number of accounts available on either the partner level or the collection level,
-    we base our calculations on either the collection level (default) or the partner level.
+    Because we allow number of accounts available on the partner level,
+    we base our calculations on the partner level.
     """
-    if app.specific_stream is not None:
-        if app.specific_stream.accounts_available is not None:
-            valid_authorizations = count_valid_authorizations(
-                app.partner, app.specific_stream
-            )
-            total_accounts_available = app.specific_stream.accounts_available
-            return total_accounts_available - valid_authorizations
-        elif app.partner.accounts_available is not None:
-            valid_authorizations = count_valid_authorizations(app.partner)
-            total_accounts_available = app.partner.accounts_available
-            return total_accounts_available - valid_authorizations
-    elif app.partner.accounts_available is not None:
+    if app.partner.accounts_available is not None:
         valid_authorizations = count_valid_authorizations(app.partner)
         return app.partner.accounts_available - valid_authorizations
 
@@ -199,12 +177,8 @@ def get_accounts_available(app):
 def is_proxy_and_application_approved(status, app):
     if (
         app.partner.authorization_method == Partner.PROXY
-        or (
-            app.specific_stream.authorization_method == Partner.PROXY
-            if app.specific_stream
-            else False
-        )
-    ) and status == Application.APPROVED:
+        and status == Application.APPROVED
+    ):
         return True
     else:
         return False
@@ -219,10 +193,6 @@ def more_applications_than_accounts_available(app):
         total_pending_apps = Application.objects.filter(
             partner=app.partner, status__in=[Application.PENDING, Application.QUESTION]
         )
-        if app.specific_stream:
-            total_pending_apps = total_pending_apps.filter(
-                specific_stream=app.specific_stream
-            )
         if (
             app.partner.status != Partner.WAITLIST
             and total_accounts_available_for_distribution > 0

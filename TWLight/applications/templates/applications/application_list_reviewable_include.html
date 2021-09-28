@@ -35,7 +35,7 @@
               {{ app.get_status_display }}
             </span>&nbsp;
             <a href="{{ app.get_absolute_url }}">
-              {{ app }} {% if app.specific_stream %}({{ app.specific_stream }}){% endif %}
+              {{ app }}
             </a>
             &mdash;
             {% if app.get_version_count > 1 %} {# first version is original submission, not later review #}
@@ -77,12 +77,12 @@
 
     <div class="row">
       <div class="col-xs-12 col-sm-6">
-        <div class="form-group">    
+        <div class="form-group">
           <label for="select_status">
             {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.{% endcomment %}
             {% trans "Status for all selected applications" %}
           </label>
-          
+
           <select name="batch_status" class="form-control" id="select_status">
             {% for status in status_choices %}
               <option value="{{ status.0 }}">{{ status.1 }}</option>

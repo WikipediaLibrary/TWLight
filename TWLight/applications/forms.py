@@ -25,7 +25,7 @@ from django import forms
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Editor, Authorization
 
@@ -35,7 +35,6 @@ from .helpers import (
     PARTNER_FORM_BASE_FIELDS,
     FIELD_TYPES,
     FIELD_LABELS,
-    SPECIFIC_STREAM,
     AGREEMENT_WITH_TERMS_OF_USE,
     ACCOUNT_EMAIL,
 )
@@ -257,41 +256,6 @@ class BaseApplicationForm(forms.Form):
                         url=partner_object.terms_of_use
                     )
                     self.fields[field_name].help_text = help_text
-
-                if datum == SPECIFIC_STREAM:
-                    # Only show streams for this partner
-                    partner_id = int(partner[8:])
-                    # We use the logic below to filter out the streams for which
-                    # the user already has authorizations. Streams with authorizations
-                    # can only be renewed (as opposed to applying) from the My Library
-                    # page.
-                    queryset = Stream.objects.filter(partner_id=partner_id)
-                    # We need a user if we are to determine which streams have authorizations.
-                    # We set the user in the view code if a partner has streams.
-                    if self.user:
-                        all_authorizations = Authorization.objects.filter(
-                            user=self.user, partners=partner_id, stream__isnull=False
-                        )
-                        existing_streams = []
-                        for each_authorization in all_authorizations:
-                            existing_streams.append(each_authorization.stream.id)
-                        if len(existing_streams) > len(set(existing_streams)):
-                            logger.info(
-                                "Multiple authorizations returned for the same partner {}, same stream for user {}. "
-                                "Unable to pop options.".format(partner_id, self.user)
-                            )
-                            break
-                        else:
-                            # We exclude the streams that already have authorizations.
-                            queryset = Stream.objects.exclude(
-                                id__in=existing_streams
-                            ).filter(partner_id=partner_id)
-
-                    specific_stream = forms.ModelChoiceField(
-                        queryset=queryset, empty_label=None
-                    )
-                    self.fields[field_name] = specific_stream
-                    self.fields[field_name].label = FIELD_LABELS[datum]
 
                 if datum == ACCOUNT_EMAIL:
                     # If partner requires pre-registration, make sure users

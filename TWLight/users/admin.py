@@ -62,13 +62,11 @@ class AuthorizationAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "get_partners_company_name",
-        "stream",
         "get_authorizer_wp_username",
         "get_authorized_user_wp_username",
     )
     search_fields = [
         "partners__company_name",
-        "stream__name",
         "authorizer__editor__wp_username",
         "user__editor__wp_username",
     ]

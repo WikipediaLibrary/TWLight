@@ -13,7 +13,7 @@ from django.urls import reverse
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.applications.views import SendReadyApplicationsView
-from TWLight.resources.models import Partner, Stream, AccessCode
+from TWLight.resources.models import Partner, AccessCode
 from TWLight.users.models import Editor
 
 twl_team = User.objects.get(username="TWL Team")
@@ -77,12 +77,6 @@ class Command(BaseCommand):
                     editor=random_editor,
                     partner=random_partner,
                 )
-
-                # Make sure partner-specific information is filled.
-                if random_partner.specific_stream:
-                    app.specific_stream = random.choice(
-                        Stream.objects.filter(partner=random_partner)
-                    )
 
                 if random_partner.specific_title:
                     app.specific_title = Faker(

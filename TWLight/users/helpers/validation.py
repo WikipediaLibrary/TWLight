@@ -1,13 +1,12 @@
 from typing import Union
 from django.db.models import QuerySet
 from django.core.exceptions import ValidationError
-from modeltranslation.manager import MultilingualQuerySet
 
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
 
 
-def validate_partners(partners: Union[QuerySet, MultilingualQuerySet]):
+def validate_partners(partners: QuerySet):
     """
     If we have more than one partner, assert that the auth method is the same for all partners and is bundle.
     """

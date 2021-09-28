@@ -13,8 +13,6 @@ then
     python3 ${TWLIGHT_HOME}/manage.py makemigrations || exit 1
 
     if ! python3 ${TWLIGHT_HOME}/manage.py migrate; then
-        # Sync any translation fields that were missed by migration.
-        python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
         python3 ${TWLIGHT_HOME}/manage.py migrate
     fi
 
@@ -32,15 +30,9 @@ then
       python3 ${TWLIGHT_HOME}/manage.py makemigrations ${app} || exit 1
       echo "migrate ${app}"
       if ! python3 ${TWLIGHT_HOME}/manage.py migrate ${app}; then
-          # Sync any translation fields that were missed by migration.
-          python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
           python3 ${TWLIGHT_HOME}/manage.py migrate ${app}
       fi
     done
-
-    # Sync any translation fields that were missed by migration.
-    echo "sync_translation_fields"
-    python3 ${TWLIGHT_HOME}/manage.py sync_translation_fields --noinput || exit 1
 
     # Run black on all migrations.
     find ${TWLIGHT_HOME}/TWLight -type d -name "migrations" -print0 | xargs -0 black -t py37

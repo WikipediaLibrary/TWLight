@@ -21,7 +21,7 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.tests import EditorCraftRoom
-from TWLight.resources.factories import PartnerFactory, StreamFactory
+from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.factories import UserFactory, EditorFactory
@@ -470,13 +470,6 @@ class AuthorizationBaseTestCase(TestCase):
         cls.partner5 = PartnerFactory(
             authorization_method=Partner.EMAIL,
             status=Partner.AVAILABLE,
-            specific_stream=True,
-        )
-        cls.partner5_stream1 = StreamFactory(
-            partner=cls.partner5, authorization_method=Partner.EMAIL
-        )
-        cls.partner5_stream2 = StreamFactory(
-            partner=cls.partner5, authorization_method=Partner.EMAIL
         )
 
         cls.editor1 = EditorFactory()
@@ -535,13 +528,11 @@ class AuthorizationBaseTestCase(TestCase):
         cls.app10 = ApplicationFactory(
             editor=cls.editor1,
             partner=cls.partner5,
-            specific_stream=cls.partner5_stream1,
             status=Application.PENDING,
         )
         cls.app11 = ApplicationFactory(
             editor=cls.editor1,
             partner=cls.partner5,
-            specific_stream=cls.partner5_stream2,
             status=Application.PENDING,
         )
 
@@ -566,7 +557,6 @@ class AuthorizationBaseTestCase(TestCase):
             authorizer=cls.editor4.user,
             user=cls.editor1.user,
             partners=cls.partner5,
-            stream=cls.partner5_stream1,
         )
         cls.client.post(
             reverse("applications:evaluate", kwargs={"pk": cls.app11.pk}),
@@ -578,7 +568,6 @@ class AuthorizationBaseTestCase(TestCase):
             authorizer=cls.editor4.user,
             user=cls.editor1.user,
             partners=cls.partner5,
-            stream=cls.partner5_stream2,
         )
 
         # Send the application
@@ -757,40 +746,6 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         ).exists()
 
         self.assertTrue(authorization_object_exists)
-
-    def test_handle_stream_post_delete(self):
-
-        partner5_authorizations = Authorization.objects.filter(
-            partners=self.partner5, user=self.editor1.user, stream__isnull=True
-        )
-        stream1_authorizations = Authorization.objects.filter(
-            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream1
-        )
-        stream2_authorizations = Authorization.objects.filter(
-            partners=self.partner5, user=self.editor1.user, stream=self.partner5_stream2
-        )
-        # Verifying that we only have stream-specific auths.
-        self.assertTrue(self.partner5.specific_stream)
-        self.assertEquals(partner5_authorizations.count(), 0)
-        self.assertEquals(stream1_authorizations.count(), 1)
-        self.assertEquals(stream2_authorizations.count(), 1)
-
-        # Deleting stream 1 should convert its related auths to partner scope.
-        self.partner5_stream1.delete()
-        self.assertTrue(self.partner5.specific_stream)
-        stream1_authorizations.all()
-        partner5_authorizations.all()
-        self.assertEqual(partner5_authorizations.count(), 1)
-        self.assertEquals(stream1_authorizations.count(), 0)
-
-        # Deleting stream 2 shouldn't create a duplicate partner-scoped auth. The extra auth should just disappear.
-        # Since stream 2 was the last stream related to partner 5, partner5.specific_stream should now be False.
-        self.partner5_stream2.delete()
-        self.assertFalse(self.partner5.specific_stream)
-        stream2_authorizations.all()
-        partner5_authorizations.all()
-        self.assertEqual(partner5_authorizations.count(), 1)
-        self.assertEquals(stream2_authorizations.count(), 0)
 
     def test_updating_existing_authorization(self):
         """
@@ -1255,23 +1210,6 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
 
         self.assertEqual(response.data, expected_json)
 
-    def test_authorized_users_api_streams(self):
-        """
-        For a partner with streams, we should still return the
-        correct list of authorized users.
-        """
-        factory = APIRequestFactory()
-        request = factory.get("/api/v0/users/authorizations/partner/1")
-        force_authenticate(request, user=self.editor1.user)
-
-        response = TWLight.users.views.AuthorizedUsers.as_view()(
-            request, self.partner5.pk, 0
-        )
-
-        expected_json = [{"wp_username": self.editor1.wp_username}]
-
-        self.assertEqual(response.data, expected_json)
-
 
 class TestBaseViews(TestCase):
     @classmethod
@@ -1305,7 +1243,6 @@ class TestBaseViews(TestCase):
         cls.partner5 = PartnerFactory(
             authorization_method=Partner.PROXY,
             status=Partner.AVAILABLE,
-            specific_stream=True,
             new_tags={"tags": ["multidisciplinary_tag"]},
         )
         cls.user_editor = UserFactory(username="Jon Snow")

@@ -28,8 +28,8 @@ from django.urls import reverse
 from django.utils.html import escape
 
 from TWLight.helpers import site_id
-from TWLight.resources.models import Partner, Stream, AccessCode
-from TWLight.resources.factories import PartnerFactory, StreamFactory
+from TWLight.resources.models import Partner, AccessCode
+from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators, get_restricted
@@ -40,7 +40,6 @@ from .helpers import (
     USER_FORM_FIELDS,
     PARTNER_FORM_OPTIONAL_FIELDS,
     FIELD_TYPES,
-    SPECIFIC_STREAM,
     SPECIFIC_TITLE,
     AGREEMENT_WITH_TERMS_OF_USE,
     REAL_NAME,
@@ -243,11 +242,6 @@ class SynchronizeFieldsTest(TestCase):
         partner.registration_url = "https://example.com/register"
         partner.save()
 
-        stream = Stream()
-        stream.partner = partner
-        stream.name = "Stuff and things"
-        stream.save()
-
         app = ApplicationFactory(
             status=Application.APPROVED,
             partner=partner,
@@ -257,7 +251,6 @@ class SynchronizeFieldsTest(TestCase):
         )
         setattr(app, AGREEMENT_WITH_TERMS_OF_USE, True)
         setattr(app, ACCOUNT_EMAIL, "alice@example.com")
-        setattr(app, SPECIFIC_STREAM, stream)
         setattr(app, SPECIFIC_TITLE, "Alice in Wonderland")
         app.save()
 
@@ -268,7 +261,6 @@ class SynchronizeFieldsTest(TestCase):
         self.assertEqual(output[COUNTRY_OF_RESIDENCE]["data"], "Holy Roman Empire")
         self.assertEqual(output[OCCUPATION]["data"], "Dog surfing instructor")
         self.assertEqual(output[AFFILIATION]["data"], "The Long Now Foundation")
-        self.assertEqual(output[SPECIFIC_STREAM]["data"], stream)
         self.assertEqual(output[SPECIFIC_TITLE]["data"], "Alice in Wonderland")
         self.assertEqual(output["Email"]["data"], "alice@example.com")
         self.assertEqual(output[AGREEMENT_WITH_TERMS_OF_USE]["data"], True)
@@ -276,7 +268,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(9, len(list(output.keys())))
+        self.assertEqual(8, len(list(output.keys())))
 
     def test_application_output_2(self):
         """
@@ -832,7 +824,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -851,7 +842,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertNotIn("affiliation", form.fields)
 
         # Check partner data: p1.
-        self.assertNotIn("partner_{id}_specific_stream".format(id=p1.id), form.fields)
         self.assertNotIn("partner_{id}_specific_title".format(id=p1.id), form.fields)
         self.assertNotIn(
             "partner_{id}_agreement_with_terms_of_use".format(id=p1.id), form.fields
@@ -869,7 +859,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -883,7 +872,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -903,7 +891,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertNotIn("affiliation", form.fields)
 
         # Check partner data: p1.
-        self.assertNotIn("partner_{id}_specific_stream".format(id=p1.id), form.fields)
         self.assertNotIn("partner_{id}_specific_title".format(id=p1.id), form.fields)
         self.assertNotIn(
             "partner_{id}_agreement_with_terms_of_use".format(id=p1.id), form.fields
@@ -913,7 +900,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertIn("partner_{id}_comments".format(id=p1.id), form.fields)
 
         # Check partner data: p2.
-        self.assertNotIn("partner_{id}_specific_stream".format(id=p2.id), form.fields)
         self.assertNotIn("partner_{id}_specific_title".format(id=p2.id), form.fields)
         self.assertNotIn(
             "partner_{id}_agreement_with_terms_of_use".format(id=p2.id), form.fields
@@ -934,7 +920,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -948,7 +933,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=True,
-            specific_stream=False,
             occupation=True,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -967,7 +951,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertNotIn("affiliation", form.fields)
 
         # Check partner data: p1.
-        self.assertNotIn("partner_{id}_specific_stream".format(id=p1.id), form.fields)
         self.assertNotIn("partner_{id}_specific_title".format(id=p1.id), form.fields)
         self.assertNotIn(
             "partner_{id}_agreement_with_terms_of_use".format(id=p1.id), form.fields
@@ -977,7 +960,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertIn("partner_{id}_comments".format(id=p1.id), form.fields)
 
         # Check partner data: p2.
-        self.assertNotIn("partner_{id}_specific_stream".format(id=p2.id), form.fields)
         self.assertIn("partner_{id}_specific_title".format(id=p2.id), form.fields)
         self.assertNotIn(
             "partner_{id}_agreement_with_terms_of_use".format(id=p2.id), form.fields
@@ -995,7 +977,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=True,
             affiliation=True,
             agreement_with_terms_of_use=False,
@@ -1051,7 +1032,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=False,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1087,7 +1067,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=True,
             specific_title=False,
-            specific_stream=False,
             occupation=True,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1142,7 +1121,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=False,
             country_of_residence=False,
             specific_title=True,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1152,17 +1130,11 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=False,
             country_of_residence=False,
             specific_title=False,
-            specific_stream=True,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
             account_email=False,
         )
-
-        s1 = Stream()
-        s1.partner = p2
-        s1.name = "Health and Biological Sciences"
-        s1.save()
 
         # Checking our assumptions, just in case. This means that our
         # get() queries later on should not raise MultipleObjectsReturned.
@@ -1177,7 +1149,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             "partner_{id}_specific_title".format(id=p1.id): "Open Access for n00bs",
             "partner_{id}_rationale".format(id=p2.id): "Saving the world",
             "partner_{id}_comments".format(id=p2.id): "",
-            "partner_{id}_specific_stream".format(id=p2.id): s1.pk,
         }
 
         request = factory.post(self.url, data)
@@ -1197,7 +1168,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(app1.rationale, "Whimsy")
         self.assertEqual(app1.comments, "None whatsoever")
         self.assertEqual(app1.specific_title, "Open Access for n00bs")
-        self.assertEqual(app1.specific_stream, None)
         self.assertEqual(app1.agreement_with_terms_of_use, False)
         self.assertEqual(app1.account_email, None)
 
@@ -1205,7 +1175,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         self.assertEqual(app2.rationale, "Saving the world")
         self.assertEqual(app2.comments, "")
         self.assertEqual(app2.specific_title, "")
-        self.assertEqual(app2.specific_stream, s1)
         self.assertEqual(app2.agreement_with_terms_of_use, False)
         self.assertEqual(app2.account_email, None)
 
@@ -1242,7 +1211,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=False,
             country_of_residence=False,
             specific_title=True,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=True,
@@ -1252,7 +1220,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=False,
             country_of_residence=False,
             specific_title=False,
-            specific_stream=True,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1268,15 +1235,12 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             {"specific_title", "agreement_with_terms_of_use"},
         )
 
-        self.assertEqual(set(view._get_partner_fields(p2)), {"specific_stream"})
-
     def test_get_user_fields(self):
 
         p1 = PartnerFactory(
             real_name=False,
             country_of_residence=False,
             specific_title=True,
-            specific_stream=False,
             occupation=True,
             affiliation=True,
             agreement_with_terms_of_use=True,
@@ -1286,7 +1250,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=False,
             specific_title=False,
-            specific_stream=True,
             occupation=True,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1314,7 +1277,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=False,
             specific_title=False,
-            specific_stream=False,
             occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
@@ -1343,46 +1305,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             "partner_{id}_rationale".format(id=p1.id),
             "This field consists only of restricted text.",
         )
-
-    def test_pop_specific_stream_options(self):
-        """
-        For partners having multiple streams, users should only be able
-        to apply for the ones they don't have an authorization to.
-        """
-        # Set up request.
-        factory = RequestFactory()
-        request = factory.get(self.url)
-        user = UserFactory()
-        user.email = "foo@bar.com"
-        user.save()
-        user.userprofile.terms_of_use = True
-        user.userprofile.save()
-        editor = EditorFactory(user=user)
-        request.user = user
-        partner = PartnerFactory(specific_stream=True)
-        stream1 = StreamFactory(partner=partner)
-        stream2 = StreamFactory(partner=partner)
-        ApplicationFactory(
-            status=Application.SENT,
-            editor=editor,
-            partner=partner,
-            specific_stream=stream1,
-            sent_by=self.coordinator,
-        )
-
-        request.session = {views.PARTNERS_SESSION_KEY: [partner.pk]}
-        response = views.SubmitApplicationView.as_view()(request)
-        self.assertEqual(response.status_code, 200)
-        option1 = '<option value="{stream_id}">{stream_name}</option>'.format(
-            stream_id=stream1.id, stream_name=stream1.name
-        )
-        option2 = '<option value="{stream_id}">{stream_name}</option>'.format(
-            stream_id=stream2.id, stream_name=stream2.name
-        )
-        self.assertContains(response, option2)
-        # User already has an authorization for stream1 i.e. the
-        # option should not be on the apply page
-        self.assertNotContains(response, option1)
 
     def test_application_waitlist_status_for_single_partner(self):
         """
@@ -1523,123 +1445,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
                 )
 
         # it should redirect to the expected url
-        self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
-
-    def test_allow_user_for_creating_multiple_applications_for_collections(self):
-        """
-        allow a user only from applying to the same partner
-        more than once  when partner is collection
-        """
-        # create partner with specific stream
-        partner = PartnerFactory(specific_stream=True)
-        user = UserFactory()
-        editor = EditorFactory(user=user)
-
-        # add partner to stream
-        s1 = StreamFactory()
-        s1.partner = partner
-        s1.name = "Health and Biological Sciences"
-        s1.save()
-
-        # Set up request
-        factory = RequestFactory()
-        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
-        data = {
-            "partner_{id}_rationale".format(id=partner.id): "abc",
-            "partner_{id}_comments".format(id=partner.id): "Saving the world",
-            "partner_{id}_specific_stream".format(id=partner.id): s1.pk,
-        }
-        request = factory.post(url, data)
-        request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
-
-        # send request
-        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
-        # it should redirect to partner detail page on success
-        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
-
-        self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
-
-        # create another application
-        data = {
-            "partner_{id}_rationale".format(id=partner.id): "abcd",
-            "partner_{id}_comments".format(id=partner.id): "None whatsoever",
-            "partner_{id}_specific_stream".format(id=partner.id): s1.pk,
-        }
-        request = factory.post(url, data)
-        request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
-
-        # send request
-        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
-
-        # again it should redirect to the same url
-        self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
-
-    def test_allow_user_for_multiple_applications_for_partners_with_specific_title(
-        self,
-    ):
-        """
-        allow a user only from applying to the same partner
-        more than once  when partner is collection
-        """
-        # create partner with specific title
-        partner = PartnerFactory(specific_title=True)
-        user = UserFactory()
-        editor = EditorFactory(user=user)
-
-        # add partner to stream
-        s1 = StreamFactory()
-        s1.partner = partner
-        s1.name = "Health and Biological Sciences"
-        s1.save()
-
-        # Set up request
-        factory = RequestFactory()
-        url = reverse("applications:apply_single", kwargs={"pk": partner.id})
-        data = {
-            "partner_{id}_rationale".format(id=partner.id): "abc",
-            "partner_{id}_comments".format(id=partner.id): "Saving the world",
-            "partner_{id}_specific_title".format(
-                id=partner.id
-            ): "Open Access for geeks",
-        }
-        request = factory.post(url, data)
-        request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
-
-        # send request
-        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
-
-        # it should redirect to partner detail page on success
-        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
-
-        self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
-
-        # create another application
-        data = {
-            "partner_{id}_rationale".format(id=partner.id): "abcd",
-            "partner_{id}_comments".format(id=partner.id): "None whatsoever",
-            "partner_{id}_specific_title".format(
-                id=partner.id
-            ): "Open Access for geeks",
-        }
-        request = factory.post(url, data)
-        request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
-
-        # send request
-        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
-
-        # again it should redirect to the same url
         self.assertEqual(resp.status_code, 302)
         self.assertEqual(resp.url, expected_url)
 
@@ -2880,14 +2685,12 @@ class ApplicationModelTest(TestCase):
             app.delete()
 
     def test_renew_good_app(self):
-        stream = StreamFactory()
         editor = EditorFactory()
         editor2 = EditorFactory()
         partner = PartnerFactory(renewals_available=True)
         app = ApplicationFactory(
             rationale="Because I said so",
             specific_title="The one with the blue cover",
-            specific_stream=stream,
             comments="No comment",
             agreement_with_terms_of_use=True,
             account_email="bob@example.com",
@@ -2907,7 +2710,6 @@ class ApplicationModelTest(TestCase):
         # Fields that should be copied, were.
         self.assertEqual(app2.rationale, "Because I said so")
         self.assertEqual(app2.specific_title, "The one with the blue cover")
-        self.assertEqual(app2.specific_stream, stream)
         self.assertEqual(app2.comments, "No comment")
         self.assertEqual(app2.agreement_with_terms_of_use, True)
         self.assertEqual(app2.account_email, "bob@example.com")
@@ -2994,52 +2796,6 @@ class ApplicationModelTest(TestCase):
 
         application.refresh_from_db()
         assert application.editor == editor
-
-    def test_stream_delete(self):
-        # Null out specific_stream for application if the stream gets deleted.
-        # This is important for appropriately handling partner/stream configuration changes.
-        user = UserFactory()
-        editor = EditorFactory(user=user)
-        coordinator = UserFactory()
-        get_coordinators().user_set.add(coordinator)
-        partner = PartnerFactory(
-            specific_stream=True, authorization_method=Partner.EMAIL
-        )
-        stream = StreamFactory(partner=partner, authorization_method=Partner.EMAIL)
-        app = ApplicationFactory(
-            rationale="Because I said so",
-            comments="No comment",
-            agreement_with_terms_of_use=True,
-            account_email="bob@example.com",
-            editor=editor,
-            partner=partner,
-            specific_stream=stream,
-            status=Application.SENT,
-            date_closed=date.today() + timedelta(days=1),
-            days_open=1,
-            sent_by=coordinator,
-        )
-        # This app should show up in stream specific queries.
-        self.assertEqual(
-            Application.objects.filter(
-                pk=app.pk, specific_stream=stream.pk, editor=editor
-            ).count(),
-            1,
-        )
-        # Delete the stream.
-        stream_pk = stream.pk
-        stream.delete()
-        # This app should no longer show up in stream specific queries.
-        self.assertEqual(
-            Application.objects.filter(
-                pk=app.pk, specific_stream=stream_pk, editor=editor
-            ).count(),
-            0,
-        )
-        # But it should still be there.
-        self.assertEqual(
-            Application.objects.filter(pk=app.pk, editor=editor).count(), 1
-        )
 
     def test_get_authorization(self):
         # Approve an application so that we create an authorization
@@ -3275,29 +3031,6 @@ class EvaluateApplicationTest(TestCase):
         total_valid_authorizations = count_valid_authorizations(self.partner)
         self.assertEqual(total_valid_authorizations, 6)
 
-        stream = StreamFactory(partner=self.partner)
-        for _ in range(5):
-            # valid
-            auth5 = Authorization(
-                user=EditorFactory().user,
-                stream=stream,
-                authorizer=self.coordinator,
-                date_expires=date.today() + timedelta(days=random.randint(0, 5)),
-            )
-            auth5.save()
-            auth5.partners.add(self.partner)
-            # valid
-            auth6 = Authorization(
-                user=EditorFactory().user,
-                stream=stream,
-                authorizer=self.coordinator,
-                date_expires=date.today() - timedelta(days=random.randint(1, 5)),
-            )
-            auth6.save()
-            auth6.partners.add(self.partner)
-        total_valid_authorizations = count_valid_authorizations(self.partner, stream)
-        self.assertEqual(total_valid_authorizations, 5)
-
         # Filter logic in .helpers.get_valid_partner_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
@@ -3467,39 +3200,6 @@ class EvaluateApplicationTest(TestCase):
         self.application.partner = original_partner
         self.application.save()
 
-    def test_immediately_sent_collection(self):
-        """
-        Given a collection with the Partner.LINK authorization method,
-        an application flagged as APPROVED should update to SENT.
-        """
-        factory = RequestFactory()
-
-        self.partner.specific_stream = True
-        self.partner.save()
-        stream = StreamFactory(partner=self.partner)
-        stream.authorization_method = Partner.LINK
-        stream.save()
-
-        self.application.status = Application.PENDING
-        self.application.specific_stream = stream
-        self.application.save()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.coordinator = coordinator.user
-        self.partner.authorization_method = Partner.LINK
-        self.partner.save()
-
-        # Approve the application
-        response = self.client.post(
-            self.url, data={"status": Application.APPROVED}, follow=True
-        )
-
-        # Verify status
-        self.application.refresh_from_db()
-        self.assertEqual(self.application.status, Application.SENT)
-
     def test_immediately_sent(self):
         """
         Given a partner with the Partner.LINK authorization method,
@@ -3552,40 +3252,6 @@ class EvaluateApplicationTest(TestCase):
 
         # The email should contain user_instructions
         self.assertTrue(self.partner.user_instructions in mail.outbox[0].body)
-
-    def test_user_instructions_email_collection(self):
-        """
-        For a collection with the Partner.LINK authorization method,
-        approving an application should send an email containing
-        user_instructions.
-        """
-        factory = RequestFactory()
-
-        # Create an coordinator with a test client session
-        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
-
-        self.partner.specific_stream = True
-        self.partner.coordinator = coordinator.user
-        self.partner.save()
-
-        stream = StreamFactory(partner=self.partner)
-        stream.authorization_method = Partner.LINK
-        stream.user_instructions = "Instructions for account setup."
-        stream.save()
-
-        self.application.specific_stream = stream
-        self.application.save()
-
-        # Approve the application
-        response = self.client.post(
-            self.url, data={"status": Application.APPROVED}, follow=True
-        )
-
-        # We expect that one email should now be sent.
-        self.assertEqual(len(mail.outbox), 1)
-
-        # The email should contain user_instructions
-        self.assertTrue(stream.user_instructions in mail.outbox[0].body)
 
     def test_sent_by_assignment(self):
         # sent_by wasn't being set when applications were marked as sent
@@ -3895,7 +3561,6 @@ class BatchEditTest(TestCase):
         cls.partner = PartnerFactory()
         cls.partner1 = PartnerFactory()
         cls.partner2 = PartnerFactory()
-        cls.stream = StreamFactory(accounts_available=None, partner=cls.partner2)
 
         cls.application = ApplicationFactory(
             editor=editor,
@@ -3933,7 +3598,6 @@ class BatchEditTest(TestCase):
             editor=editor1,
             status=Application.PENDING,
             partner=cls.partner2,
-            specific_stream=cls.stream,
             rationale="Just because",
             agreement_with_terms_of_use=True,
         )
@@ -4157,69 +3821,6 @@ class BatchEditTest(TestCase):
 
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
-
-    def test_sets_status_approved_for_proxy_partners_with_streams(self):
-        factory = RequestFactory()
-
-        # For partners with collections we only care about the collection authorization method
-        self.stream.authorization_method = Partner.PROXY
-        self.stream.save()
-        # Approval won't work if proxy partner is not available/waitlisted
-        self.partner2.status = Partner.AVAILABLE
-        self.partner2.accounts_available = 10
-        self.partner2.save()
-
-        self.partner2.coordinator = EditorCraftRoom(
-            self, Terms=True, Coordinator=True
-        ).user
-        self.partner2.save()
-
-        # Approve the applications
-        response = self.client.post(
-            self.url,
-            data={"applications": self.application4.pk, "batch_status": 2},
-            follow=False,
-        )
-
-        # Approved applications are treated as sent for proxy partners
-        self.application4.refresh_from_db()
-        self.assertEqual(self.application4.status, Application.SENT)
-
-        # Our current setup allows either or workflow for accounts_available field,
-        # and our code should be able to handle that
-        self.partner2.accounts_available = None
-        self.partner2.save()
-        self.stream.accounts_available = 2
-        self.stream.save()
-
-        self.application4.status = Application.PENDING
-        self.application4.save()
-
-        # Approve the application
-        response = self.client.post(
-            self.url,
-            data={"applications": self.application4.pk, "batch_status": 2},
-            follow=False,
-        )
-
-        self.application4.refresh_from_db()
-        self.assertEqual(self.application4.status, Application.SENT)
-
-        self.partner2.status = Partner.WAITLIST
-        self.partner2.save()
-
-        self.application4.status = Application.PENDING
-        self.application4.save()
-
-        # Approve the application
-        response = self.client.post(
-            self.url,
-            data={"applications": self.application4.pk, "batch_status": 2},
-            follow=False,
-        )
-
-        self.application4.refresh_from_db()
-        self.assertEqual(self.application4.status, Application.PENDING)
 
     def test_sets_days_open(self):
         factory = RequestFactory()

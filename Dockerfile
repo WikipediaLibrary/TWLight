@@ -33,8 +33,6 @@ ENV PATH="/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH
 # should all be moved out of the running container
 # since we just use it to generate a css file.
 # CSS Janus is the thing actually used to generate the rtl css.
-# Pandoc is used for rendering wikicode resource descriptions
-# into html for display. We do need this on the live image.
 RUN apt update ; \
     apt install -y --no-install-recommends \
     bash \
@@ -43,7 +41,6 @@ RUN apt update ; \
     mariadb-client \
     nodejs \
     npm \
-    pandoc \
     tar \
     wget ; \
     rm -rf /var/lib/apt/lists/*; \

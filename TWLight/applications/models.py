@@ -12,7 +12,7 @@ from django.forms.models import model_to_dict
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
-from TWLight.resources.models import Partner, Stream
+from TWLight.resources.models import Partner
 from TWLight.users.models import Editor, Authorization
 
 logger = logging.getLogger(__name__)
@@ -111,13 +111,6 @@ class Application(models.Model):
 
     rationale = models.TextField(blank=True)
     specific_title = models.CharField(max_length=128, blank=True)
-    specific_stream = models.ForeignKey(
-        Stream,
-        related_name="applications",
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-    )
     comments = models.TextField(blank=True)
     agreement_with_terms_of_use = models.BooleanField(default=False)
     account_email = models.EmailField(blank=True, null=True)
@@ -202,7 +195,7 @@ class Application(models.Model):
             )
 
             # Status and parent are explicitly different on the child than
-            # on the parent application. For editor, partner, and stream, we
+            # on the parent application. For editor and partner, we
             # need to pull those directly - model_to_dict will give us the pks
             # of the referenced objects, but we need the actual objects.
             data.update(
@@ -211,7 +204,6 @@ class Application(models.Model):
                     "parent": self,
                     "editor": self.editor,
                     "partner": self.partner,
-                    "specific_stream": self.specific_stream,
                     "account_email": self.account_email,
                     "requested_access_duration": self.requested_access_duration,
                 }
@@ -315,9 +307,7 @@ class Application(models.Model):
         """
         user_instructions = None
         resource = None
-        if self.specific_stream:
-            resource = self.specific_stream
-        elif self.partner:
+        if self.partner:
             resource = self.partner
 
         # Fetch instructions from the database if appropriate
@@ -345,19 +335,12 @@ class Application(models.Model):
 
     def get_authorization(self):
         """
-        For a given application, find an authorization for this partner-stream-editor, if possible.
+        For a given application, find an authorization for this partner-editor, if possible.
         """
         try:
-            if self.specific_stream:
-                authorization = Authorization.objects.get(
-                    partners=self.partner,
-                    user=self.editor.user,
-                    stream=self.specific_stream,
-                )
-            else:
-                authorization = Authorization.objects.get(
-                    partners=self.partner, user=self.editor.user
-                )
+            authorization = Authorization.objects.get(
+                partners=self.partner, user=self.editor.user
+            )
         except Authorization.DoesNotExist:
             return None
 
@@ -369,13 +352,7 @@ class Application(models.Model):
         we will instantly mark it as finalized and provide access.
         """
         instantly_finalised_authorization_methods = [Partner.PROXY, Partner.LINK]
-
-        # Authorization methods are defined at both the partner and collection level,
-        # so we need to know which one to check.
-        if self.specific_stream:
-            authorization_method = self.specific_stream.authorization_method
-        else:
-            authorization_method = self.partner.authorization_method
+        authorization_method = self.partner.authorization_method
 
         if authorization_method in instantly_finalised_authorization_methods:
             return True

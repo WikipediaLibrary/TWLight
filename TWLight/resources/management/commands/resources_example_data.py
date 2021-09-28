@@ -10,15 +10,14 @@ from django.core.management.base import BaseCommand
 
 from TWLight.resources.factories import (
     PartnerFactory,
-    StreamFactory,
     VideoFactory,
     SuggestionFactory,
 )
-from TWLight.resources.models import Language, Partner, Stream, AccessCode
+from TWLight.resources.models import Language, Partner, AccessCode
 
 
 class Command(BaseCommand):
-    help = "Adds a number of example resources, streams, suggestions, and tags."
+    help = "Adds a number of example resources, suggestions, and tags."
 
     def add_arguments(self, parser):
         parser.add_argument("num", nargs="+", type=int)
@@ -48,11 +47,9 @@ class Command(BaseCommand):
                 real_name=self.chance(True, False, 40),
                 country_of_residence=self.chance(True, False, 20),
                 specific_title=self.chance(True, False, 10),
-                specific_stream=self.chance(True, False, 10),
                 occupation=self.chance(True, False, 10),
                 affiliation=self.chance(True, False, 10),
                 agreement_with_terms_of_use=self.chance(True, False, 10),
-                mutually_exclusive=False,
             )
 
             # ManyToMany relationships can't be set until the partner object has
@@ -128,35 +125,10 @@ class Command(BaseCommand):
             featured_partner.featured = True
             featured_partner.save()
 
-        # Give any specific_stream flagged partners streams.
-        stream_partners = all_partners.filter(specific_stream=True)
-
-        # Random number of accounts available for all partners without streams
+        # Random number of accounts available for all partners
         for accounts in all_partners:
-            if not accounts.specific_stream:
-                accounts.accounts_available = random.randint(10, 550)
-                accounts.save()
-
-        # If we happened to not create any partners with streams,
-        # create one deliberately.
-        if stream_partners.count() == 0:
-            stream_partners = random.sample(list(all_partners), 1)
-            stream_partners[0].specific_stream = True
-            stream_partners[0].save()
-
-        for partner in stream_partners:
-            for _ in range(3):
-                stream = StreamFactory(
-                    partner=partner,
-                    name=Faker(random.choice(settings.FAKER_LOCALES)).sentence(
-                        nb_words=3
-                    )[
-                        :-1
-                    ],  # [:-1] removes full stop
-                    description=Faker(random.choice(settings.FAKER_LOCALES)).paragraph(
-                        nb_sentences=2
-                    ),
-                )
+            accounts.accounts_available = random.randint(10, 550)
+            accounts.save()
 
         # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
         for partner in random.sample(list(all_partners), 15):
@@ -167,12 +139,6 @@ class Command(BaseCommand):
                         random.choice(settings.FAKER_LOCALES)
                     ).url(),
                 )
-
-        # Random number of accounts available for all streams
-        all_streams = Stream.objects.all()
-        for each_stream in all_streams:
-            each_stream.accounts_available = random.randint(10, 100)
-            each_stream.save()
 
         # Generate a few number of suggestions with upvotes
         all_users = User.objects.exclude(is_superuser=True)
