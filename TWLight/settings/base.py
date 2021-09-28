@@ -200,6 +200,11 @@ DATABASES = {
     }
 }
 
+# Auto-created primary key used when not defining a primary key type.
+# In Django 3.2, the default changed from from Autofield to BigAutoField.
+# This just keeps our existing fields as they are so we don't have to migrate
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------

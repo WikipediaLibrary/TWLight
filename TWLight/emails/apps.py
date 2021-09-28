@@ -3,6 +3,7 @@ from django.apps import AppConfig
 
 class EmailConfig(AppConfig):
     name = "TWLight.emails"
+    label = "emails"
 
     def ready(self):
         """

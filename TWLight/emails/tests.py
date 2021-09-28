@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
-from testdata import wrap_testdata
 from unittest.mock import patch
 
 from django_comments import get_form_target
@@ -38,7 +37,6 @@ from .tasks import (
 
 class ApplicationCommentTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.editor = EditorFactory(user__email="editor@example.com").user
@@ -229,7 +227,6 @@ class ApplicationCommentTest(TestCase):
 
 class ApplicationStatusTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.coordinator = EditorFactory().user
@@ -355,7 +352,6 @@ class ApplicationStatusTest(TestCase):
 
 class ContactUsTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.editor = EditorFactory(user__email="editor@example.com").user
@@ -417,7 +413,6 @@ class ContactUsTest(TestCase):
 
 class UserRenewalNoticeTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         editor = EditorFactory(user__email="editor@example.com")
@@ -565,7 +560,6 @@ class UserRenewalNoticeTest(TestCase):
 
 class CoordinatorReminderEmailTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         editor = EditorFactory()
@@ -635,7 +629,6 @@ class CoordinatorReminderEmailTest(TestCase):
 
 class SearchLaunchEmailTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         editor1 = EditorFactory(user__email="editor@example.com")

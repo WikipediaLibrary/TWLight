@@ -2,7 +2,6 @@ import random
 from unittest.mock import patch
 from datetime import date, timedelta
 from faker import Faker
-from testdata import wrap_testdata
 
 from django.contrib.auth import logout
 from django.contrib.auth.models import User, AnonymousUser
@@ -96,7 +95,6 @@ class TestEmailRequired(EmailRequired, DispatchProvider):
 
 class ViewMixinTests(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         # Some mixins add messages; don't make the tests fail simply because
@@ -449,7 +447,6 @@ class AuthorizationBaseTestCase(TestCase):
     """
 
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
 
@@ -1213,7 +1210,6 @@ class AuthorizedUsersAPITestCase(AuthorizationBaseTestCase):
 
 class TestBaseViews(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.partner1 = PartnerFactory(

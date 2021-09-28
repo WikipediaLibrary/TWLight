@@ -5,7 +5,6 @@ from dateutil.relativedelta import relativedelta
 from itertools import chain
 import random
 import reversion
-from testdata import wrap_testdata
 from unittest.mock import patch
 import urllib
 from urllib.parse import urlparse
@@ -351,7 +350,6 @@ class SynchronizeFieldsTest(TestCase):
 
 class BaseApplicationViewTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.client = Client()
@@ -420,7 +418,6 @@ class BaseApplicationViewTest(TestCase):
 
 class RequestApplicationTest(BaseApplicationViewTest):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.url = reverse("applications:request")
@@ -670,7 +667,6 @@ class RequestApplicationTest(BaseApplicationViewTest):
 
 class SubmitApplicationTest(BaseApplicationViewTest):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.url = reverse("applications:apply")
@@ -1451,7 +1447,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
 class ListApplicationsTest(BaseApplicationViewTest):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.superuser = User.objects.create_user(username="super", password="super")
@@ -2821,7 +2816,6 @@ class ApplicationModelTest(TestCase):
 
 class EvaluateApplicationTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.editor = EditorFactory()
@@ -3452,7 +3446,6 @@ class EvaluateApplicationTest(TestCase):
 
 class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
 
@@ -3546,7 +3539,6 @@ class SignalsUpdateApplicationsTest(BaseApplicationViewTest):
 
 class BatchEditTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.url = reverse("applications:batch_edit")
@@ -3943,7 +3935,6 @@ class ListReadyApplicationsTest(TestCase):
 
 class MarkSentTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         editor = EditorFactory()

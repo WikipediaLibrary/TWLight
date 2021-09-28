@@ -3,7 +3,6 @@ import copy
 from datetime import datetime, date, timedelta
 import json
 import re
-from testdata import wrap_testdata
 from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
@@ -106,7 +105,6 @@ def remove_csrfmiddlewaretoken(rendered_html):
 
 class ViewsTestCase(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.client = Client()
@@ -843,7 +841,6 @@ class UserProfileModelTestCase(TestCase):
 
 class EditorModelTestCase(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         for editor in Editor.objects.all():
@@ -1295,7 +1292,6 @@ class EditorModelTestCase(TestCase):
 
 class OAuthTestCase(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         # Prevent failures due to side effects from database artifacts.
@@ -1421,7 +1417,6 @@ class HelpersTestCase(TestCase):
 
 class AuthorizationsHelpersTestCase(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
@@ -1484,7 +1479,6 @@ class AuthorizationsHelpersTestCase(TestCase):
 
 class ManagementCommandsTestCase(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         """
@@ -1638,7 +1632,6 @@ class ManagementCommandsTestCase(TestCase):
 
 class MyLibraryViewsTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.bundle_partner_1 = PartnerFactory(
