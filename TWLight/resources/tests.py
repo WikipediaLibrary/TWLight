@@ -4,7 +4,6 @@ from datetime import date, timedelta
 import json
 from jsonschema import validate
 import os
-from testdata import wrap_testdata
 import random
 from unittest.mock import patch
 
@@ -101,7 +100,6 @@ def EditorCraftRoom(
 
 class LanguageModelTests(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         """
@@ -137,7 +135,6 @@ class LanguageModelTests(TestCase):
 
 class PartnerModelTests(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.lang_en, _ = Language.objects.get_or_create(language="en")
@@ -601,7 +598,6 @@ class WaitlistBehaviorTests(TestCase):
     """
 
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
@@ -758,7 +754,6 @@ class WaitlistBehaviorTests(TestCase):
 
 class PartnerViewTests(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
 
@@ -815,7 +810,6 @@ class PartnerViewTests(TestCase):
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
 
@@ -922,7 +916,6 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
 class AutoWaitlistDisableTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         editor = EditorFactory()
@@ -1011,7 +1004,6 @@ class AutoWaitlistDisableTest(TestCase):
 
 class BundlePartnerTest(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
         cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
@@ -1237,7 +1229,6 @@ class BundlePartnerTest(TestCase):
 
 class PartnerSuggestionViewTests(TestCase):
     @classmethod
-    @wrap_testdata
     def setUpTestData(cls):
         super().setUpTestData()
 
