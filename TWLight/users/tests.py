@@ -857,7 +857,7 @@ class UserProfileModelTestCase(TestCase):
         Tests that a valid collection (one a user has access to) is successfully
         added to the favorites
         """
-        profile = UserProfile.objects.get(user=self.user_coordinator)
+        profile = UserProfile.objects.get(user=self.editor.user)
 
         # Create an authorization object so that the partner can be added to a
         # user's favorites collection
@@ -896,7 +896,7 @@ class UserProfileModelTestCase(TestCase):
         Tests that a valid collection (one a user has access to, even if it has
         expired) is successfully added to the favorites
         """
-        profile = UserProfile.objects.get(user=self.user_coordinator)
+        profile = UserProfile.objects.get(user=self.editor.user)
 
         app_proxy_partner_1 = ApplicationFactory(
             status=Application.SENT,
@@ -921,7 +921,7 @@ class UserProfileModelTestCase(TestCase):
         Tests that an invalid collection (one a user does not has access to) is not
         added to the favorites and that a ValidationError is raised
         """
-        profile = UserProfile.objects.get(user=self.user_coordinator)
+        profile = UserProfile.objects.get(user=self.editor.user)
 
         with self.assertRaises(ValidationError):
             profile.favorites.add(self.proxy_partner_1)
