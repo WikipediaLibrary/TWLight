@@ -887,6 +887,10 @@ class UserProfileModelTestCase(TestCase):
         profile.favorites.add(self.bundle_partner_2)
         profile.favorites.add(self.proxy_partner_1)
 
+        self.assertIn(self.proxy_partner_1, profile.favorites.all())
+        self.assertIn(self.bundle_partner_1, profile.favorites.all())
+        self.assertIn(self.bundle_partner_2, profile.favorites.all())
+
     def test_add_favorite_expired_collection_valid(self):
         """
         Tests that a valid collection (one a user has access to, even if it has
@@ -910,6 +914,8 @@ class UserProfileModelTestCase(TestCase):
 
         profile.favorites.add(self.proxy_partner_1)
 
+        self.assertIn(self.proxy_partner_1, profile.favorites.all())
+
     def test_add_favorite_collection_invalid(self):
         """
         Tests that an invalid collection (one a user does not has access to) is not
@@ -919,6 +925,8 @@ class UserProfileModelTestCase(TestCase):
 
         with self.assertRaises(ValidationError):
             profile.favorites.add(self.proxy_partner_1)
+
+        self.assertNotIn(self.proxy_partner_1, profile.favorites.all())
 
 
 class EditorModelTestCase(TestCase):
