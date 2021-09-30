@@ -40,6 +40,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q
+from django.db.models.signals import m2m_changed
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -120,6 +121,39 @@ class UserProfile(models.Model):
     )
     # Temporary field to track sending of project page 2021 email to prevent duplication in case of error.
     project_page_2021_notification_sent = models.BooleanField(default=False)
+
+    favorites = models.ManyToManyField(
+        Partner,
+        blank=True,
+        help_text="The partner(s) that the user has marked as favorite.",
+    )
+
+
+def favorites_field_changed(sender, **kwargs):
+    """
+    This method validates whether a user has access to a partner they want to
+    add to their favorites
+    Added this signal per https://stackoverflow.com/a/56368721/4612594
+    """
+    instance = kwargs["instance"]
+    authorized_partners = []
+    authorizations = instance.user.authorizations.all()
+    for authorization in authorizations:
+        for partner in authorization.partners.all():
+            authorized_partners.append(partner.pk)
+
+    for favorite in instance.favorites.all():
+        if favorite.pk not in authorized_partners:
+            raise ValidationError(
+                "We cannot add partner {partner} to your favorites because you don't have access to it".format(
+                    partner=favorite.company_name
+                )
+            )
+
+
+# This connects the UserProfile.favorites field to a signal to validate the
+# partners being added
+m2m_changed.connect(favorites_field_changed, sender=UserProfile.favorites.through)
 
 
 class Editor(models.Model):

@@ -783,6 +783,7 @@ class MyLibraryView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         editor = Editor.objects.get(pk=self.request.user.editor.pk)
+        favorites = self.request.user.userprofile.favorites.all()
         language_code = get_language()
 
         self._build_user_collection_object(context, language_code, editor)
@@ -791,6 +792,7 @@ class MyLibraryView(TemplateView):
         )
 
         context["editor"] = editor
+        context["favorites"] = favorites
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
         context["bundle_criteria"] = {

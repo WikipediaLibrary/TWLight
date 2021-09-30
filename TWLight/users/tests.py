@@ -801,6 +801,20 @@ class ViewsTestCase(TestCase):
 
 
 class UserProfileModelTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
+
+        cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+
+        cls.user_coordinator = UserFactory(username="Jon Snow")
+        cls.editor = EditorFactory()
+        cls.editor.wp_bundle_eligible = True
+        cls.editor.save()
+        get_coordinators().user_set.add(cls.user_coordinator)
+
     def test_user_profile_created(self):
         """
         UserProfile should be created on user creation.
@@ -837,6 +851,74 @@ class UserProfileModelTestCase(TestCase):
         self.assertEqual(profile.use_wp_email, True)
 
         user.delete()
+
+    def test_add_favorite_collection_valid(self):
+        """
+        Tests that a valid collection (one a user has access to) is successfully
+        added to the favorites
+        """
+        profile = UserProfile.objects.get(user=self.user_coordinator)
+
+        # Create an authorization object so that the partner can be added to a
+        # user's favorites collection
+
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        profile.favorites.add(self.bundle_partner_1)
+        profile.favorites.add(self.bundle_partner_2)
+        profile.favorites.add(self.proxy_partner_1)
+
+    def test_add_favorite_expired_collection_valid(self):
+        """
+        Tests that a valid collection (one a user has access to, even if it has
+        expired) is successfully added to the favorites
+        """
+        profile = UserProfile.objects.get(user=self.user_coordinator)
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        someday = date.today() - timedelta(days=60)
+        authorization = Authorization.objects.get(
+            user=self.editor.user, partners=self.proxy_partner_1
+        )
+        authorization.date_expires = someday
+        authorization.save()
+
+        profile.favorites.add(self.proxy_partner_1)
+
+    def test_add_favorite_collection_invalid(self):
+        """
+        Tests that an invalid collection (one a user does not has access to) is not
+        added to the favorites and that a ValidationError is raised
+        """
+        profile = UserProfile.objects.get(user=self.user_coordinator)
+
+        with self.assertRaises(ValidationError):
+            profile.favorites.add(self.proxy_partner_1)
 
 
 class EditorModelTestCase(TestCase):
