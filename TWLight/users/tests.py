@@ -926,8 +926,6 @@ class UserProfileModelTestCase(TestCase):
         with self.assertRaises(ValidationError):
             profile.favorites.add(self.proxy_partner_1)
 
-        self.assertNotIn(self.proxy_partner_1, profile.favorites.all())
-
 
 class EditorModelTestCase(TestCase):
     @classmethod
