@@ -343,7 +343,7 @@ class Partner(models.Model):
     def __str__(self):
         return self.company_name
 
-    def clean(self):
+    def clean(self, *args, **kwargs):
         if self.agreement_with_terms_of_use and not self.terms_of_use:
             raise ValidationError(
                 "When agreement with terms of use is "
