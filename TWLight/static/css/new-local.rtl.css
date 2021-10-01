@@ -754,6 +754,7 @@ NEW MY LIBRARY CSS
 .collection-filter-label{
     font-size: 14px;
     font-weight: 500;
+    margin-top: 5px;
 }
 
 .searchable-form{
@@ -765,11 +766,13 @@ NEW MY LIBRARY CSS
 label{
     font-size: 14px;
     font-weight: 500;
+    margin-top: 5px;
 }
 
 #id_searchable li label{
     font-size: 14px;
     font-weight: 300;
+    margin-top: 0px;
 }
 
 .v-divider{
