@@ -893,6 +893,14 @@ NEW MY LIBRARY CSS
     padding: 10px 10px 0px 10px;
 }
 
+.favorite-icon{
+    color: #FFC93F;
+    font-size: 20px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
 .collection-tags{
     color: #000000;
     background-color: #E0E0E0;

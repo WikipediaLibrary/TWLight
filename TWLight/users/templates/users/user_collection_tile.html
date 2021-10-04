@@ -18,6 +18,13 @@
         <img src="..." class="card-img-top" alt="{{ user_collection.partner_name }} logo">
       </a>
     {% endif %}
+    {% if user_collection.pk in favorites %}
+      {% comment %}Translators: Hovertext for an icon which that will mark a collection as a favorite. {% endcomment %}
+      <i class="fa fa-star favorite-icon" title="{% trans 'Add this collection to favorites' %}"></i>
+    {% else %}
+      {% comment %}Translators: Hovertext for an icon which that will remove a collection as a favorite. {% endcomment %}
+      <i class="fa fa-star-o favorite-icon" title="{% trans 'Remove this collection from favorites' %}"></i>
+    {% endif %}
     <div class="card-body">
       <p class="card-text">{{ user_collection.partner_short_description|safe }}</p>
       <hr>
