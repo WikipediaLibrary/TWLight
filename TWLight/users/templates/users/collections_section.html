@@ -2,8 +2,17 @@
 <div class="row collections-section-container">
   <ul id="collectionsTab" class="nav collections-nav flex-column flex-sm-row" role="tablist">
     <li class="nav-item" role="presentation">
-      <a id="user-collections-tab" class="nav-link collection-tab-item active" data-toggle="tab" href="#user-collections"
-          role="tab" aria-controls="user-collections" aria-selected="true">
+      <a id="favorite-collections-tab" class="nav-link collection-tab-item {% if favorites_count > 0 %} active {% endif %}"
+          data-toggle="tab" href="#favorite-collections" role="tab" aria-controls="favorite-collections"
+          aria-selected="true">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has. {% endcomment %}
+          {% trans "Favorites " %} ({{ favorites_count }})
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a id="user-collections-tab" class="nav-link collection-tab-item {% if favorites_count <= 0 %} active {% endif %}"
+          data-toggle="tab" href="#user-collections" role="tab" aria-controls="user-collections"
+          aria-selected="true">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to. {% endcomment %}
           {% trans "My Collections " %} ({{ number_user_collections }})
       </a>
@@ -26,7 +35,30 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div id="user-collections" class="tab-pane active collections-pane" role="tabpanel" aria-labelledby="user-collections-tab">
+  <div id="favorite-collections" class="tab-pane collections-pane {% if favorites_count > 0 %} active {% endif %}"
+      role="tabpanel" aria-labelledby="favorite-collections-tab">
+    <!-- Favorite Collections -->
+    <div class="row">
+        {% for user_collection in favorite_collections %}
+          {% include "users/user_collection_tile.html" %}
+        {% endfor %}
+    </div>
+    <!-- Expired Favorite Collections -->
+    {% if expired_favorite_collections %}
+      <hr>
+      <h3>
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section. {% endcomment %}
+        {% trans "Expired" %}
+      </h3>
+      <div class="row">
+        {% for user_collection in expired_favorite_collections %}
+          {% include "users/user_collection_tile.html" %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <div id="user-collections" class="tab-pane collections-pane {% if favorites_count <= 0 %} active {% endif %}"
+      role="tabpanel" aria-labelledby="user-collections-tab">
     <!-- User Collections -->
     <div class="row">
         {% for user_collection in user_collections %}
