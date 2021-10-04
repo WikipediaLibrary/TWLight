@@ -351,6 +351,11 @@ LOGIN PARTIAL CSS
 	padding:21px 0px 5px 23px;
 }
 
+.language-form{
+    float: right;
+    padding: 21px 0px 5px 23px;
+  }
+
 .homepage-title{
     font-family: Roboto;
     font-style: normal;

@@ -360,8 +360,13 @@ LOGIN PARTIAL CSS
 
 .logo {
 	height:70px;
-	float:left;
+	float:right;
 	padding:21px 25px 5px 0px;
+}
+
+.language-form{
+    float: left;
+    padding: 21px 25px 5px 0px;
 }
 
 .homepage-title{
