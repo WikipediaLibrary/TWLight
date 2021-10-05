@@ -795,6 +795,8 @@ class MyLibraryView(TemplateView):
         context["favorites"] = favorites
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
+        context["searchable"] = Partner.SEARCHABLE
+        context["partially_searchable"] = Partner.PARTIALLY_SEARCHABLE
         context["bundle_criteria"] = {
             # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
             _("500+ edits"): editor.wp_enough_edits,
@@ -937,6 +939,7 @@ class MyLibraryView(TemplateView):
                             "partner_access_url": access_url,
                             "partner_is_not_available": user_authorization_partner.is_not_available,
                             "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
+                            "searchable": user_authorization_partner.searchable,
                         }
                     )
                     partner_id_set.add(user_authorization_partner.pk)
@@ -1018,6 +1021,7 @@ class MyLibraryView(TemplateView):
                     "tags": translated_tags,
                     "is_not_available": available_collection.is_not_available,
                     "is_waitlisted": available_collection.is_waitlisted,
+                    "searchable": available_collection.searchable,
                 }
             )
 

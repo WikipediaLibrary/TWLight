@@ -1,6 +1,13 @@
 {% load i18n %}
 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
+    {% if user_collection.searchable == searchable %}
+      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not. {% endcomment %}
+      <i class="fa fa-search searchable-icon" title="{% trans 'Searchable' %}"></i>
+    {% elif user_collection.searchable == partially_searchable %}
+      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not. {% endcomment %}
+      <i class="fa fa-search partially-searchable-icon" title="{% trans 'Partially searchable' %}"></i>
+    {% endif %}
     {% if user_collection.partner_logo %}
       <a href="{% url 'partners:detail' user_collection.partner_pk %}" class="tile-partner-link">
         <img src="{{ user_collection.partner_logo }}" class="card-img-top library-tile-image"

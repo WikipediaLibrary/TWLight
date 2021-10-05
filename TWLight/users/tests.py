@@ -1725,24 +1725,39 @@ class MyLibraryViewsTest(TestCase):
         cls.bundle_partner_1 = PartnerFactory(
             authorization_method=Partner.BUNDLE,
             new_tags={"tags": ["earth-sciences_tag"]},
+            searchable=Partner.SEARCHABLE,
         )
         cls.bundle_partner_2 = PartnerFactory(
-            authorization_method=Partner.BUNDLE, new_tags={"tags": ["art_tag"]}
+            authorization_method=Partner.BUNDLE,
+            new_tags={"tags": ["art_tag"]},
+            searchable=Partner.PARTIALLY_SEARCHABLE,
         )
 
-        cls.bundle_partner_3 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_3 = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            searchable=Partner.PARTIALLY_SEARCHABLE,
+        )
         cls.bundle_partner_3.new_tags = {"tags": ["art_tag"]}
         cls.bundle_partner_3.save()
 
-        cls.bundle_partner_4 = PartnerFactory(authorization_method=Partner.BUNDLE)
+        cls.bundle_partner_4 = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            searchable=Partner.SEARCHABLE,
+        )
         cls.bundle_partner_4.new_tags = {"tags": ["multidisciplinary_tag"]}
         cls.bundle_partner_4.save()
 
-        cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_1 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            searchable=Partner.SEARCHABLE,
+        )
         cls.proxy_partner_1.new_tags = {"tags": ["earth-sciences_tag"]}
         cls.proxy_partner_1.save()
 
-        cls.proxy_partner_2 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.proxy_partner_2 = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            searchable=Partner.SEARCHABLE,
+        )
         cls.proxy_partner_2.new_tags = {"tags": ["earth-sciences_tag"]}
         cls.proxy_partner_2.save()
 
@@ -2185,3 +2200,186 @@ class MyLibraryViewsTest(TestCase):
         eligibility_message = "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
 
         self.assertIn(eligibility_message, content)
+
+    def test_collection_filters_searchable(self):
+        """
+        Tests that only user collections that match the filter are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        url_with_searchable_param = "{url}?searchable={searchable}".format(
+            url=url, searchable=Partner.SEARCHABLE
+        )
+        request = factory.get(url_with_searchable_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertIn(escape(self.bundle_partner_4.company_name), content)
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(escape(self.proxy_partner_2.company_name), content)
+
+        self.assertNotIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_3.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_3.company_name), content)
+
+    def test_collection_filters_partially_searchable(self):
+        """
+        Tests that only user collections that match the filter are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        url_with_searchable_param = "{url}?searchable={searchable}".format(
+            url=url, searchable=Partner.PARTIALLY_SEARCHABLE
+        )
+        request = factory.get(url_with_searchable_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertIn(escape(self.bundle_partner_3.company_name), content)
+
+        self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_4.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_3.company_name), content)
+
+    def test_collection_filters_not_searchable(self):
+        """
+        Tests that only user collections that match the filter are shown
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_3 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_3,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_4 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_4,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        url_with_searchable_param = "{url}?searchable={searchable}".format(
+            url=url, searchable=Partner.NOT_SEARCHABLE
+        )
+        request = factory.get(url_with_searchable_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.proxy_partner_3.company_name), content)
+
+        self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_3.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_4.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
