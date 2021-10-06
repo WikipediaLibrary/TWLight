@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, resolve, Resolver404, reverse
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
@@ -826,7 +826,6 @@ class MyLibraryView(TemplateView):
         dict
             The context dictionary with the user collections added
         """
-        favorites_collection = []
         today = datetime.date.today()
         user_authorizations = Authorization.objects.filter(
             Q(date_expires__gte=today) | Q(date_expires=None), user=editor.user
@@ -847,15 +846,21 @@ class MyLibraryView(TemplateView):
             expired_user_authorizations, language_code, partner_id_set
         )
 
-        context["favorite_collections"] = self._build_authorization_object(
-            user_authorizations, language_code, partner_id_set, favorite_ids
-        )
-        context["expired_favorite_collections"] = self._build_authorization_object(
-            expired_user_authorizations, language_code, partner_id_set, favorite_ids
-        )
+        if len(favorite_ids) > 0:
+            context["favorite_collections"] = self._build_authorization_object(
+                user_authorizations, language_code, partner_id_set, favorite_ids
+            )
+            context["expired_favorite_collections"] = self._build_authorization_object(
+                expired_user_authorizations, language_code, partner_id_set, favorite_ids
+            )
+        else:
+            context["favorite_collections"] = []
+            context["expired_favorite_collections"] = []
 
         context["favorite_ids"] = favorite_ids
-        context["favorites_count"] = favorites.count()
+        context["favorites_count"] = len(context["favorite_collections"]) + len(
+            context["expired_favorite_collections"]
+        )
         context["partner_id_set"] = partner_id_set
         context["number_user_collections"] = len(partner_id_set)
 
@@ -1048,3 +1053,25 @@ class MyLibraryView(TemplateView):
         context["number_available_collections"] = len(available_collection_obj)
 
         return context
+
+
+def favorite_collection(request):
+    """ """
+    user_profile = request.user.userprofile
+    partner_pk = request.GET.get("partner_pk", None)
+
+    favorites = user_profile.favorites.all()
+    favorite_pks = [f.pk for f in favorites]
+
+    if partner_pk:
+        if int(partner_pk) in favorite_pks:
+            # partner is already in favorites, unfavoriting this partner
+            user_profile.favorites.remove(partner_pk)
+            response = {"added": False}
+        else:
+            user_profile.favorites.add(partner_pk)
+            response = {"added": True}
+    else:
+        response = {"error": "A partner ID was not passed in this AJAX request."}
+
+    return JsonResponse(response)

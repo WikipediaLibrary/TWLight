@@ -6,7 +6,7 @@
           data-toggle="tab" href="#favorite-collections" role="tab" aria-controls="favorite-collections"
           aria-selected="true">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has. {% endcomment %}
-          {% trans "Favorites " %} ({{ favorites_count }})
+          {% trans "Favorites " %} (<span id="favorite-collections-number">{{ favorites_count }}</span>)
       </a>
     </li>
     <li class="nav-item" role="presentation">
@@ -38,9 +38,12 @@
   <div id="favorite-collections" class="tab-pane collections-pane {% if favorites_count > 0 %} active {% endif %}"
       role="tabpanel" aria-labelledby="favorite-collections-tab">
     <!-- Favorite Collections -->
-    <div class="row">
+    <div id="favorite-collections-row" class="row">
         {% for user_collection in favorite_collections %}
+        <div id="favorite-tile-partner-{{user_collection.partner_pk}}"
+            class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
           {% include "users/user_collection_tile.html" %}
+        </div>
         {% endfor %}
     </div>
     <!-- Expired Favorite Collections -->
@@ -52,7 +55,10 @@
       </h3>
       <div class="row">
         {% for user_collection in expired_favorite_collections %}
-          {% include "users/user_collection_tile.html" %}
+          <div id="favorite-tile-partner-{{user_collection.partner_pk}}"
+              class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            {% include "users/user_collection_tile.html" %}
+          </div>
         {% endfor %}
       </div>
     {% endif %}
@@ -62,7 +68,10 @@
     <!-- User Collections -->
     <div class="row">
         {% for user_collection in user_collections %}
+        <div id="tile-partner-{{user_collection.partner_pk}}"
+            class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
           {% include "users/user_collection_tile.html" %}
+        </div>
         {% endfor %}
     </div>
     <!-- Expired User Collections -->
@@ -74,7 +83,10 @@
       </h3>
       <div class="row">
         {% for user_collection in expired_user_collections %}
-          {% include "users/user_collection_tile.html" %}
+          <div id="tile-partner-{{user_collection.partner_pk}}"
+              class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+            {% include "users/user_collection_tile.html" %}
+          </div>
         {% endfor %}
       </div>
     {% endif %}

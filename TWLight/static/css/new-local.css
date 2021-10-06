@@ -867,6 +867,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
     position: absolute;
     right: 5px;
     top: 5px;
+    cursor: pointer;
 }
 
 .collection-tags{

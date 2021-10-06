@@ -28,6 +28,50 @@
 
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
+
+    function favoriteCollection(icon, partnerPk) {
+      $.ajax({
+        url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk,
+        // on success
+        success: function(response) {
+          var favoritesNumber = document.getElementById("favorite-collections-number");
+          var previousCount = Number(favoritesNumber.innerText);
+
+          if(response.added){
+            // Update favorites counter
+            favoritesNumber.innerHTML = previousCount + 1;
+            // Change icon to star icon
+            icon.className = "fa fa-star favorite-icon";
+            var partnerIcon = document.getElementById("favorite-icon-" + partnerPk);
+            partnerIcon.className = "fa fa-star favorite-icon";
+            // Add tile to favorites section
+            var collectionTile = document.getElementById("tile-partner-" + partnerPk);
+            var collectionTileClone = collectionTile.cloneNode(true);
+            // Change the id to indicate the cloned tile is a favorite
+            collectionTileClone.id = "favorite-tile-partner-" + partnerPk;
+            var favoriteRow = document.getElementById("favorite-collections-row");
+            favoriteRow.appendChild(collectionTileClone);
+
+          }
+          else{
+            // Update favorites counter
+            favoritesNumber.innerHTML = previousCount - 1;
+            // Change icon to outline star icon
+            icon.className = "fa fa-star-o favorite-icon";
+            var partnerIcon = document.querySelector("#favorite-icon-" + partnerPk);
+            partnerIcon.className = "fa fa-star-o favorite-icon";
+            // Remove tile from favorites section
+            var favoriteTile = document.getElementById("favorite-tile-partner-" + partnerPk);
+            favoriteTile.parentNode.removeChild(favoriteTile);
+          }
+        },
+        // on error
+        error: function(response) {
+            // alert the error if any error occured
+            console.log(response.responseJSON.errors)
+        }
+      });
+    }
   </script>
 
 {% endblock %}
