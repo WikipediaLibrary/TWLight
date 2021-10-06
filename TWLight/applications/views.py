@@ -33,6 +33,7 @@ from django.views.generic.list import ListView
 from reversion import revisions as reversion
 from reversion.models import Version
 
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 from TWLight.applications.signals import no_more_accounts
 from TWLight.resources.models import Partner, AccessCode
 from TWLight.users.groups import get_coordinators
@@ -468,6 +469,10 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
             url, message = self._check_duplicate_applications()
             messages.add_message(request, messages.ERROR, message)
             return HttpResponseRedirect(url, message)
+
+        # Non-eligible users should redirect to my library page
+        if not editor_bundle_eligible(self.request.user.editor):
+            return HttpResponseRedirect(reverse("users:my_library"))
 
         return super(SubmitSingleApplicationView, self).dispatch(
             request, *args, **kwargs

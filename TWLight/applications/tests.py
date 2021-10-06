@@ -32,6 +32,7 @@ from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.tests import EditorCraftRoom
 from TWLight.users.factories import EditorFactory, UserFactory
 from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 from TWLight.users.models import Authorization, Editor
 
 from . import views
@@ -1295,12 +1296,17 @@ class SubmitApplicationTest(BaseApplicationViewTest):
 
         response = client.post(form_url, data)
 
-        self.assertFormError(
-            response,
-            "form",
-            "partner_{id}_rationale".format(id=p1.id),
-            "This field consists only of restricted text.",
-        )
+        if not editor_bundle_eligible(self.editor.editor):
+            # if editor not eligible application won't get submitted
+            expected_url = reverse("users:my_library")
+            self.assertEqual(response.url, expected_url)
+        else:
+            self.assertFormError(
+                response,
+                "form",
+                "partner_{id}_rationale".format(id=p1.id),
+                "This field consists only of restricted text.",
+            )
 
     def test_application_waitlist_status_for_single_partner(self):
         """
@@ -1326,13 +1332,18 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         request.session = {}
         request.session[views.PARTNERS_SESSION_KEY] = [p1.id]
 
-        _ = views.SubmitSingleApplicationView.as_view()(request, pk=p1.pk)
+        response = views.SubmitSingleApplicationView.as_view()(request, pk=p1.pk)
 
-        # Get Application
-        app1 = Application.objects.get(partner=p1, editor=self.editor.editor)
+        if not editor_bundle_eligible(self.editor.editor):
+            # if editor not eligible application won't get submitted
+            expected_url = reverse("users:my_library")
+            self.assertEqual(response.url, expected_url)
+        else:
+            # Get Application
+            app1 = Application.objects.get(partner=p1, editor=self.editor.editor)
 
-        # Application's waitlist status should be True
-        self.assertEqual(app1.waitlist_status, True)
+            # Application's waitlist status should be True
+            self.assertEqual(app1.waitlist_status, True)
 
     def test_application_waitlist_status_for_different_partners(self):
         """
@@ -1402,47 +1413,53 @@ class SubmitApplicationTest(BaseApplicationViewTest):
         resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
 
         # it should redirect to partner detail page on success
-        expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
-
         self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
+        if not editor_bundle_eligible(editor):
+            # if editor not eligible application won't get submitted
+            expected_url = reverse("users:my_library")
+            self.assertEqual(resp.url, expected_url)
+        else:
+            expected_url = reverse("resources:detail", kwargs={"pk": partner.pk})
+            self.assertEqual(resp.url, expected_url)
 
-        # Create another application to the same partner
-        data = {
-            "partner_{id}_rationale".format(id=partner.id): "Random",
-            "partner_{id}_comments".format(id=partner.id): "Random whatsoever",
-        }
-        request = factory.post(url, data)
-        request.user = user
-        request.session = {}
-        request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
-        resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
+            # Create another application to the same partner
+            data = {
+                "partner_{id}_rationale".format(id=partner.id): "Random",
+                "partner_{id}_comments".format(id=partner.id): "Random whatsoever",
+            }
+            request = factory.post(url, data)
+            request.user = user
+            request.session = {}
+            request.session[views.PARTNERS_SESSION_KEY] = [partner.id]
+            resp = views.SubmitSingleApplicationView.as_view()(request, pk=partner.pk)
 
-        # get duplicate applications
-        apps = Application.objects.filter(
-            partner=partner,
-            editor=editor,
-            status__in=(
-                Application.QUESTION,
-                Application.PENDING,
-                Application.APPROVED,
-            ),
-        )
-        if apps.exists():
-            if len(apps) == 1:
-                # if there is only app we should redirect user to that application
-                app = apps[0]
-                expected_url = reverse("applications:evaluate", kwargs={"pk": app.id})
-            else:
-                # if there are more than one application exists then
-                # redirect user to my_applications page
-                expected_url = reverse(
-                    "users:my_applications", kwargs={"pk": editor.pk}
-                )
+            # get duplicate applications
+            apps = Application.objects.filter(
+                partner=partner,
+                editor=editor,
+                status__in=(
+                    Application.QUESTION,
+                    Application.PENDING,
+                    Application.APPROVED,
+                ),
+            )
+            if apps.exists():
+                if len(apps) == 1:
+                    # if there is only app we should redirect user to that application
+                    app = apps[0]
+                    expected_url = reverse(
+                        "applications:evaluate", kwargs={"pk": app.id}
+                    )
+                else:
+                    # if there are more than one application exists then
+                    # redirect user to my_applications page
+                    expected_url = reverse(
+                        "users:my_applications", kwargs={"pk": editor.pk}
+                    )
 
-        # it should redirect to the expected url
-        self.assertEqual(resp.status_code, 302)
-        self.assertEqual(resp.url, expected_url)
+            # it should redirect to the expected url
+            self.assertEqual(resp.status_code, 302)
+            self.assertEqual(resp.url, expected_url)
 
 
 class ListApplicationsTest(BaseApplicationViewTest):

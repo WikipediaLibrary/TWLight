@@ -15,6 +15,7 @@ from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from .filters import PartnerFilter
 from .forms import SuggestionForm
@@ -167,6 +168,7 @@ class PartnersDetailView(DetailView):
         if (
             self.request.user.is_authenticated
             and not partner.authorization_method == partner.BUNDLE
+            and editor_bundle_eligible(self.request.user.editor)
         ):
             context["apply"] = True
             user = self.request.user
