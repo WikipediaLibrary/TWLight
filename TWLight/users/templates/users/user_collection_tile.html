@@ -19,12 +19,14 @@
   {% endif %}
   {% if user_collection.partner_pk in favorite_ids %}
     {% comment %}Translators: Hovertext for an icon that will remove a collection as a favorite. {% endcomment %}
-    <i id="favorite-icon-{{user_collection.partner_pk}}" class="fa fa-star favorite-icon" title="{% trans 'Remove this collection from favorites' %}"
+    <i class="fa fa-star favorite-icon favorite-icon-{{user_collection.partner_pk}}"
+        title="{% trans 'Remove this collection from favorites' %}"
         onclick="favoriteCollection(this, {{user_collection.partner_pk}})">
     </i>
   {% else %}
     {% comment %}Translators: Hovertext for an icon that will mark a collection as a favorite. {% endcomment %}
-    <i id="favorite-icon-{{user_collection.partner_pk}}" class="fa fa-star-o favorite-icon" title="{% trans 'Add this collection to favorites' %}"
+    <i class="fa fa-star-o favorite-icon favorite-icon-{{user_collection.partner_pk}}"
+        title="{% trans 'Add this collection to favorites' %}"
         onclick="favoriteCollection(this, {{user_collection.partner_pk}})">
     </i>
   {% endif %}

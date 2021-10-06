@@ -41,9 +41,7 @@
             // Update favorites counter
             favoritesNumber.innerHTML = previousCount + 1;
             // Change icon to star icon
-            icon.className = "fa fa-star favorite-icon";
-            var partnerIcon = document.getElementById("favorite-icon-" + partnerPk);
-            partnerIcon.className = "fa fa-star favorite-icon";
+            icon.className = "fa fa-star favorite-icon favorite-icon-" + partnerPk;
             // Add tile to favorites section
             var collectionTile = document.getElementById("tile-partner-" + partnerPk);
             var collectionTileClone = collectionTile.cloneNode(true);
@@ -58,8 +56,10 @@
             favoritesNumber.innerHTML = previousCount - 1;
             // Change icon to outline star icon
             icon.className = "fa fa-star-o favorite-icon";
-            var partnerIcon = document.querySelector("#favorite-icon-" + partnerPk);
-            partnerIcon.className = "fa fa-star-o favorite-icon";
+            var partnerIcons = document.getElementsByClassName("fa fa-star favorite-icon favorite-icon-" + partnerPk);
+            for (var i = 0; i < partnerIcons.length; i++) {
+              partnerIcons[i].className = "fa fa-star-o favorite-icon favorite-icon-" + partnerPk;
+            }
             // Remove tile from favorites section
             var favoriteTile = document.getElementById("favorite-tile-partner-" + partnerPk);
             favoriteTile.parentNode.removeChild(favoriteTile);
