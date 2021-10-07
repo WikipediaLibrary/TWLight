@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-06 17:36+0000\n"
+"POT-Creation-Date: 2021-10-07 16:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -364,7 +364,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:326
 #: TWLight/resources/templates/resources/partner_tile.html:48
 #: TWLight/users/templates/users/available_collection_tile.html:47
-#: TWLight/users/templates/users/user_collection_tile.html:47
+#: TWLight/users/templates/users/user_collection_tile.html:59
 msgid "Waitlisted"
 msgstr ""
 
@@ -1462,7 +1462,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #: TWLight/resources/filters.py:22
 #: TWLight/users/templates/users/available_collection_tile.html:26
-#: TWLight/users/templates/users/user_collection_tile.html:26
+#: TWLight/users/templates/users/user_collection_tile.html:38
 msgid "Languages"
 msgstr ""
 
@@ -1472,7 +1472,7 @@ msgstr ""
 #: TWLight/resources/filters.py:28
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:15
-#: TWLight/users/templates/users/user_collection_tile.html:6
+#: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
 msgstr ""
 
@@ -1819,7 +1819,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
 #: TWLight/resources/templates/resources/partner_tile.html:68
 #: TWLight/users/templates/users/available_collection_tile.html:33
-#: TWLight/users/templates/users/user_collection_tile.html:33
+#: TWLight/users/templates/users/user_collection_tile.html:45
 msgid "Language(s) not known"
 msgstr ""
 
@@ -2531,33 +2531,39 @@ msgstr ""
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
 #: TWLight/users/templates/users/available_collection_tile.html:9
 #: TWLight/users/templates/users/filter_section.html:24
-#: TWLight/users/templates/users/user_collection_tile.html:9
+#: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:53
-#: TWLight/users/templates/users/user_collection_tile.html:53
+#: TWLight/users/templates/users/user_collection_tile.html:65
 msgid "Not Available"
 msgstr ""
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
+#: TWLight/users/templates/users/collections_section.html:9
+msgid "Favorites "
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
-#: TWLight/users/templates/users/collections_section.html:8
+#: TWLight/users/templates/users/collections_section.html:17
 msgid "My Collections "
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
-#: TWLight/users/templates/users/collections_section.html:15
+#: TWLight/users/templates/users/collections_section.html:24
 msgid "Available Collections "
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
-#: TWLight/users/templates/users/collections_section.html:22
+#: TWLight/users/templates/users/collections_section.html:31
 msgid "View my applications >"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
-#: TWLight/users/templates/users/collections_section.html:41
+#: TWLight/users/templates/users/collections_section.html:54
+#: TWLight/users/templates/users/collections_section.html:82
 msgid "Expired"
 msgstr ""
 
@@ -3339,38 +3345,46 @@ msgid ""
 "which you gain access through The Wikipedia Library program."
 msgstr ""
 
+#: TWLight/users/templates/users/user_collection_tile.html:23
+msgid "Remove this collection from favorites"
+msgstr ""
+
+#: TWLight/users/templates/users/user_collection_tile.html:29
+msgid "Add this collection to favorites"
+msgstr ""
+
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
-#: TWLight/users/templates/users/user_collection_tile.html:63
+#: TWLight/users/templates/users/user_collection_tile.html:75
 msgid "Expiry date"
 msgstr ""
 
-#: TWLight/users/templates/users/user_collection_tile.html:68
+#: TWLight/users/templates/users/user_collection_tile.html:80
 msgid "Click to return this access"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
-#: TWLight/users/templates/users/user_collection_tile.html:77
+#: TWLight/users/templates/users/user_collection_tile.html:89
 msgid "Go to application"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
-#: TWLight/users/templates/users/user_collection_tile.html:86
+#: TWLight/users/templates/users/user_collection_tile.html:98
 msgid "Go to site"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
-#: TWLight/users/templates/users/user_collection_tile.html:89
-#: TWLight/users/templates/users/user_collection_tile.html:109
+#: TWLight/users/templates/users/user_collection_tile.html:101
+#: TWLight/users/templates/users/user_collection_tile.html:121
 msgid "Access collection"
 msgstr ""
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/user_collection_tile.html:97
+#: TWLight/users/templates/users/user_collection_tile.html:109
 msgid "Renew"
 msgstr ""
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/user_collection_tile.html:100
+#: TWLight/users/templates/users/user_collection_tile.html:112
 msgid "Extend"
 msgstr ""
 
@@ -3469,22 +3483,22 @@ msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:802 TWLight/views.py:31
+#: TWLight/users/views.py:800 TWLight/views.py:31
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:804 TWLight/views.py:33
+#: TWLight/users/views.py:802 TWLight/views.py:33
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:806 TWLight/views.py:35
+#: TWLight/users/views.py:804 TWLight/views.py:35
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:808 TWLight/views.py:37
+#: TWLight/users/views.py:806 TWLight/views.py:37
 msgid "No active blocks"
 msgstr ""
 
