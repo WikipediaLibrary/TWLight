@@ -1,12 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Kareyac"
 		]
 	},
 	"languages-and-literature_tag": "Языки и литература",
+	"multidisciplinary_tag": "Мультидисциплинарный",
+	"physical-sciences_tag": "Физические науки",
+	"music_tag": "Музыка",
+	"art_tag": "Искусство",
 	"business-and-economics_tag": "Бизнес и экономика",
+	"law_tag": "Закон",
+	"education_tag": "Образование",
 	"philosophy-and-religion_tag": "Философия и религия",
 	"social-sciences_tag": "Социальные науки",
+	"history_tag": "История",
+	"culture_tag": "Культура",
+	"life-sciences_tag": "Науки о жизни",
+	"health-sciences_tag": "Медицинских наук",
+	"earth-sciences_tag": "Науки о Земле",
 	"technology_tag": "Технология"
 }

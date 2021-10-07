@@ -38,6 +38,7 @@
 	"23_description": "エルゼビアには購読制コンテンツに加えて、誰でも読むことができるいくつかの資料もあります。オープンアクセスのマークのほか、次の方法でも探せます。\n<ul>\n<li>オープンアクセスジャーナルのリストを閲覧する</li>\n<li>ScienceDirectのホームページで「オープンアクセス記事のあるすべての出版物を表示」ボタンをクリック、オープンアクセス記事のあるジャーナル全件を一覧表示</li>\n<li>高度な検索を使うときに「オープンアクセス記事のみ」というチェックボックスをオンにする</li>\n</ul>",
 	"56_short_description": "<strong>Emerald Group Publishing</strong>は、経済学、教育学、工学、看護と介護、マーケティング、社会学など、さまざまな分野の書籍やジャーナルへのアクセスを提供します。",
 	"44_short_description": "<strong>Érudit</strong> はカナダに本拠を置くウェブポータルで専門は学術文書です。主な対象は人文科学と社会科学で、さらに物理科学、自然科学の出版物も若干、扱います。",
+	"43_short_description": "<strong>Fold3</strong> フォールドスリーはアメリカやイギリス、オーストラリアやニュージーランドの軍事史を対象に、文書、画像その他の素材をまとめたデータベースです。特筆すべきコレクションとしてアフリカ系アメリカ人ならびにアメリカ先住民の歴史、[[:w:連邦捜査局|FBI]]発行の青書、またアメリカ史や軍関係機関あるいは軍事的衝突のその他の側面の資料などです。",
 	"8_short_description": "<strong>Foreign Affairs</strong>はアメリカのジャーナルで、国際関係とアメリカの外交政策が対象です。無料の購読を提供し、Foreign Affairs誌、電子書籍およびアーカイブ90年分超のへのアクセスを提供します。",
 	"22_short_description": "<strong>Future Science Group</strong>は、医学、バイオテクノロジー、科学研究の出版社です。アクセスを提供するジャーナル集はFuture ScienceとFuture Medicineの2件です。",
 	"55_short_description": "<strong>Gale</strong>（ゲール）はアメリカの教育出版社で、非常に大規模な複数の研究データベースを提供します。アクセスはGale Academic OneFile、Gale General OneFile、Gale eBooks、Gale OneFileはニュース、Gale In Contextは伝記、Gale Primary Sources（一次資料）、NewsVault、The Times Digital Archiveが対象です。",
@@ -94,5 +95,7 @@
 	"110_short_description": "<strong>Psychologie, Psychotherapie, Psychoanalyse</strong>は、心理学の主題に関するドイツ語の学術論文へのアクセスを提供します。",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong>はドイツ語の音楽雑誌です。",
 	"112_short_description": "<strong><em>Merkur</em></strong>はドイツ語の文化雑誌です。",
+	"118_short_description": "<strong>Oxford Research Encyclopedias</strong> オックスフォード調べ物百科事典はさまざまな学問分野について、査読済みの長文の概論の論文をまとめています。",
+	"123_short_description": "<strong>Nature</strong> ネイチャーは国際版の科学系学術誌で週刊です。",
 	"119_short_description": "<strong>Future Medicine</strong> フューチャー・メディスンは生化学関連のリソース集です。"
 }
