@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, resolve, Resolver404, reverse
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
@@ -783,7 +783,6 @@ class MyLibraryView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         editor = Editor.objects.get(pk=self.request.user.editor.pk)
-        favorites = self.request.user.userprofile.favorites.all()
         language_code = get_language()
 
         self._build_user_collection_object(context, language_code, editor)
@@ -792,7 +791,6 @@ class MyLibraryView(TemplateView):
         )
 
         context["editor"] = editor
-        context["favorites"] = favorites
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
         context["searchable"] = Partner.SEARCHABLE
@@ -836,6 +834,8 @@ class MyLibraryView(TemplateView):
         expired_user_authorizations = Authorization.objects.filter(
             date_expires__lt=today, user=editor.user
         )
+        favorites = self.request.user.userprofile.favorites.all()
+        favorite_ids = [f.pk for f in favorites]
 
         partner_id_set = set()
 
@@ -846,13 +846,28 @@ class MyLibraryView(TemplateView):
             expired_user_authorizations, language_code, partner_id_set
         )
 
+        if len(favorite_ids) > 0:
+            context["favorite_collections"] = self._build_authorization_object(
+                user_authorizations, language_code, partner_id_set, favorite_ids
+            )
+            context["expired_favorite_collections"] = self._build_authorization_object(
+                expired_user_authorizations, language_code, partner_id_set, favorite_ids
+            )
+        else:
+            context["favorite_collections"] = []
+            context["expired_favorite_collections"] = []
+
+        context["favorite_ids"] = favorite_ids
+        context["favorites_count"] = len(context["favorite_collections"]) + len(
+            context["expired_favorite_collections"]
+        )
         context["partner_id_set"] = partner_id_set
         context["number_user_collections"] = len(partner_id_set)
 
         return context
 
     def _build_authorization_object(
-        self, authorization_queryset, language_code, partner_id_set
+        self, authorization_queryset, language_code, partner_id_set, favorite_ids=None
     ):
         """
         Helper function to convert an Authorization queryset to an object that the
@@ -865,6 +880,8 @@ class MyLibraryView(TemplateView):
         partner_id_set: set
             A set that will be filled with partner IDs. These partners will be excluded
             in the Available Collections section
+        favorite_ids: list or None
+            A list of partner IDs that have been added to a user's favorites
 
         Returns
         -------
@@ -872,6 +889,7 @@ class MyLibraryView(TemplateView):
             A list that contains the transformed Authorization queryset
         """
         user_authorization_obj = []
+        favorites_obj = []
 
         for user_authorization in authorization_queryset:
             partner_filtered_list = PartnerFilter(
@@ -916,33 +934,37 @@ class MyLibraryView(TemplateView):
                         language_code, user_authorization_partner.new_tags
                     )
                     access_url = user_authorization_partner.get_access_url
+                    user_auth_dict = {
+                        "auth_pk": user_authorization.pk,
+                        "auth_date_authorized": user_authorization.date_authorized,
+                        "auth_date_expires": user_authorization.date_expires,
+                        "auth_is_valid": user_authorization.is_valid,
+                        "auth_latest_sent_app": user_authorization.get_latest_sent_app,
+                        "auth_open_app": open_app,
+                        "auth_has_expired": has_expired,
+                        "partner_pk": user_authorization_partner.pk,
+                        "partner_name": user_authorization_partner.company_name,
+                        "partner_logo": partner_logo,
+                        "partner_short_description": partner_descriptions[
+                            "short_description"
+                        ],
+                        "partner_description": partner_descriptions["description"],
+                        "partner_languages": user_authorization_partner.get_languages,
+                        "partner_tags": translated_tags,
+                        "partner_authorization_method": user_authorization_partner.authorization_method,
+                        "partner_access_url": access_url,
+                        "partner_is_not_available": user_authorization_partner.is_not_available,
+                        "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
+                        "searchable": user_authorization_partner.searchable,
+                    }
 
-                    user_authorization_obj.append(
-                        {
-                            "auth_pk": user_authorization.pk,
-                            "auth_date_authorized": user_authorization.date_authorized,
-                            "auth_date_expires": user_authorization.date_expires,
-                            "auth_is_valid": user_authorization.is_valid,
-                            "auth_latest_sent_app": user_authorization.get_latest_sent_app,
-                            "auth_open_app": open_app,
-                            "auth_has_expired": has_expired,
-                            "partner_pk": user_authorization_partner.pk,
-                            "partner_name": user_authorization_partner.company_name,
-                            "partner_logo": partner_logo,
-                            "partner_short_description": partner_descriptions[
-                                "short_description"
-                            ],
-                            "partner_description": partner_descriptions["description"],
-                            "partner_languages": user_authorization_partner.get_languages,
-                            "partner_tags": translated_tags,
-                            "partner_authorization_method": user_authorization_partner.authorization_method,
-                            "partner_access_url": access_url,
-                            "partner_is_not_available": user_authorization_partner.is_not_available,
-                            "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
-                            "searchable": user_authorization_partner.searchable,
-                        }
-                    )
-                    partner_id_set.add(user_authorization_partner.pk)
+                    if favorite_ids:
+                        if user_authorization_partner.pk in favorite_ids:
+                            user_authorization_obj.append(user_auth_dict)
+                            partner_id_set.add(user_authorization_partner.pk)
+                    else:
+                        user_authorization_obj.append(user_auth_dict)
+                        partner_id_set.add(user_authorization_partner.pk)
 
         # Sort by partner name
         return sorted(user_authorization_obj, key=lambda k: k["partner_name"])
@@ -1031,3 +1053,25 @@ class MyLibraryView(TemplateView):
         context["number_available_collections"] = len(available_collection_obj)
 
         return context
+
+
+def favorite_collection(request):
+    """ """
+    user_profile = request.user.userprofile
+    partner_pk = request.GET.get("partner_pk", None)
+
+    favorites = user_profile.favorites.all()
+    favorite_pks = [f.pk for f in favorites]
+
+    if partner_pk:
+        if int(partner_pk) in favorite_pks:
+            # partner is already in favorites, unfavoriting this partner
+            user_profile.favorites.remove(partner_pk)
+            response = {"added": False}
+        else:
+            user_profile.favorites.add(partner_pk)
+            response = {"added": True}
+    else:
+        response = {"error": "A partner ID was not passed in this AJAX request."}
+
+    return JsonResponse(response)

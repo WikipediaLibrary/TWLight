@@ -57,4 +57,9 @@ urlpatterns = [
         login_required(views.WithdrawApplication.as_view()),
         name="withdraw",
     ),
+    url(
+        r"^favorite_collection/$",
+        login_required(views.favorite_collection),
+        name="favorite_collection",
+    ),
 ]

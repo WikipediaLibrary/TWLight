@@ -861,6 +861,15 @@ NEW MY LIBRARY COLLECTION TILES CSS
     padding: 10px 10px 0px 10px;
 }
 
+.favorite-icon{
+    color: #FFC93F;
+    font-size: 20px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
 .collection-tags{
     color: #000000;
     background-color: #E0E0E0;
