@@ -33,7 +33,7 @@ from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor, Authorization
-from .views import MyLibraryView
+from .views import MyLibraryView, favorite_collection
 
 from TWLight.users.helpers.editor_data import (
     editor_valid,
@@ -2401,7 +2401,7 @@ class MyLibraryViewsTest(TestCase):
         )
         request = factory.get(url_with_partner_pk)
         request.user = self.editor.user
-        response = MyLibraryView.as_view()(request)
+        response = self.client.post(request)
 
         self.assertEqual(response.status_code, 200)
 
