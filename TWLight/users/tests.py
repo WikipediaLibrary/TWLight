@@ -2405,4 +2405,4 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual({"added": True}, response)
+        self.assertEqual({"added": True}, json.loads(response.content.decode()))
