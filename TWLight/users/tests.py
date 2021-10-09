@@ -2383,3 +2383,26 @@ class MyLibraryViewsTest(TestCase):
         self.assertNotIn(escape(self.bundle_partner_4.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
+
+    def test_favorite_collection(self):
+        """
+        Tests that a collection can be favorited
+        """
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+        factory = RequestFactory()
+        url = reverse("users:favorite_collection")
+        url_with_partner_pk = "{url}?partner_pk={partner_pk}".format(
+            url=url, partner_pk=self.bundle_partner_1.pk
+        )
+        request = factory.get(url_with_partner_pk)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertEqual({"added": True}, response)
