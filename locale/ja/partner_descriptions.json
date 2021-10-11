@@ -26,7 +26,7 @@
 	"79_short_description": "<strong>Civilica</strong>は、科学ジャーナルと会議議事録の出版者です。 70万件超の公表済み論文の全文にアクセスを提供します。",
 	"15_short_description": "<strong>Cochrane</strong>（コクラン）はCochrane Libraryへのアクセスを提供します。6つのデータベースは、医療分野の主題に関する系統的レビューと査読および評価データベースで構成されます。",
 	"105_short_description": "<strong>De Gruyter</strong>は、学術文献を専門とする専門出版社です。アカウントはDe Gruyter Onlineを通じて利用できるすべての電子リソースにアクセスでき、対象には美学、人文科学、社会科学、自然科学、神学/宗教学、医学、数学、法学および一般的な参考文献に関する電子書籍やジャーナルが含まれます。それらには、英語、ドイツ語およびその他の複数言語のリソースがあります。",
-	"83_short_description": "<strong>ZEIT ONLINE</strong>は、ドイツの週刊新聞DieZeitのオンライン版です。",
+	"83_short_description": "<strong>ZEIT ONLINE</strong>は、ドイツの週刊新聞[[:ja:ディー・ツァイト|Die Zeit]]のオンライン版です。",
 	"74_short_description": "<strong>Drama Online</strong>（ドラマ・オンライン）は演劇関連の文書、上演、録音・録画記録を集め、研究論文、注釈付き文書その他の学術資料を揃えています。発行元はブルームズバリー出版 Bloomsbury Publishing。",
 	"57_short_description": "<strong>EBSCO Information Services</strong>は、アメリカを拠点とする図書館リソースおよび情報サービスの主要プロバイダーです。EBSCOとウィキペディア図書館との提携関係には、複数のデータベースへのアクセスが含まれます。",
 	"57_description": "利用可能なデータベースは下記のとお理。<ul>\n<li>Academic Search Complete</li>\n<li>America: History and Life</li>\n<li>Applied Science &amp; Technology Source</li>\n<li>Al-Kotob Arabic eBooks Collection</li>\n<li>Arab World Research Source: Al Masdar</li>\n<li>Art Source</li>\n<li>Book Review Digest Plus</li>\n<li>Business Search Complete</li>\n<li>Caribbean Search</li>\n<li>CINAHL Complete</li>\n<li>Communications and Mass Media Complete</li>\n<li>DynaMed Plus</li>\n<li>Education Research Complete</li>\n<li>Enfermería al Día</li>\n<li>ERIC (Education Resource Information Center)</li>\n<li>Fuente Académica Premier</li>\n<li>Humanities Full Text</li>\n<li>LGBT Life with Full Text</li>\n<li>Life Magazine Archive</li>\n<li>Literary Reference Center Plus</li>\n<li>MasterFILE Complete</li>\n<li>MedicLatina</li>\n<li>MEDLINE Complete</li>\n<li>Nursing Reference Center</li>\n<li>Patient Education Reference Center</li>\n<li>Psychology &amp; Behavioral Sciences Collection</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX with Full Text</li>\n<li>SportDiscus with Full Text</li>\n</ul>",
@@ -39,8 +39,10 @@
 	"56_short_description": "<strong>Emerald Group Publishing</strong>は、経済学、教育学、工学、看護と介護、マーケティング、社会学など、さまざまな分野の書籍やジャーナルへのアクセスを提供します。",
 	"44_short_description": "<strong>Érudit</strong> はカナダに本拠を置くウェブポータルで専門は学術文書です。主な対象は人文科学と社会科学で、さらに物理科学、自然科学の出版物も若干、扱います。",
 	"43_short_description": "<strong>Fold3</strong> フォールドスリーはアメリカやイギリス、オーストラリアやニュージーランドの軍事史を対象に、文書、画像その他の素材をまとめたデータベースです。特筆すべきコレクションとしてアフリカ系アメリカ人ならびにアメリカ先住民の歴史、[[:w:連邦捜査局|FBI]]発行の青書、またアメリカ史や軍関係機関あるいは軍事的衝突のその他の側面の資料などです。",
+	"43_description": "編集者には、ウィキペディアに使うために利用した素材はすべて、関連性のある信頼性の高い情報源の方針に従うことが求められます。Fold3 を構成する素材の大半は政府刊行物や記録集であり、その使用はたいへんに適しているとはいえ、利用者が作成した素材も含まれ、必ずしもウィキペディアにおける使用に的するとは限りません。",
 	"8_short_description": "<strong>Foreign Affairs</strong>はアメリカのジャーナルで、国際関係とアメリカの外交政策が対象です。無料の購読を提供し、Foreign Affairs誌、電子書籍およびアーカイブ90年分超のへのアクセスを提供します。",
 	"22_short_description": "<strong>Future Science Group</strong>は、医学、バイオテクノロジー、科学研究の出版社です。アクセスを提供するジャーナル集はFuture ScienceとFuture Medicineの2件です。",
+	"22_description": "<ul>\n<li>Future Science の対象は生物分析、臨床検査、将来の医化学、薬学的  -  薬学におけるバイオプロセスやパテント分析、 治療的徐放性</li>\n<li>Future Medicine に含まれる分野は Aging Health、Clinical Practice、Diabetes Management、Future Microbiology、Future Neurology、HIV Therapy、Imaging in Medicine、International Journal of Clinical Rheumatology、Journal of 3D Printing in Medicine、Nanomedicine、Neuropsychiatry、Pain Management、Pediatric Health、Regenerative Medicine</li>\n</ul>",
 	"55_short_description": "<strong>Gale</strong>（ゲール）はアメリカの教育出版社で、非常に大規模な複数の研究データベースを提供します。アクセスはGale Academic OneFile、Gale General OneFile、Gale eBooks、Gale OneFileはニュース、Gale In Contextは伝記、Gale Primary Sources（一次資料）、NewsVault、The Times Digital Archiveが対象です。",
 	"55_description": "<ul>\n<li> Academic OneFileは定期刊行物1万7千件超のデータベースで、査読付き学術雑誌3千件超を含みます。</li>\n<li> General OneFileは、定期刊行物1万4千件超のデータベースで消費者向け雑誌、業界誌、業界誌が対象です。</li>\n<li>Gale eBooksは、百科事典と専門の参考資料のデータベース。</li>\n<li> OneFile Newsは、アメリカの主要な地域紙、全国紙、地方紙に加えて世界中の主要な新聞へのアクセス。</li>\n<li> Biography In Contextは伝記項目のデータベースで、170件超のソースを典拠とする40万人超の伝記を含みます。</li>\n<li>Gale Primary Sources</li>\n<li> NewsVault</li>\n<li>Times Digital Archive（タイムズ電子アーカイブ）は、タイムズ紙のオンライン版で全文転写は200年分を超え、1785年から2013年にわたる全号の全ページで構成されます。</li>\n</ul>\n<p>Galeを典拠として引用する編集者は、必ずここに示した形式を使ってください。</p>",
 	"78_short_description": "<strong>ICE Publishing</strong>は、イギリス土木学会に属しています。ICE仮想図書館に収蔵されたすべてのジャーナルと電子書籍へのアクセスを提供します。",
@@ -97,5 +99,8 @@
 	"112_short_description": "<strong><em>Merkur</em></strong>はドイツ語の文化雑誌です。",
 	"118_short_description": "<strong>Oxford Research Encyclopedias</strong> オックスフォード調べ物百科事典はさまざまな学問分野について、査読済みの長文の概論の論文をまとめています。",
 	"123_short_description": "<strong>Nature</strong> ネイチャーは国際版の科学系学術誌で週刊です。",
+	"124_short_description": "<strong>SpringerLink</strong> スプリンガーリンクには電子書籍2万6000件、学術誌2000件を網羅し、分野は科学、経営学と経済学、工学、人文科学、社会科学、法学、数学にわたります。",
+	"122_short_description": "<strong>RILM Music Encyclopedias</strong> RILM 音楽学データベースは、1775年から現在まで - 文献50件超をまとめ - 収載した項目数は30万件超です。",
+	"120_short_description": "<strong>Future Science</strong> フューチャー・サイエンスには、生物学と薬学関連のリソースをまとめてあります。",
 	"119_short_description": "<strong>Future Medicine</strong> フューチャー・メディスンは生化学関連のリソース集です。"
 }
