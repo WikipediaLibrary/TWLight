@@ -1,4 +1,5 @@
 import logging
+import base64
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 from mwoauth.errors import OAuthException
 import urllib.parse
@@ -17,6 +18,7 @@ from django.utils.translation import get_language, gettext as _
 from urllib.parse import urlencode
 
 from .models import Editor
+from .views import OauthPromptView
 
 
 logger = logging.getLogger(__name__)
@@ -260,6 +262,10 @@ class OAuthInitializeView(View):
         # The Sites framework was designed for different URLs that correspond to
         # different databases or functionality - it's not a good fit here.
         domain = self.request.get_host()
+
+        # preference for being prompted before leaving site to authenticated.
+        oauth_prompt = request.session.get("oauth_prompt", True)
+
         try:
             assert domain in settings.ALLOWED_HOSTS  # safety first!
         except (AssertionError, DisallowedHost) as e:
@@ -307,6 +313,7 @@ class OAuthInitializeView(View):
                 logger.warning(e)
 
             return HttpResponseRedirect(return_url)
+        # If the user isn't logged in
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
@@ -328,6 +335,24 @@ class OAuthInitializeView(View):
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
+            if oauth_prompt:
+                request.session["oauth_url"] = local_redirect
+                # return OauthPromptFormView()
+                print(local_redirect)
+                # return HttpResponseRedirect(reverse_lazy("users:oauth_prompt/" + str(base64.urlsafe_b64encode(local_redirect.encode("utf-8")), "utf-8")))
+                url = reverse_lazy(
+                    "users:oauth_prompt",
+                    kwargs={
+                        "oauth_prompt": self.request.session.get("oauth_prompt", True),
+                        "oauth_url": str(
+                            base64.urlsafe_b64encode(local_redirect.encode("utf-8")),
+                            "utf-8",
+                        ),
+                    },
+                )
+
+                return HttpResponseRedirect(url)
+
             return HttpResponseRedirect(local_redirect)
 
 

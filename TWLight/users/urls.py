@@ -62,4 +62,11 @@ urlpatterns = [
         login_required(views.favorite_collection),
         name="favorite_collection",
     ),
+    url(
+        # r"^oauth_prompt/$",
+        # r"^oauth_prompt/(?P<oauth_url>[0-9a-zA-Z=]+)/$",
+        r"^oauth_prompt/(?P<oauth_prompt>True|False)/(?P<oauth_url>.+)$",
+        views.OauthPromptView.as_view(),
+        name="oauth_prompt",
+    ),
 ]

@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout
+from crispy_forms.layout import Hidden, Submit, Layout
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -222,6 +222,40 @@ class EmailChangeForm(forms.Form):
                 "submit",
                 # Translators: This labels a button which users click to change their email.
                 _("Update email"),
+                css_class="btn btn-default col-md-offset-2",
+            ),
+        )
+
+
+class OauthPromptForm(forms.Form):
+    def __init__(self, oauth_prompt, oauth_url, *args, **kwargs):
+        super(OauthPromptForm, self).__init__(*args, **kwargs)
+        # self.fields['prompt'] = forms.BooleanField(label='Warn me before leaving site',initial=request.session['oauth_prompt'])
+        # self.fields['url'] = forms.CharField(max_length=512,initial=request.session['oauth_url'])
+        # self.fields['prompt'].initial=self.request.session['oauth_prompt']
+        # self.fields['url'].initial=self.request.session['oauth_url']
+        if oauth_prompt is not None:
+            prompt = oauth_prompt
+        else:
+            prompt = True
+
+        if oauth_url:
+            url = oauth_url
+        else:
+            url = ""
+        self.fields["prompt"] = forms.BooleanField(
+            label="Warn me before leaving site", initial=prompt, required=False
+        )
+        self.fields["url"] = forms.CharField(max_length=512, initial=url)
+        self.helper = FormHelper()
+        self.helper.label_class = "sr-only"
+        self.helper.layout = Layout(
+            "prompt",
+            Hidden("url", self.fields["url"]),
+            Submit(
+                "submit",
+                # Translators: This labels a button which users click to change their email.
+                _("Login"),
                 css_class="btn btn-default col-md-offset-2",
             ),
         )
