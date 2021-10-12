@@ -2394,15 +2394,12 @@ class MyLibraryViewsTest(TestCase):
             partner=self.bundle_partner_1,
             sent_by=self.user_coordinator,
         )
-        factory = RequestFactory()
         url = reverse("users:favorite_collection")
         url_with_partner_pk = "{url}?partner_pk={partner_pk}".format(
             url=url, partner_pk=self.bundle_partner_1.pk
         )
-        request = factory.get(url_with_partner_pk)
-        request.user = self.editor.user
-        response = self.client.post(request)
+        response = self.client.get(url_with_partner_pk)
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual({"added": True}, json.loads(response.content.decode()))
+        self.assertJSONEqual({"added": True}, json.loads(response.content.decode()))
