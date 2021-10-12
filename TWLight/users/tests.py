@@ -2402,4 +2402,6 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertEqual(response.status_code, 302)
 
-        self.assertJSONEqual({"added": True}, json.loads(response.content.decode()))
+        user_profile = self.editor.user.userprofile
+        favorites = user_profile.favorites.all()
+        self.assertIn(self.bundle_partner_1, favorites)
