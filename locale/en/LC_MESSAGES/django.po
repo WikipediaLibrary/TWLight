@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-07 16:28+0000\n"
+"POT-Creation-Date: 2021-10-12 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1700,7 +1700,7 @@ msgid "Special:EmailUser page"
 msgstr ""
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/resources/templates/resources/partner_detail.html:419
+#: TWLight/resources/templates/resources/partner_detail.html:421
 msgid ""
 "The Wikipedia Library team will process this application. Want to help? <a "
 "href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/"
@@ -1708,42 +1708,42 @@ msgid ""
 msgstr ""
 
 #. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
-#: TWLight/resources/templates/resources/partner_detail.html:428
+#: TWLight/resources/templates/resources/partner_detail.html:430
 msgid "List applications"
 msgstr ""
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
-#: TWLight/resources/templates/resources/partner_detail.html:435
-#: TWLight/resources/templates/resources/partner_detail.html:448
+#: TWLight/resources/templates/resources/partner_detail.html:437
+#: TWLight/resources/templates/resources/partner_detail.html:450
 msgid "Access Collection"
 msgstr ""
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
-#: TWLight/resources/templates/resources/partner_detail.html:437
-#: TWLight/resources/templates/resources/partner_detail.html:450
-#: TWLight/resources/templates/resources/partner_detail.html:466
+#: TWLight/resources/templates/resources/partner_detail.html:439
+#: TWLight/resources/templates/resources/partner_detail.html:452
+#: TWLight/resources/templates/resources/partner_detail.html:468
 #: TWLight/resources/templates/resources/partner_tile.html:19
 msgid "Library Bundle"
 msgstr ""
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
 #. Translators: Alt text for the Library Bundle icon shown on the browse partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:439
-#: TWLight/resources/templates/resources/partner_detail.html:452
-#: TWLight/resources/templates/resources/partner_detail.html:468
+#: TWLight/resources/templates/resources/partner_detail.html:441
+#: TWLight/resources/templates/resources/partner_detail.html:454
+#: TWLight/resources/templates/resources/partner_detail.html:470
 #: TWLight/resources/templates/resources/partner_tile.html:21
 msgid "Library bundle access"
 msgstr ""
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:442
+#: TWLight/resources/templates/resources/partner_detail.html:444
 msgid ""
 "You are eligible to access Library Bundle partners. Click the button above "
 "to access the collection."
 msgstr ""
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:456
+#: TWLight/resources/templates/resources/partner_detail.html:458
 #, python-format
 msgid ""
 "You are not eligible to access Library Bundle partners. Visit the <a href="
@@ -1751,12 +1751,12 @@ msgid ""
 msgstr ""
 
 #. Translators: Buttton prompting users to log in.
-#: TWLight/resources/templates/resources/partner_detail.html:464
+#: TWLight/resources/templates/resources/partner_detail.html:466
 msgid "Log in"
 msgstr ""
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:472
+#: TWLight/resources/templates/resources/partner_detail.html:474
 #, python-format
 msgid ""
 "This resource is part of our <a href=\"%(about)s\">Library Bundle</a>, which "
@@ -1765,17 +1765,17 @@ msgid ""
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:496
+#: TWLight/resources/templates/resources/partner_detail.html:498
 msgid "Active accounts"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:512
+#: TWLight/resources/templates/resources/partner_detail.html:514
 msgid "Users who received access (all time)"
 msgstr ""
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
-#: TWLight/resources/templates/resources/partner_detail.html:534
+#: TWLight/resources/templates/resources/partner_detail.html:536
 msgid "Median days from application to decision"
 msgstr ""
 
