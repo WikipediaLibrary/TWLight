@@ -7,6 +7,13 @@ from .helpers import get_tag_choices
 
 import django_filters
 
+INSTANT = 0
+MULTI_STEP = 1
+ACCESS_CHOICES = (
+    (INSTANT, "Instant (proxy) access"),
+    (MULTI_STEP, "Multi-step access"),
+)
+
 
 class MainPartnerFilter(django_filters.FilterSet):
     """
@@ -67,6 +74,14 @@ class PartnerFilter(MainPartnerFilter):
         widget=forms.CheckboxSelectMultiple,
     )
 
+    access = django_filters.MultipleChoiceFilter(
+        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
+        label=_("Access"),
+        choices=ACCESS_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        method="access_filter",
+    )
+
     def __init__(self, data=None, *args, **kwargs):
         # Set searchable to all selected by default
         # if filterset is bound, use initial values as defaults
@@ -77,8 +92,28 @@ class PartnerFilter(MainPartnerFilter):
                 # filter param is either missing or empty, set all searchable values in MultiValueDict
                 if name == "searchable" and not data.get(name):
                     data.setlist("searchable", ["0", "1", "2"])
+                if name == "access" and not data.get(name):
+                    data.setlist("access", ["0", "1"])
 
         super().__init__(data, *args, **kwargs)
         self.filters["searchable"].field.widget.attrs.update(
-            {"class": "searchable-form"}
+            {"class": "checkbox-filter-form"}
         )
+        self.filters["access"].field.widget.attrs.update(
+            {"class": "checkbox-filter-form"}
+        )
+
+    def access_filter(self, queryset, name, value):
+        if str(INSTANT) in value and str(MULTI_STEP) in value:
+            return queryset
+        else:
+            if str(INSTANT) in value:
+                return queryset.filter(
+                    authorization_method__in=[Partner.PROXY, Partner.BUNDLE]
+                )
+            elif str(MULTI_STEP) in value:
+                return queryset.exclude(
+                    authorization_method__in=[Partner.PROXY, Partner.BUNDLE]
+                )
+
+        return queryset

@@ -742,7 +742,7 @@ NEW MY LIBRARY CSS
     margin-top: 5px;
 }
 
-.searchable-form{
+.checkbox-filter-form{
     font-size: 14px;
     list-style: none;
     padding: 0px;
@@ -755,6 +755,12 @@ label{
 }
 
 #id_searchable li label{
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 0px;
+}
+
+#id_access li label{
     font-size: 14px;
     font-weight: 400;
     margin-top: 0px;
