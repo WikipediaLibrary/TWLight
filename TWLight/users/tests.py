@@ -2399,7 +2399,7 @@ class MyLibraryViewsTest(TestCase):
         url_with_partner_pk = "{url}?partner_pk={partner_pk}".format(
             url=url, partner_pk=self.bundle_partner_1.pk
         )
-        request = factory.get(url_with_searchable_param)
+        request = factory.get(url_with_partner_pk)
         request.user = self.editor.user
         response = self.client.get(request)
 
