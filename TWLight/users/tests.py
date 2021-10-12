@@ -2400,6 +2400,6 @@ class MyLibraryViewsTest(TestCase):
         )
         response = self.client.get(url_with_partner_pk)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         self.assertJSONEqual({"added": True}, json.loads(response.content.decode()))
