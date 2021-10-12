@@ -414,13 +414,14 @@
                     </li>
                   {% endif %}
                 </ul>
-              {% else %}
-                {% comment %}Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
-                {% blocktranslate trimmed %}
-                  The Wikipedia Library team will process this application. Want to
-                  help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
-                  coordinator.</a>
-                {% endblocktranslate %}
+                {% comment %} TODO: Change this elif to else once we are in need of more coordinators {% endcomment %}
+                {% elif False %}
+                  {% comment %}Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+                  {% blocktranslate trimmed %}
+                    The Wikipedia Library team will process this application. Want to
+                    help? <a href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
+                    coordinator.</a>
+                  {% endblocktranslate %}
               {% endif %}
             </div>
             {% if object.coordinator == user or user.is_staff %}
