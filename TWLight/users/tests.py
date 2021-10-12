@@ -2394,14 +2394,18 @@ class MyLibraryViewsTest(TestCase):
             partner=self.bundle_partner_1,
             sent_by=self.user_coordinator,
         )
+        factory = RequestFactory()
         url = reverse("users:favorite_collection")
         url_with_partner_pk = "{url}?partner_pk={partner_pk}".format(
             url=url, partner_pk=self.bundle_partner_1.pk
         )
-        response = self.client.get(url_with_partner_pk)
+        request = factory.get(url_with_searchable_param)
+        request.user = self.editor.user
+        response = self.client.get(request)
 
         self.assertEqual(response.status_code, 302)
 
+        self.editor.user.userprofile.refresh_from_db()
         user_profile = self.editor.user.userprofile
         favorites = user_profile.favorites.all()
         self.assertIn(self.bundle_partner_1, favorites)
