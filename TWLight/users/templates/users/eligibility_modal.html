@@ -33,6 +33,17 @@
           </p>
         {% endif %}
       </div>
+      {% if not editor.wp_not_blocked %}
+        {% url 'contact' as contact_url %}
+        {% comment %}Translators: This message tells users that they have an active block but they can still reach out for access.{% endcomment %}
+        <p class="text-center text-danger">
+          {% blocktranslate trimmed %}
+            It looks like you have an active block on your account. If you meet the
+            other criteria you may still be permitted access to the library - please
+            <a href="{{ contact_url }}">contact us</a>.
+          {% endblocktranslate %}
+        </p>
+      {% endif %}
       <p class="text-center">
         <em>
           {% comment %}Translators: Instructions to refresh a user's data. {% endcomment %}
