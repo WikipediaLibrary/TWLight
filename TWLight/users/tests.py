@@ -22,6 +22,7 @@ from django.utils.timezone import now
 from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
+from TWLight.resources.filters import INSTANT, MULTI_STEP
 from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
 
@@ -1765,6 +1766,9 @@ class MyLibraryViewsTest(TestCase):
         cls.proxy_partner_3.new_tags = {"tags": ["multidisciplinary_tag"]}
         cls.proxy_partner_3.save()
 
+        cls.email_partner_1 = PartnerFactory(authorization_method=Partner.EMAIL)
+        cls.email_partner_2 = PartnerFactory(authorization_method=Partner.EMAIL)
+
         cls.user_coordinator = UserFactory(username="Jon Snow")
         cls.editor = EditorFactory()
         cls.editor.wp_bundle_eligible = True
@@ -2383,3 +2387,135 @@ class MyLibraryViewsTest(TestCase):
         self.assertNotIn(escape(self.bundle_partner_4.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
         self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
+
+    def test_instant_access_filter(self):
+        """
+        Tests that only instant access collections are shown
+        """
+
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_email_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.email_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_email_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        url_with_access_param = "{url}?access={access}".format(url=url, access=INSTANT)
+        request = factory.get(url_with_access_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertIn(escape(self.proxy_partner_2.company_name), content)
+
+        self.assertNotIn(escape(self.email_partner_1.company_name), content)
+        self.assertNotIn(escape(self.email_partner_2.company_name), content)
+
+    def test_multi_step_access_filter(self):
+        """
+        Tests that only instant access collections are shown
+        """
+
+        app_bundle_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_bundle_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_proxy_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.proxy_partner_2,
+            sent_by=self.user_coordinator,
+        )
+
+        app_email_partner_1 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.email_partner_1,
+            sent_by=self.user_coordinator,
+        )
+
+        app_email_partner_2 = ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.bundle_partner_2,
+            sent_by=self.user_coordinator,
+        )
+        factory = RequestFactory()
+        url = reverse("users:my_library")
+        url_with_access_param = "{url}?access={access}".format(
+            url=url, access=MULTI_STEP
+        )
+        request = factory.get(url_with_access_param)
+        request.user = self.editor.user
+        response = MyLibraryView.as_view()(request)
+
+        self.assertEqual(response.status_code, 200)
+
+        content = response.render().content.decode("utf-8")
+
+        self.assertNotIn(escape(self.bundle_partner_1.company_name), content)
+        self.assertNotIn(escape(self.bundle_partner_2.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_1.company_name), content)
+        self.assertNotIn(escape(self.proxy_partner_2.company_name), content)
+
+        self.assertIn(escape(self.email_partner_1.company_name), content)
+        self.assertIn(escape(self.email_partner_2.company_name), content)
