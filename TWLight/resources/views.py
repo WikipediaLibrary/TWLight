@@ -17,7 +17,7 @@ from TWLight.users.models import Authorization
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
-from .filters import PartnerFilter
+from .filters import MainPartnerFilter
 from .forms import SuggestionForm
 from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Suggestion
@@ -65,7 +65,7 @@ class PartnersFilterView(ListView):
         language_code = get_language()
         # Changed since T278337: add filter to queryset before we build the partners
         # dictionary
-        partner_filtered_list = PartnerFilter(
+        partner_filtered_list = MainPartnerFilter(
             self.request.GET, queryset=self.get_queryset(), language_code=language_code
         )
         context["filter"] = partner_filtered_list
