@@ -625,19 +625,3 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertIn("1 pending application", mail.outbox[0].body)
         self.assertIn("1 under discussion application", mail.outbox[0].body)
         self.assertIn("1 approved application", mail.outbox[0].body)
-
-
-class SearchLaunchEmailTest(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        super().setUpTestData()
-        editor1 = EditorFactory(user__email="editor@example.com")
-        editor2 = EditorFactory(user__email="editor2@example.com")
-
-    def test_search_launch(self):
-        """
-        Tests that the search launch email is sent to all editors.
-        """
-        call_command("email_search_launch")
-
-        self.assertEqual(len(mail.outbox), 2)

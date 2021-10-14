@@ -39,7 +39,7 @@ from TWLight.applications.signals import Reminder
 from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, SearchLaunch2021
+from TWLight.users.signals import Notice
 
 
 logger = logging.getLogger(__name__)
@@ -79,10 +79,6 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
-
-
-class SearchLaunchEmail(template_mail.TemplateMail):
-    name = "search_launch_email"
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -527,18 +523,3 @@ def contact_us_emails(sender, **kwargs):
     logger.info("Email constructed.")
     email.send()
     logger.info("Email queued.")
-
-
-@receiver(SearchLaunch2021.launch_notice)
-def send_search_launch(sender, **kwargs):
-    """
-    Sends the email to notify users that EDS search
-    has launched. Will only need to be sent once as-is.
-    """
-    user_wp_username = kwargs["user_wp_username"]
-    user_email = kwargs["user_email"]
-    lang = kwargs["lang"]
-
-    email = SearchLaunchEmail()
-
-    email.send(user_email, {"username": user_wp_username, "lang": lang})
