@@ -6,7 +6,7 @@
           data-toggle="tab" href="#favorite-collections" role="tab" aria-controls="favorite-collections"
           aria-selected="true">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has. {% endcomment %}
-          {% trans "Favorites " %} (<span id="favorite-collections-number">{{ favorites_count }}</span>)
+          {% trans "Favorites" %} (<span id="favorite-collections-number">{{ favorites_count }}</span>)
       </a>
     </li>
     <li class="nav-item" role="presentation">
@@ -14,14 +14,14 @@
           data-toggle="tab" href="#user-collections" role="tab" aria-controls="user-collections"
           aria-selected="true">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to. {% endcomment %}
-          {% trans "My Collections " %} ({{ number_user_collections }})
+          {% trans "My Collections" %} ({{ number_user_collections }})
       </a>
     </li>
     <li class="nav-item" role="presentation">
       <a id="available-collections-tab" class="nav-link collection-tab-item" data-toggle="tab" href="#available-collections"
           role="tab" aria-controls="available-collections" aria-selected="false">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to. {% endcomment %}
-        {% trans "Available Collections " %} ({{ number_available_collections }})
+        {% trans "Available Collections" %} ({{ number_available_collections }})
       </a>
     </li>
   </ul>
