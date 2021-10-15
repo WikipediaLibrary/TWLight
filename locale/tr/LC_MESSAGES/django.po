@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-14 22:58+0000\n"
+"POT-Creation-Date: 2021-10-15 15:15+0000\n"
 "PO-Revision-Date: 2021-10-14 11:18:03+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2800,17 +2800,23 @@ msgstr "Mevcut Değil"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
-msgid "Favorites "
+#, fuzzy
+#| msgid "Favorites "
+msgid "Favorites"
 msgstr "Favoriler "
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
-msgid "My Collections "
+#, fuzzy
+#| msgid "My Collections "
+msgid "My Collections"
 msgstr "Koleksiyonlarım "
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
 #: TWLight/users/templates/users/collections_section.html:24
-msgid "Available Collections "
+#, fuzzy
+#| msgid "Available Collections "
+msgid "Available Collections"
 msgstr "Mevcut Koleksiyonlar "
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.

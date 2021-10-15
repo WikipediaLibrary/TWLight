@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-14 22:59+0000\n"
+"POT-Creation-Date: 2021-10-15 15:16+0000\n"
 "PO-Revision-Date: 2021-10-14 11:18:01+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2540,19 +2540,19 @@ msgstr "Tidak tersedia"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
-msgid "Favorites "
+msgid "Favorites"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
 #, fuzzy
-msgid "My Collections "
+msgid "My Collections"
 msgstr "Koleksi"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
 #: TWLight/users/templates/users/collections_section.html:24
 #, fuzzy
-msgid "Available Collections "
+msgid "Available Collections"
 msgstr "Koleksi"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
