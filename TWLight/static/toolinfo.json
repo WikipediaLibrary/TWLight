@@ -1,0 +1,19 @@
+{
+    "name": "The Wikipedia Library",
+    "title": "The Wikipedia Library",
+    "description": "The Wikipedia Library enables active editors to access free reliable sources of information which would otherwise be paywalled. If you meet the basic eligibility criteria you can start searching content from dozens of websites right away.",
+    "url": "https://wikipedialibrary.wmflabs.org/",
+    "author": "Wikimedia Foundation",
+    "repository": "https://github.com/WikipediaLibrary/TWLight",
+    "for_wikis": "*",
+    "icon": "https://commons.wikimedia.org/wiki/File:Wikipedia_Library_owl.svg",
+    "license": "MIT",
+    "available_ui_languages": ["de", "fa", "fr", "uk", "en", "ja", "tr", "zh-hans", "he", "es", "zh-hant", "pt", "ru"],
+    "technology_used": "Django, Python, Javascript",
+    "tool_type": "web app",
+    "developer_docs_url": "https://github.com/WikipediaLibrary/TWLight/wiki",
+    "feedback_url": "https://meta.wikimedia.org/wiki/Talk:Library_Card_platform",
+    "privacy_policy_url": "https://wikipedialibrary.wmflabs.org/terms/",
+    "translate_url": "https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform",
+    "bugtracker_url": "https://phabricator.wikimedia.org/project/view/2765/"
+}
