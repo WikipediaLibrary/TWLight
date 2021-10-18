@@ -827,13 +827,13 @@ class MyLibraryView(TemplateView):
             The context dictionary with the user collections added
         """
         today = datetime.date.today()
-        user_authorizations = Authorization.objects.filter(
+        user_authorizations = Authorization.objects.prefetch_related("partners").filter(
             Q(date_expires__gte=today) | Q(date_expires=None), user=editor.user
         )
 
-        expired_user_authorizations = Authorization.objects.filter(
-            date_expires__lt=today, user=editor.user
-        )
+        expired_user_authorizations = Authorization.objects.prefetch_related(
+            "partners"
+        ).filter(date_expires__lt=today, user=editor.user)
         favorites = self.request.user.userprofile.favorites.all()
         favorite_ids = [f.pk for f in favorites]
 
@@ -894,7 +894,9 @@ class MyLibraryView(TemplateView):
         for user_authorization in authorization_queryset:
             partner_filtered_list = PartnerFilter(
                 self.request.GET,
-                queryset=user_authorization.partners.all(),
+                queryset=user_authorization.partners.prefetch_related(
+                    "languages"
+                ).all(),
                 language_code=language_code,
             )
             # If there are no collections after filtering, we will skip this auth
