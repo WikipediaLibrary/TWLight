@@ -28,6 +28,8 @@ services:
   twlight:
     build:
       context: .
+      args:
+       - REQUIREMENTS_FILE=wmf.txt
     command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
     volumes:
       - type: bind

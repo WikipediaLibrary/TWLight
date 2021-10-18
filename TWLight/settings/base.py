@@ -86,6 +86,7 @@ def get_django_faker_languages_intersection(languages):
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
 
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.admindocs",
@@ -175,6 +176,29 @@ MIDDLEWARE = [
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
 
 DEBUG = bool(os.environ.get("DEBUG", "False").lower() == "true")
+
+# Django Debug Toolbar config
+# ------------------------------------------------------------------------------
+
+# Sometimes, developers want the debug toolbar on their local environments, so
+# we can enable it by setting REQUIREMENTS_FILE variable to "debug.txt" in the
+# docker build arg and the environment of the running container
+REQUIREMENTS_FILE = os.environ.get("REQUIREMENTS_FILE", "wmf.txt")
+if TWLIGHT_ENV == "local" and REQUIREMENTS_FILE == "debug.txt" and DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+
+    def show_toolbar(request):
+        return True
+
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+    }
 
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------

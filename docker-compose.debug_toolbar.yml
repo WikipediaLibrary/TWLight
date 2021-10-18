@@ -1,0 +1,12 @@
+---
+
+version: '3.4'
+
+services:
+  twlight:
+    build:
+      context: .
+      args:
+        - REQUIREMENTS_FILE=debug.txt
+    environment:
+      - REQUIREMENTS_FILE=debug.txt
