@@ -817,6 +817,11 @@ class MyLibraryView(TemplateView):
         return context
 
     def render_to_response(self, context, **response_kwargs):
+
+        if self.request.COOKIES.get("django_language"):
+            self.request.user.userprofile.lang = get_language()
+            self.request.user.userprofile.save()
+
         user_language = self.request.user.userprofile.lang
 
         translation.activate(user_language)
