@@ -104,7 +104,7 @@ class PartnerFilter(MainPartnerFilter):
         )
 
     def access_filter(self, queryset, name, value):
-        queryset = queryset.select_related("logos")
+        queryset = queryset.prefetch_related("languages").select_related("logos")
         if str(INSTANT) in value and str(MULTI_STEP) in value:
             return queryset
         else:
