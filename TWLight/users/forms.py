@@ -256,6 +256,6 @@ class OauthPromptForm(forms.Form):
                 "submit",
                 # Translators: This labels a button which users click to change their email.
                 _("Login"),
-                css_class="btn btn-default col-md-offset-2",
+                css_class="btn btn-light",
             ),
         )
