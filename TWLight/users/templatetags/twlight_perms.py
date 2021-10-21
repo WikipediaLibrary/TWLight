@@ -1,8 +1,18 @@
 from django import template
 
 from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 register = template.Library()
+
+
+@register.filter
+def bundle_eligible(editor):
+    """Return True if editor is bundle eligible, else False"""
+    is_eligible = False
+    if editor:
+        is_eligible = editor_bundle_eligible(editor)
+    return is_eligible
 
 
 @register.filter

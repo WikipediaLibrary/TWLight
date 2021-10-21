@@ -24,6 +24,7 @@
                 </a>
               </div>
               <div class="col-lg-7 col-md-7 col-sm-6 col-xs-7">
+                {% if user.editor|bundle_eligible %}
                 <!-- EBSCO Search Box Begins -->
                 <form action="https://searchbox.ebsco.com/search/" target="_blank" class="ebsco-single-search">
                   <input name="schemaId" value="search" type="hidden" />
@@ -63,6 +64,7 @@
                   {% comment %}Translators: Link that takes a user to an external site to provide feedback on the search bar. {% endcomment %}
                   {%trans 'Feedback' %}
                 </a>
+                {% endif %}
             </div>
             <div class="col-sm-2 col-xs-3">
               <button type="button" class="navbar-toggle collapsed twl-toggle-button" data-toggle="collapse"
