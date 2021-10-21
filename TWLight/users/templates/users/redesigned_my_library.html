@@ -29,6 +29,35 @@
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
 
+    // Live search functionality
+    var search_input = document.getElementById("collection-live-search");
+    search_input.oninput = searchCollections;
+
+    function searchCollections(obj) {
+      console.log(obj);
+      console.log("Value: " + obj.target.value);
+
+      let pattern = obj.target.value;
+
+      const options = {
+        keys: [
+          "partner_pk",
+          "partner_name",
+          "partner_short_description",
+          "partner_description"
+        ]
+      };
+
+      var list = JSON.parse('{{partner_search_list|safe}}');
+
+      console.log("List: " + list);
+
+      const fuse = new Fuse(list, options);
+
+      return fuse.search(pattern)
+    }
+
+    // Favoriting functionality
     function favoriteCollection(icon, partnerPk, myLibraryCacheKey) {
       $.ajax({
         url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk + "&my_library_cache_key=" + myLibraryCacheKey,

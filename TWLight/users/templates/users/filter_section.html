@@ -43,34 +43,14 @@
       </a>
     </div>
     <form>
-      <!-- Access type filters -->
-      <!-- TODO: uncomment these lines of code when https://phabricator.wikimedia.org/T285675 is being worked on -->
-      <!-- <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input form-control-sm" id="instantAccessCheck">
-        <label class="form-check-label col-form-label-sm" for="instantAccessCheck">
-          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have instant access. {% endcomment %}
-          {% trans "Instant access" %}
-        </label>
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input form-control-sm" id="multiStepCheck">
-        <label class="form-check-label col-form-label-sm" for="multiStepCheck">
-          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a checkbox that lets users filter collections that have by multi-step access. {% endcomment %}
-          {% trans "Multi-step access" %}
-        </label>
-      </div>
-      <div class="dropdown-divider"></div> -->
       {{ filter.form }}
-      <!-- TODO: uncomment this section when https://phabricator.wikimedia.org/T285676 is being worked on -->
-      <!-- <div class="dropdown-divider"></div>
-      <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Filter collections" aria-label="Filter">
-      <button class="btn btn-sm btn-outline-success my-2 my-sm-0" type="submit">
-        Search
-      </button> -->
       <button class="btn btn-sm btn-outline-secondary collection-filter-button" type="submit">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections. {% endcomment %}
         {% trans "Filter" %}
       </button>
     </form>
+    <div class="dropdown-divider"></div>
+    <input id="collection-live-search" class="form-control form-control-sm mr-sm-2"
+        type="search" placeholder="Filter collections" aria-label="Filter">
   </div>
 </nav>

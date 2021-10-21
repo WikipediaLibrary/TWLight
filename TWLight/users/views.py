@@ -803,7 +803,9 @@ class MyLibraryView(TemplateView):
 
         self._build_user_collection_object(context, language_code, user)
         self._build_available_collection_object(
-            context, language_code, context["partner_id_set"]
+            context,
+            language_code,
+            context["partner_id_set"],
         )
 
         # Store the result of `learn_cache_key` for invalidation
@@ -991,7 +993,10 @@ class MyLibraryView(TemplateView):
         return sorted(user_authorization_obj, key=lambda k: k["partner_name"])
 
     def _build_available_collection_object(
-        self, context, language_code, partner_id_set
+        self,
+        context,
+        language_code,
+        partner_id_set,
     ):
         """
         Helper function to build an available collections object that will
