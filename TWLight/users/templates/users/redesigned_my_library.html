@@ -29,9 +29,9 @@
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
 
-    function favoriteCollection(icon, partnerPk) {
+    function favoriteCollection(icon, partnerPk, myLibraryCacheKey) {
       $.ajax({
-        url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk,
+        url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk + "&my_library_cache_key=" + myLibraryCacheKey,
         // on success
         success: function(response) {
           var favoritesNumber = document.getElementById("favorite-collections-number");
