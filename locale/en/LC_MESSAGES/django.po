@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-21 00:20+0000\n"
+"POT-Creation-Date: 2021-10-21 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2219,44 +2219,44 @@ msgstr ""
 msgid "The Wikipedia Library home"
 msgstr ""
 
-#: TWLight/templates/header_partial_b3.html:50
-#: TWLight/templates/header_partial_b4.html:45
+#: TWLight/templates/header_partial_b3.html:51
+#: TWLight/templates/header_partial_b4.html:46
 msgid "Search the library"
 msgstr ""
 
 #. Translators: Shown in the search button.
-#: TWLight/templates/header_partial_b3.html:54
-#: TWLight/templates/header_partial_b4.html:48
+#: TWLight/templates/header_partial_b3.html:55
+#: TWLight/templates/header_partial_b4.html:49
 msgid "Search"
 msgstr ""
 
 #. Translators: Link that takes a user to an external site to provide feedback on the search bar.
-#: TWLight/templates/header_partial_b3.html:64
-#: TWLight/templates/header_partial_b4.html:57
+#: TWLight/templates/header_partial_b3.html:65
+#: TWLight/templates/header_partial_b4.html:58
 msgid "Feedback"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b3.html:85
-#: TWLight/templates/header_partial_b4.html:75
+#: TWLight/templates/header_partial_b3.html:87
+#: TWLight/templates/header_partial_b4.html:77
 msgid "Review"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b3.html:91
-#: TWLight/templates/header_partial_b4.html:81
+#: TWLight/templates/header_partial_b3.html:93
+#: TWLight/templates/header_partial_b4.html:83
 msgid "Send data to partners"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b3.html:99
-#: TWLight/templates/header_partial_b4.html:89
+#: TWLight/templates/header_partial_b3.html:101
+#: TWLight/templates/header_partial_b4.html:91
 msgid "Suggest a collection"
 msgstr ""
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b3.html:112
-#: TWLight/templates/header_partial_b4.html:102
+#: TWLight/templates/header_partial_b3.html:114
+#: TWLight/templates/header_partial_b4.html:104
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr ""
