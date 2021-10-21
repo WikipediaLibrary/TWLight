@@ -50,7 +50,7 @@ services:
       - TWLIGHT_EZPROXY_SECRET
   twlight:
     image: quay.io/wikipedialibrary/twlight:branch_staging
-    command: /app/bin/twlight_staging_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
+    command: /app/bin/twlight_docker_entrypoint.sh "python manage.py collectstatic --noinput && /venv/bin/gunicorn TWLight.wsgi"
     env_file:
       - ./conf/staging.twlight.env
     volumes:

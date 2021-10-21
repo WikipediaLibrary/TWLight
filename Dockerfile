@@ -9,6 +9,8 @@ RUN apt update ; \
 
 FROM twlight_base as twlight_build
 # Copy pip requirements.
+ARG REQUIREMENTS_FILE=wmf.txt
+ENV REQUIREMENTS_FILE=${REQUIREMENTS_FILE}
 COPY requirements /requirements
 
 # Build dependencies.
@@ -19,7 +21,7 @@ RUN apt update ; \
     rm -rf /var/lib/apt/lists/*; \
     virtualenv /venv ; \
     . /venv/bin/activate ; \
-    pip3 install -r /requirements/wmf.txt
+    pip3 install -r /requirements/${REQUIREMENTS_FILE}
 
 FROM twlight_base
 COPY --from=twlight_build /venv /venv

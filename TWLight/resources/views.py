@@ -37,7 +37,11 @@ class PartnersFilterView(ListView):
     model = Partner
 
     def get_queryset(self):
-        qs = Partner.objects.order_by("company_name")
+        qs = (
+            Partner.objects.prefetch_related("languages")
+            .select_related("coordinator", "logos")
+            .order_by("company_name")
+        )
         # The ordering here is useful primarily to people familiar with the
         # English alphabet. :/
         if self.request.user.is_staff:
@@ -47,7 +51,11 @@ class PartnersFilterView(ListView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            qs = Partner.even_not_available.order_by("company_name")
+            qs = (
+                Partner.even_not_available.prefetch_related("languages")
+                .select_related("coordinator", "logos")
+                .order_by("company_name")
+            )
 
         return qs
 
@@ -218,21 +226,25 @@ class PartnersDetailView(DetailView):
         # and normal users. We want to limit the list of viewable partner pages in different ways for each.
 
         # By default users can only view available partners
-        available_partners = Partner.objects.all()
+        available_partners = Partner.objects.select_related(
+            "coordinator", "logos"
+        ).all()
         partner_list = available_partners
 
         # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
         if self.request.user.is_authenticated:
-            coordinator_partners = Partner.even_not_available.filter(
-                coordinator=self.request.user, status=Partner.NOT_AVAILABLE
-            )
+            coordinator_partners = Partner.even_not_available.select_related(
+                "coordinator", "logos"
+            ).filter(coordinator=self.request.user, status=Partner.NOT_AVAILABLE)
             if coordinator_partners.exists():
                 # Coordinated partners are also valid for this user to view
                 partner_list = available_partners | coordinator_partners
 
         if self.request.user.is_staff:
             # Staff can see any partner pages, even unavailable ones.
-            partner_list = Partner.even_not_available.all()
+            partner_list = Partner.even_not_available.select_related(
+                "coordinator", "logos"
+            ).all()
 
         return partner_list
 

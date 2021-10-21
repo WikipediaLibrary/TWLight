@@ -105,10 +105,11 @@ class UserDetailView(SelfOnly, TemplateView):
             raise Http404
 
     def get_context_data(self, **kwargs):
+        user = User.objects.select_related("userprofile").get(pk=self.request.user.pk)
         context = super(UserDetailView, self).get_context_data(**kwargs)
-        context["language_form"] = SetLanguageForm(user=self.request.user)
-        context["password_form"] = PasswordChangeForm(user=self.request.user)
-        context["terms_form"] = TermsForm(user_profile=self.request.user.userprofile)
+        context["language_form"] = SetLanguageForm(user=user)
+        context["password_form"] = PasswordChangeForm(user=user)
+        context["terms_form"] = TermsForm(user_profile=user.userprofile)
         return context
 
 
@@ -127,8 +128,8 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EditorDetailView, self).get_context_data(**kwargs)
-        editor = self.get_object()
         user = self.request.user
+        editor = user.editor
         context["editor"] = editor  # allow for more semantic templates
         context["form"] = EditorUpdateForm(instance=editor)
         context["language_form"] = SetLanguageForm(user=user)
@@ -782,33 +783,38 @@ class MyLibraryView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        editor = Editor.objects.get(pk=self.request.user.editor.pk)
+        user = (
+            User.objects.prefetch_related("authorizations")
+            .select_related("editor", "userprofile")
+            .get(pk=self.request.user.pk)
+        )
         language_code = get_language()
 
-        self._build_user_collection_object(context, language_code, editor)
+        self._build_user_collection_object(context, language_code, user)
         self._build_available_collection_object(
             context, language_code, context["partner_id_set"]
         )
 
-        context["editor"] = editor
+        context["user"] = user
+        context["editor"] = user.editor
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
         context["searchable"] = Partner.SEARCHABLE
         context["partially_searchable"] = Partner.PARTIALLY_SEARCHABLE
         context["bundle_criteria"] = {
             # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-            _("500+ edits"): editor.wp_enough_edits,
+            _("500+ edits"): user.editor.wp_enough_edits,
             # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-            _("6+ months editing"): editor.wp_account_old_enough,
+            _("6+ months editing"): user.editor.wp_account_old_enough,
             # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-            _("10+ edits in the last month"): editor.wp_enough_recent_edits,
+            _("10+ edits in the last month"): user.editor.wp_enough_recent_edits,
             # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-            _("No active blocks"): editor.wp_not_blocked,
+            _("No active blocks"): user.editor.wp_not_blocked,
         }
 
         return context
 
-    def _build_user_collection_object(self, context, language_code, editor):
+    def _build_user_collection_object(self, context, language_code, user):
         """
         Helper function to build a user collections object that will
         fill the My Collections section of the redesigned My Library
@@ -818,8 +824,8 @@ class MyLibraryView(TemplateView):
             The context dictionary
         language_code: str
             The language code that some tags and descriptions will be translated to
-        editor: Editor
-            The Editor object that will serve to filter authorizations
+        user: User
+            The User object that will serve to filter authorizations
 
         Returns
         -------
@@ -827,14 +833,14 @@ class MyLibraryView(TemplateView):
             The context dictionary with the user collections added
         """
         today = datetime.date.today()
-        user_authorizations = Authorization.objects.filter(
-            Q(date_expires__gte=today) | Q(date_expires=None), user=editor.user
+        user_authorizations = user.authorizations.prefetch_related("partners").filter(
+            Q(date_expires__gte=today) | Q(date_expires=None), user=user
         )
 
-        expired_user_authorizations = Authorization.objects.filter(
-            date_expires__lt=today, user=editor.user
-        )
-        favorites = self.request.user.userprofile.favorites.all()
+        expired_user_authorizations = user.authorizations.prefetch_related(
+            "partners"
+        ).filter(date_expires__lt=today, user=user)
+        favorites = user.userprofile.favorites.all()
         favorite_ids = [f.pk for f in favorites]
 
         partner_id_set = set()
@@ -894,7 +900,9 @@ class MyLibraryView(TemplateView):
         for user_authorization in authorization_queryset:
             partner_filtered_list = PartnerFilter(
                 self.request.GET,
-                queryset=user_authorization.partners.all(),
+                queryset=user_authorization.partners.prefetch_related(
+                    "languages"
+                ).all(),
                 language_code=language_code,
             )
             # If there are no collections after filtering, we will skip this auth

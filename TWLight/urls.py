@@ -4,11 +4,13 @@ TWLight URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/ref/urls/
 """
+from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.urls import path
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
@@ -87,3 +89,13 @@ urlpatterns = [
     url(r"^$", NewHomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
 ]
+
+# Enable debug_toolbar if configured
+if (
+    settings.TWLIGHT_ENV == "local"
+    and settings.REQUIREMENTS_FILE == "debug.txt"
+    and settings.DEBUG
+):
+    import debug_toolbar
+
+    urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
