@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-15 15:15+0000\n"
+"POT-Creation-Date: 2021-10-21 00:19+0000\n"
 "PO-Revision-Date: 2021-10-14 11:18:02+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -711,7 +711,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
-#: TWLight/users/views.py:500
+#: TWLight/users/views.py:501
 msgid "Confirm"
 msgstr "확인"
 
@@ -1370,7 +1370,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:452
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:464
 msgid "You must be a Wikipedia editor to do that."
 msgstr "해당 작업을 수행하려면 위키백과의 편집자여야 합니다."
 
@@ -1841,34 +1841,34 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "<b>%(object)s</b>을(를) 정말로 삭제하시겠습니까?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:210
+#: TWLight/resources/views.py:218
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:250
+#: TWLight/resources/views.py:262
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:340
+#: TWLight/resources/views.py:352
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:353
+#: TWLight/resources/views.py:365
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:444
+#: TWLight/resources/views.py:456
 msgid "Your suggestion has been added."
 msgstr "제안이 추가되었습니다."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:469
+#: TWLight/resources/views.py:481
 msgid "Suggestion has been deleted."
 msgstr "제안이 삭제되었습니다."
 
@@ -2874,7 +2874,7 @@ msgstr "비밀번호"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:23
-#: TWLight/users/views.py:369
+#: TWLight/users/views.py:370
 msgid "Update"
 msgstr "업데이트"
 
@@ -3392,7 +3392,7 @@ msgid "Coordinators only"
 msgstr "조정자 전용"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:148
+#: TWLight/users/views.py:149
 #, python-brace-format
 msgid ""
 "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
@@ -3400,7 +3400,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:261
+#: TWLight/users/views.py:262
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -3408,36 +3408,36 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:269
+#: TWLight/users/views.py:270
 msgid "Your reminder email preferences are updated."
 msgstr "내 리마인더 이메일 환경 설정이 업데이트 되었습니다."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:351 TWLight/users/views.py:432
-#: TWLight/users/views.py:485
+#: TWLight/users/views.py:352 TWLight/users/views.py:433
+#: TWLight/users/views.py:486
 msgid "You must be logged in to do that."
 msgstr "해당 작업을 수행하려면 로그인해야 합니다."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:384
+#: TWLight/users/views.py:385
 msgid "Your information has been updated."
 msgstr "내 정보가 업데이트되었습니다."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:416
+#: TWLight/users/views.py:417
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:444
+#: TWLight/users/views.py:445
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "내 이메일이 {email}(으)로 변경되었습니다."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:455
+#: TWLight/users/views.py:456
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -3446,27 +3446,27 @@ msgstr ""
 "리소스에 접근을 신청하지 못하게 됩니다."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:754
+#: TWLight/users/views.py:755
 msgid "Access to {} has been returned."
 msgstr "{}의 접근 권한이 반환되었습니다."
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:800 TWLight/views.py:31
+#: TWLight/users/views.py:806 TWLight/views.py:31
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:802 TWLight/views.py:33
+#: TWLight/users/views.py:808 TWLight/views.py:33
 msgid "6+ months editing"
 msgstr "6개월 이상 편집"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:804 TWLight/views.py:35
+#: TWLight/users/views.py:810 TWLight/views.py:35
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:806 TWLight/views.py:37
+#: TWLight/users/views.py:812 TWLight/views.py:37
 msgid "No active blocks"
 msgstr ""
 
