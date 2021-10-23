@@ -34,12 +34,9 @@
     search_input.oninput = searchCollections;
 
     function searchCollections(obj) {
-      console.log(obj);
-      console.log("Value: " + obj.target.value);
+      var pattern = obj.target.value;
 
-      let pattern = obj.target.value;
-
-      const options = {
+      var options = {
         keys: [
           "partner_pk",
           "partner_name",
@@ -48,13 +45,78 @@
         ]
       };
 
-      var list = JSON.parse('{{partner_search_list|safe}}');
+      var list = {{partner_search_list|safe}};
 
-      console.log("List: " + list);
+      var fuse = new Fuse(list, options);
 
-      const fuse = new Fuse(list, options);
+      var searchResults = fuse.search(pattern);
 
-      return fuse.search(pattern)
+      if (searchResults.length === 0 && pattern !== "") {
+        // Hide all collections
+        console.log("Empty array!");
+        document.getElementById("user-collections").innerHTML = "";
+        document.getElementById("favorite-collections").innerHTML = "";
+        document.getElementById("available-collections").innerHTML = "";
+      }
+      else if (searchResults.length === 0 && pattern === ""){
+        console.log("No search text, display everything again!");
+      }
+      else{
+        // Show results
+        var filteredUserCollections = [];
+        var filteredAvailableCollections = [];
+        var filteredFavoriteCollections = [];
+
+        for (var result in searchResults) {
+          var collectionType = searchResults[result].item.collection_type;
+          var partnerPk = searchResults[result].item.partner_pk;
+          if (collectionType === "AVAILABLE") {
+            filteredAvailableCollections.push("tile-partner-" + partnerPk);
+          }
+          else if(collectionType === "USER"){
+            filteredUserCollections.push("tile-partner-" + partnerPk);
+          }
+          else{
+            filteredFavoriteCollections.push("favorite-tile-partner-" + partnerPk);
+          }
+        }
+      }
+      // Check if document.querySelectorAll('#favorite-collections div .col-xl-3.col-lg-4.col-md-6.col-sm-12')
+      // is more optimal
+      var userCollectionElems = document.getElementById("user-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var favoriteCollectionElems = document.getElementById("favorite-collections" ).getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var availableCollectionElems = document.getElementById("available-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+
+      Array.prototype.slice.call(userCollectionElems).forEach(function(elem){
+        var valueID = elem.id.toString();
+        if (filteredUserCollections.includes(valueID)){
+          elem.style.display = "flex";
+        }
+        else{
+          elem.style.display = "none";
+        }
+      });
+
+      Array.prototype.slice.call(favoriteCollectionElems).forEach(function(elem){
+        var valueID = elem.id.toString();
+        if (filteredUserCollections.includes(valueID)){
+          elem.style.display = "flex";
+        }
+        else{
+          elem.style.display = "none";
+        }
+      });
+
+      Array.prototype.slice.call(availableCollectionElems).forEach(function(elem){
+        var valueID = elem.id.toString();
+        if (filteredUserCollections.includes(valueID)){
+          elem.style.display = "flex";
+        }
+        else{
+          elem.style.display = "none";
+        }
+      });
+
     }
 
     // Favoriting functionality
