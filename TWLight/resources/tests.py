@@ -807,6 +807,20 @@ class PartnerViewTests(TestCase):
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)
 
+    def test_partner_views(self):
+        partner = PartnerFactory()
+        editor = EditorFactory()
+
+        app1 = ApplicationFactory(partner=partner, status=Application.APPROVED)
+        app2 = ApplicationFactory(partner=partner, status=Application.NOT_APPROVED)
+
+        partner_detail_url = reverse("partners:detail", kwargs={"pk": partner.pk})
+
+        request = RequestFactory().get(partner_detail_url)
+        request.user = editor.user
+        response = PartnersDetailView.as_view()(request, **{"pk": partner.pk})
+        self.assertEqual(response.status_code, 200)
+
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod
