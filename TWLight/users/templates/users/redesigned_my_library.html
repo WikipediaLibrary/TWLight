@@ -49,8 +49,20 @@
       var userCollectionElems = document.getElementById("user-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
       var favoriteCollectionElems = document.getElementById("favorite-collections" ).getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
       var availableCollectionElems = document.getElementById("available-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
-      var expiredFavCollections = document.getElementById("favorites-expired-partner-row").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
-      var expiredUserCollections = document.getElementById("user-expired-partner-row").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var expiredFavContainer = document.getElementById("favorites-expired-partner-row");
+      var expiredUserContainer = document.getElementById("user-expired-partner-row");
+      if (expiredFavContainer !== null) {
+        var expiredFavCollections = expiredFavContainer.getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      }
+      else{
+        var expiredFavCollections = [];
+      }
+
+      if (expiredUserContainer !== null) {
+        var expiredUserCollections = expiredUserContainer.getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      } else {
+        var expiredUserCollections = [];
+      }
 
       var list = {{partner_search_list|safe}};
 
@@ -61,8 +73,6 @@
       var filteredUserCollections = [];
       var filteredAvailableCollections = [];
       var filteredFavoriteCollections = [];
-
-      console.log(searchResults);
 
       if (searchResults.length === 0 && pattern !== "") {
         // Hide all collections, no results to that search text found
@@ -121,8 +131,12 @@
         updateCounter("available-collections-number", filteredAvailableCollections.length);
 
         // Check if the expired header should show
-        updateExpiredHeader(userExpiredCount, "user");
-        updateExpiredHeader(favExpiredCount, "favorites");
+        if (expiredUserContainer !== null) {
+          updateExpiredHeader(userExpiredCount, "user");
+        }
+        if (expiredFavContainer !== null) {
+          updateExpiredHeader(favExpiredCount, "favorites");
+        }
 
       }
 
