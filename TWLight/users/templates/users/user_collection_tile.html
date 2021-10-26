@@ -21,13 +21,13 @@
     {% comment %}Translators: Hovertext for an icon that will remove a collection as a favorite. {% endcomment %}
     <i class="fa fa-star favorite-icon favorite-icon-{{user_collection.partner_pk}}"
         title="{% trans 'Remove this collection from favorites' %}"
-        onclick="favoriteCollection(this, {{user_collection.partner_pk}})">
+        onclick="favoriteCollection(this, {{user_collection.partner_pk}}, '{{my_library_cache_key|urlencode}}')">
     </i>
   {% else %}
     {% comment %}Translators: Hovertext for an icon that will mark a collection as a favorite. {% endcomment %}
     <i class="fa fa-star-o favorite-icon favorite-icon-{{user_collection.partner_pk}}"
         title="{% trans 'Add this collection to favorites' %}"
-        onclick="favoriteCollection(this, {{user_collection.partner_pk}})">
+        onclick="favoriteCollection(this, {{user_collection.partner_pk}}, '{{my_library_cache_key|urlencode}}')">
     </i>
   {% endif %}
   <div class="card-body">
