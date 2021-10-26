@@ -37,6 +37,7 @@
       var pattern = obj.target.value;
 
       var options = {
+        includeMatches: true,
         keys: [
           "partner_pk",
           "partner_name",
@@ -60,6 +61,8 @@
       var filteredUserCollections = [];
       var filteredAvailableCollections = [];
       var filteredFavoriteCollections = [];
+
+      console.log(searchResults);
 
       if (searchResults.length === 0 && pattern !== "") {
         // Hide all collections, no results to that search text found
