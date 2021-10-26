@@ -83,11 +83,11 @@ printf "${MATOMO_AUTH_TOKEN}" | docker secret create MATOMO_AUTH_TOKEN -
 docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_STACK_ENV}.yml" "${TWLIGHT_STACK_ENV}"
 
 echo "Setting up crontab. *WARNING* This will create duplicate jobs if run repeatedly."
-(crontab -l 2>/dev/null; echo "# Reclaim disk space previously used by docker.") | crontab -
-(crontab -l 2>/dev/null; echo '0 5 * * * docker system prune -a -f; docker volume rm \$(docker volume ls -qf dangling=true)') | crontab -
 (crontab -l 2>/dev/null; echo "# Run django_cron tasks.") | crontab -
 (crontab -l 2>/dev/null; echo '*/5 * * * *  docker exec -t \$(docker ps -q -f name=${TWLIGHT_STACK_ENV}_twlight) /app/bin/twlight_docker_entrypoint.sh python manage.py runcrons') | crontab -
 (crontab -l 2>/dev/null; echo "# Update the running TWLight service if there is a new image. The initial pull is just to verify that the image is valid. Otherwise an inaccessible image could break the service.") | crontab -
 (crontab -l 2>/dev/null; echo '*/5 * * * *  /srv/TWLight/bin/./twlight_docker_deploy.sh ${TWLIGHT_STACK_ENV} branch_${TWLIGHT_GIT_BRANCH}') | crontab -
+(crontab -l 2>/dev/null; echo "# Reclaim disk space previously used by docker.") | crontab -
+(crontab -l 2>/dev/null; echo '*/30 * * * * docker system prune -a -f; docker volume rm \$(docker volume ls -qf dangling=true)') | crontab -
 EOF
 sudo su --login twlight /usr/bin/env bash -c "${TWLIGHT}"
