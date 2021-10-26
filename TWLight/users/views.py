@@ -1076,17 +1076,18 @@ class MyLibraryView(TemplateView):
         return context
 
 
+# @TODO: reimplement as a form to leverage django's input sanitization
 def favorite_collection(request):
     """ """
     user_profile = request.user.userprofile
-    partner_pk = request.GET.get("partner_pk", None)
-    my_library_cache_key = request.GET.get("my_library_cache_key", None)
+    partner_pk = int(request.GET.get("partner_pk", None))
+    my_library_cache_key = str(request.GET.get("my_library_cache_key", None))
 
     favorites = user_profile.favorites.all()
     favorite_pks = [f.pk for f in favorites]
 
     if partner_pk:
-        if int(partner_pk) in favorite_pks:
+        if partner_pk in favorite_pks:
             # partner is already in favorites, unfavoriting this partner
             user_profile.favorites.remove(partner_pk)
             response = {"added": False}
