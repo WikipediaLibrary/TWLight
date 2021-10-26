@@ -44,6 +44,10 @@
           "partner_description"
         ]
       };
+      // Get all of the partner tile containers for each tab
+      var userCollectionElems = document.getElementById("user-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var favoriteCollectionElems = document.getElementById("favorite-collections" ).getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var availableCollectionElems = document.getElementById("available-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
 
       var list = {{partner_search_list|safe}};
 
@@ -51,22 +55,33 @@
 
       var searchResults = fuse.search(pattern);
 
+      var filteredUserCollections = [];
+      var filteredAvailableCollections = [];
+      var filteredFavoriteCollections = [];
+
       if (searchResults.length === 0 && pattern !== "") {
-        // Hide all collections
-        console.log("Empty array!");
-        document.getElementById("user-collections").innerHTML = "";
-        document.getElementById("favorite-collections").innerHTML = "";
-        document.getElementById("available-collections").innerHTML = "";
+        // Hide all collections, no results to that search text found
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        updateCounter("favorite-collections-number", filteredFavoriteCollections.length);
+        updateCounter("user-collections-number", filteredUserCollections.length);
+        updateCounter("available-collections-number", filteredAvailableCollections.length);
       }
       else if (searchResults.length === 0 && pattern === ""){
-        console.log("No search text, display everything again!");
+        // No search text and no search results, display everything again
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        updateCounter("favorite-collections-number", favoriteCollectionElems.length);
+        updateCounter("user-collections-number", userCollectionElems.length);
+        updateCounter("available-collections-number", availableCollectionElems.length);
       }
       else{
-        // Show results
-        var filteredUserCollections = [];
-        var filteredAvailableCollections = [];
-        var filteredFavoriteCollections = [];
-
+        // Show search results
+        // Fill arrays for each tab for matched partners
         for (var result in searchResults) {
           var collectionType = searchResults[result].item.collection_type;
           var partnerPk = searchResults[result].item.partner_pk;
@@ -80,43 +95,39 @@
             filteredFavoriteCollections.push("favorite-tile-partner-" + partnerPk);
           }
         }
+        // Display only the partners that appeared in the search results
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        // Update the tab counter
+        updateCounter("favorite-collections-number", filteredFavoriteCollections.length);
+        updateCounter("user-collections-number", filteredUserCollections.length);
+        updateCounter("available-collections-number", filteredAvailableCollections.length);
       }
-      // Check if document.querySelectorAll('#favorite-collections div .col-xl-3.col-lg-4.col-md-6.col-sm-12')
-      // is more optimal
-      var userCollectionElems = document.getElementById("user-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
-      var favoriteCollectionElems = document.getElementById("favorite-collections" ).getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
-      var availableCollectionElems = document.getElementById("available-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
 
-      Array.prototype.slice.call(userCollectionElems).forEach(function(elem){
+    }
+
+    function displayPartnerTile(collectionElements, filteredCollections, pattern) {
+      Array.prototype.slice.call(collectionElements).forEach(function(elem){
         var valueID = elem.id.toString();
-        if (filteredUserCollections.includes(valueID)){
-          elem.style.display = "flex";
+        if (pattern !== "" || filteredCollections.length > 0){
+          if (filteredCollections.includes(valueID)){
+            elem.style.display = "flex";
+          }
+          else{
+            elem.style.display = "none";
+          }
         }
         else{
-          elem.style.display = "none";
-        }
-      });
-
-      Array.prototype.slice.call(favoriteCollectionElems).forEach(function(elem){
-        var valueID = elem.id.toString();
-        if (filteredUserCollections.includes(valueID)){
           elem.style.display = "flex";
         }
-        else{
-          elem.style.display = "none";
-        }
       });
+    }
 
-      Array.prototype.slice.call(availableCollectionElems).forEach(function(elem){
-        var valueID = elem.id.toString();
-        if (filteredUserCollections.includes(valueID)){
-          elem.style.display = "flex";
-        }
-        else{
-          elem.style.display = "none";
-        }
-      });
-
+    function updateCounter(collectionSpanId, updatedNumber) {
+      var collectionNumberElement = document.getElementById(collectionSpanId);
+      collectionNumberElement.innerHTML = updatedNumber;
     }
 
     // Favoriting functionality

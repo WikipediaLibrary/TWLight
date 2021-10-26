@@ -1017,9 +1017,6 @@ class MyLibraryView(TemplateView):
                                     "partner_short_description": partner_descriptions[
                                         "short_description"
                                     ],
-                                    "partner_description": partner_descriptions[
-                                        "description"
-                                    ],
                                     "collection_type": "FAVORITES",
                                 }
                             )
@@ -1032,9 +1029,6 @@ class MyLibraryView(TemplateView):
                                 "partner_name": user_authorization_partner.company_name,
                                 "partner_short_description": partner_descriptions[
                                     "short_description"
-                                ],
-                                "partner_description": partner_descriptions[
-                                    "description"
                                 ],
                                 "collection_type": "USER",
                             }
@@ -1130,7 +1124,6 @@ class MyLibraryView(TemplateView):
                     "partner_short_description": partner_descriptions[
                         "short_description"
                     ],
-                    "partner_description": partner_descriptions["description"],
                     "collection_type": "AVAILABLE",
                 }
             )
