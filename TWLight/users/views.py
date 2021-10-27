@@ -1,3 +1,4 @@
+import bleach
 import datetime
 import json
 import logging
@@ -1006,6 +1007,24 @@ class MyLibraryView(TemplateView):
                         "searchable": user_authorization_partner.searchable,
                     }
 
+                    if partner_descriptions["description"]:
+                        partner_desc = bleach.clean(
+                            partner_descriptions["description"],
+                            tags=[],
+                            strip=True,
+                        )
+                    else:
+                        partner_desc = None
+
+                    if partner_descriptions["short_description"]:
+                        partner_short_desc = bleach.clean(
+                            partner_descriptions["short_description"],
+                            tags=[],
+                            strip=True,
+                        )
+                    else:
+                        partner_short_desc = None
+
                     if favorite_ids:
                         if user_authorization_partner.pk in favorite_ids:
                             user_authorization_obj.append(user_auth_dict)
@@ -1014,9 +1033,8 @@ class MyLibraryView(TemplateView):
                                 {
                                     "partner_pk": user_authorization_partner.pk,
                                     "partner_name": user_authorization_partner.company_name,
-                                    "partner_short_description": partner_descriptions[
-                                        "short_description"
-                                    ],
+                                    "partner_short_description": partner_short_desc,
+                                    "partner_description": partner_desc,
                                     "collection_type": "FAVORITES",
                                 }
                             )
@@ -1027,9 +1045,8 @@ class MyLibraryView(TemplateView):
                             {
                                 "partner_pk": user_authorization_partner.pk,
                                 "partner_name": user_authorization_partner.company_name,
-                                "partner_short_description": partner_descriptions[
-                                    "short_description"
-                                ],
+                                "partner_short_description": partner_short_desc,
+                                "partner_description": partner_desc,
                                 "collection_type": "USER",
                             }
                         )
@@ -1117,13 +1134,31 @@ class MyLibraryView(TemplateView):
                     "searchable": available_collection.searchable,
                 }
             )
+
+            if partner_descriptions["description"]:
+                partner_desc = bleach.clean(
+                    partner_descriptions["description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_desc = None
+
+            if partner_descriptions["short_description"]:
+                partner_short_desc = bleach.clean(
+                    partner_descriptions["short_description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_short_desc = None
+
             partner_search_list.append(
                 {
                     "partner_pk": available_collection.pk,
                     "partner_name": available_collection.company_name,
-                    "partner_short_description": partner_descriptions[
-                        "short_description"
-                    ],
+                    "partner_short_description": partner_short_desc,
+                    "partner_description": partner_desc,
                     "collection_type": "AVAILABLE",
                 }
             )

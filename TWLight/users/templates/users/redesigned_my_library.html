@@ -39,7 +39,6 @@
       var options = {
         includeMatches: true,
         keys: [
-          "partner_pk",
           "partner_name",
           "partner_short_description",
           "partner_description"
@@ -69,6 +68,8 @@
       var fuse = new Fuse(list, options);
 
       var searchResults = fuse.search(pattern);
+
+      console.log(searchResults);
 
       var filteredUserCollections = [];
       var filteredAvailableCollections = [];
