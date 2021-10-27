@@ -37,6 +37,7 @@
       var pattern = obj.target.value;
 
       var options = {
+        threshold: 0.4,
         includeMatches: true,
         keys: [
           "partner_name",
@@ -68,8 +69,6 @@
       var fuse = new Fuse(list, options);
 
       var searchResults = fuse.search(pattern);
-
-      console.log(searchResults);
 
       var filteredUserCollections = [];
       var filteredAvailableCollections = [];
