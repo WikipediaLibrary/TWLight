@@ -15,6 +15,7 @@ from django.urls import reverse_lazy, reverse
 from django.db import models
 from django_countries.fields import CountryField
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from TWLight.resources.helpers import (
     check_for_target_url_duplication_and_generate_error_message,
@@ -283,9 +284,9 @@ class Partner(models.Model):
     PARTIALLY_SEARCHABLE = 2
 
     SEARCHABLE_CHOICES = (
-        (SEARCHABLE, "Searchable"),
-        (NOT_SEARCHABLE, "Not searchable"),
-        (PARTIALLY_SEARCHABLE, "Partially searchable"),
+        (SEARCHABLE, _("Searchable")),
+        (NOT_SEARCHABLE, _("Not searchable")),
+        (PARTIALLY_SEARCHABLE, _("Partially searchable")),
     )
 
     searchable = models.IntegerField(
