@@ -15,6 +15,7 @@ from django.urls import reverse_lazy, reverse
 from django.db import models
 from django_countries.fields import CountryField
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 
 from TWLight.resources.helpers import (
     check_for_target_url_duplication_and_generate_error_message,
@@ -283,9 +284,12 @@ class Partner(models.Model):
     PARTIALLY_SEARCHABLE = 2
 
     SEARCHABLE_CHOICES = (
-        (SEARCHABLE, "Searchable"),
-        (NOT_SEARCHABLE, "Not searchable"),
-        (PARTIALLY_SEARCHABLE, "Partially searchable"),
+        # Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+        (SEARCHABLE, _("Searchable")),
+        # Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+        (NOT_SEARCHABLE, _("Not searchable")),
+        # Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+        (PARTIALLY_SEARCHABLE, _("Partially searchable")),
     )
 
     searchable = models.IntegerField(

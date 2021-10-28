@@ -2,10 +2,10 @@
 <div id="tile-partner-{{available_collection.pk}}" class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if available_collection.searchable == searchable %}
-      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not.. {% endcomment %}
+      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not. {% endcomment %}
       <i class="fa fa-search searchable-icon" title="{% trans 'Searchable' %}"></i>
     {% elif available_collection.searchable == partially_searchable %}
-      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not.. {% endcomment %}
+      {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not. {% endcomment %}
       <i class="fa fa-search partially-searchable-icon" title="{% trans 'Partially searchable' %}"></i>
     {% endif %}
     {% if available_collection.partner_logo %}

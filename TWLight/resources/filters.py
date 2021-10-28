@@ -1,6 +1,6 @@
 from django import forms
 from django.db.models import Q
-from django.utils.translation import gettext as _
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Language, Partner
 from .helpers import get_tag_choices
@@ -10,8 +10,10 @@ import django_filters
 INSTANT = 0
 MULTI_STEP = 1
 ACCESS_CHOICES = (
-    (INSTANT, "Instant (proxy) access"),
-    (MULTI_STEP, "Multi-step access"),
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+    (INSTANT, _("Instant (proxy) access")),
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+    (MULTI_STEP, _("Multi-step access")),
 )
 
 
