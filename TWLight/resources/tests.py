@@ -807,6 +807,30 @@ class PartnerViewTests(TestCase):
         response = views.PartnerUsers.as_view()(request, pk=self.partner.pk)
         self.assertEqual(response.status_code, 200)
 
+    def test_partner_views(self):
+        partner = PartnerFactory()
+
+        # Create a coordinator with a test client session
+        editor = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        # Designate the coordinator
+        partner.coordinator = editor.user
+        partner.save()
+
+        # Creates applications for partner
+        app1 = ApplicationFactory(partner=partner, status=Application.APPROVED)
+        app2 = ApplicationFactory(partner=partner, status=Application.NOT_APPROVED)
+        app3 = ApplicationFactory(
+            partner=partner, status=Application.SENT, sent_by=editor.user
+        )
+
+        partner_detail_url = reverse("partners:detail", kwargs={"pk": partner.pk})
+        response = self.client.get(partner_detail_url, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        # check whether median_days is not None
+        self.assertNotEqual(response.context["median_days"], None)
+
 
 class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
     @classmethod
