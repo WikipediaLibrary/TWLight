@@ -694,27 +694,41 @@ NEW MY LIBRARY CSS
     color: #3366CC;
     text-decoration: none;
 }
-.key-section{
+.about-section, .key-section{
     font-size: 15px;
+}
+.about-links{
+    text-align:center;
+}
+.learn-more-link, .discuss-link, .reset-filters-link{
+    font-size: 15px;
+    color: #3366CC;
+    text-decoration: underline;
 }
 .icon-section{
     display: inline-block;
     vertical-align:middle;
     width: 10%;
 }
-.key-content{
+.about-content, .key-content{
     display: inline-block;
     font-size: 14px;
     vertical-align: middle;
     width: 80%;
+}
+.key-content{
     padding-left: 15px;
 }
+
 .key-additional-info{
     font-size: 14px;
 }
 .filter-container{
     flex-direction: column;
     margin-top: 40px;
+}
+.filter-container hr {
+    width: 100%;
 }
 .filter-title-container{
     width: 100%;
@@ -725,9 +739,6 @@ NEW MY LIBRARY CSS
 }
 
 .reset-filters-link{
-    font-size: 15px;
-    color: #3366CC;
-    text-decoration: underline;
     position: absolute;
     right: 0px;
 }
