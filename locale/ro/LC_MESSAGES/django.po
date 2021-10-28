@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-28 18:18+0000\n"
+"POT-Creation-Date: 2021-10-28 22:39+0000\n"
 "PO-Revision-Date: 2021-10-21 11:16:58+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1557,13 +1557,25 @@ msgstr ""
 msgid "Missing EZProxy target URL."
 msgstr ""
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+#: TWLight/resources/filters.py:14
+#, fuzzy
+#| msgid "Instant access"
+msgid "Instant (proxy) access"
+msgstr "Acces instant"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+#: TWLight/resources/filters.py:16
+msgid "Multi-step access"
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
-#: TWLight/resources/filters.py:25
+#: TWLight/resources/filters.py:27
 msgid "Topics"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/resources/filters.py:32
+#: TWLight/resources/filters.py:34
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
 #, fuzzy
@@ -1571,9 +1583,9 @@ msgid "Languages"
 msgstr "Limbă"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not..
+#. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/filters.py:72
+#: TWLight/resources/filters.py:74 TWLight/resources/models.py:288
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
@@ -1581,7 +1593,7 @@ msgid "Searchable"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
-#: TWLight/resources/filters.py:79
+#: TWLight/resources/filters.py:81
 msgid "Access"
 msgstr ""
 
@@ -1600,6 +1612,22 @@ msgstr "Descriere"
 #: TWLight/resources/forms.py:21
 msgid "Website"
 msgstr "Site web"
+
+#. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+#: TWLight/resources/models.py:290
+#, fuzzy
+#| msgid "Not available"
+msgid "Not searchable"
+msgstr "Nu este disponibil"
+
+#. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
+#: TWLight/resources/models.py:292
+#: TWLight/users/templates/users/available_collection_tile.html:9
+#: TWLight/users/templates/users/filter_section.html:44
+#: TWLight/users/templates/users/user_collection_tile.html:8
+msgid "Partially searchable"
+msgstr ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:14
 #, fuzzy
@@ -2842,14 +2870,6 @@ msgstr ""
 "Nu veți mai putea accesa resursele <b>%(partner)s's</b> prin intermediul "
 "platformei Library Card, dar puteți solicita acces din nou făcând click pe "
 "'reînnoire', dacă vă răzgândiți. Sigur doriți să vă returnați accesul?"
-
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not..
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/users/templates/users/available_collection_tile.html:9
-#: TWLight/users/templates/users/filter_section.html:44
-#: TWLight/users/templates/users/user_collection_tile.html:8
-msgid "Partially searchable"
-msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:55
@@ -4131,6 +4151,3 @@ msgstr ""
 #~ "Biblioteca Wikipedia oferă acces gratuit la materiale de cercetare pentru "
 #~ "a vă îmbunătăți capacitatea de a contribui conținut la proiectele "
 #~ "Wikimedia."
-
-#~ msgid "Instant access"
-#~ msgstr "Acces instant"

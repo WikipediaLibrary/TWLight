@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-28 18:18+0000\n"
+"POT-Creation-Date: 2021-10-28 22:39+0000\n"
 "PO-Revision-Date: 2021-10-21 11:17:00+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1475,22 +1475,34 @@ msgstr "無效的 EZProxy 目標網址。"
 msgid "Missing EZProxy target URL."
 msgstr "遺漏 EZProxy 目標網址。"
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+#: TWLight/resources/filters.py:14
+#, fuzzy
+#| msgid "Instant access"
+msgid "Instant (proxy) access"
+msgstr "即時取用"
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+#: TWLight/resources/filters.py:16
+msgid "Multi-step access"
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
-#: TWLight/resources/filters.py:25
+#: TWLight/resources/filters.py:27
 msgid "Topics"
 msgstr "主題"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/resources/filters.py:32
+#: TWLight/resources/filters.py:34
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
 msgid "Languages"
 msgstr "語言"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not..
+#. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/filters.py:72
+#: TWLight/resources/filters.py:74 TWLight/resources/models.py:288
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
@@ -1498,7 +1510,7 @@ msgid "Searchable"
 msgstr "可供搜尋"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
-#: TWLight/resources/filters.py:79
+#: TWLight/resources/filters.py:81
 msgid "Access"
 msgstr "存取"
 
@@ -1517,6 +1529,22 @@ msgstr "描述"
 #: TWLight/resources/forms.py:21
 msgid "Website"
 msgstr "網站"
+
+#. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+#: TWLight/resources/models.py:290
+#, fuzzy
+#| msgid "Searchable"
+msgid "Not searchable"
+msgstr "可供搜尋"
+
+#. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
+#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
+#: TWLight/resources/models.py:292
+#: TWLight/users/templates/users/available_collection_tile.html:9
+#: TWLight/users/templates/users/filter_section.html:44
+#: TWLight/users/templates/users/user_collection_tile.html:8
+msgid "Partially searchable"
+msgstr "部分可供搜尋"
 
 #: TWLight/resources/templates/resources/partner_detail.html:14
 msgid "Back to My Library"
@@ -2679,14 +2707,6 @@ msgstr ""
 "您不再能透過借閱卡平台來取用 <b>%(partner)s</b> 的資源，但若您改變心意，可以"
 "透過點擊「續辦」來再次請求取用。您確定要歸還您的取用嗎？"
 
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not..
-#. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/users/templates/users/available_collection_tile.html:9
-#: TWLight/users/templates/users/filter_section.html:44
-#: TWLight/users/templates/users/user_collection_tile.html:8
-msgid "Partially searchable"
-msgstr "部分可供搜尋"
-
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
 #: TWLight/users/templates/users/available_collection_tile.html:55
 #: TWLight/users/templates/users/user_collection_tile.html:67
@@ -3836,6 +3856,3 @@ msgstr ""
 #~ msgstr ""
 #~ "維基百科圖書館提供能自由取用研究資料，來增進您為維基媒體計劃貢獻內容的能"
 #~ "力。"
-
-#~ msgid "Instant access"
-#~ msgstr "即時取用"
