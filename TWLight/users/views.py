@@ -1,3 +1,4 @@
+import bleach
 import datetime
 import json
 import logging
@@ -800,10 +801,13 @@ class MyLibraryView(TemplateView):
             .get(pk=self.request.user.pk)
         )
         language_code = get_language()
+        partner_search_list = []
 
-        self._build_user_collection_object(context, language_code, user)
+        self._build_user_collection_object(
+            context, language_code, user, partner_search_list
+        )
         self._build_available_collection_object(
-            context, language_code, context["partner_id_set"]
+            context, language_code, context["partner_id_set"], partner_search_list
         )
 
         # Store the result of `learn_cache_key` for invalidation
@@ -827,7 +831,9 @@ class MyLibraryView(TemplateView):
 
         return context
 
-    def _build_user_collection_object(self, context, language_code, user):
+    def _build_user_collection_object(
+        self, context, language_code, user, partner_search_list
+    ):
         """
         Helper function to build a user collections object that will
         fill the My Collections section of the redesigned My Library
@@ -839,6 +845,9 @@ class MyLibraryView(TemplateView):
             The language code that some tags and descriptions will be translated to
         user: User
             The User object that will serve to filter authorizations
+        partner_search_list: list
+            A list of all of the partners that will feed FuseJS for live search
+            and filtering
 
         Returns
         -------
@@ -859,18 +868,29 @@ class MyLibraryView(TemplateView):
         partner_id_set = set()
 
         context["user_collections"] = self._build_authorization_object(
-            user_authorizations, language_code, partner_id_set
+            user_authorizations, language_code, partner_id_set, partner_search_list
         )
         context["expired_user_collections"] = self._build_authorization_object(
-            expired_user_authorizations, language_code, partner_id_set
+            expired_user_authorizations,
+            language_code,
+            partner_id_set,
+            partner_search_list,
         )
 
         if len(favorite_ids) > 0:
             context["favorite_collections"] = self._build_authorization_object(
-                user_authorizations, language_code, partner_id_set, favorite_ids
+                user_authorizations,
+                language_code,
+                partner_id_set,
+                partner_search_list,
+                favorite_ids,
             )
             context["expired_favorite_collections"] = self._build_authorization_object(
-                expired_user_authorizations, language_code, partner_id_set, favorite_ids
+                expired_user_authorizations,
+                language_code,
+                partner_id_set,
+                partner_search_list,
+                favorite_ids,
             )
         else:
             context["favorite_collections"] = []
@@ -886,7 +906,12 @@ class MyLibraryView(TemplateView):
         return context
 
     def _build_authorization_object(
-        self, authorization_queryset, language_code, partner_id_set, favorite_ids=None
+        self,
+        authorization_queryset,
+        language_code,
+        partner_id_set,
+        partner_search_list,
+        favorite_ids=None,
     ):
         """
         Helper function to convert an Authorization queryset to an object that the
@@ -899,6 +924,9 @@ class MyLibraryView(TemplateView):
         partner_id_set: set
             A set that will be filled with partner IDs. These partners will be excluded
             in the Available Collections section
+        partner_search_list: list
+            A list of all of the partners that will feed FuseJS for live search
+            and filtering
         favorite_ids: list or None
             A list of partner IDs that have been added to a user's favorites
 
@@ -979,19 +1007,55 @@ class MyLibraryView(TemplateView):
                         "searchable": user_authorization_partner.searchable,
                     }
 
+                    if partner_descriptions["description"]:
+                        partner_desc = bleach.clean(
+                            partner_descriptions["description"],
+                            tags=[],
+                            strip=True,
+                        )
+                    else:
+                        partner_desc = None
+
+                    if partner_descriptions["short_description"]:
+                        partner_short_desc = bleach.clean(
+                            partner_descriptions["short_description"],
+                            tags=[],
+                            strip=True,
+                        )
+                    else:
+                        partner_short_desc = None
+
                     if favorite_ids:
                         if user_authorization_partner.pk in favorite_ids:
                             user_authorization_obj.append(user_auth_dict)
                             partner_id_set.add(user_authorization_partner.pk)
+                            partner_search_list.append(
+                                {
+                                    "partner_pk": user_authorization_partner.pk,
+                                    "partner_name": user_authorization_partner.company_name,
+                                    "partner_short_description": partner_short_desc,
+                                    "partner_description": partner_desc,
+                                    "collection_type": "FAVORITES",
+                                }
+                            )
                     else:
                         user_authorization_obj.append(user_auth_dict)
                         partner_id_set.add(user_authorization_partner.pk)
+                        partner_search_list.append(
+                            {
+                                "partner_pk": user_authorization_partner.pk,
+                                "partner_name": user_authorization_partner.company_name,
+                                "partner_short_description": partner_short_desc,
+                                "partner_description": partner_desc,
+                                "collection_type": "USER",
+                            }
+                        )
 
         # Sort by partner name
         return sorted(user_authorization_obj, key=lambda k: k["partner_name"])
 
     def _build_available_collection_object(
-        self, context, language_code, partner_id_set
+        self, context, language_code, partner_id_set, partner_search_list
     ):
         """
         Helper function to build an available collections object that will
@@ -1005,6 +1069,9 @@ class MyLibraryView(TemplateView):
         partner_id_set: set
             A set of partner IDs which are to be excluded from the query because
             they're already in the My Collections section of the interface
+        partner_search_list: list
+            A list of all of the partners that will feed FuseJS for live search
+            and filtering
 
         Returns
         -------
@@ -1068,10 +1135,39 @@ class MyLibraryView(TemplateView):
                 }
             )
 
+            if partner_descriptions["description"]:
+                partner_desc = bleach.clean(
+                    partner_descriptions["description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_desc = None
+
+            if partner_descriptions["short_description"]:
+                partner_short_desc = bleach.clean(
+                    partner_descriptions["short_description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_short_desc = None
+
+            partner_search_list.append(
+                {
+                    "partner_pk": available_collection.pk,
+                    "partner_name": available_collection.company_name,
+                    "partner_short_description": partner_short_desc,
+                    "partner_description": partner_desc,
+                    "collection_type": "AVAILABLE",
+                }
+            )
+
         context["available_collections"] = sorted(
             available_collection_obj, key=lambda k: k["partner_name"]
         )
         context["number_available_collections"] = len(available_collection_obj)
+        context["partner_search_list"] = json.dumps(partner_search_list)
 
         return context
 

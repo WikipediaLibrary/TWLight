@@ -29,6 +29,157 @@
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
 
+    // Live search functionality
+    var search_input = document.getElementById("collection-live-search");
+    search_input.oninput = searchCollections;
+
+    function searchCollections(obj) {
+      var pattern = obj.target.value;
+
+      var options = {
+        threshold: 0.4,
+        includeMatches: true,
+        keys: [
+          "partner_name",
+          "partner_short_description",
+          "partner_description"
+        ]
+      };
+      // Get all of the partner tile containers for each tab
+      var userCollectionElems = document.getElementById("user-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var favoriteCollectionElems = document.getElementById("favorite-collections" ).getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var availableCollectionElems = document.getElementById("available-collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      var expiredFavContainer = document.getElementById("favorites-expired-partner-row");
+      var expiredUserContainer = document.getElementById("user-expired-partner-row");
+      if (expiredFavContainer !== null) {
+        var expiredFavCollections = expiredFavContainer.getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      }
+      else{
+        var expiredFavCollections = [];
+      }
+
+      if (expiredUserContainer !== null) {
+        var expiredUserCollections = expiredUserContainer.getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+      } else {
+        var expiredUserCollections = [];
+      }
+
+      var list = {{partner_search_list|safe}};
+
+      var fuse = new Fuse(list, options);
+
+      var searchResults = fuse.search(pattern);
+
+      var filteredUserCollections = [];
+      var filteredAvailableCollections = [];
+      var filteredFavoriteCollections = [];
+
+      if (searchResults.length === 0 && pattern !== "") {
+        // Hide all collections, no results to that search text found
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        updateCounter("favorite-collections-number", filteredFavoriteCollections.length);
+        updateCounter("user-collections-number", filteredUserCollections.length);
+        updateCounter("available-collections-number", filteredAvailableCollections.length);
+      }
+      else if (searchResults.length === 0 && pattern === ""){
+        // No search text and no search results, display everything again
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        updateCounter("favorite-collections-number", favoriteCollectionElems.length);
+        updateCounter("user-collections-number", userCollectionElems.length);
+        updateCounter("available-collections-number", availableCollectionElems.length);
+      }
+      else{
+        // Show search results
+        var favExpiredCount = 0;
+        var userExpiredCount = 0;
+        // Fill arrays for each tab for matched partners
+        for (var result in searchResults) {
+          var collectionType = searchResults[result].item.collection_type;
+          var partnerPk = searchResults[result].item.partner_pk;
+          if (collectionType === "AVAILABLE") {
+            filteredAvailableCollections.push("tile-partner-" + partnerPk);
+          }
+          else if(collectionType === "USER"){
+            filteredUserCollections.push("tile-partner-" + partnerPk);
+            // Check if this partner is in the expired section
+            if ("tile-partner-" + partnerPk in expiredUserCollections) {
+              userExpiredCount += 1;
+            }
+          }
+          else{
+            filteredFavoriteCollections.push("favorite-tile-partner-" + partnerPk);
+            // Check if this partner is in the expired section
+            if ("favorite-tile-partner-" + partnerPk in expiredFavCollections) {
+              favExpiredCount += 1;
+            }
+          }
+        }
+        // Display only the partners that appeared in the search results
+        displayPartnerTile(userCollectionElems, filteredUserCollections, pattern);
+        displayPartnerTile(availableCollectionElems, filteredAvailableCollections, pattern);
+        displayPartnerTile(favoriteCollectionElems, filteredFavoriteCollections, pattern);
+
+        // Update the tab counter
+        updateCounter("favorite-collections-number", filteredFavoriteCollections.length);
+        updateCounter("user-collections-number", filteredUserCollections.length);
+        updateCounter("available-collections-number", filteredAvailableCollections.length);
+
+        // Check if the expired header should show
+        if (expiredUserContainer !== null) {
+          updateExpiredHeader(userExpiredCount, "user");
+        }
+        if (expiredFavContainer !== null) {
+          updateExpiredHeader(favExpiredCount, "favorites");
+        }
+
+      }
+
+    }
+
+    function displayPartnerTile(collectionElements, filteredCollections, pattern) {
+      Array.prototype.slice.call(collectionElements).forEach(function(elem){
+        var valueID = elem.id.toString();
+        if (pattern !== "" || filteredCollections.length > 0){
+          if (filteredCollections.includes(valueID)){
+            elem.style.display = "flex";
+          }
+          else{
+            elem.style.display = "none";
+          }
+        }
+        else{
+          elem.style.display = "flex";
+        }
+      });
+    }
+
+    function updateCounter(collectionSpanId, updatedNumber) {
+      var collectionNumberElement = document.getElementById(collectionSpanId);
+      collectionNumberElement.innerHTML = updatedNumber;
+    }
+
+    function updateExpiredHeader(expiredCount, collectionType) {
+      var expiredSeparator = document.getElementById(collectionType + "-expired-separator");
+      var expiredTitle = document.getElementById(collectionType + "-expired-title");
+
+      if (expiredCount === 0){
+        expiredSeparator.style.display = "none";
+        expiredTitle.style.display = "none";
+      }
+      else{
+        expiredSeparator.style.display = "flex";
+        expiredTitle.style.display = "flex";
+      }
+
+    }
+
+    // Favoriting functionality
     function favoriteCollection(icon, partnerPk, myLibraryCacheKey) {
       $.ajax({
         url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk + "&my_library_cache_key=" + myLibraryCacheKey,

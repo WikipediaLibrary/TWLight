@@ -14,14 +14,14 @@
           data-toggle="tab" href="#user-collections" role="tab" aria-controls="user-collections"
           aria-selected="true">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to. {% endcomment %}
-          {% trans "My Collections" %} ({{ number_user_collections }})
+          {% trans "My Collections" %} (<span id="user-collections-number">{{ number_user_collections }}</span>)
       </a>
     </li>
     <li class="nav-item" role="presentation">
       <a id="available-collections-tab" class="nav-link collection-tab-item" data-toggle="tab" href="#available-collections"
           role="tab" aria-controls="available-collections" aria-selected="false">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to. {% endcomment %}
-        {% trans "Available Collections" %} ({{ number_available_collections }})
+        {% trans "Available Collections" %} (<span id="available-collections-number">{{ number_available_collections }}</span>)
       </a>
     </li>
   </ul>
@@ -48,12 +48,12 @@
     </div>
     <!-- Expired Favorite Collections -->
     {% if expired_favorite_collections %}
-      <hr>
-      <h3>
+      <hr id="favorites-expired-separator">
+      <h3 id="favorites-expired-title">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section. {% endcomment %}
         {% trans "Expired" %}
       </h3>
-      <div class="row">
+      <div id="favorites-expired-partner-row" class="row">
         {% for user_collection in expired_favorite_collections %}
           <div id="favorite-tile-partner-{{user_collection.partner_pk}}"
               class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
@@ -76,12 +76,12 @@
     </div>
     <!-- Expired User Collections -->
     {% if expired_user_collections %}
-      <hr>
-      <h3>
+      <hr id="user-expired-separator">
+      <h3 id="user-expired-title">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section. {% endcomment %}
         {% trans "Expired" %}
       </h3>
-      <div class="row">
+      <div id="user-expired-partner-row" class="row">
         {% for user_collection in expired_user_collections %}
           <div id="tile-partner-{{user_collection.partner_pk}}"
               class="col-xl-3 col-lg-4 col-md-6 col-sm-12">

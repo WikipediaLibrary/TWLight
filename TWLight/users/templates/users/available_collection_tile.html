@@ -1,5 +1,5 @@
 {% load i18n %}
-<div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+<div id="tile-partner-{{available_collection.pk}}" class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if available_collection.searchable == searchable %}
       {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not.. {% endcomment %}
@@ -19,7 +19,9 @@
       </a>
     {% endif %}
     <div class="card-body">
-      <p class="card-text">{{ available_collection.short_description|safe }}</p>
+      <p class="card-text">
+        {{ available_collection.short_description|safe }}
+      </p>
       <hr>
       <p class="card-text small">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports. {% endcomment %}
