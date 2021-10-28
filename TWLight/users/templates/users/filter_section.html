@@ -7,6 +7,26 @@
   </button>
 
   <div id="filterNavbar" class="collapse navbar-collapse filter-container">
+    <div class="about-section">
+      <div class="about-content">
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
+        <p>{% trans "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!" %}</p>
+        {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library. {% endcomment %}
+        <p>{% trans "Start with the search bar at the top or browse publisher websites directly." %}</p>
+      </div>
+      <div class="about-links">
+        <a href="{% url 'about' %}" class="learn-more-link">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
+          {% trans "Learn more" %}
+        </a>
+        &ndash;
+        <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library" class="discuss-link">
+          {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library) {% endcomment %}
+          {% trans "Discuss" %}
+        </a>
+      </div>
+    </div>
+    <hr>
     <div class="key-section">
       {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons. {% endcomment %}
       <p>{% trans "Key"%}</p>
@@ -32,6 +52,7 @@
       <em class="key-additional-info">{% trans "Other collections must be browsed individually" %}</em>
       <br> <br>
     </div>
+    <hr>
     <div class="row filter-title-container">
       <p class="filter-title">
         {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section. {% endcomment %}
