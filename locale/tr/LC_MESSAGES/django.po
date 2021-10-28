@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-28 15:20+0000\n"
+"POT-Creation-Date: 2021-10-28 18:18+0000\n"
 "PO-Revision-Date: 2021-10-21 11:16:59+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1247,7 +1247,7 @@ msgstr ""
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/emails/templates/emails/contact.html:13
-#: TWLight/templates/about.html:195 TWLight/templates/base.html:133
+#: TWLight/templates/about.html:206 TWLight/templates/base.html:133
 #: TWLight/templates/new_base.html:92
 msgid "Contact us"
 msgstr "İletişim"
@@ -1560,7 +1560,7 @@ msgstr "Diller"
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
 #: TWLight/resources/filters.py:72
 #: TWLight/users/templates/users/available_collection_tile.html:6
-#: TWLight/users/templates/users/filter_section.html:15
+#: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
 msgstr "Aranabilir"
@@ -2168,24 +2168,57 @@ msgstr "Kameraya doğru seyir sahilde bir yengeç"
 msgid "About the Wikipedia Library"
 msgstr "Vikipedi Kütüphanesi Hakkında"
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:10
+#: TWLight/users/templates/users/filter_section.html:13
 msgid ""
-"The Wikipedia Library provides free access to research materials to improve "
-"your ability to contribute content to Wikimedia projects."
+"The Wikipedia Library allows active editors to access a wide range of "
+"collections of paywalled reliable sources for free!"
 msgstr ""
-"Vikipedi Kütüphanesi, Wikimedia projelerine içerik katma yeteneğinizi "
-"geliştirmek için araştırma materyallerine ücretsiz erişim sağlar."
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:18
+#, fuzzy
+#| msgid ""
+#| "This platform is our central tool for reviewing applications and "
+#| "providing access to our collection. Here you can see which partnerships "
+#| "are available, search their contents, and apply for and access the ones "
+#| "you’re interested in. Volunteer coordinators, who have signed non-"
+#| "disclosure agreements with the Wikimedia Foundation, review applications "
+#| "and work with publishers to get you your free access. Some content is "
+#| "available without an application."
 msgid ""
-"This platform is our central tool for reviewing applications and providing "
-"access to our collection. Here you can see which partnerships are available, "
-"search their contents, and apply for and access the ones you’re interested "
-"in. Volunteer coordinators, who have signed non-disclosure agreements with "
-"the Wikimedia Foundation, review applications and work with publishers to "
-"get you your free access. Some content is available without an application."
+"This platform is our central tool for facilitating access to our available "
+"collections. Here you can see which partnerships are available, search their "
+"contents, and apply for and access the ones you’re interested in."
+msgstr ""
+"Bu platform, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için "
+"merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, "
+"içeriğini arayabilir ve ilgilendiklerinize başvurabilir ve bunlara "
+"erişebilirsiniz. Wikimedia Vakfı ile gizlilik sözleşmesi imzalayan gönüllü "
+"koordinatörler, başvuruları inceler ve ücretsiz erişiminiz için yayıncılarla "
+"birlikte çalışır. Bazı içerikler başvuru olmadan kullanılabilir."
+
+#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
+#: TWLight/templates/about.html:27
+#, fuzzy
+#| msgid ""
+#| "This platform is our central tool for reviewing applications and "
+#| "providing access to our collection. Here you can see which partnerships "
+#| "are available, search their contents, and apply for and access the ones "
+#| "you’re interested in. Volunteer coordinators, who have signed non-"
+#| "disclosure agreements with the Wikimedia Foundation, review applications "
+#| "and work with publishers to get you your free access. Some content is "
+#| "available without an application."
+msgid ""
+"All users receive immediate access to some collections, which can be browsed "
+"by clicking the 'Access collection' buttons or using the search bar at the "
+"top of the page. Other collections require an application before access is "
+"granted, and may be accessed directly or via an individual login or access "
+"code. Volunteer coordinators, who have signed non-disclosure agreements with "
+"the Wikimedia Foundation, review these applications and work with publishers "
+"to get you your free access."
 msgstr ""
 "Bu platform, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için "
 "merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, "
@@ -2195,7 +2228,7 @@ msgstr ""
 "birlikte çalışır. Bazı içerikler başvuru olmadan kullanılabilir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
-#: TWLight/templates/about.html:30
+#: TWLight/templates/about.html:41
 #, python-format
 msgid ""
 "For more information about how your information is stored and reviewed "
@@ -2210,12 +2243,12 @@ msgstr ""
 "geçirin."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:38
+#: TWLight/templates/about.html:49
 msgid "Who can receive access?"
 msgstr "Kimler erişim alabilir?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
-#: TWLight/templates/about.html:42
+#: TWLight/templates/about.html:53
 msgid ""
 "Any active editor in good standing can receive access. For publishers with "
 "limited numbers of accounts, applications are reviewed based on the editor’s "
@@ -2231,37 +2264,37 @@ msgstr ""
 "başvurunuz."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:52
+#: TWLight/templates/about.html:63
 msgid "Any editor can use the library if they meet a few basic requirements:"
 msgstr ""
 "Herhangi bir editör, birkaç temel koşulu karşılıyorsa kitaplığı kullanabilir:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:58
+#: TWLight/templates/about.html:69
 msgid "You have an account that is a minimum of 6 months old"
 msgstr "En az 6 aylık bir hesabınız olmalı"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:62
+#: TWLight/templates/about.html:73
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
 msgstr "Wikimedia projelerinde minimum 500 düzenleme yapmış olmalısınız"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:66
+#: TWLight/templates/about.html:77
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
 msgstr ""
 "Son bir ay içinde Wikimedia projelerinde en az 10 değişiklik yapmış "
 "olmalısınız"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:70
+#: TWLight/templates/about.html:81
 msgid "You are not currently blocked from editing a Wikimedia project"
 msgstr ""
 "Şu anda bir Wikimedia projesinde düzenleme yapmanız için engellenmemiş "
 "olmalısınız"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:74
+#: TWLight/templates/about.html:85
 msgid ""
 "You do not already have access to the resources you’re applying for through "
 "another library or institution"
@@ -2270,7 +2303,7 @@ msgstr ""
 "halihazırda sahip olmamalısınız"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:80
+#: TWLight/templates/about.html:91
 msgid ""
 "If your account is blocked on one or more Wikimedia projects, you may still "
 "be granted access to The Wikipedia Library. You will need to contact the "
@@ -2289,37 +2322,37 @@ msgstr ""
 "talep etmeniz gerekecektir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:91
+#: TWLight/templates/about.html:102
 msgid "What do I do after I get access?"
 msgstr "Erişim hakkında sahip olduktan sonra ne yapmalıyım?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:95
+#: TWLight/templates/about.html:106
 msgid "Approved editors <i>may</i> use their access to:"
 msgstr "Onaylanmış editörler erişimlerini şurada <i>kullanabilir</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:99
+#: TWLight/templates/about.html:110
 msgid "Search, view, retrieve, and display partner content"
 msgstr "İş ortağı içeriğini arama, görüntüleme, alma e göz atma"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:103
+#: TWLight/templates/about.html:114
 msgid "Electronically save partner content"
 msgstr "İş ortağı içeriğini elektronik olarak kaydetme"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:107
+#: TWLight/templates/about.html:118
 msgid "Print out single copies of partner content"
 msgstr "İş ortağı içeriğinin kopyalarını yazdırma"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:113
+#: TWLight/templates/about.html:124
 msgid "Approved editors <i>should not</i>:"
 msgstr "Onaylanan editörler şunları <i>yapmamalıdır</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:117
+#: TWLight/templates/about.html:128
 msgid ""
 "Share their account logins or passwords with others, or sell their access to "
 "other parties"
@@ -2328,12 +2361,12 @@ msgstr ""
 "taraflara erişim sağlama"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:121
+#: TWLight/templates/about.html:132
 msgid "Mass scrape or mass download partner content"
 msgstr "İş ortağı içeriğini toplu indirme"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:125
+#: TWLight/templates/about.html:136
 msgid ""
 "Systematically make printed or electronic copies of multiple extracts of "
 "restricted content available for any purpose"
@@ -2342,7 +2375,7 @@ msgstr ""
 "veya elektronik kopyalarını sistematik olarak oluşturma"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
-#: TWLight/templates/about.html:129
+#: TWLight/templates/about.html:140
 msgid ""
 "Datamine metadata without permission, in order, for instance, to use "
 "metadata for auto-created stub articles"
@@ -2351,7 +2384,7 @@ msgstr ""
 "kullanmak için izinsiz üst verileri alma"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:135
+#: TWLight/templates/about.html:146
 msgid ""
 "Respecting these agreements allows us to continue growing the partnerships "
 "available to the community."
@@ -2360,12 +2393,12 @@ msgstr ""
 "etmemizi sağlar."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:141
+#: TWLight/templates/about.html:152
 msgid "EZProxy"
 msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:145
+#: TWLight/templates/about.html:156
 msgid ""
 "EZProxy is a proxy server used to authenticate users for many Wikipedia "
 "Library partners. Users sign into EZProxy via the Library Card platform to "
@@ -2379,7 +2412,7 @@ msgstr ""
 "istenen kaynaklara erişir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:154
+#: TWLight/templates/about.html:165
 msgid ""
 "You may notice that when accessing resources via EZProxy that URLs are "
 "dynamically rewritten. This is why we recommend logging in via the Library "
@@ -2394,7 +2427,7 @@ msgstr ""
 "EZProxy aracılığıyla bağlanıyorsunuz demektir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:163
+#: TWLight/templates/about.html:174
 msgid ""
 "Typically once you’ve logged in your session will remain active in your "
 "browser for up to two hours after you’ve finished searching. Note that use "
@@ -2407,7 +2440,7 @@ msgstr ""
 "temizlemeyi ve tarayıcınızı yeniden başlatmayı da denemelisiniz."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:174
+#: TWLight/templates/about.html:185
 msgid ""
 "The Library Bundle is a collection of resources for which no application is "
 "required. If you meet the criteria laid out above, you will be authorized "
@@ -2424,12 +2457,12 @@ msgstr ""
 "içeriğine EZProxy aracılığıyla erişilir."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:183
+#: TWLight/templates/about.html:194
 msgid "Citation practices"
 msgstr "Atıf uygulamaları"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:187
+#: TWLight/templates/about.html:198
 msgid ""
 "Citation practices vary by project and even by article. Generally, we "
 "support editors citing where they found information, in a form that allows "
@@ -2444,7 +2477,7 @@ msgstr ""
 "veritabanına bir bağlantı sağlamak anlamına gelir."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:199
+#: TWLight/templates/about.html:210
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
@@ -2787,7 +2820,7 @@ msgstr ""
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not..
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
 #: TWLight/users/templates/users/available_collection_tile.html:9
-#: TWLight/users/templates/users/filter_section.html:24
+#: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
 msgstr "Kısmen aranabilir"
@@ -3092,42 +3125,60 @@ msgstr "Verilerinizi yenilemek için lütfen oturumu kapatıp tekrar açın."
 msgid "Profile/Settings"
 msgstr "Profil/Ayarlar"
 
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
+#: TWLight/users/templates/users/filter_section.html:15
+msgid ""
+"Start with the search bar at the top or browse publisher websites directly."
+msgstr ""
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
+#: TWLight/users/templates/users/filter_section.html:20
+msgid "Learn more"
+msgstr ""
+
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
+#: TWLight/users/templates/users/filter_section.html:25
+#, fuzzy
+#| msgid "Discussion"
+msgid "Discuss"
+msgstr "Tartışma"
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
-#: TWLight/users/templates/users/filter_section.html:12
+#: TWLight/users/templates/users/filter_section.html:32
 msgid "Key"
 msgstr "Anahtar"
 
 #. Translators: Text that describes a search icon.
-#: TWLight/users/templates/users/filter_section.html:19
+#: TWLight/users/templates/users/filter_section.html:39
 msgid "Collection is fully searchable via the search bar"
 msgstr "Koleksiyon, arama çubuğu aracılığıyla tamamen aranabilir"
 
 #. Translators: Text that describes a search icon.
-#: TWLight/users/templates/users/filter_section.html:28
+#: TWLight/users/templates/users/filter_section.html:48
 msgid "Collection is only partially searchable via the search bar"
 msgstr "Koleksiyon, arama çubuğu aracılığıyla yalnızca kısmen aranabilir"
 
 #. Translators: Text that explains when there is no search icon.
-#: TWLight/users/templates/users/filter_section.html:32
+#: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
 msgstr "Diğer koleksiyonlar ayrı ayrı taranmalıdır"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
-#: TWLight/users/templates/users/filter_section.html:38
+#: TWLight/users/templates/users/filter_section.html:59
 msgid "Filters"
 msgstr "Filtreler"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
-#: TWLight/users/templates/users/filter_section.html:42
+#: TWLight/users/templates/users/filter_section.html:63
 msgid "Reset filters"
 msgstr "Filtreleri sıfırla"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
-#: TWLight/users/templates/users/filter_section.html:49
+#: TWLight/users/templates/users/filter_section.html:70
 msgid "Filter"
 msgstr "Filtre"
 
-#: TWLight/users/templates/users/filter_section.html:55
+#: TWLight/users/templates/users/filter_section.html:76
 #, fuzzy
 #| msgid "Available Collections"
 msgid "Filter collections"
@@ -4005,6 +4056,13 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid ""
+#~ "The Wikipedia Library provides free access to research materials to "
+#~ "improve your ability to contribute content to Wikimedia projects."
+#~ msgstr ""
+#~ "Vikipedi Kütüphanesi, Wikimedia projelerine içerik katma yeteneğinizi "
+#~ "geliştirmek için araştırma materyallerine ücretsiz erişim sağlar."
 
 #~ msgid "Instant access"
 #~ msgstr "Anında erişim"
