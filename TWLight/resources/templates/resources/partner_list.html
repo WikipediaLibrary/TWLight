@@ -1,47 +1,36 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load i18n %}
 {% load twlight_perms %}
 
 {% block content %}
-  <!-- begin filtering options/info -->
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+
   <div class="row">
-    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-      {% comment %}Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
-      <h2>{% trans "Browse Partners" %}</h2>
+    <div class="col-lg-2 col-md-3">
+      {% include "users/filter_section.html" %}
     </div>
-    <div class="col-flex col-xs-12 col-sm-5 col-md-7">
-      <div class="panel panel-default">
-        <div class="panel-body" id="resource-filter-panel-body">
-          <form class="form-inline" action="" method="get">
-            {{ filter.form }}
-            <input name="submit" value="Filter" class="btn btn-default" id="submit-id-submit" type="submit">
-          </form>
+    <div class="v-divider"></div>
+    <div class="col-lg-9 col-md-8 col-sm-12">
+      <div class="page-banner-container row">
+        {% comment %}Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
+        <h2>{% trans "Browse Partners" %}</h2>
+        <div class="browse-suggest">
+          {% comment %}Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
+          <a class="btn btn-primary" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
         </div>
       </div>
-    </div>
-    <div class="col-flex col-xs-12 col-sm-3 col-md-2 browse-suggest">
-      {% comment %}Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
-        <a class="btn btn-primary" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
-    </div>
-  </div>
-  <div class="row" style="padding-bottom:10px">
-    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-      {% comment %}Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/) {% endcomment %}
-      <a class="btn btn-default" href="{% url 'applications:request' %}"> {% trans "Apply to multiple partners" %}</a>
-    </div>
-  </div>
-  <!-- end filtering options/info -->
-  <div class="row row-flex">
-    {% for partner in partners_list %}
-      <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-        {% include "resources/partner_tile.html" %}
+      <div class="list-container row">
+        {% for available_collection in partners_list %}
+          {% include "users/available_collection_tile.html" %}
+        {% empty %}
+          <div class="col-xs-12">
+            {% comment %}Translators: This text is shown to users when no partners meet the filtering criteria. {% endcomment %}
+            {% trans "No partners meet the specified criteria." %}
+          </div>
+        {% endfor %}
       </div>
-    {% empty %}
-      <div class="col-xs-12">
-        {% comment %}Translators: This text is shown to users when no partners meet the filtering criteria. {% endcomment %}
-        {% trans "No partners meet the specified criteria." %}
-      </div>
-    {% endfor %}
+    </div>
   </div>
 
   <div>
