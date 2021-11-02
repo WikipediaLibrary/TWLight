@@ -260,6 +260,7 @@ class OAuthInitializeView(View):
         # The Sites framework was designed for different URLs that correspond to
         # different databases or functionality - it's not a good fit here.
         domain = self.request.get_host()
+
         try:
             assert domain in settings.ALLOWED_HOSTS  # safety first!
         except (AssertionError, DisallowedHost) as e:
@@ -307,6 +308,7 @@ class OAuthInitializeView(View):
                 logger.warning(e)
 
             return HttpResponseRedirect(return_url)
+        # If the user isn't logged in
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
@@ -324,10 +326,35 @@ class OAuthInitializeView(View):
                 )
                 raise PermissionDenied
 
-            local_redirect = _localize_oauth_redirect(redirect)
+            # Create a QueryDict from the 'get' session dict.
+            query_dict = QueryDict(urlencode(request.session["get"]), mutable=True)
+            # Pop the 'next' parameter out of the QueryDict.
+            next = query_dict.pop("next")
+            # Set the return url to the value of 'next'. Basic.
+            return_url = next[0]
+            from_homepage = query_dict.get("from_homepage", None)
+
+            if from_homepage:
+                logger.info("Logging in from homepage, redirecting to Meta login")
+                local_redirect = _localize_oauth_redirect(redirect)
+            else:
+                logger.info(
+                    "Trying to access a link while not logged in, redirecting to homepage"
+                )
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    # fmt: off
+                    # Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
+                    _("To view this link you need to be an eligible library user. Please login to continue."),
+                    # fmt: on
+                )
+
+                local_redirect = reverse_lazy("homepage")
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
+
             return HttpResponseRedirect(local_redirect)
 
 
