@@ -1,47 +1,36 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load i18n %}
 {% load twlight_perms %}
 
 {% block content %}
-  <!-- begin filtering options/info -->
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+
   <div class="row">
-    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-      {% comment %}Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
-      <h2>{% trans "Browse Partners" %}</h2>
+    <div class="col-lg-2 col-md-3">
+      {% include "resources/filter_section.html" %}
     </div>
-    <div class="col-flex col-xs-12 col-sm-5 col-md-7">
-      <div class="panel panel-default">
-        <div class="panel-body" id="resource-filter-panel-body">
-          <form class="form-inline" action="" method="get">
-            {{ filter.form }}
-            <input name="submit" value="Filter" class="btn btn-default" id="submit-id-submit" type="submit">
-          </form>
+    <div class="v-divider"></div>
+    <div class="col-lg-9 col-md-8 col-sm-12">
+      <div class="page-banner-container row">
+        {% comment %}Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
+        <h2 class="page-title col-xl-10 col-lg-9 col-sm-8">{% trans "Browse Partners" %}</h2>
+        <div class="suggest-item col-xl-2 col-lg-3 col-sm-4">
+          {% comment %}Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
+          <a class="btn suggest-button" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
         </div>
       </div>
-    </div>
-    <div class="col-flex col-xs-12 col-sm-3 col-md-2 browse-suggest">
-      {% comment %}Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
-        <a class="btn btn-primary" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
-    </div>
-  </div>
-  <div class="row" style="padding-bottom:10px">
-    <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-      {% comment %}Translators: This text is on a button users can click to go to the page where they can apply for many partners in one application (https://wikipedialibrary.wmflabs.org/applications/request/) {% endcomment %}
-      <a class="btn btn-default" href="{% url 'applications:request' %}"> {% trans "Apply to multiple partners" %}</a>
-    </div>
-  </div>
-  <!-- end filtering options/info -->
-  <div class="row row-flex">
-    {% for partner in partners_list %}
-      <div class="col-flex col-xs-12 col-sm-4 col-md-3">
-        {% include "resources/partner_tile.html" %}
+      <div id="collections" class="list-container row">
+        {% for collection in partners_list %}
+            {% include "resources/collection_tile.html" %}
+        {% empty %}
+          <div class="col-xs-12">
+            {% comment %}Translators: This text is shown to users when no partners meet the filtering criteria. {% endcomment %}
+            {% trans "No partners meet the specified criteria." %}
+          </div>
+        {% endfor %}
       </div>
-    {% empty %}
-      <div class="col-xs-12">
-        {% comment %}Translators: This text is shown to users when no partners meet the filtering criteria. {% endcomment %}
-        {% trans "No partners meet the specified criteria." %}
-      </div>
-    {% endfor %}
+    </div>
   </div>
 
   <div>
@@ -51,3 +40,81 @@
     </a>
   </div>
 {% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    // Dynamically add classes to the django-filter generated labels
+    labelLanguages = document.querySelector("[for=id_languages]")
+    labelTags = document.querySelector("[for=id_tags]")
+
+    labelLanguages.classList.add("collection-filter-label");
+    labelTags.classList.add("collection-filter-label");
+
+    // Live search functionality
+    var search_input = document.getElementById("collection-live-search");
+    search_input.oninput = searchCollections;
+
+    function searchCollections(obj) {
+      var pattern = obj.target.value;
+
+      var options = {
+        threshold: 0.4,
+        includeMatches: true,
+        keys: [
+          "partner_name",
+          "partner_short_description",
+          "partner_description"
+        ]
+      };
+      // Get all of the partner tile containers
+      var collectionElems = document.getElementById("collections").getElementsByClassName("col-xl-3 col-lg-4 col-md-6 col-sm-12");
+
+      var list = {{partner_search_list|safe}};
+
+      var fuse = new Fuse(list, options);
+
+      var searchResults = fuse.search(pattern);
+
+      var filteredCollections = [];
+
+      if (searchResults.length === 0 && pattern !== "") {
+        // Hide all collections, no results to that search text found
+        displayPartnerTile(collectionElems, filteredCollections, pattern);
+      }
+      else if (searchResults.length === 0 && pattern === ""){
+        // No search text and no search results, display everything again
+        displayPartnerTile(collectionElems, filteredCollections, pattern);
+      }
+      else{
+        // Fill arrays for each tab for matched partners
+        for (var result in searchResults) {
+          var collectionType = searchResults[result].item.collection_type;
+          var partnerPk = searchResults[result].item.partner_pk;
+          filteredCollections.push("tile-partner-" + partnerPk);
+        }
+        // Display only the partners that appeared in the search results
+        displayPartnerTile(collectionElems, filteredCollections, pattern);
+
+      }
+
+    }
+
+    function displayPartnerTile(collectionElements, filteredCollections, pattern) {
+      Array.prototype.slice.call(collectionElements).forEach(function(elem){
+        var valueID = elem.id.toString();
+        if (pattern !== "" || filteredCollections.length > 0){
+          if (filteredCollections.includes(valueID)){
+            elem.style.display = "flex";
+          }
+          else{
+            elem.style.display = "none";
+          }
+        }
+        else{
+          elem.style.display = "flex";
+        }
+      });
+    }
+  </script>
+
+{% endblock %}

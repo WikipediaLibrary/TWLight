@@ -373,6 +373,16 @@ LOGIN PARTIAL CSS
 
 /*
 ----------------------------------------------------------------------------
+MESSAGE PARTIAL CSS
+--------------------------------------------------------------------------
+*/
+#message-container {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/*
+----------------------------------------------------------------------------
 HOMEPAGE CAROUSEL CSS
 --------------------------------------------------------------------------
 */
@@ -1099,6 +1109,64 @@ and (max-width : 450px) {
     }
 }
 
+/*
+----------------------------------------------------------------------------
+PARTNERS CSS
+--------------------------------------------------------------------------
+*/
+
+.page-banner-container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 40px;
+}
+
+.suggest-button {
+  float: left;
+  white-space: nowrap;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+}
+
+.suggest-button:hover {
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+  text-decoration: underline !important;
+}
+
+
+.list-container {
+  margin-top: 10px;
+}
+
+/* For 'back to top' button on /partners/ */
+#back-to-top {
+  display: inline-block;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 170px;
+  right: 10px;
+  font-size: 28px;
+  z-index: 1000;
+  background-color: #ff9800;
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+@media only screen
+and (min-width : 576px) {
+  .suggest-button {
+    float: right;
+  }
+}
 
 /*
 ----------------------------------------------------------------------------

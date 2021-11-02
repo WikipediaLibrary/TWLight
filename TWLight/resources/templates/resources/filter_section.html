@@ -1,0 +1,56 @@
+{% load i18n %}
+{% load twlight_perms %}
+<nav class="navbar navbar-expand-lg navbar-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#filterNavbar" aria-controls="filterNavbar" aria-expanded="false"
+      aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div id="filterNavbar" class="collapse navbar-collapse filter-container">
+    <div class="about-section">
+      <div class="about-content">
+        {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
+        <p>{% trans "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!" %}</p>
+        {% if user.editor|bundle_eligible %}
+          {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. {% endcomment %}
+          <p>{% trans "Start with the search bar at the top or browse publisher websites directly." %}</p>
+        {% endif %}
+      </div>
+      <div class="about-links">
+        <a href="{% url 'about' %}" class="learn-more-link">
+          {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
+          {% trans "Learn more" %}
+        </a>
+        &ndash;
+        <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library" class="discuss-link">
+          {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library) {% endcomment %}
+          {% trans "Discuss" %}
+        </a>
+      </div>
+    </div>
+    <hr>
+    <div class="row filter-title-container">
+      <p class="filter-title">
+        {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this label indicates the start of the filter section. {% endcomment %}
+        {% trans "Filters" %}:
+      </p>
+      <a href="?tags=&languages=" class="reset-filters-link">
+        {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections. {% endcomment %}
+        {% trans "Reset filters" %}
+      </a>
+    </div>
+    <form>
+      {{ filter.form }}
+      <p></p>
+      <button class="btn btn-sm btn-outline-secondary collection-filter-button" type="submit">
+        {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this labels a button that helps users filter collections. {% endcomment %}
+        {% trans "Filter" %}
+      </button>
+    </form>
+    <div class="dropdown-divider"></div>
+    {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this is a placeholder for an input that helps users filter collections. {% endcomment %}
+    <input id="collection-live-search" class="form-control form-control-sm mr-sm-2"
+        type="search" placeholder="{% trans 'Filter collections' %}" aria-label="Filter">
+  </div>
+</nav>

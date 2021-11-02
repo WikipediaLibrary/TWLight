@@ -1,0 +1,54 @@
+{% load i18n %}
+<div id="tile-partner-{{collection.pk}}" class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+  <div class="card collection-tile">
+    {% if collection.partner_logo %}
+      <a href="{% url 'partners:detail' collection.pk %}" class="tile-partner-link">
+        <img src="{{ collection.partner_logo }}" class="card-img-top library-tile-image"
+            alt="{{ collection.partner_name }} logo">
+      </a>
+    {% else %}
+      <a href="{% url 'partners:detail' collection.pk %}" class="tile-partner-link">
+        <img src="..." class="card-img-top" alt="{{ collection.partner_name }} logo">
+      </a>
+    {% endif %}
+    <div class="card-body">
+      <p class="card-text">
+        {{ collection.short_description|safe }}
+      </p>
+      <hr>
+      <p class="card-text small">
+        {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports. {% endcomment %}
+        <strong> {% trans "Languages" %}: </strong>
+        {% if collection.languages %}
+          {% for language in collection.languages%}
+            {{ language }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        {% else %}
+          {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show. {% endcomment %}
+          {% trans "Language(s) not known" %}
+        {% endif %}
+      </p>
+      <p class="card-text">
+        {% if collection.tags %}
+          {% for tag_key, tag_value in collection.tags.items %}
+            <a href="{% url 'partners:filter' %}?tags={{ tag_key }}" class="badge badge-pill collection-tags">
+              {{ tag_value }}
+            </a>
+          {% endfor %}
+        {% endif %}
+        {% if collection.is_waitlisted %}
+          <span class="badge badge-pill collection-waitlisted-badge">
+            {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this badge is shown when a collection is waitlisted. {% endcomment %}
+            {% trans "Waitlisted" %}
+          </span>
+        {% endif %}
+        {% if collection.is_not_available %}
+          <span class="badge badge-pill collection-not-available-badge">
+            {% comment %}Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this badge is shown when a collection is not available. {% endcomment %}
+            {% trans "Not Available" %}
+          </span>
+        {% endif %}
+      </p>
+    </div>
+  </div>
+</div>

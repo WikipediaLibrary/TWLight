@@ -190,7 +190,11 @@ DEBUG = bool(os.environ.get("DEBUG", "False").lower() == "true")
 # we can enable it by setting REQUIREMENTS_FILE variable to "debug.txt" in the
 # docker build arg and the environment of the running container
 REQUIREMENTS_FILE = os.environ.get("REQUIREMENTS_FILE", "wmf.txt")
-if TWLIGHT_ENV == "local" and REQUIREMENTS_FILE == "debug.txt" and DEBUG:
+if (
+    TWLIGHT_ENV == "local"
+    and REQUIREMENTS_FILE == "debug.txt"
+    and (DEBUG or "test" in sys.argv)
+):
     INSTALLED_APPS += [
         "debug_toolbar",
     ]
@@ -260,6 +264,9 @@ SITE_ID = 1
 
 # Overwrite messages.ERROR to use danger instead, to play nice with bootstrap
 MESSAGE_TAGS = {messages.ERROR: "danger"}
+
+# Eliminate duplicate messages
+MESSAGE_STORAGE = "TWLight.message_storage.SessionDedupStorage"
 
 # Overwrite django default SESSION_COOKIE_AGE
 SESSION_COOKIE_AGE = 259200

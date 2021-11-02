@@ -7,6 +7,7 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
+from itertools import chain
 from urllib.parse import urlencode
 from urllib.parse import ParseResult
 
@@ -319,3 +320,17 @@ class NotDeleted(BaseObj):
             raise Http404
 
         return super(NotDeleted, self).dispatch(request, *args, **kwargs)
+
+
+class DedupMessageMixin(object):
+    """
+    Used by custom session storage to prevent storing duplicate messages.
+    cribbed directly from: https://stackoverflow.com/a/25157660
+    """
+
+    def add(self, level, message, extra_tags):
+        messages = chain(self._loaded_messages, self._queued_messages)
+        for m in messages:
+            if m.message == message:
+                return
+        return super(DedupMessageMixin, self).add(level, message, extra_tags)

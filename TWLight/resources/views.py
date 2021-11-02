@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
-from TWLight.users.models import Authorization
+from TWLight.users.models import Authorization, User
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
@@ -22,6 +22,7 @@ from .forms import SuggestionForm
 from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Suggestion
 
+import bleach
 import logging
 
 logger = logging.getLogger(__name__)
@@ -77,11 +78,17 @@ class PartnersFilterView(ListView):
             self.request.GET, queryset=self.get_queryset(), language_code=language_code
         )
         context["filter"] = partner_filtered_list
+
+        user = self.request.user
+        if user.is_authenticated:
+            user = User.objects.select_related("editor").get(pk=self.request.user.pk)
+            context["user"] = user
+            context["editor"] = user.editor
         partners_list = []
+        partner_search_list = []
         for partner in partner_filtered_list.qs:
             partner_dict = {}
             partner_dict["pk"] = partner.pk
-            partner_dict["authorization_method"] = partner.authorization_method
             partner_dict["company_name"] = partner.company_name
             try:
                 partner_dict["partner_logo"] = partner.logos.logo.url
@@ -108,8 +115,34 @@ class PartnersFilterView(ListView):
             ]
             partner_dict["description"] = partner_descriptions["description"]
             partners_list.append(partner_dict)
+            if partner_descriptions["description"]:
+                partner_desc = bleach.clean(
+                    partner_descriptions["description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_desc = ""
 
+            if partner_descriptions["short_description"]:
+                partner_short_desc = bleach.clean(
+                    partner_descriptions["short_description"],
+                    tags=[],
+                    strip=True,
+                )
+            else:
+                partner_short_desc = ""
+
+            partner_search_list.append(
+                {
+                    "partner_pk": partner.pk,
+                    "partner_name": partner.company_name,
+                    "partner_short_description": partner_short_desc,
+                    "partner_description": partner_desc,
+                }
+            )
         context["partners_list"] = partners_list
+        context["partner_search_list"] = partner_search_list
 
         return context
 
