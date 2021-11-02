@@ -2,5 +2,5 @@
 django-nose==1.4.7
 coveralls==3.2.0
 coverage==5.5
-locust==2.4.1
+locust==2.4.3
 tblib==1.7.0
