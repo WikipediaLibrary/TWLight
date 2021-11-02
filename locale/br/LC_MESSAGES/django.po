@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-10-28 22:39+0000\n"
+"POT-Creation-Date: 2021-11-02 20:09+0000\n"
 "PO-Revision-Date: 2021-10-21 11:16:56+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2377,24 +2377,24 @@ msgid "More info"
 msgstr "(gouzout hiroc'h)"
 
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:21
+#: TWLight/templates/login_partial.html:29
 msgid ""
 "Over 90 of the world's top subscription-only databases, free for Wikipedians "
 "of all backgrounds"
 msgstr ""
 
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:32
+#: TWLight/templates/login_partial.html:40
 msgid "Meet these criteria for automatic access"
 msgstr ""
 
-#: TWLight/templates/login_partial.html:37
+#: TWLight/templates/login_partial.html:45
 msgid ""
 "These criteria grant you access to certain collections but not all. Some "
 "collections are accessible on a per application basis only."
 msgstr ""
 
-#: TWLight/templates/login_partial.html:57
+#: TWLight/templates/login_partial.html:65
 #, fuzzy
 msgid "Login via Wikipedia"
 msgstr "Kevreit gant ho kont Wikipedia"
@@ -2513,51 +2513,58 @@ msgstr ""
 "Klasket ho peus kevreañ met kinniget ho peus ur jedouer monet n'eo ket mat."
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:271 TWLight/users/oauth.py:374
+#: TWLight/users/oauth.py:272 TWLight/users/oauth.py:401
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain} n'eo ket ur servijer aotreet."
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:323
+#: TWLight/users/oauth.py:325
 msgid "Handshaker not initiated, please try logging in again."
 msgstr ""
 
+#. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
+#: TWLight/users/oauth.py:349
+msgid ""
+"To view this link you need to be an eligible library user. Please login to "
+"continue."
+msgstr ""
+
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:359
+#: TWLight/users/oauth.py:386
 msgid "Did not receive a valid oauth response."
 msgstr "N'en deus ket resevet a respont oauth mat."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:387
+#: TWLight/users/oauth.py:414
 msgid "Could not find handshaker."
 msgstr "Ne c'haller ket kavout ar protokol"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:400
+#: TWLight/users/oauth.py:427
 #, fuzzy
 msgid "No session token."
 msgstr "Jedouer goulenn ebet."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:413
+#: TWLight/users/oauth.py:440
 msgid "No request token."
 msgstr "Jedouer goulenn ebet."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:426
+#: TWLight/users/oauth.py:453
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:444
+#: TWLight/users/oauth.py:471
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:453
+#: TWLight/users/oauth.py:480
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2565,7 +2572,7 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:467
+#: TWLight/users/oauth.py:494
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
