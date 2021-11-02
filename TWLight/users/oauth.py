@@ -333,9 +333,15 @@ class OAuthInitializeView(View):
             next = query_dict.pop("next")
             # Set the return url to the value of 'next'. Basic.
             return_url = next[0]
+            from_homepage = query_dict.get("from_homepage", None)
 
-            if "oclc" in return_url or "ezproxy" in return_url:
-                logger.info("EZProxy link, redirecting to homepage")
+            if from_homepage:
+                logger.info("Logging in from homepage, redirecting to Meta login")
+                local_redirect = _localize_oauth_redirect(redirect)
+            else:
+                logger.info(
+                    "Trying to access a link while not logged in, redirecting to homepage"
+                )
                 messages.add_message(
                     request,
                     messages.INFO,
@@ -346,8 +352,6 @@ class OAuthInitializeView(View):
                 )
 
                 local_redirect = reverse_lazy("homepage")
-            else:
-                local_redirect = _localize_oauth_redirect(redirect)
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)

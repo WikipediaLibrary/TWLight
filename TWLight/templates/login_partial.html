@@ -61,7 +61,7 @@
 <div class="row">
     <div class="col-lg-6 col-md-12 col-sm-12 homepage-login">
       {% comment %}Translators: Button that logs editors in via Wikipedia.{% endcomment %}
-      <a  class="btn btn-lg btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={% url 'users:my_library' %}">
+      <a  class="btn btn-lg btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={% url 'users:my_library' %}&from_homepage=true">
         {% trans "Login via Wikipedia" %}
       </a>
     </div>
