@@ -84,14 +84,11 @@ class PartnersFilterView(ListView):
             user = User.objects.select_related("editor").get(pk=self.request.user.pk)
             context["user"] = user
             context["editor"] = user.editor
-        context["bundle_authorization"] = Partner.BUNDLE
-        context["proxy_authorization"] = Partner.PROXY
         partners_list = []
         partner_search_list = []
         for partner in partner_filtered_list.qs:
             partner_dict = {}
             partner_dict["pk"] = partner.pk
-            partner_dict["authorization_method"] = partner.authorization_method
             partner_dict["company_name"] = partner.company_name
             try:
                 partner_dict["partner_logo"] = partner.logos.logo.url
