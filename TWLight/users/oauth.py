@@ -262,9 +262,6 @@ class OAuthInitializeView(View):
         # different databases or functionality - it's not a good fit here.
         domain = self.request.get_host()
 
-        # preference for being prompted before leaving site to authenticated.
-        oauth_prompt = request.session.get("oauth_prompt", True)
-
         try:
             assert domain in settings.ALLOWED_HOSTS  # safety first!
         except (AssertionError, DisallowedHost) as e:
@@ -330,16 +327,27 @@ class OAuthInitializeView(View):
                 )
                 raise PermissionDenied
 
-            messages.add_message(
-                request,
-                messages.INFO,
-                # fmt: off
-                # Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-                _("To view this link you need to be an eligible library user. Please login to continue."),
-                # fmt: on
-            )
+            # Create a QueryDict from the 'get' session dict.
+            query_dict = QueryDict(urlencode(request.session["get"]), mutable=True)
+            # Pop the 'next' parameter out of the QueryDict.
+            next = query_dict.pop("next")
+            # Set the return url to the value of 'next'. Basic.
+            return_url = next[0]
 
-            local_redirect = reverse_lazy("homepage")
+            if "oclc" in return_url or "ezproxy" in return_url:
+                logger.info("EZProxy link, redirecting to homepage")
+                messages.add_message(
+                    request,
+                    messages.INFO,
+                    # fmt: off
+                    # Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
+                    _("To view this link you need to be an eligible library user. Please login to continue."),
+                    # fmt: on
+                )
+
+                local_redirect = reverse_lazy("homepage")
+            else:
+                local_redirect = _localize_oauth_redirect(redirect)
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
