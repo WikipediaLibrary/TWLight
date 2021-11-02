@@ -86,15 +86,11 @@ class PartnersFilterView(ListView):
             context["editor"] = user.editor
         context["bundle_authorization"] = Partner.BUNDLE
         context["proxy_authorization"] = Partner.PROXY
-        context["searchable"] = Partner.SEARCHABLE
-        context["partially_searchable"] = Partner.PARTIALLY_SEARCHABLE
         partners_list = []
         partner_search_list = []
         for partner in partner_filtered_list.qs:
             partner_dict = {}
             partner_dict["pk"] = partner.pk
-            partner_dict["searchable"] = partner.searchable
-            partner_dict["partially_searchable"] = partner.PARTIALLY_SEARCHABLE
             partner_dict["authorization_method"] = partner.authorization_method
             partner_dict["company_name"] = partner.company_name
             try:
