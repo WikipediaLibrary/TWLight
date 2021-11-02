@@ -18,7 +18,6 @@ from django.utils.translation import get_language, gettext as _
 from urllib.parse import urlencode
 
 from .models import Editor
-from .views import OauthPromptView
 
 
 logger = logging.getLogger(__name__)
@@ -331,27 +330,19 @@ class OAuthInitializeView(View):
                 )
                 raise PermissionDenied
 
-            local_redirect = _localize_oauth_redirect(redirect)
+            messages.add_message(
+                request,
+                messages.INFO,
+                # fmt: off
+                # Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
+                _("To view this link you need to be an eligible library user. Please login to continue."),
+                # fmt: on
+            )
+
+            local_redirect = reverse_lazy("homepage")
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
-            if oauth_prompt:
-                request.session["oauth_url"] = local_redirect
-                # return OauthPromptFormView()
-                print(local_redirect)
-                # return HttpResponseRedirect(reverse_lazy("users:oauth_prompt/" + str(base64.urlsafe_b64encode(local_redirect.encode("utf-8")), "utf-8")))
-                url = reverse_lazy(
-                    "users:oauth_prompt",
-                    kwargs={
-                        "oauth_prompt": self.request.session.get("oauth_prompt", True),
-                        "oauth_url": str(
-                            base64.urlsafe_b64encode(local_redirect.encode("utf-8")),
-                            "utf-8",
-                        ),
-                    },
-                )
-
-                return HttpResponseRedirect(url)
 
             return HttpResponseRedirect(local_redirect)
 

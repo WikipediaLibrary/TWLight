@@ -56,7 +56,6 @@ from .forms import (
     SetLanguageForm,
     TermsForm,
     EmailChangeForm,
-    OauthPromptForm,
     RestrictDataForm,
     UserEmailForm,
     CoordinatorEmailForm,
@@ -396,41 +395,6 @@ class PIIUpdateView(SelfOnly, UpdateView):
             _("Your information has been updated."),
         )
         return reverse_lazy("users:home")
-
-
-class OauthPromptView(FormView):
-    template_name = "users/oauth_prompt.html"
-    form_class = OauthPromptForm
-
-    def get_form_kwargs(self):
-        kwargs = super(OauthPromptView, self).get_form_kwargs()
-        kwargs.update(
-            {
-                "oauth_prompt": self.request.session.get("oauth_prompt", True),
-                "oauth_url": base64.b64decode(
-                    self.request.session.get("oauth_url", "")
-                ),
-            }
-        )
-        return kwargs
-
-    def get_success_url(self):
-        return self.request.session.get("oauth_url", "")
-
-    #    def get_context_data(self, **kwargs):
-    #         context = super().get_context_data(**kwargs)
-    # context = super(OauthPromptView, self).get_context_data(**kwargs)
-    #         context['oauth_prompt'] = self.request.session.get("oauth_prompt", True)
-    #        context['oauth_url'] = self.request.session.get("oauth_url")
-    #        return context
-
-    def form_valid(self, form):
-        # prompt, url = form.cleaned_data['prompt'], form.cleaned_data['url']
-        # prompt = self.cleaned_data['prompt']
-        self.request.session["oauth_prompt"] = form.cleaned_data["prompt"]
-        # request.session['oauth_url'] = url
-        return super().form_valid(form)
-        # return HttpResponseRedirect(reverse_lazy("home"))
 
 
 class EmailChangeView(SelfOnly, FormView):

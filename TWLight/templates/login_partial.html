@@ -14,6 +14,14 @@
   <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
 </div>
 
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success text-center w-75 mr-auto ml-auto" role="alert">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
 <div class="row">
   <div class="col-lg-6 col-md-12 col-sm-12 homepage-description">
     <p>
