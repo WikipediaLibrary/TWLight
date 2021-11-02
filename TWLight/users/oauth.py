@@ -1,5 +1,4 @@
 import logging
-import base64
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 from mwoauth.errors import OAuthException
 import urllib.parse

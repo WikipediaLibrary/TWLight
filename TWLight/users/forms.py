@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Hidden, Submit, Layout
+from crispy_forms.layout import Submit, Layout
 
 from django.conf import settings
 from django.contrib.auth.models import User
