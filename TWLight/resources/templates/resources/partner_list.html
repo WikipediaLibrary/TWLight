@@ -14,10 +14,10 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <div class="page-banner-container row">
         {% comment %}Translators: On the 'browse partners' page (https://wikipedialibrary.wmflabs.org/partners/), this message is shown at the top, as a title. {% endcomment %}
-        <h2>{% trans "Browse Partners" %}</h2>
-        <div class="browse-suggest">
+        <h2 class="page-title col-xl-10 col-lg-9 col-sm-8">{% trans "Browse Partners" %}</h2>
+        <div class="suggest-item col-xl-2 col-lg-3 col-sm-4">
           {% comment %}Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page. {% endcomment %}
-          <a class="btn btn-primary" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
+          <a class="btn suggest-button" href="{% url 'suggest' %}"><i class="fa fa-plus" aria-hidden="true"></i> {% trans "Suggest a partner" %}</a>
         </div>
       </div>
       <div id="collections" class="list-container row">

@@ -1118,12 +1118,24 @@ PARTNERS CSS
 .page-banner-container {
   padding-left: 15px;
   padding-right: 15px;
+  margin-bottom: 40px;
 }
 
-.browse-suggest {
-  position: absolute;
-  right: 15px;
+.suggest-button {
+  float: left;
+  white-space: nowrap;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
 }
+
+.suggest-button:hover {
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+  text-decoration: underline !important;
+}
+
 
 .list-container {
   margin-top: 10px;
@@ -1149,6 +1161,12 @@ PARTNERS CSS
   color: #fff;
 }
 
+@media only screen
+and (min-width : 576px) {
+  .suggest-button {
+    float: right;
+  }
+}
 
 /*
 ----------------------------------------------------------------------------
