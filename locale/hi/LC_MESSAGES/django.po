@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-02 23:40+0000\n"
+"POT-Creation-Date: 2021-11-03 14:59+0000\n"
 "PO-Revision-Date: 2021-10-21 11:16:57+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3215,29 +3215,30 @@ msgstr ""
 "आपका समन्वयक ध्वज हटा दिया जाएगा।"
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
-#: TWLight/users/templates/users/terms.html:24
+#: TWLight/users/templates/users/terms.html:46
 #, fuzzy
 msgid "Last updated 11 August 2021"
 msgstr "अंतिम बार १९ जनवरी २०१६ को अपडेट किया गया"
 
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
-#: TWLight/users/templates/users/terms.html:28
+#: TWLight/users/templates/users/terms.html:50
 msgid "Wikimedia Foundation privacy policy"
 msgstr "विकिमीडिया फाउंडेशन गोपनीयता नीति"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:32
+#: TWLight/users/templates/users/terms.html:54
 msgid "Wikipedia Library Card Terms of Use and Privacy Statement"
 msgstr "विकिपीडिया पुस्तकालय कार्ड उपयोग की शर्तें और गोपनीयता कथन"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:42
+#: TWLight/users/templates/users/terms.html:64
 #, fuzzy
 msgid ""
-"<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">The "
-"Wikipedia Library</a> has partnered with publishers around the world to "
-"allow users to access otherwise paywalled resources. This website allows "
-"Wikipedia editors to search and access these resources."
+"<a class=\"terms-link\" href=\"https://meta.wikimedia.org/wiki/"
+"The_Wikipedia_Library\"> The Wikipedia Library </a> has partnered with "
+"publishers around the world to allow users to access otherwise paywalled "
+"resources. This website allows Wikipedia editors to search and access these "
+"resources."
 msgstr ""
 "विकिपीडिया पुस्तकालय एक खुला शोध केंद्र है, जिसके माध्यम से सक्रिय विकिपीडिया संपादक अपने "
 "काम के लिए आवश्यक महत्वपूर्ण विश्वसनीय स्रोतों तक पहुँच प्राप्त कर सकते हैं और विश्वकोश को "
@@ -3248,7 +3249,7 @@ msgstr ""
 "प्रबंधन को आसान और कुशल बनाता है।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:52
+#: TWLight/users/templates/users/terms.html:76
 #, fuzzy
 msgid ""
 "This program is administered by the Wikimedia Foundation (WMF). These terms "
@@ -3268,12 +3269,12 @@ msgstr ""
 "सूचना ईमेल भेजेंगे।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:63
+#: TWLight/users/templates/users/terms.html:87
 msgid "Requirements for a Wikipedia Library Card Account"
 msgstr "विकिपीडिया पुस्तकालय कार्ड खाते के लिए आवश्यकताएँ"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:67
+#: TWLight/users/templates/users/terms.html:91
 #, fuzzy
 msgid ""
 "Access to resources via The Wikipedia Library is reserved for community "
@@ -3300,7 +3301,7 @@ msgstr ""
 "सकते हैं, ताकि दूसरों को वह अवसर प्रदान किया जा सके।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:83
+#: TWLight/users/templates/users/terms.html:107
 #, fuzzy
 msgid ""
 "Additionally, if you are currently blocked or banned from a Wikimedia "
@@ -3316,7 +3317,7 @@ msgstr ""
 "पुस्तकालय खाते तक पहुँच खो सकते हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:93
+#: TWLight/users/templates/users/terms.html:117
 msgid ""
 "Your eligibility to access The Wikipedia Library is assessed at each login. "
 "While more than half of the library's content is provided via this automated "
@@ -3326,13 +3327,13 @@ msgid ""
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:103
+#: TWLight/users/templates/users/terms.html:127
 #, fuzzy
 msgid "Applying via Your Wikipedia Library Card Account"
 msgstr "अपने विकिपीडिया पुस्तकालय कार्ड खाते के लिए आवेदन करना"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:107
+#: TWLight/users/templates/users/terms.html:131
 #, fuzzy
 msgid ""
 "In order to apply for access to a partner resource, you must provide us with "
@@ -3350,7 +3351,7 @@ msgstr ""
 "आपको स्वयं भी जानकारी भेज देंगे।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:119
+#: TWLight/users/templates/users/terms.html:143
 #, fuzzy
 msgid ""
 "In addition to the basic information you provide to us, our system will "
@@ -3365,14 +3366,14 @@ msgstr ""
 "जानकारी स्वतः अपडेट हो जाएगी।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:129
+#: TWLight/users/templates/users/terms.html:153
 msgid ""
 "Each time you log in to the Wikipedia Library Card Platform, this "
 "information will be automatically updated."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:137
+#: TWLight/users/templates/users/terms.html:161
 #, fuzzy
 msgid ""
 "We will ask you to provide us with some information about your history of "
@@ -3385,7 +3386,7 @@ msgstr ""
 "आवेदन के मूल्यांकन में हमारी बहुत सहायता करेगी।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:146
+#: TWLight/users/templates/users/terms.html:170
 #, fuzzy
 msgid ""
 "The information you provide when creating your account will be visible to "
@@ -3405,12 +3406,12 @@ msgstr ""
 "से पहुंच का अनुरोध करने और प्राप्त करने के लिए आवश्यक जानकारी ईमेल कर सकते हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:156
+#: TWLight/users/templates/users/terms.html:180
 msgid "Your Use of Publisher Resources"
 msgstr "प्रकाशक संसाधनों का आपका उपयोग"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:160
+#: TWLight/users/templates/users/terms.html:184
 #, fuzzy
 msgid ""
 "In order to access an individual publisher’s resources, you must agree to "
@@ -3424,7 +3425,7 @@ msgstr ""
 "के माध्यम से प्रकाशक संसाधनों तक आपकी पहुँच निम्नलिखित शर्तों के साथ है।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:173
+#: TWLight/users/templates/users/terms.html:197
 #, fuzzy
 msgid ""
 "Sharing your Wikipedia account, usernames, passwords, or any access codes "
@@ -3434,13 +3435,13 @@ msgstr ""
 "नहीं करने के लिए सहमत होना आवश्यक है।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:180
+#: TWLight/users/templates/users/terms.html:204
 msgid ""
 "Automatically scraping or downloading restricted content from publishers;"
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:186
+#: TWLight/users/templates/users/terms.html:210
 #, fuzzy
 msgid ""
 "Systematically making printed or electronic copies of multiple extracts of "
@@ -3450,7 +3451,7 @@ msgstr ""
 "इलेक्ट्रॉनिक प्रतियाँ बनान"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:193
+#: TWLight/users/templates/users/terms.html:217
 #, fuzzy
 msgid ""
 "Data mining metadata without permission—for example, in order to use "
@@ -3460,19 +3461,19 @@ msgstr ""
 "मेटाडेटा का उपयोग करने के लिए"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:200
+#: TWLight/users/templates/users/terms.html:224
 msgid ""
 "Using the access you receive through the Wikipedia Library for profit by "
 "selling access to your account or resources which you have through it."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:209
+#: TWLight/users/templates/users/terms.html:233
 msgid "External Search and Proxy Services"
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:213
+#: TWLight/users/templates/users/terms.html:237
 msgid ""
 "Certain resources may only be accessed using an external search service, "
 "such as the EBSCO Discovery Service, or a proxy service, such as OCLC "
@@ -3481,19 +3482,19 @@ msgid ""
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:223
+#: TWLight/users/templates/users/terms.html:247
 msgid ""
 "In addition, if you use OCLC EZProxy, please note that you may not use it "
 "for commercial purposes."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:230
+#: TWLight/users/templates/users/terms.html:254
 msgid "Data Retention and Handling"
 msgstr "डेटा प्रतिधारण और संचालन"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:234
+#: TWLight/users/templates/users/terms.html:258
 msgid ""
 "The Wikimedia Foundation and our service providers use your information for "
 "the legitimate purpose of providing Wikipedia Library services in support of "
@@ -3508,7 +3509,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:251
+#: TWLight/users/templates/users/terms.html:275
 #, fuzzy, python-format
 msgid ""
 "Each publisher who is a member of the Wikipedia Library program requires "
@@ -3518,9 +3519,9 @@ msgid ""
 "complete your application, you will only be asked to supply information "
 "required by the publishers you have chosen, and each publisher will only "
 "receive the information they require for providing you with access. Please "
-"see our <a href=\"%(all_partners_url)s\">partner information</a> pages to "
-"learn what information is required by each publisher to gain access to their "
-"resources."
+"see our <a class=\"terms-link\" href=\"%(all_partners_url)s\">partner "
+"information</a> pages to learn what information is required by each "
+"publisher to gain access to their resources."
 msgstr ""
 "प्रत्येक प्रकाशक, जो विकिपीडिया पुस्तकालय कार्यक्रम का सदस्य है, को आवेदन में विभिन्न "
 "विशिष्ट जानकारी की आवश्यकता होती है। कुछ प्रकाशक केवल एक ईमेल पते का अनुरोध कर सकते हैं, "
@@ -3532,7 +3533,7 @@ msgstr ""
 "\"%(partners_page)s\"> भागीदार जानकारी पृष्ठ </a> देखें।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:266
+#: TWLight/users/templates/users/terms.html:290
 msgid ""
 "Some Wikipedia Library pages are visible without logging in, but you will "
 "need to log in to apply or access proprietary partner resources. We use the "
@@ -3541,20 +3542,21 @@ msgid ""
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:277
+#: TWLight/users/templates/users/terms.html:301
 #, fuzzy, python-format
 msgid ""
 "In order to administer the Wikipedia Library program, we will retain the "
 "application data we collect from you for three years after your most recent "
 "login, unless you delete your account, as described below. You can log in "
-"and go to <a href=\"%(profile_url)s\">your profile page</a> in order to see "
-"the information associated with your account, and can download it in JSON "
-"format. You may access, update, restrict, or delete this information at any "
-"time, except for the information that is automatically retrieved from the "
-"projects. If you have any questions or concerns about the handling of your "
-"data, please contact <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> "
-"wikipedialibrary@wikimedia.org </a>."
+"and go to <a class=\"terms-link\" href=\"%(profile_url)s\">your profile "
+"page</a> in order to see the information associated with your account, and "
+"can download it in JSON format. You may access, update, restrict, or delete "
+"this information at any time, except for the information that is "
+"automatically retrieved from the projects. If you have any questions or "
+"concerns about the handling of your data, please contact <a class=\"terms-"
+"link\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
+"%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia."
+"org </a>."
 msgstr ""
 "विकिपीडिया पुस्तकालय कार्यक्रम को प्रबंधित करने के लिए, हम डेटा को अनिश्चित काल के लिए "
 "एकत्र रखेंगे, जब तक कि आप अपना खाता नहीं हटाते, जैसा कि नीचे वर्णित है। अपने खाते से जुड़ी "
@@ -3563,7 +3565,7 @@ msgstr ""
 "केवल उन सूचनाओं को छोड़कर जो परियोजनाओं से स्वचालित रूप से पुनर्प्राप्त की जाती हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:294
+#: TWLight/users/templates/users/terms.html:318
 #, fuzzy
 msgid ""
 "If you decide to disable your Wikipedia Library account, you can use the "
@@ -3589,7 +3591,7 @@ msgstr ""
 "जानकारी प्रदान करनी होगी।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:310
+#: TWLight/users/templates/users/terms.html:334
 #, fuzzy
 msgid ""
 "The Wikipedia Library is run by WMF Staff, Contractors, and approved "
@@ -3614,14 +3616,14 @@ msgstr ""
 "अपवाद हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
-#: TWLight/users/templates/users/terms.html:327
+#: TWLight/users/templates/users/terms.html:351
 #, fuzzy
 msgid ""
 "We may disclose any collected information when required by law, when we have "
 "your permission, when needed to protect our rights, privacy, safety, users, "
 "or the general public, and when necessary to enforce these terms, WMF’s "
-"general <a href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms "
-"of Use</a>, or any other WMF policy."
+"general <a class=\"terms-link\" href=\"https://foundation.wikimedia.org/wiki/"
+"Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
 msgstr ""
 "हम कानून द्वारा आवश्यक होने पर, जब हमारे पास आपकी अनुमति हो, जब हमारे अधिकारों, "
 "गोपनीयता, सुरक्षा, उपयोगकर्ताओं या आम जनता की रक्षा के लिए आवश्यक हो, और जब इन "
@@ -3629,7 +3631,7 @@ msgstr ""
 "लिए आवश्यक हो, तो किसी भी एकत्रित जानकारी का खुलासा कर सकते हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:338
+#: TWLight/users/templates/users/terms.html:362
 msgid ""
 "We take the security of your personal data seriously, and take reasonable "
 "precautions to ensure your data is protected. These precautions include "
@@ -3639,7 +3641,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:349
+#: TWLight/users/templates/users/terms.html:373
 #, fuzzy
 msgid ""
 "Please note that these terms do not control the use and handling of your "
@@ -3652,13 +3654,13 @@ msgstr ""
 "व्यक्तिगत गोपनीयता नीतियाँ पढ़ें।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:357
+#: TWLight/users/templates/users/terms.html:381
 #, fuzzy
 msgid "Important Note"
 msgstr "आयातित"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:362
+#: TWLight/users/templates/users/terms.html:386
 #, fuzzy
 msgid ""
 "The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
@@ -3685,7 +3687,7 @@ msgstr ""
 "संरक्षण कानून हो सकते हैं।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:381
+#: TWLight/users/templates/users/terms.html:405
 msgid ""
 "Please note that in the event of any differences in meaning or "
 "interpretation between the original English version of these terms and a "
@@ -3695,30 +3697,30 @@ msgstr ""
 "अंतर होने की स्थिति में, मूल अंग्रेजी संस्करण को प्राथमिकता मिलती है।"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
-#: TWLight/users/templates/users/terms.html:392
+#: TWLight/users/templates/users/terms.html:416
 msgid ""
-"See also the <a href=\"https://wikimediafoundation.org/wiki/Privacy_policy"
-"\">Wikimedia Foundation Privacy Policy</a>."
+"See also the <a class=\"terms-link\" href=\"https://wikimediafoundation.org/"
+"wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
 msgstr ""
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
-#: TWLight/users/templates/users/terms.html:401
+#: TWLight/users/templates/users/terms.html:425
 msgid "Thank you!"
 msgstr "धन्यवाद!"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:405
+#: TWLight/users/templates/users/terms.html:429
 msgid "The Wikipedia Library Team"
 msgstr "विकिपीडिया पुस्तकालय दल"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
-#: TWLight/users/templates/users/terms.html:407
+#: TWLight/users/templates/users/terms.html:431
 #, fuzzy
 msgid "Wikimedia Foundation"
 msgstr "विकिमीडिया फाउंडेशन गोपनीयता नीति"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
-#: TWLight/users/templates/users/terms.html:415
+#: TWLight/users/templates/users/terms.html:439
 #, fuzzy
 msgid ""
 "By checking this box and clicking “Submit”, you agree that you have read the "
