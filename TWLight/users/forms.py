@@ -179,7 +179,7 @@ class TermsForm(forms.ModelForm):
             self.fields["terms_of_use"].initial = user_profile.terms_of_use
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
-        self.helper.field_template = "bootstrap3/layout/inline_field.html"
+        self.helper.field_template = "bootstrap4/layout/inline_field.html"
         # fmt: off
         # Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
         self.fields["terms_of_use"].help_text = _("By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use.")
@@ -188,7 +188,7 @@ class TermsForm(forms.ModelForm):
         self.helper.layout = Layout(
             "terms_of_use",
             # Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-            Submit("submit", _("Submit"), css_class="btn btn-default"),
+            Submit("submit", _("Submit"), css_class="btn btn-default terms-button"),
         )
 
 
