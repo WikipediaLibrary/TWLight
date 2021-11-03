@@ -271,6 +271,9 @@ MESSAGE_STORAGE = "TWLight.message_storage.SessionDedupStorage"
 # Overwrite django default SESSION_COOKIE_AGE
 SESSION_COOKIE_AGE = 259200
 
+# Add header to work with EDS
+SECURE_REFERRER_POLICY = "origin"
+
 # INTERNATIONALIZATION CONFIGURATION
 # ------------------------------------------------------------------------------
 
