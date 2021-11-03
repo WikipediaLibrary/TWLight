@@ -89,7 +89,7 @@ urlpatterns = [
     url(r"^$", NewHomePageView.as_view(), name="homepage"),
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
     url(
-        r"^search/(?P<query>\w+)$",
+        r"^search/$",
         login_required(SearchRedirectView.as_view()),
         name="search",
     ),

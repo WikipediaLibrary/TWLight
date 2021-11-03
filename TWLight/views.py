@@ -2,6 +2,7 @@
 import json
 
 from django.views.generic import RedirectView, TemplateView
+from django.views.generic.edit import FormView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
@@ -16,6 +17,8 @@ from django.views.decorators.debug import sensitive_variables
 
 from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.resources.helpers import get_partner_description, get_tag_dict
+
+from .forms import EdsSearchForm
 
 import logging
 
@@ -125,7 +128,7 @@ class NewHomePageView(TemplateView):
             return render(request, "homepage.html", context)
 
 
-class SearchRedirectView(RedirectView):
+class SearchRedirectView(FormView):
     """
     {% if LANGUAGE_CODE == "pt" %}
       <input name="lang" value="pt-pt" type="hidden" />
@@ -138,13 +141,13 @@ class SearchRedirectView(RedirectView):
     {% endif %}
     """
 
-    url = "https://searchbox.ebsco.com/search/?schemaId=search&custid=ns253359&groupid=main&profid=eds&scope=site&site=eds-live&direct=true&authtype=url"
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super().get_form_kwargs()
+        kwargs["bquery"] = self.request.GET.get("bquery")
+        return kwargs
 
-    def get_redirect_url(self, query=None, *args, **kwargs):
-        if query is not None:
-            target_url = super().get_redirect_url(*args, **kwargs)
-            target_url += "&bquery=" + query
-            return target_url
+    template_name = "eds_search_form.html"
+    form_class = EdsSearchForm
 
 
 @sensitive_variables()
