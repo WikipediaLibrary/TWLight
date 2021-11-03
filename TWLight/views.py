@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView, TemplateView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
@@ -123,6 +123,28 @@ class NewHomePageView(TemplateView):
         else:
             context = self.get_context_data()
             return render(request, "homepage.html", context)
+
+
+class SearchRedirectView(RedirectView):
+    """
+    {% if LANGUAGE_CODE == "pt" %}
+      <input name="lang" value="pt-pt" type="hidden" />
+    {% elif LANGUAGE_CODE == "zh-hans" %}
+      <input name="lang" value="zh-cn" type="hidden" />
+    {% elif LANGUAGE_CODE == "zh-hant" %}
+      <input name="lang" value="zh-tw" type="hidden" />
+    {% else %}
+      <input name="lang" value="{{ LANGUAGE_CODE }}" type="hidden" />
+    {% endif %}
+    """
+
+    url = "https://searchbox.ebsco.com/search/?schemaId=search&custid=ns253359&groupid=main&profid=eds&scope=site&site=eds-live&direct=true&authtype=url"
+
+    def get_redirect_url(self, query=None, *args, **kwargs):
+        if query is not None:
+            target_url = super().get_redirect_url(*args, **kwargs)
+            target_url += "&bquery=" + query
+            return target_url
 
 
 @sensitive_variables()
