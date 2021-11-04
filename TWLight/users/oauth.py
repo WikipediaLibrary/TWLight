@@ -349,8 +349,13 @@ class OAuthInitializeView(View):
                     _("To view this link you need to be an eligible library user. Please login to continue."),
                     # fmt: on
                 )
-
-                local_redirect = reverse_lazy("homepage")
+                if return_url:
+                    homepage = reverse_lazy("homepage")
+                    local_redirect = "{homepage}?next_url={return_url}".format(
+                        homepage=homepage, return_url=return_url
+                    )
+                else:
+                    local_redirect = reverse_lazy("homepage")
 
             logger.info("handshaker initiated.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
