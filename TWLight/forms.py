@@ -34,14 +34,6 @@ class EdsSearchForm(forms.Form):
             lang = "zh-cn"
         elif language_code == "zh-hant":
             lang = "zh-tw"
-        self.fields["schemaId"].initial = "search"
-        self.fields["custid"].initial = "ns253359"
-        self.fields["groupid"].initial = "main"
-        self.fields["profid"].initial = "eds"
-        self.fields["scope"].initial = "site"
-        self.fields["site"].initial = "eds-live"
-        self.fields["direct"].initial = "true"
-        self.fields["authtype"].initial = "url"
         self.helper = FormHelper()
         self.helper.form_id = "search"
         self.helper.form_action = "https://searchbox.ebsco.com/search/"
