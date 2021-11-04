@@ -19,6 +19,7 @@ from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.resources.helpers import get_partner_description, get_tag_dict
 
 from .forms import EdsSearchForm
+from .view_mixins import EligibleEditorsOnly
 
 import logging
 
@@ -128,7 +129,7 @@ class NewHomePageView(TemplateView):
             return render(request, "homepage.html", context)
 
 
-class SearchEndpointFormView(FormView):
+class SearchEndpointFormView(EligibleEditorsOnly, FormView):
     """
     Allows persistent links to EDS searches with referring URL authentication.
     """
