@@ -8,6 +8,7 @@ from django.contrib.messages import get_messages
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.utils.translation import get_language, gettext_lazy as _
 from django.template import TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
@@ -108,6 +109,11 @@ class NewHomePageView(TemplateView):
                 }
             )
         context["partners"] = partners_obj
+        param_next_url = self.request.GET.get("next_url", None)
+        if param_next_url:
+            context["next_url"] = param_next_url
+        else:
+            context["next_url"] = reverse_lazy("users:my_library")
 
         return context
 
