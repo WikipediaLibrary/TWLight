@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import get_language, gettext as _
 
 
 class EdsSearchForm(forms.Form):
@@ -23,10 +23,17 @@ class EdsSearchForm(forms.Form):
     bquery = forms.CharField()
 
     def __init__(self, *args, **kwargs):
+        language_code = get_language()
+        lang = language_code
         bquery = kwargs.pop("bquery", None)
+
         super().__init__(*args, **kwargs)
-        if bquery:
-            self.fields["bquery"].initial = bquery
+        if language_code == "pt":
+            lang = "pt-pt"
+        elif language_code == "zh-hans":
+            lang = "zh-cn"
+        elif language_code == "zh-hant":
+            lang = "zh-tw"
         self.fields["schemaId"].initial = "search"
         self.fields["custid"].initial = "ns253359"
         self.fields["groupid"].initial = "main"
@@ -36,12 +43,13 @@ class EdsSearchForm(forms.Form):
         self.fields["direct"].initial = "true"
         self.fields["authtype"].initial = "url"
         self.helper = FormHelper()
+        self.helper.form_id = "search"
         self.helper.form_action = "https://searchbox.ebsco.com/search/"
         self.helper.form_method = "GET"
         self.helper.label_class = "sr-only"
         self.helper.layout = Layout(
-            "bquery",
-            Hidden("lang", "en"),
+            Hidden("bquery", bquery),
+            Hidden("lang", lang),
             Hidden("schemaId", "search"),
             Hidden("custid", "ns253359"),
             Hidden("groupid", "main"),
@@ -52,8 +60,8 @@ class EdsSearchForm(forms.Form):
             Hidden("authtype", "url"),
             Submit(
                 "submit",
-                # Translators: This labels a button which users click to change their email.
+                # Translators: Shown in the search button.
                 _("Search"),
-                css_class="btn btn-default col-md-offset-2",
+                css_class="btn eds-search-button",
             ),
         )

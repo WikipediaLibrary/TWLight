@@ -128,25 +128,17 @@ class NewHomePageView(TemplateView):
             return render(request, "homepage.html", context)
 
 
-class SearchRedirectView(FormView):
+class SearchEndpointFormView(FormView):
     """
-    {% if LANGUAGE_CODE == "pt" %}
-      <input name="lang" value="pt-pt" type="hidden" />
-    {% elif LANGUAGE_CODE == "zh-hans" %}
-      <input name="lang" value="zh-cn" type="hidden" />
-    {% elif LANGUAGE_CODE == "zh-hant" %}
-      <input name="lang" value="zh-tw" type="hidden" />
-    {% else %}
-      <input name="lang" value="{{ LANGUAGE_CODE }}" type="hidden" />
-    {% endif %}
+    Allows persistent links to EDS searches with referring URL authentication.
     """
 
     def get_form_kwargs(self, **kwargs):
         kwargs = super().get_form_kwargs()
-        kwargs["bquery"] = self.request.GET.get("bquery")
+        kwargs["bquery"] = self.request.GET.get("q")
         return kwargs
 
-    template_name = "eds_search_form.html"
+    template_name = "eds_search_endpoint.html"
     form_class = EdsSearchForm
 
 

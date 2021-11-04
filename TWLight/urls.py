@@ -28,7 +28,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
-from .views import NewHomePageView, SearchRedirectView
+from .views import NewHomePageView, SearchEndpointFormView
 
 handler400 = "TWLight.views.bad_request"
 
@@ -90,7 +90,7 @@ urlpatterns = [
     url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
     url(
         r"^search/$",
-        login_required(SearchRedirectView.as_view()),
+        login_required(SearchEndpointFormView.as_view()),
         name="search",
     ),
 ]
