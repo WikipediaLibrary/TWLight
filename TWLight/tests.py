@@ -34,6 +34,7 @@ from .view_mixins import (
     PartnerCoordinatorOrSelf,
     CoordinatorsOnly,
     EditorsOnly,
+    EligibleEditorsOnly,
     SelfOnly,
     ToURequired,
     EmailRequired,
@@ -78,6 +79,10 @@ class TestCoordinatorsOnly(CoordinatorsOnly, DispatchProvider):
 
 
 class TestEditorsOnly(EditorsOnly, DispatchProvider):
+    pass
+
+
+class TestEligibleEditorsOnly(EligibleEditorsOnly, DispatchProvider):
     pass
 
 
@@ -266,6 +271,66 @@ class ViewMixinTests(TestCase):
         test = TestEditorsOnly()
         with self.assertRaises(PermissionDenied):
             test.dispatch(req)
+
+    def test_eligible_editors_only_1(self):
+        """
+        EligibleEditorsOnly allows eligible editors.
+        """
+        user = UserFactory()
+        _ = EditorFactory(user=user)
+        _.wp_bundle_eligible = True
+
+        req = RequestFactory()
+        req.user = user
+
+        test = TestEligibleEditorsOnly()
+        test.dispatch(req)
+
+    def test_eligible_editors_only_2(self):
+        """
+        EligibleEditorsOnly does *not* allow superusers who aren't editors.
+        """
+        user = UserFactory(is_superuser=True)
+        self.assertFalse(hasattr(user, "editor"))
+
+        req = RequestFactory()
+        req.user = user
+
+        test = TestEligibleEditorsOnly()
+        with self.assertRaises(PermissionDenied):
+            test.dispatch(req)
+
+    def test_eligible_editors_only_3(self):
+        """
+        EligibleEditorsOnly does not allow non-superusers who aren't editors.
+        """
+        user = UserFactory(is_superuser=False)
+        self.assertFalse(hasattr(user, "editor"))
+
+        req = RequestFactory()
+        req.user = user
+
+        test = TestEligibleEditorsOnly()
+        with self.assertRaises(PermissionDenied):
+            test.dispatch(req)
+
+    def test_eligible_editors_only_4(self):
+        """
+        EligibleEditorsOnly redirects ineligible editors.
+        """
+        user = UserFactory(is_superuser=False)
+        self.assertFalse(hasattr(user, "editor"))
+        _ = EditorFactory(user=user)
+        _.wp_bundle_eligible = False
+
+        req = RequestFactory()
+        req.user = user
+
+        test = TestEligibleEditorsOnly()
+
+        resp = test.dispatch(req)
+        # This test doesn't deny permission; it sends people to my_library.
+        self.assertTrue(isinstance(resp, HttpResponseRedirect))
 
     def test_self_only_1(self):
         """
