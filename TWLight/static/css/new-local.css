@@ -947,6 +947,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
     border: 1px solid #8E8E8E;
     background-color: #FFFFFF;
     width: 40%;
+    -webkit-appearance: none;
 }
 
 .renew-extend-button:hover{
@@ -969,6 +970,7 @@ and (max-device-width : 480px) {
         border: 1px solid #8E8E8E;
         background-color: #FFFFFF;
         width: 100%;
+        -webkit-appearance: none;
     }
 }
 /* Tablets */
@@ -987,6 +989,7 @@ and (max-device-width : 1024px) {
         border: 1px solid #8E8E8E;
         background-color: #FFFFFF;
         width: 100%;
+        -webkit-appearance: none;
     }
 }
 
