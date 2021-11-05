@@ -1123,6 +1123,32 @@ and (max-width : 450px) {
 
 /*
 ----------------------------------------------------------------------------
+CONTACT US CSS
+--------------------------------------------------------------------------
+*/
+
+.contact-us-links{
+    color: #3366CC;
+}
+
+.contact-us-button{
+    background-color: #3366CC;
+    border-color: #3366CC;
+}
+
+.contact-us-button:hover{
+    background-color: #3366CC;
+    border-color: #3366CC;
+    text-decoration: underline;
+}
+
+.contact-info-header{
+    background-color: #3366CC;
+    color: #FFFFFF;
+}
+
+/*
+----------------------------------------------------------------------------
 NEW FOOTER CSS
 --------------------------------------------------------------------------
 */
