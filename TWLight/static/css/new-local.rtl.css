@@ -938,6 +938,7 @@ NEW MY LIBRARY CSS
     background-color: #3366CC;
     width: 50%;
     float: right;
+    -webkit-appearance: none;
 }
 
 .access-apply-button:hover{
@@ -965,6 +966,7 @@ and (max-device-width : 480px) {
         background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
+        -webkit-appearance: none;
     }
 
     .renew-extend-button{
@@ -982,6 +984,7 @@ and (max-device-width : 1024px) {
         background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
+        -webkit-appearance: none;
     }
 
     .renew-extend-button{
