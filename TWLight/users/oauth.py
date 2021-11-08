@@ -293,12 +293,15 @@ class OAuthInitializeView(View):
                 next = query_dict.pop("next")
                 # Set the return url to the value of 'next'. Basic.
                 return_url = next[0]
+                # Pop the 'from_homepage' parameter out of the QueryDict.
+                # We don't need it here.
+                query_dict.pop("from_homepage", None)
                 # If there is anything left in the QueryDict after popping
                 # 'next', append it to the return url. This preserves state
                 # for filtered lists and redirected form submissions like
                 # the partner suggestion form.
                 if query_dict:
-                    return_url += "?" + urlencode(query_dict)
+                    return_url += "&" + urlencode(query_dict)
                 logger.info(
                     "User is already authenticated. Sending them on "
                     'for post-login redirection per "next" parameter.'
@@ -332,7 +335,8 @@ class OAuthInitializeView(View):
             next = query_dict.pop("next")
             # Set the return url to the value of 'next'. Basic.
             return_url = next[0]
-            from_homepage = query_dict.get("from_homepage", None)
+            # Pop the 'from_homepage' parameter out of the QueryDict.
+            from_homepage = query_dict.pop("from_homepage", None)
 
             if from_homepage:
                 logger.info("Logging in from homepage, redirecting to Meta login")
@@ -513,12 +517,15 @@ class OAuthCallbackView(View):
                         next = query_dict.pop("next")
                         # Set the return url to the value of 'next'. Basic.
                         return_url = next[0]
+                        # Pop the 'from_homepage' parameter out of the QueryDict.
+                        # We don't need it here.
+                        query_dict.pop("from_homepage", None)
                         # If there is anything left in the QueryDict after popping
                         # 'next', append it to the return url. This preserves state
                         # for filtered lists and redirected form submissions like
                         # the partner suggestion form.
                         if query_dict:
-                            return_url += "?" + urlencode(query_dict)
+                            return_url += "&" + urlencode(query_dict)
                         logger.info(
                             "User authenticated. Sending them on for "
                             'post-login redirection per "next" parameter.'
