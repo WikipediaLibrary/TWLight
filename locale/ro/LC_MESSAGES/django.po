@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-04 19:04+0000\n"
+"POT-Creation-Date: 2021-11-08 16:53+0000\n"
 "PO-Revision-Date: 2021-11-04 12:17:30+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,7 +192,7 @@ msgstr "Cont de email"
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
 #: TWLight/applications/helpers.py:138
-#: TWLight/emails/templates/emails/contact.html:48
+#: TWLight/emails/templates/emails/contact.html:51
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:68
 #: TWLight/users/forms.py:203
@@ -1069,7 +1069,7 @@ msgstr "Email-ul tău"
 #, fuzzy
 msgid ""
 "This field is automatically updated with the email from your <a "
-"href='{}'>user profile</a>."
+"class='contact-us-links' href='{}'>user profile</a>."
 msgstr ""
 "Acest câmp este actualizat automat odată cu e-mailul din <a href="
 "\"{}\">profilul utilizator</a>."
@@ -1087,7 +1087,7 @@ msgstr "Primește o copie a acestui mesaj"
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:35
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Trimite"
@@ -1250,29 +1250,32 @@ msgstr ""
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/emails/templates/emails/contact.html:13
+#: TWLight/emails/templates/emails/contact.html:16
 #: TWLight/templates/about.html:208 TWLight/templates/base.html:133
 #: TWLight/templates/new_base.html:92
 msgid "Contact us"
 msgstr "Contactează-ne"
 
 #. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
-#: TWLight/emails/templates/emails/contact.html:30
-#, python-format
+#: TWLight/emails/templates/emails/contact.html:33
+#, fuzzy, python-format
+#| msgid ""
+#| "(If you would like to suggest a partner, <a href=\"%(suggest)s"
+#| "\"><strong>go here</strong></a>.)"
 msgid ""
-"(If you would like to suggest a partner, <a href=\"%(suggest)s\"><strong>go "
-"here</strong></a>.)"
+"(If you would like to suggest a partner, <a class=\"contact-us-links\" href="
+"\"%(suggest)s\"><strong>go here</strong></a>.)"
 msgstr ""
 "(Dacă doriți să sugerați un partener, <a href=\"%(suggest)s\"><strong>mergi "
 "aici</strong></a>.)"
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
-#: TWLight/emails/templates/emails/contact.html:39
+#: TWLight/emails/templates/emails/contact.html:42
 msgid "Contact info"
 msgstr "Informații de contact"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
-#: TWLight/emails/templates/emails/contact.html:43
+#: TWLight/emails/templates/emails/contact.html:46
 msgid "Meta page"
 msgstr "Pagina Meta"
 
@@ -1280,7 +1283,7 @@ msgstr "Pagina Meta"
 #. Translators: Name of the project/tool.
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #. Translators: Name of the project/tool.
-#: TWLight/emails/templates/emails/contact.html:45
+#: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/templates/base.html:15 TWLight/templates/header_partial_b3.html:23
 #: TWLight/templates/header_partial_b4.html:18
 #: TWLight/templates/login_partial.html:10
@@ -1289,22 +1292,22 @@ msgid "The Wikipedia Library"
 msgstr "Biblioteca Wikipedia"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
-#: TWLight/emails/templates/emails/contact.html:52
+#: TWLight/emails/templates/emails/contact.html:55
 msgid "Mailing list"
 msgstr "Lista de trimis poșta electronică"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
-#: TWLight/emails/templates/emails/contact.html:56
+#: TWLight/emails/templates/emails/contact.html:59
 msgid "IRC"
 msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:64
+#: TWLight/emails/templates/emails/contact.html:67
 msgid "Wikipedia Library Facebook page"
 msgstr "Pagina de Facebook a Bibliotecii Wikipedia"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:70
+#: TWLight/emails/templates/emails/contact.html:73
 msgid "Wikipedia Library Twitter page"
 msgstr "Pagina de Twitter a Bibliotecii Wikipedia"
 

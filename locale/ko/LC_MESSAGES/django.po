@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-04 19:04+0000\n"
+"POT-Creation-Date: 2021-11-08 16:52+0000\n"
 "PO-Revision-Date: 2021-11-04 12:17:29+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -190,7 +190,7 @@ msgstr "계정 이메일"
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
 #: TWLight/applications/helpers.py:138
-#: TWLight/emails/templates/emails/contact.html:48
+#: TWLight/emails/templates/emails/contact.html:51
 #: TWLight/resources/templates/resources/partner_users.html:28
 #: TWLight/resources/templates/resources/partner_users.html:68
 #: TWLight/users/forms.py:203
@@ -999,7 +999,7 @@ msgstr "내 이메일"
 #: TWLight/emails/forms.py:21
 msgid ""
 "This field is automatically updated with the email from your <a "
-"href='{}'>user profile</a>."
+"class='contact-us-links' href='{}'>user profile</a>."
 msgstr ""
 
 #. Translators: This labels a textfield where users can enter their email message.
@@ -1015,7 +1015,7 @@ msgstr ""
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:43 TWLight/resources/forms.py:35
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:35
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "제출"
@@ -1142,27 +1142,27 @@ msgstr ""
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This button is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/emails/templates/emails/contact.html:13
+#: TWLight/emails/templates/emails/contact.html:16
 #: TWLight/templates/about.html:208 TWLight/templates/base.html:133
 #: TWLight/templates/new_base.html:92
 msgid "Contact us"
 msgstr "문의하기"
 
 #. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
-#: TWLight/emails/templates/emails/contact.html:30
+#: TWLight/emails/templates/emails/contact.html:33
 #, python-format
 msgid ""
-"(If you would like to suggest a partner, <a href=\"%(suggest)s\"><strong>go "
-"here</strong></a>.)"
+"(If you would like to suggest a partner, <a class=\"contact-us-links\" href="
+"\"%(suggest)s\"><strong>go here</strong></a>.)"
 msgstr ""
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
-#: TWLight/emails/templates/emails/contact.html:39
+#: TWLight/emails/templates/emails/contact.html:42
 msgid "Contact info"
 msgstr "연락처 정보"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
-#: TWLight/emails/templates/emails/contact.html:43
+#: TWLight/emails/templates/emails/contact.html:46
 msgid "Meta page"
 msgstr "메타 페이지"
 
@@ -1170,7 +1170,7 @@ msgstr "메타 페이지"
 #. Translators: Name of the project/tool.
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #. Translators: Name of the project/tool.
-#: TWLight/emails/templates/emails/contact.html:45
+#: TWLight/emails/templates/emails/contact.html:48
 #: TWLight/templates/base.html:15 TWLight/templates/header_partial_b3.html:23
 #: TWLight/templates/header_partial_b4.html:18
 #: TWLight/templates/login_partial.html:10
@@ -1179,22 +1179,22 @@ msgid "The Wikipedia Library"
 msgstr "위키백과 도서관"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
-#: TWLight/emails/templates/emails/contact.html:52
+#: TWLight/emails/templates/emails/contact.html:55
 msgid "Mailing list"
 msgstr "메일링 리스트"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
-#: TWLight/emails/templates/emails/contact.html:56
+#: TWLight/emails/templates/emails/contact.html:59
 msgid "IRC"
 msgstr "IRC"
 
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:64
+#: TWLight/emails/templates/emails/contact.html:67
 msgid "Wikipedia Library Facebook page"
 msgstr "위키백과 도서관 페이스북 페이지"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:70
+#: TWLight/emails/templates/emails/contact.html:73
 msgid "Wikipedia Library Twitter page"
 msgstr "위키백과 도서관 트위터 페이지"
 
