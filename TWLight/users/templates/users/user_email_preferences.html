@@ -5,20 +5,22 @@
   <form method="post" class="form-inline">
     {% csrf_token %}
     {% for field in email_form %}
-      <div id="div_{{ field.auto_id }}" class="form-group">
-        {{ field.label }}: {{ field }}
-      </div> <br />
+      <div id="div_{{ field.auto_id }}" class="form-group w-100 d-block">
+        <label for="{{ field.auto_id }}" class="d-inline">{{ field.label }}</label>
+        {{ field }}
+      </div>
     {% endfor %}
     {% if user|coordinators_only %}
       {% comment %}Translators: Labels a sections where coordinators can select their email preferences.{% endcomment %}
-      <br /><strong>{% trans "Coordinators only" %}</strong><br />
+      <strong class="pt-3 d-block">{% trans "Coordinators only" %}</strong><br />
       {% for field in coordinator_email_form %}
-        <div id="div_{{ field.auto_id }}" class="form-group">
-          {{ field.label }}: {{ field }}
-        </div> <br />
+        <div id="div_{{ field.auto_id }}" class="form-group w-100 d-block">
+          <label for="{{ field.auto_id }}" class="d-inline">{{ field.label }}</label>
+          {{ field }}
+        </div>
       {% endfor %}
     {% endif %}
-    <div style="padding-top: 10px">
+    <div class="d-block">
       {% comment %}Translators: This is a button which updates user preference settings {% endcomment %}
       <input type="submit" name="update_email_settings" value="{% trans "Update" %}" class="btn btn-default"/>
     </div>

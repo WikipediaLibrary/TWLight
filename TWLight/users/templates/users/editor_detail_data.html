@@ -66,7 +66,7 @@
             {% trans "Yes" %}
         {% else %}
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
-            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+            <p class="bg-danger-soft"><strong class="warning">{% trans "No" %}</strong></p>
             <p>
                 {% comment %}Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
                 {% blocktranslate trimmed with username=editor.wp_username %}
@@ -162,7 +162,7 @@
             {% trans "Yes" %}
         {% else %}
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
-            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+            <p class="bg-danger-soft"><strong class="warning">{% trans "No" %}</strong></p>
         {% endif %}
     </div>
 </div>
