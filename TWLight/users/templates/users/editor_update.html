@@ -1,7 +1,11 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
 {% block content %}
-  {% crispy form %}
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    {% crispy form %}
+  </div>
 {% endblock content %}

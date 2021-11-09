@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout
+from crispy_forms.layout import Submit, Layout, Column, Row
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -212,16 +212,19 @@ class EmailChangeForm(forms.Form):
         self.fields["use_wp_email"].initial = user.userprofile.use_wp_email
 
         self.helper = FormHelper()
-        self.helper.form_class = "form-horizontal"
-        self.helper.label_class = "col-md-2"
-        self.helper.field_class = "col-md-8"
+        self.helper.form_class = "mx-auto w-75 px-5"
+        self.helper.label_class = "font-weight-bold w-25 d-inline"
         self.helper.layout = Layout(
-            "email",
-            "use_wp_email",
+            Row(
+                Column("email", css_class="form-group w-100 d-inline"),
+            ),
+            Row(
+                Column("use_wp_email", css_class="form-group w-100"),
+            ),
             Submit(
                 "submit",
                 # Translators: This labels a button which users click to change their email.
                 _("Update email"),
-                css_class="btn btn-default col-md-offset-2",
+                css_class="twl-btn",
             ),
         )

@@ -81,19 +81,6 @@ HEADER CSS
     font-size: 14px;
 }
 
-.user-button {
-    font-family: Roboto;
-    font-size: 14px;
-    color: #FFFFFF !important;
-    background-color: #3366CC !important;
-}
-
-.user-button:hover {
-    color: #FFFFFF !important;
-    background-color: #3366CC !important;
-    text-decoration: underline !important;
-}
-
 .ebsco-single-search{
     margin-top: 15px;
 }
@@ -388,6 +375,18 @@ COMMON CONTENT BLOCK CSS
 */
 #main-content {
   padding: 0.5rem 1rem;
+}
+.twl-btn {
+  white-space: nowrap;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+}
+.twl-btn:hover {
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+  text-decoration: underline !important;
 }
 .btn-extra-large{
   padding-top:30px;
@@ -1251,19 +1250,7 @@ PARTNERS CSS
 
 .suggest-button {
   float: left;
-  white-space: nowrap;
-  font-family: Roboto;
-  font-size: 14px;
-  color: #FFFFFF !important;
-  background-color: #3366CC !important;
 }
-
-.suggest-button:hover {
-  color: #FFFFFF !important;
-  background-color: #3366CC !important;
-  text-decoration: underline !important;
-}
-
 
 .list-container {
   margin-top: 10px;
