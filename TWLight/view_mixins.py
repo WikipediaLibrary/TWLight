@@ -21,6 +21,7 @@ from django.http import HttpResponseRedirect, Http404
 from TWLight.applications.models import Application
 from TWLight.resources.models import Partner
 from TWLight.users.models import Editor
+from TWLight.users.helpers.editor_data import editor_bundle_eligible
 from TWLight.users.groups import COORDINATOR_GROUP_NAME, RESTRICTED_GROUP_NAME
 
 import logging
@@ -203,6 +204,30 @@ class EditorsOnly(object):
             raise PermissionDenied
 
         return super(EditorsOnly, self).dispatch(request, *args, **kwargs)
+
+
+class EligibleEditorsOnly(object):
+    """
+    Restricts visibility to:
+    * Eligible Editors.
+
+    Raises Permission denied for non-editors.
+    Redirects to my_library with message for ineligible editors.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        user = request.user
+        if not test_func_editors_only(user):
+            messages.add_message(
+                request,
+                messages.WARNING,
+                "You must be a coordinator or an editor to do that.",
+            )
+            raise PermissionDenied
+        elif not editor_bundle_eligible(user.editor):
+            # Send ineligible editors to my_library for info on eligibility.
+            return HttpResponseRedirect(reverse_lazy("users:my_library"))
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_tou_required(user):

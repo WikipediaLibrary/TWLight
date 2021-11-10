@@ -1,0 +1,23 @@
+{% extends "new_base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load twlight_perms %}
+{% block content %}
+    {% comment %}Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.{% endcomment %}
+    <p id="noscript">{% trans "JavaScript is disabled; use the button below to continue." %}</p>
+    {% crispy form %}
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    // On page load
+    document.addEventListener("DOMContentLoaded", function(event) {
+      // Delete noscript element.
+      // <noscript> text was not showing up in testing with the noscript extension.
+      var noscript = document.getElementById("noscript");
+      noscript.parentNode.removeChild(noscript);
+      // Submit the form.
+      document.createElement('form').submit.call(document.getElementById('search'));
+    });
+  </script>
+{% endblock %}

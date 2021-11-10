@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView, TemplateView
+from django.views.generic.edit import FormView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
@@ -16,6 +17,9 @@ from django.views.decorators.debug import sensitive_variables
 
 from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.resources.helpers import get_partner_description, get_tag_dict
+
+from .forms import EdsSearchForm
+from .view_mixins import EligibleEditorsOnly
 
 import logging
 
@@ -123,6 +127,20 @@ class NewHomePageView(TemplateView):
         else:
             context = self.get_context_data()
             return render(request, "homepage.html", context)
+
+
+class SearchEndpointFormView(EligibleEditorsOnly, FormView):
+    """
+    Allows persistent links to EDS searches with referring URL authentication.
+    """
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super().get_form_kwargs()
+        kwargs["bquery"] = self.request.GET.get("q")
+        return kwargs
+
+    template_name = "eds_search_endpoint.html"
+    form_class = EdsSearchForm
 
 
 @sensitive_variables()
