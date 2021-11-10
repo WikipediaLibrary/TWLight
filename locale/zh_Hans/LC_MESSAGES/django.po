@@ -30,7 +30,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-08 16:53+0000\n"
+"POT-Creation-Date: 2021-11-10 15:57+0000\n"
 "PO-Revision-Date: 2021-11-04 12:17:31+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1499,6 +1499,12 @@ msgstr "无效的EZProxy目标URL。"
 msgid "Missing EZProxy target URL."
 msgstr "缺少EZProxy目标URL。"
 
+#. Translators: Shown in the search button.
+#: TWLight/forms.py:56 TWLight/templates/header_partial_b3.html:55
+#: TWLight/templates/header_partial_b4.html:49
+msgid "Search"
+msgstr "搜索"
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 #, fuzzy
@@ -2491,6 +2497,11 @@ msgstr "使用条款及隐私权声明"
 msgid "Translate the Library"
 msgstr "翻译这个图书馆"
 
+#. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
+#: TWLight/templates/eds_search_endpoint.html:7
+msgid "JavaScript is disabled; use the button below to continue."
+msgstr ""
+
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19
 #: TWLight/templates/header_partial_b4.html:14
@@ -2501,12 +2512,6 @@ msgstr "维基百科图书馆主页"
 #: TWLight/templates/header_partial_b4.html:46
 msgid "Search the library"
 msgstr "搜索本图书馆"
-
-#. Translators: Shown in the search button.
-#: TWLight/templates/header_partial_b3.html:55
-#: TWLight/templates/header_partial_b4.html:49
-msgid "Search"
-msgstr "搜索"
 
 #. Translators: Link that takes a user to an external site to provide feedback on the search bar.
 #: TWLight/templates/header_partial_b3.html:65
@@ -2684,50 +2689,50 @@ msgid "You tried to log in but presented an invalid access token."
 msgstr "您试图登录但您的访问令牌无效。"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:272 TWLight/users/oauth.py:406
+#: TWLight/users/oauth.py:272 TWLight/users/oauth.py:410
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain}不是有效的主机。"
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:325
+#: TWLight/users/oauth.py:328
 msgid "Handshaker not initiated, please try logging in again."
 msgstr "握手程序未启动，请尝试重新登录。"
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:349
+#: TWLight/users/oauth.py:353
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
 msgstr ""
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:391
+#: TWLight/users/oauth.py:395
 msgid "Did not receive a valid oauth response."
 msgstr "没有收到有效的OAuth响应。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:419
+#: TWLight/users/oauth.py:423
 msgid "Could not find handshaker."
 msgstr "找不到握手程序。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:432
+#: TWLight/users/oauth.py:436
 msgid "No session token."
 msgstr "没有会话令牌。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:445
+#: TWLight/users/oauth.py:449
 msgid "No request token."
 msgstr "没有请求令牌。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:458
+#: TWLight/users/oauth.py:462
 msgid "Access token generation failed."
 msgstr "访问令牌生成失败。"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:476
+#: TWLight/users/oauth.py:480
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2736,7 +2741,7 @@ msgstr ""
 "帐户。"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:485
+#: TWLight/users/oauth.py:489
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2746,7 +2751,7 @@ msgstr ""
 "该能够登录，请发送电子邮件至wikipedialibrary@wikimedia.org。"
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:499
+#: TWLight/users/oauth.py:503
 msgid "Welcome! Please agree to the terms of use."
 msgstr "欢迎使用！请先同意使用条款。"
 
@@ -3809,22 +3814,22 @@ msgid "Access to {} has been returned."
 msgstr "已返回对{}的访问权限。"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:823 TWLight/views.py:32
+#: TWLight/users/views.py:823 TWLight/views.py:36
 msgid "500+ edits"
 msgstr "编辑500次以上"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:825 TWLight/views.py:34
+#: TWLight/users/views.py:825 TWLight/views.py:38
 msgid "6+ months editing"
 msgstr "6+月编辑"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:827 TWLight/views.py:36
+#: TWLight/users/views.py:827 TWLight/views.py:40
 msgid "10+ edits in the last month"
 msgstr "在上个月至少编辑10次"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:829 TWLight/views.py:38
+#: TWLight/users/views.py:829 TWLight/views.py:42
 msgid "No active blocks"
 msgstr "无有效的封禁"
 
