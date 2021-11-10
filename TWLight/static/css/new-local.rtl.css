@@ -903,13 +903,13 @@ NEW MY LIBRARY CSS
 /* (Safari + MobileSafari >= 14.6) or (All MobileSafari versions) */
 @supports  (selector(:nth-child(1 of x))) or (-webkit-touch-callout: none) {
     .tile-partner-link{
-        max-height: 16.5vh;
+        max-height: 20.5vh;
         max-width: 20.5vh;
         margin-left: auto;
         margin-right: auto;
     }
     .library-tile-image{
-        max-height: 16.5vh;
+        max-height: 20.5vh;
         padding: 10px 0px 0px 0px;
     }
 }
@@ -1025,13 +1025,13 @@ and (max-width : 1440px) {
     /* (Safari + MobileSafari >= 14.6) or (All MobileSafari versions) */
     @supports  (selector(:nth-child(1 of x))) or (-webkit-touch-callout: none) {
         .tile-partner-link{
-            max-height: 10.5vh;
+            max-height: 14vh;
             max-width: 14vh;
             margin-left: auto;
             margin-right: auto;
         }
         .library-tile-image{
-            max-height: 10.5vh;
+            max-height: 14vh;
             padding: 10px 0px 0px 0px;
         }
     }
