@@ -21,7 +21,9 @@ from TWLight.resources.helpers import get_partner_description, get_tag_dict
 from .forms import EdsSearchForm
 from .view_mixins import EligibleEditorsOnly
 
+import bleach
 import logging
+from urllib.parse import quote
 
 from django.views.defaults import ERROR_400_TEMPLATE_NAME, ERROR_PAGE_TEMPLATE
 
@@ -136,7 +138,13 @@ class SearchEndpointFormView(EligibleEditorsOnly, FormView):
 
     def get_form_kwargs(self, **kwargs):
         kwargs = super().get_form_kwargs()
-        kwargs["bquery"] = self.request.GET.get("q")
+        kwargs["bquery"] = quote(
+            bleach.clean(
+                self.request.GET.get("q"),
+                tags=[],
+                strip=True,
+            )
+        )
         return kwargs
 
     template_name = "eds_search_endpoint.html"
