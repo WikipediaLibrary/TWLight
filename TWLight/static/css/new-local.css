@@ -390,6 +390,21 @@ COMMON CONTENT BLOCK CSS
   padding: 0.5rem 1rem;
 }
 
+.twl-links{
+    color: #3366CC;
+}
+
+.twl-main-btn{
+    color: #FFFFFF;
+    background-color: #3366CC;
+    border-color: #3366CC;
+}
+
+.twl-main-btn:hover{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
 /*
 ----------------------------------------------------------------------------
 NOSCRIPT CSS
