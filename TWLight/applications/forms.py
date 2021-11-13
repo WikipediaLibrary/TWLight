@@ -385,7 +385,6 @@ class RenewalForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.form_class = "form-horizontal"
         self.helper.label_class = "col-lg-3"
         self.helper.field_class = "col-lg-4"
 
