@@ -102,7 +102,7 @@ class BaseApplicationForm(forms.Form):
 
         # Make sure to align any checkbox inputs with other field types
         self.helper.filter_by_widget(forms.CheckboxInput).wrap(
-            Div, css_class="col-sm-8 col-sm-offset-4 col-md-9 col-md-offset-3 apply-tos"
+            Div, css_class="col-sm-8 offset-sm-4 col-md-9 offset-md-3 apply-tos"
         )
 
         self.helper.add_input(
@@ -110,7 +110,7 @@ class BaseApplicationForm(forms.Form):
                 "submit",
                 # Translators: Labels the button users click to apply for a partner's resources.
                 _("Apply"),
-                css_class="center-block",
+                css_class="mx-auto twl-main-btn",
             )
         )
 
@@ -193,9 +193,8 @@ class BaseApplicationForm(forms.Form):
 
     def _initialize_form_helper(self):
         # Add basic styling to the form.
-        self.helper.form_class = "form-horizontal"
-        self.helper.label_class = "col-xs-12 col-sm-4 col-md-3"
-        self.helper.field_class = "col-xs-12 col-sm-8 col-md-9"
+        self.helper.label_class = "col-12 col-sm-4 col-md-3"
+        self.helper.field_class = "col-12 col-sm-8 col-md-9"
 
     def _add_user_data_subform(self, user_data):
         self._validate_user_data(user_data)
@@ -220,7 +219,7 @@ class BaseApplicationForm(forms.Form):
             self.helper.layout.append(user_data_layout)
             # fmt: off
             # Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a href='{terms_url}'> privacy policy</a>.</i></small></p>").format(
+            disclaimer_html = _("<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>").format(
                 terms_url=reverse("terms")
             )
             # fmt: on
@@ -314,7 +313,7 @@ class ApplicationAutocomplete(forms.ModelForm):
         # Prettify.
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
-        self.helper.field_template = "bootstrap3/layout/inline_field.html"
+        self.helper.field_template = "bootstrap4/layout/inline_field.html"
         self.helper.layout = Layout(
             InlineField("editor"),
             InlineField("partner"),

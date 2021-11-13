@@ -1,11 +1,23 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
+{% block extra_css %}
+  <style type="text/css">
+    legend{
+      border-bottom: 1px solid #e5e5e5;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
-  <div class="row">
-    <div class="col-xs-12">
-      {% crispy form %}      
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    <div class="row">
+      <div class="col-sm-12">
+        {% crispy form %}
+      </div>
     </div>
   </div>
 {% endblock content %}
