@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"languages-and-literature_tag": "Språk och litteratur",
+	"multidisciplinary_tag": "Multidisciplinärt",
+	"physical-sciences_tag": "Fysik",
+	"music_tag": "Musik",
+	"art_tag": "Konst",
+	"business-and-economics_tag": "Näringsliv och ekonomi",
+	"law_tag": "Juridik",
+	"education_tag": "Utbildning",
+	"philosophy-and-religion_tag": "Filosofi och religion",
+	"social-sciences_tag": "Socialvetenskap",
+	"history_tag": "Historia",
+	"culture_tag": "Kultur",
+	"life-sciences_tag": "Livsvetenskap",
+	"health-sciences_tag": "Medicin",
+	"earth-sciences_tag": "Geologi",
+	"technology_tag": "Teknik"
+}

@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-11-11 01:29+0000\n"
-"PO-Revision-Date: 2021-11-11 12:16:39+0000\n"
+"PO-Revision-Date: 2021-11-15 12:17:40+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2038,7 +2038,7 @@ msgstr "Traduire la Bibliothèque"
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "JavaScript est désactivé ; utiliser le bouton ci-dessous pour continuer."
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19

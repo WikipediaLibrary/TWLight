@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-11-11 01:28+0000\n"
-"PO-Revision-Date: 2021-11-11 12:16:41+0000\n"
+"PO-Revision-Date: 2021-11-15 12:17:43+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1317,9 +1317,8 @@ msgstr "Web sitesi"
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
-#, fuzzy
 msgid "Not searchable"
-msgstr "Aranabilir"
+msgstr "Aranamaz"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1366,7 +1365,6 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "Daha fazla bilgi"
 
@@ -1374,7 +1372,6 @@ msgstr "Daha fazla bilgi"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
-#, fuzzy
 msgid "Discuss"
 msgstr "Tartışma"
 
@@ -1401,9 +1398,8 @@ msgstr "Filtre"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
-#, fuzzy
 msgid "Filter collections"
-msgstr "Mevcut Koleksiyonlar"
+msgstr "Koleksiyonları filtrele"
 
 #: TWLight/resources/templates/resources/partner_detail.html:14
 msgid "Back to My Library"

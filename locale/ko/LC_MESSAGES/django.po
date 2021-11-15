@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-11-11 01:28+0000\n"
-"PO-Revision-Date: 2021-11-11 12:16:40+0000\n"
+"PO-Revision-Date: 2021-11-15 12:17:41+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2030,7 +2030,7 @@ msgstr ""
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "자바스크립트가 비활성화되어 있습니다. 계속하려면 아래의 버튼을 사용하십시오."
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19
