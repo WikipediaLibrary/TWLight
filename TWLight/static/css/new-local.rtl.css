@@ -899,6 +899,21 @@ NEW MY LIBRARY CSS
     padding: 10px 10px 0px 10px;
 }
 
+/* Obtained from https://www.bram.us/2021/06/23/css-at-supports-rules-to-target-only-firefox-safari-chromium/#safari */
+/* (Safari + MobileSafari >= 14.6) or (All MobileSafari versions) */
+@supports  (selector(:nth-child(1 of x))) or (-webkit-touch-callout: none) {
+    .tile-partner-link{
+        max-height: 20.5vh;
+        max-width: 20.5vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .library-tile-image{
+        max-height: 20.5vh;
+        padding: 10px 0px 0px 0px;
+    }
+}
+
 .favorite-icon{
     color: #FFC93F;
     font-size: 20px;
@@ -938,6 +953,7 @@ NEW MY LIBRARY CSS
     background-color: #3366CC;
     width: 50%;
     float: right;
+    -webkit-appearance: none;
 }
 
 .access-apply-button:hover{
@@ -950,6 +966,7 @@ NEW MY LIBRARY CSS
     background-color: #FFFFFF;
     width: 40%;
     float: left;
+    -webkit-appearance: none;
 }
 
 .renew-extend-button:hover{
@@ -965,12 +982,14 @@ and (max-device-width : 480px) {
         background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
+        -webkit-appearance: none;
     }
 
     .renew-extend-button{
         border: 1px solid #8E8E8E;
         background-color: #FFFFFF;
         width: 100%;
+        -webkit-appearance: none;
     }
 }
 /* Tablets */
@@ -982,12 +1001,14 @@ and (max-device-width : 1024px) {
         background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
+        -webkit-appearance: none;
     }
 
     .renew-extend-button{
         border: 1px solid #8E8E8E;
         background-color: #FFFFFF;
         width: 100%;
+        -webkit-appearance: none;
     }
 }
 
@@ -999,6 +1020,20 @@ and (max-width : 1440px) {
         max-height: 80px;
         max-width: 190px;
         padding: 10px 0px 0px 0px;
+    }
+    /* Obtained from https://www.bram.us/2021/06/23/css-at-supports-rules-to-target-only-firefox-safari-chromium/#safari */
+    /* (Safari + MobileSafari >= 14.6) or (All MobileSafari versions) */
+    @supports  (selector(:nth-child(1 of x))) or (-webkit-touch-callout: none) {
+        .tile-partner-link{
+            max-height: 14vh;
+            max-width: 14vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .library-tile-image{
+            max-height: 14vh;
+            padding: 10px 0px 0px 0px;
+        }
     }
 }
 
