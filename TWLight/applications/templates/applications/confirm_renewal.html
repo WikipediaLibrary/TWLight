@@ -1,10 +1,20 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
+{% block extra_css %}
+  <style type="text/css">
+    legend{
+      border-bottom: 1px solid #e5e5e5;
+    }
+  </style>
+{% endblock extra_css %}
+
 {% block content %}
-  <div>
-    <form class="form-horizontal" method="post">
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    <form method="post">
       {% csrf_token %}
       {% crispy form %}
       <div class="form-group">
@@ -16,7 +26,7 @@
         </label>
         <div class="col-lg-offset-1 col-lg-1 controls">
           {% comment %}Translators: Labels the submit button requesting confirmation of application renewal. {% endcomment %}
-          <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-primary"/>
+          <input type="submit" value="{% trans 'Confirm' %}" class="btn twl-main-btn"/>
         </div>
       </div>
     </form>
