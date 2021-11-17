@@ -408,6 +408,16 @@ COMMON CONTENT BLOCK CSS
     text-decoration: underline;
 }
 
+.twl-secondary-btn{
+    color: #000000;
+    background-color: #FFFFFF;
+    border-color: #CCCCCC;
+}
+
+.twl-secondary-btn:hover{
+    background-color: #CCCCCC;
+}
+
 /*
 ----------------------------------------------------------------------------
 HOMEPAGE CAROUSEL CSS
