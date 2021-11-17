@@ -22,6 +22,10 @@ body {
   background-color: white;
 }
 
+.overflow-hidden{
+  overflow: hidden;
+}
+
 /* Different buffers for the footer based on screen size */
 @media (max-width: 767px) {
   body {
@@ -110,6 +114,7 @@ HEADER CSS
 .eds-search-icon{
     display: none;
 }
+
 .feedback-link{
     float: right;
     font-size: 12px;
@@ -819,7 +824,6 @@ NEW MY LIBRARY CSS
 .key-content{
     padding-left: 15px;
 }
-
 .key-additional-info{
     font-size: 14px;
 }
