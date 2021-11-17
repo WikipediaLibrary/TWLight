@@ -34,7 +34,7 @@ class EditorUpdateForm(forms.ModelForm):
                 "submit",
                 # Translators: This is the label for a button that users click to update their public information.
                 _("Update profile"),
-                css_class="center-block",
+                css_class="twl-btn",
             )
         )
 

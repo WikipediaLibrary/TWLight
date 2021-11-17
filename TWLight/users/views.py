@@ -377,7 +377,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
                 "submit",
                 # Translators: This is the button users click to confirm changes to their personal information.
                 _("Update"),
-                css_class="center-block",
+                css_class="twl-btn",
             )
         )
 
