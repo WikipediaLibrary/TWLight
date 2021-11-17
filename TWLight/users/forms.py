@@ -162,7 +162,7 @@ class RestrictDataForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
-        self.helper.field_template = "bootstrap3/layout/inline_field.html"
+        self.helper.field_template = "bootstrap4/layout/inline_field.html"
 
 
 class TermsForm(forms.ModelForm):
