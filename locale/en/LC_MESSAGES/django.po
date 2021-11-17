@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-11 01:28+0000\n"
+"POT-Creation-Date: 2021-11-17 16:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 #. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access.
 #: TWLight/applications/forms.py:112
-#: TWLight/applications/templates/applications/request_for_application.html:64
-#: TWLight/applications/templates/applications/request_for_application.html:66
+#: TWLight/applications/templates/applications/request_for_application.html:65
+#: TWLight/applications/templates/applications/request_for_application.html:67
 #: TWLight/resources/templates/resources/partner_detail.html:55
 #: TWLight/resources/templates/resources/partner_detail.html:58
 #: TWLight/resources/templates/resources/partner_detail.html:351
@@ -33,63 +33,63 @@ msgid "Apply"
 msgstr ""
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
-#: TWLight/applications/forms.py:205
+#: TWLight/applications/forms.py:204
 msgid "About you"
 msgstr ""
 
 #. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-#: TWLight/applications/forms.py:214
+#: TWLight/applications/forms.py:213
 #, python-brace-format
 msgid "Requested by: {partner_list}"
 msgstr ""
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:223
+#: TWLight/applications/forms.py:222
 #, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a "
-"href='{terms_url}'> privacy policy</a>.</i></small></p>"
+"class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
 msgstr ""
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
-#: TWLight/applications/forms.py:234
+#: TWLight/applications/forms.py:233
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr ""
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
-#: TWLight/applications/forms.py:267
+#: TWLight/applications/forms.py:266
 #, python-brace-format
 msgid "You must register at {url} before applying."
 msgstr ""
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
-#: TWLight/applications/forms.py:332
+#: TWLight/applications/forms.py:331
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
 msgid "Username"
 msgstr ""
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:334 TWLight/applications/helpers.py:93
+#: TWLight/applications/forms.py:333 TWLight/applications/helpers.py:93
 msgid "Partner name"
 msgstr ""
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:350
+#: TWLight/applications/forms.py:349
 msgid "Renewal confirmation"
 msgstr ""
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:367 TWLight/applications/helpers.py:103
+#: TWLight/applications/forms.py:366 TWLight/applications/helpers.py:103
 msgid "The email for your account on the partner's website"
 msgstr ""
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:377 TWLight/applications/helpers.py:106
+#: TWLight/applications/forms.py:376 TWLight/applications/helpers.py:106
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -359,7 +359,7 @@ msgstr ""
 #. Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is waitlisted.
 #: TWLight/applications/templates/applications/application_evaluation.html:93
-#: TWLight/applications/templates/applications/request_for_application.html:52
+#: TWLight/applications/templates/applications/request_for_application.html:53
 #: TWLight/resources/templates/resources/collection_tile.html:42
 #: TWLight/resources/templates/resources/partner_detail.html:30
 #: TWLight/resources/templates/resources/partner_detail.html:326
@@ -692,7 +692,7 @@ msgid "Set status"
 msgstr ""
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
-#: TWLight/applications/templates/applications/confirm_renewal.html:13
+#: TWLight/applications/templates/applications/confirm_renewal.html:23
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
 msgstr ""
@@ -702,7 +702,7 @@ msgstr ""
 #. Translators: A button users can click to return their access to a particular resource.
 #. Translators: A button users can click to delete their account.
 #. Translators: This is the button users click to confirm changes to their personal information.
-#: TWLight/applications/templates/applications/confirm_renewal.html:19
+#: TWLight/applications/templates/applications/confirm_renewal.html:29
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
@@ -711,31 +711,31 @@ msgid "Confirm"
 msgstr ""
 
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
-#: TWLight/applications/templates/applications/request_for_application.html:21
+#: TWLight/applications/templates/applications/request_for_application.html:23
 msgid "What resources do you want to access?"
 msgstr ""
 
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
-#: TWLight/applications/templates/applications/request_for_application.html:24
+#: TWLight/applications/templates/applications/request_for_application.html:26
 msgid ""
 "Library Bundle partners are not shown as eligibility is determined "
 "automatically."
 msgstr ""
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
-#: TWLight/applications/templates/applications/request_for_application.html:47
+#: TWLight/applications/templates/applications/request_for_application.html:48
 msgid "(more info)"
 msgstr ""
 
 #. Translators: On the page where users can apply for multiple partners, this text is displayed when there are no available partners.
-#: TWLight/applications/templates/applications/request_for_application.html:59
+#: TWLight/applications/templates/applications/request_for_application.html:60
 msgid "No partner data has been added yet."
 msgstr ""
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
-#: TWLight/applications/templates/applications/request_for_application.html:73
+#: TWLight/applications/templates/applications/request_for_application.html:74
 msgid ""
-"You can apply to <span class=\"label label-warning\">Waitlisted</span> "
+"You can apply to <span class=\"badge badge-warning\">Waitlisted</span> "
 "partners, but they don't have access grants available right now. We will "
 "process those applications when access becomes available."
 msgstr ""
