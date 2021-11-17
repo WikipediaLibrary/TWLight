@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-17 16:02+0000\n"
+"POT-Creation-Date: 2021-11-17 23:06+0000\n"
 "PO-Revision-Date: 2021-11-11 12:16:40+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -610,7 +610,7 @@ msgstr "शेवटचे पान"
 
 #. Translators: On the page listing applications, this shows next to an application which was imported to the website.
 #: TWLight/applications/templates/applications/application_list_include.html:33
-#: TWLight/users/templates/users/my_applications.html:40
+#: TWLight/users/templates/users/my_applications.html:43
 msgid "Imported application"
 msgstr "आयात केलेली अवजारे"
 
@@ -619,7 +619,7 @@ msgstr "आयात केलेली अवजारे"
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:37
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:44
-#: TWLight/users/templates/users/my_applications.html:44
+#: TWLight/users/templates/users/my_applications.html:47
 #, python-format
 msgid "Last reviewed by %(reviewer)s on %(review_date)s"
 msgstr "यांनी %(reviewer)s या तारखेला %(review_date)s तपासले"
@@ -629,7 +629,7 @@ msgstr "यांनी %(reviewer)s या तारखेला %(review_date)
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
 #: TWLight/applications/templates/applications/application_list_include.html:42
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:49
-#: TWLight/users/templates/users/my_applications.html:49
+#: TWLight/users/templates/users/my_applications.html:52
 #, python-format
 msgid "Last reviewed on %(review_date)s"
 msgstr "%(review_date)s या तारखेला शेवटचे तपासले गेले"
@@ -639,7 +639,7 @@ msgstr "%(review_date)s या तारखेला शेवटचे तप�
 #. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
 #: TWLight/applications/templates/applications/application_list_include.html:48
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
-#: TWLight/users/templates/users/my_applications.html:55
+#: TWLight/users/templates/users/my_applications.html:58
 msgid "Not yet reviewed."
 msgstr "अजून तपासले गेले नाही."
 
@@ -648,7 +648,7 @@ msgstr "अजून तपासले गेले नाही."
 #. Translators: On the page listing applications, this text is displayed when there aren't any applications to list.
 #: TWLight/applications/templates/applications/application_list_include.html:65
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:102
-#: TWLight/users/templates/users/my_applications.html:89
+#: TWLight/users/templates/users/my_applications.html:92
 msgid "No applications right now."
 msgstr "सध्या अर्ज उपलब्ध नाहीत."
 
@@ -2632,7 +2632,7 @@ msgstr ""
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.
 #. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
 #: TWLight/users/templates/users/editor_detail.html:21
-#: TWLight/users/templates/users/my_applications.html:10
+#: TWLight/users/templates/users/my_applications.html:13
 msgid "My Library"
 msgstr ""
 
@@ -2644,7 +2644,7 @@ msgstr ""
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
 #: TWLight/users/templates/users/editor_detail.html:33
-#: TWLight/users/templates/users/my_applications.html:7
+#: TWLight/users/templates/users/my_applications.html:10
 #, fuzzy
 msgid "My applications"
 msgstr "पुढे पाठवलेले अर्ज"
@@ -2901,22 +2901,22 @@ msgid ""
 msgstr ""
 
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
-#: TWLight/users/templates/users/my_applications.html:62
+#: TWLight/users/templates/users/my_applications.html:65
 msgid "Withdraw"
 msgstr ""
 
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
-#: TWLight/users/templates/users/my_applications.html:70
+#: TWLight/users/templates/users/my_applications.html:73
 msgid "Has your account expired?"
 msgstr "तुमच्या खात्याची वर्गणी संपली आहे का?"
 
 #. Translators: On the page listing applications, this text labels a link which users can click to request a renewal of their application.
-#: TWLight/users/templates/users/my_applications.html:73
+#: TWLight/users/templates/users/my_applications.html:76
 msgid "Request renewal"
 msgstr "परत वर्गणी भरा"
 
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
-#: TWLight/users/templates/users/my_applications.html:76
+#: TWLight/users/templates/users/my_applications.html:79
 msgid ""
 "Renewals are either not required, not available right now, or you have "
 "already requested a renewal."
