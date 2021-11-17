@@ -1,27 +1,31 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load twlight_perms %}
 
 {% block content %}
-  {% comment %}Translators: This is the heading of the page where users can request the deletion of their data.{% endcomment %}
-  <h1>{% trans 'Delete all data' %}</h1>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    {% comment %}Translators: This is the heading of the page where users can request the deletion of their data.{% endcomment %}
+    <h1>{% trans 'Delete all data' %}</h1>
 
-  <form method="post">
-    {% csrf_token %}
-    <p>
-      {% comment %}Translators: This message is displayed on the page where users can request the deletion of their data.{% endcomment %}
-      {% blocktranslate trimmed %}
-          <b>Warning:</b> Performing this action will delete your Wikipedia 
-          Library Card user account and all associated applications. This 
-          process is not reversible. You may lose any partner accounts 
-          you were granted, and will not be able to renew those 
-          accounts or apply for new ones.
-      {% endblocktranslate %}
-    </p>
-    <div style="text-align: center;">
-      {% comment %}Translators: A button users can click to delete their account.{% endcomment %}
-      <input type="submit" style="position: absolute;" value="{% trans 'Confirm' %}" class="btn btn-danger"/>
+    <form method="post">
+      {% csrf_token %}
+      <p>
+        {% comment %}Translators: This message is displayed on the page where users can request the deletion of their data.{% endcomment %}
+        {% blocktranslate trimmed %}
+            <b>Warning:</b> Performing this action will delete your Wikipedia
+            Library Card user account and all associated applications. This
+            process is not reversible. You may lose any partner accounts
+            you were granted, and will not be able to renew those
+            accounts or apply for new ones.
+        {% endblocktranslate %}
+      </p>
+      <div style="text-align: center;">
+        {% comment %}Translators: A button users can click to delete their account.{% endcomment %}
+        <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-danger"/>
+      </div>
+    </form>
     </div>
-  </form>
 {% endblock content %}
