@@ -4,8 +4,8 @@
 
 {% block content %}
   {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
   <div id="main-content">
-    {% include "message_partial.html" %}
     {% comment %}Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.{% endcomment %}
     <h3 class="d-inline-block mb-5">{% trans 'My applications' %}</h3>
       <a href="{% url 'users:my_library' %}" class="btn twl-secondary-btn pull-right">
