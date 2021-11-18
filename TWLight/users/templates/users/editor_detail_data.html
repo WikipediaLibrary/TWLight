@@ -21,7 +21,7 @@
         {% if editor.wp_link_central_auth %}
             <br/>
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/) {% endcomment %}
-            <a href="{{ editor.wp_link_central_auth }}">({% trans "CentralAuth" %})</a>
+            <a class="twl-links" href="{{ editor.wp_link_central_auth }}">({% trans "CentralAuth" %})</a>
         {% endif %}
     </div>
 </div>
@@ -40,7 +40,7 @@
         {% ifequal editor.user user %}
             <br/>
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
-            <a href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
+            <a class="twl-links" href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
         {% endifequal %}
         <br/>
     </div>
@@ -66,7 +66,7 @@
             {% trans "Yes" %}
         {% else %}
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
-            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+            <p class="bg-danger-soft"><strong class="warning">{% trans "No" %}</strong></p>
             <p>
                 {% comment %}Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate {{ username }}.{% endcomment %}
                 {% blocktranslate trimmed with username=editor.wp_username %}
@@ -133,7 +133,7 @@
             {% blocktranslate trimmed %}
               It looks like you have an active block on your account. If you meet
               the other criteria you may still be permitted access to the library -
-              please <a href="{{ contact_url }}">contact us</a>.
+              please <a class="twl-links" href="{{ contact_url }}">contact us</a>.
             {% endblocktranslate %}
           </p>
       {% endif %}
@@ -162,7 +162,7 @@
             {% trans "Yes" %}
         {% else %}
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
-            <p class="bg-danger"><strong class="warning">{% trans "No" %}</strong></p>
+            <p class="bg-danger-soft"><strong class="warning">{% trans "No" %}</strong></p>
         {% endif %}
     </div>
 </div>
@@ -197,7 +197,7 @@
         {% if editor.wp_link_guc %}
             <br/>
             {# Translators: this links to a Tools page with edit stats for a given wikipedia editor. #}
-            <a href="{{ editor.wp_link_guc }}">{% trans "(view global user contributions)" %}</a>
+            <a class="twl-links" href="{{ editor.wp_link_guc }}">{% trans "(view global user contributions)" %}</a>
         {% endif %}
     </div>
 </div>
@@ -265,7 +265,7 @@
         {% url 'users:pii_update' as update_url %}
         {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate {{ update_url }}.{% endcomment %}
         {% blocktranslate trimmed %}
-            You may <a href="{{ update_url }}">update or delete</a>
+            You may <a class="twl-links" href="{{ update_url }}">update or delete</a>
             your data at any time.
         {% endblocktranslate %}
     </p>
@@ -280,7 +280,7 @@
         <div class="col-xs-12 col-sm-9">
             {{ editor.user.email }}<br/>
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email. {% endcomment %}
-            <a href="{% url 'users:email_change' %}">({% trans "update" %})</a>
+            <a class="twl-links" href="{% url 'users:email_change' %}">({% trans "update" %})</a>
         </div>
     </div>
 

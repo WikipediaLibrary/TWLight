@@ -155,7 +155,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
                     messages.WARNING,
                     # fmt: off
                     # Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-                    _("Please <a href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications.")
+                    _("Please <a class='twl-links' href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications.")
                     .format(
                         url=reverse_lazy(
                         "users:editor_update", kwargs={"pk": editor.pk}
@@ -377,7 +377,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
                 "submit",
                 # Translators: This is the button users click to confirm changes to their personal information.
                 _("Update"),
-                css_class="center-block",
+                css_class="twl-btn",
             )
         )
 
@@ -508,7 +508,7 @@ class RestrictDataView(SelfOnly, FormView):
                 "submit",
                 # Translators: This is the button users click to confirm changes to their personal information.
                 _("Confirm"),
-                css_class="center-block",
+                css_class="twl-btn",
             )
         )
 
@@ -781,7 +781,7 @@ class WithdrawApplication(RedirectView):
         for application in applications:
             application.status = Application.INVALID
             application.save()
-        message = f"Your application has been withdrawn successfully. Head over to <a href='/users/my_applications/{application_id}'>My Applications</a> to view the status."
+        message = f"Your application has been withdrawn successfully. Head over to <a class='twl-links' href='/users/my_applications/{application_id}'>My Applications</a> to view the status."
         messages.add_message(self.request, messages.SUCCESS, message)
         return super().get_redirect_url(*args, **kwargs)
 

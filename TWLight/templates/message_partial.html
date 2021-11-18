@@ -14,8 +14,8 @@
          {% comment %}Translators: Shown if the current user doesn't have a registered email on their account. Don't translate {{ contact_us_url }} or {{ email_url }}. {%     endcomment %}
          {% blocktranslate trimmed %}
            You don't have an email on file. We can't finalize your access to
-           partner resources, and you won't be able to <a href="{{ contact_us_url }}">contact us</a> without an email. Please
-           <a href="{{ email_url }}">update your email</a>.
+           partner resources, and you won't be able to <a class="twl-links" href="{{ contact_us_url }}">contact us</a> without an email. Please
+           <a class="twl-links" href="{{ email_url }}">update your email</a>.
          {% endblocktranslate %}
        </div>
      {% endif %}
@@ -26,7 +26,7 @@
          {% blocktranslate trimmed %}
            You have requested a restriction on the processing of your data.
            Most site functionality will not be available to you until you
-           <a href="{{ restrict_url }}">lift this restriction</a>.
+           <a class="twl-links" href="{{ restrict_url }}">lift this restriction</a>.
          {% endblocktranslate %}
        </div>
      {% endif %}
@@ -35,7 +35,7 @@
          {% url 'terms' as terms_url %}
          {% comment %}Translators: Shown if the current user has not agreed to the terms of use. {% endcomment %}
          {% blocktranslate trimmed %}
-           You have not agreed to the <a href="{{ terms_url }}">terms of use</a>
+           You have not agreed to the <a class="twl-links" href="{{ terms_url }}">terms of use</a>
            of this site. Your applications will not be processed and you won't be
            able to apply or access resources you are approved for.
          {% endblocktranslate %}

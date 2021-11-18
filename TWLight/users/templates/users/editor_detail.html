@@ -1,76 +1,80 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load i18n %}
 {% load l10n %}
 {% load crispy_forms_tags %}
 {% load twlight_perms %}
 
 {% block content %}
-  <h1>{{ editor.wp_username }}</h1>
-  <p>
-    <a href="{% url 'partners:filter' %}" class="btn btn-primary">
-      {% comment %}Translators: Users viewing their own profile can click this button to go to the browse partners page.{% endcomment %}
-      {% trans 'Start new application' %}
-    </a>
-  </p>
-  <hr>
-  <div class="row">
-    <div class="col-md-5 col-lg-4" style="margin-bottom: 14px;">
-      <a href="{% url 'users:my_library' %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-folder-open-o fa-4x pull-left" aria-hidden="true"></i>
-        <p class="app-list"  style="font-size:25px; float:left">
-          {% comment %}Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.{% endcomment %}
-          {% trans 'My Library' %}
-        </p><br>
-        <p class="app-list hidden-xs pull-left" style="font-size:15px; float:left">
-          {% comment %}Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.{% endcomment %}
-          {% trans 'A collective list of collections you are authorized to access' %}
-        </p>
-      </a>
-    </div>
-    <div class="col-md-5 col-lg-4">
-      <a href="{% url 'users:my_applications' editor.pk %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-file-text-o fa-4x pull-left" aria-hidden="true"></i>
-        <p class="app-list"  style="font-size:25px; float:left">
-          {% comment %}Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.{% endcomment %}
-          {% trans 'My applications' %}
-        </p><br>
-        <p class="app-list hidden-xs" style="font-size:15px; float:left">
-          {% comment %}Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.{% endcomment %}
-          {% trans 'Both historical and current, made to various partners' %}
-        </p>
-      </a>
-    </div>
-  </div>
-
-  {% comment %}Translators: This is the heading for user information on profile and application pages.{% endcomment %}
-  <h2>{% trans 'User information' %}</h2>
-  {% comment %}Translators: This is the heading for Wikipedia account information on profile and application pages.{% endcomment %}
-  <h3>{% trans 'Editor data' %}</h3>
-
-  {% include 'users/editor_detail_data.html' %}
-
-  {% ifequal user editor.user  %}
-    {% include "users/preferences.html" %}    
-  {% endifequal %}
-
-  <p>
-    {% comment %}Translators: This is shown on editor profiles, in their profile page or on applications.{% endcomment %}
-    {% blocktranslate trimmed %}
-      Information with an * was retrieved from Wikipedia directly.
-      Other information was entered directly by users or site admins,
-      in their preferred language.
-    {% endblocktranslate %}
-  </p>
-
-  {% if editor.user|coordinators_only %}
-    <div class="row">
-      <div class="col-xs-12 col-md-10 col-md-offset-1">
-        <p class="well">
-            {% comment %}Translators: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}.{% endcomment %}
-            {% blocktranslate trimmed with username=editor.wp_username %}
-              {{ username }} has coordinator privileges on this site.
-            {% endblocktranslate %}
-        </p>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+      <h1>{{ editor.wp_username }}</h1>
+      <p>
+        <a href="{% url 'partners:filter' %}" class="btn twl-btn">
+          {% comment %}Translators: Users viewing their own profile can click this button to go to the browse partners page.{% endcomment %}
+          {% trans 'Start new application' %}
+        </a>
+      </p>
+      <hr>
+      <div class="row">
+        <div class="col-md-5 col-lg-4">
+          <a href="{% url 'users:my_library' %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-folder-open-o fa-4x pull-left" aria-hidden="true"></i>
+            <p class="app-list"  style="font-size:25px; float:left">
+              {% comment %}Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.{% endcomment %}
+              {% trans 'My Library' %}
+            </p><br>
+            <p class="app-list hidden-xs pull-left" style="font-size:15px; float:left">
+              {% comment %}Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.{% endcomment %}
+              {% trans 'A collective list of collections you are authorized to access' %}
+            </p>
+          </a>
+        </div>
+        <div class="col-md-5 col-lg-4">
+          <a href="{% url 'users:my_applications' editor.pk %}" class="btn btn-default btn-lg btn-block btn-extra-large"><i class="fa fa-file-text-o fa-4x pull-left" aria-hidden="true"></i>
+            <p class="app-list"  style="font-size:25px; float:left">
+              {% comment %}Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.{% endcomment %}
+              {% trans 'My applications' %}
+            </p><br>
+            <p class="app-list hidden-xs" style="font-size:15px; float:left">
+              {% comment %}Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.{% endcomment %}
+              {% trans 'Both historical and current, made to various partners' %}
+            </p>
+          </a>
+        </div>
       </div>
+
+      {% comment %}Translators: This is the heading for user information on profile and application pages.{% endcomment %}
+      <h2>{% trans 'User information' %}</h2>
+      {% comment %}Translators: This is the heading for Wikipedia account information on profile and application pages.{% endcomment %}
+      <h3>{% trans 'Editor data' %}</h3>
+
+      {% include 'users/editor_detail_data.html' %}
+
+      {% ifequal user editor.user  %}
+        {% include "users/preferences.html" %}    
+      {% endifequal %}
+
+      <p>
+        {% comment %}Translators: This is shown on editor profiles, in their profile page or on applications.{% endcomment %}
+        {% blocktranslate trimmed %}
+          Information with an * was retrieved from Wikipedia directly.
+          Other information was entered directly by users or site admins,
+          in their preferred language.
+        {% endblocktranslate %}
+      </p>
+
+      {% if editor.user|coordinators_only %}
+        <div class="row">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <p class="card card-body bg-light">
+                {% comment %}Translators: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}.{% endcomment %}
+                {% blocktranslate trimmed with username=editor.wp_username %}
+                  {{ username }} has coordinator privileges on this site.
+                {% endblocktranslate %}
+            </p>
+          </div>
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
 
 {% endblock %}
