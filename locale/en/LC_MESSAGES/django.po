@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-17 23:06+0000\n"
+"POT-Creation-Date: 2021-11-18 16:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -703,7 +703,7 @@ msgstr ""
 #. Translators: A button users can click to delete their account.
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:29
-#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:14
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
 #: TWLight/users/templates/users/user_confirm_delete.html:24
 #: TWLight/users/views.py:510
@@ -1438,7 +1438,7 @@ msgstr ""
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
 #: TWLight/resources/forms.py:19
-#: TWLight/resources/templates/resources/suggest.html:55
+#: TWLight/resources/templates/resources/suggest.html:58
 msgid "Description"
 msgstr ""
 
@@ -1871,46 +1871,45 @@ msgid "Imported"
 msgstr ""
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
-#: TWLight/resources/templates/resources/suggest.html:18
+#: TWLight/resources/templates/resources/suggest.html:20
 msgid "Suggest partners"
 msgstr ""
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:38
+#: TWLight/resources/templates/resources/suggest.html:40
 msgid "Browse and support suggestions"
 msgstr ""
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:47
+#: TWLight/resources/templates/resources/suggest.html:49
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr ""
 
-#. Translators: This is the text that appears before the URL of every partner suggestion.
-#: TWLight/resources/templates/resources/suggest.html:59
+#: TWLight/resources/templates/resources/suggest.html:63
 msgid "URL"
 msgstr ""
 
-#: TWLight/resources/templates/resources/suggest.html:60
+#: TWLight/resources/templates/resources/suggest.html:69
 msgid "Proposer"
 msgstr ""
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:69
-#: TWLight/resources/templates/resources/suggest.html:93
-#: TWLight/resources/templates/resources/suggest.html:97
+#: TWLight/resources/templates/resources/suggest.html:83
+#: TWLight/resources/templates/resources/suggest.html:111
+#: TWLight/resources/templates/resources/suggest.html:115
 msgid "Upvoted"
 msgstr ""
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:72
-#: TWLight/resources/templates/resources/suggest.html:95
+#: TWLight/resources/templates/resources/suggest.html:86
+#: TWLight/resources/templates/resources/suggest.html:113
 msgid "Upvote"
 msgstr ""
 
 #. Translators: This message is displayed on the page where coordinators can request the deletion of a suggestion.
-#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:9
+#: TWLight/resources/templates/resources/suggestion_confirm_delete.html:12
 #, python-format
 msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
