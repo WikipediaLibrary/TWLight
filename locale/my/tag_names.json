@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dr Lotus Black"
+		]
+	},
+	"languages-and-literature_tag": "ဘာသာစကားများနှင့် စာပေ",
+	"physical-sciences_tag": "ရုပ်ပိုင်းဆိုင်ရာသိပ္ပံ",
+	"music_tag": "ဂီတ",
+	"art_tag": "အနုပညာ",
+	"business-and-economics_tag": "လုပ်ငန်းနှင့် စီးပွားရေး",
+	"law_tag": "ဥပဒေ",
+	"education_tag": "ပညာရေး",
+	"philosophy-and-religion_tag": "ဒဿနိကနှင့်ဘာသာရေး",
+	"social-sciences_tag": "လူမှုသိပ္ပံ",
+	"history_tag": "သမိုင်း",
+	"culture_tag": "ယာဉ်ကျေးမှု",
+	"life-sciences_tag": "ဘဝသိပ္ပံ",
+	"health-sciences_tag": "ကျန်းမာရေးသိပ္ပံ",
+	"earth-sciences_tag": "ကမ္ဘာမြေသိပ္ပံ",
+	"technology_tag": "နည်းပညာ"
+}
