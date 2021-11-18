@@ -74,7 +74,7 @@
                   </div>
                   {% if user.is_authenticated %}
                     <div class="col-lg-2 pull-right" style="text-align: right;">
-                      <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}"
+                      <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-outline-dark{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}"
                           href="">
                         <i class="fa fa-arrow-up" aria-hidden="true"></i>
                         <span class="utext">
