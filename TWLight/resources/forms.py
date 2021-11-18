@@ -25,12 +25,12 @@ class SuggestionForm(forms.Form):
         self.helper.form_tag = False
         self.helper.form_class = "form-horizontal"
         self.helper.label_class = "col-lg-3"
-        self.helper.field_class = "col-lg-7"
+        self.helper.field_class = "col-lg-12"
         self.helper.layout = Layout(
             "suggested_company_name",
             "description",
             "company_url",
             "next",
             # Translators: This labels a button which users click to submit their suggestion.
-            Submit("submit", _("Submit"), css_class="center-block"),
+            Submit("submit", _("Submit"), css_class="twl-btn"),
         )

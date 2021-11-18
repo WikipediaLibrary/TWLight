@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load cache %}
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -8,17 +8,19 @@
 {% block head_javascript %}
   <script type="text/javascript" language="javascript" src="{% static "js/jquery-2.2.4.min.js" %}"></script>
   <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.4.1.min.js" %}"></script>
-  <script type="text/javascript" language="javascript" src="{% static "js/bootstrap.min.js" %}"></script>
 {% endblock head_javascript %}
 
 {% block content %}
-    <div class="panel panel-default full-width">
-      <div class="panel-heading">
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    <div class="card full-width mb-4">
+      <div class="card-header">
         {% comment %}Translators: This is the title of the form where users can submit partner suggestions. {% endcomment %}
-        <strong><span class="panel-title">{% trans 'Suggest partners' %}</span></strong>
+        <strong><span class="card-title">{% trans 'Suggest partners' %}</span></strong>
       </div>
-      <div class="panel-body">
-        <form class="form-horizontal"
+      <div class="card-body">
+        <form class="w-75 mx-auto"
         {% if user.is_authenticated %}
         method="post"
         {% elif request.GET %}
@@ -31,57 +33,73 @@
         </form>
       </div>
     </div>
-  {% if all_suggestions %}
-    <div class="panel panel-default full-width">
-      <div class="panel-heading">
-        {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
-        <strong><span class="panel-title">{% trans 'Browse and support suggestions' %}</span></strong>
-      </div>
-      <div class="panel-body">
-        {% for each_suggestion in all_suggestions %}
-          <div class="panel panel-default full-width">
-            <div class="panel-heading">
-              <div class="panel-title pull-left"><span class="panel-title">{{ each_suggestion.suggested_company_name }}</span></div>
-              {% if user|coordinators_only %}
-                {% comment %}Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
-                <a href="{% url 'suggest-delete' each_suggestion.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-              {% endif %}
-              <div class="clearfix"></div>
-            </div>
-            <div class="panel-body ">
-              <div class="col-md-10">
-                {% comment %}Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
-                <p>
-                  <strong>{% trans 'Description' %}: </strong>
-                  {{ each_suggestion.description | safe }}
-                </p>
-                {% comment %}Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
-                <p><strong>{% trans 'URL' %}:</strong> <a href="{{ each_suggestion.company_url }}">{{ each_suggestion.company_url }}</a></p>
-                <p><strong>{% trans 'Proposer' %}:</strong> <a href="{{ each_suggestion.author.editor.wp_link_central_auth }}">{{ each_suggestion.author.editor.wp_username }}</a></p>
+    {% if all_suggestions %}
+      <div class="card full-width">
+        <div class="card-header">
+          {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
+          <strong><span class="card-title">{% trans 'Browse and support suggestions' %}</span></strong>
+        </div>
+        <div class="card-body">
+          {% for each_suggestion in all_suggestions %}
+            <div class="card full-width mb-4">
+              <div class="card-header">
+                <div class="card-title pull-left"><span class="card-title">{{ each_suggestion.suggested_company_name }}</span></div>
+                {% if user|coordinators_only %}
+                  {% comment %}Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
+                  <a href="{% url 'suggest-delete' each_suggestion.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                {% endif %}
+                <div class="clearfix"></div>
               </div>
-              {% if user.is_authenticated %}
-                <div class="col-md-2 pull-right" style="text-align: right;">
-                  <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-default{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}" href="">
-                    <i class="fa fa-arrow-up" aria-hidden="true"></i>
-                    <span class="utext">
-                      {% if user in each_suggestion.upvoted_users.all %}
-                        {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
-                        {% trans 'Upvoted' %}
-                      {% else %}
-                        {% comment %}Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
-                        {% trans 'Upvote' %}
-                      {% endif %}
-                    </span>
-                    <span class="count badge">{{ each_suggestion.upvoted_users.count }}</span>
-                  </a>
-                </div>           
-              {% endif %}
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-lg-10">
+                    {% comment %}Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
+                    <p>
+                      <strong>{% trans 'Description' %}: </strong>
+                      {{ each_suggestion.description | safe }}
+                    </p>
+                    {% comment %}Translators: This is the text that appears before the URL of every partner suggestion. {% endcomment %}
+                    <p>
+                      <strong>{% trans 'URL' %}:</strong>
+                      <a class="twl-links" href="{{ each_suggestion.company_url }}">
+                        {{ each_suggestion.company_url }}
+                      </a>
+                    </p>
+                    <p>
+                      <strong>{% trans 'Proposer' %}:</strong>
+                      <a class="twl-links" href="{{ each_suggestion.author.editor.wp_link_central_auth }}">
+                        {{ each_suggestion.author.editor.wp_username }}
+                      </a>
+                    </p>
+                  </div>
+                  {% if user.is_authenticated %}
+                    <div class="col-lg-2 pull-right" style="text-align: right;">
+                      <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-outline-dark{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}"
+                          href="">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                        <span class="utext">
+                          {% if user in each_suggestion.upvoted_users.all %}
+                            {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+                            {% trans 'Upvoted' %}
+                          {% else %}
+                            {% comment %}Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse). {% endcomment %}
+                            {% trans 'Upvote' %}
+                          {% endif %}
+                        </span>
+                        <span class="count badge {% if user in each_suggestion.upvoted_users.all %}badge-light text-success{% else %}badge-dark{% endif %}">
+                          {{ each_suggestion.upvoted_users.count }}
+                        </span>
+                      </a>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>  
-    </div>
-  {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
 {% endblock content %}
 {% block javascript %}
   <script>
@@ -106,6 +124,19 @@
         $(this).removeClass('btn-default');
         count++;
         $(this).children('.count').text(count);
+      }
+      var badge = $(this).find(".badge");
+      if(badge.hasClass("text-success")){
+        badge.removeClass('text-success');
+        badge.addClass('text-light');
+        badge.addClass('badge-dark');
+        badge.removeClass('badge-light');
+      }
+      else{
+        badge.addClass('text-success');
+        badge.addClass('badge-light');
+        badge.removeClass('text-light');
+        badge.removeClass('badge-dark');
       }
       var this_ = $(this);
       var upvoteURL = this_.attr("data-href");
