@@ -22,6 +22,10 @@ body {
   background-color: white;
 }
 
+.overflow-hidden{
+  overflow: hidden;
+}
+
 /* Different buffers for the footer based on screen size */
 @media (max-width: 767px) {
   body {
@@ -81,19 +85,6 @@ HEADER CSS
     font-size: 14px;
 }
 
-.user-button {
-    font-family: Roboto;
-    font-size: 14px;
-    color: #FFFFFF !important;
-    background-color: #3366CC !important;
-}
-
-.user-button:hover {
-    color: #FFFFFF !important;
-    background-color: #3366CC !important;
-    text-decoration: underline !important;
-}
-
 .ebsco-single-search{
     margin-top: 15px;
 }
@@ -123,6 +114,7 @@ HEADER CSS
 .eds-search-icon{
     display: none;
 }
+
 .feedback-link{
     float: right;
     font-size: 12px;
@@ -388,6 +380,66 @@ COMMON CONTENT BLOCK CSS
 */
 #main-content {
   padding: 0.5rem 1rem;
+}
+.twl-btn {
+  white-space: nowrap;
+  font-family: Roboto;
+  font-size: 14px;
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+}
+.twl-btn:hover {
+  color: #FFFFFF !important;
+  background-color: #3366CC !important;
+  text-decoration: underline !important;
+}
+.btn-extra-large{
+  padding-top:30px;
+  padding-bottom:30px;
+  margin-bottom: 14px;
+  max-width: 575px;
+}
+.btn-extra-large::after {
+  content: " ";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+/* uses the less-dangerous-looking pink of bootstrap 3 */
+.bg-danger-soft {
+  background-color: rgb(242, 222, 222);
+}
+/* btn-default behaviors ported from bootstrap 3 */
+.btn-default {
+  color: rgb(51, 51, 51);
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(204, 204, 204);
+}
+.btn-default.focus, .btn-default:focus {
+  color:#333;
+  background-color:#e6e6e6;
+  border-color:#8c8c8c
+}
+.btn-default:hover {
+  color:#333;
+  background-color:#e6e6e6;
+  border-color:#adadad
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+  color:#333;
+  background-color:#e6e6e6;
+  border-color:#adadad
+}
+.btn-default.active.focus,.btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover{color:#333;background-color:#d4d4d4;border-color:#8c8c8c}.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+  background-image:none
+}
+.btn-default.disabled.focus, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled].focus, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default.focus,fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover {
+  background-color:#fff;
+  border-color:#ccc
+}
+.btn-default .badge {
+  color:#fff;
+  background-color:#333
 }
 
 .twl-links{
@@ -772,7 +824,6 @@ NEW MY LIBRARY CSS
 .key-content{
     padding-left: 15px;
 }
-
 .key-additional-info{
     font-size: 14px;
 }
@@ -1203,19 +1254,7 @@ PARTNERS CSS
 
 .suggest-button {
   float: left;
-  white-space: nowrap;
-  font-family: Roboto;
-  font-size: 14px;
-  color: #FFFFFF !important;
-  background-color: #3366CC !important;
 }
-
-.suggest-button:hover {
-  color: #FFFFFF !important;
-  background-color: #3366CC !important;
-  text-decoration: underline !important;
-}
-
 
 .list-container {
   margin-top: 10px;
