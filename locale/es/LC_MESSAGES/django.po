@@ -27,7 +27,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-18 16:05+0000\n"
+"POT-Creation-Date: 2021-11-18 16:14+0000\n"
 "PO-Revision-Date: 2021-11-18 12:22:54+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -751,7 +751,7 @@ msgstr "Haz clic en 'confirmar' para renovar la aplicación para %(partner)s"
 #: TWLight/applications/templates/applications/confirm_renewal.html:29
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:16
-#: TWLight/users/templates/users/user_confirm_delete.html:24
+#: TWLight/users/templates/users/user_confirm_delete.html:27
 #: TWLight/users/views.py:510
 msgid "Confirm"
 msgstr "Confirmar"
@@ -2452,7 +2452,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
-#: TWLight/templates/base.html:67 TWLight/templates/message_partial.html:15
+#: TWLight/templates/base.html:67
 #, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
@@ -2466,7 +2466,7 @@ msgstr ""
 "\"%(email_url)s\">actualizar tu correo electrónico</a>."
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
-#: TWLight/templates/base.html:78 TWLight/templates/message_partial.html:26
+#: TWLight/templates/base.html:78
 #, python-format
 msgid ""
 "You have requested a restriction on the processing of your data. Most site "
@@ -2475,7 +2475,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown if the current user has not agreed to the terms of use.
-#: TWLight/templates/base.html:89 TWLight/templates/message_partial.html:37
+#: TWLight/templates/base.html:89
 #, python-format
 msgid ""
 "You have not agreed to the <a href=\"%(terms_url)s\">terms of use</a> of "
@@ -2586,6 +2586,43 @@ msgstr ""
 msgid "Login via Wikipedia"
 msgstr "Iniciar sesión con tu cuenta de Wikipedia"
 
+#. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
+#: TWLight/templates/message_partial.html:15
+#, fuzzy, python-format
+#| msgid ""
+#| "You don't have an email on file. We can't finalize your access to partner "
+#| "resources, and you won't be able to <a href=\"%(contact_us_url)s"
+#| "\">contact us</a> without an email. Please <a href=\"%(email_url)s"
+#| "\">update your email</a>."
+msgid ""
+"You don't have an email on file. We can't finalize your access to partner "
+"resources, and you won't be able to <a class=\"twl-links\" href="
+"\"%(contact_us_url)s\">contact us</a> without an email. Please <a class="
+"\"twl-links\" href=\"%(email_url)s\">update your email</a>."
+msgstr ""
+"No tienes un correo electrónico agregado. No podemos finalizar to acceso a "
+"los recursos del socio y no podrás  <a href=\"%(contact_us_url)s"
+"\">contactarnos</a> si un correo electrónico. Favor de <a href="
+"\"%(email_url)s\">actualizar tu correo electrónico</a>."
+
+#. Translators: Shown if the current user has requested the processing of their data should be restricted.
+#: TWLight/templates/message_partial.html:26
+#, python-format
+msgid ""
+"You have requested a restriction on the processing of your data. Most site "
+"functionality will not be available to you until you <a class=\"twl-links\" "
+"href=\"%(restrict_url)s\">lift this restriction</a>."
+msgstr ""
+
+#. Translators: Shown if the current user has not agreed to the terms of use.
+#: TWLight/templates/message_partial.html:37
+#, python-format
+msgid ""
+"You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s"
+"\">terms of use</a> of this site. Your applications will not be processed "
+"and you won't be able to apply or access resources you are approved for."
+msgstr ""
+
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
@@ -2679,7 +2716,7 @@ msgstr ""
 "inicio de sesión)."
 
 #. Translators: This labels a button which users click to change their email.
-#: TWLight/users/forms.py:224
+#: TWLight/users/forms.py:227
 msgid "Update email"
 msgstr "Actualizar dirección de correo electrónico"
 
@@ -2801,46 +2838,46 @@ msgid "Expired"
 msgstr "Caducado"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
-#: TWLight/users/templates/users/editor_detail.html:12
+#: TWLight/users/templates/users/editor_detail.html:15
 msgid "Start new application"
 msgstr "Comenzar una nueva solicitud"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.
 #. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
-#: TWLight/users/templates/users/editor_detail.html:21
+#: TWLight/users/templates/users/editor_detail.html:24
 #: TWLight/users/templates/users/my_applications.html:13
 msgid "My Library"
 msgstr "Mi Biblioteca"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
-#: TWLight/users/templates/users/editor_detail.html:25
+#: TWLight/users/templates/users/editor_detail.html:28
 msgid "A collective list of collections you are authorized to access"
 msgstr "Una lista de colecciones a las que estás autorizado a acceder"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
-#: TWLight/users/templates/users/editor_detail.html:33
+#: TWLight/users/templates/users/editor_detail.html:36
 #: TWLight/users/templates/users/my_applications.html:10
 msgid "My applications"
 msgstr "Mis solicitudes"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
-#: TWLight/users/templates/users/editor_detail.html:37
+#: TWLight/users/templates/users/editor_detail.html:40
 msgid "Both historical and current, made to various partners"
 msgstr "Tanto histórico como actual, hecho a varios socios"
 
 #. Translators: This is the heading for user information on profile and application pages.
-#: TWLight/users/templates/users/editor_detail.html:44
+#: TWLight/users/templates/users/editor_detail.html:47
 msgid "User information"
 msgstr "Información del usuario"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
-#: TWLight/users/templates/users/editor_detail.html:46
+#: TWLight/users/templates/users/editor_detail.html:49
 msgid "Editor data"
 msgstr "Datos del editor"
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
-#: TWLight/users/templates/users/editor_detail.html:56
+#: TWLight/users/templates/users/editor_detail.html:59
 msgid ""
 "Information with an * was retrieved from Wikipedia directly. Other "
 "information was entered directly by users or site admins, in their preferred "
@@ -2851,7 +2888,7 @@ msgstr ""
 "sitio en su idioma de preferencia."
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
-#: TWLight/users/templates/users/editor_detail.html:68
+#: TWLight/users/templates/users/editor_detail.html:71
 #, python-format
 msgid "%(username)s has coordinator privileges on this site."
 msgstr "%(username)s tiene privilegios de coordinador en este sitio."
@@ -2934,12 +2971,11 @@ msgstr "¿Se encuentra bloqueado en algún proyecto?"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:133
-#: TWLight/users/templates/users/eligibility_modal.html:40
 #, fuzzy, python-format
 msgid ""
 "It looks like you have an active block on your account. If you meet the "
 "other criteria you may still be permitted access to the library - please <a "
-"href=\"%(contact_url)s\">contact us</a>."
+"class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
 msgstr ""
 "Parece que tienes un bloqueo activo en tu cuenta. Si reúnes los otros "
 "criterios, podrías tener acceso al Paquete de la Biblioteca. Favor de <a "
@@ -3015,10 +3051,13 @@ msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:267
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
+#| "time."
 msgid ""
-"You may <a href=\"%(update_url)s\">update or delete</a> your data at any "
-"time."
+"You may <a class=\"twl-links\" href=\"%(update_url)s\">update or delete</a> "
+"your data at any time."
 msgstr ""
 "Puedes <a href=\"%(update_url)s\">actualizar o borrar</a> tu información en "
 "cualquier momento."
@@ -3051,6 +3090,17 @@ msgstr ""
 msgid ""
 "Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
 msgstr "Aceptó las <a href=\"%(terms)s\">condiciones de uso</a> del sitio"
+
+#: TWLight/users/templates/users/eligibility_modal.html:40
+#, fuzzy, python-format
+msgid ""
+"It looks like you have an active block on your account. If you meet the "
+"other criteria you may still be permitted access to the library - please <a "
+"href=\"%(contact_url)s\">contact us</a>."
+msgstr ""
+"Parece que tienes un bloqueo activo en tu cuenta. Si reúnes los otros "
+"criterios, podrías tener acceso al Paquete de la Biblioteca. Favor de <a "
+"href=\"%(contact_url)s\">contactarnos</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -3088,10 +3138,15 @@ msgid "Set language"
 msgstr "Establecer idioma"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
-#: TWLight/users/templates/users/language_form.html:29
+#: TWLight/users/templates/users/language_form.html:31
+#, fuzzy
+#| msgid ""
+#| "You can help translate the tool at <a href=\"https://translatewiki.net/"
+#| "wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 msgid ""
-"You can help translate the tool at <a href=\"https://translatewiki.net/wiki/"
-"Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
+"You can help translate the tool at <a class=\"twl-links\" href=\"https://"
+"translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform"
+"\">translatewiki.net</a>."
 msgstr ""
 "Puedes ayudar a traducir la herramienta en <a href=\"https://translatewiki."
 "net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
@@ -3144,7 +3199,7 @@ msgstr "Contraseña"
 #. Translators: This is a button which updates user preference settings
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
-#: TWLight/users/templates/users/user_email_preferences.html:23
+#: TWLight/users/templates/users/user_email_preferences.html:25
 #: TWLight/users/views.py:379
 msgid "Update"
 msgstr "Actualizar"
@@ -3175,12 +3230,12 @@ msgid "Restrict"
 msgstr "Restringir"
 
 #. Translators: This is the title of the page where users can request we stop processing their data.
-#: TWLight/users/templates/users/restrict_data.html:8
+#: TWLight/users/templates/users/restrict_data.html:11
 msgid "Restrict data processing"
 msgstr "Restringir procesamiento de datos"
 
 #. Translators: This message is displayed on the page where users can request we stop processing their data.
-#: TWLight/users/templates/users/restrict_data.html:12
+#: TWLight/users/templates/users/restrict_data.html:15
 msgid ""
 "Checking this box and clicking “Restrict” will pause all processing of the "
 "data you have entered into this website. You will not be able to apply for "
@@ -3190,7 +3245,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This warning message is shown to coordinators who view the data restriction page.
-#: TWLight/users/templates/users/restrict_data.html:23
+#: TWLight/users/templates/users/restrict_data.html:26
 msgid ""
 "You are a coordinator on this site. If you restrict the processing of your "
 "data, your coordinator flag will be removed."
@@ -3654,12 +3709,12 @@ msgid "Extend"
 msgstr "Extender"
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
-#: TWLight/users/templates/users/user_confirm_delete.html:8
+#: TWLight/users/templates/users/user_confirm_delete.html:11
 msgid "Delete all data"
 msgstr "Eliminar todos los datos"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
-#: TWLight/users/templates/users/user_confirm_delete.html:14
+#: TWLight/users/templates/users/user_confirm_delete.html:17
 msgid ""
 "<b>Warning:</b> Performing this action will delete your Wikipedia Library "
 "Card user account and all associated applications. This process is not "
@@ -3696,16 +3751,19 @@ msgstr ""
 "administrador del sitio para que te ayude."
 
 #. Translators: Labels a sections where coordinators can select their email preferences.
-#: TWLight/users/templates/users/user_email_preferences.html:14
+#: TWLight/users/templates/users/user_email_preferences.html:15
 msgid "Coordinators only"
 msgstr "Solo coordinadores"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:158
-#, python-brace-format
+#, fuzzy, python-brace-format
+#| msgid ""
+#| "Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
+#| "coordinators evaluate your applications."
 msgid ""
-"Please <a href='{url}'>update your contributions</a> to Wikipedia to help "
-"coordinators evaluate your applications."
+"Please <a class='twl-links' href='{url}'>update your contributions</a> to "
+"Wikipedia to help coordinators evaluate your applications."
 msgstr ""
 "Favor de <a href='{url}'>actualizar tus contribuciones</a> a Wikipedia para "
 "ayudar a coordinadores a evaluar tus solicitudes."
