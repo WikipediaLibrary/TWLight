@@ -66,7 +66,7 @@
       {% if editor.user|coordinators_only %}
         <div class="row">
           <div class="col-xs-12 col-md-10 col-md-offset-1">
-            <p class="well">
+            <p class="card card-body bg-light">
                 {% comment %}Translators: This distinguishes users who have been flagged as account coordinators. Don't translate {{ username }}.{% endcomment %}
                 {% blocktranslate trimmed with username=editor.wp_username %}
                   {{ username }} has coordinator privileges on this site.
