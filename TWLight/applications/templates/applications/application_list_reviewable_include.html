@@ -3,7 +3,7 @@
 
 {% if object_list %}
   <i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;
-  <span class="label label-primary">
+  <span class="badge badge-primary">
     {% comment %}Translators: This labels the column description indicating the status of the listed applications.{% endcomment %}
     {% trans "Status" %}
   </span>&nbsp;
@@ -31,10 +31,10 @@
         {% for app in object_list %}
           <li>
             <input type="checkbox" name="applications" value="{{ app.pk }}">
-            <span class="label label{{ app.get_bootstrap_class }}">
+            <span class="badge badge{{ app.get_bootstrap_class }}">
               {{ app.get_status_display }}
             </span>&nbsp;
-            <a href="{{ app.get_absolute_url }}">
+            <a class="twl-links" href="{{ app.get_absolute_url }}">
               {{ app }}
             </a>
             &mdash;
@@ -57,7 +57,7 @@
             &mdash;
             <em>{{ app.date_created }}</em>&nbsp;
             {% if app.parent %}
-              <span class="label label-info">
+              <span class="badge badge-info">
                 {% comment %}Translators: Displayed if an application is a renewal.{% endcomment %}
                 {% trans "Renewal" %}
               </span>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="row">
-      <div class="col-xs-12 col-sm-6">
+      <div class="col-12 col-sm-6">
         <div class="form-group">
           <label for="select_status">
             {% comment %}Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.{% endcomment %}

@@ -9,23 +9,23 @@
 {% for app in object_list %}
   <div class="row">
     <div class="col-xs-4 col-sm-2">
-      <span class="label label{{ app.get_bootstrap_class }} pull-right">
+      <span class="badge badge{{ app.get_bootstrap_class }} pull-right">
         {{ app.get_status_display }}
       </span>
     </div>    
     <div class="col-xs-8 col-sm-6">
-      <h4>
-      <a href="{{ app.get_absolute_url }}">
+      <h5>
+      <a class="twl-links" href="{{ app.get_absolute_url }}">
         {{ app }}
       </a>
-      </h4>
+      </h5>
       {% if app.user.editor %}
-      Editor: <a href="/users/{{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
+      Editor: <a class="twl-links" href="/users/{{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
       <br />
       {% endif %}
       {% if app.user.email %}
       Email:
-        <a href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
+        <a class="twl-links" href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
       <br />
       {% endif %}
       {% if app.imported %}
@@ -49,10 +49,10 @@
       {% endif %}
       <br />
       {% if app.user.editor %}
-      Filter by editor: <a href="?Editor={{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
+      Filter by editor: <a class="twl-links" href="?Editor={{ app.user.editor.pk|urlencode|safe }}">{{ app.user.editor.wp_username }}</a>
       &nbsp;&nbsp;&nbsp;
       {% endif %}
-      Filter by partner: <a href="?Partner={{ app.partner.pk|urlencode|safe }}">{{ app.partner }}</a>
+      Filter by partner: <a class="twl-links" href="?Partner={{ app.partner.pk|urlencode|safe }}">{{ app.partner }}</a>
     </div>
     {% if not forloop.last %}
       <div class="col-sm-10 col-sm-offset-2 col-xs-12">

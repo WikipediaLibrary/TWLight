@@ -313,7 +313,6 @@ class ApplicationAutocomplete(forms.ModelForm):
         # Prettify.
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
-        self.helper.field_template = "bootstrap4/layout/inline_field.html"
         self.helper.layout = Layout(
             InlineField("editor"),
             InlineField("partner"),
