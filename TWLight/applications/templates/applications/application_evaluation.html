@@ -8,8 +8,8 @@
 {% load twlight_perms %}
 
 {% block extra_css %}
-  <style media="screen">
-    h2{
+  <style type="text/css">
+    h1, h2, h3{
       margin: 20px 0px;
     }
     #id_honeypot {
@@ -51,57 +51,57 @@
     <h2>{% trans 'Application' %}</h2>
 
     <div class="row">
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing the date the application was submitted.{% endcomment %}
         <strong>{% trans 'Date of application' %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         {{ object.date_created | localize }}
       </div>
 
       {% if object.get_num_days_open >= 0 %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
             {% comment %}Translators: This labels the section of an application showing how many days it has been since the application was opened.{% endcomment %}
             <strong>{% trans 'Days open' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ object.get_num_days_open }}
         </div>
       {% else %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of an application showing how many days it has been since the application was closed.{% endcomment %}
           <strong>{% trans 'Days since application was closed' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ object.get_num_days_open|stringformat:"+d"|slice:"1:" }} {# slice off negative sign #}
         </div>
       {% endif %}
 
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.){% endcomment %}
         <strong>{% trans 'Status' %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         <span class="badge badge{{ object.get_bootstrap_class }} badge-lg">{{ object.get_status_display }}
       </div>
 
       {% if object.requested_access_duration %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.{% endcomment %}
           <strong>{% trans 'Access duration' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ object.requested_access_duration }}
           {% comment %}Translators: This adds the word 'month(s)' next to the actual number of months.{% endcomment %}
           {% trans 'month(s)' %}
         </div>
       {% endif %}
 
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application showing which partner the user requested access to.{% endcomment %}
         <strong>{% trans 'Partner' %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         {{ object.partner }}
         {% if object.partner.is_waitlisted %}
           {% comment %}Translators: This labels the partner as waitlisted (if that's the case) to help coordinators better assess application.{% endcomment %}
@@ -110,11 +110,11 @@
       </div>
 
       {% if object.partner.country_of_residence %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of an application that shows the country of residence of the applicant.{% endcomment %}
           <strong>{% trans 'Country of residence' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {% if not object.editor.country_of_residence %}
             {% comment %}Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.{% endcomment %}
             {% trans 'Unknown' %}
@@ -129,16 +129,16 @@
       {% endif %}
 
       {% if total_accounts_available_for_distribution is not None %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.{% endcomment %}
           <strong>{% trans 'Accounts available' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ total_accounts_available_for_distribution }}
         </div>
       {% endif %}
 
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         <strong>
           {% url 'terms' as terms_url %}
           {% comment %}Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.{% endcomment %}
@@ -147,7 +147,7 @@
           {% endblocktranslate %}
         </strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         {% if object.editor.user.userprofile.terms_of_use %}
           {% comment %}Translators: Displayed to coordinators when they've agreed to the terms of use.{% endcomment %}
           {% trans 'Yes' %}
@@ -162,20 +162,20 @@
       </div>
 
       {% if object.specific_title %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.{% endcomment %}
           <strong>{% trans 'Title requested' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ object.specific_title }}
         </div>
       {% endif %}
 
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.{% endcomment %}
         <strong>{% trans 'Why the editor wants access' %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         {% if object.rationale %}
           {{ object.rationale }}
         {% else %}
@@ -184,11 +184,11 @@
         {% endif %}
       </div>
 
-      <div class="col-xs-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         {% comment %}Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.{% endcomment %}
         <strong>{% trans 'Renewal of existing access grant?' %}</strong>
       </div>
-      <div class="col-xs-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         {% if object.parent %}
           {% with object.parent.get_absolute_url as parent_url %}
             {% comment %}Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or {{ parent_url }}.{% endcomment %}
@@ -203,21 +203,21 @@
       </div>
 
       {% if object.parent and object.parent.get_authorization %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.{% endcomment %}
           <strong>{% trans 'Previous access expiry date' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ previous_auth_expiry_date }}
         </div>
       {% endif %}
 
       {% if object.comments %}
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-12 col-sm-4">
           {% comment %}Translators: This labels the section of an application containing the additional comments submitted by the user when applying.{% endcomment %}
           <strong>{% trans 'Comments from the editor' %}</strong>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-12 col-sm-8">
           {{ object.comments }}
         </div>
       {% endif %}
@@ -271,7 +271,7 @@
     {% if not object.user|restricted %}
       {% get_comment_form for object as form %}
       <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-3">
           <form id="comment-form" method="POST" action="{% comment_form_target %}">
             {% csrf_token %}
             <label for="{{ form.comment.id }}" class="control-label">
@@ -312,10 +312,10 @@
       {% for version in versions %}
         <li>
           <div class="row">
-            <div class="col-xs-2">
+            <div class="col-2">
               <span class="badge badge{{ version|get_bootstrap_class_for_version }} pull-right">{{ version|get_status_display_for_version }}</span>
             </div>
-            <div class="col-xs-9">
+            <div class="col-9">
               <span class="pull-left">
                 {% if forloop.last %}
                   {% with submit_user=version.revision.user.editor.wp_username %}
