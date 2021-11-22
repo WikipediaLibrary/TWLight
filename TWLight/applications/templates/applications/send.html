@@ -1,23 +1,27 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 
 {% load i18n %}
 
 {% block content %}
-  {% comment %}Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.{% endcomment %}
-  <h2>{% trans "Partners with approved, unsent applications" %}</h2>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    {% comment %}Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.{% endcomment %}
+    <h2 class="mb-4 ml-2">{% trans "Partners with approved, unsent applications" %}</h2>
 
-  {% if object_list %}
-    <ul>
-      {% for partner in object_list %}
-        <li>
-          <a href="{% url 'applications:send_partner' partner.id %}">{{ partner }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>
-      {% comment %}Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.{% endcomment %}
-      {% trans "There are no partners with applications ready to send." %}
-    </p>
-  {% endif %}
+    {% if object_list %}
+      <ul>
+        {% for partner in object_list %}
+          <li>
+            <a class="twl-links" href="{% url 'applications:send_partner' partner.id %}">{{ partner }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>
+        {% comment %}Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.{% endcomment %}
+        {% trans "There are no partners with applications ready to send." %}
+      </p>
+    {% endif %}
+  </div>
 {% endblock content %}
