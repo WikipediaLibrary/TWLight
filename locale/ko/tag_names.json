@@ -10,6 +10,7 @@
 	"physical-sciences_tag": "물리학",
 	"music_tag": "음악",
 	"art_tag": "미술",
+	"business-and-economics_tag": "비즈니스와 경제",
 	"law_tag": "법",
 	"education_tag": "교육",
 	"philosophy-and-religion_tag": "철학과 종교",
@@ -17,6 +18,7 @@
 	"history_tag": "역사",
 	"culture_tag": "문화",
 	"life-sciences_tag": "생명과학",
+	"health-sciences_tag": "보건학",
 	"earth-sciences_tag": "지구과학",
 	"technology_tag": "기술"
 }
