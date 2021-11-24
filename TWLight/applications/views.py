@@ -1387,16 +1387,19 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 auth = Authorization.objects.get(
                     user=application.user, partners=application.partner
                 )
-                if auth.accesscodes:
-                    logger.info(
-                        "Authorization already has an access code, reassigning it...."
-                    )
-                    # Get old access code and delete it
-                    old_access_code = AccessCode.objects.get(pk=auth.accesscodes.pk)
-                    old_access_code.delete()
-                    auth.accesscodes = code_object
-                    auth.save()
-                    code_object.authorization = auth
+                if hasattr(auth, "accesscodes"):
+                    if auth.accesscodes:
+                        logger.info(
+                            "Authorization already has an access code, reassigning it...."
+                        )
+                        # Get old access code and delete it
+                        old_access_code = AccessCode.objects.get(pk=auth.accesscodes.pk)
+                        old_access_code.delete()
+                        auth.accesscodes = code_object
+                        auth.save()
+                        code_object.authorization = auth
+                    else:
+                        code_object.authorization = auth
                 else:
                     code_object.authorization = auth
 
