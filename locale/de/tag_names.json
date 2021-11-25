@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Martin Rulsch (WMDE)",
 			"Sandro Halank (WMDE)",
 			"Umlaut"
 		]
@@ -10,7 +11,7 @@
 	"physical-sciences_tag": "Physik",
 	"music_tag": "Musik",
 	"art_tag": "Kunst",
-	"business-and-economics_tag": "Betriebs- und Volkswirtschaftslehre",
+	"business-and-economics_tag": "Wirtschaft und Ökonomie",
 	"law_tag": "Recht",
 	"education_tag": "Bildung",
 	"philosophy-and-religion_tag": "Philosophie und Religion",
@@ -18,7 +19,7 @@
 	"history_tag": "Geschichte",
 	"culture_tag": "Kultur",
 	"life-sciences_tag": "Naturwissenschaften",
-	"health-sciences_tag": "Gesundheitswissenschaften",
+	"health-sciences_tag": "Medizin",
 	"earth-sciences_tag": "Geowissenschaften",
 	"technology_tag": "Technologie"
 }
