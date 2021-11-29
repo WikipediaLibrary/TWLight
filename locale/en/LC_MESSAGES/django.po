@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-18 16:15+0000\n"
+"POT-Creation-Date: 2021-11-29 17:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,7 +285,7 @@ msgstr ""
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:21
 #: TWLight/applications/templates/applications/application_list_include.html:6
-#: TWLight/applications/templates/applications/send_partner.html:42
+#: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:15
 msgid ""
 "Coordinators: This page may contain personal information such as real names "
@@ -668,14 +668,14 @@ msgstr ""
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:28
-#: TWLight/applications/templates/applications/send_partner.html:104
+#: TWLight/applications/templates/applications/send_partner.html:109
 msgid "Select/deselect all"
 msgstr ""
 
 #. Translators: Displayed if an application is a renewal.
 #. Translators: Denotes whether an application was a renewal request for a previous application.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:62
-#: TWLight/applications/templates/applications/send_partner.html:123
+#: TWLight/applications/templates/applications/send_partner.html:129
 #: TWLight/resources/templates/resources/partner_users.html:50
 #: TWLight/resources/templates/resources/partner_users.html:90
 msgid "Renewal"
@@ -741,23 +741,23 @@ msgid ""
 msgstr ""
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
-#: TWLight/applications/templates/applications/send.html:7
+#: TWLight/applications/templates/applications/send.html:10
 msgid "Partners with approved, unsent applications"
 msgstr ""
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when no such applications exist or all have already been sent.
-#: TWLight/applications/templates/applications/send.html:20
+#: TWLight/applications/templates/applications/send.html:23
 msgid "There are no partners with applications ready to send."
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the page, where object will be the name of the partner. Don't translate object.
-#: TWLight/applications/templates/applications/send_partner.html:37
+#: TWLight/applications/templates/applications/send_partner.html:40
 #, python-format
 msgid "Application data for %(object)s"
 msgstr ""
 
 #. Translators: This message is shown when applications exceed the number of accounts available.
-#: TWLight/applications/templates/applications/send_partner.html:51
+#: TWLight/applications/templates/applications/send_partner.html:54
 #, python-format
 msgid ""
 "Application(s) for %(object)s, if sent, will exceed the total available "
@@ -765,49 +765,49 @@ msgid ""
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
-#: TWLight/applications/templates/applications/send_partner.html:62
+#: TWLight/applications/templates/applications/send_partner.html:65
 msgid "When you've processed the data below, click the 'mark as sent' button."
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing contact information for the people applications should be sent to.
-#: TWLight/applications/templates/applications/send_partner.html:68
+#: TWLight/applications/templates/applications/send_partner.html:71
 msgid "Contact"
 msgid_plural "Contacts"
 msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/applications/templates/applications/send_partner.html:84
+#: TWLight/applications/templates/applications/send_partner.html:89
 msgid ""
 "Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
 "administrators."
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
-#: TWLight/applications/templates/applications/send_partner.html:89
+#: TWLight/applications/templates/applications/send_partner.html:94
 msgid "Application data"
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this labels the button coordinators press to change the status of applications to 'sent'.
-#: TWLight/applications/templates/applications/send_partner.html:140
-#: TWLight/applications/templates/applications/send_partner.html:180
+#: TWLight/applications/templates/applications/send_partner.html:147
+#: TWLight/applications/templates/applications/send_partner.html:187
 msgid "Mark as sent"
 msgstr ""
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
-#: TWLight/applications/templates/applications/send_partner.html:145
+#: TWLight/applications/templates/applications/send_partner.html:152
 msgid ""
 "Use the dropdown menus to denote which editor will receive each code. Access "
 "codes will be sent to users automatically."
 msgstr ""
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
-#: TWLight/applications/templates/applications/send_partner.html:166
+#: TWLight/applications/templates/applications/send_partner.html:173
 msgid "Select code:"
 msgstr ""
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
-#: TWLight/applications/templates/applications/send_partner.html:185
+#: TWLight/applications/templates/applications/send_partner.html:192
 msgid "There are no approved, unsent applications."
 msgstr ""
 
