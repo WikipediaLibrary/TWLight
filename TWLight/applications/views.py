@@ -1041,7 +1041,7 @@ class EvaluateApplicationView(
                 "submit",
                 # Translators: this lets a reviewer set the status of a single application.
                 _("Set application status"),
-                css_class="center-block",
+                css_class="twl-btn",
             )
         )
 
