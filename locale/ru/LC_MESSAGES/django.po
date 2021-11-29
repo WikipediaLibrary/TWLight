@@ -39,7 +39,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-11-18 16:15+0000\n"
-"PO-Revision-Date: 2021-11-22 13:00:31+0000\n"
+"PO-Revision-Date: 2021-11-29 12:14:42+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2516,9 +2516,9 @@ msgstr "Следующая информация доступна только в
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:267
-#, fuzzy, python-format
+#, python-format
 msgid "You may <a class=\"twl-links\" href=\"%(update_url)s\">update or delete</a> your data at any time."
-msgstr "Вы можете <a href=\"%(update_url)s\">обновить или удалить</a> свои данные в любое время."
+msgstr "Вы можете <a class=\"twl-links\" href=\"%(update_url)s\">обновить или удалить</a> свои данные в любое время."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:278

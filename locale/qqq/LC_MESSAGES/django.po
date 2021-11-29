@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-11-18 16:15+0000\n"
-"PO-Revision-Date: 2021-11-22 13:00:30+0000\n"
+"PO-Revision-Date: 2021-11-29 12:14:42+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -461,7 +461,7 @@ msgstr ""
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:253
 msgid "Discussion"
-msgstr ""
+msgstr "{{Identical|Discussion}}"
 
 #. Translators: This labels the button which users click to send a typed comment.
 #: TWLight/applications/templates/applications/application_evaluation.html:274
@@ -548,7 +548,7 @@ msgstr ""
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
 #: TWLight/applications/templates/applications/application_list.html:84
 msgid "None"
-msgstr ""
+msgstr "{{Identical|None}}"
 
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
 #: TWLight/applications/templates/applications/application_list.html:96
@@ -1276,7 +1276,6 @@ msgstr "{{identical|Topic}}"
 #: TWLight/resources/templates/resources/collection_tile.html:21
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
-#, fuzzy
 msgid "Languages"
 msgstr "{{Identical|Language}}"
 
