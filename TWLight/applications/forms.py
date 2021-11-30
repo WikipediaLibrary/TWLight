@@ -17,7 +17,16 @@ form that takes a dict of required fields, and constructs the form accordingly.
 from dal import autocomplete
 from crispy_forms.bootstrap import InlineField
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, BaseInput, Div, HTML
+from crispy_forms.layout import (
+    Layout,
+    Column,
+    Row,
+    Fieldset,
+    Submit,
+    BaseInput,
+    Div,
+    HTML,
+)
 import logging
 import re
 
@@ -313,10 +322,20 @@ class ApplicationAutocomplete(forms.ModelForm):
         # Prettify.
         self.helper = FormHelper()
         self.helper.form_class = "form-inline"
+        self.helper.label_class = "sr-only"
         self.helper.layout = Layout(
-            InlineField("editor"),
-            InlineField("partner"),
-            StylableSubmit("submit", "Filter", css_class="btn btn-default"),
+            Row(
+                Column("editor", css_class="col-lg-6 px-sm-3 col-sm-8 mx-sm-1"),
+                css_class="form-group my-1",
+            ),
+            Row(
+                Column("partner", css_class="col-lg-6 px-sm-3 col-sm-8 mx-sm-1"),
+                css_class="form-group my-1",
+            ),
+            Row(
+                Submit("submit", "Filter", css_class="btn btn-default mx-sm-1"),
+                css_class="form-group my-1 px-lg-3 col-sm-3 col-xs-4 px-xs-2",
+            ),
         )
 
         # Required on the model, but optional for autocomplete, so override
