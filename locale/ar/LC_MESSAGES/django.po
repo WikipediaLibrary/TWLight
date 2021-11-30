@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-30 21:07+0000\n"
+"POT-Creation-Date: 2021-11-30 23:47+0000\n"
 "PO-Revision-Date: 2021-11-22 13:00:27+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1289,18 +1289,13 @@ msgstr "مكتبة ويكيبيديا"
 msgid "Mailing list"
 msgstr "القائمة البريدية"
 
-#. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
-#: TWLight/emails/templates/emails/contact.html:59
-msgid "IRC"
-msgstr "آي آر سي"
-
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:67
+#: TWLight/emails/templates/emails/contact.html:63
 msgid "Wikipedia Library Facebook page"
 msgstr "صفحة مكتبة ويكيبيديا على فيسبوك"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:73
+#: TWLight/emails/templates/emails/contact.html:69
 msgid "Wikipedia Library Twitter page"
 msgstr "صفحة مكتبة ويكيبيديا على تويتر"
 
@@ -4072,3 +4067,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "IRC"
+#~ msgstr "آي آر سي"

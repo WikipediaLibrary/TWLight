@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-30 21:06+0000\n"
+"POT-Creation-Date: 2021-11-30 23:47+0000\n"
 "PO-Revision-Date: 2021-11-25 12:19:49+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1189,18 +1189,13 @@ msgstr "위키백과 도서관"
 msgid "Mailing list"
 msgstr "메일링 리스트"
 
-#. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
-#: TWLight/emails/templates/emails/contact.html:59
-msgid "IRC"
-msgstr "IRC"
-
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:67
+#: TWLight/emails/templates/emails/contact.html:63
 msgid "Wikipedia Library Facebook page"
 msgstr "위키백과 도서관 페이스북 페이지"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:73
+#: TWLight/emails/templates/emails/contact.html:69
 msgid "Wikipedia Library Twitter page"
 msgstr "위키백과 도서관 트위터 페이지"
 
@@ -3594,3 +3589,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "IRC"
+#~ msgstr "IRC"
