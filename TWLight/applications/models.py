@@ -166,7 +166,7 @@ class Application(models.Model):
     # Versions contain the model data at the time, accessible via
     # version.field_dict['field_name']. Revisions contain metadata about the
     # version (like when it was saved).
-    # See http://django-reversion.readthedocs.io/en/release-1.8/.
+    # See http://django-reversion.readthedocs.io/en/stable.
     # See TWLight/applications/templatetags/version_tags for how to display
     # version-related information in templates; the API is not always
     # straightforward so we wrap it there.

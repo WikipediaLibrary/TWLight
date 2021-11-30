@@ -1384,9 +1384,25 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 # to ensure that the authorization object has been created.
                 # This filtering should only ever find one object. There will
                 # always be a user and partner
-                code_object.authorization = Authorization.objects.get(
+                auth = Authorization.objects.get(
                     user=application.user, partners=application.partner
                 )
+                if hasattr(auth, "accesscodes"):
+                    if auth.accesscodes:
+                        logger.info(
+                            "Authorization already has an access code, reassigning it...."
+                        )
+                        # Get old access code and delete it
+                        old_access_code = AccessCode.objects.get(pk=auth.accesscodes.pk)
+                        old_access_code.delete()
+                        auth.accesscodes = code_object
+                        auth.save()
+                        code_object.authorization = auth
+                    else:
+                        code_object.authorization = auth
+                else:
+                    code_object.authorization = auth
+
                 code_object.save()
 
         messages.add_message(
