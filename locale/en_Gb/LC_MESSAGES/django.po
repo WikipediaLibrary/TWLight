@@ -1282,6 +1282,11 @@ msgstr "The Wikipedia Library"
 msgid "Mailing list"
 msgstr "Mailing list"
 
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library IRC channel.
+#: TWLight/emails/templates/emails/contact.html:59
+msgid "IRC"
+msgstr "IRC"
+
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:67
 msgid "Wikipedia Library Facebook page"
