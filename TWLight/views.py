@@ -7,7 +7,7 @@ from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.translation import get_language, gettext_lazy as _
@@ -136,19 +136,33 @@ class SearchEndpointFormView(EligibleEditorsOnly, FormView):
     Allows persistent links to EDS searches with referring URL authentication.
     """
 
-    def get_form_kwargs(self, **kwargs):
-        kwargs = super().get_form_kwargs()
-        kwargs["bquery"] = quote(
-            bleach.clean(
-                self.request.GET.get("q"),
+    template_name = "eds_search_endpoint.html"
+    form_class = EdsSearchForm
+
+    def get(self, request, *args, **kwargs):
+        """Redirect to the homepage if we don't have a valid search; otherwise, proceed as ususal."""
+        self.request.GET = self.request.GET.copy()
+        q = None
+
+        if self.request.GET.__contains__("q"):
+            q = bleach.clean(
+                self.request.GET.pop("q")[0],
                 tags=[],
                 strip=True,
             )
-        )
-        return kwargs
 
-    template_name = "eds_search_endpoint.html"
-    form_class = EdsSearchForm
+        if q:
+            self.request.GET["q"] = quote(q)
+            return self.render_to_response(self.get_context_data())
+        else:
+            return HttpResponseRedirect(reverse_lazy("homepage"))
+
+    def get_form_kwargs(self, **kwargs):
+        kwargs = super().get_form_kwargs()
+        q = self.request.GET.get("q")
+        if q is not None:
+            kwargs["bquery"] = q
+        return kwargs
 
 
 @sensitive_variables()
