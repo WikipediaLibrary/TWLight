@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-11-30 23:47+0000\n"
+"POT-Creation-Date: 2021-12-01 02:43+0000\n"
 "PO-Revision-Date: 2021-11-22 13:00:32+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
 #. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access.
-#: TWLight/applications/forms.py:112
+#: TWLight/applications/forms.py:121
 #: TWLight/applications/templates/applications/request_for_application.html:65
 #: TWLight/applications/templates/applications/request_for_application.html:67
 #: TWLight/resources/templates/resources/partner_detail.html:55
@@ -37,18 +37,18 @@ msgid "Apply"
 msgstr "Nộp đơn"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
-#: TWLight/applications/forms.py:204
+#: TWLight/applications/forms.py:213
 msgid "About you"
 msgstr "Tự giới thiệu"
 
 #. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-#: TWLight/applications/forms.py:213
+#: TWLight/applications/forms.py:222
 #, python-brace-format
 msgid "Requested by: {partner_list}"
 msgstr "Yêu cầu bởi: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:222
+#: TWLight/applications/forms.py:231
 #, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a "
@@ -56,45 +56,45 @@ msgid ""
 msgstr ""
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
-#: TWLight/applications/forms.py:233
+#: TWLight/applications/forms.py:242
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "Đơn xin {partner} của bạn"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
-#: TWLight/applications/forms.py:266
+#: TWLight/applications/forms.py:275
 #, python-brace-format
 msgid "You must register at {url} before applying."
 msgstr "Bạn cần phải mở tài khoản tại {url} trước khi nộp đơn."
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
-#: TWLight/applications/forms.py:331
+#: TWLight/applications/forms.py:349
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
 msgid "Username"
 msgstr "Tên người dùng"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:333 TWLight/applications/helpers.py:93
+#: TWLight/applications/forms.py:351 TWLight/applications/helpers.py:93
 msgid "Partner name"
 msgstr "Tên đối tác"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:349
+#: TWLight/applications/forms.py:367
 #, fuzzy
 msgid "Renewal confirmation"
 msgstr "Thông tin cá nhân"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:366 TWLight/applications/helpers.py:103
+#: TWLight/applications/forms.py:384 TWLight/applications/helpers.py:103
 msgid "The email for your account on the partner's website"
 msgstr ""
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:376 TWLight/applications/helpers.py:106
+#: TWLight/applications/forms.py:394 TWLight/applications/helpers.py:106
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -216,7 +216,7 @@ msgstr "Đang thảo luận"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #: TWLight/applications/models.py:58
-#: TWLight/applications/templates/applications/application_list.html:31
+#: TWLight/applications/templates/applications/application_list.html:48
 msgid "Approved"
 msgstr "Chấp nhận"
 
@@ -543,75 +543,80 @@ msgstr ""
 msgid "No previous versions."
 msgstr ""
 
-#: TWLight/applications/templates/applications/application_list.html:20
+#: TWLight/applications/templates/applications/application_list.html:37
 msgid "View applications which are..."
 msgstr "Xem các đơn xin…"
 
-#: TWLight/applications/templates/applications/application_list.html:26
+#: TWLight/applications/templates/applications/application_list.html:43
 msgid "Pending review"
 msgstr "Chờ duyệt"
 
-#: TWLight/applications/templates/applications/application_list.html:36
+#: TWLight/applications/templates/applications/application_list.html:53
 msgid "Rejected"
 msgstr "Từ chối"
 
-#: TWLight/applications/templates/applications/application_list.html:41
+#: TWLight/applications/templates/applications/application_list.html:58
 msgid "Sent"
 msgstr "Gửi"
 
-#: TWLight/applications/templates/applications/application_list.html:46
+#: TWLight/applications/templates/applications/application_list.html:63
 msgid "Up for renewal"
 msgstr ""
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
-#: TWLight/applications/templates/applications/application_list.html:61
+#: TWLight/applications/templates/applications/application_list.html:78
 msgid "Filter by..."
 msgstr "Lọc theo…"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
-#: TWLight/applications/templates/applications/application_list.html:73
+#: TWLight/applications/templates/applications/application_list.html:90
 msgid "Current filters"
 msgstr "Bộ lọc hiện hành"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
-#: TWLight/applications/templates/applications/application_list.html:84
+#: TWLight/applications/templates/applications/application_list.html:101
 msgid "None"
 msgstr "Không có"
 
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
-#: TWLight/applications/templates/applications/application_list.html:96
+#: TWLight/applications/templates/applications/application_list.html:113
 msgid "Page navigation"
 msgstr "Điều hướng trang"
 
-#. Translators: This is the label for a button which goes to the previous page of applications.
-#: TWLight/applications/templates/applications/application_list.html:100
-#: TWLight/applications/templates/applications/application_list.html:102
-#: TWLight/applications/templates/applications/application_list.html:107
-#: TWLight/applications/templates/applications/application_list.html:108
+#: TWLight/applications/templates/applications/application_list.html:117
+#: TWLight/applications/templates/applications/application_list.html:124
 msgid "Previous page"
 msgstr "Trang trước"
 
+#. Translators: This is the label for a button which goes to the previous page of applications.
+#: TWLight/applications/templates/applications/application_list.html:119
+#: TWLight/applications/templates/applications/application_list.html:125
+#, fuzzy
+#| msgid "Previous page"
+msgid "Previous"
+msgstr "Trang trước"
+
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:208
+#. Translators: This is the label for a button which goes to the next page of applications.
+#: TWLight/applications/templates/applications/application_list.html:225
+#: TWLight/applications/templates/applications/application_list.html:227
+#: TWLight/applications/templates/applications/application_list.html:244
 msgid "Next"
 msgstr "Sau"
 
-#. Translators: This is the label for a button which goes to the next page of applications.
-#: TWLight/applications/templates/applications/application_list.html:210
-#: TWLight/applications/templates/applications/application_list.html:226
-#: TWLight/applications/templates/applications/application_list.html:227
-msgid "Next page"
-msgstr "Trang sau"
-
 #. Translators: On the page which shows a list of applications, coordinators can click Last to go to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:217
+#. Translators: This is the label for a button which goes to the last page of applications.
+#: TWLight/applications/templates/applications/application_list.html:234
+#: TWLight/applications/templates/applications/application_list.html:236
+#: TWLight/applications/templates/applications/application_list.html:249
 msgid "Last"
 msgstr "Cuối cùng"
 
-#. Translators: This is the label for a button which goes to the last page of applications.
-#: TWLight/applications/templates/applications/application_list.html:219
-#: TWLight/applications/templates/applications/application_list.html:231
-#: TWLight/applications/templates/applications/application_list.html:232
+#: TWLight/applications/templates/applications/application_list.html:243
+msgid "Next page"
+msgstr "Trang sau"
+
+#: TWLight/applications/templates/applications/application_list.html:248
 msgid "Last page"
 msgstr "Trang cuối"
 
@@ -1445,7 +1450,7 @@ msgstr "Tên của đối tác tiềm năng"
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
 #: TWLight/resources/forms.py:19
-#: TWLight/resources/templates/resources/suggest.html:58
+#: TWLight/resources/templates/resources/suggest.html:57
 msgid "Description"
 msgstr "Mô tả"
 
@@ -1892,40 +1897,40 @@ msgid "Imported"
 msgstr "Đã nhập"
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
-#: TWLight/resources/templates/resources/suggest.html:20
+#: TWLight/resources/templates/resources/suggest.html:19
 msgid "Suggest partners"
 msgstr "Đề xuất đối tác"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:40
+#: TWLight/resources/templates/resources/suggest.html:39
 msgid "Browse and support suggestions"
 msgstr "Xem và ủng hộ các ý kiến"
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:49
+#: TWLight/resources/templates/resources/suggest.html:48
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr "Xóa"
 
-#: TWLight/resources/templates/resources/suggest.html:63
+#: TWLight/resources/templates/resources/suggest.html:62
 msgid "URL"
 msgstr "URL"
 
-#: TWLight/resources/templates/resources/suggest.html:69
+#: TWLight/resources/templates/resources/suggest.html:68
 msgid "Proposer"
 msgstr "Người đề xuất"
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:83
-#: TWLight/resources/templates/resources/suggest.html:111
-#: TWLight/resources/templates/resources/suggest.html:115
+#: TWLight/resources/templates/resources/suggest.html:82
+#: TWLight/resources/templates/resources/suggest.html:110
+#: TWLight/resources/templates/resources/suggest.html:114
 msgid "Upvoted"
 msgstr "Đã bầu lên"
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:86
-#: TWLight/resources/templates/resources/suggest.html:113
+#: TWLight/resources/templates/resources/suggest.html:85
+#: TWLight/resources/templates/resources/suggest.html:112
 msgid "Upvote"
 msgstr "Bầu lên"
 
