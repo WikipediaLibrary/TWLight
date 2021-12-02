@@ -1,0 +1,227 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+{% load twlight_perms %}
+{% load twlight_removetags %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<ul class="timeline half-timeline margin-bottom-2em">
+  <li class="timeline-inverted">
+    <div class="timeline-badge"><i class="fa fa-info"></i>
+    </div>
+    <div class="timeline-panel">
+      <div class="timeline-body">
+        {% if partner_short_description %}
+          <p>
+            {{ partner_short_description | safe }}
+          </p>
+        {% else %}
+          {% comment %}Translators: If a partner has no description written, this message is shown in the Description field on the partner page. {% endcomment %}
+          {% trans "Description not available." %}
+        {% endif %}
+        {% if tags %}
+          <div class="resource-label-subject">
+          {% for tag_key, tag_value in tags.items %}
+            <a class="twl-links" class="resource-label" href="{% url 'partners:filter' %}?tags={{ tag_key }}">{{ tag_value }}</a>
+            {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
+          {% endfor %}
+          </div>
+        {% endif %}
+        {% if partner_description %}
+          <p>
+            {{ partner_description | safe }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </li>
+  {% if object.videos.all %}
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-file"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-body">
+          <h4 class="timeline-title">
+            {% comment %}Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
+            {% trans "Video tutorials" %}
+          </h4>
+          <ul>
+            {% for each_tutorial in object.videos.all %}
+              {% comment %}Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
+              <li><a class="twl-links" href={{ each_tutorial.tutorial_video_url | safe }}>{% trans 'Video' %} {{ forloop.counter }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </li>
+  {% endif %}
+  <li class="timeline-inverted">
+    <div class="timeline-badge"><i class="fa fa-language"></i>
+    </div>
+    <div class="timeline-panel">
+      <div class="timeline-body">
+        {% if object.get_languages %}
+          <div class="partner-languages">
+              {% comment %}Translators: If a partner has content languages specified, this message precedes the list of those languages on the partner page. {% endcomment %}
+              {% trans 'Language(s)' %}:
+              <div class="resource-label-languages">
+              {% for language in partner.get_languages %}
+                  <a class="twl-links" class="resource-label" href="{% url 'partners:filter' %}?languages={{ language.pk }}">{{ language }}</a>
+                  {% if not forloop.last %} <span class="pipe">|</span> {% endif %}
+              {% endfor %}
+              </div>
+          </div>
+        {% else %}
+          {% comment %}Translators: If a partner has no content languages specified, this message is shown in the Languages field on the partner page. {% endcomment %}
+          <p>{% trans "Languages not available." %}</p>
+        {% endif %}
+      </div>
+    </div>
+  </li>
+  {% with object.excerpt_limit as excerpt_limit %}
+  {% with object.excerpt_limit_percentage as excerpt_limit_percentage %}
+  {% if excerpt_limit or excerpt_limit_percentage %}
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-files-o" aria-hidden="true"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          {% comment %}Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
+          <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
+        </div>
+        <div class="timeline-body">
+          <ul>
+            {% if excerpt_limit_percentage and excerpt_limit %}
+              <li>
+                {% comment %}Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page. {% endcomment %}
+                {% blocktranslate trimmed %}
+                  {{ object }} allows a maximum of {{ excerpt_limit }} words or {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                {% endblocktranslate %}
+              </li>
+            {% elif excerpt_limit %}
+              <li>
+                {% comment %}Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page. {% endcomment %}
+                {% blocktranslate trimmed %}
+                  {{ object }} allows a maximum of {{ excerpt_limit }} words be excerpted into a Wikipedia article.
+                {% endblocktranslate %}
+              </li>
+            {% elif excerpt_limit_percentage %}
+              <li>
+                {% comment %}Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page. {% endcomment %}
+                {% blocktranslate trimmed %}
+                  {{ object }} allows a maximum of {{ excerpt_limit_percentage }}% of an article be excerpted into a Wikipedia article.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </li>
+  {% endif %}
+  {% endwith %}
+  {% endwith %}
+  {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
+    <li class="timeline-inverted">
+      <div class="timeline-badge"><i class="fa fa-exclamation"></i>
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          {% comment %}Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
+          <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
+        </div>
+        <div class="timeline-body">
+
+          <ul>
+            {% if object.agreement_with_terms_of_use %}
+              <li>
+                {% comment %}Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate {{ publisher }} or {{ url }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name url=object.terms_of_use %}
+                  {{ publisher }} requires that you agree with its <a href="{{ url }}">terms
+                  of use</a>.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.real_name %}
+              <li>
+                {% comment %}Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your real name.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.country_of_residence %}
+              <li>
+                {% comment %}Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your country of residence.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.occupation %}
+              <li>
+                {% comment %}Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your occupation.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.affiliation %}
+              <li>
+                {% comment %}Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you provide your institutional affiliation.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.specific_title %}
+              <li>
+                {% comment %}Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you specify a particular title that you want
+                  to access.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+
+            {% if object.account_email %}
+              <li>
+                {% comment %}Translators: If a user must register on the partner website before applying, they see this message. Don't translate {{ partner }}. {% endcomment %}
+                {% blocktranslate trimmed with publisher=object.company_name %}
+                  {{ publisher }} requires that you sign up for an account before applying
+                  for access.
+                {% endblocktranslate %}
+              </li>
+            {% endif %}
+          </ul>
+
+        </div>
+      </div>
+    </li>
+  {% endif %}
+  <li class="timeline-inverted">
+    <div class="timeline-badge"><i class="fa fa-link"></i>
+    </div>
+    <div class="timeline-panel">
+      <div class="timeline-body">
+        {% if object.company_location %}
+          {% comment %}Translators: If a partner has their location listed, this message is a label for that location {% endcomment %}
+          <p>{% trans "Location" %}: {{ object.company_location.name }}</p>
+        {% endif %}
+        {% if object.terms_of_use %}
+          {% comment %}Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+          <p><a class="twl-links" href="{{ object.terms_of_use }}">{% trans "Terms of use" %}</a></p>
+        {% else %}
+          {% comment %}Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/). {% endcomment %}
+          <p>{% trans "Terms of use not available." %}</p>
+        {% endif %}
+      </div>
+    </div>
+  </li>
+</ul>
