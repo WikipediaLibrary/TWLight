@@ -1345,6 +1345,38 @@ CONTACT US CSS
 
 /*
 ----------------------------------------------------------------------------
+TIMELINE
+--------------------------------------------------------------------------*/
+.half-timeline > li > .timeline-badge {
+  right: 0;
+}
+
+.half-timeline:before {
+  right: 0;
+}
+
+.half-timeline > li.timeline-inverted > .timeline-panel {
+  float: right;
+  margin-right: 50px;
+  width: 70%;
+}
+
+.full-width {
+  display: block;
+  width: 100%;
+}
+
+/* removes li after 5th from homepage */
+ul.timeline li:nth-child(-n+5) {
+   display: list-item;
+}
+
+ul.timeline-home li {
+	display:none;
+}
+
+/*
+----------------------------------------------------------------------------
 NEW FOOTER CSS
 --------------------------------------------------------------------------
 */

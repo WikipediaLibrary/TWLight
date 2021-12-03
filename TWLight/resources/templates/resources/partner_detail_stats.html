@@ -1,0 +1,65 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+{% load twlight_perms %}
+{% load twlight_removetags %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <div class="alert alert-success">
+      <div class="alert-heading">
+        <div class="row">
+          <div class="col-3">
+            <i class="fa fa-align-left fa-5x"></i>
+          </div>
+          <div class="col-9 text-right">
+            <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ object.accounts_available }}{% endif %}</div>
+            {% comment %}Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+            <div>{% trans 'Active accounts' %}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="alert alert-warning">
+      <div class="alert-heading">
+        <div class="row">
+          <div class="col-3">
+            <i class="fa fa-users fa-5x"></i>
+          </div>
+          <div class="col-9 text-right">
+            <div class="huge">{{ total_users }}</div>
+            {% comment %}Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+            <div>{% trans 'Users who received access (all time)' %}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <div class="alert alert-primary">
+      <div class="alert-heading">
+        <div class="row">
+          <div class="col-3">
+            <i class="fa fa-clock-o fa-5x"></i>
+          </div>
+          <div class="col-9 text-right">
+            <div class="huge">
+              {% if median_days %}
+                  {{ median_days }}
+              {% else %}
+                  -
+              {% endif %}
+            </div>
+            {% comment %}Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
+            <div>{% trans 'Median days from application to decision' %}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

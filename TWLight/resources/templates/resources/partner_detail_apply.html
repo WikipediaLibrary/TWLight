@@ -1,0 +1,168 @@
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+{% load cache %}
+{% load twlight_perms %}
+{% load twlight_removetags %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% if not object.authorization_method == object.BUNDLE %}
+  {% if object.is_waitlisted %}
+  <div class="d-none d-sm-block alert alert-warning resource-label-warning">
+    {% comment %}Translators: This text labels partners who have no available accounts remaining and therefore have a waitlist for access {% endcomment %}
+    <span class="resource-label">{% trans "Waitlisted" %}</span>
+    <p>
+    {% comment %}Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list. {% endcomment %}
+    {% blocktranslate trimmed %}
+    There are no access grants available for this partner
+    at this time. You can still apply for access; applications will
+    be processed when access is available.
+    {% endblocktranslate %}
+    </p>
+  </div>
+  {% endif %}
+  {% if apply %}
+    <div class="alert alert-info d-none d-sm-block">
+      <p>
+        {% comment %}Translators: This text links to the minimum user requirements and terms of use on the partner page. {% endcomment %}
+        {% blocktranslate trimmed %}
+          Before applying, please review the
+          <strong><a class="twl-links" href="{{ about }}#req">minimum requirements</a></strong> for access
+          and our <strong><a class="twl-links" href="{{ terms }}">terms of use</a></strong>.
+        {% endblocktranslate %}
+      </p>
+    </div>
+  {% endif %}
+  {% if user|restricted %}
+    {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+    <button type="button" class="btn twl-btn btn-lg d-none d-sm-block btn-block disabled">{% trans "Apply" %}</button><br />
+  {% else %}
+    {% comment %}Translators: On the partner detail page, this text labels the button which users can click to create an application. {% endcomment %}
+    <a href="{% if apply %}{{ app_url }}{% else %}#{% endif %}" class="btn twl-btn btn-lg d-none d-sm-block btn-block {% if not apply or has_open_apps %}disabled{% endif %}">{% trans "Apply" %}</a><br />
+    {% if has_open_apps or has_auths %}
+      {% url 'users:my_library' as library_url %}
+      {% url 'users:my_applications' user.editor.pk as applications_url %}
+      <div class="panel panel-default d-none d-sm-block">
+        <div class="panel-body top-border">
+          {% if has_auths %}
+            {% comment %}Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
+            {% blocktranslate trimmed %}
+              View the status of your access on your <strong><a href="{{ library_url }}">My Library</a></strong> page.
+            {% endblocktranslate %}
+            {% if has_open_apps %}
+              <hr />
+            {% endif %}
+          {% endif %}
+          {% if has_open_apps %}
+            {% comment %}Translators: This message is shown when a user has open applications, linking to their respective applications page. {% endcomment %}
+            {% blocktranslate trimmed %}
+              View the status of your application(s) on your <strong><a href="{{ applications_url }}">My Applications</a></strong> page.
+            {% endblocktranslate %}
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  {% if user|coordinators_only %}
+  <form class="margin-bottom-2em" action="{% url 'partners:toggle_waitlist' object.pk %}" method="POST">
+    {% csrf_token %}
+    {% comment %}Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status. {% endcomment %}
+    <input type="submit" class="btn btn-default btn-block text-center d-none d-sm-block" value="{% if object.is_waitlisted %}{% trans "Remove from waitlist" %}{% else %}{% trans "Set as waitlisted" %}{% endif %}"/>
+  </form>
+  {% endif %}
+{% endif %}
+{% if object.logos.logo.url %}
+  <img src="{{ object.logos.logo.url }}" class="img-responsive d-none d-sm-block center-block partner-logo">
+{% endif %}
+{% if not object.authorization_method == object.BUNDLE %}
+    <div class="well d-none d-sm-block">
+      {% if object.coordinator.editor.wp_username %}
+        {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
+        {% blocktranslate trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
+          <strong>{{ coordinator }}</strong> processes applications to {{ partner }}.
+        {% endblocktranslate %}
+
+        <ul>
+          {% if object.coordinator.editor.wp_talk_page_url %}
+            <li>
+              <a class="twl-links" href="{{ object.coordinator.editor.wp_talk_page_url }}">
+                {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to. {% endcomment %}
+                {% trans "Talk page" %}
+              </a>
+            </li>
+          {% endif %}
+          {% if object.coordinator.editor.wp_email_page_url %}
+            <li>
+              <a class="twl-links" href="{{ object.coordinator.editor.wp_email_page_url }}">
+                {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to. {% endcomment %}
+                {% trans "Special:EmailUser page" %}
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+        {% comment %} TODO: Change this elif to else once we are in need of more coordinators {% endcomment %}
+        {% elif False %}
+          {% comment %}Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+          {% blocktranslate trimmed %}
+            The Wikipedia Library team will process this application. Want to
+            help? <a class="twl-links" href="https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup">Sign up as a
+            coordinator.</a>
+          {% endblocktranslate %}
+      {% endif %}
+    </div>
+    {% if object.coordinator == user or user.is_staff %}
+      {% comment %}Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
+      <a href="{% url 'partners:users' pk=object.pk %}" class="btn twl-btn btn-lg d-none d-sm-block btn-block">{% trans "List applications" %}</a>
+    {% endif %}
+  {% else %}
+    <div class="panel-body top-border">
+      {% if user.is_authenticated %}
+        {% if user.editor.wp_bundle_eligible %}
+          {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+          <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+          {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+          {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+          {% trans "Library bundle access" %}
+          ">
+          {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+          {% blocktranslate trimmed %}
+            You are eligible to access Library Bundle partners.
+            Click the button above to access the collection.
+          {% endblocktranslate %}
+        {% else %}
+          {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+          <a class="btn twl-btn btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+          {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+          {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+          {% trans "Library bundle access" %}
+          ">
+          {% url 'homepage' as homepage %}
+          {% comment %}Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
+          {% blocktranslate trimmed %}
+            You are not eligible to access Library Bundle partners.
+            Visit the <a class="twl-links" href="{{ homepage }}">homepage</a> to check the
+            eligibility criteria.
+          {% endblocktranslate %}
+        {% endif %}
+      {% else %}
+        {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
+        <a class="btn twl-btn btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
+        {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+        <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+        {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+        {% trans "Library bundle access" %}
+        ">
+        {% url 'about' as about %}
+        {% comment %}Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
+        {% blocktranslate trimmed %}
+          This resource is part of our <a class="twl-links" href="{{ about }}">Library Bundle</a>,
+          which you can access if you meet our minimum eligibility criteria.
+          Log in to find out if you are eligible.
+        {% endblocktranslate %}
+      {% endif %}
+    </div>
+  {% endif %}
