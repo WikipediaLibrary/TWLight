@@ -979,12 +979,11 @@ class EvaluateApplicationView(
         context["versions"] = Version.objects.get_for_object(self.object)
 
         app = self.object
-        context["total_accounts_available_for_distribution"] = None
-        # We show accounts available for proxy partners/collections in the evaluation page
-        if app.partner.authorization_method == Partner.PROXY:
-            context[
-                "total_accounts_available_for_distribution"
-            ] = get_accounts_available(app)
+
+        # We show accounts available for partners/collections in the evaluation page
+        context["total_accounts_available_for_distribution"] = get_accounts_available(
+            app
+        )
 
         # Check if the person viewing this application is actually this
         # partner's coordinator, and not *a* coordinator who happens to
