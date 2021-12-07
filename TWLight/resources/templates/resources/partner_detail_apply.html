@@ -75,7 +75,9 @@
   {% endif %}
 {% endif %}
 {% if object.logos.logo.url %}
-  <img src="{{ object.logos.logo.url }}" class="img-responsive center-block partner-detail-logo">
+  <div class="w-75 mx-auto">
+    <img src="{{ object.logos.logo.url }}" class="img-fluid center-block partner-detail-logo">
+  </div>
 {% endif %}
 {% if not object.authorization_method == object.BUNDLE %}
     <div class="alert alert-secondary d-none d-sm-block">
@@ -125,7 +127,7 @@
             {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
             <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
             {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-fluid pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
             {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
             {% trans "Library bundle access" %}
             ">
@@ -138,7 +140,7 @@
             {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
             <a class="btn twl-btn btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
             {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-fluid pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
             {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
             {% trans "Library bundle access" %}
             ">
@@ -154,7 +156,7 @@
           {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
           <a class="btn twl-btn btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
           {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-fluid pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
           {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
           {% trans "Library bundle access" %}
           ">
