@@ -75,7 +75,7 @@
   {% endif %}
 {% endif %}
 {% if object.logos.logo.url %}
-  <img src="{{ object.logos.logo.url }}" class="img-responsive d-none d-sm-block center-block partner-detail-logo">
+  <img src="{{ object.logos.logo.url }}" class="img-responsive center-block partner-detail-logo">
 {% endif %}
 {% if not object.authorization_method == object.BUNDLE %}
     <div class="alert alert-secondary d-none d-sm-block">
@@ -115,7 +115,7 @@
     </div>
     {% if object.coordinator == user or user.is_staff %}
       {% comment %}Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
-      <a href="{% url 'partners:users' pk=object.pk %}" class="btn twl-btn btn-lg d-none d-sm-block btn-block mb-3">{% trans "List applications" %}</a>
+      <a href="{% url 'partners:users' pk=object.pk %}" class="btn twl-btn btn-lg btn-block mb-3">{% trans "List applications" %}</a>
     {% endif %}
   {% else %}
     <div class="card border-secondary">
