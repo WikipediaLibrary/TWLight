@@ -1348,11 +1348,11 @@ CONTACT US CSS
 TIMELINE
 --------------------------------------------------------------------------*/
 .half-timeline > li > .timeline-badge {
-  right: 0;
+  right: 25px;
 }
 
 .half-timeline:before {
-  right: 0;
+  right: 25px;
 }
 
 .half-timeline > li.timeline-inverted > .timeline-panel {
@@ -1387,17 +1387,21 @@ ul.timeline-home li {
 .resource-label-subject{
     background-image: url('../img/bullet-subject.png');
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: top right;
     min-height: 2em;
-    padding: 6px 0px 0px 25px;
+    padding: 6px 30px 0px 0px;
 }
 
 .resource-label-languages{
     background-image: url("../img/bullet-language.png");
     background-repeat: no-repeat;
-    background-position: top left;
+    background-position: top right;
     min-height: 2em;
-    padding: 6px 0px 0px 25px;
+    padding: 6px 30px 0px 0px;
+}
+
+.stats-text{
+    text-align: left;
 }
 /*
 ----------------------------------------------------------------------------
