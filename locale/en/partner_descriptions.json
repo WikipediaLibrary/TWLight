@@ -103,7 +103,6 @@
 	"19_short_description": "<strong>World Scientific</strong> is an academic publisher of scientific, technical, and medical books and journals. Through this partnership you can access over 120 journals.",
 	"108_short_description": "<strong>Taaghche</strong> is an e-book store that offers more than 60,000 books, magazines, newspapers, and audiobooks across three platforms: Android, IOS, and Web Reader.",
 	"107_short_description": "<strong>Cabells</strong> is a scholarly analytics company, providing access to information on scholarly and predatory journals.",
-	"109_short_description": "<strong>OECD iLibrary</strong> is the online library of the Organisation for Economic Cooperation and Development (OECD) for books, papers and statistics and the gateway to OECD's analysis and data.",
 	"110_short_description": "<strong>Psychologie, Psychotherapie, Psychoanalyse</strong> provides access to German-language scholarly articles on the topic of psychology.",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> is a German-language music magazine.",
 	"112_short_description": "<strong><em>Merkur</em></strong> is a German-language cultural magazine.",
@@ -119,4 +118,8 @@
 	"121_short_description": "<strong>MGG Online</strong> is a German language music encyclopedia, providing access to the 1994-2008 print edition of MGG in addition to the updated online version.",
 	"120_short_description": "<strong>Future Science</strong> is a collection of resources related to biology and pharmacology.",
 	"119_short_description": "<strong>Future Medicine</strong> is a collection of biomedical resources."
+	"125_short_description": "<strong>OECD iLibrary</strong> is an online library of books, papers and statistics published by the Organisation for Economic Cooperation and Development (OECD).",
+	"126_short_description": "<strong>OECD Data</strong> is a repository of charts, maps, tables, and related publications published by the Organisation for Economic Cooperation and Development (OECD).",
+	"127_short_description": "<strong>OECD Multimedia Gallery</strong> is an audio-visual gallery containing podcasts and photos published by the Organisation for Economic Cooperation and Development (OECD).",
+	
 }
