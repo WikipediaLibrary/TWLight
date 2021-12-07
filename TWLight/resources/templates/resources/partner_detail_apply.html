@@ -48,7 +48,8 @@
           {% if has_auths %}
             {% comment %}Translators: This message is shown when a user has authorizations, linking to their respective collections page. {% endcomment %}
             {% blocktranslate trimmed %}
-              View the status of your access on your <strong><a href="{{ library_url }}">My Library</a></strong> page.
+              View the status of your access on your
+              <strong><a href="{{ library_url }}" class="twl-links">My Library</a></strong> page.
             {% endblocktranslate %}
             {% if has_open_apps %}
               <hr />
@@ -74,10 +75,10 @@
   {% endif %}
 {% endif %}
 {% if object.logos.logo.url %}
-  <img src="{{ object.logos.logo.url }}" class="img-responsive d-none d-sm-block center-block partner-logo">
+  <img src="{{ object.logos.logo.url }}" class="img-responsive d-none d-sm-block center-block partner-detail-logo">
 {% endif %}
 {% if not object.authorization_method == object.BUNDLE %}
-    <div class="well d-none d-sm-block">
+    <div class="alert alert-secondary d-none d-sm-block">
       {% if object.coordinator.editor.wp_username %}
         {% comment %}Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should {{ partner }}.{% endcomment %}
         {% blocktranslate trimmed with coordinator=object.coordinator.editor.wp_username partner=object.company_name %}
@@ -114,55 +115,57 @@
     </div>
     {% if object.coordinator == user or user.is_staff %}
       {% comment %}Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner {% endcomment %}
-      <a href="{% url 'partners:users' pk=object.pk %}" class="btn twl-btn btn-lg d-none d-sm-block btn-block">{% trans "List applications" %}</a>
+      <a href="{% url 'partners:users' pk=object.pk %}" class="btn twl-btn btn-lg d-none d-sm-block btn-block mb-3">{% trans "List applications" %}</a>
     {% endif %}
   {% else %}
-    <div class="panel-body top-border">
-      {% if user.is_authenticated %}
-        {% if user.editor.wp_bundle_eligible %}
-          {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-          <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
-          {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-          <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-          {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-          {% trans "Library bundle access" %}
-          ">
-          {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
-          {% blocktranslate trimmed %}
-            You are eligible to access Library Bundle partners.
-            Click the button above to access the collection.
-          {% endblocktranslate %}
+    <div class="card border-secondary">
+      <div class="card-body">
+        {% if user.is_authenticated %}
+          {% if user.editor.wp_bundle_eligible %}
+            {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+            <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}">{% trans "Access Collection" %}</a><br />
+            {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+            {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+            {% trans "Library bundle access" %}
+            ">
+            {% comment %}Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page. {% endcomment %}
+            {% blocktranslate trimmed %}
+              You are eligible to access Library Bundle partners.
+              Click the button above to access the collection.
+            {% endblocktranslate %}
+          {% else %}
+            {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
+            <a class="btn twl-btn btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+            {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
+            <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
+            {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
+            {% trans "Library bundle access" %}
+            ">
+            {% url 'homepage' as homepage %}
+            {% comment %}Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
+            {% blocktranslate trimmed %}
+              You are not eligible to access Library Bundle partners.
+              Visit the <a class="twl-links" href="{{ homepage }}">homepage</a> to check the
+              eligibility criteria.
+            {% endblocktranslate %}
+          {% endif %}
         {% else %}
-          {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-          <a class="btn twl-btn btn-lg btn-block disabled">{% trans "Access Collection" %}</a><br />
+          {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
+          <a class="btn twl-btn btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
           {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
           <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
           {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
           {% trans "Library bundle access" %}
           ">
-          {% url 'homepage' as homepage %}
-          {% comment %}Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page. {% endcomment %}
+          {% url 'about' as about %}
+          {% comment %}Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
           {% blocktranslate trimmed %}
-            You are not eligible to access Library Bundle partners.
-            Visit the <a class="twl-links" href="{{ homepage }}">homepage</a> to check the
-            eligibility criteria.
+            This resource is part of our <a class="twl-links" href="{{ about }}">Library Bundle</a>,
+            which you can access if you meet our minimum eligibility criteria.
+            Log in to find out if you are eligible.
           {% endblocktranslate %}
         {% endif %}
-      {% else %}
-        {% comment %}Translators: Buttton prompting users to log in. {% endcomment %}
-        <a class="btn twl-btn btn-lg btn-block" href="{% url 'oauth_login' %}?next={{ request.path|urlencode }}">{% trans "Log in" %}</a><br />
-        {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
-        <img src="{% static 'img/LibraryBundle.svg' %}" class="img-responsive pull-left" style="width:45px; height:45px; padding-right: 5px;" title="{% trans 'Library Bundle' %}" alt="
-        {% comment %}Translators: Alt text for the Library Bundle icon shown on the collection page. {% endcomment %}
-        {% trans "Library bundle access" %}
-        ">
-        {% url 'about' as about %}
-        {% comment %}Translators: Text shown to unauthenticated users when they visit a Bundle partner page. {% endcomment %}
-        {% blocktranslate trimmed %}
-          This resource is part of our <a class="twl-links" href="{{ about }}">Library Bundle</a>,
-          which you can access if you meet our minimum eligibility criteria.
-          Log in to find out if you are eligible.
-        {% endblocktranslate %}
-      {% endif %}
+      </div>
     </div>
   {% endif %}
