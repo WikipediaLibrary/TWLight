@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-12-03 20:02+0000\n"
+"POT-Creation-Date: 2021-12-08 20:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1956,82 +1956,83 @@ msgid "Suggestion has been deleted."
 msgstr ""
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
-#: TWLight/templates/400.html:8
+#: TWLight/templates/400.html:11
 msgid "Bad Request"
 msgstr ""
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
-#: TWLight/templates/400.html:12
+#: TWLight/templates/400.html:15
 msgid "Sorry; we don't know what to do with that."
 msgstr ""
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
-#: TWLight/templates/400.html:17
+#: TWLight/templates/400.html:20
 #, python-format
 msgid ""
 "If you think we should know what to do with that, please email us about this "
-"error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
-"%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia."
-"org</a> or report it to us on <a href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request"
-"\">Phabricator</a>"
+"error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
+"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-"
+"links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
+"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
+"%%20Bad%%20Request\">Phabricator</a>"
 msgstr ""
 
 #. Translators: Alt text for an image shown on the 400 error page.
 #. Translators: Alt text for an image shown on the 403 error page.
-#: TWLight/templates/400.html:30 TWLight/templates/403.html:30
+#: TWLight/templates/400.html:33 TWLight/templates/403.html:33
 msgid "Sad hamster in a cage"
 msgstr ""
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
-#: TWLight/templates/403.html:8
+#: TWLight/templates/403.html:11
 msgid "Permission denied"
 msgstr ""
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
-#: TWLight/templates/403.html:12
+#: TWLight/templates/403.html:15
 msgid "Sorry; you aren't allowed to do that."
 msgstr ""
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
-#: TWLight/templates/403.html:17
+#: TWLight/templates/403.html:20
 #, python-format
 msgid ""
 "If you think your account should be able to do that, please email us about "
-"this error at <a href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a href="
-"\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Permission%%20denied\">Phabricator</a>"
+"this error at <a class=\"twl-links\" href=\"mailto:"
+"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s"
+"%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it "
+"to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/"
+"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
+"\">Phabricator</a>"
 msgstr ""
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
-#: TWLight/templates/404.html:8
+#: TWLight/templates/404.html:11
 msgid "Not found"
 msgstr ""
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
-#: TWLight/templates/404.html:12
+#: TWLight/templates/404.html:15
 msgid "Sorry; we can't find that."
 msgstr ""
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
-#: TWLight/templates/404.html:16
+#: TWLight/templates/404.html:19
 #, python-format
 msgid ""
 "If you are certain that something should be here, please email us about this "
-"error at <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia"
-"%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</"
-"a> or report it to us on <a href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found"
-"\">Phabricator</a>"
+"error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> "
+"wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links"
+"\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
+"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
+"%%20Not%%20found\">Phabricator</a>"
 msgstr ""
 
 #. Translators: Alt text for an image shown on the 404 error page.
-#: TWLight/templates/404.html:29
+#: TWLight/templates/404.html:32
 msgid "A crab on a beach looking towards the camera"
 msgstr ""
 
