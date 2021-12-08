@@ -1403,6 +1403,12 @@ ul.timeline-home li {
 .stats-text{
     text-align: left;
 }
+
+#partner-detail-content{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
 /*
 ----------------------------------------------------------------------------
 NEW FOOTER CSS

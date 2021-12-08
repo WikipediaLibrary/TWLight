@@ -1374,6 +1374,11 @@ ul.timeline-home li {
     text-align: right;
 }
 
+#partner-detail-content{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
 /*
 ----------------------------------------------------------------------------
 NEW FOOTER CSS
