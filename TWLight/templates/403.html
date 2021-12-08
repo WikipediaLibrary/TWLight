@@ -1,39 +1,42 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load static %}
 {% load i18n %}
 
 {% block content %}
-{% get_current_language as LANGUAGE_CODE %}
-  {% comment %}Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
-  <h1>{% trans "Permission denied" %}</h1>
-
-  <p>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  {% get_current_language as LANGUAGE_CODE %}
+  <div id="main-content">
     {% comment %}Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
-    {% trans "Sorry; you aren't allowed to do that." %}
-  </p>
+    <h1>{% trans "Permission denied" %}</h1>
 
-  <p>
-    {% comment %}Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate {{ path }} or Phabricator. {% endcomment %}
-    {% blocktranslate trimmed with request.path|urlencode as path %}
-      If you think your account should be able to do that, please email us about this error at
-      <a href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
-      or report it to us on
-      <a href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Permission%20denied">Phabricator</a>
-    {% endblocktranslate %}
-    (<a href="https://www.mediawiki.org/wiki/Phabricator/Help/{{ LANGUAGE_CODE }}?uselang={{ LANGUAGE_CODE }}">?</a>).
-  </p>
+    <p>
+      {% comment %}Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. {% endcomment %}
+      {% trans "Sorry; you aren't allowed to do that." %}
+    </p>
 
-  <div class="clearfix">
-    <div class="pull-left">
-      <img class="img-responsive img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="
-      {% comment %}Translators: Alt text for an image shown on the 403 error page. {% endcomment %}
-      {% trans "Sad hamster in a cage" %}
-      ">
+    <p>
+      {% comment %}Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate {{ path }} or Phabricator. {% endcomment %}
+      {% blocktranslate trimmed with request.path|urlencode as path %}
+        If you think your account should be able to do that, please email us about this error at
+        <a class="twl-links" href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20{{ path }}%20Permission%20denied">wikipedialibrary@wikimedia.org</a>
+        or report it to us on
+        <a class="twl-links" href="https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%20Library%20{{ path }}%20Permission%20denied">Phabricator</a>
+      {% endblocktranslate %}
+      (<a class="twl-links" href="https://www.mediawiki.org/wiki/Phabricator/Help/{{ LANGUAGE_CODE }}?uselang={{ LANGUAGE_CODE }}">?</a>).
+    </p>
 
-      <div class="well">
-        <a href="https://flic.kr/p/6wL7Sc">crunchie needs a little tin cup</a> by <a href="https://www.flickr.com/photos/armydre2008/">frankieleon</a>, on Flickr; CC BY
+    <div class="clearfix">
+      <div class="pull-left">
+        <img class="img-fluid img-thumbnail" src={% static "img/sad_critter.jpg" %} alt="
+        {% comment %}Translators: Alt text for an image shown on the 403 error page. {% endcomment %}
+        {% trans "Sad hamster in a cage" %}
+        ">
+
+        <div class="alert alert-secondary">
+          <a class="twl-links" href="https://flic.kr/p/6wL7Sc">crunchie needs a little tin cup</a> by <a class="twl-links" href="https://www.flickr.com/photos/armydre2008/">frankieleon</a>, on Flickr; CC BY
+        </div>
       </div>
     </div>
   </div>
-
 {% endblock content %}
