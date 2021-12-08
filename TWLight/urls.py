@@ -104,3 +104,11 @@ if (
     import debug_toolbar
 
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+    # To better debug and improve the error pages, we are making them pages
+    # available when django debug toolbar is enabled
+    urlpatterns += [
+        url(r"^400/$", TemplateView.as_view(template_name="400.html")),
+        url(r"^403/$", TemplateView.as_view(template_name="403.html")),
+        url(r"^404/$", TemplateView.as_view(template_name="404.html")),
+        url(r"^500/$", TemplateView.as_view(template_name="500.html")),
+    ]
