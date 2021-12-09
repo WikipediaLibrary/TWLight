@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-12-09 01:25+0000\n"
+"POT-Creation-Date: 2021-12-09 01:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3438,7 +3438,7 @@ msgstr ""
 
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
 #.
-#: TWLight/users/templates/users/user_detail.html:9
+#: TWLight/users/templates/users/user_detail.html:12
 #, python-format
 msgid ""
 "Hi, %(username)s! You don't have a Wikipedia editor profile attached to your "
@@ -3446,7 +3446,7 @@ msgid ""
 msgstr ""
 
 #. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
-#: TWLight/users/templates/users/user_detail.html:17
+#: TWLight/users/templates/users/user_detail.html:20
 msgid ""
 "If you aren't a site administrator, something weird has happened. You won't "
 "be able to apply for access without a Wikipedia editor profile. You should "
