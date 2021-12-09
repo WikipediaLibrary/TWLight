@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-12-08 20:42+0000\n"
+"POT-Creation-Date: 2021-12-09 01:26+0000\n"
 "PO-Revision-Date: 2021-12-06 12:17:54+0000\n"
 "Language: my\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2454,24 +2454,24 @@ msgid "More"
 msgstr "ပို၍"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
-#: TWLight/templates/registration/login.html:16
+#: TWLight/templates/registration/login.html:17
 msgid "Log in with your Wikipedia account"
 msgstr "ဝီကီပီးဒီးယားအကောင့်ဖြင့် ဝင်ရန်"
 
 #. Translators: Found on the password reset page.
-#: TWLight/templates/registration/password_change_form.html:11
+#: TWLight/templates/registration/password_change_form.html:14
 #: TWLight/users/templates/users/preferences.html:43
 msgid "Change password"
 msgstr "စကားဝှက် ပြောင်းရန်"
 
 #. Translators: Found on the page for resetting your password.
-#: TWLight/templates/registration/password_reset_form.html:7
-#: TWLight/templates/registration/password_reset_form.html:16
+#: TWLight/templates/registration/password_reset_form.html:10
+#: TWLight/templates/registration/password_reset_form.html:19
 msgid "Reset password"
 msgstr "စကားဝှက်ကို ပြန်ချိန်ရန်"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
-#: TWLight/templates/registration/password_reset_form.html:10
+#: TWLight/templates/registration/password_reset_form.html:13
 msgid ""
 "Forgot your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
