@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 {% load crispy_forms_tags %}
 {% load i18n %}
 
@@ -9,21 +9,23 @@ here it is, just in case.
 {% endcomment %}
 
 {% block content %}
-<div class="row">
-  <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-    <a href="{% url 'oauth_login' %}" class="btn btn-primary btn-lg btn-block">
-      {% comment %}Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth) {% endcomment %}
-      {% trans "Log in with your Wikipedia account" %}
-    </a>
-    <hr />
-    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-      {% csrf_token %}
-      {{ form | crispy }}
-      <input type="submit" value="log in" class="btn btn-block" />
-      <input type="hidden" name="next" value="{{ next }}" />
-    </form>
-    <br />
-    <p class="small text-center"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+  <div id="main-content">
+    <div class="row mt-5">
+      <div class="col-12 col-sm-6 offset-sm-3 col-md-5 offset-md-4">
+        <a href="{% url 'oauth_login' %}" class="btn twl-btn btn-lg btn-block">
+          {% comment %}Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth) {% endcomment %}
+          {% trans "Log in with your Wikipedia account" %}
+        </a>
+        <hr />
+        <form method="post" action="{% url 'auth_login' %}">
+          {% csrf_token %}
+          {{ form | crispy }}
+          <input type="submit" value="Log in" class="btn twl-btn btn-block" />
+          <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        <br />
+        <p class="small text-center"><a class="twl-links" href="{% url 'password_reset' %}">Forgot your password?</a></p>
+      </div>
+    </div>
   </div>
-</div>
 {% endblock %}
