@@ -15,7 +15,7 @@
           <div class="col-3">
             <i class="fa fa-align-left fa-5x"></i>
           </div>
-          <div class="col-9 text-right">
+          <div class="col-9 stats-text">
             <div class="huge">{{ total_accounts_distributed_partner }}{% if object.accounts_available %}/{{ object.accounts_available }}{% endif %}</div>
             {% comment %}Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
             <div>{% trans 'Active accounts' %}</div>
@@ -31,7 +31,7 @@
           <div class="col-3">
             <i class="fa fa-users fa-5x"></i>
           </div>
-          <div class="col-9 text-right">
+          <div class="col-9 stats-text">
             <div class="huge">{{ total_users }}</div>
             {% comment %}Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/). {% endcomment %}
             <div>{% trans 'Users who received access (all time)' %}</div>
@@ -47,7 +47,7 @@
           <div class="col-3">
             <i class="fa fa-clock-o fa-5x"></i>
           </div>
-          <div class="col-9 text-right">
+          <div class="col-9 stats-text">
             <div class="huge">
               {% if median_days %}
                   {{ median_days }}

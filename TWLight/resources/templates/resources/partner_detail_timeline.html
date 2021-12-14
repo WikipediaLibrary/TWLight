@@ -43,10 +43,10 @@
       </div>
       <div class="timeline-panel">
         <div class="timeline-body">
-          <h4 class="timeline-title">
+          <h6 class="timeline-title">
             {% comment %}Translators: If a partner has video tutorials, this text shows as the title for that information field.{% endcomment %}
             {% trans "Video tutorials" %}
-          </h4>
+          </h6>
           <ul>
             {% for each_tutorial in object.videos.all %}
               {% comment %}Translators: If a partner has video tutorials, this text links to the video(s).{% endcomment %}
@@ -89,7 +89,7 @@
       <div class="timeline-panel">
         <div class="timeline-heading">
           {% comment %}Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field. {% endcomment %}
-          <h4 class="timeline-title">{% trans "Excerpt limit" %}</h4>
+          <h6 class="timeline-title">{% trans "Excerpt limit" %}</h6>
         </div>
         <div class="timeline-body">
           <ul>
@@ -129,7 +129,7 @@
       <div class="timeline-panel">
         <div class="timeline-heading">
           {% comment %}Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/). {% endcomment %}
-          <h4 class="timeline-title">{% trans "Special requirements for applicants" %}</h4>
+          <h6 class="timeline-title">{% trans "Special requirements for applicants" %}</h6>
         </div>
         <div class="timeline-body">
 

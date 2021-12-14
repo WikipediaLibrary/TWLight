@@ -1348,16 +1348,16 @@ CONTACT US CSS
 TIMELINE
 --------------------------------------------------------------------------*/
 .half-timeline > li > .timeline-badge {
-  right: 0;
+  right: 25px;
 }
 
 .half-timeline:before {
-  right: 0;
+  right: 25px;
 }
 
 .half-timeline > li.timeline-inverted > .timeline-panel {
   float: right;
-  margin-right: 50px;
+  margin-right: 75px;
   width: 70%;
 }
 
@@ -1373,6 +1373,40 @@ ul.timeline li:nth-child(-n+5) {
 
 ul.timeline-home li {
 	display:none;
+}
+
+.partner-detail-logo{
+    position: relative;
+    padding: 0 10% 0 10%;
+    margin: 0 auto 2em auto;
+    max-height: 7em;
+    min-height: 3em;
+    z-index: 1;
+}
+
+.resource-label-subject{
+    background-image: url('../img/bullet-subject.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    min-height: 2em;
+    padding: 6px 30px 0px 0px;
+}
+
+.resource-label-languages{
+    background-image: url("../img/bullet-language.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    min-height: 2em;
+    padding: 6px 30px 0px 0px;
+}
+
+.stats-text{
+    text-align: left;
+}
+
+#partner-detail-content{
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 /*
