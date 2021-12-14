@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-12-09 01:35+0000\n"
+"POT-Creation-Date: 2021-12-14 19:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -710,7 +710,7 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/applications/templates/applications/confirm_renewal.html:29
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
-#: TWLight/users/templates/users/authorization_confirm_return.html:16
+#: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
 #: TWLight/users/views.py:510
 msgid "Confirm"
@@ -2581,7 +2581,7 @@ msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
-#: TWLight/users/templates/users/authorization_confirm_return.html:10
+#: TWLight/users/templates/users/authorization_confirm_return.html:13
 #, python-format
 msgid ""
 "You will no longer be able to access <b>%(partner)s's</b> resources via the "
