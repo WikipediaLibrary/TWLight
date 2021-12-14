@@ -1,18 +1,22 @@
-{% extends "base.html" %}
+{% extends "new_base.html" %}
 
 {% load i18n %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
-    <p>
-      {% comment %}Translators: This message is displayed on the confirmation page where users can return their access to partner collections.{% endcomment %}
-    {% blocktranslate trimmed with object.partners.get as partner %}
-      You will no longer be able to access <b>{{ partner }}'s</b> resources via the Library Card platform, but can request access again
-      by clicking 'renew', if you change your mind. Are you sure you want to return your access?
-    {% endblocktranslate %}
-    </p>
-    {% comment %}Translators: A button users can click to return their access to a particular resource.{% endcomment %}
-    <input type="submit" value="{% trans 'Confirm' %}" class="btn btn-primary"/>
-  </form>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div id="main-content">
+    <form method="post">
+      {% csrf_token %}
+      <p>
+        {% comment %}Translators: This message is displayed on the confirmation page where users can return their access to partner collections.{% endcomment %}
+      {% blocktranslate trimmed with object.partners.get as partner %}
+        You will no longer be able to access <b>{{ partner }}'s</b> resources via the Library Card platform, but can request access again
+        by clicking 'renew', if you change your mind. Are you sure you want to return your access?
+      {% endblocktranslate %}
+      </p>
+      {% comment %}Translators: A button users can click to return their access to a particular resource.{% endcomment %}
+      <input type="submit" value="{% trans 'Confirm' %}" class="btn twl-btn"/>
+    </form>
+  </div>
 {% endblock content %}
