@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2021-12-14 19:36+0000\n"
+"POT-Creation-Date: 2021-12-14 19:46+0000\n"
 "PO-Revision-Date: 2021-12-13 12:17:51+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1778,31 +1778,21 @@ msgstr ""
 "class=\"twl-links\" href=\"%(applications_url)s\">Solicitarea mea</a></"
 "strong>."
 
-#. Translators: If a partner is currently waitlisted, this button allows coordinators to remove the partner from the waitlist.
-#. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
-#: TWLight/resources/templates/resources/partner_detail.html:93
-#: TWLight/resources/templates/resources/partner_detail_apply.html:72
-msgid "Remove from waitlist"
-msgstr "Elimină din lista de pagini urmărite"
-
-#. Translators: If a partner is not currently waitlisted, this button allows coordinators to add the partner to the waitlist.
-#: TWLight/resources/templates/resources/partner_detail.html:96
-#: TWLight/resources/templates/resources/partner_detail_apply.html:72
-msgid "Set as waitlisted"
-msgstr "Setează pe lista de așteptare"
-
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "View the status of your access on your <strong><a href=\"%(library_url)s"
+#| "\">My Library</a></strong> page."
 msgid ""
-"View the status of your access on your <strong><a href=\"%(library_url)s"
-"\">My Library</a></strong> page."
+"View the status of your access on your <strong><a href=\"%(library_url)s\" "
+"class=\"twl-links\">My Library</a></strong> page."
 msgstr ""
 "Vizualizați starea accesului dvs. la adresa dvs. <strong><a href="
 "\"%(library_url)s\">Biblioteca mea</a></strong> page."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:59
+#: TWLight/resources/templates/resources/partner_detail_apply.html:60
 #, python-format
 msgid ""
 "View the status of your application(s) on your <strong><a href="
@@ -1811,25 +1801,34 @@ msgstr ""
 "Vizualizați starea solicitării (solicitărilor) dvs. în pagina <strong><a "
 "href=\"%(applications_url)s\">Solicitarea mea</a></strong>."
 
+#. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
+#: TWLight/resources/templates/resources/partner_detail_apply.html:73
+msgid "Remove from waitlist"
+msgstr "Elimină din lista de pagini urmărite"
+
+#: TWLight/resources/templates/resources/partner_detail_apply.html:73
+msgid "Set as waitlisted"
+msgstr "Setează pe lista de așteptare"
+
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:83
+#: TWLight/resources/templates/resources/partner_detail_apply.html:86
 #, python-format
 msgid "<strong>%(coordinator)s</strong> processes applications to %(partner)s."
 msgstr ""
 "<strong>%(coordinator)s</strong> procesează aplicațiile pentru %(partner)s."
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:92
+#: TWLight/resources/templates/resources/partner_detail_apply.html:95
 msgid "Talk page"
 msgstr "Pagina de discuții"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:100
+#: TWLight/resources/templates/resources/partner_detail_apply.html:103
 msgid "Special:EmailUser page"
 msgstr "Pagina Special:EmailUser"
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
-#: TWLight/resources/templates/resources/partner_detail_apply.html:109
+#: TWLight/resources/templates/resources/partner_detail_apply.html:112
 msgid ""
 "The Wikipedia Library team will process this application. Want to help? <a "
 "class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/Wikipedia:"
@@ -1840,32 +1839,32 @@ msgstr ""
 "The_Wikipedia_Library/Coordinators/Signup\">Înscrie-te ca coordonator.</a>"
 
 #. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
-#: TWLight/resources/templates/resources/partner_detail_apply.html:118
+#: TWLight/resources/templates/resources/partner_detail_apply.html:121
 msgid "List applications"
 msgstr "Lista solicitărilor"
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:125
-#: TWLight/resources/templates/resources/partner_detail_apply.html:138
+#: TWLight/resources/templates/resources/partner_detail_apply.html:129
+#: TWLight/resources/templates/resources/partner_detail_apply.html:142
 msgid "Access Collection"
 msgstr "Accesează Colecția"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:127
-#: TWLight/resources/templates/resources/partner_detail_apply.html:140
-#: TWLight/resources/templates/resources/partner_detail_apply.html:156
+#: TWLight/resources/templates/resources/partner_detail_apply.html:131
+#: TWLight/resources/templates/resources/partner_detail_apply.html:144
+#: TWLight/resources/templates/resources/partner_detail_apply.html:160
 msgid "Library Bundle"
 msgstr "Library Bundle"
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:129
-#: TWLight/resources/templates/resources/partner_detail_apply.html:142
-#: TWLight/resources/templates/resources/partner_detail_apply.html:158
+#: TWLight/resources/templates/resources/partner_detail_apply.html:133
+#: TWLight/resources/templates/resources/partner_detail_apply.html:146
+#: TWLight/resources/templates/resources/partner_detail_apply.html:162
 msgid "Library bundle access"
 msgstr "Acces pachet bibliotecă"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:132
+#: TWLight/resources/templates/resources/partner_detail_apply.html:136
 msgid ""
 "You are eligible to access Library Bundle partners. Click the button above "
 "to access the collection."
@@ -1874,7 +1873,7 @@ msgstr ""
 "butonul de mai sus pentru a accesa colecția."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:146
+#: TWLight/resources/templates/resources/partner_detail_apply.html:150
 #, python-format
 msgid ""
 "You are not eligible to access Library Bundle partners. Visit the <a class="
@@ -1886,12 +1885,12 @@ msgstr ""
 "verifica criteriile de eligibilitate."
 
 #. Translators: Buttton prompting users to log in.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:154
+#: TWLight/resources/templates/resources/partner_detail_apply.html:158
 msgid "Log in"
 msgstr "Autentificare"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:162
+#: TWLight/resources/templates/resources/partner_detail_apply.html:166
 #, python-format
 msgid ""
 "This resource is part of our <a class=\"twl-links\" href=\"%(about)s"
