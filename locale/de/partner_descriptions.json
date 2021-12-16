@@ -102,7 +102,6 @@
 	"19_short_description": "<strong>World Scientific</strong> ist ein akademischer Verlag für wissenschaftliche, technische und medizinische Bücher und Zeitschriften. Durch diese Partnerschaft wird der Zugriff zu 120 Zeitschriften ermöglicht.",
 	"108_short_description": "<strong>Taaghche</strong> ist ein E-Book-Shop, der mehr als 60.000 Bücher, Zeitschriften, Zeitungen und Hörbücher für Android, iOS und Web-Reader anbietet.",
 	"107_short_description": "<strong>Cabells</strong> ist ein wissenschaftliches Analyseunternehmen, das Zugang zu Informationen zu wissenschaftlichen Zeitschriften und „Raubjournalen“ bietet.",
-	"109_short_description": "<strong>OECD iLibrary</strong> ist die Online-Bibliothek der Organisation für wirtschaftliche Zusammenarbeit und Entwicklung (OECD) für Bücher, Papiere und Statistiken und das Tor zu den Analysen und Daten der OECD.",
 	"110_short_description": "<strong>Psychologie, Psychotherapie, Psychoanalyse</strong> bietet Zugang zu deutschsprachigen wissenschaftlichen Artikeln zum Themenfeld Psychologie.",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> ist ein deutschsprachiges Musikmagazin.",
 	"112_short_description": "<strong><em>Merkur</em></strong> ist ein deutschsprachiges Kulturmagazin.",
@@ -117,5 +116,8 @@
 	"122_short_description": "<strong>RILM Music Encyclopedias</strong> ist eine Sammlung von mehr als 50 Titeln von 1775 bis heute, die mehr als 300.000 Einträge umfasst.",
 	"121_short_description": "<strong>MGG Online</strong> ist eine deutschsprachige Musikenzyklopädie, die neben der aktualisierten Online-Version auch Zugriff auf die Printausgabe von MGG (1994-2008) bietet.",
 	"120_short_description": "<strong>Future Science</strong> ist eine Sammlung von Ressourcen aus den Themenfeldern Biologie und Pharmakologie.",
-	"119_short_description": "<strong>Future Medicine</strong> ist eine Sammlung biomedizinischer Ressourcen."
+	"119_short_description": "<strong>Future Medicine</strong> ist eine Sammlung biomedizinischer Ressourcen.",
+	"125_short_description": "<strong>OECD iLibrary</strong> ist eine Online-Bibliothek mit Büchern, Dokumenten und Statistiken, die von der Organisation für wirtschaftliche Zusammenarbeit und Entwicklung veröffentlicht werden.",
+	"126_short_description": "<strong>OECD Data</strong> ist eine Sammlung von Diagrammen, Karten, Tabellen und ähnlichen Publikationen, die von der Organisation für wirtschaftliche Zusammenarbeit und Entwicklung veröffentlicht werden.",
+	"127_short_description": "<strong>OECD Multimedia Gallery</strong> ist eine audiovisuelle Galerie mit Podcasts und Fotos, die von der Organisation für wirtschaftliche Zusammenarbeit und Entwicklung veröffentlicht werden."
 }

@@ -102,7 +102,6 @@
 	"19_short_description": "<strong>World Scientific</strong> (Monde scientifique) est éditeur académique de livres et de revues scientifiques, techniques et médicales. Grâce à ce partenariat, vous pouvez accéder à plus de 120 revues.",
 	"108_short_description": "<strong>Taaghche</strong> est un magasin de livres électroniques qui propose plus de 60 000 livres, magazines, journaux et livres audio sur trois plateformes : Android, IOS, et Web Reader.",
 	"107_short_description": "<strong>Cabells</strong> est une société d’analyse savante, fournissant un accès à des informations sur les journaux savants et prédateurs.",
-	"109_short_description": "<strong>OECD iLibrary</strong> est la bibliothèque en ligne de l’Organisation pour la coopération et le développement économique (OECD) pour les livres, articles et statistiques, et le portail vers les analyses et données de OECD.",
 	"110_short_description": "<strong>Psychologie, Psychothérapie, Psychanalyse</strong> fournit des accès aux articles scientifiques en allemand sur le sujet de la psychologie.",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> est un magazine de musique en langue allemande.",
 	"112_short_description": "<strong><em>Merkur</em></strong> est un magazine culturel en langue allemande.",
@@ -117,5 +116,8 @@
 	"122_short_description": "<strong>RILM Music Encyclopedias</strong> sont une collection de plus de 50 titres - couvrant plus de 300 000 entrées - de 1775 à maintenant.",
 	"121_short_description": "<strong>MGG Online</strong> est une encyclopédie musicale en langue allemande, donnant accès à l'édition imprimée 1994-2008 de MGG en plus de la version en ligne actualisée.",
 	"120_short_description": "<strong>Future Science</strong> est une collection de ressources liées à la biologie et à la pharmacologie.",
-	"119_short_description": "<strong>Médecine du futur</strong> est une collection de ressources biomédicales."
+	"119_short_description": "<strong>Médecine du futur</strong> est une collection de ressources biomédicales.",
+	"125_short_description": "<strong>iLibrary de OCDE</strong> est une bibliothèque en ligne de livres, papiers et statistiques publiés par l’Organisation pour la Coopération et le Développement Économiques (OCDE).",
+	"126_short_description": "<strong>Données de OCDE</strong> est un dépôt de graphiques, cartes, tableaux et publications associées publiées par l’Organisation pour la Coopération et le Développement Économiques (OCDE).",
+	"127_short_description": "<strong>Galerie multimédia de OCDE</strong> est une galerie audiovisuelle contenant des diffusions et des photos publiées par l’Organisation pour la Coopération et le Développement Économiques (OCDE)."
 }

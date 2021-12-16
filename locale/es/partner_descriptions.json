@@ -101,7 +101,6 @@
 	"19_short_description": "<strong>World Scientific</strong> es una publicación académica de libros y journals científicos, técnicos y de medicina. A través de esta sociedad puedes tener acceso a más de 120 journals.",
 	"108_short_description": "<strong>Taaghche</strong> es una tienda de libros electrónicos que ofrece más de 60.000 libros, revistas, periódicos y audiolibros en tres plataformas: Android, IOS y Web Reader.",
 	"107_short_description": "<strong>Cabells</strong> es una compañía de análisis académico que proporciona acceso a información de journals académicos.",
-	"109_short_description": "<strong>OECD iLibrary</strong> es la biblioteca en línea de la Organización para la Cooperación y el Desarrollo Económicos (OCDE) para libros, papers y estadísticas y la puerta de entrada a los datos y análisis de la OCDE.",
 	"110_short_description": "<strong>Psychologie, Psychotherapie, Psychoanalyse</strong> proporciona acceso a artículos académicos en alemán sobre psicología.",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> es una revista de música alemana.",
 	"112_short_description": "<strong><em>Merkur</em></strong> es una revista cultural alemana.",
@@ -116,5 +115,8 @@
 	"122_short_description": "<strong>RILM Music Encyclopedias</strong> es una colección de más de 50 títulos – abarcando más de 300,000 entradas – desde 1775 a la actualidad.",
 	"121_short_description": "<strong>MGG Online</strong> es una enciclopedia musical en alemán, que provee acceso a las ediciones impresas de MGG de 1994-2008 además de la versión actualizada en línea.",
 	"120_short_description": "<strong>Future Science</strong> es una colección de recursos relacionados con biología y farmacología.",
-	"119_short_description": "<strong>Future Medicine</strong> es una colección de recursos biomédicos."
+	"119_short_description": "<strong>Future Medicine</strong> es una colección de recursos biomédicos.",
+	"125_short_description": "<strong>OECD iLibrary</strong> es una biblioteca en línea de libros, papers y estadísticas publicadas por la Organización para la Cooperación y el Desarrollo Económicos (OCDE).",
+	"126_short_description": "<strong>OECD Data</strong> es un repositorio de gráficos, mapas, tables y publicaciones relacionadas publicado por la Organización para la Cooperación y el Desarrollo Económicos (OCDE).",
+	"127_short_description": "<strong>OECD Multimedia Gallery</strong> es una galería multimedia que contiene podcasts y fotos publicadas por la Organización para la Cooperación y el Desarrollo Económicos (OCDE)."
 }
