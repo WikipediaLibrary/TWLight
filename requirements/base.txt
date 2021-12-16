@@ -1,7 +1,7 @@
 black==21.12b0
 bleach==4.1.0
 defusedxml==0.7.1
-django==3.2.7
+django==3.2.10
 django-annoying==0.10.6
 django-autocomplete-light==3.8.2
 django-contrib-comments==2.1.0
