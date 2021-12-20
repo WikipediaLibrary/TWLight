@@ -112,6 +112,10 @@ COMMON CONTENT BLOCK CSS
     color: #3366CC;
 }
 
+.twl-links:hover{
+    color: #3366CC;
+}
+
 .twl-links-underline{
     text-decoration: underline;
 }
@@ -772,14 +776,7 @@ NEW MY LIBRARY CSS
 }
 
 .applications-link{
-    font-family: Roboto;
     font-size: 14px;
-    color: #3366CC;
-    text-decoration: underline;
-}
-.applications-link:hover{
-    color: #3366CC;
-    text-decoration: none;
 }
 .about-section, .key-section{
     font-size: 15px;
