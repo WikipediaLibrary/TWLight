@@ -41,7 +41,7 @@
       {% url 'terms' as terms_url %}
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate {{ terms_url }}. {% endcomment %}
       {% blocktranslate trimmed %}
-        For more information about how your information is stored and reviewed please see our <a href="{{ terms_url }}">
+        For more information about how your information is stored and reviewed please see our <a class="twl-links" href="{{ terms_url }}">
         terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each
         partner’s platform; please review them.
       {% endblocktranslate %}
@@ -210,7 +210,7 @@
       {% url 'contact' as contact_url %}
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
-        If you have questions, need help, or want to volunteer to help, please see our <a href="{{ contact_url }}">contact page</a>.
+        If you have questions, need help, or want to volunteer to help, please see our <a class="twl-links" href="{{ contact_url }}">contact page</a>.
       {% endblocktranslate %}
     </p>
   </div>
