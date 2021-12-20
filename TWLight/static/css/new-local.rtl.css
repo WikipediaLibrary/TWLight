@@ -888,10 +888,7 @@ and (max-device-width : 1024px) {
         text-align: center;
     }
     .applications-link{
-        font-family: Roboto;
         font-size: 13px;
-        color: #3366CC;
-        text-decoration: underline;
     }
     .applications-item{
         position: absolute;
@@ -913,10 +910,7 @@ and (max-device-width : 480px) {
         text-align: center;
     }
     .applications-link{
-        font-family: Roboto;
         font-size: 13px;
-        color: #3366CC;
-        text-decoration: underline;
     }
     .applications-item{
         position: absolute;
