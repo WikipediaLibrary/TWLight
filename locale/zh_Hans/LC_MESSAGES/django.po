@@ -34,7 +34,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:28+0000\n"
+"PO-Revision-Date: 2021-12-20 12:18:00+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1301,12 +1301,12 @@ msgstr "语言"
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
-msgstr ""
+msgstr "可搜索"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:81
 msgid "Access"
-msgstr ""
+msgstr "访问"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17
@@ -1336,7 +1336,7 @@ msgstr "不可搜索"
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
-msgstr ""
+msgstr "部分可搜索"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1361,20 +1361,19 @@ msgstr "不可用"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr ""
+msgstr "维基百科图书馆允许活跃编辑者免费访问各种付费墙可靠资源！"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "在顶部搜索栏中搜索或者直接浏览出版者网站以开始。"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "了解更多"
 
@@ -2044,7 +2043,7 @@ msgstr "翻译这个图书馆"
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "JavaScript 已被禁用；点击下方的按钮以继续。"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19
@@ -2241,7 +2240,7 @@ msgstr "握手程序未启动，请尝试重新登录。"
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:353
 msgid "To view this link you need to be an eligible library user. Please login to continue."
-msgstr ""
+msgstr "要查看此链接，您需要是符合条件的图书馆用户。请先登录以继续。"
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:395
@@ -2292,7 +2291,7 @@ msgstr "您将不再能够通过图书卡平台访问<b>%(partner)s's</b>的资�
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
 msgid "Favorites"
-msgstr ""
+msgstr "最爱"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
@@ -2536,27 +2535,27 @@ msgstr "要刷新您的数据，请注销再重新登录。"
 #. Translators: A button that takes users to their profile.
 #: TWLight/users/templates/users/eligibility_modal.html:58
 msgid "Profile/Settings"
-msgstr ""
+msgstr "个人资料/设置"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
 #: TWLight/users/templates/users/filter_section.html:32
 msgid "Key"
-msgstr ""
+msgstr "图例"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:39
 msgid "Collection is fully searchable via the search bar"
-msgstr ""
+msgstr "馆藏可完全通过搜索栏搜索"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:48
 msgid "Collection is only partially searchable via the search bar"
-msgstr ""
+msgstr "馆藏仅可通过搜索栏进行部分搜索"
 
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
-msgstr ""
+msgstr "其他馆藏必须单独浏览"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2689,9 +2688,8 @@ msgstr "维基百科图书卡账户的要求"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:92
-#, fuzzy
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for The Wikipedia Library, we require that you be registered for a user account on the projects, with at least 500 edits, six (6) months of activity, and 10+ edits in the last month. We ask that you do not request access to any publishers with a limited number of available accounts whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "社群成员保留通过维基百科图书馆访问资源的权限，他们已经表明了对维基媒体项目的承诺，并将使用这些资源来改善项目的内容。为此，为了有资格使用维基百科图书馆程序，我们要求您在一个项目上注册为用户。我们优先考虑至少有500次编辑和6个月活动的用户，但是这些并不是严格的要求。我们要求您不要请求任何已可以通过本地图书馆或大学或其他机构或组织就能免费访问其资源的出版商的访问权限，以便向其他人提供该机会。"
+msgstr "社群成员保留通过维基百科图书馆访问资源的权限，他们已经表明了对维基媒体项目的承诺，并将使用这些资源来改善项目的内容。为此，为了有资格使用维基百科图书馆程序，我们要求您在一个项目上注册为用户。我们优先考虑至少有500次编辑、6个月活动的及最近一个月做出10次以上编辑的用户。我们要求您不要请求任何已可以通过本地图书馆、大学、其他机构或组织就能免费访问其资源的出版商的访问权限，以便向其他人提供该机会。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:108
@@ -2701,7 +2699,7 @@ msgstr "此外，如果您当前被维基媒体项目封禁或禁止编辑，对
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:118
 msgid "Your eligibility to access The Wikipedia Library is assessed at each login. While more than half of the library's content is provided via this automated eligibility check, access to other publisher's content may be time limited, typically lapsing after one year, after which you will usually need to apply for renewal."
-msgstr ""
+msgstr "每次登录都会评估您访问维基百科图书馆的资格。尽管图书馆超过一半的内容是通过此自动资格检查程序提供的，但对其他出版者内容的访问可能会有时间限制，通常会在一年后失效，在那之后您通常需要申请续订。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:128
@@ -2877,11 +2875,11 @@ msgstr "选中此框并点击“提交”，即表示您已阅读并同意上述
 
 #: TWLight/users/templates/users/user_collection_tile.html:23
 msgid "Remove this collection from favorites"
-msgstr ""
+msgstr "将此馆藏从最爱中移除"
 
 #: TWLight/users/templates/users/user_collection_tile.html:29
 msgid "Add this collection to favorites"
-msgstr ""
+msgstr "将此馆藏加入最爱"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:77

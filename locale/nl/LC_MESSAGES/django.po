@@ -8,6 +8,7 @@
 # Author: McDutchie
 # Author: Robin van der Vliet
 # Author: Romaine
+# Author: Spinster
 # Author: Timk70
 # Author: Xbaked potatox
 msgid ""
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:27+0000\n"
+"PO-Revision-Date: 2021-12-20 12:17:58+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2106,7 +2107,7 @@ msgstr ""
 #: TWLight/templates/message_partial.html:15
 #, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a class=\"twl-links\" href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a class=\"twl-links\" href=\"%(email_url)s\">update your email</a>."
-msgstr "U hebt geen e-mail in het bestand. We kunnen uw toegang tot partnerbronnen niet voltooien en u kunt geen <a class=\"twl-links\" href=\"%(contact_us_url)s\"> contact met ons opnemen </a> zonder e-mail. <a class=\"twl-links\" href=\"%(email_url)s\"> update uw e-mail </a>."
+msgstr "U hebt geen e-mail in het bestand. We kunnen uw toegang tot partnerbronnen niet voltooien en u kunt geen <a class=\"twl-links\" href=\"%(contact_us_url)s\"> contact met ons opnemen </a> zonder e-mail. <a class=\"twl-links\" href=\"%(email_url)s\">Update uw e-mail </a>."
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/message_partial.html:26

@@ -23,12 +23,13 @@
 # Author: Sandro Halank (WMDE)
 # Author: Seewolf
 # Author: SoWhy
+# Author: Umlaut
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:25+0000\n"
+"PO-Revision-Date: 2021-12-20 12:17:56+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1445,7 +1446,7 @@ msgstr "Schau dir den Status deiner Bewerbungen auf <strong><a class=\"twl-links
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
 msgstr "Schau dir den Status deines Zuganges auf <strong><a href=\"%(library_url)s\">Meine Zugänge</a></strong> an."
 
