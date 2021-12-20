@@ -183,16 +183,7 @@ HEADER CSS
 }
 
 .eds-search-button{
-    font-family: Roboto;
-    color: #FFFFFF;
-    background-color: #3366CC;
     border-radius: 0 2px 2px 0;
-}
-
-.eds-search-button:hover {
-    color: #FFFFFF !important;
-    background-color: #3366CC !important;
-    text-decoration: underline !important;
 }
 
 .eds-search-icon{
