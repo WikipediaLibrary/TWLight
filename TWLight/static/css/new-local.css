@@ -789,8 +789,6 @@ NEW MY LIBRARY CSS
 }
 .learn-more-link, .discuss-link, .reset-filters-link{
     font-size: 15px;
-    color: #3366CC;
-    text-decoration: underline;
 }
 .icon-section{
     display: inline-block;
