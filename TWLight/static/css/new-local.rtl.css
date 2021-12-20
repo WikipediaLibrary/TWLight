@@ -195,13 +195,7 @@ HEADER CSS
 .feedback-link{
     float: left;
     font-size: 12px;
-    color: #3366CC;
-    text-decoration: underline;
     margin-left: 12%;
-}
-.feedback-link:hover{
-    color: #3366CC;
-    text-decoration: none;
 }
 
 .top-navbar-button{

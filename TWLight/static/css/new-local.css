@@ -112,6 +112,13 @@ COMMON CONTENT BLOCK CSS
     color: #3366CC;
 }
 
+.twl-links-underline{
+    text-decoration: underline;
+}
+.twl-links-underline:hover{
+    text-decoration: none;
+}
+
 .twl-secondary-btn{
     color: #000000;
     background-color: #FFFFFF;
@@ -193,13 +200,7 @@ HEADER CSS
 .feedback-link{
     float: right;
     font-size: 12px;
-    color: #3366CC;
-    text-decoration: underline;
     margin-right: 10%;
-}
-.feedback-link:hover{
-    color: #3366CC;
-    text-decoration: none;
 }
 
 .top-navbar-button{
