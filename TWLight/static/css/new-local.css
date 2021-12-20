@@ -53,6 +53,7 @@ COMMON CONTENT BLOCK CSS
   font-size: 14px;
   color: #FFFFFF !important;
   background-color: #3366CC !important;
+  border-color: #3366CC !important;
 }
 .twl-btn:hover {
   color: #FFFFFF !important;

@@ -188,7 +188,7 @@ class TermsForm(forms.ModelForm):
         self.helper.layout = Layout(
             "terms_of_use",
             # Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-            Submit("submit", _("Submit"), css_class="btn btn-default terms-button"),
+            Submit("submit", _("Submit"), css_class="btn twl-btn"),
         )
 
 

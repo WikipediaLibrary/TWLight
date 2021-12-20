@@ -25,17 +25,6 @@
     .terms-content{
       margin: auto 56px;
     }
-    .terms-link{
-      color: #3366CC;
-    }
-    .terms-button{
-      background-color: #3366CC;
-      border-color: #3366CC;
-    }
-    .terms-button:hover{
-      background-color: #3366CC;
-      text-decoration: underline;
-    }
   </style>
 {% endblock extra_css %}
 
@@ -46,7 +35,7 @@
     {# Translators: use the date *when you are translating*, in a language-appropriate format. #}
     <em>{% trans "Last updated 11 August 2021" %}</em>
 
-    <a class="terms-link" href="https://wikimediafoundation.org/wiki/Privacy_policy" style="float:right">
+    <a class="twl-links" href="https://wikimediafoundation.org/wiki/Privacy_policy" style="float:right">
     {% comment %}Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.{% endcomment %}
     {% trans "Wikimedia Foundation privacy policy" %}
     </a>
@@ -62,7 +51,7 @@
       <p>
         {% comment %}Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.{% endcomment %}
         {% blocktranslate trimmed %}
-          <a class="terms-link" href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
+          <a class="twl-links" href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">
             The Wikipedia Library
           </a>
           has partnered with publishers around the world to allow users to access otherwise
@@ -280,7 +269,7 @@
           application, you will only be asked to supply information required by the
           publishers you have chosen, and each publisher will only receive the information
           they require for providing you with access. Please see our
-          <a class="terms-link" href="{{ all_partners_url }}">partner information</a> pages to learn what
+          <a class="twl-links" href="{{ all_partners_url }}">partner information</a> pages to learn what
           information is required by each publisher to gain access to their resources.
         {% endblocktranslate %}
       </p>
@@ -302,12 +291,12 @@
           In order to administer the Wikipedia Library program, we will retain the application
           data we collect from you for three years after your most recent login, unless
           you delete your account, as described below. You can log in and go to
-          <a class="terms-link" href="{{ profile_url }}">your profile page</a> in order to see the information
+          <a class="twl-links" href="{{ profile_url }}">your profile page</a> in order to see the information
           associated with your account, and can download it in JSON format. You may access,
           update, restrict, or delete this information at any time, except for the information
           that is automatically retrieved from the projects. If you have any questions
           or concerns about the handling of your data, please contact
-          <a class="terms-link" href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Card%20account%20deactivation">
+          <a class="twl-links" href="mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%20Library%20Card%20account%20deactivation">
             wikipedialibrary@wikimedia.org
           </a>.
         {% endblocktranslate %}
@@ -352,7 +341,7 @@
           We may disclose any collected information when required by law, when we have
           your permission, when needed to protect our rights, privacy, safety, users,
           or the general public, and when necessary to enforce these terms, WMF’s
-          general <a class="terms-link" href="https://foundation.wikimedia.org/wiki/Terms_of_Use">Terms of Use</a>,
+          general <a class="twl-links" href="https://foundation.wikimedia.org/wiki/Terms_of_Use">Terms of Use</a>,
           or any other WMF policy.
         {% endblocktranslate %}
       </p>
@@ -414,7 +403,7 @@
         <strong>
           {% comment %}Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. {% endcomment %}
           {% blocktranslate trimmed %}
-            See also the <a class="terms-link" href="https://wikimediafoundation.org/wiki/Privacy_policy">Wikimedia Foundation Privacy Policy</a>.
+            See also the <a class="twl-links" href="https://wikimediafoundation.org/wiki/Privacy_policy">Wikimedia Foundation Privacy Policy</a>.
           {% endblocktranslate %}
         </strong>
       </p>
