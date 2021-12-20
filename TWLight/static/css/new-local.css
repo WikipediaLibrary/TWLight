@@ -1004,15 +1004,8 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 
 .access-apply-button{
-    color: #FFFFFF;
-    background-color: #3366CC;
     width: 50%;
     -webkit-appearance: none;
-}
-
-.access-apply-button:hover{
-    color: #FFFFFF;
-    text-decoration: underline;
 }
 
 .renew-extend-button{
@@ -1031,8 +1024,6 @@ NEW MY LIBRARY COLLECTION TILES CSS
 and (min-device-width : 320px)
 and (max-device-width : 480px) {
     .access-apply-button{
-        color: #FFFFFF;
-        background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
         -webkit-appearance: none;
@@ -1050,8 +1041,6 @@ and (max-device-width : 480px) {
 and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     .access-apply-button{
-        color: #FFFFFF;
-        background-color: #3366CC;
         width: 100%;
         margin-bottom: 10px;
         -webkit-appearance: none;
