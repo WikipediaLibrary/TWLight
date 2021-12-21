@@ -3,6 +3,8 @@ import json
 import logging
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
+from django.contrib.auth.hashers import make_password
+from TWLight.users.signals import BlockHashChanged
 
 logger = logging.getLogger(__name__)
 
@@ -219,3 +221,51 @@ def editor_bundle_eligible(editor: "Editor"):
         return True
     else:
         return False
+
+
+def editor_block_hash(merged: list):
+    """
+    Creates a hash based on a JSON string of a user's blocks
+    ----------
+    merged : list
+        A list of merged accounts for this Editor as returned by globaluserinfo.
+
+    Returns
+    -------
+    str
+        A hash of the JSON string of a user's blocks
+    """
+    blocked_dict = {}
+    for account in merged:
+        if "blocked" in account:
+            blocked_dict[account["wiki"]] = account["blocked"]
+
+    return make_password(str(blocked_dict))
+
+
+def editor_compare_hashes(
+    previous_block_hash: str, wp_block_hash: str, wp_username: str
+):
+    """
+    Compares two hashes. If they are different, and email is sent to the team.
+    ----------
+    previous_block_hash : str
+        The value of the previous block hash.
+    wp_block_hash: str
+        The recently generated block hash
+    wp_username: str
+        The Wikipedia username of the editor we are comparing block hashes from
+
+    Returns
+    -------
+    str
+        A hash of the JSON string of a user's blocks
+    """
+    if previous_block_hash != wp_block_hash and previous_block_hash is not None:
+        # Send email to TWL team
+        BlockHashChanged.send_email(
+            sender="TBD",
+            user_email=email,
+            editor_wp_username=wp_username,
+            body=message,
+        )

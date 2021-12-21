@@ -146,3 +146,12 @@ def update_bundle_authorizations_on_bundle_partner_creation(
         if authorizations_to_update:
             for authorization in authorizations_to_update:
                 authorization.partners.add(instance)
+
+
+class BlockHashChanged(object):
+    block_hash_change_notice = Signal(
+        providing_args=[
+            "user_wp_username",
+            "user_email",
+        ]
+    )

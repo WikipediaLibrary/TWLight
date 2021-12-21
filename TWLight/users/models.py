@@ -56,7 +56,10 @@ from TWLight.users.helpers.editor_data import (
     editor_not_blocked,
     editor_reg_date,
     editor_bundle_eligible,
+    editor_block_hash,
+    editor_compare_hashes,
 )
+from TWLight.users.signals import BlockHashChanged
 
 logger = logging.getLogger(__name__)
 
@@ -232,6 +235,13 @@ class Editor(models.Model):
         default=False,
         editable=False,
         help_text="At their last login, did this user meet the criteria for access to the library card bundle?",
+    )
+
+    wp_block_hash = models.CharField(
+        max_length=255,
+        blank=True,
+        editable=False,
+        help_text="A hash that is generated with a user's block data",
     )
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Staff-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -682,6 +692,11 @@ class Editor(models.Model):
                 global_userinfo["editcount"], current_datetime=current_datetime
             )
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
+            previous_block_hash = self.wp_block_hash
+            self.wp_block_hash = editor_block_hash(global_userinfo["merged"])
+            editor_compare_hashes(
+                previous_block_hash, self.wp_block_hash, self.wp_username
+            )
 
         # if the account is already old enough, we shouldn't run this check everytime
         # since this flag should never return back to False
