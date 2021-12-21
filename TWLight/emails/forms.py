@@ -18,7 +18,7 @@ class ContactUsForm(forms.Form):
         self.fields["email"].label = _("Your email")
         # fmt: off
         # Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
-        self.fields["email"].help_text = _("This field is automatically updated with the email from your <a class='contact-us-links' href='{}'>user profile</a>.").format(
+        self.fields["email"].help_text = _("This field is automatically updated with the email from your <a class='twl-links' href='{}'>user profile</a>.").format(
             reverse_lazy("users:home")
         )
         # fmt: on
@@ -41,5 +41,5 @@ class ContactUsForm(forms.Form):
             "cc",
             "next",
             # Translators: This labels a button which users click to submit their email message.
-            Submit("submit", _("Submit"), css_class="contact-us-button"),
+            Submit("submit", _("Submit"), css_class="twl-btn"),
         )
