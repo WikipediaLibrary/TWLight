@@ -22,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:46+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:28+0000\n"
+"PO-Revision-Date: 2021-12-23 12:14:55+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -568,9 +568,8 @@ msgstr "Önceki sayfa"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
-msgstr "Önceki sayfa"
+msgstr "Önceki"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -1259,9 +1258,8 @@ msgstr "Ara"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
-#, fuzzy
 msgid "Instant (proxy) access"
-msgstr "Anında erişim"
+msgstr "Anında (vekil) erişim"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
@@ -1351,14 +1349,14 @@ msgstr "Mevcut Değil"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr ""
+msgstr "Vikipedi Kütüphanesi, aktif editörlerin ödeme isteyen güvenilir birçok kaynak koleksiyonuna ücretsiz olarak erişimini sağlar!"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "En üstteki arama çubuğuyla veya yayıncılara ait web sitelere göz atarak işe başlayabilirsiniz."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -1435,9 +1433,9 @@ msgstr "Başvurularınızın durumunu <strong> <a class=\"twl-links\" href=\"%(a
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\">Kütüphanem</a></strong> sayfasında görüntüleyin."
+msgstr "Erişiminizin durumunu <strong><a href=\"%(library_url)s\" class=\"twl-links\">Kütüphanem</a></strong> sayfasında görüntüleyin."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
@@ -1840,15 +1838,13 @@ msgstr "Vikipedi Kütüphanesi Hakkında"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
-#, fuzzy
 msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
-msgstr "Bu platform, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, içeriğini arayabilir ve ilgilendiklerinize başvurabilir ve bunlara erişebilirsiniz. Wikimedia Vakfı ile gizlilik sözleşmesi imzalayan gönüllü koordinatörler, başvuruları inceler ve ücretsiz erişiminiz için yayıncılarla birlikte çalışır. Bazı içerikler başvuru olmadan kullanılabilir."
+msgstr "Bu platform, mevcut koleksiyonlarımıza erişimi kolaylaştıran merkezi aracımızdır. Burada hangi ortaklıkların mevcut olduğunu görebilir, içeriklerini arayabilir ve ilgilendiklerinize başvurabilir ve bunlara erişebilirsiniz."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
-#, fuzzy
 msgid "All users receive immediate access to some collections, which can be browsed by clicking the 'Access collection' buttons or using the search bar at the top of the page. Other collections require an application before access is granted, and may be accessed directly or via an individual login or access code. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review these applications and work with publishers to get you your free access."
-msgstr "Bu platform, uygulamaları incelemek ve koleksiyonumuza erişim sağlamak için merkezi bir araçtır. Burada hangi ortaklıkların uygun olduğunu görebilir, içeriğini arayabilir ve ilgilendiklerinize başvurabilir ve bunlara erişebilirsiniz. Wikimedia Vakfı ile gizlilik sözleşmesi imzalayan gönüllü koordinatörler, başvuruları inceler ve ücretsiz erişiminiz için yayıncılarla birlikte çalışır. Bazı içerikler başvuru olmadan kullanılabilir."
+msgstr "Tüm kullanıcılar, 'Koleksiyona erişim' butonuna tıklayarak veya sayfanın üst kısmındaki arama çubuğunu kullanarak göz atılabilen bazı koleksiyonlara anında erişim elde eder. Diğer koleksiyonlar, erişim verilmeden önce bir başvuru gerektirir ve doğrudan veya bireysel oturum açma veya erişim kodu aracılığıyla erişilebilir. Wikimedia Vakfı ile gizlilik anlaşmaları imzalamış olan gönüllü koordinatörler, bu uygulamaları gözden geçirir ve size ücretsiz erişiminizi sağlamak için yayıncılarla birlikte çalışır."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
@@ -2035,7 +2031,7 @@ msgstr "Çeviri"
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "JavaScript devre dışı bırakıldı, devam etmek için aşağıdaki butonu kullanın."
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19
@@ -2232,7 +2228,7 @@ msgstr "OAuth-Handshaker aracılığıyla kimlik doğrulama başlatılmadı, lü
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:353
 msgid "To view this link you need to be an eligible library user. Please login to continue."
-msgstr ""
+msgstr "Bu bağlantıyı görüntülemek için uygun bir kütüphane kullanıcısı olmanız gerekir. Devam etmek için lütfen giriş yapınız."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:395
