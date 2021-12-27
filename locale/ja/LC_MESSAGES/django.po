@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:26+0000\n"
+"PO-Revision-Date: 2021-12-27 12:15:24+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1431,9 +1431,9 @@ msgstr "提出した申請の進行状況は<strong><a class=\"twl-links\" href=
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr "アクセス権の状況を確認するには<strong><a href=\"%(library_url)s\">私の図書館</a></strong>ページをご覧ください。"
+msgstr "アクセス権の状況を確認するには<strong><a href=\"%(library_url)s\"class=\"twl-links\">私の図書館</a></strong>ページをご覧ください。"
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
