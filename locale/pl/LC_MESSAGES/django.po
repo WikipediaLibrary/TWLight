@@ -5,6 +5,7 @@
 # Author: Chrumps
 # Author: DDPAT
 # Author: Kareyac
+# Author: Msz2001
 # Author: Nux
 # Author: Rail
 # Author: Rainbow P
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:46+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:27+0000\n"
+"PO-Revision-Date: 2021-12-30 12:13:42+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -562,7 +563,6 @@ msgstr "Poprzednia strona"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
 msgstr "Poprzednia strona"
 

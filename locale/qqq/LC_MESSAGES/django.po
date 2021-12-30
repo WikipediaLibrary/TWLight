@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-20 12:17:59+0000\n"
+"PO-Revision-Date: 2021-12-30 12:13:43+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -1429,7 +1429,7 @@ msgstr "\"My Applications\" is {{msg-wm|Wikipedia-library-c46eb7-My Applications
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
 msgstr "“My Library” is {{msg-wm|Wikipedia-library-7996cc-My Library}}."
 
