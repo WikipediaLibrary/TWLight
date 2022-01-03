@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-20 12:17:58+0000\n"
+"PO-Revision-Date: 2022-01-03 12:13:12+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2470,7 +2470,7 @@ msgstr ""
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:250
 msgid "Personal data"
-msgstr ""
+msgstr "Persoonlijke gegevens"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:257
