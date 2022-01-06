@@ -3,6 +3,7 @@
 #
 # Author: Ajeje Brazorf
 # Author: Beta16
+# Author: Gianfranco
 # Author: JackLantern
 # Author: Mpayansilva
 # Author: OrbiliusMagister
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:26+0000\n"
+"PO-Revision-Date: 2022-01-06 12:13:51+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -417,43 +418,43 @@ msgstr "Gentilmente, richiedi all'utente di sottoscrivere le condizioni di utili
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:176
 msgid "Why the editor wants access"
-msgstr ""
+msgstr "Perché l'utente richiede l'accesso"
 
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
 #: TWLight/applications/templates/applications/application_evaluation.html:183
 msgid "Not stated"
-msgstr ""
+msgstr "Non dichiarato"
 
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
 #: TWLight/applications/templates/applications/application_evaluation.html:189
 msgid "Renewal of existing access grant?"
-msgstr ""
+msgstr "Rinnovo di un'autorizzazione all'accesso esistente?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:195
 #, python-format
 msgid "Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
-msgstr ""
+msgstr "Sì (<a class=\"twl-links\" href=\"%(parent_url)s\">richiesta precedente</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
 msgid "Previous access expiry date"
-msgstr ""
+msgstr "Data di scadenza dell'accesso precedente"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:218
 msgid "Comments from the editor"
-msgstr ""
+msgstr "Commenti dell'utente"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:227
 msgid "Recent Applications (last 90 days)"
-msgstr ""
+msgstr "Richieste recenti (ultimi 90 giorni)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:264
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "Nessuna richiesta è stata presentata dall'utente negli ultimi 90 giorni"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:268
@@ -468,7 +469,7 @@ msgstr "Aggiungi commento"
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:297
 msgid "Comments are visible to all coordinators and to the editor who submitted this application."
-msgstr ""
+msgstr "I commenti sono visibili a tutti i coordinatori e all'utente che ha presentato questa richiesta."
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
@@ -487,13 +488,13 @@ msgstr "Cronologia"
 #: TWLight/applications/templates/applications/application_evaluation.html:325
 #, python-format
 msgid "Submitted by %(submit_user)s on %(review_date)s"
-msgstr ""
+msgstr "Inviato da %(submit_user)s il %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted for review. Don't translate review_date.
 #: TWLight/applications/templates/applications/application_evaluation.html:330
 #, python-format
 msgid "Submitted on %(review_date)s"
-msgstr ""
+msgstr "Inviato il %(review_date)s"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was reviewed and who reviewed it. Don't translate review_user or review_date.
 #: TWLight/applications/templates/applications/application_evaluation.html:341
@@ -510,27 +511,27 @@ msgstr "Revisionato il%(review_date)s"
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
 #: TWLight/applications/templates/applications/application_evaluation.html:359
 msgid "No previous versions."
-msgstr ""
+msgstr "Nessuna versione precedente."
 
 #: TWLight/applications/templates/applications/application_list.html:37
 msgid "View applications which are..."
-msgstr ""
+msgstr "Vedi le richieste che sono..."
 
 #: TWLight/applications/templates/applications/application_list.html:43
 msgid "Pending review"
-msgstr ""
+msgstr "Revisione in corso"
 
 #: TWLight/applications/templates/applications/application_list.html:53
 msgid "Rejected"
-msgstr ""
+msgstr "Respinto"
 
 #: TWLight/applications/templates/applications/application_list.html:58
 msgid "Sent"
-msgstr ""
+msgstr "Inviato"
 
 #: TWLight/applications/templates/applications/application_list.html:63
 msgid "Up for renewal"
-msgstr ""
+msgstr "Da rinnovare"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:78
@@ -540,7 +541,7 @@ msgstr "Filtra per..."
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
 #: TWLight/applications/templates/applications/application_list.html:90
 msgid "Current filters"
-msgstr ""
+msgstr "Filtri attuali"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
 #: TWLight/applications/templates/applications/application_list.html:101
@@ -550,12 +551,12 @@ msgstr "Nessuno"
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
 #: TWLight/applications/templates/applications/application_list.html:113
 msgid "Page navigation"
-msgstr ""
+msgstr "Navigazione della pagina"
 
 #: TWLight/applications/templates/applications/application_list.html:117
 #: TWLight/applications/templates/applications/application_list.html:124
 msgid "Previous page"
-msgstr ""
+msgstr "Pagina precedente"
 
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
@@ -591,7 +592,7 @@ msgstr "Ultima pagina"
 #: TWLight/applications/templates/applications/application_list_include.html:33
 #: TWLight/users/templates/users/my_applications.html:43
 msgid "Imported application"
-msgstr ""
+msgstr "Richieste importate"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #. Translators: If an application was previously reviewed by a coordinator, this text displays the date and the name of the coordinator.
@@ -601,7 +602,7 @@ msgstr ""
 #: TWLight/users/templates/users/my_applications.html:47
 #, python-format
 msgid "Last reviewed by %(reviewer)s on %(review_date)s"
-msgstr ""
+msgstr "Esaminato l'ultima volta da %(reviewer)s il %(review_date)s"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate review_date.
 #. Translators: If an application was previously reviewed, this text displays the date of the review.
@@ -611,7 +612,7 @@ msgstr ""
 #: TWLight/users/templates/users/my_applications.html:52
 #, python-format
 msgid "Last reviewed on %(review_date)s"
-msgstr ""
+msgstr "Esaminato l'ultima volta il %(review_date)s"
 
 #. Translators: On the page listing applications, this shows next to an application which has not yet been reviewed.
 #. Translators: If an application wasn't previously reviewed, this text is displayed.
@@ -620,7 +621,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
 #: TWLight/users/templates/users/my_applications.html:58
 msgid "Not yet reviewed."
-msgstr ""
+msgstr "Non ancora esaminato."
 
 #. Translators: On the page listing applications, this text is displayed when there are no applications to be shown.
 #. Translators: On the page listing applications, this text is displayed when there are no app;ications to be shown.
@@ -629,22 +630,22 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:102
 #: TWLight/users/templates/users/my_applications.html:92
 msgid "No applications right now."
-msgstr ""
+msgstr "Non ci sono richieste in questo momento."
 
 #. Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
 msgid "Partner (Collection)"
-msgstr ""
+msgstr "Partner (Collezione)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15
 msgid "Last reviewed"
-msgstr ""
+msgstr "Ultimo esame"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
 msgid "Date applied"
-msgstr ""
+msgstr "Data di richiesta"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
@@ -656,7 +657,7 @@ msgstr "Accetti le condizioni d'uso?"
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:28
 #: TWLight/applications/templates/applications/send_partner.html:109
 msgid "Select/deselect all"
-msgstr ""
+msgstr "Seleziona/deseleziona tutto"
 
 #. Translators: Displayed if an application is a renewal.
 #. Translators: Denotes whether an application was a renewal request for a previous application.
@@ -665,23 +666,23 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:53
 #: TWLight/resources/templates/resources/partner_users.html:93
 msgid "Renewal"
-msgstr ""
+msgstr "Rinnovo"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:83
 msgid "Status for all selected applications"
-msgstr ""
+msgstr "Stato di tutte le richieste selezionate"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:97
 msgid "Set status"
-msgstr ""
+msgstr "Imposta stato"
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr ""
+msgstr "Fai clic su 'conferma' per rinnovare la tua richiesta per %(partner)s"
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.
@@ -699,22 +700,22 @@ msgstr "Conferma"
 #. Translators: We are asking editors which publishers' resources they want access to. They may request more than one publisher.
 #: TWLight/applications/templates/applications/request_for_application.html:23
 msgid "What resources do you want to access?"
-msgstr ""
+msgstr "A quali risorse vuoi accedere?"
 
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:26
 msgid "Library Bundle partners are not shown as eligibility is determined automatically."
-msgstr ""
+msgstr "I partner di Library Bundle non sono mostrati perché la loro ammissibilità è determinata automaticamente."
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:48
 msgid "(more info)"
-msgstr ""
+msgstr "(più informazioni)"
 
 #. Translators: On the page where users can apply for multiple partners, this text is displayed when there are no available partners.
 #: TWLight/applications/templates/applications/request_for_application.html:60
 msgid "No partner data has been added yet."
-msgstr ""
+msgstr "Nessun dato di partner è stato ancora aggiunto."
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:74
