@@ -29,6 +29,7 @@
 # Author: Rubin16
 # Author: Sabelöga
 # Author: Soul Train
+# Author: Sunpriat
 # Author: Teretalexev
 # Author: Thothsum
 # Author: Vlad5250
@@ -39,7 +40,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:46+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:27+0000\n"
+"PO-Revision-Date: 2022-01-10 12:13:47+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2070,7 +2071,7 @@ msgstr "Главная страница Библиотеки Википедии"
 #: TWLight/templates/header_partial_b3.html:51
 #: TWLight/templates/header_partial_b4.html:46
 msgid "Search the library"
-msgstr "Поиск библиотеки"
+msgstr "Поиск в библиотеке"
 
 #. Translators: Link that takes a user to an external site to provide feedback on the search bar.
 #: TWLight/templates/header_partial_b3.html:65
@@ -2122,7 +2123,7 @@ msgstr "Более 90 лучших в мире баз данных только 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
 msgid "Meet these criteria for automatic access"
-msgstr "Соблюдите этим критериям автоматического доступа"
+msgstr "Вы должны соответствовать этим критериям автоматического доступа"
 
 #: TWLight/templates/login_partial.html:45
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
