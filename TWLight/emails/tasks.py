@@ -303,20 +303,27 @@ def send_approval_notification_email(instance):
     path = reverse_lazy("users:my_library")
     link = "https://{base}{path}".format(base=base_url, path=path)
     email = ApprovalNotification()
-
     # If, for some reason, we're trying to send an email to a user
     # who deleted their account, stop doing that.
+
     if instance.editor:
-        email.send(
-            instance.user.email,
-            {
-                "user": instance.user.editor.wp_username,
-                "lang": instance.user.userprofile.lang,
-                "partner": instance.partner,
-                "link": link,
-                "user_instructions": instance.get_user_instructions(),
-            },
-        )
+        # Emails for approved emails in access codes method shall be sent only when finalized
+        if instance.partner.authorization_method == Partner.CODES:
+            logger.info(
+                "Email for access codes method should be sent only once,"
+                "when the status of application is finalized."
+            )
+        else:
+            email.send(
+                instance.user.email,
+                {
+                    "user": instance.user.editor.wp_username,
+                    "lang": instance.user.userprofile.lang,
+                    "partner": instance.partner,
+                    "link": link,
+                    "user_instructions": instance.get_user_instructions(),
+                },
+            )
     else:
         logger.error(
             "Tried to send an email to an editor that doesn't "
