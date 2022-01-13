@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2022-01-06 12:13:51+0000\n"
+"PO-Revision-Date: 2022-01-13 12:16:28+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2063,7 +2063,7 @@ msgstr ""
 #: TWLight/templates/header_partial_b3.html:101
 #: TWLight/templates/header_partial_b4.html:91
 msgid "Suggest a collection"
-msgstr ""
+msgstr "Suggerisci una collezione"
 
 #. Translators: A button to log out of The Wikipedia Library.
 #: TWLight/templates/header_partial_b3.html:114
@@ -2081,7 +2081,7 @@ msgstr "Meno informazioni"
 #: TWLight/templates/homepage.html:377
 #: TWLight/templates/partner_carousel.html:80
 msgid "More info"
-msgstr ""
+msgstr "Ulteriori informazioni"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
@@ -2091,7 +2091,7 @@ msgstr ""
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
 msgid "Meet these criteria for automatic access"
-msgstr ""
+msgstr "Soddisfa questi criteri per l'accesso automatico"
 
 #: TWLight/templates/login_partial.html:45
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
@@ -2132,7 +2132,7 @@ msgstr "Altro"
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:17
 msgid "Log in with your Wikipedia account"
-msgstr ""
+msgstr "Accedi con la tua utenza Wikipedia"
 
 #. Translators: Found on the password reset page.
 #: TWLight/templates/registration/password_change_form.html:14
@@ -2144,7 +2144,7 @@ msgstr "Cambia password"
 #: TWLight/templates/registration/password_reset_form.html:10
 #: TWLight/templates/registration/password_reset_form.html:19
 msgid "Reset password"
-msgstr ""
+msgstr "Reimposta password"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
@@ -2154,7 +2154,7 @@ msgstr ""
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:36
 msgid "Update profile"
-msgstr ""
+msgstr "Aggiorna profilo"
 
 #. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
 #: TWLight/users/forms.py:45
@@ -2189,7 +2189,7 @@ msgstr ""
 #. Translators: Users must click this button when registering to agree to the website terms of use.
 #: TWLight/users/forms.py:177
 msgid "I agree with the terms of use"
-msgstr ""
+msgstr "Sono d'accordo con le condizioni d'uso"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
@@ -2204,7 +2204,7 @@ msgstr ""
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:227
 msgid "Update email"
-msgstr ""
+msgstr "Aggiorna email"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:218
@@ -2276,12 +2276,12 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
 msgid "Favorites"
-msgstr ""
+msgstr "Preferiti"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
 msgid "My Collections"
-msgstr ""
+msgstr "Le mie collezioni"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
 #: TWLight/users/templates/users/collections_section.html:24
@@ -2297,7 +2297,7 @@ msgstr "Nessun tag"
 #: TWLight/users/templates/users/collections_section.html:54
 #: TWLight/users/templates/users/collections_section.html:82
 msgid "Expired"
-msgstr ""
+msgstr "Scaduto"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:15
@@ -2309,7 +2309,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail.html:24
 #: TWLight/users/templates/users/my_applications.html:13
 msgid "My Library"
-msgstr ""
+msgstr "La mia biblioteca"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:28
@@ -2463,7 +2463,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:239
 msgid "Wikipedia user ID *"
-msgstr ""
+msgstr "ID utente Wikipedia *"
 
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:250
@@ -2484,7 +2484,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:278
 msgid "Email *"
-msgstr ""
+msgstr "Email *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:283
@@ -2545,7 +2545,7 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr ""
+msgstr "Imposta lingua"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
@@ -2590,7 +2590,7 @@ msgstr "Email"
 #. Translators: This is the heading of the section of a user's profile where users can change their password.
 #: TWLight/users/templates/users/preferences.html:36
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #. Translators: This text labels a button which, when clicked, updates a user's acceptance to the site's terms of use.
 #. Translators: This is a button which updates user preference settings
@@ -2599,7 +2599,7 @@ msgstr ""
 #: TWLight/users/templates/users/user_email_preferences.html:25
 #: TWLight/users/views.py:379
 msgid "Update"
-msgstr ""
+msgstr "Aggiorna"
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
@@ -2614,7 +2614,7 @@ msgstr "Vedi Condizioni d'uso"
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:82
 msgid "Data"
-msgstr ""
+msgstr "Dati"
 
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:88
@@ -2841,7 +2841,7 @@ msgstr ""
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:426
 msgid "Thank you!"
-msgstr ""
+msgstr "Grazie!"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:430
@@ -2851,7 +2851,7 @@ msgstr ""
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:432
 msgid "Wikimedia Foundation"
-msgstr ""
+msgstr "Wikimedia Foundation"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:440
@@ -2980,20 +2980,20 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:823 TWLight/views.py:38
 msgid "500+ edits"
-msgstr ""
+msgstr "Più di 500 modifiche"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:825 TWLight/views.py:40
 msgid "6+ months editing"
-msgstr ""
+msgstr "Oltre 6 mesi di contribuzione"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:827 TWLight/views.py:42
 msgid "10+ edits in the last month"
-msgstr ""
+msgstr "Più di 10 modifiche nell'ultimo mese"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:829 TWLight/views.py:44
 msgid "No active blocks"
-msgstr ""
+msgstr "Nessun blocco attivo"
 

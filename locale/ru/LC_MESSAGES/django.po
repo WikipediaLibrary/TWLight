@@ -34,13 +34,14 @@
 # Author: Thothsum
 # Author: Vlad5250
 # Author: Wileyfoxyx
+# Author: WindEwriX
 # Author: Евгения
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:46+0000\n"
-"PO-Revision-Date: 2022-01-10 12:13:47+0000\n"
+"PO-Revision-Date: 2022-01-13 12:16:30+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1317,7 +1318,7 @@ msgstr "Языки"
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
-msgstr ""
+msgstr "Доступно для поиска"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:81
@@ -1352,7 +1353,7 @@ msgstr "Недоступно для поиска"
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
-msgstr ""
+msgstr "Частично доступно для поиска"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1461,9 +1462,9 @@ msgstr "Посмотрите статус ваших заявок на стра�
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr "Посмотрите статус вашего доступа на странице <strong><a href=\"%(library_url)s\">Моя библиотека</a></strong>."
+msgstr "Посмотрите статус вашего доступа на странице <strong><a href=\"%(library_url)s\" class=\"twl-links\">Моя библиотека</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
@@ -2060,7 +2061,7 @@ msgstr "Перевести библиотеку"
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "JavaScript отключен; для продолжения воспользуйтесь кнопкой ниже."
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b3.html:19
@@ -2308,7 +2309,7 @@ msgstr "Вы больше не сможете обращаться к ресур
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
 msgid "Favorites"
-msgstr ""
+msgstr "Избранное"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
@@ -2557,22 +2558,22 @@ msgstr "Профиль/Настройки"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
 #: TWLight/users/templates/users/filter_section.html:32
 msgid "Key"
-msgstr ""
+msgstr "Ключ"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:39
 msgid "Collection is fully searchable via the search bar"
-msgstr ""
+msgstr "Коллекция полностью доступна для поиска с помощью поисковой строки"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:48
 msgid "Collection is only partially searchable via the search bar"
-msgstr ""
+msgstr "Коллекция лишь частично доступна для поиска с помощью поисковой строки"
 
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
-msgstr ""
+msgstr "Другие коллекции необходимо просматривать индивидуально"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2717,7 +2718,7 @@ msgstr "Кроме того, если вы в данный момент забл
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:118
 msgid "Your eligibility to access The Wikipedia Library is assessed at each login. While more than half of the library's content is provided via this automated eligibility check, access to other publisher's content may be time limited, typically lapsing after one year, after which you will usually need to apply for renewal."
-msgstr ""
+msgstr "Ваше право на доступ к библиотеке Википедии проверяется при каждом входе в систему. Хотя более половины содержимого библиотеки предоставляется с помощью этой автоматической проверки, доступ к содержимому других издательств может быть ограничен по времени, обычно заканчиваясь через год, после чего вам обычно требуется подавать заявку на продление."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:128
@@ -2817,9 +2818,8 @@ msgstr "Каждый издатель, являющийся членом про�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:291
-#, fuzzy
 msgid "Some Wikipedia Library pages are visible without logging in, but you will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr "Вы можете просматривать Библиотеку Википедии без авторизации, однако чтобы подавать заявки на доступ к частным ресурсам партнёров, вам придётся авторизоваться. При создании и обработке заявок на доступ мы используем данные, предоставляемые OAuth, и вызовы API Викимедиа."
+msgstr "Некоторые страницы Библиотеки Википедии можно просматривать без авторизации, однако чтобы подавать заявки на доступ к частным ресурсам партнёров, вам придётся авторизоваться. При создании и обработке заявок на доступ мы используем данные, предоставляемые OAuth, и вызовы API Викимедиа."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:302
@@ -2894,11 +2894,11 @@ msgstr "Поставив здесь галочку и нажав «Отправ�
 
 #: TWLight/users/templates/users/user_collection_tile.html:23
 msgid "Remove this collection from favorites"
-msgstr ""
+msgstr "Удалить эту коллекцию из избранного"
 
 #: TWLight/users/templates/users/user_collection_tile.html:29
 msgid "Add this collection to favorites"
-msgstr ""
+msgstr "Добавить коллекцию в избранное"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:77

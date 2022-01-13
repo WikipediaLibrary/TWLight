@@ -41,6 +41,12 @@
 	"78_short_description": "<strong>ICE Publishing</strong> הוא חלק מהמכון להנדסה אזרחית (Institution of Civil Engineers). הם מספקים גישה לכל כתבי־העת והספרים האלקטרוניים שנכללים בספרייה הווירטואלית של ICE.",
 	"72_short_description": "<strong>קיניגֶה</strong> (కినిగె, Kinige) היא חנות ספרים אלקטרוניים של ספרים בשפות הודיות, בעיקר בטלוגו. קיניגה מספקת גישה חופשית ל־10 ספרים אלקטרוניים בחודש.",
 	"80_short_description": "<strong>מגירן</strong> (مگیران, Magiran) הוא מוציא לאור של עיתונים וכתבי־עת אקדמיים.",
+	"16_short_description": "<strong>מקפרלנד</strong> <span dir=\"ltr\">McFarland &amp; Company</span> הוא מו\"ל אקדמי של עבודות במגוון רחב של נושאים, שמתמחה בכיסוי אזורים שלפעמים אינם מיוצגים היטב בספרות אקדמית, כגון משחקי וידאו, ספורט, ותרבות פופולרית. אנא עיינו ב<a href=\"https://mcfarlandbooks.com/shop/\">קטלוג המקוון</a> כדי למצוא ספרים בתחומי העניין שלכם.",
+	"16_description": "מקפרלנד יפיץ לכל היותר חמישה כותרים לעורך לשנה. ייתכנו מקרים יוצאי דופן – נא לספק הסבר להעלאת המגבלה.",
+	"40_short_description": "<strong>מפתח אוניות מיראמאר</strong> <span dir=\"ltr\">Miramar Ship Index</span> הוא מפתח של אוניות וההיסטוריות שלהן, שמכסה אוניות ברזל ופלדה, אוניות סוחר ממונעות, ואוניות מלחמה, מאז ראשית המאה ה־19.",
+	"53_short_description": "<strong>כתבי־עת של ההוצאה לאור של אם־איי־טי</strong> <span dir=\"ltr\">MIT Press Journals</span> הוא מו\"ל מלומד של יותר מ־30 כתבי־עת במדעי הרוח, מדעים מדויקים, ומדעי החברה.",
+	"27_short_description": "<strong>NewspaperARCHIVE.com</strong> הוא מסד נתונים מקוון של עיתונים מסופרתים עם יותר מ־2 מיליארד מאמרי חדשות; הכיסוי מתפרס מ־1607 עד ימינו מארצות הברית, קנדה, הממלכה המאוחדת, ועוד 20 מדינות.",
+	"27_description": "בעת ציטוט תוכן של Newspaperarchive.com, נא להשתמש בגזירים (cippings) במידת האפשר. גזירים מאפשרים לקוראים להציג את טקסט המקור דרך כתובת URL עם גישה פתוחה ללא צורך להירשם.",
 	"81_short_description": "<strong>נורמאגז</strong> (نورمگز, Noormags) הוא מוציא לאור של כתבי־עת בנושא מדעי החברה ומדעי הרוח.",
 	"93_short_description": "אתר <strong>כתבי־עת של הוצאת אוניברסיטת אוקספורד</strong> (Oxford University Press Journals) מכיל מגוון נושאים.",
 	"99_short_description": "אתר <strong>המשפטים של הוצאת אוניברסיטת אוקספורד</strong> (Oxford University Press Law) מציע אוסף משאבים בנושא חוק בין־לאומי.",
@@ -49,5 +55,9 @@
 	"108_short_description": "<strong>טאקצ'ה</strong> (طاقچه, Taaghche) היא חנות ספרים אלקטרוניים שמציעה יותר מ־60,000 ספרים, כתבי־עת, עיתונים, וספרי אודיו בשלוש פלטפורמות: אנדרואיד, iOS, ו־Web Reader.",
 	"107_short_description": "<strong>קאבלס</strong> (Cabells) היא חברת ניתוח נתונים על פרסומים מלומדים, שנותנת גישה למידע על כתבי־עת מדעיים ונצלניים.",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> הוא כתב־עת בשפה הגרמנית בנושא מוזיקה.",
-	"112_short_description": "<strong><em>מרקור</em></strong> (Merkur) הוא כתב־עת בנושא תרבות בשפה הגרמנית."
+	"112_short_description": "<strong><em>מרקור</em></strong> (Merkur) הוא כתב־עת בנושא תרבות בשפה הגרמנית.",
+	"119_short_description": "<strong>פיוצ'ר מדיסין</strong> (Future Medicine) הוא אוסף של משאבים ביורפואיים.",
+	"125_short_description": "אתר <strong>OECD iLibrary</strong> הוא ספרייה מקוונת של ספרים, מאמרים, וסטטיסטיקות שמוציא לאור הארגון לשיתוף פעולה ולפיתוח כלכלי.",
+	"126_short_description": "אתר <strong>OECD Data</strong> הוא מאגר של תרשימים, מפות, טבלאות ופרסומים קשורים שמוציא לאור הארגון לשיתוף פעולה ולפיתוח כלכלי.",
+	"127_short_description": "אתר <strong>OECD Multimedia Gallery</strong> הוא גלריה אורקולית שמכילה הסכתים וצילומים שמוציא לאור הארגון לשיתוף פעולה ולפיתוח כלכלי."
 }

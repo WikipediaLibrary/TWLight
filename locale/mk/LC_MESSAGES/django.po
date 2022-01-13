@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:26+0000\n"
+"PO-Revision-Date: 2022-01-13 12:16:28+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -565,9 +565,8 @@ msgstr "Претходна страница"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
-msgstr "Претходна страница"
+msgstr "Претходно"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -1286,9 +1285,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/collection_tile.html:21
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
-#, fuzzy
 msgid "Languages"
-msgstr "Јазик"
+msgstr "Јазици"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -1323,9 +1321,8 @@ msgstr "Мрежно место"
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
-#, fuzzy
 msgid "Not searchable"
-msgstr "Недостапно"
+msgstr "Непребарливо"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1349,7 +1346,6 @@ msgstr "Непознати јазици"
 #: TWLight/resources/templates/resources/collection_tile.html:48
 #: TWLight/users/templates/users/available_collection_tile.html:55
 #: TWLight/users/templates/users/user_collection_tile.html:67
-#, fuzzy
 msgid "Not Available"
 msgstr "Недостапно"
 
@@ -1373,7 +1369,6 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "Дознајте повеќе"
 
@@ -1381,7 +1376,6 @@ msgstr "Дознајте повеќе"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
-#, fuzzy
 msgid "Discuss"
 msgstr "Разговор"
 
@@ -1389,40 +1383,35 @@ msgstr "Разговор"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/resources/templates/resources/filter_section.html:36
 #: TWLight/users/templates/users/filter_section.html:59
-#, fuzzy
 msgid "Filters"
-msgstr "Филтрирај по..."
+msgstr "Филтри"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
 #: TWLight/resources/templates/resources/filter_section.html:40
 #: TWLight/users/templates/users/filter_section.html:63
-#, fuzzy
 msgid "Reset filters"
-msgstr "Тековни филтри"
+msgstr "Врати ги филтрите по основно"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this labels a button that helps users filter collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
 #: TWLight/resources/templates/resources/filter_section.html:48
 #: TWLight/users/templates/users/filter_section.html:70
-#, fuzzy
 msgid "Filter"
-msgstr "Филтрирај по..."
+msgstr "Филтрирај"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
-#, fuzzy
 msgid "Filter collections"
-msgstr "Збирки"
+msgstr "Филтрирај збирки"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
 msgstr ""
 
 #: TWLight/resources/templates/resources/partner_detail.html:22
-#, fuzzy
 msgid "Back to partners"
-msgstr "Испрати податоци на соработниците"
+msgstr "Назад кон партнерите"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1499,9 +1488,8 @@ msgstr "Список на барања"
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:129
 #: TWLight/resources/templates/resources/partner_detail_apply.html:142
-#, fuzzy
 msgid "Access Collection"
-msgstr "Збирки"
+msgstr "Пристап до збирката"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:131
@@ -1674,9 +1662,8 @@ msgstr ""
 
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_list.html:20
-#, fuzzy
 msgid "Suggest a partner"
-msgstr "Испрати податоци на соработниците"
+msgstr "Предложи партнер"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_list.html:29
@@ -1685,9 +1672,8 @@ msgstr ""
 
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_list.html:38
-#, fuzzy
 msgid "Back to top"
-msgstr "Испрати податоци на соработниците"
+msgstr "Најгоре"
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_users.html:11
@@ -1721,9 +1707,8 @@ msgstr "Увезено"
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:19
-#, fuzzy
 msgid "Suggest partners"
-msgstr "Испрати податоци на соработниците"
+msgstr "Предложи партнери"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:39

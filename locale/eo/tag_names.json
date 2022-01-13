@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robin van der Vliet"
+		]
+	},
+	"languages-and-literature_tag": "Lingvoj kaj literaturo",
+	"physical-sciences_tag": "Fizikaj sciencoj",
+	"music_tag": "Muziko",
+	"art_tag": "Arto",
+	"business-and-economics_tag": "Komerco kaj ekonomiko",
+	"law_tag": "Juro",
+	"education_tag": "Edukado",
+	"philosophy-and-religion_tag": "Filozofio kaj religio",
+	"social-sciences_tag": "Sociaj sciencoj",
+	"history_tag": "Historio",
+	"culture_tag": "Kulturo",
+	"life-sciences_tag": "Vivsciencoj",
+	"health-sciences_tag": "Sansciencoj",
+	"earth-sciences_tag": "Tersciencoj",
+	"technology_tag": "Teĥnologio"
+}

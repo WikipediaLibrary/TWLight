@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"languages-and-literature_tag": "Јазици и книжевност",
+	"multidisciplinary_tag": "Повеќедисциплински",
+	"physical-sciences_tag": "Физички науки",
+	"music_tag": "Музика",
+	"art_tag": "Уметност",
+	"business-and-economics_tag": "Деловност и економија",
+	"law_tag": "Право",
+	"education_tag": "Образование",
+	"philosophy-and-religion_tag": "Филозофија и религија",
+	"social-sciences_tag": "Општествени науки",
+	"history_tag": "Историја",
+	"culture_tag": "Култура",
+	"life-sciences_tag": "Науки за животот",
+	"health-sciences_tag": "Здравствени науки",
+	"earth-sciences_tag": "Науки за Земјата",
+	"technology_tag": "Технологија"
+}

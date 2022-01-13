@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2021-12-14 19:47+0000\n"
-"PO-Revision-Date: 2021-12-16 12:19:25+0000\n"
+"PO-Revision-Date: 2022-01-13 12:16:27+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -46,7 +46,7 @@ msgstr "Pri vi"
 #: TWLight/applications/forms.py:222
 #, python-brace-format
 msgid "Requested by: {partner_list}"
-msgstr ""
+msgstr "Petita de: {partner_list}"
 
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:231
@@ -232,26 +232,23 @@ msgstr "Ne valida"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
-#, fuzzy
 msgid "1 month"
-msgstr "Monato"
+msgstr "1 monato"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
-#, fuzzy
 msgid "3 months"
-msgstr "Monato"
+msgstr "3 monatoj"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
-#, fuzzy
 msgid "6 months"
-msgstr "Monato"
+msgstr "6 monatoj"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
 msgid "12 months"
-msgstr ""
+msgstr "12 monatoj"
 
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:160
@@ -337,9 +334,8 @@ msgstr "Okupo"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:96
-#, fuzzy
 msgid "month(s)"
-msgstr "Monato"
+msgstr "monato(j)"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
@@ -366,7 +362,7 @@ msgstr ""
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:120
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
@@ -1263,7 +1259,7 @@ msgstr ""
 #: TWLight/forms.py:56 TWLight/templates/header_partial_b3.html:55
 #: TWLight/templates/header_partial_b4.html:49
 msgid "Search"
-msgstr ""
+msgstr "Serĉi"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
@@ -1278,7 +1274,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "Temoj"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1287,9 +1283,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/collection_tile.html:21
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
-#, fuzzy
 msgid "Languages"
-msgstr "Lingvo"
+msgstr "Lingvoj"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
