@@ -59,7 +59,6 @@ from TWLight.users.helpers.editor_data import (
     editor_block_hash,
     editor_compare_hashes,
 )
-from TWLight.users.signals import BlockHashChanged
 
 logger = logging.getLogger(__name__)
 

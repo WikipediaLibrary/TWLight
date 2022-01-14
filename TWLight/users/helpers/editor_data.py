@@ -1,10 +1,12 @@
 from datetime import date, datetime, timedelta
 import json
 import logging
+import os
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from TWLight.users.signals import BlockHashChanged
+
+from djmail import template_mail
 
 logger = logging.getLogger(__name__)
 
@@ -243,11 +245,16 @@ def editor_block_hash(merged: list):
     return make_password(str(blocked_dict))
 
 
+class BlockHashChangedEmail(template_mail.TemplateMail):
+    name = "block_hash_changed"
+
+
 def editor_compare_hashes(
     previous_block_hash: str, wp_block_hash: str, wp_username: str
 ):
     """
-    Compares two hashes. If they are different, and email is sent to the team.
+    Compares two block hashes. If they are different, it means an editor's block status
+    has changed and email is sent to the team to check it.
     ----------
     previous_block_hash : str
         The value of the previous block hash.
@@ -263,9 +270,8 @@ def editor_compare_hashes(
     """
     if previous_block_hash != wp_block_hash and previous_block_hash is not None:
         # Send email to TWL team
-        BlockHashChanged.send_email(
-            sender="TBD",
-            user_email=email,
-            editor_wp_username=wp_username,
-            body=message,
+        email = BlockHashChangedEmail()
+        email.send(
+            os.environ.get("TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"),
+            {"wp_username": wp_username},
         )
