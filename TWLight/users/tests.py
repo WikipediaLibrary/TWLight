@@ -43,6 +43,8 @@ from TWLight.users.helpers.editor_data import (
     editor_not_blocked,
     editor_reg_date,
     editor_bundle_eligible,
+    editor_block_hash,
+    editor_compare_hashes,
 )
 
 FAKE_IDENTITY_DATA = {"query": {"userinfo": {"options": {"disablemail": 0}}}}
@@ -1367,6 +1369,9 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(new_editor.wp_editcount, 960)
         self.assertEqual(new_editor.user.email, "porkchop@example.com")
         self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
+        self.assertEqual(
+            new_editor.wp_block_hash, editor_block_hash(global_userinfo["merged"])
+        )
 
         # Now check what happens if their wikipedia ID number has changed - this
         # should throw an error as we can no longer verify they're the same
