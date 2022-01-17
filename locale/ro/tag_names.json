@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"MSClaudiu"
+		]
+	},
+	"languages-and-literature_tag": "Limbi și Literatură",
+	"multidisciplinary_tag": "Multidisciplinar",
+	"physical-sciences_tag": "Științele fizice",
+	"music_tag": "Muzică",
+	"art_tag": "Artă",
+	"business-and-economics_tag": "Afaceri și Economie",
+	"law_tag": "Drept",
+	"education_tag": "Educație",
+	"philosophy-and-religion_tag": "Filozofie și Religie",
+	"social-sciences_tag": "Științe sociale",
+	"history_tag": "Istorie",
+	"culture_tag": "Cultură",
+	"life-sciences_tag": "Științele Vieții",
+	"health-sciences_tag": "Științele Sănătății",
+	"earth-sciences_tag": "Științele Pământului",
+	"technology_tag": "Tehnologie"
+}
