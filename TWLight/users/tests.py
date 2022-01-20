@@ -7,6 +7,7 @@ from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
 from django.conf import settings
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.exceptions import (
     PermissionDenied,
@@ -1371,11 +1372,7 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(new_editor.wp_editcount, 960)
         self.assertEqual(new_editor.user.email, "porkchop@example.com")
         self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
-        self.assertEqual(
-            new_editor.wp_block_hash,
-            editor_compare_hashes(new_editor.wp_block_hash, global_userinfo["merged"]),
-            new_editor.wp_username,
-        )
+        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
 
         # Now check what happens if their wikipedia ID number has changed - this
         # should throw an error as we can no longer verify they're the same
