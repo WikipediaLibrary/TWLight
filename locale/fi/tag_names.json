@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Moj"
+		]
+	},
+	"languages-and-literature_tag": "Kielet ja kirjallisuus",
+	"multidisciplinary_tag": "Monitieteinen",
+	"business-and-economics_tag": "Liiketoiminta ja talous",
+	"law_tag": "Laki",
+	"education_tag": "Koulutus",
+	"social-sciences_tag": "Yhteiskuntatieteet",
+	"life-sciences_tag": "Biotieteet",
+	"health-sciences_tag": "Terveystieteet",
+	"technology_tag": "Teknologia"
+}

@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Amire80
+# Author: ArgonSim
 # Author: DDPAT
 # Author: Eduardo Addad de Oliveira
 # Author: Eduardoaddad
@@ -17,12 +18,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-13 12:30+0000\n"
-"PO-Revision-Date: 2022-01-17 12:17:49+0000\n"
+"PO-Revision-Date: 2022-01-20 12:18:20+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2022-01-13 13:30:27+0000\n"
-"X-Generator: MediaWiki 1.38.0-alpha; Translate 2021-10-25\n"
+"X-Generator: MediaWiki 1.38.0-alpha; Translate 2022-01-19\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -372,9 +373,8 @@ msgstr "Solicite ao candidato que adicione seu país de residência ao perfil an
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "Disponibilidade de contas"
+msgstr "Contas disponíveis"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -564,9 +564,8 @@ msgstr "Página Anterior"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
-msgstr "Página Anterior"
+msgstr "Anterior"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -648,7 +647,6 @@ msgstr "Revisado pela última vez"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
-#, fuzzy
 msgid "Date applied"
 msgstr "Data da candidatura"
 
@@ -1128,7 +1126,7 @@ msgstr "Demolir"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s pending application."
 msgid_plural "%(counter)s pending applications."
 msgstr[0] "Uma candidatura pendente."
@@ -1137,19 +1135,19 @@ msgstr[1] "%(counter)s candidaturas pendentes."
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "Uma em candidatura de discussão."
-msgstr[1] "%(counter)s em candidaturas de discussão."
+msgstr[0] "%(counter)s candidatura em discussão."
+msgstr[1] "%(counter)s candidaturas em discussão."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "%(approved_count)s candidaturas aprovadas."
+msgstr[0] "%(counter)s candidatura aprovada."
 msgstr[1] "%(counter)s candidaturas aprovadas."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
@@ -1260,19 +1258,18 @@ msgstr "Pesquisar"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
-#, fuzzy
 msgid "Instant (proxy) access"
-msgstr "Acesso instantâneo"
+msgstr "Acesso instantâneo (proxy)"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
 msgid "Multi-step access"
-msgstr ""
+msgstr "Acesso por múltiplas etapas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "Tópicos"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1281,9 +1278,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/collection_tile.html:21
 #: TWLight/users/templates/users/available_collection_tile.html:28
 #: TWLight/users/templates/users/user_collection_tile.html:40
-#, fuzzy
 msgid "Languages"
-msgstr "Idioma"
+msgstr "Idiomas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -1318,9 +1314,8 @@ msgstr "Site"
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
-#, fuzzy
 msgid "Not searchable"
-msgstr "Pesquisável"
+msgstr "Não pesquisável"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1344,9 +1339,8 @@ msgstr "Idioma(s) desconhecido(s)"
 #: TWLight/resources/templates/resources/collection_tile.html:48
 #: TWLight/users/templates/users/available_collection_tile.html:55
 #: TWLight/users/templates/users/user_collection_tile.html:67
-#, fuzzy
 msgid "Not Available"
-msgstr "Não disponível"
+msgstr "Indisponível"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1355,20 +1349,19 @@ msgstr "Não disponível"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr ""
+msgstr "A Biblioteca da Wikipédia permite que editores ativos acessem gratuitamente uma ampla gama de coleções de fontes confiáveis pagas!"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "Comece pela barra de busca no topo ou navegue pelos sites das editoras diretamente."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "Saiba mais"
 
@@ -1376,7 +1369,6 @@ msgstr "Saiba mais"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
-#, fuzzy
 msgid "Discuss"
 msgstr "Discussão"
 
@@ -1384,31 +1376,27 @@ msgstr "Discussão"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/resources/templates/resources/filter_section.html:36
 #: TWLight/users/templates/users/filter_section.html:59
-#, fuzzy
 msgid "Filters"
-msgstr "Filtrar por..."
+msgstr "Filtros"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
 #: TWLight/resources/templates/resources/filter_section.html:40
 #: TWLight/users/templates/users/filter_section.html:63
-#, fuzzy
 msgid "Reset filters"
-msgstr "Filtros atuais"
+msgstr "Redefinir filtros"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this labels a button that helps users filter collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
 #: TWLight/resources/templates/resources/filter_section.html:48
 #: TWLight/users/templates/users/filter_section.html:70
-#, fuzzy
 msgid "Filter"
-msgstr "Filtrar por..."
+msgstr "Filtrar"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
-#, fuzzy
 msgid "Filter collections"
-msgstr "Coleções"
+msgstr "Filtrar coleções"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1445,9 +1433,9 @@ msgstr "Veja o status dos seus aplicativos em sua página <strong><a class=\"twl
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
-#, fuzzy, python-format
+#, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr "Veja seus status de acesso na sua página <strong><a href=\"%(library_url)s\">Minha biblioteca</a></strong>."
+msgstr "Veja seu status de acesso na página <strong><a href=\"%(library_url)s\">Minha biblioteca</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60

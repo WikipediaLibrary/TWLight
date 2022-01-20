@@ -9,6 +9,7 @@
 # Author: HaEr48
 # Author: Mnam23
 # Author: NFarras
+# Author: Naufal06
 # Author: PutriAmalia1991
 # Author: Sonic Speedy
 # Author: Ulinfaizah
@@ -17,12 +18,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-13 12:30+0000\n"
-"PO-Revision-Date: 2022-01-17 12:17:48+0000\n"
+"PO-Revision-Date: 2022-01-20 12:18:18+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2022-01-13 13:30:27+0000\n"
-"X-Generator: MediaWiki 1.38.0-alpha; Translate 2021-10-25\n"
+"X-Generator: MediaWiki 1.38.0-alpha; Translate 2022-01-19\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -874,7 +875,7 @@ msgstr "Anda mencoba membuat otorisasi kedua."
 #: TWLight/applications/views.py:1026
 #, python-brace-format
 msgid "This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions."
-msgstr ""
+msgstr "Permohonan ini tidak dapat diubah semenjak partner ini kini menjadi bagian dari <a href='{bundle}'>akses berkas</a> kami. Jika Anda memenuhi, Anda dapat mengakses sumber daya ini dari <a href='{library}'>perpustakaan Anda</a>. <a href='{contact}'>Hubungi kami</a> jika Anda memiliki pertanyaan."
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:1042
@@ -899,12 +900,12 @@ msgstr "Pilih setidaknya satu permohonan."
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
 #: TWLight/applications/views.py:1212
 msgid "Batch update of application(s) {} successful."
-msgstr ""
+msgstr "Pembaruan batch aplikasi {} berhasil."
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1221
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
-msgstr ""
+msgstr "Tidak dapat menerima permohonan {} karena partner dengan metode otorisasi proxy masuk ke dalam daftar tunggu dan (atau) tidak memiliki cukup akun yang tersedia. Jika akun yang tersedia tidak cukup, prioritaskan permohonan dan kemudian setujui permohonan sesuai dengan jumlah akun yang tersedia."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1361
@@ -986,13 +987,13 @@ msgstr "Kode akses Perpustakaan Wikipedia Anda"
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p>Halo %(user)s,</p> <p>Terima kasih telah memohon akses ke sumber daya %(partner)s melalui Perpustakaan Wikipedia. Kami merasa senang memberi tahu Anda bahwa permohonannya disetujui.</p> <p>%(user_instructions)s</p> <p>Anda dapat melihat koleksi yang telah diizinkan untuk diakses oleh Anda di Perpustakaan Saya: %(link)s</p> <p>Selamat!</p> <p>Perpustakaan Wikipedia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr ""
+msgstr "Halo %(user)s, Terima kasih telah memohon akses ke sumber daya %(partner)s melalui Perpustakaan Wikipedia. Kami merasa senang memberi tahu Anda bahwa permohonannya disetujui. %(user_instructions)s Anda dapat melihat koleksi yang telah diizinkan untuk diakses oleh Anda di Perpustakaan Saya: %(link)s Selamat! Perpustakaan Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1003,13 +1004,13 @@ msgstr "Permohonan Perpustakaan Wikipedia Anda telah disetujui"
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
 #, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Tolong balas ini di: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Salam,</p> <p>Perpustakaan Wikipedia</p>"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
 #, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to this at: %(app_url)s Best, The Wikipedia Library"
-msgstr ""
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Tolong balas ini di: %(app_url)s Salam, Perpustakaan Wikipedia"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
@@ -1020,13 +1021,13 @@ msgstr "Komentar baru di permohonan Perpustakaan Wikipedia yang Anda proses"
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
 #, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Tolong balas ini di <a href=\"%(app_url)s\">%(app_url)s</a> sehingga kami dapat mengevaluasi permohonan Anda.</p> <p>Salam,</p> <p>Perpustakaan Wikipedia</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr ""
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Tolong balas ini di: %(app_url)s sehingga kami dapat mengevaluasi permohonan Anda. Salam, Perpustakaan Wikipedia"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -1037,13 +1038,13 @@ msgstr "Komentar baru pada permohonan Perpustakaan Wikipedia Anda"
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
 #, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
-msgstr ""
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> Lihat itu di <a href=\"%(app_url)s\">%(app_url)s</a>. Terima kasih telah membantu meninjau permohonan Perpustakaan Wikipedia!"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
 #, python-format
 msgid "%(submit_date)s - %(commenter)s %(comment)s See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
-msgstr ""
+msgstr "%(submit_date)s - %(commenter)s %(comment)s Lihat itu di: %(app_url)s Terima kasih telah membantu meninjau permohonan Perpustakaan Wikipedia!"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
@@ -1107,13 +1108,13 @@ msgstr "Halaman Twitter Perpustakaan Wikipedia"
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
 #, python-format
 msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
-msgstr ""
+msgstr "Pesan Wikipedia Library Card Platform dari %(editor_wp_username)s"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications.</p>"
-msgstr ""
+msgstr "<p>Halo %(user)s,</p> <p>Catatan kami menunjukkan bahwa Anda adalah calon koordinator untuk partner yang mempunyai total %(total_apps)s permohonan.</p>"
 
 #. Translators: Breakdown as in 'cost breakdown'; analysis.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
@@ -1895,17 +1896,17 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:104
 msgid "What do I do after I get access?"
-msgstr ""
+msgstr "Apa yang dapat saya lakukan setelah mendapat akses?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:108
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr ""
+msgstr "Penyunting yang disetujui <i>mungkin</i> menggunakan akses mereka untuk:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:112
 msgid "Search, view, retrieve, and display partner content"
-msgstr ""
+msgstr "Cari, lihat, akses, dan tampilkan konten partner"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:116
@@ -1920,7 +1921,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:126
 msgid "Approved editors <i>should not</i>:"
-msgstr ""
+msgstr "Penyunting yang disetujui <i>dilarang</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:130
