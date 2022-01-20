@@ -56,7 +56,7 @@ from TWLight.users.helpers.editor_data import (
     editor_not_blocked,
     editor_reg_date,
     editor_bundle_eligible,
-    editor_block_hash,
+    editor_make_block_dict,
     editor_compare_hashes,
 )
 
@@ -687,14 +687,15 @@ class Editor(models.Model):
         self.wp_rights = json.dumps(identity["rights"])
         self.wp_groups = json.dumps(identity["groups"])
         if global_userinfo:
+            blocked_dict = {}
             self.update_editcount(
                 global_userinfo["editcount"], current_datetime=current_datetime
             )
             self.wp_not_blocked = editor_not_blocked(global_userinfo["merged"])
             previous_block_hash = self.wp_block_hash
-            self.wp_block_hash = editor_block_hash(global_userinfo["merged"])
-            editor_compare_hashes(
-                previous_block_hash, self.wp_block_hash, self.wp_username
+            blocked_dict = editor_make_block_dict(global_userinfo["merged"])
+            self.wp_block_hash = editor_compare_hashes(
+                previous_block_hash, blocked_dict, self.wp_username
             )
 
         # if the account is already old enough, we shouldn't run this check everytime

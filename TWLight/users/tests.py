@@ -43,7 +43,7 @@ from TWLight.users.helpers.editor_data import (
     editor_not_blocked,
     editor_reg_date,
     editor_bundle_eligible,
-    editor_block_hash,
+    editor_make_block_dict,
     editor_compare_hashes,
 )
 
@@ -1363,6 +1363,8 @@ class EditorModelTestCase(TestCase):
             new_identity, lang, new_global_userinfo
         )  # This call also saves the editor
 
+        blocked_dict = editor_make_block_dict(global_userinfo["merged"])
+
         self.assertEqual(new_editor.wp_username, "evil_dr_porkchop")
         self.assertEqual(new_editor.wp_rights, json.dumps(["deletion", "spaceflight"]))
         self.assertEqual(new_editor.wp_groups, json.dumps(["charismatic megafauna"]))
@@ -1370,7 +1372,9 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(new_editor.user.email, "porkchop@example.com")
         self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
         self.assertEqual(
-            new_editor.wp_block_hash, editor_block_hash(global_userinfo["merged"])
+            new_editor.wp_block_hash,
+            editor_compare_hashes(new_editor.wp_block_hash, global_userinfo["merged"]),
+            new_editor.wp_username,
         )
 
         # Now check what happens if their wikipedia ID number has changed - this
