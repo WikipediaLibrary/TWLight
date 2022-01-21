@@ -4,6 +4,7 @@ TWLight URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/ref/urls/
 """
+import sys
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -99,7 +100,7 @@ urlpatterns = [
 if (
     settings.TWLIGHT_ENV == "local"
     and settings.REQUIREMENTS_FILE == "debug.txt"
-    and settings.DEBUG
+    and (settings.DEBUG or "test" in sys.argv)
 ):
     import debug_toolbar
 
