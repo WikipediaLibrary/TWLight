@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User, AnonymousUser
+from django.core import mail
 from django.core.exceptions import (
     PermissionDenied,
     SuspiciousOperation,
@@ -1383,6 +1384,81 @@ class EditorModelTestCase(TestCase):
             new_editor.update_from_wikipedia(
                 new_identity, lang, new_global_userinfo
             )  # This call also saves the editor
+
+    def test_block_hash_changed(self):
+        identity = {}
+        identity["username"] = "evil_dr_porkchop"
+        # Users' unique WP IDs should not change across API calls, but are
+        # needed by update_from_wikipedia.
+        identity["sub"] = self.editor.wp_sub
+        identity["rights"] = ["deletion", "spaceflight"]
+        identity["groups"] = ["charismatic megafauna"]
+        # We should now be ignoring the oauth editcount
+        identity["editcount"] = 42
+        identity["email"] = "porkchop@example.com"
+        identity["iss"] = "zh-classical.wikipedia.org"
+        identity["registered"] = "20130205230142"
+        # validity
+        identity["blocked"] = False
+
+        global_userinfo = {}
+        global_userinfo["home"] = "zh_classicalwiki"
+        global_userinfo["id"] = identity["sub"]
+        global_userinfo["registration"] = "2013-02-05T23:01:42Z"
+        global_userinfo["name"] = identity["username"]
+        # We should now be using the global_userinfo editcount
+        global_userinfo["editcount"] = 960
+
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+
+        # Don't change self.editor, or other tests will fail! Make a new one
+        # to test instead.
+        new_editor = EditorFactory(wp_registered=None)
+        new_identity = dict(identity)
+        new_global_userinfo = dict(global_userinfo)
+        new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
+
+        lang = get_language()
+        new_editor.update_from_wikipedia(
+            new_identity, lang, new_global_userinfo
+        )  # This call also saves the editor
+
+        blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
+
+        self.assertEqual(new_editor.wp_username, "evil_dr_porkchop")
+        self.assertEqual(new_editor.wp_rights, json.dumps(["deletion", "spaceflight"]))
+        self.assertEqual(new_editor.wp_groups, json.dumps(["charismatic megafauna"]))
+        self.assertEqual(new_editor.wp_editcount, 960)
+        self.assertEqual(new_editor.user.email, "porkchop@example.com")
+        self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
+        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
+
+        # Add a new block from the user
+        copied_merged_blocked_array = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        copied_merged_blocked_array.append(
+            {
+                "wiki": "eswiki",
+                "url": "https://es.wikipedia.org",
+                "timestamp": "2015-11-06T15:46:29Z",
+                "method": "login",
+                "editcount": 100,
+                "registration": "2015-11-06T15:46:29Z",
+                "groups": ["extendedconfirmed"],
+                "blocked": {"expiry": "infinity", "reason": "bad editor!"},
+            }
+        )
+        new_global_userinfo["merged"] = copied_merged_blocked_array
+
+        new_editor.update_from_wikipedia(
+            new_identity, lang, new_global_userinfo
+        )  # This call also saves the editor
+
+        new_blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
+
+        self.assertTrue(check_password(new_blocked_dict, new_editor.wp_block_hash))
+        self.assertFalse(check_password(blocked_dict, new_editor.wp_block_hash))
+        self.assertEqual(len(mail.outbox), 1)
 
 
 class OAuthTestCase(TestCase):
