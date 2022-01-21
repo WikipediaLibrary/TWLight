@@ -1433,6 +1433,7 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(new_editor.user.email, "porkchop@example.com")
         self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
         self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
+        self.assertEqual(len(mail.outbox), 1)
 
         # Add a new block from the user
         copied_merged_blocked_array = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
@@ -1458,7 +1459,7 @@ class EditorModelTestCase(TestCase):
 
         self.assertTrue(check_password(new_blocked_dict, new_editor.wp_block_hash))
         self.assertFalse(check_password(blocked_dict, new_editor.wp_block_hash))
-        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 2)
 
 
 class OAuthTestCase(TestCase):
