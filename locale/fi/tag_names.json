@@ -6,11 +6,18 @@
 	},
 	"languages-and-literature_tag": "Kielet ja kirjallisuus",
 	"multidisciplinary_tag": "Monitieteinen",
+	"physical-sciences_tag": "Fysikaaliset tieteet",
+	"music_tag": "Musiikki",
+	"art_tag": "Taide",
 	"business-and-economics_tag": "Liiketoiminta ja talous",
 	"law_tag": "Laki",
 	"education_tag": "Koulutus",
+	"philosophy-and-religion_tag": "Filosofia ja uskonto",
 	"social-sciences_tag": "Yhteiskuntatieteet",
+	"history_tag": "Historia",
+	"culture_tag": "Kulttuuri",
 	"life-sciences_tag": "Biotieteet",
 	"health-sciences_tag": "Terveystieteet",
+	"earth-sciences_tag": "Geotieteet",
 	"technology_tag": "Teknologia"
 }

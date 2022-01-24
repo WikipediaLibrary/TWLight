@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Xavier Dengra"
+		]
+	},
+	"languages-and-literature_tag": "Llengües i Literatura",
+	"multidisciplinary_tag": "Interdisciplinari",
+	"physical-sciences_tag": "Ciències Físiques",
+	"music_tag": "Música",
+	"art_tag": "Art",
+	"business-and-economics_tag": "Economia i Negoci",
+	"law_tag": "Dret",
+	"education_tag": "Educació",
+	"philosophy-and-religion_tag": "Filosofia i Religions",
+	"social-sciences_tag": "Ciències Socials",
+	"history_tag": "Història",
+	"culture_tag": "Cultura",
+	"life-sciences_tag": "Ciències Biològiques",
+	"health-sciences_tag": "Ciències de la Salut",
+	"earth-sciences_tag": "Ciències de la Terra",
+	"technology_tag": "Tecnologia i Enginyeria"
+}
