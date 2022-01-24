@@ -1409,11 +1409,11 @@ class EditorModelTestCase(TestCase):
         # We should now be using the global_userinfo editcount
         global_userinfo["editcount"] = 960
 
-        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
 
         # Don't change self.editor, or other tests will fail! Make a new one
         # to test instead.
-        new_editor = EditorFactory(wp_registered=None)
+        new_editor = EditorFactory(wp_registered=None, wp_block_hash="")
         new_identity = dict(identity)
         new_global_userinfo = dict(global_userinfo)
         new_identity["sub"] = new_editor.wp_sub
@@ -1426,12 +1426,15 @@ class EditorModelTestCase(TestCase):
 
         blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
 
-        self.assertEqual(new_editor.wp_username, "evil_dr_porkchop")
-        self.assertEqual(new_editor.wp_rights, json.dumps(["deletion", "spaceflight"]))
-        self.assertEqual(new_editor.wp_groups, json.dumps(["charismatic megafauna"]))
-        self.assertEqual(new_editor.wp_editcount, 960)
-        self.assertEqual(new_editor.user.email, "porkchop@example.com")
-        self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
+        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
+        self.assertEqual(len(mail.outbox), 0)
+
+        new_editor.update_from_wikipedia(
+            new_identity, lang, new_global_userinfo
+        )  # This call also saves the editor
+
+        blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
+
         self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
         self.assertEqual(len(mail.outbox), 1)
 

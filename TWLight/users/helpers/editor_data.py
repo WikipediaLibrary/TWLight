@@ -272,7 +272,7 @@ def editor_compare_hashes(
         An updated hash of the JSON string of a user's blocks if there are any changes.
         If not, the previous hash will be reassigned to wp_block_hash
     """
-    if previous_block_hash is not None:
+    if previous_block_hash is not None or previous_block_hash == "":
         if not check_password(wp_block_hash, previous_block_hash):
             # Send email to TWL team
             email = BlockHashChangedEmail()
