@@ -30,7 +30,7 @@
             <div class="pull-right">
               {% url 'suggest' as suggest %}
               {% comment %}Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.{% endcomment %}
-              {% blocktranslate trimmed %}(If you would like to suggest a partner, <a class="contact-us-links" href="{{ suggest }}"><strong>go here</strong></a>.){% endblocktranslate %}
+              {% blocktranslate trimmed %}(If you would like to suggest a partner, <a class="twl-links" href="{{ suggest }}"><strong>go here</strong></a>.){% endblocktranslate %}
             </div>
           </div>
         </div>
@@ -45,15 +45,15 @@
             <p>{% comment %}Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.{% endcomment %}
               <strong>{% trans 'Meta page' %}: </strong>
               {% comment %}Translators: On the contact us page, this text links to the Wikipedia Library meta page.{% endcomment %}
-              <a class="contact-us-links" href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">{% trans 'The Wikipedia Library' %}</a>
+              <a class="twl-links" href="https://meta.wikimedia.org/wiki/The_Wikipedia_Library">{% trans 'The Wikipedia Library' %}</a>
             </p>
             <p>{% comment %}Translators: On the contact us page, this labels the link to the Wikipedia Library email address.{% endcomment %}
               <strong>{% trans 'Email' %}: </strong>
-              <a class="contact-us-links" href="mailto:wikipedialibrary@wikimedia.org">wikipedialibrary@wikimedia.org</a>
+              <a class="twl-links" href="mailto:wikipedialibrary@wikimedia.org">wikipedialibrary@wikimedia.org</a>
             </p>
             <p>{% comment %}Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.{% endcomment %}
               <strong>{% trans 'Mailing list' %}: </strong> <br />
-              &emsp;<a class="contact-us-links" href="https://lists.wikimedia.org/mailman/listinfo/wikipedia-library">wikipedia-library@lists.wikimedia.org</a>
+              &emsp;<a class="twl-links" href="https://lists.wikimedia.org/mailman/listinfo/wikipedia-library">wikipedia-library@lists.wikimedia.org</a>
             </p>
             <div class="clearfix"></div><hr />
             <p>

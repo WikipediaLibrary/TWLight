@@ -119,7 +119,7 @@ class BaseApplicationForm(forms.Form):
                 "submit",
                 # Translators: Labels the button users click to apply for a partner's resources.
                 _("Apply"),
-                css_class="mx-auto twl-main-btn",
+                css_class="mx-auto twl-btn",
             )
         )
 
