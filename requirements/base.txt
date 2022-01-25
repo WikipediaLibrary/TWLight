@@ -6,7 +6,7 @@ django-annoying==0.10.6
 django-autocomplete-light==3.8.2
 django-contrib-comments==2.1.0
 django-countries==7.2.1
-django-crispy-forms==1.13.0
+django-crispy-forms==1.14.0
 django-cron==0.5.1
 django-durationfield==0.5.5
 django_extensions==3.1.3
