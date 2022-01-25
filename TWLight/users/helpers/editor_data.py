@@ -287,4 +287,4 @@ def editor_compare_hashes(
         else:
             return previous_block_hash
     else:
-        return previous_block_hash
+        return make_password(previous_block_hash)
