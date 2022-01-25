@@ -1,8 +1,12 @@
 from datetime import date, datetime, timedelta
 import json
 import logging
+import os
 import urllib.request, urllib.error, urllib.parse
 from django.conf import settings
+from django.contrib.auth.hashers import make_password, check_password
+
+from djmail import template_mail
 
 logger = logging.getLogger(__name__)
 
@@ -219,3 +223,69 @@ def editor_bundle_eligible(editor: "Editor"):
         return True
     else:
         return False
+
+
+def editor_make_block_dict(merged: list):
+    """
+    Creates a hash based on a JSON string of a user's blocks
+    ----------
+    merged : list
+        A list of merged accounts for this Editor as returned by globaluserinfo.
+
+    Returns
+    -------
+    str
+        A sorted JSON string of a user's blocks
+    """
+    blocked_dict = {}
+    for account in merged:
+        if "blocked" in account:
+            blocked_dict[account["wiki"]] = account["blocked"]
+
+    # Sort by key
+    sorted_blocked_dict = dict(sorted(blocked_dict.items(), key=lambda k: k[0]))
+
+    return str(sorted_blocked_dict)
+
+
+class BlockHashChangedEmail(template_mail.TemplateMail):
+    name = "block_hash_changed"
+
+
+def editor_compare_hashes(
+    previous_block_hash: str, new_block_string: str, wp_username: str
+):
+    """
+    Compares two block hashes. If they are different, it means an editor's block status
+    has changed and email is sent to the team to check it.
+    ----------
+    previous_block_hash : str
+        The value of the previous block hash.
+    new_block_string: str
+        The recently generated block dictionary without hashing.
+    wp_username: str
+        The Wikipedia username of the editor we are comparing block hashes from
+
+    Returns
+    -------
+    str
+        An updated hash of the JSON string of a user's blocks if there are any changes.
+        If not, the previous hash will be reassigned to new_block_string
+    """
+    if previous_block_hash != "":
+        if not check_password(new_block_string, previous_block_hash):
+            # Send email to TWL team
+            email = BlockHashChangedEmail()
+            email.send(
+                os.environ.get(
+                    "TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"
+                ),
+                {"wp_username": wp_username},
+            )
+
+            return make_password(new_block_string)
+        else:
+            return previous_block_hash
+    else:
+        # previous_block_hash is blank, we will make a hash of an empty dictionary
+        return make_password("{}")
