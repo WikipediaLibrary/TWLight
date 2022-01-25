@@ -1365,15 +1365,12 @@ class EditorModelTestCase(TestCase):
             new_identity, lang, new_global_userinfo
         )  # This call also saves the editor
 
-        blocked_dict = editor_make_block_dict(global_userinfo["merged"])
-
         self.assertEqual(new_editor.wp_username, "evil_dr_porkchop")
         self.assertEqual(new_editor.wp_rights, json.dumps(["deletion", "spaceflight"]))
         self.assertEqual(new_editor.wp_groups, json.dumps(["charismatic megafauna"]))
         self.assertEqual(new_editor.wp_editcount, 960)
         self.assertEqual(new_editor.user.email, "porkchop@example.com")
         self.assertEqual(new_editor.wp_registered, datetime(2013, 2, 5).date())
-        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
 
         # Now check what happens if their wikipedia ID number has changed - this
         # should throw an error as we can no longer verify they're the same
@@ -1427,31 +1424,11 @@ class EditorModelTestCase(TestCase):
         blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
 
         self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
+        # No emails should be sent since the wp_block_hash was blank
         self.assertEqual(len(mail.outbox), 0)
-
-        new_editor.update_from_wikipedia(
-            new_identity, lang, new_global_userinfo
-        )  # This call also saves the editor
-
-        blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
-
-        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
-        self.assertEqual(len(mail.outbox), 1)
 
         # Add a new block from the user
         copied_merged_blocked_array = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
-        copied_merged_blocked_array.append(
-            {
-                "wiki": "eswiki",
-                "url": "https://es.wikipedia.org",
-                "timestamp": "2015-11-06T15:46:29Z",
-                "method": "login",
-                "editcount": 100,
-                "registration": "2015-11-06T15:46:29Z",
-                "groups": ["extendedconfirmed"],
-                "blocked": {"expiry": "infinity", "reason": "bad editor!"},
-            }
-        )
         new_global_userinfo["merged"] = copied_merged_blocked_array
 
         new_editor.update_from_wikipedia(
@@ -1462,7 +1439,7 @@ class EditorModelTestCase(TestCase):
 
         self.assertTrue(check_password(new_blocked_dict, new_editor.wp_block_hash))
         self.assertFalse(check_password(blocked_dict, new_editor.wp_block_hash))
-        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(len(mail.outbox), 1)
 
 
 class OAuthTestCase(TestCase):

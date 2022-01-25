@@ -253,7 +253,7 @@ class BlockHashChangedEmail(template_mail.TemplateMail):
 
 
 def editor_compare_hashes(
-    previous_block_hash: str, wp_block_hash: str, wp_username: str
+    previous_block_hash: str, new_block_string: str, wp_username: str
 ):
     """
     Compares two block hashes. If they are different, it means an editor's block status
@@ -261,7 +261,7 @@ def editor_compare_hashes(
     ----------
     previous_block_hash : str
         The value of the previous block hash.
-    wp_block_hash: str
+    new_block_string: str
         The recently generated block dictionary without hashing.
     wp_username: str
         The Wikipedia username of the editor we are comparing block hashes from
@@ -270,10 +270,10 @@ def editor_compare_hashes(
     -------
     str
         An updated hash of the JSON string of a user's blocks if there are any changes.
-        If not, the previous hash will be reassigned to wp_block_hash
+        If not, the previous hash will be reassigned to new_block_string
     """
     if previous_block_hash != "":
-        if not check_password(wp_block_hash, previous_block_hash):
+        if not check_password(new_block_string, previous_block_hash):
             # Send email to TWL team
             email = BlockHashChangedEmail()
             email.send(
@@ -283,8 +283,9 @@ def editor_compare_hashes(
                 {"wp_username": wp_username},
             )
 
-            return make_password(wp_block_hash)
+            return make_password(new_block_string)
         else:
             return previous_block_hash
     else:
-        return make_password(previous_block_hash)
+        # previous_block_hash is blank, we will make a hash of an empty dictionary
+        return make_password("{}")
