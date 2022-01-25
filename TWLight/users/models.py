@@ -238,9 +238,8 @@ class Editor(models.Model):
 
     wp_block_hash = models.CharField(
         max_length=255,
-        default=None,
+        default="",
         blank=True,
-        null=True,
         editable=False,
         help_text="A hash that is generated with a user's block data",
     )
