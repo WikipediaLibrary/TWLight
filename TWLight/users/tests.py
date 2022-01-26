@@ -1382,6 +1382,10 @@ class EditorModelTestCase(TestCase):
             )  # This call also saves the editor
 
     def test_block_hash_changed_block_override(self):
+        """
+        Tests that an email is sent when an editor's block status changes and
+        the block override is on
+        """
         identity = {}
         identity["username"] = "evil_dr_porkchop"
         # Users' unique WP IDs should not change across API calls, but are
@@ -1443,6 +1447,10 @@ class EditorModelTestCase(TestCase):
         self.assertEqual(len(mail.outbox), 1)
 
     def test_block_hash_changed_no_block_override(self):
+        """
+        Tests that an email is not sent when an editor's block status changes and
+        the block override is off
+        """
         identity = {}
         identity["username"] = "evil_dr_porkchop"
         # Users' unique WP IDs should not change across API calls, but are
