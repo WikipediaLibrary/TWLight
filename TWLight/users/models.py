@@ -696,7 +696,10 @@ class Editor(models.Model):
             previous_block_hash = self.wp_block_hash
             blocked_dict = editor_make_block_dict(global_userinfo["merged"])
             self.wp_block_hash = editor_compare_hashes(
-                previous_block_hash, blocked_dict, self.wp_username
+                previous_block_hash,
+                blocked_dict,
+                self.wp_username,
+                self.ignore_wp_blocks,
             )
 
         # if the account is already old enough, we shouldn't run this check everytime
