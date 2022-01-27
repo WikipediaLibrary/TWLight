@@ -253,7 +253,10 @@ class BlockHashChangedEmail(template_mail.TemplateMail):
 
 
 def editor_compare_hashes(
-    previous_block_hash: str, new_block_string: str, wp_username: str
+    previous_block_hash: str,
+    new_block_string: str,
+    wp_username: str,
+    ignore_wp_blocks: bool,
 ):
     """
     Compares two block hashes. If they are different, it means an editor's block status
@@ -265,6 +268,8 @@ def editor_compare_hashes(
         The recently generated block dictionary without hashing.
     wp_username: str
         The Wikipedia username of the editor we are comparing block hashes from
+    ignore_wp_blocks: bool
+        Flag that indicates whether a block is overruled for access to the library
 
     Returns
     -------
@@ -274,14 +279,16 @@ def editor_compare_hashes(
     """
     if previous_block_hash != "":
         if not check_password(new_block_string, previous_block_hash):
-            # Send email to TWL team
-            email = BlockHashChangedEmail()
-            email.send(
-                os.environ.get(
-                    "TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"
-                ),
-                {"wp_username": wp_username},
-            )
+            # Hash does not match, checking if a user has the block override
+            if ignore_wp_blocks:
+                # Send email to TWL team
+                email = BlockHashChangedEmail()
+                email.send(
+                    os.environ.get(
+                        "TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"
+                    ),
+                    {"wp_username": wp_username},
+                )
 
             return make_password(new_block_string)
         else:
