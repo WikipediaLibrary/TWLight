@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Minh Nguyen"
+			"Minh Nguyen",
+			"Vinhtantran"
 		]
 	},
-	"languages-and-literature_tag": "Ngôn ngữ và văn học",
+	"languages-and-literature_tag": "Ngôn ngữ và Văn học",
 	"multidisciplinary_tag": "Đa ngành",
 	"physical-sciences_tag": "Khoa học vật lý",
 	"music_tag": "Âm nhạc",
 	"art_tag": "Nghệ thuật",
-	"business-and-economics_tag": "Kinh doanh và kinh tế",
+	"business-and-economics_tag": "Kinh doanh và Kinh tế",
 	"law_tag": "Luật pháp",
 	"education_tag": "Giáo dục",
-	"philosophy-and-religion_tag": "Triết học và tôn giáo",
+	"philosophy-and-religion_tag": "Triết học và Tôn giáo",
 	"social-sciences_tag": "Khoa học xã hội",
 	"history_tag": "Lịch sử",
 	"culture_tag": "Văn hóa",

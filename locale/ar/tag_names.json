@@ -1,11 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hhaboh162002",
 			"محمد أحمد عبد الفتاح"
 		]
 	},
+	"languages-and-literature_tag": "اللغات والأدب",
+	"multidisciplinary_tag": "متعدد التخصصات",
+	"physical-sciences_tag": "علوم الفيزياء",
 	"music_tag": "موسيقى",
-	"social-sciences_tag": "علوم اجتماعية",
-	"history_tag": "تاريخ",
-	"culture_tag": "ثقافة"
+	"art_tag": "الفنون",
+	"business-and-economics_tag": "تجارة واقتصاد",
+	"law_tag": "القانون",
+	"education_tag": "التعليم",
+	"philosophy-and-religion_tag": "الفلسفة والأديان",
+	"social-sciences_tag": "العلوم الاجتماعية",
+	"history_tag": "التاريخ",
+	"culture_tag": "الثقافة",
+	"life-sciences_tag": "علوم الحياة",
+	"health-sciences_tag": "العلوم الصحية",
+	"earth-sciences_tag": "علوم الأرض",
+	"technology_tag": "التقنية"
 }
