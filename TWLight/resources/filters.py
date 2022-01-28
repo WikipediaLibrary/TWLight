@@ -1,8 +1,8 @@
 from django import forms
-from django.db.models import Q
+from django.db.models import Q, Value, F, CharField
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Language, Partner
+from .models import Language, Partner, Suggestion
 from .helpers import get_tag_choices
 
 import django_filters
@@ -10,9 +10,9 @@ import django_filters
 INSTANT = 0
 MULTI_STEP = 1
 ACCESS_CHOICES = (
-    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a  collection may be accessed immediately.
     (INSTANT, _("Instant (proxy) access")),
-    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a  collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
     (MULTI_STEP, _("Multi-step access")),
 )
 
@@ -120,3 +120,30 @@ class PartnerFilter(MainPartnerFilter):
                 )
 
         return queryset
+
+
+class MergeSuggestionFilter(django_filters.FilterSet):
+    """Filter based on domain name"""
+
+    company_domain = django_filters.CharFilter(
+        label="Search via domain:",
+        field_name="company_url",
+        method="filter_company_domain",
+    )
+
+    def filter_company_domain(self, queryset, name, value):
+        # Utility to filter suggestions based on common domain
+        lookup = "__".join([name, "icontains"])
+
+        qs = queryset.filter(**{lookup: value})
+        return qs.distinct()
+
+    class Meta:
+        model = Suggestion
+        fields = ["company_domain"]
+
+    def __init__(self, data=None, *args, **kwargs) -> None:
+        super().__init__(data, *args, **kwargs)
+        self.filters["company_domain"].field.widget.attrs.update(
+            {"class": "form-control form-control-sm"}
+        )

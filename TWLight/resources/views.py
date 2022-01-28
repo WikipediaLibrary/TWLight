@@ -18,11 +18,11 @@ from TWLight.users.models import Authorization, User
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
-from .filters import MainPartnerFilter
-from .forms import SuggestionForm
+from .filters import MainPartnerFilter, MergeSuggestionFilter
+from .forms import SuggestionForm, SuggestionMergeForm
 from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Suggestion
-
+from urllib.parse import urlparse
 import bleach
 import logging
 
@@ -543,3 +543,91 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
             else:
                 obj.upvoted_users.add(user)
         return url_
+
+
+@method_decorator(login_required, name="post")
+class SuggestionMergeView(CoordinatorsOnly, FormView):
+
+    model = Suggestion
+    template_name = "resources/merge_suggestion.html"
+    form_class = SuggestionMergeForm
+    success_url = reverse_lazy("suggest")
+
+    def get_total_upvotes(self, suggestions):
+        """
+        This function merges upvoted users for merged suggestions.
+
+        Parameters
+        ----------
+        self : view object
+
+        suggestions : Queryset<Suggestion>
+            The queryset of suggestions to merge
+
+        Returns
+        -------
+        The `queryset` of upvoted users
+
+        """
+        total_upvoted_users = User.objects.none()
+        for suggestion in suggestions.all():
+            total_upvoted_users |= suggestion.upvoted_users.all()
+
+        return total_upvoted_users.distinct()
+
+    def get_queryset(self):
+        user_qs = User.objects.select_related("editor")
+
+        return (
+            Suggestion.objects.all()
+            .prefetch_related(Prefetch("author", queryset=user_qs))
+            .prefetch_related("upvoted_users")
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super(SuggestionMergeView, self).get_context_data(**kwargs)
+
+        filter_suggestion = MergeSuggestionFilter(
+            self.request.GET, queryset=self.get_queryset()
+        )
+        context["filter"] = filter_suggestion
+        all_suggestions = filter_suggestion.qs
+
+        if all_suggestions.count() > 0:
+            context["all_suggestions"] = all_suggestions
+
+        else:
+            context["all_suggestions"] = None
+
+        return context
+
+    def form_valid(self, form):
+
+        try:
+            merged_suggestion = form.cleaned_data["suggestions_merged_into"]
+            suggestions = form.cleaned_data["suggestions_to_merge"]
+            merged_suggestion.upvoted_users.add(
+                *self.get_total_upvotes(suggestions=suggestions)
+            )
+            merged_suggestion.save()
+
+            # Old suggestions shall be spliced
+            Suggestion.objects.filter(
+                id__in=suggestions.values_list("id", flat=True)
+            ).exclude(id=merged_suggestion.id).delete()
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                # Translators: Shown to users when they successfully merge suggestion.
+                _("Suggestions merged successfully!"),
+            )
+            return HttpResponseRedirect(self.success_url)
+
+        except (AssertionError, AttributeError) as e:
+            messages.add_message(
+                self.request,
+                messages.WARNING,
+                # Translators: This message is shown in case some error occurs during merging of suggestions.
+                _("Some Error Occured"),
+            )
+            raise PermissionDenied

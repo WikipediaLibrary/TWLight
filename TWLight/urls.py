@@ -22,6 +22,7 @@ from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.resources.views import (
     PartnerSuggestionView,
     SuggestionDeleteView,
+    SuggestionMergeView,
     SuggestionUpvoteView,
 )
 from TWLight.users import oauth as auth
@@ -75,6 +76,7 @@ urlpatterns = [
     url(r"^terms/$", TermsView.as_view(), name="terms"),
     # For partner suggestions
     url(r"^suggest/$", PartnerSuggestionView.as_view(), name="suggest"),
+    url(r"^suggest/merge/$", SuggestionMergeView.as_view(), name="suggest-merge"),
     url(
         r"^suggest/(?P<pk>[0-9]+)/delete/$",
         login_required(SuggestionDeleteView.as_view()),
