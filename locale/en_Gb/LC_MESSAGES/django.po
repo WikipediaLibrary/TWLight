@@ -11,12 +11,13 @@
 # Author: Sabelöga
 # Author: Samwilson
 # Author: TheSkull28870
+# Author: Valentine Badu
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:38+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:34+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:06+0000\n"
 "Language: en_gb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2825,7 +2826,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:406
 msgid "See also the <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
-msgstr ""
+msgstr "Hwɛ nso <class=\" twl- links\" href=\" https// wikimediafoundation.org/ wiki/ privacy_ policy\"> Wikipedia Foundation privacy policy</a>."
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:415

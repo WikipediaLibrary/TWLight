@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Castillerian",
 			"Robin van der Vliet"
 		]
 	},
@@ -12,7 +13,7 @@
 	"law_tag": "Juro",
 	"education_tag": "Edukado",
 	"philosophy-and-religion_tag": "Filozofio kaj religio",
-	"social-sciences_tag": "Sociaj sciencoj",
+	"social-sciences_tag": "Sociaj Sciencoj",
 	"history_tag": "Historio",
 	"culture_tag": "Kulturo",
 	"life-sciences_tag": "Vivsciencoj",

@@ -4,6 +4,7 @@
 # Author: Ashaio
 # Author: Chrumps
 # Author: DDPAT
+# Author: IOIOI
 # Author: Kareyac
 # Author: Msz2001
 # Author: Nux
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:37+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:35+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:09+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -254,7 +255,7 @@ msgstr "12 miesięcy"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:160
 msgid "Finalized"
-msgstr ""
+msgstr "Ukończona"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:326

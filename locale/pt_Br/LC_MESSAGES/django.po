@@ -6,6 +6,7 @@
 # Author: DDPAT
 # Author: Eduardo Addad de Oliveira
 # Author: Eduardoaddad
+# Author: Elilopes
 # Author: Isabelle Belato
 # Author: Luk3
 # Author: Mariagarbin
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:38+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:36+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:09+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2746,27 +2747,25 @@ msgstr "Retenção e Manipulação de Dados"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:248
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "A Fundação Wikimedia e nossos provedores de serviços usam suas informações com a finalidade legítima de fornecer serviços da Biblioteca Wikipedia em apoio à nossa missão de caridade. Quando você solicita uma conta da Biblioteca da Wikipédia ou usa sua conta da Biblioteca da Wikipédia, podemos coletar rotineiramente as seguintes informações: nome de usuário, endereço de e-mail, contagem de edições, data de registro, número de identificação do usuário, grupos aos quais você pertence e qualquer usuário especial direitos; seu nome, país de residência, ocupação e/ou afiliação, se exigido por um parceiro ao qual você está se candidatando; sua descrição narrativa de suas contribuições e razões para solicitar acesso aos recursos do parceiro; e a data em que você concorda com estes termos de uso."
+msgstr "A Fundação Wikimedia e seus provedores de serviços usam suas informações com a finalidade de fornecer serviços da Biblioteca Wikipedia em apoio à nossa missão de caridade. Quando você solicita uma conta nesta/ou usa sua conta da Biblioteca, coletaremos as seguintes informações: nome de usuário, endereço de e-mail, contagem de edições, data de registro, número de identificação do usuário, grupos aos quais você pertence e qualquer nível especial de usuário; seu nome, país de residência, ocupação e/ou afiliação (se exigido por um parceiro ao qual você está se candidatando); descrição de suas contribuições e razões para solicitar acesso aos recursos do parceiro, e; a data em que você concorda com estes termos de uso."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:265
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura. Algumas editoras podem pedir só um endereço de e-mail, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Quando preenche a sua candidatura, só lhe será pedida a informação exigida pelas editoras que escolheu, e cada editora só receberá a informação que requer para lhe conceder acesso. Consulte as nossas páginas de <a class=\"twl-links\" href=\"%(all_partners_url)s\">informações de parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
+msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura, algumas podem pedir só um endereço de e-mail, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Será pedida a informação exigida de acordo com as editoras que escolheu, e cada só receberá a informação que requereu para lhe conceder acesso. Consulte as nossas páginas de <a class=\"twl-links\" href=\"%(all_partners_url)s\">informações de parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:280
-#, fuzzy
 msgid "Some Wikipedia Library pages are visible without logging in, but you will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr "Você pode navegar no site da Biblioteca da Wikipédia sem fazer login, mas precisará fazer login para aplicar ou acessar recursos de parceiros proprietários. Usamos os dados fornecidos por você por meio de chamadas da API OAuth e Wikimedia para avaliar seu pedido de acesso e processar solicitações aprovadas."
+msgstr "Você pode navegar no site da Biblioteca da Wikipédia sem autenticação (login), mas para acessar recursos de parceiros proprietários precisará autenticar-se. Usamos os dados fornecidos por você por meio de chamadas da API OAuth e Wikimedia para avaliar seu pedido de acesso e processar solicitações aprovadas."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:291
-#, fuzzy, python-format
+#, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a class=\"twl-links\" href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
-msgstr "Para administrar o programa da Biblioteca da Wikipédia reteremos os dados de candidatura que nos forneceu, durante um período de três anos após o seu início de sessão mais recente, a menos que elimine a sua conta conforme descrito abaixo. Pode iniciar uma sessão e aceder à <a class=\"twl-links\" href=\"%(profile_url)s\">sua página de perfil</a> para ver as informações associadas à sua conta, e pode baixar-las em formato JSON. Pode aceder, atualizar, restringir ou apagar estas informações em qualquer altura, exceto as que são obtidas automaticamente dos projetos. Se tem qualquer pergunta ou preocupação acerca do nosso tratamento dos seus dados, é favor contactar <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
+msgstr "Para administrar o programa da Biblioteca da Wikipédia reteremos os dados de candidatura que nos forneceu, durante um período de três anos após o seu início de sessão mais recente, a menos que elimine a sua conta conforme descrito abaixo. Pode iniciar uma sessão e aceder à <a class=\"twl-links\" href=\"%(profile_url)s\">sua página de perfil</a> para ver as informações associadas à sua conta, onde pode baixar-las em formato JSON, atualizar, restringir, ou apagar estas informações em qualquer momento, exceto as que são obtidas automaticamente dos projetos. Se tem qualquer pergunta ou preocupação acerca do nosso tratamento dos seus dados, por favor fale conosco <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a>."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:308
@@ -2780,9 +2779,8 @@ msgstr "A Biblioteca da Wikipédia é administrada por funcionários da WMF, con
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:341
-#, fuzzy
 msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr "Podemos divulgar qualquer informação coletada quando exigido por lei, quando tivermos sua permissão, quando necessário para proteger nossos direitos, privacidade, segurança, usuários ou o público em geral e, quando necessário, para fazer cumprir esses termos, as diretrizes gerais da WMF. <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Termos de uso</a>, ou qualquer outra política do WMF."
+msgstr "Podemos divulgar qualquer informação coletada quando: exigido por lei, quando tivermos sua permissão, quando necessário para proteger nossos direitos, privacidade, segurança, usuários ou o público em geral e, quando necessário, para fazer cumprir os termos e as diretrizes gerais da WMF. <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Termos de uso</a>, ou qualquer outra política do WMF."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:352
@@ -2811,9 +2809,8 @@ msgstr "Observe que, no caso de haver diferenças de significado ou interpretaç
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:406
-#, fuzzy
 msgid "See also the <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
-msgstr "Veja também a <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Política de Privacidade da Fundação Wikimedia</a>."
+msgstr "Veja também a <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Política de Privacidade da WMF</a>."
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:415
@@ -2845,9 +2842,8 @@ msgstr "Adicione esta coleção aos favoritos"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:77
-#, fuzzy
 msgid "Expiry date"
-msgstr "Expirou em"
+msgstr "Data de validade"
 
 #: TWLight/users/templates/users/user_collection_tile.html:82
 msgid "Click to return this access"
@@ -2855,9 +2851,8 @@ msgstr "Clique para retornar este acesso"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:91
-#, fuzzy
 msgid "Go to application"
-msgstr "Data da candidatura"
+msgstr "Ir para a a plicação"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:100

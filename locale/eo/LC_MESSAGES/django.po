@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Esperanto (Esperanto)
 # Exported from translatewiki.net
 #
+# Author: Castillerian
 # Author: DDPAT
 # Author: Druesenfieber
 # Author: Fitoschido
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:38+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:34+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:06+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +60,7 @@ msgstr "<p><small><i>Via privata informo estos prilaborata konforme al nia <a cl
 #: TWLight/applications/forms.py:242
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr "Vi aligas al {partner}"
+msgstr "Via apliko al {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:275
@@ -176,12 +177,12 @@ msgstr "Petita titolo"
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:122
 msgid "Agreed with terms of use"
-msgstr "Mi aprobas la uzkondiĉojn"
+msgstr "Aprobita la uzkondiĉojn"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:124
 msgid "Account email"
-msgstr "Konta retpoŝto"
+msgstr "Kontretpoŝto"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.

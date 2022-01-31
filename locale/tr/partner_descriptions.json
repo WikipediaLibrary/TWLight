@@ -14,7 +14,7 @@
 	"48_short_description": "<strong>Amerikan Psikoloji Derneği</strong> (APA), 1894'ten günümüze materyalleri içeren PsycARTICLES ve PsycBOOKS'a erişim sağlar.",
 	"102_short_description": "<strong>Ancestry.com</strong>; soy, tarihsel ve genetik kayıtların bir koleksiyonunu içerir. Bu ortaklık, tüm ABD ve uluslararası kayıtları içeren World Explorer üyeliğine erişim sağlar.",
 	"102_description": "Bu ortaklık, Fold3 veya Newspapers.com'a erişim içermez ancak bunlar ayrı olarak uygulanabilir.",
-	"32_short_description": "<strong>Annual Reviews</strong>, bilimler ve sosyal bilimlerde inceleme makalelerinin yayıncısıdır. Bu ortaklık, tüm dergi koleksiyonlarına erişim sağlar.",
+	"32_short_description": "<strong>Annual Reviews</strong>; yaşam, biyomedikal, fizik ve sosyal bilimlerde inceleme makalelerini kâr amacı gütmeyerek yayımlayan bir organdır. Bu ortaklık, Açık Erişime Abone Ol programındaki sekiz açık erişim başlığı da dahil olmak üzere 51 derginin tümüne ve tüm konu koleksiyonlarına erişim sağlar.",
 	"11_short_description": "<strong>American Speech-Language-Hearing Association</strong> (ASHA), ASHA dergilerine erişim sağlar: American Journal of Audiology, American Journal of Speech-Language Pathology, Journal of Speech, Language, and Hearing Research and Language, Speech, and Hearing Services in School.",
 	"47_short_description": "<strong>Baylor University Press</strong>, öncelikle dini çalışmalar ve beşeri bilimler alanlarında akademik e-kitapların yayıncısıdır. Editörler, <a href=\"http://www.baylorpress.com/Title\">yayıncının katalogunda</a> ilgilendikleri başlıkları seçebilir.",
 	"73_short_description": "<strong>Berg Moda Kütüphanesi</strong>; ansiklopediler, referans eserler ve 100'den fazla akademik e-Kitap dahil olmak üzere moda konularını kapsayan kaynakları içerir. Bloomsbury Publishing tarafından yayımlanmaktadır.",
@@ -117,5 +117,6 @@
 	"119_short_description": "<strong>Future Medicine</strong>, biyomedikal kaynakların bir koleksiyonudur.",
 	"125_short_description": "<strong>OECD iLibrary</strong>, Ekonomik İşbirliği ve Kalkınma Örgütü (OECD) tarafından yayınlanan çevrimiçi bir kitap, makale ve istatistik kütüphanesidir.",
 	"126_short_description": "<strong>OECD Data</strong>, Ekonomik İşbirliği ve Kalkınma Teşkilatı (OECD) tarafından yayınlanan çizelgeler, haritalar, tablolar ve ilgili yayınların bir deposudur.",
-	"127_short_description": "<strong>OECD Multimedia Gallery</strong>, Ekonomik İşbirliği ve Kalkınma Örgütü (OECD) tarafından yayınlanan podcast'leri ve fotoğrafları içeren görsel-işitsel bir galeridir."
+	"127_short_description": "<strong>OECD Multimedia Gallery</strong>, Ekonomik İşbirliği ve Kalkınma Örgütü (OECD) tarafından yayınlanan podcast'leri ve fotoğrafları içeren görsel-işitsel bir galeridir.",
+	"128_short_description": "<strong>Wiley</strong>; yaşam, sağlık, sosyal ve fiziksel bilimleri kapsayan çevrimiçi dergiler, kitaplar ve araştırma kaynakları koleksiyonları sunar."
 }

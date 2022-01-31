@@ -30,7 +30,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:38+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:34+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:06+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1858,9 +1858,9 @@ msgstr "Alle Nutzer erhalten sofortigen Zugang zu einigen Sammlungen, die durch 
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
-#, fuzzy, python-format
+#, python-format
 msgid "For more information about how your information is stored and reviewed please see our <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
-msgstr "Mehr Informationen über die Speicherung und Verarbeitung deiner Daten auf der Seite <a href=\"%(terms_url)s\">Nutzungsbedingungen und Datenschutzrichtlinie</a>. Für die Zugänge, auf die du dich beworben hast, gelten auch die Nutzungsbedingungen der Plattformen der jeweiligen Partner; bitte informiere dich bei ihnen."
+msgstr "Mehr Informationen über die Speicherung und Verarbeitung deiner Daten auf der Seite <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Für die Zugänge, auf die du dich beworben hast, gelten auch die Nutzungsbedingungen der Plattformen der jeweiligen Partner; bitte informiere dich bei ihnen."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51

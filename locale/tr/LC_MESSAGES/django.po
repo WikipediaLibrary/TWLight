@@ -22,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-01-27 00:38+0000\n"
-"PO-Revision-Date: 2022-01-27 12:17:36+0000\n"
+"PO-Revision-Date: 2022-01-31 12:16:10+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -949,9 +949,8 @@ msgstr "E-postanız"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
-#, fuzzy
 msgid "This field is automatically updated with the email from your <a class='twl-links' href='{}'>user profile</a>."
-msgstr "Bu alan, <a class='contact-us-links' href='{}'>kullanıcı profilinizden</a> gelen e-posta ile otomatik olarak güncellenir."
+msgstr "Bu alan, <a class='twl-links' href='{}'>kullanıcı profilinizden</a> gelen e-posta ile otomatik olarak güncellenir."
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1066,9 +1065,9 @@ msgstr "İletişim"
 
 #. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
 #: TWLight/emails/templates/emails/contact.html:33
-#, fuzzy, python-format
+#, python-format
 msgid "(If you would like to suggest a partner, <a class=\"twl-links\" href=\"%(suggest)s\"><strong>go here</strong></a>.)"
-msgstr "(Bir iş ortağı önermek istiyorsanız <a class=\"contact-us-links\" href=\"%(suggest)s\"><strong>buraya tıklayın</strong></a>.)"
+msgstr "(Bir iş ortağı önermek istiyorsanız <a class=\"twl-links\" href=\"%(suggest)s\"><strong>buraya tıklayın</strong></a>.)"
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:42
@@ -1845,9 +1844,9 @@ msgstr "Tüm kullanıcılar, 'Koleksiyona erişim' butonuna tıklayarak veya say
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
-#, fuzzy, python-format
+#, python-format
 msgid "For more information about how your information is stored and reviewed please see our <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
-msgstr "Bilgilerinizin nasıl saklandığı ve incelendiği hakkında daha fazla bilgi için lütfen <a href=\"%(terms_url)s\">kullanım şartları ve gizlilik politikamıza</a> bakın. Başvurduğunuz hesaplar ayrıca her bir ortak platformunun sağladığı kullanım koşullarına tabidir; lütfen onları gözden geçirin."
+msgstr "Bilgilerinizin nasıl saklandığı ve incelendiği hakkında daha fazla bilgi için lütfen <a class=\"twl-links\" href=\"%(terms_url)s\">kullanım şartları ve gizlilik politikamıza</a> bakın. Başvurduğunuz hesaplar ayrıca her bir ortak platformunun sağladığı kullanım koşullarına tabidir; lütfen onları gözden geçirin."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51
@@ -1986,9 +1985,9 @@ msgstr "Atıf uygulamaları projeye ve hatta maddeye göre değişir. Genel olar
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:212
-#, fuzzy, python-format
+#, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
-msgstr "Sorularınız varsa, yardıma ihtiyacınız varsa veya yardım için gönüllü olmak istiyorsanız, lütfen <a href=\"%(contact_url)s\">iletişim sayfamıza</a> bakın."
+msgstr "Sorularınız varsa, yardıma ihtiyacınız varsa veya yardım için gönüllü olmak istiyorsanız, lütfen <a class=\"twl-links\" href=\"%(contact_url)s\">iletişim sayfamıza</a> bakın."
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
@@ -2631,9 +2630,8 @@ msgstr "Vikipedi Kütüphane Kartı Kullanım Koşulları ve Gizlilik Bildirimi"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:54
-#, fuzzy
 msgid "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library </a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows Wikipedia editors to search and access these resources."
-msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/tr\">Vikipedi Kütüphanesi</a>, kullanıcıların ödemeli kaynaklara erişmeni sağlamak için dünya çapındaki yayıncılarla ortaklık kurmaktadır. Bu web sitesi, Vikipedi editörlerinin bu kaynakları aramasına ve bu kaynaklara erişmesine izin verir."
+msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\">Vikipedi Kütüphanesi</a>, kullanıcıların ödemeli kaynaklara erişmeni sağlamak için dünya çapındaki yayıncılarla ortaklık kurmaktadır. Bu web sitesi, Vikipedi editörlerinin bu kaynakları aramasına ve bu kaynaklara erişmesine izin verir."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:66
@@ -2752,7 +2750,7 @@ msgstr "Wikimedia Vakfı ve hizmet sağlayıcılarımız, bilgilerinizi, Vikiped
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:265
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
 msgstr "Vikipedi Kütüphanesi programına üye olan her yayıncı, başvuruda farklı özel bilgiler gerektirir. Bazı yayıncılar yalnızca bir e-posta adresi isteyebilir, bazıları ise adınız, yeriniz, mesleğiniz veya kurumsal bağlılığınız gibi daha ayrıntılı veriler ister. Başvurunuzu tamamladığınızda, yalnızca seçtiğiniz yayıncıların istediği bilgileri sağlamanız istenecek ve her yayıncı yalnızca size erişim sağlamak için ihtiyaç duydukları bilgileri alacaktır. Her yayıncının kaynaklarına erişmek için hangi bilgilerin gerekli olduğunu öğrenmek için lütfen <a class=\"twl-links\" href=\"%(all_partners_url)s\">ortak bilgileri</a> sayfalarımıza bakın."
 
@@ -2763,9 +2761,9 @@ msgstr "Giriş yapmadan bazı Vikipedi Kütüphanesi sayfalarına giriş yapmada
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:291
-#, fuzzy, python-format
+#, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a class=\"twl-links\" href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
-msgstr "Vikipedi Kütüphanesi programını yönetmek için, hesabınızı silmediğiniz sürece, en son girişinizden sonra üç yıl boyunca sizden topladığımız uygulama verilerini aşağıda açıklandığı gibi tutacağız. Hesabınızla ilgili bilgileri görmek için giriş yapabilir ve hesabınızla ilişkili bilgileri görmek için <a class=\"twl-links\" href=\"%(profile_url)s\">profil sayfanıza</a> gidebilir ve JSON formatında indirebilirsiniz. Projelerden otomatik olarak alınan bilgiler dışında, bu bilgilere istediğiniz zaman erişebilir, güncelleyebilir, kısıtlayabilir vey <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a> ile iletişime geçin."
+msgstr "Vikipedi Kütüphanesi programını yönetmek için, hesabınızı silmediğiniz sürece, en son girişinizden sonra üç yıl boyunca sizden topladığımız uygulama verilerini aşağıda açıklandığı gibi tutacağız. Hesabınızla ilgili bilgileri görmek için giriş yapabilir ve hesabınızla ilişkili bilgileri görmek için <a class=\"twl-links\" href=\"%(profile_url)s\">profil sayfanıza</a> gidebilir ve JSON formatında indirebilirsiniz. Projelerden otomatik olarak alınan bilgiler dışında, bu bilgilere istediğiniz zaman erişebilir, güncelleyebilir, kısıtlayabilir veya <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a> ile iletişime geçin."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:308
@@ -2779,9 +2777,8 @@ msgstr "Vikipedi Kütüphanesi WMF Ekibi, Yükleniciler ve onaylı gönüllü Ko
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:341
-#, fuzzy
 msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr "Yasalar gereği, sizden izin aldığımızda, haklarımızı, gizliliğimizi, güvenliğimizi, kullanıcılarımızı veya kamuoyunu korumak için gerektiğinde ve bu şartları uygulamak için - <a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/Terms_of_use/tr\">Kullanım Şartları</a> veya başka bir WMF politikası gerektiğinde WMF genelinin topladığı bilgileri ifşa edebiliriz."
+msgstr "Yasalar gereği, sizden izin aldığımızda haklarımızı, gizliliğimizi, güvenliğimizi, kullanıcılarımızı veya kamuoyunu korumak için gerektiğinde ve bu şartları uygulamak için <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Kullanım Şartları</a> veya başka bir WMF politikası gerektiğinde WMF genelinin topladığı bilgileri ifşa edebiliriz."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:352
@@ -2810,7 +2807,6 @@ msgstr "Lütfen bu terimlerin İngilizce orijinali ile çeviri arasında bir anl
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:406
-#, fuzzy
 msgid "See also the <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
 msgstr "Ayrıca <a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/Privacy_policy/tr\">Meta Viki Gizlilik Politikası</a> sayfasına bakın."
 
