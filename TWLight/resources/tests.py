@@ -603,43 +603,6 @@ class WaitlistBehaviorTests(TestCase):
         cls.message_patcher = patch("TWLight.applications.views.messages.add_message")
         cls.message_patcher.start()
 
-    def test_request_application_view_context_1(self):
-        """
-        The any_waitlisted context on RequestApplicationView should True if
-        there are waitlisted Partners.
-        """
-        # Set up request.
-        req_url = reverse("applications:request")
-
-        # Create an editor with a test client session
-        editor = EditorCraftRoom(self, Terms=True)
-
-        # Ensure there is at least one waitlisted partner.
-        partner = PartnerFactory(status=Partner.WAITLIST)
-
-        # Test response.
-        response = self.client.get(req_url, follow=True)
-        self.assertEqual(response.context["any_waitlisted"], True)
-
-    def test_request_application_view_context_2(self):
-        """
-        The any_waitlisted context on RequestApplicationView should False if
-        there are not waitlisted Partners.
-        """
-        # Set up request.
-        req_url = reverse("applications:request")
-
-        # Create an editor with a test client session
-        editor = EditorCraftRoom(self, Terms=True)
-
-        # Ensure there are no waitlisted partners.
-        for partner in Partner.objects.filter(status=Partner.WAITLIST):
-            partner.delete()
-
-        # Test response.
-        response = self.client.get(req_url, follow=True)
-        self.assertEqual(response.context["any_waitlisted"], False)
-
     def test_toggle_waitlist_1(self):
         """
         Posting to the toggle waitlist view sets an AVAILABLE partner to
