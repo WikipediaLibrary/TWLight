@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-02-01 18:03+0000\n"
+"POT-Creation-Date: 2022-02-01 20:05+0000\n"
 "PO-Revision-Date: 2022-01-27 12:17:35+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -371,7 +371,7 @@ msgstr "ヵ月"
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
 #: TWLight/applications/templates/applications/application_evaluation.html:102
-#: TWLight/applications/views.py:640 TWLight/applications/views.py:719
+#: TWLight/applications/views.py:461 TWLight/applications/views.py:540
 msgid "Partner"
 msgstr "提携組織"
 
@@ -860,35 +860,14 @@ msgstr "コードの選択:"
 msgid "There are no approved, unsent applications."
 msgstr "承認済みで更新手続きが済んでいない申請はありません。"
 
-#. Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
-#: TWLight/applications/views.py:204
-msgid "Please select at least one partner."
-msgstr "少なくとも提携先を1件選択してください。"
-
 #. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
-#: TWLight/applications/views.py:334
+#: TWLight/applications/views.py:237
 msgid "This field consists only of restricted text."
 msgstr "この欄には既定の文のみ記入できます。"
 
-#. Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
-#: TWLight/applications/views.py:392
-msgid "Choose at least one resource you want access to."
-msgstr "アクセスしたいリソースを最低1件選択してください。"
-
-#. Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-#. Translators: This message is shown to users once they've successfully submitted their application for review.
-#: TWLight/applications/views.py:418 TWLight/applications/views.py:487
-#, python-brace-format
-msgid ""
-"Your application has been submitted for review. Head over to <a "
-"href='{applications_url}'>My Applications</a> to view the status."
-msgstr ""
-"申請は審査過程に送られました。<a href='{applications_url}'>My Applications</"
-"a>で処理の状況を確認できます。"
-
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-#: TWLight/applications/views.py:462 TWLight/applications/views.py:1452
+#: TWLight/applications/views.py:292 TWLight/applications/views.py:1273
 msgid ""
 "This partner does not have any access grants available at this time. You may "
 "still apply for access; your application will be reviewed when access grants "
@@ -897,54 +876,64 @@ msgstr ""
 "現時点で、この提携組織ではアクセス権の無料提供はしていません。応募は受け付け"
 "ています。申請は無料提供のアクセス権が再開された時に、審査過程へ送られます。"
 
+#. Translators: This message is shown to users once they've successfully submitted their application for review.
+#: TWLight/applications/views.py:317
+#, python-brace-format
+msgid ""
+"Your application has been submitted for review. Head over to <a "
+"href='{applications_url}'>My Applications</a> to view the status."
+msgstr ""
+"申請は審査過程に送られました。<a href='{applications_url}'>My Applications</"
+"a>で処理の状況を確認できます。"
+
 #. Translators: This message is shown to user when he tries to apply to same partner more than once
-#: TWLight/applications/views.py:550
+#: TWLight/applications/views.py:371
 msgid "You already have an application for this Partner."
 msgstr "このPartnerのアプリは既に入手済みです。"
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:638 TWLight/applications/views.py:717
+#: TWLight/applications/views.py:459 TWLight/applications/views.py:538
 msgid "Editor"
 msgstr "編集者"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:763
+#: TWLight/applications/views.py:584
 msgid "Applications to review"
 msgstr "審査前の申請"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:804
+#: TWLight/applications/views.py:625
 #: TWLight/resources/templates/resources/partner_users.html:23
 msgid "Approved applications"
 msgstr "承認された申請"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:830
+#: TWLight/applications/views.py:651
 msgid "Rejected applications"
 msgstr "却下された申請"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:864
+#: TWLight/applications/views.py:685
 msgid "Access grants up for renewal"
 msgstr "更新が必要な無料アクセス権"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:890
+#: TWLight/applications/views.py:711
 #: TWLight/resources/templates/resources/partner_users.html:63
 msgid "Sent applications"
 msgstr "申請を送付"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
-#: TWLight/applications/views.py:925
+#: TWLight/applications/views.py:746
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
 msgstr "提携組織のプロキシ承認方式が順番待ちのため、申請の処理ができません。"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:949
+#: TWLight/applications/views.py:770
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
@@ -953,12 +942,12 @@ msgstr ""
 "権がゼロのため、申請の処理ができません。"
 
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
-#: TWLight/applications/views.py:972
+#: TWLight/applications/views.py:793
 msgid "You attempted to create a duplicate authorization."
 msgstr "すでに申請済みのアクセス権について、申請手続きが重複したようです。"
 
 #. Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
-#: TWLight/applications/views.py:1026
+#: TWLight/applications/views.py:847
 #, python-brace-format
 msgid ""
 "This application cannot be modified since this partner is now part of our <a "
@@ -972,34 +961,34 @@ msgstr ""
 "ださい。"
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:1042
+#: TWLight/applications/views.py:863
 msgid "Set application status"
 msgstr "申請の処理状態を設定"
 
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
-#: TWLight/applications/views.py:1060
+#: TWLight/applications/views.py:881
 msgid ""
 "There are more pending applications than available accounts. Your "
 "application might get waitlisted."
 msgstr "申請は保留されました。設定を上回る件数が審査待ちです。"
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
-#: TWLight/applications/views.py:1073
+#: TWLight/applications/views.py:894
 msgid "Status of INVALID applications cannot be changed."
 msgstr "無効な申請の状態を変更することはできません。"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:1109
+#: TWLight/applications/views.py:930
 msgid "Please select at least one application."
 msgstr "申請を最低1件、選択してください。"
 
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
-#: TWLight/applications/views.py:1212
+#: TWLight/applications/views.py:1033
 msgid "Batch update of application(s) {} successful."
 msgstr "申請 {} の一括更新に成功しました。"
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:1221
+#: TWLight/applications/views.py:1042
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -1011,17 +1000,17 @@ msgstr ""
 "し、承認アカウント数の上限の範囲で申請を承認します。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1361
+#: TWLight/applications/views.py:1182
 msgid "Error: Code used multiple times."
 msgstr "エラー: コードが複数回、使用されました。"
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1411
+#: TWLight/applications/views.py:1232
 msgid "All selected applications have been marked as sent."
 msgstr "選択した申請はすべて送信済みです。"
 
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
-#: TWLight/applications/views.py:1442
+#: TWLight/applications/views.py:1263
 msgid ""
 "Cannot renew application at this time as partner is not available. Please "
 "check back later, or contact us for more information."
@@ -1030,13 +1019,13 @@ msgstr ""
 "細情報をお問い合わせください。"
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
-#: TWLight/applications/views.py:1478
+#: TWLight/applications/views.py:1299
 #, python-brace-format
 msgid "Attempt to renew unapproved application #{pk} has been denied"
 msgstr "却下された申請#{pk}の更新を試みましたが拒否されました"
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
-#: TWLight/applications/views.py:1550
+#: TWLight/applications/views.py:1371
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -1045,7 +1034,7 @@ msgstr ""
 "す。）"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1560
+#: TWLight/applications/views.py:1381
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -4046,6 +4035,12 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Please select at least one partner."
+#~ msgstr "少なくとも提携先を1件選択してください。"
+
+#~ msgid "Choose at least one resource you want access to."
+#~ msgstr "アクセスしたいリソースを最低1件選択してください。"
 
 #~ msgid ""
 #~ "You do not already have access to the resources you’re applying for "
