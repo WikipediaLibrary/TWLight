@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-01-31 12:29+0000\n"
+"POT-Creation-Date: 2022-02-01 18:03+0000\n"
 "PO-Revision-Date: 2022-01-27 12:17:37+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2267,24 +2267,20 @@ msgstr "在過去一個月裡，您有在維基媒體計劃裡做出至少 10 �
 msgid "You are not currently blocked from editing a Wikimedia project"
 msgstr "您目前並沒有被禁止編輯維基媒體專案"
 
-#. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#: TWLight/templates/about.html:87
-msgid ""
-"You do not already have access to the resources you’re applying for through "
-"another library or institution"
-msgstr "您尚無法透過其它的圖書館或機構，來取用您現在所想申請的資源"
-
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
-#: TWLight/templates/about.html:93
+#: TWLight/templates/about.html:90
 #, fuzzy
 msgid ""
-"If your account is blocked on one or more Wikimedia projects, you may still "
-"be granted access to The Wikipedia Library. You will need to contact the "
-"Wikipedia Library team, who will review your blocks. If you have been "
-"blocked for content issues, most notably copyright violations, or have "
-"multiple long-term blocks, we may decline your request. Additionally, if "
-"your block status changes after being approved, you will need to request "
-"another review."
+"<p> If you are applying for an available collection, please first check that "
+"you don't already have access through another library or institution. If you "
+"do, please consider using that access rather than taking up a seat for this "
+"resource in The Wikipedia Library. </p> If your account is blocked on one or "
+"more Wikimedia projects, you may still be granted access to The Wikipedia "
+"Library. You will need to contact the Wikipedia Library team, who will "
+"review your blocks. If you have been blocked for content issues, most "
+"notably copyright violations, or have multiple long-term blocks, we may "
+"decline your request. Additionally, if your block status changes after being "
+"approved, you will need to request another review."
 msgstr ""
 "若您的帳號被一個或以上的維基媒體計劃給封鎖，您仍可以被授予取用 Library "
 "Bundle。您會需要聯絡維基百科圖書館團隊，我們會審核有關您的封鎖。若您是出自內"
@@ -3868,3 +3864,8 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid ""
+#~ "You do not already have access to the resources you’re applying for "
+#~ "through another library or institution"
+#~ msgstr "您尚無法透過其它的圖書館或機構，來取用您現在所想申請的資源"
