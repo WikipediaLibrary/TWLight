@@ -85,7 +85,19 @@
         </p>
       {% endif %}
       {% if user_collection.auth_open_app %}
-        <a href="{% url 'applications:evaluate' user_collection.auth_open_app.pk %}" class="btn btn-sm access-apply-button"
+        {% if not user_collection.auth_has_expired %}
+        <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
+              type="button" name="button" target="_blank" rel="noopener">
+          {% if user_collection.partner_authorization_method != proxy_authorization %}
+              {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
+              {% trans "Go to site" %}
+          {% else %}
+              {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
+              {% trans "Access collection" %}
+          {% endif %}
+        </a>
+        {% endif %}
+        <a href="{% url 'applications:evaluate' user_collection.auth_open_app.pk %}" class="btn btn-sm twl-secondary-btn"
               type="button" name="button">
           {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application. {% endcomment %}
           {% trans "Go to application" %}
