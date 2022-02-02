@@ -54,6 +54,7 @@ COMMON CONTENT BLOCK CSS
   color: #FFFFFF !important;
   background-color: #3366CC !important;
   border-color: #3366CC !important;
+  -webkit-appearance: none;
 }
 .twl-btn:hover {
   color: #FFFFFF !important;
@@ -81,6 +82,7 @@ COMMON CONTENT BLOCK CSS
   color: rgb(51, 51, 51);
   background-color: rgb(255, 255, 255);
   border-color: rgb(204, 204, 204);
+  -webkit-appearance: none;
 }
 .btn-default.focus, .btn-default:focus {
   color:#333;
@@ -128,6 +130,7 @@ COMMON CONTENT BLOCK CSS
     color: #000000;
     background-color: #FFFFFF;
     border-color: #CCCCCC;
+    -webkit-appearance: none;
 }
 
 .twl-secondary-btn:hover{
