@@ -119,106 +119,9 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
         return partner_qs
 
 
-class RequestApplicationView(EditorsOnly, ToURequired, EmailRequired, FormView):
-    template_name = "applications/request_for_application.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(RequestApplicationView, self).get_context_data(**kwargs)
-        context["any_waitlisted"] = Partner.objects.filter(
-            status=Partner.WAITLIST
-        ).exists()
-        return context
-
-    def get_form_class(self):
-        """
-        Dynamically construct a form which will have a checkbox for every
-        partner.
-        """
-        fields = {}
-        field_order = []
-        open_apps = Application.objects.filter(
-            editor=self.request.user.editor,
-            status__in=(
-                Application.SENT,
-                Application.QUESTION,
-                Application.PENDING,
-                Application.APPROVED,
-            ),
-        )
-        open_apps_partners = []
-        for i in open_apps:
-            open_apps_partners.append(i.partner.company_name)
-        for partner in Partner.objects.filter(
-            ~Q(authorization_method=Partner.BUNDLE)
-        ).order_by("company_name"):
-            # We cannot just use the partner ID as the field name; Django won't
-            # be able to find the resultant data.
-            # http://stackoverflow.com/a/8289048
-            if partner.company_name not in open_apps_partners:
-                field_name = "partner_{id}".format(id=partner.id)
-                fields[field_name] = forms.BooleanField(
-                    label=partner.company_name,
-                    required=False,
-                    # We need to pass the partner to the front end in order to
-                    # render the partner information tiles. Widget attrs appear to
-                    # be the place we can stash arbitrary metadata. Ugh.
-                    widget=forms.CheckboxInput(attrs={"object": partner}),
-                )
-                field_order.append(partner.company_name)
-
-        form_class = type("RfAForm", (forms.Form,), fields)
-        form_class.field_order = field_order
-        return form_class
-
-    def form_valid(self, form):
-        """
-        When users submit a valid request, construct a stub application and
-        redirect users to the page where they fill it out.
-        """
-        # Get the IDs of the partner resources they want to apply for.
-        # Because we had to prepend some text to the ID in get_form_class,
-        # make sure to strip it off here, so we're left with just the ID for
-        # ease of database lookups. Store them in the session so we can
-        # construct the required form later.
-        partner_ids = [
-            int(key[8:]) for key in form.cleaned_data if form.cleaned_data[key]
-        ]
-        for each_id in partner_ids:
-            try:
-                if (
-                    Partner.objects.get(id=each_id).authorization_method
-                    == Partner.BUNDLE
-                ):
-                    partner_ids.remove(each_id)
-            except Partner.DoesNotExist:
-                partner_ids.remove(each_id)
-        self.request.session[PARTNERS_SESSION_KEY] = partner_ids
-
-        if len(partner_ids):
-            return HttpResponseRedirect(reverse("applications:apply"))
-        else:
-            messages.add_message(
-                self.request,
-                messages.WARNING,
-                # Translators: When a user is on the page where they can select multiple partners to apply to (https://wikipedialibrary.wmflabs.org/applications/request/), they receive this message if they click Apply without selecting anything.
-                _("Please select at least one partner."),
-            )
-            return HttpResponseRedirect(reverse("applications:request"))
-
-
 class _BaseSubmitApplicationView(
     EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView
 ):
-    """
-    People can get to application submission in 2 ways:
-    1) via RequestApplicationView, which lets people select multiple partners;
-    2) via the "apply for access" button on the partner detail page.
-
-    This means there are 2 different ways to tell the SubmitApplicationView
-    which partner(s) it is dealing with, but after that point the logic is the
-    same. We factor the common logic out here, and use subclasses for the two
-    cases.
-    """
 
     template_name = "applications/apply.html"
     form_class = BaseApplicationForm
@@ -376,79 +279,6 @@ class _BaseSubmitApplicationView(
         return needed_fields
 
 
-class SubmitApplicationView(_BaseSubmitApplicationView):
-    """
-    This is the view used after RequestApplicationView, when one or more
-    partners may be in play.
-    """
-
-    # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
-
-    def dispatch(self, request, *args, **kwargs):
-        """
-        Validate inputs.
-        """
-        # Translators: If a user files an application for a partner but doesn't specify a collection of resources they need, this message is shown.
-        fail_msg = _("Choose at least one resource you want access to.")
-        if not PARTNERS_SESSION_KEY in list(request.session.keys()):
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse("applications:request"))
-
-        if len(request.session[PARTNERS_SESSION_KEY]) == 0:
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse("applications:request"))
-
-        try:
-            partners = self._get_partners()
-            if partners.count() == 0:
-                messages.add_message(request, messages.WARNING, fail_msg)
-                return HttpResponseRedirect(reverse("applications:request"))
-        except:
-            messages.add_message(request, messages.WARNING, fail_msg)
-            return HttpResponseRedirect(reverse("applications:request"))
-
-        return super(SubmitApplicationView, self).dispatch(request, *args, **kwargs)
-
-    def get_success_url(self):
-        messages.add_message(
-            self.request,
-            messages.SUCCESS,
-            # fmt: off
-            # Translators: When a user applies for a set of resources, they receive this message if their application was filed successfully.
-            _("Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status.")
-            .format(
-                applications_url=reverse_lazy(
-                    "users:my_applications",
-                    kwargs={"pk": self.request.user.editor.pk},
-                )
-            ),
-            # fmt: on
-        )
-        user_home = reverse(
-            "users:editor_detail", kwargs={"pk": self.request.user.editor.pk}
-        )
-        return user_home
-
-    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-
-    def _get_partners(self):
-        """
-        Get the queryset of Partners with resources the user wants access to.
-        These partners were specified in RequestApplicationView.
-        """
-        # This key is guaranteed by dispatch() to exist and be nonempty.
-        partner_ids = self.request.session[PARTNERS_SESSION_KEY]
-        partners = Partner.objects.filter(id__in=partner_ids)
-        try:
-            assert len(partner_ids) == partners.count()
-        except AssertionError:
-            logger.exception(
-                "Number of partners found does not match number " "of IDs provided"
-            )
-            raise
-        return partners
-
-
 class SubmitSingleApplicationView(_BaseSubmitApplicationView):
     def dispatch(self, request, *args, **kwargs):
         if self._get_partners()[0].authorization_method == Partner.BUNDLE:
@@ -497,15 +327,6 @@ class SubmitSingleApplicationView(_BaseSubmitApplicationView):
         return user_home
 
     def _get_partners(self):
-        """
-        Get the Partner with resources the user wants access to. There's only
-        one (as specified in the URL parameter), but this is called
-        _get_partners() and returns a queryset so that
-        SubmitSingleApplicationView and SubmitApplicationView have the same
-        behavior, and the shared functionality in _BaseSubmitApplicationView
-        doesn't have to special-case it. Store the partner_id in the session so
-        the validator doesn't blow up when we link directly to a partner app..
-        """
         partner_id = self.kwargs["pk"]
 
         self.request.session[PARTNERS_SESSION_KEY] = partner_id
