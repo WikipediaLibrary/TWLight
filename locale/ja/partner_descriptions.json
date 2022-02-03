@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"MathXplore",
-			"Omotecho"
+			"Omotecho",
+			"Yusuke1109"
 		]
 	},
 	"24_short_description": "<strong>AAAS</strong> （米国科学振興協会）は、そのWebサイトsciencemag.orgのリソースへのアクセスを提供しています。これには、ジャーナル<em>Science</em> （1880年-現在）やその他の科学研究、ニュース、解説、メディアが含まれます。",
@@ -114,5 +115,6 @@
 	"122_short_description": "<strong>RILM Music Encyclopedias</strong> RILM 音楽学データベースは、1775年から現在まで - 文献50件超をまとめ - 収載した項目数は30万件超です。",
 	"121_short_description": "<strong>MGG オンライン</strong> はドイツ語の音楽百科事典として、冊子版のMGGの1994年-2008年の過去号に加え、オンラインの更新版を提供します。",
 	"120_short_description": "<strong>Future Science</strong> フューチャー・サイエンスには、生物学と薬学関連のリソースをまとめてあります。",
-	"119_short_description": "<strong>Future Medicine</strong> フューチャー・メディスンは生化学関連のリソース集です。"
+	"119_short_description": "<strong>Future Medicine</strong> フューチャー・メディスンは生化学関連のリソース集です。",
+	"125_short_description": "<strong>OECD iLibrary</strong>はオンライン図書館\n\n<strong>OECD iLibrary</strong>は、経済協力開発機構（OECD）が発行する書籍、論文、統計などのオンライン図書館です。"
 }
