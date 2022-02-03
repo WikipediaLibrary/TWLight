@@ -82,11 +82,17 @@
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
           {% trans "You are not currently blocked from editing a Wikimedia project" %}
         </li>
-        <li>
-          {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-          {% trans "You do not already have access to the resources you’re applying for through another library or institution" %}
-        </li>
       </ul>
+
+      <p>
+        {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
+        {% blocktranslate trimmed %}
+          If you are applying for an available collection, please first check that
+          you don't already have access through another library or institution. If
+          you do, please consider using that access rather than taking up a seat for
+          this resource in The Wikipedia Library.
+        {% endblocktranslate %}
+      </p>
 
       <p>
         {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
