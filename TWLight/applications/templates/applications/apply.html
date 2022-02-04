@@ -20,4 +20,11 @@
       </div>
     </div>
   </div>
+  {% if partner.authorization_method == EMAIL %}
+    If your application is successful we may share your email address with {{ partner }}. This is required to set up your 
+    access to their resources. By submitting this form you agree to allow your email address to be shared with {{ partner }} 
+    if your application is successful, for the purposes of account setup.
+  {% endif %}
+
+
 {% endblock content %}

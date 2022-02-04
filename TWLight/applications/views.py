@@ -383,6 +383,15 @@ class SubmitSingleApplicationView(
             return (url, message)
         return False
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        partner = self._get_partner()
+        context["partner"] = partner
+        context["EMAIL"] = Partner.EMAIL
+
+        return context
+
 
 class _BaseListApplicationView(CoordinatorsOnly, ToURequired, ListView):
     """
