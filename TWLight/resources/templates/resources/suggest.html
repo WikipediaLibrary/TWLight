@@ -43,7 +43,7 @@
             <div class="card full-width mb-4">
               <div class="card-header">
                 <div class="card-title pull-left"><span class="card-title">{{ each_suggestion.suggested_company_name }}</span></div>
-                {% if user|coordinators_only %}
+                {% if user_is_coordinator %}
                   {% comment %}Translators: This button is at the partner suggestions page for coordinators to delete suggestions. {% endcomment %}
                   <a href="{% url 'suggest-delete' each_suggestion.id %}" class="btn btn-outline-danger pull-right">{% trans 'Delete' %} <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 {% endif %}
