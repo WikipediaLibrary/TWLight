@@ -1252,6 +1252,7 @@ class PartnerSuggestionViewTests(TestCase):
 
         factory = RequestFactory()
         request = factory.get(suggestion_url)
+        request.user = self.user
 
         response = PartnerSuggestionView.as_view()(request)
 
