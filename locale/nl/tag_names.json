@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Romaine"
+		]
+	},
+	"languages-and-literature_tag": "Taal en literatuur",
+	"multidisciplinary_tag": "Multidisciplinair",
+	"physical-sciences_tag": "Exacte wetenschappen",
+	"music_tag": "Muziek",
+	"art_tag": "Kunst",
+	"business-and-economics_tag": "Bedrijven en economie",
+	"law_tag": "Rechten",
+	"education_tag": "Onderwijs",
+	"philosophy-and-religion_tag": "Filosofie en religie",
+	"social-sciences_tag": "Sociale wetenschappen",
+	"history_tag": "Geschiedenis",
+	"culture_tag": "Cultuur",
+	"life-sciences_tag": "Levenswetenschappen",
+	"health-sciences_tag": "Geneeskunde",
+	"earth-sciences_tag": "Aardwetenschappen",
+	"technology_tag": "Technologie"
+}
