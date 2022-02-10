@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.urls import reverse, reverse_lazy
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
@@ -13,6 +13,7 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
+from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, User
 from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
@@ -456,8 +457,11 @@ class PartnerSuggestionView(FormView):
 
         context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
 
+        user_qs = User.objects.select_related("editor")
         all_suggestions = (
             Suggestion.objects.all()
+            .prefetch_related(Prefetch("author", queryset=user_qs))
+            .prefetch_related("upvoted_users")
             .annotate(total_upvoted_users=Count("upvoted_users"))
             .order_by("-total_upvoted_users")
         )
@@ -466,6 +470,17 @@ class PartnerSuggestionView(FormView):
 
         else:
             context["all_suggestions"] = None
+
+        # NOTE: Checking if a user is a coordinator or a superuser from the view.
+        # Not using the coordinators_only template filter because of performance
+        # issues
+        user = self.request.user
+        coordinators = get_coordinators()
+
+        if coordinators in user.groups.all() or user.is_superuser:
+            context["user_is_coordinator"] = True
+        else:
+            context["user_is_coordinator"] = False
 
         return context
 
