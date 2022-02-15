@@ -64,7 +64,7 @@ class StylableSubmit(BaseInput):
 
     def __init__(self, *args, **kwargs):
         self.field_classes = ""
-        super(StylableSubmit, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class BaseApplicationForm(forms.Form):
@@ -75,13 +75,10 @@ class BaseApplicationForm(forms.Form):
     Expected dict format:
         {
             'user': [list, of, required, user, data, fields],
-            'partner_1': [list, of, required, fields, for, partner, 1],
-            'partner_2': [list, of, required, fields, for, partner, 2],
-            (additional partners as needed)
+            'partner_1': [list, of, required, fields, for, partner]
         }
 
-    'user' is mandatory. 'partner_1' is mandatory. Additional partners are
-    optional.
+    'user' is mandatory. 'partner_1' is mandatory.
 
     See https://django-crispy-forms.readthedocs.org/ for information on form
     layout.
@@ -95,7 +92,7 @@ class BaseApplicationForm(forms.Form):
         except KeyError:
             pass
 
-        super(BaseApplicationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
         self._initialize_form_helper()
@@ -298,7 +295,7 @@ class ApplicationAutocomplete(forms.ModelForm):
         }
 
     def __init__(self, user=None, *args, **kwargs):
-        super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Make sure that we aren't leaking info via our form choices.
         if user.is_superuser:
