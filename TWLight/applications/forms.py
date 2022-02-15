@@ -31,6 +31,7 @@ import logging
 import re
 
 from django import forms
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
@@ -87,10 +88,6 @@ class BaseApplicationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self._validate_parameters(**kwargs)
         self.field_params = kwargs.pop("field_params")
-        try:
-            self.user = kwargs.pop("requested_user")
-        except KeyError:
-            pass
 
         super().__init__(*args, **kwargs)
 
@@ -102,7 +99,8 @@ class BaseApplicationForm(forms.Form):
         user_data = self.field_params.pop("user")
         self._add_user_data_subform(user_data)
 
-        # For each partner, build a partner data section of the form.
+        # Build a partner data section of the form.
+        # Since we have popped the user key, only the partner key remains in field_params
         for partner in self.field_params:
             self._add_partner_data_subform(partner)
 
@@ -122,19 +120,11 @@ class BaseApplicationForm(forms.Form):
 
     def _get_partner_object(self, partner):
         # Extract the number component of (e.g.) 'partner_1'.
-        try:
-            partner_id = partner[8:]
+        partner_id = partner[8:]
+        # Verify that it is the ID number of a real partner.
+        partner = get_object_or_404(Partner, id=partner_id)
 
-            # Verify that it is the ID number of a real partner.
-            partner = Partner.objects.get(id=partner_id)
-
-            return partner
-        except Partner.DoesNotExist:
-            logger.exception(
-                "BaseApplicationForm received a partner ID that "
-                "did not match any partner in the database"
-            )
-            raise
+        return partner
 
     def _validate_parameters(self, **kwargs):
         """
@@ -160,8 +150,8 @@ class BaseApplicationForm(forms.Form):
             raise
 
         try:
-            # We should have 'user' plus at least one partner in the keys.
-            assert len(list(field_params.keys())) >= 2
+            # We should have 'user' plus one partner in the keys.
+            assert len(list(field_params.keys())) == 2
         except AssertionError:
             logger.exception(
                 "Tried to instantiate a BaseApplicationForm but "
@@ -211,15 +201,6 @@ class BaseApplicationForm(forms.Form):
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]
-                # Show which partner wants which personal data if applying
-                # for more than one.
-                if len(self.field_params) > 1:
-                    # fmt: off
-                    # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-                    self.fields[datum].help_text = _("Requested by: {partner_list}").format(
-                        partner_list=", ".join(user_data[datum])
-                    ),
-                    # fmt: on
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)

@@ -19,11 +19,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.core.exceptions import (
-    PermissionDenied,
-    ObjectDoesNotExist,
-    FieldDoesNotExist,
-)
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse, reverse_lazy
 from django.db import IntegrityError
@@ -206,9 +202,9 @@ class SubmitSingleApplicationView(
 
         field_params["user"] = user_fields
 
-        key = "partner_{id}".format(id=partner.id)
-        fields = self._get_partner_fields(partner)
-        field_params[key] = fields
+        partner_key = "partner_{id}".format(id=partner.id)
+        partner_fields = self._get_partner_fields(partner)
+        field_params[partner_key] = partner_fields
 
         kwargs["field_params"] = field_params
 
@@ -338,6 +334,7 @@ class SubmitSingleApplicationView(
 
     def _get_partner(self):
         partner_id = self.kwargs["pk"]
+        self.request.session[PARTNERS_SESSION_KEY] = partner_id
         partner = get_object_or_404(Partner, id=self.kwargs["pk"])
 
         return partner
@@ -345,6 +342,10 @@ class SubmitSingleApplicationView(
     def _check_duplicate_applications(self):
         """
         Disallow a user from applying to the same partner more than once
+        Returns
+        -------
+        bool
+            A boolean value to indicate whether an application is a duplicate or not
         """
         partner = self._get_partner()
         # if partner is collection or has specific title then
