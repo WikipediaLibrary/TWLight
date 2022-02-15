@@ -202,9 +202,9 @@ class SubmitSingleApplicationView(
 
         field_params["user"] = user_fields
 
-        partner_key = "partner_{id}".format(id=partner.id)
         partner_fields = self._get_partner_fields(partner)
-        field_params[partner_key] = partner_fields
+        field_params["partner"] = partner_fields
+        field_params["partner_id"] = partner.id
 
         kwargs["field_params"] = field_params
 
@@ -234,55 +234,54 @@ class SubmitSingleApplicationView(
 
         editor.save()
 
-        # Create an Application for each partner resource. Remember that the
-        # partner_id parameters were added as an attribute on the form during
+        # Create an Application for the partner resource. Remember that the
+        # partner parameters were added as an attribute on the form during
         # form __init__, so we have them available now; no need to re-process
         # them out of our session data. They were also validated during form
         # instantiation; we rely on that validation here.
         partner_fields = PARTNER_FORM_BASE_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS
-        for partner in form.field_params:
-            partner_id = partner[8:]
-            partner_obj = Partner.objects.get(id=partner_id)
+        partner_id = form.field_params["partner_id"]
+        partner_obj = Partner.objects.get(id=partner_id)
 
-            # We exclude Bundle partners from the apply page, but if they are
-            # here somehow, we can be reasonably certain something has gone awry.
-            if partner_obj.authorization_method == Partner.BUNDLE:
-                raise PermissionDenied
+        # We exclude Bundle partners from the apply page, but if they are
+        # here somehow, we can be reasonably certain something has gone awry.
+        if partner_obj.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
 
-            app = Application()
-            app.editor = self.request.user.editor
-            app.partner = partner_obj
+        app = Application()
+        app.editor = self.request.user.editor
+        app.partner = partner_obj
 
-            # Application created for a WAITLISTED Partners
-            # should have waitlist_status as True
-            if app.partner.status == Partner.WAITLIST:
-                app.waitlist_status = True
+        # Application created for a WAITLISTED Partners
+        # should have waitlist_status as True
+        if app.partner.status == Partner.WAITLIST:
+            app.waitlist_status = True
 
-            # Status will be set to PENDING by default.
+        # Status will be set to PENDING by default.
 
-            for field in partner_fields:
-                label = "{partner}_{field}".format(partner=partner, field=field)
+        for field in partner_fields:
+            label = "partner_{field}".format(field=field)
 
-                try:
-                    data = form.cleaned_data[label]
-                except KeyError:
-                    # Not all forms require all fields, and that's OK. However,
-                    # we do need to make sure to clear out the value of data
-                    # here, or we'll have carried it over from the previous
-                    # time through the loop, and who knows what sort of junk
-                    # data we'll write into the Application.
-                    data = None
+            try:
+                data = form.cleaned_data[label]
+            except KeyError:
+                # Not all forms require all fields, and that's OK. However,
+                # we do need to make sure to clear out the value of data
+                # here, or we'll have carried it over from the previous
+                # time through the loop, and who knows what sort of junk
+                # data we'll write into the Application.
+                data = None
 
-                if data == "[deleted]":
-                    # Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
-                    fail_msg = _("This field consists only of restricted text.")
-                    form.add_error(label, fail_msg)
-                    return self.form_invalid(form)
+            if data == "[deleted]":
+                # Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
+                fail_msg = _("This field consists only of restricted text.")
+                form.add_error(label, fail_msg)
+                return self.form_invalid(form)
 
-                if data:
-                    setattr(app, field, data)
+            if data:
+                setattr(app, field, data)
 
-            app.save()
+        app.save()
 
         # And clean up the session so as not to confuse future applications.
         del self.request.session[PARTNERS_SESSION_KEY]
