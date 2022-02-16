@@ -203,6 +203,40 @@ def more_applications_than_accounts_available(app):
     return False
 
 
+def get_application_field_params_json_schema():
+    """
+    JSON Schema for the field_params object that will be used to create the form
+    for the application
+    """
+    JSON_SCHEMA_FIELD_PARAMS = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+            "partner": {
+                "$id": "#/properties/partner",
+                "type": "array",
+                "items": {
+                    "$id": "#/properties/partner/items",
+                    "type": "string",
+                    "examples": ["specific_title", "agreement_with_terms_of_use"],
+                },
+            },
+            "partner_id": {
+                "$id": "#/properties/partner_id",
+                "type": "number",
+            },
+            "user": {
+                "$id": "#/properties/user",
+                "type": "object",
+            },
+        },
+        "additionalProperties": False,
+        "required": ["partner", "partner_id", "user"],
+    }
+
+    return JSON_SCHEMA_FIELD_PARAMS
+
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 """

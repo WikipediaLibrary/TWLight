@@ -28,9 +28,13 @@ import logging
 import re
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext as _
+
+from jsonschema import validate
+from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
@@ -44,6 +48,7 @@ from .helpers import (
     FIELD_LABELS,
     AGREEMENT_WITH_TERMS_OF_USE,
     ACCOUNT_EMAIL,
+    get_application_field_params_json_schema,
 )
 from .models import Application
 
@@ -73,10 +78,11 @@ class BaseApplicationForm(forms.Form):
     Expected dict format:
         {
             'user': [list, of, required, user, data, fields],
-            'partner': [list, of, required, fields, for, partner]
+            'partner': [list, of, required, fields, for, partner],
+            'partner_id': n
         }
 
-    'user' is mandatory. 'partner' is mandatory.
+    'user' is mandatory. 'partner' is mandatory. 'partner_id' is mandatory
 
     See https://django-crispy-forms.readthedocs.org/ for information on form
     layout.
@@ -127,51 +133,14 @@ class BaseApplicationForm(forms.Form):
         Ensure that parameters have been passed in and match the format
         specified in the docstring.
         """
+        field_params = kwargs["field_params"]
         try:
-            field_params = kwargs["field_params"]
-        except KeyError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "did not have field_params"
+            validate(
+                instance=field_params,
+                schema=get_application_field_params_json_schema(),
             )
-            raise
-
-        try:
-            assert "user" in field_params
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was no user parameter in field_params"
-            )
-            raise
-
-        try:
-            # We should have one user key, one partner key and the partner id key in the keys.
-            assert len(list(field_params.keys())) == 3
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was not enough information in field_params"
-            )
-            raise
-
-        try:
-            assert "partner" in field_params
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was no partner parameter in field_params"
-            )
-            raise
-
-        try:
-            assert "partner_id" in field_params
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was no partner_id parameter in field_params"
-            )
-            raise
+        except JSONSchemaValidationError:
+            raise ValidationError("The field_params dictionary is not valid")
 
     def _validate_user_data(self, user_data):
         try:
