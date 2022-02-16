@@ -130,9 +130,10 @@ class SubmitSingleApplicationView(
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
     def dispatch(self, request, *args, **kwargs):
-        if self._get_partner().authorization_method == Partner.BUNDLE:
+        partner = self._get_partner()
+        if partner.authorization_method == Partner.BUNDLE:
             raise PermissionDenied
-        elif self._get_partner().status == Partner.WAITLIST:
+        elif partner.status == Partner.WAITLIST:
             messages.add_message(
                 request,
                 messages.WARNING,
@@ -142,10 +143,10 @@ class SubmitSingleApplicationView(
                 # fmt: on
             )
 
-        if self._check_duplicate_applications():
+        if self._check_duplicate_applications(partner):
             # if duplicate applications exists then
             # redirect user to specific page with error message
-            url, message = self._check_duplicate_applications()
+            url, message = self._check_duplicate_applications(partner)
             messages.add_message(request, messages.ERROR, message)
             return HttpResponseRedirect(url, message)
 
@@ -241,7 +242,7 @@ class SubmitSingleApplicationView(
         # instantiation; we rely on that validation here.
         partner_fields = PARTNER_FORM_BASE_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS
         partner_id = form.field_params["partner_id"]
-        partner_obj = Partner.objects.get(id=partner_id)
+        partner_obj = self._get_partner()
 
         # We exclude Bundle partners from the apply page, but if they are
         # here somehow, we can be reasonably certain something has gone awry.
@@ -338,15 +339,20 @@ class SubmitSingleApplicationView(
 
         return partner
 
-    def _check_duplicate_applications(self):
+    def _check_duplicate_applications(self, partner):
         """
         Disallow a user from applying to the same partner more than once
+
+        Parameters
+        ----------
+        partner : Partner
+            Partner object
+
         Returns
         -------
         bool
             A boolean value to indicate whether an application is a duplicate or not
         """
-        partner = self._get_partner()
         # if partner is collection or has specific title then
         # multiple applications are allowed
         if partner.specific_title:
