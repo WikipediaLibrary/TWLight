@@ -62,7 +62,7 @@ class CoordinatorsOnly(object):
             )
             raise PermissionDenied
 
-        return super(CoordinatorsOnly, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_partner_coordinator(obj, user):
@@ -114,7 +114,7 @@ class PartnerCoordinatorOnly(BaseObj):
             )
             raise PermissionDenied
 
-        return super(PartnerCoordinatorOnly, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_self_only(obj, user):
@@ -148,7 +148,7 @@ class SelfOnly(BaseObj):
             )
             raise PermissionDenied
 
-        return super(SelfOnly, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_partner_coordinator_or_self(obj, user):
@@ -176,7 +176,7 @@ class PartnerCoordinatorOrSelf(BaseObj):
             )
             raise PermissionDenied
 
-        return super(PartnerCoordinatorOrSelf, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_editors_only(user):
@@ -203,7 +203,7 @@ class EditorsOnly(object):
             )
             raise PermissionDenied
 
-        return super(EditorsOnly, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class EligibleEditorsOnly(object):
@@ -270,7 +270,7 @@ class ToURequired(object):
             ).geturl()
             return HttpResponseRedirect(new_url)
 
-        return super(ToURequired, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_email_required(user):
@@ -308,7 +308,7 @@ class EmailRequired(object):
             ).geturl()
             return HttpResponseRedirect(new_url)
 
-        return super(EmailRequired, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_data_processing_required(user):
@@ -326,7 +326,7 @@ class DataProcessingRequired(object):
             # have the generic data processing notice.
             raise PermissionDenied
 
-        return super(DataProcessingRequired, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 def test_func_not_deleted(user):
@@ -344,7 +344,7 @@ class NotDeleted(BaseObj):
         if test_func_not_deleted(self.get_object()):
             raise Http404
 
-        return super(NotDeleted, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class DedupMessageMixin(object):
@@ -358,4 +358,4 @@ class DedupMessageMixin(object):
         for m in messages:
             if m.message == message:
                 return
-        return super(DedupMessageMixin, self).add(level, message, extra_tags)
+        return super().add(level, message, extra_tags)

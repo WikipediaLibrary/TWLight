@@ -25,6 +25,7 @@ from django.urls import reverse, reverse_lazy
 from django.db import IntegrityError
 from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, Http404
+from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
@@ -119,7 +120,7 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
         return partner_qs
 
 
-class _BaseSubmitApplicationView(
+class SubmitSingleApplicationView(
     EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView
 ):
 
@@ -128,23 +129,65 @@ class _BaseSubmitApplicationView(
 
     # ~~~~~~~~~~~~~~~~~ Overrides to built-in Django functions ~~~~~~~~~~~~~~~~#
 
+    def dispatch(self, request, *args, **kwargs):
+        partner = self._get_partner()
+        if partner.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
+        elif partner.status == Partner.WAITLIST:
+            messages.add_message(
+                request,
+                messages.WARNING,
+                # fmt: off
+                # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
+                _("This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."),
+                # fmt: on
+            )
+
+        if self._check_duplicate_applications(partner):
+            # if duplicate applications exists then
+            # redirect user to specific page with error message
+            url, message = self._check_duplicate_applications(partner)
+            messages.add_message(request, messages.ERROR, message)
+            return HttpResponseRedirect(url, message)
+
+        # Non-eligible users should redirect to my library page
+        if not editor_bundle_eligible(self.request.user.editor):
+            return HttpResponseRedirect(reverse("users:my_library"))
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            # fmt: off
+            # Translators: This message is shown to users once they've successfully submitted their application for review.
+            _("Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status.")
+            .format(
+                applications_url=reverse_lazy(
+                    "users:my_applications",
+                    kwargs={"pk": self.request.user.editor.pk},
+                )
+            ),
+            # fmt: on
+        )
+        user_home = self._get_partner().get_absolute_url()
+        return user_home
+
     def get_form(self, form_class=None):
         """
         We will dynamically construct a form which harvests exactly the
-        information needed for editors to request access to their desired set of
-        partner resources. (Most of the actual work of form construction happens
+        information needed for editors to request access to their desired collection.
+        (Most of the actual work of form construction happens
         in applications/forms.py. This view figures out what data to pass to
-        the base form's constructor: which information the partners in this
-        application require.)
+        the base form's constructor: which information the partner in this
+        application requires.)
 
         In particular:
         * We don't ask for information that we can harvest from their user
           profile.
-        * We will ask for optional information if and only if any of the
-          requested partners require it.
-        * We will ask for optional information once if it is the same for all
-          resources (e.g. full name), and once per partner if it differs (e.g.
-          specific title requested).
+        * We will ask for optional information if and only if the
+          requested partner requires it.
 
         The goal is to reduce the user's data entry burden to the minimum
         amount necessary for applications to be reviewed.
@@ -155,15 +198,14 @@ class _BaseSubmitApplicationView(
         kwargs = self.get_form_kwargs()
 
         field_params = {}
-        partners = self._get_partners()
-        user_fields = self._get_user_fields(partners)
+        partner = self._get_partner()
+        user_fields = self._get_user_fields(partner)
 
         field_params["user"] = user_fields
 
-        for partner in partners:
-            key = "partner_{id}".format(id=partner.id)
-            fields = self._get_partner_fields(partner)
-            field_params[key] = fields
+        partner_fields = self._get_partner_fields(partner)
+        field_params["partner"] = partner_fields
+        field_params["partner_id"] = partner.id
 
         kwargs["field_params"] = field_params
 
@@ -174,7 +216,7 @@ class _BaseSubmitApplicationView(
         If we already know the user's real name, etc., use that to prefill form
         fields.
         """
-        initial = super(_BaseSubmitApplicationView, self).get_initial()
+        initial = super().get_initial()
         editor = self.request.user.editor
 
         # Our form might not actually have all these fields, but that's OK;
@@ -193,60 +235,59 @@ class _BaseSubmitApplicationView(
 
         editor.save()
 
-        # Create an Application for each partner resource. Remember that the
-        # partner_id parameters were added as an attribute on the form during
+        # Create an Application for the partner resource. Remember that the
+        # partner parameters were added as an attribute on the form during
         # form __init__, so we have them available now; no need to re-process
         # them out of our session data. They were also validated during form
         # instantiation; we rely on that validation here.
         partner_fields = PARTNER_FORM_BASE_FIELDS + PARTNER_FORM_OPTIONAL_FIELDS
-        for partner in form.field_params:
-            partner_id = partner[8:]
-            partner_obj = Partner.objects.get(id=partner_id)
+        partner_id = form.field_params["partner_id"]
+        partner_obj = self._get_partner()
 
-            # We exclude Bundle partners from the apply page, but if they are
-            # here somehow, we can be reasonably certain something has gone awry.
-            if partner_obj.authorization_method == Partner.BUNDLE:
-                raise PermissionDenied
+        # We exclude Bundle partners from the apply page, but if they are
+        # here somehow, we can be reasonably certain something has gone awry.
+        if partner_obj.authorization_method == Partner.BUNDLE:
+            raise PermissionDenied
 
-            app = Application()
-            app.editor = self.request.user.editor
-            app.partner = partner_obj
+        app = Application()
+        app.editor = self.request.user.editor
+        app.partner = partner_obj
 
-            # Application created for a WAITLISTED Partners
-            # should have waitlist_status as True
-            if app.partner.status == Partner.WAITLIST:
-                app.waitlist_status = True
+        # Application created for a WAITLISTED Partners
+        # should have waitlist_status as True
+        if app.partner.status == Partner.WAITLIST:
+            app.waitlist_status = True
 
-            # Status will be set to PENDING by default.
+        # Status will be set to PENDING by default.
 
-            for field in partner_fields:
-                label = "{partner}_{field}".format(partner=partner, field=field)
+        for field in partner_fields:
+            label = "partner_{field}".format(field=field)
 
-                try:
-                    data = form.cleaned_data[label]
-                except KeyError:
-                    # Not all forms require all fields, and that's OK. However,
-                    # we do need to make sure to clear out the value of data
-                    # here, or we'll have carried it over from the previous
-                    # time through the loop, and who knows what sort of junk
-                    # data we'll write into the Application.
-                    data = None
+            try:
+                data = form.cleaned_data[label]
+            except KeyError:
+                # Not all forms require all fields, and that's OK. However,
+                # we do need to make sure to clear out the value of data
+                # here, or we'll have carried it over from the previous
+                # time through the loop, and who knows what sort of junk
+                # data we'll write into the Application.
+                data = None
 
-                if data == "[deleted]":
-                    # Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
-                    fail_msg = _("This field consists only of restricted text.")
-                    form.add_error(label, fail_msg)
-                    return self.form_invalid(form)
+            if data == "[deleted]":
+                # Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
+                fail_msg = _("This field consists only of restricted text.")
+                form.add_error(label, fail_msg)
+                return self.form_invalid(form)
 
-                if data:
-                    setattr(app, field, data)
+            if data:
+                setattr(app, field, data)
 
-            app.save()
+        app.save()
 
         # And clean up the session so as not to confuse future applications.
         del self.request.session[PARTNERS_SESSION_KEY]
 
-        return super(_BaseSubmitApplicationView, self).form_valid(form)
+        return super().form_valid(form)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Local functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
@@ -254,102 +295,64 @@ class _BaseSubmitApplicationView(
         """
         Return a list of the partner-specific data fields required by the given
         Partner.
+
+        Parameters
+        ----------
+        partner : Partner
+            Partner object
+
+        Returns
+        -------
+        list
+            An array of field names that are required in the application form
         """
         return [
             field for field in PARTNER_FORM_OPTIONAL_FIELDS if getattr(partner, field)
         ]
 
-    def _get_user_fields(self, partners=None):
+    def _get_user_fields(self, partner):
         """
-        Return a dict of user-specific data fields required by at least one
-        Partner to whom the user is requesting access, with a list of
-        partners requesting that data.
-        """
-        if not partners:
-            return None
+        Return a dict of user-specific data fields required by one Partner to whom
+        the user is requesting access.
 
+        Parameters
+        ----------
+        partner : Partner
+            Partner object
+
+        Returns
+        -------
+        dict
+            A dictionary with the fields that are required
+        """
         needed_fields = {}
         for field in USER_FORM_FIELDS:
-            query = {"{field}".format(field=field): True}
-            partners_queried = partners.filter(**query)
-            if partners_queried.count():
-                requesting_partners = partners_queried.distinct()
-                needed_fields[field] = [x.__str__() for x in partners_queried]
+            if getattr(partner, field):  # Will be True if required by Partner.
+                needed_fields[field] = True
 
         return needed_fields
 
-
-class SubmitSingleApplicationView(_BaseSubmitApplicationView):
-    def dispatch(self, request, *args, **kwargs):
-        if self._get_partners()[0].authorization_method == Partner.BUNDLE:
-            raise PermissionDenied
-        elif self._get_partners()[0].status == Partner.WAITLIST:
-            messages.add_message(
-                request,
-                messages.WARNING,
-                # fmt: off
-                # Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-                _("This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."),
-                # fmt: on
-            )
-
-        if self._check_duplicate_applications():
-            # if duplicate applications exists then
-            # redirect user to specific page with error message
-            url, message = self._check_duplicate_applications()
-            messages.add_message(request, messages.ERROR, message)
-            return HttpResponseRedirect(url, message)
-
-        # Non-eligible users should redirect to my library page
-        if not editor_bundle_eligible(self.request.user.editor):
-            return HttpResponseRedirect(reverse("users:my_library"))
-
-        return super(SubmitSingleApplicationView, self).dispatch(
-            request, *args, **kwargs
-        )
-
-    def get_success_url(self):
-        messages.add_message(
-            self.request,
-            messages.SUCCESS,
-            # fmt: off
-            # Translators: This message is shown to users once they've successfully submitted their application for review.
-            _("Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status.")
-            .format(
-                applications_url=reverse_lazy(
-                    "users:my_applications",
-                    kwargs={"pk": self.request.user.editor.pk},
-                )
-            ),
-            # fmt: on
-        )
-        user_home = self._get_partners()[0].get_absolute_url()
-        return user_home
-
-    def _get_partners(self):
+    def _get_partner(self):
         partner_id = self.kwargs["pk"]
-
         self.request.session[PARTNERS_SESSION_KEY] = partner_id
+        partner = get_object_or_404(Partner, id=self.kwargs["pk"])
 
-        partners = Partner.objects.filter(id=partner_id)
+        return partner
 
-        if not partners:
-            raise Http404("No partner matches the given query")
-        try:
-            assert partners.count() == 1
-        except AssertionError:
-            logger.exception(
-                "Expected 1 partner, got {count}".format(count=partners.count())
-            )
-            raise
-
-        return partners
-
-    def _check_duplicate_applications(self):
+    def _check_duplicate_applications(self, partner):
         """
         Disallow a user from applying to the same partner more than once
+
+        Parameters
+        ----------
+        partner : Partner
+            Partner object
+
+        Returns
+        -------
+        bool
+            A boolean value to indicate whether an application is a duplicate or not
         """
-        partner = self._get_partners()[0]
         # if partner is collection or has specific title then
         # multiple applications are allowed
         if partner.specific_title:

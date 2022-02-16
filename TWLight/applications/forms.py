@@ -3,11 +3,8 @@ This forms.py contains base forms that applications/views.py will use to
 generate the actual forms filled in by users in making requests for partner
 content.
 
-For usability reasons, we only want users to have to fill in one form at a time
-(even if they are requesting access to multiple partners' resources), and we
-only want to ask them once for any piece of data even if multiple partners
-require it, and we *don't* want to ask them for data that *isn't* required by
-any of the partners in their set.
+For usability reasons,  we only want to ask users once for any piece of data,
+and we *don't* want to ask them for data that *isn't* required by the partner.
 
 This means that the actual form we present to users must be generated
 dynamically; we cannot hardcode it here. What we have here instead is a base
@@ -31,8 +28,13 @@ import logging
 import re
 
 from django import forms
+from django.core.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext as _
+
+from jsonschema import validate
+from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 
 from TWLight.resources.models import Partner
 from TWLight.users.groups import get_coordinators
@@ -46,6 +48,7 @@ from .helpers import (
     FIELD_LABELS,
     AGREEMENT_WITH_TERMS_OF_USE,
     ACCOUNT_EMAIL,
+    get_application_field_params_json_schema,
 )
 from .models import Application
 
@@ -64,7 +67,7 @@ class StylableSubmit(BaseInput):
 
     def __init__(self, *args, **kwargs):
         self.field_classes = ""
-        super(StylableSubmit, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class BaseApplicationForm(forms.Form):
@@ -75,13 +78,11 @@ class BaseApplicationForm(forms.Form):
     Expected dict format:
         {
             'user': [list, of, required, user, data, fields],
-            'partner_1': [list, of, required, fields, for, partner, 1],
-            'partner_2': [list, of, required, fields, for, partner, 2],
-            (additional partners as needed)
+            'partner': [list, of, required, fields, for, partner],
+            'partner_id': n
         }
 
-    'user' is mandatory. 'partner_1' is mandatory. Additional partners are
-    optional.
+    'user' is mandatory. 'partner' is mandatory. 'partner_id' is mandatory
 
     See https://django-crispy-forms.readthedocs.org/ for information on form
     layout.
@@ -90,12 +91,8 @@ class BaseApplicationForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self._validate_parameters(**kwargs)
         self.field_params = kwargs.pop("field_params")
-        try:
-            self.user = kwargs.pop("requested_user")
-        except KeyError:
-            pass
 
-        super(BaseApplicationForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
         self._initialize_form_helper()
@@ -105,9 +102,11 @@ class BaseApplicationForm(forms.Form):
         user_data = self.field_params.pop("user")
         self._add_user_data_subform(user_data)
 
-        # For each partner, build a partner data section of the form.
-        for partner in self.field_params:
-            self._add_partner_data_subform(partner)
+        # Build a partner data section of the form.
+        # Since we have popped the user key, only the partner key remains in field_params
+        partner_data = self.field_params["partner"]
+        partner_id = self.field_params["partner_id"]
+        self._add_partner_data_subform(partner_data, partner_id)
 
         # Make sure to align any checkbox inputs with other field types
         self.helper.filter_by_widget(forms.CheckboxInput).wrap(
@@ -123,67 +122,25 @@ class BaseApplicationForm(forms.Form):
             )
         )
 
-    def _get_partner_object(self, partner):
-        # Extract the number component of (e.g.) 'partner_1'.
-        try:
-            partner_id = partner[8:]
+    def _get_partner_object(self, partner_id):
+        # Verify that it is the ID number of a real partner.
+        partner = get_object_or_404(Partner, id=partner_id)
 
-            # Verify that it is the ID number of a real partner.
-            partner = Partner.objects.get(id=partner_id)
-
-            return partner
-        except Partner.DoesNotExist:
-            logger.exception(
-                "BaseApplicationForm received a partner ID that "
-                "did not match any partner in the database"
-            )
-            raise
+        return partner
 
     def _validate_parameters(self, **kwargs):
         """
         Ensure that parameters have been passed in and match the format
         specified in the docstring.
         """
+        field_params = kwargs["field_params"]
         try:
-            field_params = kwargs["field_params"]
-        except KeyError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "did not have field_params"
+            validate(
+                instance=field_params,
+                schema=get_application_field_params_json_schema(),
             )
-            raise
-
-        try:
-            assert "user" in field_params
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was no user parameter in field_params"
-            )
-            raise
-
-        try:
-            # We should have 'user' plus at least one partner in the keys.
-            assert len(list(field_params.keys())) >= 2
-        except AssertionError:
-            logger.exception(
-                "Tried to instantiate a BaseApplicationForm but "
-                "there was not enough information in field_params"
-            )
-            raise
-
-        expected = re.compile(r"partner_\d+")
-
-        for key in list(field_params.keys()):
-            # All keys which are not the user data should be partner data.
-            if key != "user":
-                try:
-                    assert expected.match(key)
-                except AssertionError:
-                    logger.exception(
-                        "Tried to instantiate a BaseApplicationForm but "
-                        "there was a key that did not match any expected values"
-                    )
+        except JSONSchemaValidationError:
+            raise ValidationError("The field_params dictionary is not valid")
 
     def _validate_user_data(self, user_data):
         try:
@@ -214,15 +171,6 @@ class BaseApplicationForm(forms.Form):
             for datum in user_data:
                 self.fields[datum] = FIELD_TYPES[datum]
                 self.fields[datum].label = FIELD_LABELS[datum]
-                # Show which partner wants which personal data if applying
-                # for more than one.
-                if len(self.field_params) > 1:
-                    # fmt: off
-                    # Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-                    self.fields[datum].help_text = _("Requested by: {partner_list}").format(
-                        partner_list=", ".join(user_data[datum])
-                    ),
-                    # fmt: on
                 user_data_layout.append(datum)
 
             self.helper.layout.append(user_data_layout)
@@ -234,9 +182,8 @@ class BaseApplicationForm(forms.Form):
             # fmt: on
             self.helper.layout.append(HTML(disclaimer_html))
 
-    def _add_partner_data_subform(self, partner):
-        partner_data = self.field_params[partner]
-        partner_object = self._get_partner_object(partner)
+    def _add_partner_data_subform(self, partner_data, partner_id):
+        partner_object = self._get_partner_object(partner_id)
         partner_layout = Fieldset(
             # Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
             _("Your application to {partner}").format(partner=partner_object)
@@ -250,10 +197,8 @@ class BaseApplicationForm(forms.Form):
 
         if all_partner_data:
             for datum in all_partner_data:
-                # This will yield fields with names like 'partner_1_occupation'.
-                # This will let us tell during form processing which fields
-                # belong to which partners.
-                field_name = "{partner}_{datum}".format(partner=partner, datum=datum)
+                # This will yield fields with names like 'partner_occupation'
+                field_name = "partner_{datum}".format(datum=datum)
                 self.fields[field_name] = FIELD_TYPES[datum]
                 self.fields[field_name].label = FIELD_LABELS[datum]
 
@@ -298,7 +243,7 @@ class ApplicationAutocomplete(forms.ModelForm):
         }
 
     def __init__(self, user=None, *args, **kwargs):
-        super(ApplicationAutocomplete, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         # Make sure that we aren't leaking info via our form choices.
         if user.is_superuser:
