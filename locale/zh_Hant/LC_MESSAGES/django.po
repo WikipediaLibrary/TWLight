@@ -18,7 +18,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-02-15 19:32+0000\n"
+"POT-Creation-Date: 2022-02-16 19:43+0000\n"
 "PO-Revision-Date: 2022-02-14 12:18:13+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.
 #. Translators: On the partner detail page, this text labels the button which users can click to create an application.
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access.
-#: TWLight/applications/forms.py:121
+#: TWLight/applications/forms.py:120
 #: TWLight/applications/templates/applications/request_for_application.html:65
 #: TWLight/applications/templates/applications/request_for_application.html:67
 #: TWLight/resources/templates/resources/partner_detail.html:58
@@ -43,18 +43,12 @@ msgid "Apply"
 msgstr "申請"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
-#: TWLight/applications/forms.py:213
+#: TWLight/applications/forms.py:170
 msgid "About you"
 msgstr "關於您"
 
-#. Translators: This text is shown in the application form under each piece of personal information requested. {partner_list} will be a list of 2 or more organisations that require this personal data, and should not be translated.
-#: TWLight/applications/forms.py:222
-#, python-brace-format
-msgid "Requested by: {partner_list}"
-msgstr "請求由：{partner_list}"
-
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
-#: TWLight/applications/forms.py:231
+#: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid ""
 "<p><small><i>Your personal data will be processed according to our <a "
@@ -64,44 +58,44 @@ msgstr ""
 "href='{terms_url}'>隱私方針</a>處理。</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
-#: TWLight/applications/forms.py:242
+#: TWLight/applications/forms.py:189
 #, python-brace-format
 msgid "Your application to {partner}"
 msgstr "您對 {partner} 的申請程序"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
-#: TWLight/applications/forms.py:275
+#: TWLight/applications/forms.py:220
 #, python-brace-format
 msgid "You must register at {url} before applying."
 msgstr "申請前您必須要在 <a href=\"{url}\">{url}</a> 註冊。"
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
-#: TWLight/applications/forms.py:349
+#: TWLight/applications/forms.py:294
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:11
 msgid "Username"
 msgstr "使用者名稱"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:351 TWLight/applications/helpers.py:93
+#: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:93
 msgid "Partner name"
 msgstr "合作夥伴名稱"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
-#: TWLight/applications/forms.py:367
+#: TWLight/applications/forms.py:312
 msgid "Renewal confirmation"
 msgstr "續辦確認"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:384 TWLight/applications/helpers.py:103
+#: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:103
 msgid "The email for your account on the partner's website"
 msgstr "您在合作夥伴網站上帳號的電子郵件"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:394 TWLight/applications/helpers.py:106
+#: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:106
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -366,7 +360,7 @@ msgstr "月"
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
 #: TWLight/applications/templates/applications/application_evaluation.html:102
-#: TWLight/applications/views.py:461 TWLight/applications/views.py:540
+#: TWLight/applications/views.py:464 TWLight/applications/views.py:543
 msgid "Partner"
 msgstr "合作夥伴"
 
@@ -839,14 +833,9 @@ msgstr "選擇代碼："
 msgid "There are no approved, unsent applications."
 msgstr "沒有已核准、尚未發送的申請程序。"
 
-#. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
-#: TWLight/applications/views.py:237
-msgid "This field consists only of restricted text."
-msgstr "此欄位僅由受限制的文字內容構成。"
-
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-#: TWLight/applications/views.py:292 TWLight/applications/views.py:1273
+#: TWLight/applications/views.py:142 TWLight/applications/views.py:1276
 msgid ""
 "This partner does not have any access grants available at this time. You may "
 "still apply for access; your application will be reviewed when access grants "
@@ -856,7 +845,7 @@ msgstr ""
 "可用取用授予時，才會進行審查。"
 
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
-#: TWLight/applications/views.py:317
+#: TWLight/applications/views.py:165
 #, python-brace-format
 msgid ""
 "Your application has been submitted for review. Head over to <a "
@@ -865,66 +854,71 @@ msgstr ""
 "您的申請程序已提交於審核。您可以在此頁面上查閱<a href='{applications_url}'我"
 "的申請程序</a>狀態。"
 
+#. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
+#: TWLight/applications/views.py:278
+msgid "This field consists only of restricted text."
+msgstr "此欄位僅由受限制的文字內容構成。"
+
 #. Translators: This message is shown to user when he tries to apply to same partner more than once
-#: TWLight/applications/views.py:371
+#: TWLight/applications/views.py:374
 msgid "You already have an application for this Partner."
 msgstr "您已有此合作夥伴的申請程序。"
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:459 TWLight/applications/views.py:538
+#: TWLight/applications/views.py:462 TWLight/applications/views.py:541
 msgid "Editor"
 msgstr "編輯者"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:584
+#: TWLight/applications/views.py:587
 msgid "Applications to review"
 msgstr "要審查的申請程序"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:625
+#: TWLight/applications/views.py:628
 #: TWLight/resources/templates/resources/partner_users.html:23
 msgid "Approved applications"
 msgstr "已核准的申請程序"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:651
+#: TWLight/applications/views.py:654
 msgid "Rejected applications"
 msgstr "已拒絕申請程序"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:685
+#: TWLight/applications/views.py:688
 msgid "Access grants up for renewal"
 msgstr "授予取用權限給有意續辦"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:711
+#: TWLight/applications/views.py:714
 #: TWLight/resources/templates/resources/partner_users.html:63
 msgid "Sent applications"
 msgstr "已發送申請程序"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
-#: TWLight/applications/views.py:746
+#: TWLight/applications/views.py:749
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
 msgstr "代理方法的合作夥伴為候補，無法核准申請程序。"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:770
+#: TWLight/applications/views.py:773
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
 msgstr "代理方法的合作夥伴為候補或是沒有可分配的帳號，無法核准申請程序。"
 
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
-#: TWLight/applications/views.py:793
+#: TWLight/applications/views.py:796
 msgid "You attempted to create a duplicate authorization."
 msgstr "您嘗試建立重複的授權。"
 
 #. Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
-#: TWLight/applications/views.py:847
+#: TWLight/applications/views.py:850
 #, python-brace-format
 msgid ""
 "This application cannot be modified since this partner is now part of our <a "
@@ -937,34 +931,34 @@ msgstr ""
 "問題歡迎<a href='{contact}'>聯絡我們</a>。"
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:863
+#: TWLight/applications/views.py:866
 msgid "Set application status"
 msgstr "設定申請程序狀態"
 
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
-#: TWLight/applications/views.py:881
+#: TWLight/applications/views.py:884
 msgid ""
 "There are more pending applications than available accounts. Your "
 "application might get waitlisted."
 msgstr "等待審核的申請多於可用的帳號數量，你的申請將被放入等待名單當中。"
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
-#: TWLight/applications/views.py:894
+#: TWLight/applications/views.py:897
 msgid "Status of INVALID applications cannot be changed."
 msgstr "不能更改無效狀態的申請程序。"
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:930
+#: TWLight/applications/views.py:933
 msgid "Please select at least one application."
 msgstr "請至少選擇一個申請程序。"
 
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
-#: TWLight/applications/views.py:1033
+#: TWLight/applications/views.py:1036
 msgid "Batch update of application(s) {} successful."
 msgstr "申請程序{}批量更新成功。"
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:1042
+#: TWLight/applications/views.py:1045
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -975,17 +969,17 @@ msgstr ""
 "用帳號不足，會按優先順序處理申請程序，且核准與可用帳號數相同的申請程序。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1182
+#: TWLight/applications/views.py:1185
 msgid "Error: Code used multiple times."
 msgstr "錯誤：代碼被分配給多名使用者。"
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1232
+#: TWLight/applications/views.py:1235
 msgid "All selected applications have been marked as sent."
 msgstr "所有選擇的申請程序被標記為已發送。"
 
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
-#: TWLight/applications/views.py:1263
+#: TWLight/applications/views.py:1266
 msgid ""
 "Cannot renew application at this time as partner is not available. Please "
 "check back later, or contact us for more information."
@@ -994,20 +988,20 @@ msgstr ""
 "得更多資訊。"
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
-#: TWLight/applications/views.py:1299
+#: TWLight/applications/views.py:1302
 #, python-brace-format
 msgid "Attempt to renew unapproved application #{pk} has been denied"
 msgstr "嘗試續辦未核准申請程序#{pk}已被拒絕"
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
-#: TWLight/applications/views.py:1371
+#: TWLight/applications/views.py:1374
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
 msgstr "此對象無法續辦。（這通常代表您已經有請求過且已續辦。）"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1381
+#: TWLight/applications/views.py:1384
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -3855,3 +3849,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Requested by: {partner_list}"
+#~ msgstr "請求由：{partner_list}"
