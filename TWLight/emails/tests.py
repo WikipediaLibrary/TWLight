@@ -14,7 +14,9 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.test import TestCase, RequestFactory
 
-from TWLight.applications.factories import ApplicationFactory
+from TWLight.applications.factories import (
+    ApplicationFactory,
+)
 from TWLight.applications.models import Application
 from TWLight.resources.factories import PartnerFactory
 from TWLight.resources.models import Partner
@@ -239,6 +241,17 @@ class ApplicationStatusTest(TestCase):
         app.status = Application.APPROVED
         app.save()
         self.assertTrue(mock_email.called)
+
+    def test_approval_does_not_call_email_for_applications_with_access_codes_partner(
+        self,
+    ):
+        partner_with_access_codes = PartnerFactory(authorization_method=Partner.CODES)
+        app_with_access_codes_partner = ApplicationFactory(
+            status=Application.PENDING, partner=partner_with_access_codes
+        )
+        app_with_access_codes_partner.status = Application.APPROVED
+        app_with_access_codes_partner.save()
+        self.assertEqual(len(mail.outbox), 0)
 
     @patch("TWLight.emails.tasks.send_approval_notification_email")
     def test_reapproval_does_not_call_email_function(self, mock_email):
