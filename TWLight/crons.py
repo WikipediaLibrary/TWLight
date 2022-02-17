@@ -2,6 +2,7 @@ from subprocess import check_output
 from django.conf import settings
 from django.core import management
 from django_cron import CronJobBase, Schedule
+from sentry_sdk import capture_exception
 
 WEEKLY = 10080
 DAILY = 1440
@@ -12,7 +13,10 @@ class SendCoordinatorRemindersCronJob(CronJobBase):
     code = "applications.send_coordinator_reminders"
 
     def do(self):
-        management.call_command("send_coordinator_reminders")
+        try:
+            management.call_command("send_coordinator_reminders")
+        except Exception as e:
+            capture_exception(e)
 
 
 class BackupCronJob(CronJobBase):
@@ -20,10 +24,13 @@ class BackupCronJob(CronJobBase):
     code = "backup"
 
     def do(self):
-        # Using check_output here because we want to log STDOUT.
-        # To avoid logging for commands with sensitive output, import and use
-        # subprocess.call instead of subprocess.check_output.
-        return check_output([settings.TWLIGHT_HOME + "/bin/twlight_backup.sh"])
+        try:
+            # Using check_output here because we want to log STDOUT.
+            # To avoid logging for commands with sensitive output, import and use
+            # subprocess.call instead of subprocess.check_output.
+            return check_output([settings.TWLIGHT_HOME + "/bin/twlight_backup.sh"])
+        except Exception as e:
+            capture_exception(e)
 
 
 class UserRenewalNoticeCronJob(CronJobBase):
@@ -31,7 +38,10 @@ class UserRenewalNoticeCronJob(CronJobBase):
     code = "users.user_renewal_notices"
 
     def do(self):
-        management.call_command("user_renewal_notice")
+        try:
+            management.call_command("user_renewal_notice")
+        except Exception as e:
+            capture_exception(e)
 
 
 class ProxyWaitlistDisableCronJob(CronJobBase):
@@ -39,7 +49,10 @@ class ProxyWaitlistDisableCronJob(CronJobBase):
     code = "resources.proxy_waitlist_disable"
 
     def do(self):
-        management.call_command("proxy_waitlist_disable")
+        try:
+            management.call_command("proxy_waitlist_disable")
+        except Exception as e:
+            capture_exception(e)
 
 
 class UserUpdateEligibilityCronJob(CronJobBase):
@@ -47,7 +60,10 @@ class UserUpdateEligibilityCronJob(CronJobBase):
     code = "users.user_update_eligibility"
 
     def do(self):
-        management.call_command("user_update_eligibility")
+        try:
+            management.call_command("user_update_eligibility")
+        except Exception as e:
+            capture_exception(e)
 
 
 class ClearSessions(CronJobBase):
@@ -55,4 +71,7 @@ class ClearSessions(CronJobBase):
     code = "django.contrib.sessions.clearsessions"
 
     def do(self):
-        management.call_command("clearsessions")
+        try:
+            management.call_command("clearsessions")
+        except Exception as e:
+            capture_exception(e)
