@@ -36,7 +36,11 @@ import urllib.request, urllib.error, urllib.parse
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.exceptions import SuspiciousOperation, ValidationError
+from django.core.exceptions import (
+    MultipleObjectsReturned,
+    SuspiciousOperation,
+    ValidationError,
+)
 from django.urls import reverse
 from django.db import models
 from django.db.models import Q
@@ -571,11 +575,18 @@ class Editor(models.Model):
         # Although we have multiple partners with the BUNDLE authorization
         # method, we should only ever find one or zero authorizations
         # for bundle partners.
-        return get_object_or_None(
-            Authorization.objects.filter(
-                user=self.user, partners__authorization_method=Partner.BUNDLE
-            ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
-        )
+        try:
+            return get_object_or_None(
+                Authorization.objects.filter(
+                    user=self.user, partners__authorization_method=Partner.BUNDLE
+                ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
+            )
+        except MultipleObjectsReturned:
+            logger.exception(
+                "{wp_username} has multiple bundle auths".format(
+                    wp_username=self.wp_username
+                )
+            )
 
     def update_bundle_authorization(self):
         """
