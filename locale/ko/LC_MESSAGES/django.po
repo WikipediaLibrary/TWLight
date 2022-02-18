@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-02-17 18:31+0000\n"
+"POT-Creation-Date: 2022-02-18 18:40+0000\n"
 "PO-Revision-Date: 2022-02-14 12:18:10+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2473,7 +2473,7 @@ msgid "Update email"
 msgstr "이메일 업데이트"
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:745
+#: TWLight/users/models.py:756
 #, fuzzy, python-brace-format
 #| msgid "Username"
 msgid "{wp_username}"
