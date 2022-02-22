@@ -86,7 +86,10 @@ class Command(BaseCommand):
         if options["wp_username"]:
             editors = editors.filter(wp_username=str(options["wp_username"]))
 
-        for editor in editors:
+        # Iterator reduces memory footprint for large querysets
+        for editor in editors.iterator():
+            # T296853: avoid stale editor data while looping through big sets.
+            editor.refresh_from_db()
             # `global_userinfo` data may be overridden.
             if options["global_userinfo"]:
                 global_userinfo = options["global_userinfo"]
