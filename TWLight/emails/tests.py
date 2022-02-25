@@ -570,6 +570,33 @@ class UserRenewalNoticeTest(TestCase):
         call_command("user_renewal_notice")
         self.assertEqual(len(mail.outbox), 3)
 
+    def test_user_renewal_notice_user_already_filed_renewal(self):
+        """
+        Per T300014, a user shouldn't get an email if they have already filed
+        for a renewal
+        """
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.PENDING
+        renewed_app.save()
+
+        # Email shouldn't be sent since a renewal request has already been made
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 0)
+
 
 class CoordinatorReminderEmailTest(TestCase):
     @classmethod
