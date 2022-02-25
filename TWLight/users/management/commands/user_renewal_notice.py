@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
+from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.db.models import Prefetch
 from django.urls import reverse
 
 from TWLight.users.signals import Notice
@@ -14,12 +16,17 @@ class Command(BaseCommand):
         # Get all authorization objects with an expiry date in the next
         # four weeks, for which we haven't yet sent a reminder email, and
         # exclude users who disabled these emails.
-        expiring_authorizations = Authorization.objects.filter(
-            date_expires__lt=datetime.today() + timedelta(weeks=2),
-            date_expires__gte=datetime.today(),
-            reminder_email_sent=False,
-            partners__isnull=False,
-        ).exclude(user__userprofile__send_renewal_notices=False)
+        user_qs = User.objects.prefetch_related("userprofile")
+        expiring_authorizations = (
+            Authorization.objects.prefetch_related(Prefetch("user", queryset=user_qs))
+            .filter(
+                date_expires__lt=datetime.today() + timedelta(weeks=2),
+                date_expires__gte=datetime.today(),
+                reminder_email_sent=False,
+                partners__isnull=False,
+            )
+            .exclude(user__userprofile__send_renewal_notices=False)
+        )
 
         for authorization_object in expiring_authorizations:
             Notice.user_renewal_notice.send(
