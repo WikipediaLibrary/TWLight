@@ -82,7 +82,8 @@ class PartnersFilterView(ListView):
 
         user = self.request.user
         if user.is_authenticated:
-            user = User.objects.select_related("editor").get(pk=self.request.user.pk)
+            user = User.objects.select_related(
+                "editor").get(pk=self.request.user.pk)
             context["user"] = user
             context["editor"] = user.editor
         partners_list = []
@@ -157,7 +158,8 @@ class PartnersDetailView(DetailView):
 
         # Obtaining translated partner description
         language_code = get_language()
-        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
+        partner_short_description_key = "{pk}_short_description".format(
+            pk=partner.pk)
         partner_description_key = "{pk}_description".format(pk=partner.pk)
         partner_descriptions = get_partner_description(
             language_code, partner_short_description_key, partner_description_key
@@ -181,7 +183,8 @@ class PartnersDetailView(DetailView):
             partner
         )
 
-        context["total_users"] = Authorization.objects.filter(partners=partner).count()
+        context["total_users"] = Authorization.objects.filter(
+            partners=partner).count()
 
         application_end_states = [
             Application.APPROVED,
@@ -388,7 +391,8 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
             # Set waitlist_status to True for all the applications
             # which are Pending or Under Discussion for this partner
             applications = Application.objects.filter(
-                partner=partner, status__in=[Application.PENDING, Application.QUESTION]
+                partner=partner, status__in=[
+                    Application.PENDING, Application.QUESTION]
             )
             for app in applications:
                 app.waitlist_status = True
@@ -439,7 +443,8 @@ class PartnerSuggestionView(FormView):
         # We could probably be factored out to a common place for DRYness.
         if "suggested_company_name" in self.request.GET:
             initial.update(
-                {"suggested_company_name": self.request.GET["suggested_company_name"]}
+                {"suggested_company_name":
+                    self.request.GET["suggested_company_name"]}
             )
         if "description" in self.request.GET:
             initial.update({"description": self.request.GET["description"]})
@@ -553,7 +558,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
     form_class = SuggestionMergeForm
     success_url = reverse_lazy("suggest")
 
-    def get_total_upvotes(self, suggestions):
+    def get_total_upvotes(self, suggestions, merged_suggestion):
         """
         This function merges upvoted users for merged suggestions.
 
@@ -569,7 +574,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
         The `queryset` of upvoted users
 
         """
-        total_upvoted_users = User.objects.none()
+        total_upvoted_users = merged_suggestion.upvoted_users.all()
         for suggestion in suggestions.all():
             total_upvoted_users |= suggestion.upvoted_users.all()
 
@@ -605,16 +610,21 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
 
         try:
             merged_suggestion = form.cleaned_data["suggestions_merged_into"]
-            suggestions = form.cleaned_data["suggestions_to_merge"]
+            suggestions_to_merge = Suggestion.objects.filter(
+                id__in=form.cleaned_data["suggestions_to_merge"].values_list(
+                    "id", flat=True
+                )
+            ).exclude(id=merged_suggestion.id)
             merged_suggestion.upvoted_users.add(
-                *self.get_total_upvotes(suggestions=suggestions)
+                *self.get_total_upvotes(
+                    suggestions=suggestions_to_merge,
+                    merged_suggestion=merged_suggestion,
+                )
             )
             merged_suggestion.save()
 
             # Old suggestions shall be spliced
-            Suggestion.objects.filter(
-                id__in=suggestions.values_list("id", flat=True)
-            ).exclude(id=merged_suggestion.id).delete()
+            suggestions_to_merge.delete()
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
