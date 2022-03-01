@@ -20,9 +20,9 @@ class Command(BaseCommand):
         # exclude users who disabled these emails and who have already filed
         # for a renewal.
         editor_qs = Editor.objects.select_related("user")
-        users_with_applications_for_renewal = (
+        applications_for_renewal = (
             Application.objects.prefetch_related(Prefetch("editor", queryset=editor_qs))
-            .values_list("editor__user__pk")
+            .values("editor__user__pk", "partner__pk")
             .filter(
                 ~Q(partner__authorization_method=Partner.BUNDLE),
                 status__in=[Application.PENDING, Application.QUESTION],
@@ -31,6 +31,7 @@ class Command(BaseCommand):
             )
             .order_by("-date_created")
         )
+
         user_qs = User.objects.select_related("userprofile")
         expiring_authorizations = (
             Authorization.objects.prefetch_related(Prefetch("user", queryset=user_qs))
@@ -41,10 +42,23 @@ class Command(BaseCommand):
                 partners__isnull=False,
             )
             .exclude(user__userprofile__send_renewal_notices=False)
-            .exclude(user__pk__in=users_with_applications_for_renewal)
         )
 
-        for authorization_object in expiring_authorizations:
+        # Create a list of authorizations that already have a renewal application
+        no_email_list = []
+        for application in applications_for_renewal:
+            no_email_list.append(
+                expiring_authorizations.values_list("pk").filter(
+                    partners=application["partner__pk"],
+                    user=application["editor__user__pk"],
+                )
+            )
+
+        # Iterate through all expiring authorizations except the ones that have
+        # a renewal
+        for authorization_object in expiring_authorizations.exclude(
+            pk__in=no_email_list
+        ):
             Notice.user_renewal_notice.send(
                 sender=self.__class__,
                 user_wp_username=authorization_object.user.editor.wp_username,
