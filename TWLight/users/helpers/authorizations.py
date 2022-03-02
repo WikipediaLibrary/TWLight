@@ -68,6 +68,24 @@ def create_resource_dict(authorization, partner):
     return resource_item
 
 
+def delete_duplicate_bundle_authorizations(authorizations):
+    """
+    Given a queryset of Authorization objects,
+    delete duplicate Bundle authorizations.
+    """
+    bundle_authorizations = authorizations.filter(
+        partners__authorization_method=Partner.BUNDLE
+    )
+    # Get a list of users with bundle auths
+    for user_id in bundle_authorizations.values_list("user_id"):
+        # get the distinct set of authorizations for the user
+        user_authorizations = bundle_authorizations.filter(user_id=user_id).distinct()
+        # There should be no more than one bundle auth per user, so slice the queryest to get any auths beyond that
+        for duplicate_authorization in user_authorizations[1:].iterator():
+            # Delete it
+            duplicate_authorization.delete()
+
+
 def sort_authorizations_into_resource_list(authorizations):
     """
     Given a queryset of Authorization objects, return a

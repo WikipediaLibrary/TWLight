@@ -581,11 +581,20 @@ class Editor(models.Model):
                     user=self.user, partners__authorization_method=Partner.BUNDLE
                 ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
             )
+        # There should only be one bundle auth per user. Log an exception if there are duplicates
         except MultipleObjectsReturned:
             logger.exception(
                 "{wp_username} has multiple bundle auths".format(
                     wp_username=self.wp_username
                 )
+            )
+            # Grab the first auth after logging in the case of duplicates so the user may continue as normal
+            return (
+                Authorization.objects.filter(
+                    user=self.user, partners__authorization_method=Partner.BUNDLE
+                )
+                .distinct()
+                .first()
             )
 
     def update_bundle_authorization(self):
