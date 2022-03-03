@@ -570,6 +570,142 @@ class UserRenewalNoticeTest(TestCase):
         call_command("user_renewal_notice")
         self.assertEqual(len(mail.outbox), 3)
 
+    def test_user_renewal_notice_user_already_filed_renewal(self):
+        """
+        Per T300014, a user shouldn't get an email if they have already filed
+        for a renewal
+        """
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.PENDING
+        renewed_app.save()
+
+        # Email shouldn't be sent since a renewal request has already been made
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_user_renewal_notice_user_already_filed_1_renewal(self):
+        """
+        Per T300014, a user shouldn't get an email if they have already filed
+        for a renewal. This tests when a user has three near expiration authorizations,
+        but has only filed for one renewal. Only two emails should be sent.
+        """
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.PENDING
+        renewed_app.save()
+
+        # Create a new authorization
+        partner2 = PartnerFactory()
+        authorization2 = Authorization()
+        authorization2.user = self.user
+        authorization2.authorizer = self.coordinator
+        authorization2.date_expires = datetime.today() + timedelta(weeks=1)
+        authorization2.save()
+        authorization2.partners.add(partner2)
+
+        # Create a new authorization
+        partner3 = PartnerFactory()
+        authorization3 = Authorization()
+        authorization3.user = self.user
+        authorization3.authorizer = self.coordinator
+        authorization3.date_expires = datetime.today() + timedelta(weeks=1)
+        authorization3.save()
+        authorization3.partners.add(partner3)
+
+        # Only one mail should be sent since a renewal request has already been made
+        # for one of the authorizations
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 2)
+
+    def test_user_renewal_notice_user_already_filed_2_renewals(self):
+        """
+        Per T300014, a user shouldn't get an email if they have already filed
+        for a renewal. This tests when a user has three near expiration authorizations,
+        but has only filed for two renewals. Only one email should be sent.
+        """
+        # We already have an authorization, so let's setup up
+        # an application that 'corresponds' to it.
+        application = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=self.partner,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        # File a renewal.
+        self.partner.renewals_available = True
+        self.partner.save()
+        renewed_app = application.renew()
+        renewed_app.status = application.PENDING
+        renewed_app.save()
+
+        # Create a new authorization
+        partner2 = PartnerFactory()
+        authorization2 = Authorization()
+        authorization2.user = self.user
+        authorization2.authorizer = self.coordinator
+        authorization2.date_expires = datetime.today() + timedelta(weeks=1)
+        authorization2.save()
+        authorization2.partners.add(partner2)
+
+        # Create a new authorization
+        partner3 = PartnerFactory()
+        authorization3 = Authorization()
+        authorization3.user = self.user
+        authorization3.authorizer = self.coordinator
+        authorization3.date_expires = datetime.today() + timedelta(weeks=1)
+        authorization3.save()
+        authorization3.partners.add(partner3)
+
+        application2 = ApplicationFactory(
+            editor=self.user.editor,
+            sent_by=self.coordinator,
+            partner=partner3,
+            status=Application.SENT,
+            requested_access_duration=1,
+        )
+        application.save()
+
+        partner3.renewals_available = True
+        partner3.save()
+        renewed_app2 = application2.renew()
+        renewed_app2.status = application2.PENDING
+        renewed_app2.save()
+
+        # Only one mail should be sent since a renewal request has already been made
+        # for one of the authorizations
+        call_command("user_renewal_notice")
+        self.assertEqual(len(mail.outbox), 1)
+
 
 class CoordinatorReminderEmailTest(TestCase):
     @classmethod
