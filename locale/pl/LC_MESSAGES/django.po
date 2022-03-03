@@ -11,6 +11,7 @@
 # Author: Nux
 # Author: Rail
 # Author: Rainbow P
+# Author: Szymonel
 # Author: WaldiSt
 # Author: Woytecr
 msgid ""
@@ -18,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-02-22 20:19+0000\n"
-"PO-Revision-Date: 2022-02-24 12:19:49+0000\n"
+"PO-Revision-Date: 2022-03-03 12:18:17+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -445,9 +446,8 @@ msgstr "Komentarze edytora(-ki)"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:227
-#, fuzzy
 msgid "Recent Applications (last 90 days)"
-msgstr "Ostatnie zgłoszenia"
+msgstr "Ostatnie zgłoszenia (90 dni)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:264

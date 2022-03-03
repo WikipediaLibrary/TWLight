@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-02-22 20:19+0000\n"
-"PO-Revision-Date: 2022-02-24 12:19:48+0000\n"
+"PO-Revision-Date: 2022-03-03 12:18:15+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2721,7 +2721,7 @@ msgstr "Services externes de recherche et de mandataire"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:227
 msgid "Certain resources may only be accessed using an external search service, such as the EBSCO Discovery Service, or a proxy service, such as OCLC EZProxy. If you use such external search and/or proxy services, please review the applicable terms of use and privacy policies."
-msgstr "Il n’est possible d’accéder à certaines ressources qu’en utilisant un service de recherche externe (tel que le ''Service de découverte EBSCO'') ou un service de serveur mandataire (tel que ''EZProxy d’OCLC''). Si vous utilisez un tel service de recherche externe ou de serveur mandataire, lisez attentivement leurs conditions d’utilisation et politiques de confidentialité applicables."
+msgstr "Il n’est possible d’accéder à certaines ressources qu’en utilisant un service de recherche externe (tel que le Service de découverte EBSCO) ou un service de serveur mandataire (tel que EZProxy d’OCLC). Si vous utilisez un tel service de recherche externe ou de serveur mandataire, lisez attentivement leurs conditions d’utilisation et politiques de confidentialité applicables."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:237

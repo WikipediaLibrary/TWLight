@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-02-22 20:19+0000\n"
-"PO-Revision-Date: 2022-02-24 12:19:50+0000\n"
+"PO-Revision-Date: 2022-03-03 12:18:18+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1231,7 +1231,7 @@ msgstr ""
 #. Translators: Shown in the search button.
 #: TWLight/forms.py:56 TWLight/templates/header_partial_b4.html:49
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
@@ -1340,7 +1340,6 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "Tìm hiểu thêm"
 
@@ -1348,7 +1347,6 @@ msgstr "Tìm hiểu thêm"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
-#, fuzzy
 msgid "Discuss"
 msgstr "Thảo luận"
 
@@ -1761,7 +1759,7 @@ msgstr "Yêu cầu hỏng"
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:15
 msgid "Sorry; we don't know what to do with that."
-msgstr ""
+msgstr "Xin lỗi, chúng tôi không biết làm thế nào với điều trên."
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:20
@@ -1783,7 +1781,7 @@ msgstr "Không cho phép"
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:15
 msgid "Sorry; you aren't allowed to do that."
-msgstr ""
+msgstr "Xin lỗi, bạn không được phép làm điều đó."
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
 #: TWLight/templates/403.html:20
@@ -1799,7 +1797,7 @@ msgstr "Không tìm thấy"
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:15
 msgid "Sorry; we can't find that."
-msgstr ""
+msgstr "Xin lỗi chúng tôi không thể tìm thấy nó."
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
 #: TWLight/templates/404.html:19
@@ -1881,7 +1879,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
 msgid "What do I do after I get access?"
-msgstr ""
+msgstr "Bạn có thể làm gì sau khi bạn có được quyền truy cập?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
