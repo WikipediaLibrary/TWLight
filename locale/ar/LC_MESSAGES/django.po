@@ -3,6 +3,7 @@
 #
 # Author: Amire80
 # Author: Dr. Mohammed
+# Author: FiberAhmed
 # Author: Hhaboh162002
 # Author: Jsn.sherman
 # Author: Meno25
@@ -22,7 +23,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-03-03 17:38+0000\n"
-"PO-Revision-Date: 2022-03-07 12:18:59+0000\n"
+"PO-Revision-Date: 2022-03-10 12:19:55+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1779,7 +1780,7 @@ msgstr "تم حذف الاقتراح."
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:11
 msgid "Bad Request"
-msgstr "اقتراح سيء"
+msgstr "اقتراح سيئ"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:15
