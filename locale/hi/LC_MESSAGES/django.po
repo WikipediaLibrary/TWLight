@@ -3,6 +3,7 @@
 #
 # Author: Abijeet Patro
 # Author: Ajay Singh
+# Author: AnupamM
 # Author: Archana mathur
 # Author: BaRaN6161 TURK
 # Author: DDPAT
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-03-03 17:38+0000\n"
-"PO-Revision-Date: 2022-03-07 12:19:00+0000\n"
+"PO-Revision-Date: 2022-03-14 12:19:12+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -250,7 +251,7 @@ msgstr "महीना"
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
 msgid "12 months"
-msgstr ""
+msgstr "12 महीने"
 
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:160
@@ -365,7 +366,7 @@ msgstr "आप प्रतीक्षा सूची में हैं"
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:120
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
@@ -568,9 +569,8 @@ msgstr "पिछला पृष्ठ"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
-msgstr "पिछला पृष्ठ"
+msgstr "पिछला"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -660,9 +660,8 @@ msgstr "आवेदन की तिथि"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "मैं उपयोग की शर्तों से सहमत हूँ"
+msgstr "उपयोग की शर्तों से सहमति?"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.

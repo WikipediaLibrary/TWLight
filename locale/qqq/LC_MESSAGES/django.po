@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-03-03 17:38+0000\n"
-"PO-Revision-Date: 2022-03-07 12:19:02+0000\n"
+"PO-Revision-Date: 2022-03-14 12:19:13+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -2032,7 +2032,7 @@ msgstr ""
 
 #: TWLight/templates/login_partial.html:45
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
-msgstr "{{Doc-important|\"Application\" here means \"request\" or \"candidacy\". This doesn't mean \"software application\" or \"app\".}}\nTooltip message accompanying {{msg-wm|Wikipedia-library-df39ce-Meet this criteria for automat}}"
+msgstr "{{Doc-important|\"Application\" here means \"request\" or \"candidacy\". This doesn't mean \"software application\" or \"app\".}}\nTooltip message accompanying {{msg-wm|Wikipedia-library-68267b-Meet these criteria for automa}}"
 
 #: TWLight/templates/login_partial.html:65
 msgid "Login via Wikipedia"

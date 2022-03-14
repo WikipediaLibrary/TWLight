@@ -28,6 +28,8 @@
 	"57_description": "可用資料庫：\n<ul>\n<li>Academic Search Complete</li>\n<li>America: History and Life</li>\n<li>Applied Science &amp; Technology Source</li>\n<li>Al-Kotob Arabic eBooks Collection</li>\n<li>Arab World Research Source: Al Masdar</li>\n<li>Art Source</li>\n<li>Book Review Digest Plus</li>\n<li>Business Search Complete</li>\n<li>Caribbean Search</li>\n<li>CINAHL Complete</li>\n<li>Communications and Mass Media Complete</li>\n<li>DynaMed Plus</li>\n<li>Education Research Complete</li>\n<li>Enfermería al Día</li>\n<li>ERIC（Education Resource Information Center）</li>\n<li>Fuente Académica Premier</li>\n<li>Humanities Full Text</li>\n<li>LGBT Life with Full Text</li>\n<li>Life Magazine Archive</li>\n<li>Literary Reference Center Plus</li>\n<li>MasterFILE Complete</li>\n<li>MedicLatina</li>\n<li>MEDLINE Complete</li>\n<li>Nursing Reference Center</li>\n<li>Patient Education Reference Center</li>\n<li>Psychology &amp; Behavioral Sciences Collection</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX with Full Text</li>\n<li>SportDiscus with Full Text</li>\n</ul>",
 	"45_short_description": "<strong>愛丁堡大學出版社</strong>是人文和社會科學方面的書籍和期刊學術出版商。它們提供其期刊館藏的存取權限，其主題包括電影和媒體研究、歷史、文學研究和蘇格蘭相關研究。",
 	"23_description": "除了訂閱內容外，Elsevier還提供了一些可供所有人閱讀的材料。除了尋找開放獲取符號之外，以下是尋找它的方法： <ul> <li>瀏覽開放獲取期刊的列表</li> <li>通過點擊“View all publications with Open Access articles”，在ScienceDirect主頁上找到所有具有開放獲取文章期刊的列表。</li> <li>使用進階搜索，選中“Open access articles only”的框</li> </ul>",
+	"44_short_description": "<strong>Érudit</strong> 是加拿大的學術資料入口網站。著重在人文與社會克學，另外有包含一些物理與自然科學的出版物。",
+	"78_short_description": "<strong>ICE Publishing</strong> 是土木工程師機構之一。提供取用在 ICE 虛擬圖書館裡所有的期刊與電子書。",
 	"80_short_description": "<strong>Magiran</strong> 是報紙與科學期刊的出版商。",
 	"27_short_description": "<strong>NewspaperARCHIVE.com</strong> 是數位化報紙的線上資料庫，擁有超過 20 億條新聞文章，涵蓋時間範圍從 1607 年到至今，地點包含美國、加拿大、英國和其他 20 個國家。",
 	"81_short_description": "<strong>Noormags</strong> 是社會科學與人文期刊的出版商。",
@@ -40,5 +42,6 @@
 	"12_short_description": "<strong>Tilastopaja</strong> 是提供來自芬蘭和世界各地體育統計數據的資料庫。",
 	"110_short_description": "<strong>Psychologie, Psychotherapie, Psychoanalyse</strong> 提供了有關心理學主題的德語學術文章取用。",
 	"111_short_description": "<strong><em>Musik & Ästhetik</em></strong> 是德語音樂雜誌。",
-	"112_short_description": "<strong><em>Merkur</em></strong> 是德語文化雜誌。"
+	"112_short_description": "<strong><em>Merkur</em></strong> 是德語文化雜誌。",
+	"123_short_description": "<strong>Nature</strong> 是國際的科學週刊。"
 }
