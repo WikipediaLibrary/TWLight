@@ -104,6 +104,9 @@
                 {% trans "Log out" %}
               </a>
             </li>
+          {% elif not user.is_authenticated %}
+            <li role="presentation" class="mobile-menu align-middle nav-item">
+              <a class="btn twl-btn" href="{% url 'oauth_login' %}?next={{request.path}}">
           {% endif %}
         </ul>
       </div>
