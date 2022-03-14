@@ -4,7 +4,7 @@
 
 {% block extra_css %}
   <style type="text/css">
-    legend{
+    legend {
       border-bottom: 1px solid #e5e5e5;
     }
   </style>
@@ -14,6 +14,14 @@
   {% include "header_partial_b4.html" %}
   {% include "message_partial.html" %}
   <div id="main-content">
+    {% if partner.authorization_method == EMAIL %}
+      {% comment %}Translators: This is a message shown when a user tries to apply for a collection where their email will be shared with the partner.{% endcomment %}
+      <div class="alert alert-secondary" role="alert">
+          {% blocktranslate trimmed %}
+              If your application is successful we may share your email address with {{ partner }}. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with {{ partner }} if your application is successful, for the purposes of account setup.
+          {% endblocktranslate %}
+      </div>
+    {% endif %}
     <div class="row">
       <div class="col-sm-12">
         {% crispy form %}
