@@ -147,7 +147,7 @@
                   </a></li>
             {% endfor %}
             <li class="page-item disabled"><a class="twl-links page-link">...</a></li>
-            <li class="page-item disabled"><a class="twl-links page-link" href="?page={{ object_list.previous_page_number}}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
+            <li class="page-item"><a class="twl-links page-link" href="?page={{ object_list.previous_page_number}}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                 {{ object_list.previous_page_number }}
                 </a></li>
             <li class="page-item active">
