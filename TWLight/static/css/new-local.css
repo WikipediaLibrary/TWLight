@@ -1005,7 +1005,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 
 .access-apply-button{
-    width: 50%;
+    width: 100%;
     -webkit-appearance: none;
 }
 
@@ -1014,6 +1014,7 @@ NEW MY LIBRARY COLLECTION TILES CSS
     background-color: #FFFFFF;
     width: 40%;
     -webkit-appearance: none;
+    margin-top: 10px;
 }
 
 .renew-extend-button:hover{
