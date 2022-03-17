@@ -3,7 +3,8 @@
 		"authors": [
 			"DDPAT",
 			"Ice bulldog",
-			"Kareyac"
+			"Kareyac",
+			"Pacha Tchernof"
 		]
 	},
 	"languages-and-literature_tag": "Языки и литература",
@@ -18,8 +19,8 @@
 	"social-sciences_tag": "Социальные науки",
 	"history_tag": "История",
 	"culture_tag": "Культура",
-	"life-sciences_tag": "Науки о жизни",
-	"health-sciences_tag": "Медицинских наук",
+	"life-sciences_tag": "Науки о живой природе",
+	"health-sciences_tag": "Науки о здоровье",
 	"earth-sciences_tag": "Науки о Земле",
-	"technology_tag": "Технология"
+	"technology_tag": "Технологии"
 }
