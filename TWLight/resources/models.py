@@ -538,6 +538,12 @@ class Suggestion(models.Model):
     upvoted_users = models.ManyToManyField(
         User, blank=True, help_text="Users who have upvoted this suggestion."
     )
+    ticket_number = models.CharField(
+        max_length=10,
+        blank=True,
+        default="",
+        help_text="phabricator ticket id where we track progress of request",
+    )
 
     def __str__(self):
         return self.suggested_company_name
