@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-03-15 01:34+0000\n"
-"PO-Revision-Date: 2022-03-17 12:20:00+0000\n"
+"PO-Revision-Date: 2022-03-21 12:19:04+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1279,7 +1279,7 @@ msgstr "Căutabil"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:81
 msgid "Access"
-msgstr "Aces"
+msgstr "Acces"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:17

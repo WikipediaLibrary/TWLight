@@ -23,7 +23,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-03-15 01:34+0000\n"
-"PO-Revision-Date: 2022-03-17 12:20:01+0000\n"
+"PO-Revision-Date: 2022-03-21 12:19:04+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -683,7 +683,7 @@ msgstr "Durumu ayarla"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "Başvurunuz başarılı sonuçlanırsa e-posta adresinizi  %(partner)s ile paylaşabiliriz. Bu, kaynaklarına erişiminizi ayarlamak için gerekli bir adımdır. Bu formu göndererek başvurunuz başarılı olursa hesap kurulumu amacıyla e-posta adresinizin  %(partner)s ile paylaşılmasına izin vermiş olursunuz."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
