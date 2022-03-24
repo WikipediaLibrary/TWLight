@@ -29,7 +29,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-03-24 12:32+0000\n"
+"POT-Creation-Date: 2022-03-24 19:36+0000\n"
 "PO-Revision-Date: 2022-03-21 12:19:01+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
