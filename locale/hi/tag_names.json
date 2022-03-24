@@ -2,11 +2,24 @@
 	"@metadata": {
 		"authors": [
 			"Abijeet Patro",
-			"Ajaysajay"
+			"Ajaysajay",
+			"AnupamM"
 		]
 	},
+	"languages-and-literature_tag": "भाषाएं और साहित्य",
+	"multidisciplinary_tag": "बहु-विषयक",
+	"physical-sciences_tag": "भौतिक विज्ञान",
 	"music_tag": "संगीत",
+	"art_tag": "कला",
+	"business-and-economics_tag": "व्यापार और अर्थशास्त्र",
 	"law_tag": "विधि",
 	"education_tag": "शिक्षा",
-	"history_tag": "इतिहास"
+	"philosophy-and-religion_tag": "दर्शन और धर्म",
+	"social-sciences_tag": "सामाजिक विज्ञान",
+	"history_tag": "इतिहास",
+	"culture_tag": "संस्कृति",
+	"life-sciences_tag": "जीवन विज्ञान",
+	"health-sciences_tag": "स्वास्थ्य विज्ञान",
+	"earth-sciences_tag": "पृथ्वी विज्ञान",
+	"technology_tag": "प्रौद्योगिकी"
 }
