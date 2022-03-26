@@ -362,6 +362,26 @@ class ApplicationStatusTest(TestCase):
         partner.save()
         self.assertFalse(mock_email.called)
 
+    def test_waitlisting_partner_doesnt_email_users_twice(self):
+        """
+        Switching a Partner to WAITLIST status should call the email function
+        but only email users who haven't already received an email.
+        """
+        partner = PartnerFactory(status=Partner.AVAILABLE)
+        app = ApplicationFactory(status=Application.PENDING, partner=partner)
+
+        partner.status = Partner.WAITLIST
+        partner.save()
+        self.assertEqual(len(mail.outbox), 1)
+
+        partner.status = Partner.AVAILABLE
+        partner.save()
+
+        partner.status = Partner.WAITLIST
+        partner.save()
+
+        self.assertEqual(len(mail.outbox), 1)
+
 
 class ContactUsTest(TestCase):
     @classmethod

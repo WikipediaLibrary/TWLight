@@ -350,6 +350,8 @@ def send_waitlist_notification_email(instance):
                     "link": link,
                 },
             )
+            instance.waitlist_email = True
+            instance.save()
         else:
             logger.info(
                 "Skipped user {username} when sending "
@@ -481,19 +483,19 @@ def send_authorization_emails(sender, instance, **kwargs):
 def notify_applicants_when_waitlisted(sender, instance, **kwargs):
     """
     When Partners are switched to WAITLIST status, anyone with open applications
-    should be notified.
+    who hasn't already received an email for this application should be notified.
     """
     if instance.id:
         orig_partner = get_object_or_404(Partner, pk=instance.id)
 
-        if (
-            orig_partner.status != instance.status
-        ) and instance.status == Partner.WAITLIST:
-
+        status_changed = orig_partner.status != instance.status
+        waitlist_status = instance.status == Partner.WAITLIST
+        if status_changed and waitlist_status:
             for app in orig_partner.applications.filter(
                 status__in=[Application.PENDING, Application.QUESTION]
             ):
-                send_waitlist_notification_email(app)
+                if not app.waitlist_email:
+                    send_waitlist_notification_email(app)
 
 
 @receiver(ContactUs.new_email)

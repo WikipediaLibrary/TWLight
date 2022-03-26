@@ -144,6 +144,10 @@ class Application(models.Model):
         default=False, help_text="Mark as True if the partner is WAITLISTED"
     )
 
+    # Has the applicant received an email about this application being
+    # waitlisted yet?
+    waitlist_email = models.BooleanField(default=False)
+
     def __str__(self):
         return "{self.editor} - {self.partner}".format(self=self)
 
