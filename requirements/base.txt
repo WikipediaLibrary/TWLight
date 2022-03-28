@@ -1,5 +1,6 @@
 black==21.12b0
 bleach==4.1.0
+click==8.0.4
 defusedxml==0.7.1
 django==3.2.12
 django-annoying==0.10.6
