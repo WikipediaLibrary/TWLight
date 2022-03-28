@@ -70,6 +70,14 @@
                         {{ each_suggestion.author.editor.wp_username }}
                       </a>
                     </p>
+                    {% if each_suggestion.ticket_number %}
+                      <p>
+                        <strong>{% trans 'Track Progress' %}:</strong>
+                        <a class="twl-links" href="https://phabricator.wikimedia.org/{{each_suggestion.ticket_number}}" target="_blank">
+                          {{ each_suggestion.ticket_number }}
+                        </a>
+                      </p>
+                    {% endif %}
                   </div>
                   {% if user.is_authenticated %}
                     <div class="col-lg-2 pull-right" style="text-align: right;">
