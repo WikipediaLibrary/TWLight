@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-03-24 19:36+0000\n"
+"POT-Creation-Date: 2022-03-29 00:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1889,16 +1889,20 @@ msgstr ""
 msgid "Proposer"
 msgstr ""
 
+#: TWLight/resources/templates/resources/suggest.html:75
+msgid "Track Progress"
+msgstr ""
+
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:82
-#: TWLight/resources/templates/resources/suggest.html:110
-#: TWLight/resources/templates/resources/suggest.html:114
+#: TWLight/resources/templates/resources/suggest.html:90
+#: TWLight/resources/templates/resources/suggest.html:118
+#: TWLight/resources/templates/resources/suggest.html:122
 msgid "Upvoted"
 msgstr ""
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:85
-#: TWLight/resources/templates/resources/suggest.html:112
+#: TWLight/resources/templates/resources/suggest.html:93
+#: TWLight/resources/templates/resources/suggest.html:120
 msgid "Upvote"
 msgstr ""
 
