@@ -82,8 +82,7 @@ class PartnersFilterView(ListView):
 
         user = self.request.user
         if user.is_authenticated:
-            user = User.objects.select_related(
-                "editor").get(pk=self.request.user.pk)
+            user = User.objects.select_related("editor").get(pk=self.request.user.pk)
             context["user"] = user
             context["editor"] = user.editor
         partners_list = []
@@ -158,8 +157,7 @@ class PartnersDetailView(DetailView):
 
         # Obtaining translated partner description
         language_code = get_language()
-        partner_short_description_key = "{pk}_short_description".format(
-            pk=partner.pk)
+        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
         partner_description_key = "{pk}_description".format(pk=partner.pk)
         partner_descriptions = get_partner_description(
             language_code, partner_short_description_key, partner_description_key
@@ -183,8 +181,7 @@ class PartnersDetailView(DetailView):
             partner
         )
 
-        context["total_users"] = Authorization.objects.filter(
-            partners=partner).count()
+        context["total_users"] = Authorization.objects.filter(partners=partner).count()
 
         application_end_states = [
             Application.APPROVED,
@@ -391,8 +388,7 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
             # Set waitlist_status to True for all the applications
             # which are Pending or Under Discussion for this partner
             applications = Application.objects.filter(
-                partner=partner, status__in=[
-                    Application.PENDING, Application.QUESTION]
+                partner=partner, status__in=[Application.PENDING, Application.QUESTION]
             )
             for app in applications:
                 app.waitlist_status = True
@@ -443,8 +439,7 @@ class PartnerSuggestionView(FormView):
         # We could probably be factored out to a common place for DRYness.
         if "suggested_company_name" in self.request.GET:
             initial.update(
-                {"suggested_company_name":
-                    self.request.GET["suggested_company_name"]}
+                {"suggested_company_name": self.request.GET["suggested_company_name"]}
             )
         if "description" in self.request.GET:
             initial.update({"description": self.request.GET["description"]})
