@@ -294,5 +294,6 @@ def editor_compare_hashes(
         else:
             return previous_block_hash
     else:
-        # previous_block_hash is blank, we will make a hash of an empty dictionary
-        return make_password("{}")
+        # previous_block_hash is blank, we will make a hash of the user's
+        # block string.
+        return make_password(new_block_string)

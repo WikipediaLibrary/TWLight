@@ -1509,6 +1509,70 @@ class EditorModelTestCase(TestCase):
         self.assertFalse(check_password(blocked_dict, new_editor.wp_block_hash))
         self.assertEqual(len(mail.outbox), 0)
 
+    def test_block_hash_email_not_sent_on_first_login(self):
+        """
+        Tests that an email is not sent when an editor's block override
+        is turned on and they subsequently login.
+        """
+        identity = {}
+        identity["username"] = "evil_dr_porkchop"
+        # Users' unique WP IDs should not change across API calls, but are
+        # needed by update_from_wikipedia.
+        identity["sub"] = self.editor.wp_sub
+        identity["rights"] = ["deletion", "spaceflight"]
+        identity["groups"] = ["charismatic megafauna"]
+        # We should now be ignoring the oauth editcount
+        identity["editcount"] = 42
+        identity["email"] = "porkchop@example.com"
+        identity["iss"] = "zh-classical.wikipedia.org"
+        identity["registered"] = "20130205230142"
+        # validity
+        identity["blocked"] = False
+
+        global_userinfo = {}
+        global_userinfo["home"] = "zh_classicalwiki"
+        global_userinfo["id"] = identity["sub"]
+        global_userinfo["registration"] = "2013-02-05T23:01:42Z"
+        global_userinfo["name"] = identity["username"]
+        # We should now be using the global_userinfo editcount
+        global_userinfo["editcount"] = 960
+
+        global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS)
+
+        # Don't change self.editor, or other tests will fail! Make a new one
+        # to test instead.
+        new_editor = EditorFactory(wp_registered=None)
+        new_identity = dict(identity)
+        new_global_userinfo = dict(global_userinfo)
+        new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
+
+        # User starts blocked
+        copied_merged_blocked_array = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
+        new_global_userinfo["merged"] = copied_merged_blocked_array
+
+        lang = get_language()
+        new_editor.update_from_wikipedia(
+            new_identity, lang, new_global_userinfo
+        )  # This call also saves the editor
+
+        blocked_dict = editor_make_block_dict(new_global_userinfo["merged"])
+
+        self.assertTrue(check_password(blocked_dict, new_editor.wp_block_hash))
+        # No emails should be sent since the wp_block_hash was blank
+        self.assertEqual(len(mail.outbox), 0)
+
+        new_editor.ignore_wp_blocks = True
+        new_editor.save()
+
+        new_editor.update_from_wikipedia(
+            new_identity, lang, new_global_userinfo
+        )  # This call also saves the editor
+
+        # The user's block status never changed, so we shouldn't send any
+        # emails
+        self.assertEqual(len(mail.outbox), 0)
+
 
 class OAuthTestCase(TestCase):
     @classmethod
