@@ -104,6 +104,13 @@
                 {% trans "Log out" %}
               </a>
             </li>
+          {% else %}
+            <li role="presentation" class="mobile-menu align-middle nav-item">
+              {% comment %}Translators: Shown in the top bar to let users log in of The Wikipedia Library. {% endcomment %}
+              <a class="btn twl-btn" href="{% url 'oauth_login' %}?next={{request.path}}">
+                {% trans "Log in" %}
+              </a>
+            </li>
           {% endif %}
         </ul>
       </div>
