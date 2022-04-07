@@ -1005,14 +1005,16 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 
 .access-apply-button{
-    width: 50%;
+    width: 98%;
     -webkit-appearance: none;
 }
 
 .renew-extend-button{
     border: 1px solid #8E8E8E;
     background-color: #FFFFFF;
-    width: 40%;
+    width: 130%;
+    margin-top: 10%;
+    margin-left: 60%;
     -webkit-appearance: none;
 }
 

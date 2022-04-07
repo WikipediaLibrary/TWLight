@@ -109,7 +109,7 @@
           {% endif %}
           <div class="col-xl-6 col-12">
           <a href="{% url 'applications:renew' user_collection.auth_latest_sent_app.pk %}"
-                class="btn btn-sm renew-extend-button pull-right" type="button" name="button">
+                class="btn btn-sm renew-extend-button" type="button" name="button">
             {% if user_collection.auth_date_expires and user_collection.auth_has_expired %}
               {% comment %}Translators: Labels a button users can click to renew an expired account. {% endcomment %}
               {% trans "Renew" %}
