@@ -69,7 +69,8 @@
       {% endif %}
     </p>
   </div>
-  <div class="card-footer container">
+  <div class="card-footer">
+    <div class="container">
     {% if user_collection.partner_authorization_method != bundle_authorization %}
       {% if user_collection.auth_date_expires %}
         <p class="expiry-date-text">
@@ -93,7 +94,8 @@
       {% else %}
         {% if user_collection.auth_latest_sent_app %}
           {% if not user_collection.auth_has_expired %}
-            <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button col"
+          <div class="col-12">
+            <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                   type="button" name="button" target="_blank" rel="noopener">
               {% if user_collection.partner_authorization_method != proxy_authorization %}
                   {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
@@ -103,9 +105,11 @@
                   {% trans "Access collection" %}
               {% endif %}
             </a>
+          </div>
           {% endif %}
+          <div class="col-xl-6 col-12">
           <a href="{% url 'applications:renew' user_collection.auth_latest_sent_app.pk %}"
-                class="btn btn-sm renew-extend-button pull-right col" type="button" name="button">
+                class="btn btn-sm renew-extend-button pull-right" type="button" name="button">
             {% if user_collection.auth_date_expires and user_collection.auth_has_expired %}
               {% comment %}Translators: Labels a button users can click to renew an expired account. {% endcomment %}
               {% trans "Renew" %}
@@ -114,14 +118,18 @@
               {% trans "Extend" %}
             {% endif %}
           </a>
+        </div>
         {% endif %}
       {% endif %}
     {% else %}
-        <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button col"
+      <div class="col-12">
+        <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                 type="button" name="button" target="_blank" rel="noopener">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
             {% trans "Access collection" %}
         </a>
+      </div>
     {% endif %}
+  </div>
   </div>
 </div>
