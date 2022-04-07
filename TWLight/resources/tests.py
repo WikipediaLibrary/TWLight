@@ -21,6 +21,7 @@ from TWLight.applications.factories import ApplicationFactory
 from TWLight.applications.models import Application
 from TWLight.users.factories import EditorFactory, UserProfileFactory, UserFactory
 from TWLight.users.groups import get_coordinators, get_restricted
+from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, SuggestionFactory
@@ -996,6 +997,7 @@ class BundlePartnerTest(TestCase):
         cls.bundle_partner_1 = PartnerFactory(authorization_method=Partner.BUNDLE)
         cls.bundle_partner_2 = PartnerFactory(authorization_method=Partner.BUNDLE)
         cls.proxy_partner_1 = PartnerFactory(authorization_method=Partner.PROXY)
+        cls.email_partner_1 = PartnerFactory(authorization_method=Partner.EMAIL)
         cls.bundle_partner_3 = PartnerFactory(
             authorization_method=Partner.BUNDLE, status=Partner.NOT_AVAILABLE
         )
@@ -1212,6 +1214,83 @@ class BundlePartnerTest(TestCase):
 
         # Ultimately we should have one Bundle authorization
         self.assertEqual(bundle_authorization.count(), 1)
+
+    def test_switching_partner_to_bundle_doesnt_create_duplicate_auths(self):
+        """
+        When switching a partner from available to non-available status
+        and switched to Bundle in the same query, then
+        1. It should not create duplicate Bundle Authorization for the user.
+        2. It should delete previous Authorizations of Partner since it
+        is moved to Bundle now.
+        3. It should not be returned in any Bundle Authorization currently since
+        it is in a non-available status right now. So Authorizations must not be
+        created for it.
+        4. Once it is moved to Available again Bundle Authorizations must get
+        create for it automatically.
+        """
+        # Before we create the user's Bundle authorizations, let's
+        # give them an authorization to the Proxy partner.
+
+        application = ApplicationFactory(
+            partner=self.email_partner_1, editor=self.editor, status=Application.PENDING
+        )
+
+        coordinator = EditorCraftRoom(self, Terms=True, Coordinator=True)
+
+        application.status = Application.SENT
+        application.sent_by = coordinator.user
+        application.save()
+
+        # We should now have an auth for this user to this partner
+        try:
+            authorization = Authorization.objects.get(
+                user=self.editor.user,
+                partners=Partner.objects.get(pk=self.email_partner_1.pk),
+            )
+        except Authorization.DoesNotExist:
+            self.fail("Authorization wasn't created in the first place.")
+
+        self.editor.update_bundle_authorization()
+
+        self.email_partner_1.authorization_method = Partner.BUNDLE
+        self.email_partner_1.status = Partner.WAITLIST
+        self.email_partner_1.save()
+
+        bundle_authorization = Authorization.objects.filter(
+            user=self.editor.user, partners__authorization_method=Partner.BUNDLE
+        ).distinct()
+
+        # Ultimately we should have one Bundle authorization
+        # New bundle partner should not create duplicate
+        # Bundle Authorization for the user
+        self.assertEqual(bundle_authorization.count(), 1)
+
+        email_partner_authorizations = Authorization.objects.filter(
+            partners__pk=self.email_partner_1.pk
+        )
+        # All previous Authorizations of Email Partner must be deleted
+        # since it is moved to Bundle now.
+        self.assertEqual(email_partner_authorizations.exists(), False)
+
+        all_bundle_authorizations = get_all_bundle_authorizations()
+
+        # Parnter should not be in Bundle Authorization currently since
+        # it is in a non-available status right now. So Authorizations must not be
+        # created for it.
+        for authorization in all_bundle_authorizations:
+            if self.email_partner_1 in authorization.partners.all():
+                self.fail("Waitlisted bundle partner having Bundle Authorization")
+
+        # If the partner is set to available now, it should get added to all Bundle
+        # Authorizations Automatically
+        self.email_partner_1.status = Partner.AVAILABLE
+        self.email_partner_1.save()
+
+        for authorization in all_bundle_authorizations:
+            if self.email_partner_1 not in authorization.partners.all():
+                self.fail(
+                    "Available bundle partner not present in Bundle Authorization"
+                )
 
 
 class PartnerSuggestionViewTests(TestCase):
