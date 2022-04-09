@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-04-01 01:29+0000\n"
+"POT-Creation-Date: 2022-04-09 12:25+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:13+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3425,39 +3425,37 @@ msgid "Add this collection to favorites"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
-#: TWLight/users/templates/users/user_collection_tile.html:77
+#: TWLight/users/templates/users/user_collection_tile.html:78
 msgid "Expiry date"
 msgstr "Utgångsdatum"
 
-#: TWLight/users/templates/users/user_collection_tile.html:82
+#: TWLight/users/templates/users/user_collection_tile.html:83
 msgid "Click to return this access"
 msgstr ""
 
-#. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
+#. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:93
-#: TWLight/users/templates/users/user_collection_tile.html:112
+msgid "Go to application"
+msgstr "Gå till ansökan"
+
+#. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
+#: TWLight/users/templates/users/user_collection_tile.html:106
 msgid "Go to site"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
-#: TWLight/users/templates/users/user_collection_tile.html:96
-#: TWLight/users/templates/users/user_collection_tile.html:115
+#: TWLight/users/templates/users/user_collection_tile.html:109
 #: TWLight/users/templates/users/user_collection_tile.html:135
 msgid "Access collection"
 msgstr "Tillgå samling"
 
-#. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
-#: TWLight/users/templates/users/user_collection_tile.html:103
-msgid "Go to application"
-msgstr "Gå till ansökan"
-
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/user_collection_tile.html:123
+#: TWLight/users/templates/users/user_collection_tile.html:120
 msgid "Renew"
 msgstr "Förnya"
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/user_collection_tile.html:126
+#: TWLight/users/templates/users/user_collection_tile.html:123
 msgid "Extend"
 msgstr "Utvidga"
 
