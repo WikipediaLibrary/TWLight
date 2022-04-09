@@ -1029,56 +1029,31 @@ NEW MY LIBRARY COLLECTION TILES CSS
 }
 
 .access-apply-button{
-    width: 50%;
     float: right;
     -webkit-appearance: none;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .renew-extend-button{
+    color: black;
     border: 1px solid #8E8E8E;
     background-color: #FFFFFF;
-    width: 40%;
     float: left;
     -webkit-appearance: none;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .renew-extend-button:hover{
+    color: black;
     text-decoration: underline;
-}
-
-/* Smartphones */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
-    .access-apply-button{
-        width: 100%;
-        margin-bottom: 10px;
-        -webkit-appearance: none;
-    }
-
-    .renew-extend-button{
-        border: 1px solid #8E8E8E;
-        background-color: #FFFFFF;
-        width: 100%;
-        -webkit-appearance: none;
-    }
-}
-/* Tablets */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px) {
-    .access-apply-button{
-        width: 100%;
-        margin-bottom: 10px;
-        -webkit-appearance: none;
-    }
-
-    .renew-extend-button{
-        border: 1px solid #8E8E8E;
-        background-color: #FFFFFF;
-        width: 100%;
-        -webkit-appearance: none;
-    }
 }
 
 /* Change image width on some medium-sized screens */
