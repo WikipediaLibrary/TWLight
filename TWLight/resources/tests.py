@@ -1406,12 +1406,19 @@ class SuggestionMergeViewTests(TestCase):
             company_url="www.testingMerged1234.com"
         )
         cls.merge_suggestion_url = reverse("suggest-merge")
-        cls.editor = EditorCraftRoom(cls, Terms=True, Coordinator=True)
-        cls.restricted_editor = EditorCraftRoom(cls, Terms=True, Coordinator=False)
-        cls.upvoters_or_authors = [cls.restricted_editor, cls.editor]
-        cls.user = UserFactory(editor=cls.editor)
-        cls.suggestions_merged_into.author = cls.editor.user
-        cls.suggestions_merged_into.upvoted_users.add(cls.editor.user)
+
+        # Manually setting up with EditorFactory since we don't need a client session yet
+        cls.coordinator = EditorFactory()
+        coordinators = get_coordinators()
+        coordinators.user_set.add(cls.coordinator.user)
+        cls.staff = EditorFactory()
+        cls.staff.user.is_staff = True
+        coordinators.user_set.add(cls.staff.user)
+        cls.editor = EditorFactory()
+
+        cls.upvoters_or_authors = [cls.editor, cls.coordinator]
+        cls.suggestions_merged_into.author = cls.coordinator.user
+        cls.suggestions_merged_into.upvoted_users.add(cls.coordinator.user)
         cls.suggestions_merged_into.save()
 
         cls.suggestion_merge_count = 5
@@ -1439,62 +1446,63 @@ class SuggestionMergeViewTests(TestCase):
         super().tearDownClass()
         cls.message_patcher.stop()
 
-    def test_partner_suggestion_view_coordinators_only(self):
+    def test_partner_suggestion_view_staff_only(self):
         """
-        Tests that getting the suggested partners page for merge works only for coordinators.
+        Tests that getting the suggested partners page for merge works only for staff.
         """
 
         factory = RequestFactory()
         request = factory.get(self.merge_suggestion_url)
-        request.user = self.restricted_editor.user
-        self.assertRaises(PermissionDenied)
+        request.user = self.editor.user
+        with self.assertRaises(PermissionDenied):
+            response = SuggestionMergeView.as_view()(request)
+        request.user = self.coordinator.user
+        with self.assertRaises(PermissionDenied):
+            response = SuggestionMergeView.as_view()(request)
+        request.user = self.staff.user
+        response = SuggestionMergeView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
 
     def test_merge_partner_suggestion_view_post(self):
         """
         Tests that merging a partner suggestion works properly, with upvotes too getting merged properly
         """
-        merge_suggestion_data = {
-            "suggestions_merged_into": self.suggestions_merged_into,
-            "suggestions_to_merge": self.suggestions_to_merge,
-        }
-        factory = RequestFactory()
-        request = factory.post(self.merge_suggestion_url, data=merge_suggestion_data)
-        # print(request.POST.get('suggestions_merged_into'))
-        # print(request.POST.getlist('suggestions_to_merge'))
-        coordinators = get_coordinators()
-        coordinators.user_set.add(self.user)
-        request.user = self.user
 
-        response = SuggestionMergeView.as_view()(request)
+        # setup suggestion pk form data
+        suggestions_to_merge_pks = []
+        for suggestion in self.suggestions_to_merge:
+            print(suggestion.company_url)
+            suggestions_to_merge_pks.append(suggestion.pk)
+        merge_suggestion_data = {
+            "suggestions_merged_into": self.suggestions_merged_into.pk,
+            "suggestions_to_merge": suggestions_to_merge_pks,
+        }
+
+        # Start a staff test client session
+        EditorCraftRoom(self, Terms=True, Coordinator=True, editor=self.staff)
+
+        # Submit form
+        response = self.client.post(
+            self.merge_suggestion_url, merge_suggestion_data, follow=True
+        )
         self.assertEqual(response.status_code, 200)
 
+        # Verify state after submission:
+        response = self.client.get(self.merge_suggestion_url, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+        # suggestions_to_merge should be absent
+        for suggestion in self.suggestions_to_merge:
+            self.assertNotContains(response, suggestion.company_url)
+            self.assertNotContains(response, suggestion.suggested_company_name)
+
+        # merged_suggestion should be present
         merged_suggestion = Suggestion.objects.get(pk=self.suggestions_merged_into.pk)
-        print(
-            Suggestion.objects.filter(
-                pk__in=[suggestion.id for suggestion in self.suggestions_to_merge]
-            )
-        )
-        self.assertFalse(
-            Suggestion.objects.filter(
-                pk__in=[suggestion.id for suggestion in self.suggestions_to_merge]
-            ).exists()
-        )
         self.assertContains(response, merged_suggestion.suggested_company_name)
         self.assertContains(response, merged_suggestion.company_url)
+
+        # upvotes should be combined
         self.assertEqual(merged_suggestion.upvoted_users.count(), 2)
-
-    def test_merge_partner_suggestions_filter(self):
-        company_url = self.company_urls[0]
-        # Creating a temprary coordinators-only session
-        EditorCraftRoom(self, Terms=True, Coordinator=True)
-        response = self.client.get(
-            self.merge_suggestion_url, {"company_url": company_url}
-        )
-
-        self.assertEqual(response.status_code, 200)
-        for suggestion in self.suggestions_to_merge:
-            if suggestion.company_url != company_url:
-                self.assertNotContains(response, suggestion.company_url)
 
 
 class PartnerFilesTest(TestCase):
