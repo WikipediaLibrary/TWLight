@@ -19,6 +19,7 @@ from django.urls import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.vary import vary_on_headers
 from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic.base import TemplateView, View, RedirectView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, FormView, DeleteView
@@ -44,7 +45,7 @@ from TWLight.users.helpers.authorizations import get_valid_partner_authorization
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -61,7 +62,7 @@ from .forms import (
 )
 from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
-from .serializers import UserSerializer
+from .serializers import FavoriteCollectionSerializer, UserSerializer
 from TWLight.applications.models import Application
 
 logger = logging.getLogger(__name__)
@@ -789,6 +790,8 @@ class WithdrawApplication(RedirectView):
 # Cache this view for 5 minutes, vary on language and cookie
 @method_decorator(cache_page(300), name="dispatch")
 @method_decorator(vary_on_headers("Accept-Language", "Cookie"), name="dispatch")
+# Ensure presence of CSRF Cookie
+@method_decorator(ensure_csrf_cookie, name="get")
 class MyLibraryView(TemplateView):
     template_name = "users/redesigned_my_library.html"
 
@@ -1172,28 +1175,23 @@ class MyLibraryView(TemplateView):
         return context
 
 
-# @TODO: reimplement as a form to leverage django's input sanitization
-def favorite_collection(request):
-    """ """
-    user_profile = request.user.userprofile
-    partner_pk = int(request.GET.get("partner_pk", None))
-    my_library_cache_key = str(request.GET.get("my_library_cache_key", None))
+class FavoriteCollectionView(APIView):
+    """
+    Handles AJAX request for editors favoriting their collections
+    """
 
-    favorites = user_profile.favorites.all()
-    favorite_pks = [f.pk for f in favorites]
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    if partner_pk:
-        if partner_pk in favorite_pks:
-            # partner is already in favorites, unfavoriting this partner
-            user_profile.favorites.remove(partner_pk)
-            response = {"added": False}
-        else:
-            user_profile.favorites.add(partner_pk)
-            response = {"added": True}
-        # Updating favorites invalidates the my_library cache
-        if my_library_cache_key:
-            cache.delete(my_library_cache_key)
-    else:
-        response = {"error": "A partner ID was not passed in this AJAX request."}
-
-    return JsonResponse(response)
+    def post(self, request, format=None):
+        data = dict(request.data)
+        data.update({"user_profile_pk": request.user.userprofile.pk})
+        serializer = FavoriteCollectionSerializer(data=data)
+        response_status = status.HTTP_400_BAD_REQUEST
+        if serializer.is_valid():
+            serializer.save()
+            response_status = status.HTTP_200_OK
+            if serializer.data.get("added"):
+                response_status = status.HTTP_201_CREATED
+            return Response(serializer.data, status=response_status)
+        return Response(serializer.errors, status=response_status)

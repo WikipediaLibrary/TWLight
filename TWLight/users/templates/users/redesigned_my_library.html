@@ -23,8 +23,8 @@
 {% block javascript %}
   <script type="text/javascript">
     // Dynamically add classes to the django-filter generated labels
-    labelLanguages = document.querySelector("[for=id_languages]")
-    labelTags = document.querySelector("[for=id_tags]")
+    labelLanguages = document.querySelector("[for=id_languages]");
+    labelTags = document.querySelector("[for=id_tags]");
 
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
@@ -182,7 +182,15 @@
     // Favoriting functionality
     function favoriteCollection(icon, partnerPk, myLibraryCacheKey) {
       $.ajax({
-        url: "{% url 'users:favorite_collection' %}?partner_pk=" + partnerPk + "&my_library_cache_key=" + myLibraryCacheKey,
+        url: "{% url 'users:favorite_collection' %}",
+        type: "POST",
+        headers: {'X-CSRFToken': getCookie("csrftoken")},
+        mode: 'same-origin', // Do not send CSRF token to another domain.
+        contentType: 'application/json',
+        data: JSON.stringify({
+              partner_pk: partnerPk,
+              my_library_cache_key: myLibraryCacheKey,
+        }),
         // on success
         success: function(response) {
           var favoritesNumber = document.getElementById("favorite-collections-number");
@@ -218,8 +226,10 @@
         },
         // on error
         error: function(response) {
-            // alert the error if any error occured
-            console.log(response.responseJSON.errors)
+            // log the error if any details are available
+            if (response.responseJSON.detail) {
+              console.log(response.responseJSON.detail)
+            }
         }
       });
     }
