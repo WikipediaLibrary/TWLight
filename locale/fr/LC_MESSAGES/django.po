@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-04-09 12:25+0000\n"
+"POT-Creation-Date: 2022-04-26 18:06+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:11+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -2864,25 +2864,25 @@ msgid "{wp_username}"
 msgstr "Nom d’utilisateur"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/oauth.py:218
+#: TWLight/users/oauth.py:250
 msgid "You tried to log in but presented an invalid access token."
 msgstr ""
 "Vous avez essayé de vous connecter mais en présentant un jeton d’accès non "
 "valide."
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:272 TWLight/users/oauth.py:410
+#: TWLight/users/oauth.py:305 TWLight/users/oauth.py:454
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain} n’est pas un serveur autorisé."
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:328
+#: TWLight/users/oauth.py:372
 msgid "Handshaker not initiated, please try logging in again."
 msgstr "Poignée de main non initialisée, veuillez essayer de vous reconnecter."
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:353
+#: TWLight/users/oauth.py:397
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
@@ -2891,32 +2891,32 @@ msgstr ""
 "bibliothèque. Veuillez vous connecter pour continuer."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:395
+#: TWLight/users/oauth.py:439
 msgid "Did not receive a valid oauth response."
 msgstr "N’a pas reçu de réponse <em>oauth</em> valide."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:423
+#: TWLight/users/oauth.py:468
 msgid "Could not find handshaker."
 msgstr "Impossible de trouver le protocole"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:436
+#: TWLight/users/oauth.py:481
 msgid "No session token."
 msgstr "Aucun jeton de session."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:449
+#: TWLight/users/oauth.py:494
 msgid "No request token."
 msgstr "Aucun jeton de demande."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:462
+#: TWLight/users/oauth.py:507
 msgid "Access token generation failed."
 msgstr "La génération du jeton d’accès a échoué."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:480
+#: TWLight/users/oauth.py:525
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2926,7 +2926,7 @@ msgstr ""
 "Carte de Bibliothèque Wikipédia ne peut pas être activé."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:489
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2938,7 +2938,7 @@ msgstr ""
 "courriel à wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:503
+#: TWLight/users/oauth.py:549
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Bienvenue ! Veuillez accepter les conditions d’utilisation."
 
