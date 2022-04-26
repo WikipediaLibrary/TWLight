@@ -12,7 +12,11 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
-from django.utils.translation import get_language, gettext as _
+from django.utils.translation import (
+    get_language,
+    gettext as _,
+    activate as translation_activate,
+)
 
 from urllib.parse import urlencode
 
@@ -76,6 +80,34 @@ def _rehydrate_token(token):
     """
     request_token = ConsumerToken(token["key"], token["secret"])
     return request_token
+
+
+def _check_user_preferred_language(user):
+    """
+    Check if a user has a language preference set in their
+    user profile
+    ----------
+    user : User
+        User about to log into TWL
+
+    Returns
+    -------
+    boolean
+        Returns True if a user has a preferred language set and it doesn't
+        match with the user's browser language
+    """
+
+    if user.userprofile.lang:
+        # Check if the browser language is the same as the user's
+        # preferred language
+        browser_lang = get_language()
+        user_lang = user.userprofile.lang
+        if browser_lang != user_lang:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 class OAuthBackend(object):
@@ -260,6 +292,7 @@ class OAuthInitializeView(View):
         # The Sites framework was designed for different URLs that correspond to
         # different databases or functionality - it's not a good fit here.
         domain = self.request.get_host()
+        user_preferred_lang_set = False
 
         try:
             assert domain in settings.ALLOWED_HOSTS  # safety first!
@@ -310,12 +343,23 @@ class OAuthInitializeView(View):
                 return_url = reverse_lazy("homepage")
                 logger.warning(e)
 
-            return HttpResponseRedirect(return_url)
+            response = HttpResponseRedirect(return_url)
+            user_preferred_lang_set = _check_user_preferred_language(user)
+            if user_preferred_lang_set:
+                logger.info(
+                    "User has preferred language different from browser language; setting language to preferred one..."
+                )
+                translation_activate(user.userprofile.lang)
+                response.set_cookie(
+                    settings.LANGUAGE_COOKIE_NAME, user.userprofile.lang
+                )
+
+            return response
         # If the user isn't logged in
         else:
             # Get handshaker for the configured wiki oauth URL.
             handshaker = _get_handshaker()
-            logger.info("handshaker gotten.")
+            logger.info("Handshaker obtained from OAuthInitialize.")
 
             try:
                 redirect, request_token = handshaker.initiate()
@@ -361,7 +405,7 @@ class OAuthInitializeView(View):
                 else:
                     local_redirect = reverse_lazy("homepage")
 
-            logger.info("handshaker initiated.")
+            logger.info("Handshaker initiated in OAuthInitialize.")
             self.request.session["request_token"] = _dehydrate_token(request_token)
 
             return HttpResponseRedirect(local_redirect)
@@ -413,6 +457,7 @@ class OAuthCallbackView(View):
 
         try:
             handshaker = _get_handshaker()
+            logger.info("Hanshaker obtained for OAuthCallback")
         except AssertionError as e:
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.warning(e)
@@ -494,6 +539,7 @@ class OAuthCallbackView(View):
 
         elif user:
             login(request, user)
+            user_preferred_lang_set = False
 
             if created:
                 messages.add_message(
@@ -535,7 +581,17 @@ class OAuthCallbackView(View):
                         logger.warning(e)
                 else:
                     return_url = reverse_lazy("terms")
+
+            user_preferred_lang_set = _check_user_preferred_language(user)
         else:
             return_url = reverse_lazy("homepage")
 
-        return HttpResponseRedirect(return_url)
+        response = HttpResponseRedirect(return_url)
+        if user_preferred_lang_set:
+            logger.info(
+                "User has preferred language different from browser language; setting language to preferred one...."
+            )
+            translation_activate(user.userprofile.lang)
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user.userprofile.lang)
+
+        return response
