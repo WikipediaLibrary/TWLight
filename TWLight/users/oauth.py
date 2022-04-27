@@ -292,6 +292,7 @@ class OAuthInitializeView(View):
         # The Sites framework was designed for different URLs that correspond to
         # different databases or functionality - it's not a good fit here.
         domain = self.request.get_host()
+        user = self.request.user
         user_preferred_lang_set = False
 
         try:
@@ -315,7 +316,7 @@ class OAuthInitializeView(View):
             pass
 
         # If the user has already logged in, let's not spam the OAuth provider.
-        if self.request.user.is_authenticated:
+        if user.is_authenticated:
             # We're using this twice. Not very DRY.
             # Send user either to the destination specified in the 'next'
             # parameter or to their own editor detail page.
