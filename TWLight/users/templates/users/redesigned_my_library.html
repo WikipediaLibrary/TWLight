@@ -180,7 +180,7 @@
     }
 
     // Favoriting functionality
-    function favoriteCollection(icon, partnerPk, myLibraryCacheKey) {
+    function favoriteCollection(icon, partnerPk) {
       $.ajax({
         url: "{% url 'users:favorite_collection' %}",
         type: "POST",
@@ -189,7 +189,6 @@
         contentType: 'application/json',
         data: JSON.stringify({
               partner_pk: partnerPk,
-              my_library_cache_key: myLibraryCacheKey,
         }),
         // on success
         success: function(response) {

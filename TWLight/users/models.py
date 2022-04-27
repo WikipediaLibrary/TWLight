@@ -36,6 +36,7 @@ import urllib.request, urllib.error, urllib.parse
 from annoying.functions import get_object_or_None
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.exceptions import (
     MultipleObjectsReturned,
     SuspiciousOperation,
@@ -110,6 +111,12 @@ class UserProfile(models.Model):
         choices=settings.LANGUAGES,
         help_text="Language",
     )
+    my_library_cache_key = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        editable=False,
+    )
     send_renewal_notices = models.BooleanField(
         default=True, help_text="Does this user want renewal reminder notices?"
     )
@@ -133,6 +140,12 @@ class UserProfile(models.Model):
         blank=True,
         help_text="The partner(s) that the user has marked as favorite.",
     )
+
+    def delete_my_library_cache(self):
+        """
+        This method is for the convenience of skipping the import of django cache in each place that needs to invalidate the my_library cache
+        """
+        return cache.delete(self.my_library_cache_key)
 
 
 def favorites_field_changed(sender, **kwargs):

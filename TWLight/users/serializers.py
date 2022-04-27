@@ -1,12 +1,10 @@
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from TWLight.users.models import UserProfile
 
 
 class FavoriteCollectionSerializer(serializers.Serializer):
-    my_library_cache_key = serializers.CharField()
     partner_pk = serializers.IntegerField(source="partner.pk")
     added = serializers.BooleanField(required=False)
     user_profile_pk = serializers.IntegerField(source="userprofile.pk")
@@ -15,7 +13,6 @@ class FavoriteCollectionSerializer(serializers.Serializer):
         """
         add or remove partner from favorites
         """
-        my_library_cache_key = self.validated_data.get("my_library_cache_key")
         partner_pk = self.validated_data.get("partner").get("pk")
         added = None
         user_profile = get_object_or_404(
@@ -32,8 +29,7 @@ class FavoriteCollectionSerializer(serializers.Serializer):
             user_profile.favorites.add(partner_pk)
             self.validated_data.update({"added": True})
         # Updating favorites invalidates the my_library cache
-        if my_library_cache_key:
-            cache.delete(my_library_cache_key)
+        user_profile.delete_my_library_cache()
 
         return self.validated_data
 

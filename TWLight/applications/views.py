@@ -1393,4 +1393,8 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             _("Your renewal request has been received. A coordinator will review your request."),
             # fmt: on
         )
+
+        # Renewing an application invalidates the my_library cache
+        self.request.user.userprofile.delete_my_library_cache()
+
         return HttpResponseRedirect(return_url)

@@ -814,7 +814,11 @@ class MyLibraryView(TemplateView):
         )
 
         # Store the result of `learn_cache_key` for invalidation
-        context["my_library_cache_key"] = learn_cache_key(self.request, vary_response)
+        user.userprofile.my_library_cache_key = learn_cache_key(
+            self.request, vary_response
+        )
+        user.userprofile.save()
+
         context["user"] = user
         context["editor"] = user.editor
         context["bundle_authorization"] = Partner.BUNDLE
