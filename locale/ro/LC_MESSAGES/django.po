@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-04-26 18:06+0000\n"
+"POT-Creation-Date: 2022-04-27 00:50+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:13+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2813,20 +2813,20 @@ msgstr ""
 "nevalid."
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:305 TWLight/users/oauth.py:454
+#: TWLight/users/oauth.py:306 TWLight/users/oauth.py:455
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain} nu este o gazdă permisă."
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:372
+#: TWLight/users/oauth.py:373
 msgid "Handshaker not initiated, please try logging in again."
 msgstr ""
 "Strângere de mână nu a fost inițializată, vă rugăm să încercați să vă "
 "conectați din nou."
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:397
+#: TWLight/users/oauth.py:398
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
@@ -2835,32 +2835,32 @@ msgstr ""
 "bibliotecii. Vă rugăm să vă conectați pentru a continua."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:439
+#: TWLight/users/oauth.py:440
 msgid "Did not receive a valid oauth response."
 msgstr "Nu a primit un răspuns valabil."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:468
+#: TWLight/users/oauth.py:469
 msgid "Could not find handshaker."
 msgstr "Nu am putut găsi protocolul."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:481
+#: TWLight/users/oauth.py:482
 msgid "No session token."
 msgstr "Fără jeton de sesiune"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:494
+#: TWLight/users/oauth.py:495
 msgid "No request token."
 msgstr "Fără cerere jeton."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:507
+#: TWLight/users/oauth.py:508
 msgid "Access token generation failed."
 msgstr "Generare jeton de acces nu a reușit."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:525
+#: TWLight/users/oauth.py:526
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2870,7 +2870,7 @@ msgstr ""
 "Bibliotecă Wikipedia nu poate fi activat."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:534
+#: TWLight/users/oauth.py:535
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2882,7 +2882,7 @@ msgstr ""
 "wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:549
+#: TWLight/users/oauth.py:550
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Bine ați venit! Vă rugăm să fiți de acord cu termenii de utilizare."
 
