@@ -787,8 +787,8 @@ class WithdrawApplication(RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-# Cache this view for 5 minutes, vary on language and cookie
-@method_decorator(cache_page(300), name="dispatch")
+# Cache this view for 60 minutes, vary on language and cookie
+@method_decorator(cache_page(60 * 60), name="dispatch")
 @method_decorator(vary_on_headers("Accept-Language", "Cookie"), name="dispatch")
 # Ensure presence of CSRF Cookie
 @method_decorator(ensure_csrf_cookie, name="get")
