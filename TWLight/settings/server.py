@@ -16,6 +16,8 @@ from .base import *
 # Let Django know that allowed hosts are trusted for CSRF.
 # Needed to be added for /admin
 CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
+# Allow CSRF token access in JavaScript
+CSRF_COOKIE_HTTPONLY = False
 
 # Never debug on servers
 DEBUG = False
@@ -24,7 +26,6 @@ DEBUG = False
 # python manage.py check --deploy
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
