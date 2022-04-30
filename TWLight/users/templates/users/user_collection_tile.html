@@ -87,7 +87,7 @@
         {% endif %}
         {% if user_collection.auth_open_app %}
         <div class="col-12" style="padding: 0px;">
-          <a href="{% url 'applications:evaluate' user_collection.auth_open_app.pk %}" class="btn btn-sm access-apply-button"
+          <a href="{% url 'applications:evaluate' user_collection.auth_open_app.pk %}" class="btn twl-btn btn-sm access-apply-button"
                 type="button" name="button">
             {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application. {% endcomment %}
             {% trans "Go to application" %}
