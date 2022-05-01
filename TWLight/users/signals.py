@@ -107,12 +107,11 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
         if previously_available and previously_bundle:
             remove_from_auths = True
 
-        # Case when partner is no more available
-        # but set to Bundle at the same time.
-        # We need to delete its existing authorizations for now
-        # whenever its status or authorization_method will change
-        # in future, situation will be handled by either add_to_auths
-        # remove_from_auths accordingly
+        # Fix T302882: Case when a partner does not have an Available status
+        # and has a Bundle authorization method set in the same operation.
+        # Then we need to delete its existing authorizations for now.
+        # If its status or authorization_method changes in future, situation will be
+        # handled by either add_to_auths or remove_from_auths accordingly.
         elif now_bundle and not previously_bundle:
             delete_defunct_authorizations = True
 
