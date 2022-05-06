@@ -31,4 +31,9 @@ flock -n ${lockfile}
     chmod 0600 "${TWLIGHT_BACKUP_DIR}/${date}.tar.gz"
 
     echo "Finished TWLight backup."
+
+    # Retain backups for 30 days.
+    find "${TWLIGHT_BACKUP_DIR}" -name "*.sql.gz" -mtime +30 -delete || :
+
+    echo "Removed backups created 30 days ago or more."
 } {lockfile}>&-
