@@ -33,7 +33,7 @@ flock -n ${lockfile}
     echo "Finished TWLight backup."
 
     # Retain backups for 30 days.
-    find "${TWLIGHT_BACKUP_DIR}" -name "*.sql.gz" -mtime +30 -delete || :
+    find "${TWLIGHT_BACKUP_DIR}" -name "*.tar.gz" -mtime +30 -delete || :
 
     echo "Removed backups created 30 days ago or more."
 } {lockfile}>&-
