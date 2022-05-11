@@ -59,7 +59,7 @@ urlpatterns = [
     ),
     url(
         r"^favorite_collection/$",
-        login_required(views.favorite_collection),
+        login_required(views.FavoriteCollectionView.as_view()),
         name="favorite_collection",
     ),
 ]

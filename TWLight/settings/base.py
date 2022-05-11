@@ -48,6 +48,11 @@ CACHES = {
     }
 }
 
+# Site paths that shouldn't be cached browser-side
+NEVER_CACHE_HTTP_HEADER_PATHS = [
+    "/users/my_library/",
+]
+
 # An atypical way of setting django languages for TranslateWiki integration:
 # https://translatewiki.net/wiki/Thread:Support/_The_following_issue_is_unconfirmed,_still_to_be_investigated._Adding_TheWikipediaLibrary_Card_Platform_TranslateWiki
 
@@ -129,6 +134,7 @@ TWLIGHT_APPS = [
     "TWLight.comments",
     "TWLight.api",
     "TWLight.ezproxy",
+    "TWLight.common",
 ]
 
 # dal (autocomplete_light) must go before django.contrib.admin.
@@ -171,6 +177,7 @@ MIDDLEWARE = [
     # That’s why SessionMiddleware must be enabled and appear before
     # MessageMiddleware.
     "django.contrib.messages.middleware.MessageMiddleware",
+    "TWLight.common.middleware.cache.NeverCacheHttpHeadersMiddleware",
 ]
 
 

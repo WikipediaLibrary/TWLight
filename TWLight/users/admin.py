@@ -39,10 +39,19 @@ class UserProfileInline(admin.StackedInline):
     extra = 1
     can_delete = False
     raw_id_fields = ("user",)
+    readonly_fields = ("my_library_cache_key",)
     fieldsets = (
         (
             None,
-            {"fields": ("terms_of_use", "terms_of_use_date", "use_wp_email", "lang")},
+            {
+                "fields": (
+                    "terms_of_use",
+                    "terms_of_use_date",
+                    "use_wp_email",
+                    "lang",
+                    "my_library_cache_key",
+                )
+            },
         ),
         (
             "Email preferences",

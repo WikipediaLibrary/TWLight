@@ -1374,6 +1374,11 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             ]
 
         renewal = application.renew()
+
+        # Requesting Renewing invalidates the my_library cache
+        # This happens regardless of sucess so that the message will be displayed
+        self.request.user.userprofile.delete_my_library_cache()
+
         if not renewal:
             messages.add_message(
                 self.request,
@@ -1393,4 +1398,5 @@ class RenewApplicationView(SelfOnly, ToURequired, DataProcessingRequired, FormVi
             _("Your renewal request has been received. A coordinator will review your request."),
             # fmt: on
         )
+
         return HttpResponseRedirect(return_url)
