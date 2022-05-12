@@ -84,6 +84,7 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
     """
     add_to_auths = False
     remove_from_auths = False
+    delete_defunct_authorizations = False
 
     try:
         previous_data = Partner.even_not_available.get(pk=instance.pk)
@@ -112,8 +113,16 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
         if previously_available and previously_bundle:
             remove_from_auths = True
 
+        # Fix T302882: Case when a partner does not have an Available status
+        # and has a Bundle authorization method set in the same operation.
+        # Then we need to delete its existing authorizations for now.
+        # If its status or authorization_method changes in future, situation will be
+        # handled by either add_to_auths or remove_from_auths accordingly.
+        elif now_bundle and not previously_bundle:
+            delete_defunct_authorizations = True
+
     # Let's avoid db queries if we don't need them
-    if add_to_auths or remove_from_auths:
+    if add_to_auths or remove_from_auths or delete_defunct_authorizations:
         authorizations_to_update = get_all_bundle_authorizations()
 
         if add_to_auths:
@@ -131,6 +140,13 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
         elif remove_from_auths:
             for authorization in authorizations_to_update:
                 authorization.partners.remove(instance)
+
+        elif delete_defunct_authorizations:
+            all_partner_authorizations = Authorization.objects.filter(
+                partners__pk=instance.pk
+            )
+            for defunct_authorization in all_partner_authorizations:
+                defunct_authorization.delete()
 
 
 @receiver(post_save, sender=Partner)
