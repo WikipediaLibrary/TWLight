@@ -80,17 +80,23 @@ class NewHomePageView(TemplateView):
         if tags:
             # Order by ascending tag order if tag name is before multidisciplinary
             if tags < "multidisciplinary_tag":
-                partners = Partner.objects.filter(tag_filter).order_by(
-                    "new_tags__tags", "?"
+                partners = (
+                    Partner.objects.select_related("logos")
+                    .filter(tag_filter)
+                    .order_by("new_tags__tags", "?")
                 )
             # Order by descending tag order if tag name is after multidisciplinary
             else:
-                partners = Partner.objects.filter(tag_filter).order_by(
-                    "-new_tags__tags", "?"
+                partners = (
+                    Partner.objects.select_related("logos")
+                    .filter(tag_filter)
+                    .order_by("-new_tags__tags", "?")
                 )
         # No tag filter was passed, ordering can be random
         else:
-            partners = Partner.objects.filter(tag_filter).order_by("?")
+            partners = (
+                Partner.objects.select_related("logos").filter(tag_filter).order_by("?")
+            )
 
         for partner in partners:
             # Obtaining translated partner description
