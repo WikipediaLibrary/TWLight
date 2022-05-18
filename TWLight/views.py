@@ -6,7 +6,7 @@ from django.views.generic.edit import FormView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -115,6 +115,9 @@ class NewHomePageView(TemplateView):
                 }
             )
         context["partners"] = partners_obj
+        context["no_of_languages"] = (
+            Partner.objects.values("languages").distinct().count()
+        )
         param_next_url = self.request.GET.get("next_url", None)
         if param_next_url:
             context["next_url"] = param_next_url
