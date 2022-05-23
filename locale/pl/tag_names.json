@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Santer"
+		]
+	},
+	"languages-and-literature_tag": "Języki i literatura",
+	"multidisciplinary_tag": "Publikacje interdyscyplinarne",
+	"physical-sciences_tag": "Nauki fizyczne",
+	"music_tag": "Muzyka",
+	"art_tag": "Sztuka",
+	"business-and-economics_tag": "Finanse i ekonomia",
+	"law_tag": "Prawo",
+	"education_tag": "Edukacja",
+	"philosophy-and-religion_tag": "Filozofia i religia",
+	"social-sciences_tag": "Nauki społeczne",
+	"history_tag": "Historia",
+	"culture_tag": "Kultura",
+	"life-sciences_tag": "Nauki biologiczne",
+	"health-sciences_tag": "Nauki o zdrowiu",
+	"earth-sciences_tag": "Nauki o Ziemi",
+	"technology_tag": "Technologia"
+}
