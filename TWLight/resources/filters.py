@@ -123,16 +123,16 @@ class PartnerFilter(MainPartnerFilter):
 
 
 class MergeSuggestionFilter(django_filters.FilterSet):
-    """Filter based on domain name"""
+    """Filter based on URL name"""
 
-    company_domain = django_filters.CharFilter(
-        label="Search via domain:",
+    company_url = django_filters.CharFilter(
+        label="Search via URL",
         field_name="company_url",
-        method="filter_company_domain",
+        method="filter_company_url",
     )
 
-    def filter_company_domain(self, queryset, name, value):
-        # Utility to filter suggestions based on common domain
+    def filter_company_url(self, queryset, name, value):
+        # Utility to filter suggestions based on common url
         lookup = "__".join([name, "icontains"])
 
         qs = queryset.filter(**{lookup: value})
@@ -140,10 +140,10 @@ class MergeSuggestionFilter(django_filters.FilterSet):
 
     class Meta:
         model = Suggestion
-        fields = ["company_domain"]
+        fields = ["company_url"]
 
     def __init__(self, data=None, *args, **kwargs) -> None:
         super().__init__(data, *args, **kwargs)
-        self.filters["company_domain"].field.widget.attrs.update(
+        self.filters["company_url"].field.widget.attrs.update(
             {"class": "form-control form-control-sm"}
         )
