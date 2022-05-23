@@ -10,9 +10,9 @@ import django_filters
 INSTANT = 0
 MULTI_STEP = 1
 ACCESS_CHOICES = (
-    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a  collection may be accessed immediately.
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
     (INSTANT, _("Instant (proxy) access")),
-    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a  collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+    # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
     (MULTI_STEP, _("Multi-step access")),
 )
 
