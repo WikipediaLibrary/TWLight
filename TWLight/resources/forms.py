@@ -46,14 +46,11 @@ class SuggestionMergeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(SuggestionMergeForm, self).__init__(*args, **kwargs)
-        # Translators: This labels a multiple choice field to choose the suggestions to merge
-        self.fields["suggestions_to_merge"].label = _("Merged suggestions")
-        # Translators: This labels a choiceField where users can enter the suggestion to merge into
-        self.fields["suggestions_merged_into"].label = _("Merge suggestions into")
+        self.fields["suggestions_to_merge"].label = "Merged suggestions"
+        self.fields["suggestions_merged_into"].label = "Merge suggestions into"
         self.helper = FormHelper()
         self.helper.layout = Layout(
             "suggestions_to_merge",
             "suggestions_merged_into",
-            # Translators: This labels a button which users click to merge suggestions.
-            Submit("submit", _("Submit"), css_class="twl-btn"),
+            Submit("submit", "Submit", css_class="twl-btn"),
         )

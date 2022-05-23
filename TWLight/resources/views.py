@@ -623,8 +623,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
-                # Translators: Shown to users when they successfully merge suggestion.
-                _("Suggestions merged successfully!"),
+                "Suggestions merged successfully!",
             )
             return HttpResponseRedirect(self.success_url)
 
@@ -632,7 +631,6 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                # Translators: This message is shown in case some error occurs during merging of suggestions.
-                _("Some Error Occured"),
+                "Some Error Occured",
             )
             raise PermissionDenied
