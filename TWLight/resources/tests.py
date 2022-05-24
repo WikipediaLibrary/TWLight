@@ -1402,9 +1402,7 @@ class SuggestionMergeViewTests(TestCase):
     def setUpTestData(cls):
         super().setUpTestData()
 
-        cls.suggestions_merged_into = SuggestionFactory(
-            company_url="www.testingMerged1234.com"
-        )
+        cls.main_suggestion = SuggestionFactory(company_url="www.testingMerged1234.com")
         cls.merge_suggestion_url = reverse("suggest-merge")
 
         # Manually setting up with EditorFactory since we don't need a client session yet
@@ -1417,18 +1415,18 @@ class SuggestionMergeViewTests(TestCase):
         cls.editor = EditorFactory()
 
         cls.upvoters_or_authors = [cls.editor, cls.coordinator]
-        cls.suggestions_merged_into.author = cls.coordinator.user
-        cls.suggestions_merged_into.upvoted_users.add(cls.coordinator.user)
-        cls.suggestions_merged_into.save()
+        cls.main_suggestion.author = cls.coordinator.user
+        cls.main_suggestion.upvoted_users.add(cls.coordinator.user)
+        cls.main_suggestion.save()
 
         cls.suggestion_merge_count = 5
 
         cls.company_urls = ["www.testing123.com", "www.testingMerge123.com"]
-        cls.suggestions_to_merge = [
+        cls.secondary_suggestions = [
             SuggestionFactory(company_url=random.choice(cls.company_urls))
             for _ in range(cls.suggestion_merge_count)
         ]
-        for suggestion in cls.suggestions_to_merge:
+        for suggestion in cls.secondary_suggestions:
             upvoter_or_author = random.choice(cls.upvoters_or_authors)
             suggestion.author = upvoter_or_author.user
             suggestion.upvoted_users.add(upvoter_or_author.user)
@@ -1468,12 +1466,12 @@ class SuggestionMergeViewTests(TestCase):
         """
 
         # setup suggestion pk form data
-        suggestions_to_merge_pks = []
-        for suggestion in self.suggestions_to_merge:
-            suggestions_to_merge_pks.append(suggestion.pk)
+        secondary_suggestions_pks = []
+        for suggestion in self.secondary_suggestions:
+            secondary_suggestions_pks.append(suggestion.pk)
         merge_suggestion_data = {
-            "suggestions_merged_into": self.suggestions_merged_into.pk,
-            "suggestions_to_merge": suggestions_to_merge_pks,
+            "main_suggestion": self.main_suggestion.pk,
+            "secondary_suggestions": secondary_suggestions_pks,
         }
 
         # Start a staff test client session
@@ -1489,13 +1487,13 @@ class SuggestionMergeViewTests(TestCase):
         response = self.client.get(self.merge_suggestion_url, follow=True)
         self.assertEqual(response.status_code, 200)
 
-        # suggestions_to_merge should be absent
-        for suggestion in self.suggestions_to_merge:
+        # secondary_suggestions should be absent
+        for suggestion in self.secondary_suggestions:
             self.assertNotContains(response, suggestion.company_url)
             self.assertNotContains(response, suggestion.suggested_company_name)
 
         # merged_suggestion should be present
-        merged_suggestion = Suggestion.objects.get(pk=self.suggestions_merged_into.pk)
+        merged_suggestion = Suggestion.objects.get(pk=self.main_suggestion.pk)
         self.assertContains(response, merged_suggestion.suggested_company_name)
         self.assertContains(response, merged_suggestion.company_url)
 
