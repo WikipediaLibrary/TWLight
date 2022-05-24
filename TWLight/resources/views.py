@@ -553,7 +553,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
     form_class = SuggestionMergeForm
     success_url = reverse_lazy("suggest")
 
-    def get_total_upvotes(self, suggestions, merged_suggestion):
+    def get_total_upvotes(self, suggestions, main_suggestion):
         """
         This function merges upvoted users for merged suggestions.
 
@@ -569,7 +569,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
         The `queryset` of upvoted users
 
         """
-        total_upvoted_users = merged_suggestion.upvoted_users.all()
+        total_upvoted_users = main_suggestion.upvoted_users.all()
         for suggestion in suggestions.all():
             total_upvoted_users |= suggestion.upvoted_users.all()
 
@@ -604,22 +604,22 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
     def form_valid(self, form):
 
         try:
-            merged_suggestion = form.cleaned_data["suggestions_merged_into"]
-            suggestions_to_merge = Suggestion.objects.filter(
-                id__in=form.cleaned_data["suggestions_to_merge"].values_list(
+            main_suggestion = form.cleaned_data["main_suggestion"]
+            secondary_suggestions = Suggestion.objects.filter(
+                id__in=form.cleaned_data["secondary_suggestions"].values_list(
                     "id", flat=True
                 )
-            ).exclude(id=merged_suggestion.id)
-            merged_suggestion.upvoted_users.add(
+            ).exclude(id=main_suggestion.id)
+            main_suggestion.upvoted_users.add(
                 *self.get_total_upvotes(
-                    suggestions=suggestions_to_merge,
-                    merged_suggestion=merged_suggestion,
+                    suggestions=secondary_suggestions,
+                    main_suggestion=main_suggestion,
                 )
             )
-            merged_suggestion.save()
+            main_suggestion.save()
 
             # Old suggestions shall be spliced
-            suggestions_to_merge.delete()
+            secondary_suggestions.delete()
             messages.add_message(
                 self.request,
                 messages.SUCCESS,

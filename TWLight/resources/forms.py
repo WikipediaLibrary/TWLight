@@ -39,18 +39,18 @@ class SuggestionForm(forms.Form):
 
 class SuggestionMergeForm(forms.Form):
 
-    suggestions_to_merge = forms.ModelMultipleChoiceField(
+    main_suggestion = forms.ModelChoiceField(queryset=Suggestion.objects.all())
+    secondary_suggestions = forms.ModelMultipleChoiceField(
         queryset=Suggestion.objects.all()
     )
-    suggestions_merged_into = forms.ModelChoiceField(queryset=Suggestion.objects.all())
 
     def __init__(self, *args, **kwargs):
         super(SuggestionMergeForm, self).__init__(*args, **kwargs)
-        self.fields["suggestions_to_merge"].label = "Merged suggestions"
-        self.fields["suggestions_merged_into"].label = "Merge suggestions into"
+        self.fields["main_suggestion"].label = "Main suggestion"
+        self.fields["secondary_suggestions"].label = "Secondary suggestions"
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            "suggestions_to_merge",
-            "suggestions_merged_into",
+            "main_suggestion",
+            "secondary_suggestions",
             Submit("submit", "Submit", css_class="twl-btn"),
         )
