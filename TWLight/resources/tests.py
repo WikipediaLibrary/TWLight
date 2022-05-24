@@ -1428,7 +1428,6 @@ class SuggestionMergeViewTests(TestCase):
             SuggestionFactory(company_url=random.choice(cls.company_urls))
             for _ in range(cls.suggestion_merge_count)
         ]
-        # print(cls.suggestions_to_merge)
         for suggestion in cls.suggestions_to_merge:
             upvoter_or_author = random.choice(cls.upvoters_or_authors)
             suggestion.author = upvoter_or_author.user
@@ -1471,7 +1470,6 @@ class SuggestionMergeViewTests(TestCase):
         # setup suggestion pk form data
         suggestions_to_merge_pks = []
         for suggestion in self.suggestions_to_merge:
-            print(suggestion.company_url)
             suggestions_to_merge_pks.append(suggestion.pk)
         merge_suggestion_data = {
             "suggestions_merged_into": self.suggestions_merged_into.pk,

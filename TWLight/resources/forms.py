@@ -45,7 +45,7 @@ class SuggestionMergeForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        super(SuggestionMergeForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["main_suggestion"].label = "Main suggestion"
         self.fields["secondary_suggestions"].label = "Secondary suggestions"
         self.helper = FormHelper()

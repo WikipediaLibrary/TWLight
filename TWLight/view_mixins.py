@@ -65,6 +65,22 @@ class CoordinatorsOnly(object):
         return super().dispatch(request, *args, **kwargs)
 
 
+class StaffOnly(object):
+    """
+    Restricts visibility to:
+    * Staff.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            messages.add_message(
+                request, messages.WARNING, "You must be staff to do that."
+            )
+            raise PermissionDenied
+
+        return super().dispatch(request, *args, **kwargs)
+
+
 def test_func_partner_coordinator(obj, user):
     obj_partner_coordinator_test = (
         user.is_superuser

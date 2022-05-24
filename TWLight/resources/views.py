@@ -15,7 +15,12 @@ from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
 from TWLight.users.groups import get_coordinators
 from TWLight.users.models import Authorization, User
-from TWLight.view_mixins import CoordinatorsOnly, PartnerCoordinatorOrSelf, EditorsOnly
+from TWLight.view_mixins import (
+    CoordinatorsOnly,
+    PartnerCoordinatorOrSelf,
+    EditorsOnly,
+    StaffOnly,
+)
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from .filters import MainPartnerFilter, MergeSuggestionFilter
@@ -546,7 +551,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
 
 
 @method_decorator(login_required, name="post")
-class SuggestionMergeView(CoordinatorsOnly, FormView):
+class SuggestionMergeView(StaffOnly, FormView):
 
     model = Suggestion
     template_name = "resources/merge_suggestion.html"
@@ -585,7 +590,7 @@ class SuggestionMergeView(CoordinatorsOnly, FormView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(SuggestionMergeView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         filter_suggestion = MergeSuggestionFilter(
             self.request.GET, queryset=self.get_queryset()
