@@ -19,6 +19,6 @@ then
   # Per https://github.com/MariaDB/mariadb-docker/issues/434, mariadb must be
   # pulled from own mariadb quay.io
   docker pull quay.io/mariadb-foundation/mariadb-devel:10.7
-  docker tag quay.io/mariadb-foundation/library/mariadb-devel:10.7 ${cr_server}/wikipedialibrary/mariadb-devel:10.7
+  docker tag quay.io/mariadb-foundation/mariadb-devel:10.7 ${cr_server}/wikipedialibrary/mariadb-devel:10.7
   docker push ${cr_server}/wikipedialibrary/mariadb-devel:10.7
 fi
