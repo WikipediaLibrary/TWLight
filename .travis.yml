@@ -24,11 +24,11 @@ install:
 # Skip these steps if the job was fired by cron
 script:
   # Run migrations
-  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_migrate.sh; fi
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_migrate.sh || docker-compose logs && exit 1; fi
   # Update translations
-  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit; fi
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_translate.sh last-commit || docker-compose logs && exit 1; fi
   # Run tests
-  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_test.sh; fi
+  - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ]; then docker-compose exec twlight /app/bin/virtualenv_test.sh || docker-compose logs && exit 1; fi
   # Submit test coverage report to coveralls
   - if [ "${TRAVIS_EVENT_TYPE}" != "cron" ] && [ -n "${TRAVIS_BRANCH+isset}" ] && [ -n "${TRAVIS_JOB_ID+isset}" ] && [ -n "${COVERALLS_REPO_TOKEN+isset}" ]; then docker-compose exec -e COVERALLS_REPO_TOKEN -e TRAVIS_JOB_ID -e TRAVIS_BRANCH twlight /venv/bin/coveralls ||:; fi
 
