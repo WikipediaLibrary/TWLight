@@ -10,4 +10,5 @@ docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialib
 docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialibrary/twlight_syslog:${BUILD_TAG}"
 docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialibrary/twlight_syslog:${COMMIT_TAG}"
 
+mkdir tmp
 docker-compose up -d db twlight

@@ -3,6 +3,11 @@
 version: '3.4'
 
 services:
+  db:
+    volumes:
+      - type: bind
+        source: ./tmp
+        target: /tmp
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
     build:
