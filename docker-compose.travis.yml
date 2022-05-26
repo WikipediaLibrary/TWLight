@@ -3,8 +3,6 @@
 version: '3.4'
 
 services:
-  db:
-    image: quay.io/mariadb-foundation/mariadb-devel:10.7
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
     build:

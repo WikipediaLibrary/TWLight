@@ -13,6 +13,8 @@ services:
   - docker
 
 install:
+  # Update packages.
+  - .travis/./apt_update.sh
   # mirror images from docker.io to ${cr_server}.
   # Do this step if the job was fired by cron
   - if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then .travis/./docker_mirror.sh; fi
