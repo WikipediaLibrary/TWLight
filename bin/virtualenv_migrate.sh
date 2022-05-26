@@ -18,13 +18,11 @@ then
 
     # List of TWLIGHT_APPS
     apps=($(python3 ${TWLIGHT_HOME}/manage.py diffsettings | grep 'TWLIGHT_APPS' | grep -o "'[^']*'" | xargs))
-    # List of apps that don't need migrations
-    skip_migration=(api comments common emails i18n)
     for path in "${apps[@]}"; do
       # Strip 'TWLight.' from the front of each TWLIGHT_APP
       app=${path:8}
       # skip apps that don't need migrations
-      if declare -p skip_migration 2> /dev/null | grep -q 'declare \-a'; then
+      if [ ! -d "${app}/migrations" ]; then
         continue
       fi
       echo "createinitialrevisions ${app}"
