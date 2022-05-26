@@ -3,6 +3,7 @@
 
 {% block content %}
   {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
 
   {% if not editor.wp_bundle_eligible %}
     {% include "users/eligibility_modal.html" %}
