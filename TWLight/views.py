@@ -6,7 +6,7 @@ from django.views.generic.edit import FormView
 from django.views import View
 from django.conf import settings
 from django.contrib.messages import get_messages
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -80,17 +80,23 @@ class NewHomePageView(TemplateView):
         if tags:
             # Order by ascending tag order if tag name is before multidisciplinary
             if tags < "multidisciplinary_tag":
-                partners = Partner.objects.filter(tag_filter).order_by(
-                    "new_tags__tags", "?"
+                partners = (
+                    Partner.objects.select_related("logos")
+                    .filter(tag_filter)
+                    .order_by("new_tags__tags", "?")
                 )
             # Order by descending tag order if tag name is after multidisciplinary
             else:
-                partners = Partner.objects.filter(tag_filter).order_by(
-                    "-new_tags__tags", "?"
+                partners = (
+                    Partner.objects.select_related("logos")
+                    .filter(tag_filter)
+                    .order_by("-new_tags__tags", "?")
                 )
         # No tag filter was passed, ordering can be random
         else:
-            partners = Partner.objects.filter(tag_filter).order_by("?")
+            partners = (
+                Partner.objects.select_related("logos").filter(tag_filter).order_by("?")
+            )
 
         for partner in partners:
             # Obtaining translated partner description
@@ -115,6 +121,9 @@ class NewHomePageView(TemplateView):
                 }
             )
         context["partners"] = partners_obj
+        context["no_of_languages"] = (
+            Partner.objects.values("languages").distinct().count()
+        )
         param_next_url = self.request.GET.get("next_url", None)
         if param_next_url:
             context["next_url"] = param_next_url
