@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-05-26 17:44+0000\n"
+"POT-Creation-Date: 2022-05-26 18:45+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:13+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2369,9 +2369,10 @@ msgstr "(அதிக தகவல்கள்)"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
+#, python-format
 msgid ""
-"Over 90 of the world's top subscription-only databases, free for Wikipedians "
-"of all backgrounds"
+"Over 90 of the world's top subscription-only databases, with content in "
+"%(no_of_languages)s languages, free for Wikipedians of all backgrounds"
 msgstr ""
 
 #. Translators: Information about The Wikipedia Library.

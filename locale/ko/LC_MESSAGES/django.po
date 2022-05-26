@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-05-26 17:44+0000\n"
+"POT-Creation-Date: 2022-05-26 18:45+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:12+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2322,9 +2322,13 @@ msgstr "더 많은 정보"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
+#, fuzzy, python-format
+#| msgid ""
+#| "Over 90 of the world's top subscription-only databases, free for "
+#| "Wikipedians of all backgrounds"
 msgid ""
-"Over 90 of the world's top subscription-only databases, free for Wikipedians "
-"of all backgrounds"
+"Over 90 of the world's top subscription-only databases, with content in "
+"%(no_of_languages)s languages, free for Wikipedians of all backgrounds"
 msgstr ""
 "모든 위키백과 사용자가 무료로 이용하는, 세계 최고의 90개 이상의 구독 전용 데"
 "이터베이스"
