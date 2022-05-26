@@ -7,14 +7,16 @@ env:
     - COMMIT_TAG=commit_${TRAVIS_COMMIT}
     - BUILD_TAG=build_${TRAVIS_BUILD_NUMBER}
 
+dist: focal
+
 language: minimal
 
 services:
   - docker
 
 install:
-  # Update packages.
-  - .travis/./apt_update.sh
+  # Manage apt packages.
+  - .travis/./apt.sh
   # mirror images from docker.io to ${cr_server}.
   # Do this step if the job was fired by cron
   - if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then .travis/./docker_mirror.sh; fi
