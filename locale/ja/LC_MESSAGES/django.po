@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-05-26 18:45+0000\n"
+"POT-Creation-Date: 2022-05-27 16:33+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:12+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1074,7 +1074,7 @@ msgstr "このメッセージの副本を受け取る"
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:35
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:36
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "提出"
@@ -1506,7 +1506,7 @@ msgstr "メッセージを送信しました。返答までしばらくお待ち
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:512
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:517
 msgid "You must be a Wikipedia editor to do that."
 msgstr "手続きはウィキペディアの編集者に限定されます。"
 
@@ -1530,12 +1530,12 @@ msgstr "EZProxy問合せURLが未指定です。"
 msgid "Search"
 msgstr "検索"
 
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 msgid "Instant (proxy) access"
 msgstr "即時アクセス (プロキシ経由)"
 
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
 msgid "Multi-step access"
 msgstr "複数ステップでアクセス"
@@ -1571,18 +1571,19 @@ msgid "Access"
 msgstr "利用"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
-#: TWLight/resources/forms.py:17
+#: TWLight/resources/forms.py:18
 msgid "Name of the potential partner"
 msgstr "提携組織候補の名称"
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
-#: TWLight/resources/forms.py:19
-#: TWLight/resources/templates/resources/suggest.html:57
+#: TWLight/resources/forms.py:20
+#: TWLight/resources/templates/resources/merge_suggestion.html:60
+#: TWLight/resources/templates/resources/suggest.html:66
 msgid "Description"
 msgstr "説明"
 
 #. Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
-#: TWLight/resources/forms.py:21
+#: TWLight/resources/forms.py:22
 msgid "Website"
 msgstr "ウェブサイト"
 
@@ -1678,6 +1679,28 @@ msgstr "絞り込み"
 #: TWLight/users/templates/users/filter_section.html:76
 msgid "Filter collections"
 msgstr "コレクションをしぼり込む"
+
+#. Translators: This is the title of the form where coordiantors can merge partner suggestions.
+#: TWLight/resources/templates/resources/merge_suggestion.html:34
+msgid "Merge Suggestions"
+msgstr ""
+
+#: TWLight/resources/templates/resources/merge_suggestion.html:64
+#: TWLight/resources/templates/resources/suggest.html:71
+msgid "URL"
+msgstr "URL"
+
+#: TWLight/resources/templates/resources/merge_suggestion.html:70
+#: TWLight/resources/templates/resources/suggest.html:77
+msgid "Proposer"
+msgstr "提案者"
+
+#. Translators: This is the text that shows upvotes for a suggestion
+#: TWLight/resources/templates/resources/merge_suggestion.html:87
+#, fuzzy
+#| msgid "Upvote"
+msgid "Upvotes"
+msgstr "支持する"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -2062,40 +2085,37 @@ msgstr "インポート済み"
 msgid "Suggest partners"
 msgstr "パートナーを提案"
 
+#. Translators: This is the text that appears in the button for staff to merge.
+#: TWLight/resources/templates/resources/suggest.html:41
+msgid "Merge"
+msgstr ""
+
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:39
+#: TWLight/resources/templates/resources/suggest.html:48
 msgid "Browse and support suggestions"
 msgstr "提案の閲覧と支持"
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:48
+#: TWLight/resources/templates/resources/suggest.html:57
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr "削除"
 
-#: TWLight/resources/templates/resources/suggest.html:62
-msgid "URL"
-msgstr "URL"
-
-#: TWLight/resources/templates/resources/suggest.html:68
-msgid "Proposer"
-msgstr "提案者"
-
-#: TWLight/resources/templates/resources/suggest.html:75
+#: TWLight/resources/templates/resources/suggest.html:84
 msgid "Track Progress"
 msgstr "進捗状況の追跡"
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:90
-#: TWLight/resources/templates/resources/suggest.html:118
-#: TWLight/resources/templates/resources/suggest.html:122
+#: TWLight/resources/templates/resources/suggest.html:99
+#: TWLight/resources/templates/resources/suggest.html:127
+#: TWLight/resources/templates/resources/suggest.html:131
 msgid "Upvoted"
 msgstr "支持済み"
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:93
-#: TWLight/resources/templates/resources/suggest.html:120
+#: TWLight/resources/templates/resources/suggest.html:102
+#: TWLight/resources/templates/resources/suggest.html:129
 msgid "Upvote"
 msgstr "支持する"
 
@@ -2106,7 +2126,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "ほんとうに<b>%(object)s</b>を削除してよろしいですか？"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:252
+#: TWLight/resources/views.py:257
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2115,27 +2135,27 @@ msgstr ""
 "ただき、このメッセージが表示されたことを必ずお伝えください。"
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:296
+#: TWLight/resources/views.py:301
 msgid "This partner is currently not open for applications"
 msgstr "この提携組織では現在、申請を受け付けていません"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:386
+#: TWLight/resources/views.py:391
 msgid "This partner is now waitlisted"
 msgstr "この提携組織への受付は現在、待機中です"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:399
+#: TWLight/resources/views.py:404
 msgid "This partner is now available for applications"
 msgstr "この提携組織では現在、申請を受け付け中"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:504
+#: TWLight/resources/views.py:509
 msgid "Your suggestion has been added."
 msgstr "提案いただいた件を追加しました。"
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:529
+#: TWLight/resources/views.py:534
 msgid "Suggestion has been deleted."
 msgstr "提案を削除しました。"
 

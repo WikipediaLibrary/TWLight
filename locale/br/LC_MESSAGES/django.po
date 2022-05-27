@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-05-26 18:45+0000\n"
+"POT-Creation-Date: 2022-05-27 16:32+0000\n"
 "PO-Revision-Date: 2022-03-31 11:20:10+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1045,7 +1045,7 @@ msgstr "Resev un eilenn eus ar gemennadenn"
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:35
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:36
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Kas"
@@ -1414,7 +1414,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:512
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:517
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -1438,12 +1438,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed immediately.
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 msgid "Instant (proxy) access"
 msgstr ""
 
-#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
+#. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
 msgid "Multi-step access"
 msgstr ""
@@ -1479,18 +1479,19 @@ msgid "Access"
 msgstr ""
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
-#: TWLight/resources/forms.py:17
+#: TWLight/resources/forms.py:18
 msgid "Name of the potential partner"
 msgstr "Anv an danvez keveler"
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
-#: TWLight/resources/forms.py:19
-#: TWLight/resources/templates/resources/suggest.html:57
+#: TWLight/resources/forms.py:20
+#: TWLight/resources/templates/resources/merge_suggestion.html:60
+#: TWLight/resources/templates/resources/suggest.html:66
 msgid "Description"
 msgstr "Deskrivadur"
 
 #. Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
-#: TWLight/resources/forms.py:21
+#: TWLight/resources/forms.py:22
 msgid "Website"
 msgstr "Lec'hienn Genrouedad"
 
@@ -1586,6 +1587,28 @@ msgstr "Silañ"
 #, fuzzy
 msgid "Filter collections"
 msgstr "Dastumadoù hegerz"
+
+#. Translators: This is the title of the form where coordiantors can merge partner suggestions.
+#: TWLight/resources/templates/resources/merge_suggestion.html:34
+msgid "Merge Suggestions"
+msgstr ""
+
+#: TWLight/resources/templates/resources/merge_suggestion.html:64
+#: TWLight/resources/templates/resources/suggest.html:71
+msgid "URL"
+msgstr "URL"
+
+#: TWLight/resources/templates/resources/merge_suggestion.html:70
+#: TWLight/resources/templates/resources/suggest.html:77
+msgid "Proposer"
+msgstr ""
+
+#. Translators: This is the text that shows upvotes for a suggestion
+#: TWLight/resources/templates/resources/merge_suggestion.html:87
+#, fuzzy
+#| msgid "Upvote"
+msgid "Upvotes"
+msgstr "Vot evit"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1936,40 +1959,37 @@ msgstr "Enporzhiet"
 msgid "Suggest partners"
 msgstr "Kas d'ar c'heveler"
 
+#. Translators: This is the text that appears in the button for staff to merge.
+#: TWLight/resources/templates/resources/suggest.html:41
+msgid "Merge"
+msgstr ""
+
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:39
+#: TWLight/resources/templates/resources/suggest.html:48
 msgid "Browse and support suggestions"
 msgstr ""
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:48
+#: TWLight/resources/templates/resources/suggest.html:57
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr "Lemel"
 
-#: TWLight/resources/templates/resources/suggest.html:62
-msgid "URL"
-msgstr "URL"
-
-#: TWLight/resources/templates/resources/suggest.html:68
-msgid "Proposer"
-msgstr ""
-
-#: TWLight/resources/templates/resources/suggest.html:75
+#: TWLight/resources/templates/resources/suggest.html:84
 msgid "Track Progress"
 msgstr ""
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:90
-#: TWLight/resources/templates/resources/suggest.html:118
-#: TWLight/resources/templates/resources/suggest.html:122
+#: TWLight/resources/templates/resources/suggest.html:99
+#: TWLight/resources/templates/resources/suggest.html:127
+#: TWLight/resources/templates/resources/suggest.html:131
 msgid "Upvoted"
 msgstr "Votet evit"
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:93
-#: TWLight/resources/templates/resources/suggest.html:120
+#: TWLight/resources/templates/resources/suggest.html:102
+#: TWLight/resources/templates/resources/suggest.html:129
 msgid "Upvote"
 msgstr "Vot evit"
 
@@ -1980,35 +2000,35 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Ha sur eo ho peus c'hoant da lemel <b>%(object)s</b) ?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:252
+#: TWLight/resources/views.py:257
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:296
+#: TWLight/resources/views.py:301
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:386
+#: TWLight/resources/views.py:391
 msgid "This partner is now waitlisted"
 msgstr "Ar c'heveler zo o c'hortoz bremañ"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:399
+#: TWLight/resources/views.py:404
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:504
+#: TWLight/resources/views.py:509
 #, fuzzy
 msgid "Your suggestion has been added."
 msgstr "N'eus bet ouzhpennet roadenn keveler ebet c'hoazh."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:529
+#: TWLight/resources/views.py:534
 msgid "Suggestion has been deleted."
 msgstr ""
 
