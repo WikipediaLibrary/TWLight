@@ -9,16 +9,11 @@ then
   echo "$cr_password" | docker login $cr_server -u "$cr_username" --password-stdin
 
   # Pull images from docker hub, then retag for $cr_server for reuse and mirroring.
-  declare -a images=("alpine:3.11" "debian:buster-slim" "nginx:latest" "python:3.8-buster" "python:3.7-slim-buster")
+  declare -a images=("alpine:3.11" "debian:buster-slim" "mariadb:10" "nginx:latest" "python:3.8-buster" "python:3.7-slim-buster")
   for image in "${images[@]}"
   do
     docker pull docker.io/library/${image}
     docker tag docker.io/library/${image} ${cr_server}/wikipedialibrary/${image}
     docker push ${cr_server}/wikipedialibrary/${image}
   done
-  # Per https://github.com/MariaDB/mariadb-docker/issues/434, mariadb must be
-  # pulled from own mariadb quay.io
-  docker pull quay.io/mariadb-foundation/mariadb-devel:10.7
-  docker tag quay.io/mariadb-foundation/mariadb-devel:10.7 ${cr_server}/wikipedialibrary/mariadb-devel:10.7
-  docker push ${cr_server}/wikipedialibrary/mariadb-devel:10.7
 fi
