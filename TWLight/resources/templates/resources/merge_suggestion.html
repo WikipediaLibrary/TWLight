@@ -1,0 +1,173 @@
+{% extends "new_base.html" %}
+{% load cache %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% load twlight_perms %}
+
+{% block extra_css %}
+<style>
+  .merge-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+{% include "header_partial_b4.html" %}
+{% include "message_partial.html" %}
+
+{% if all_suggestions %}
+<div id="main-content">
+  <form method='get' class="mb-4">
+    {{filter.form}}
+    <button class='btn twl-btn mt-1 mb-1' type='submit'>Apply</button>
+  </form>
+  <div class="card full-width mb-4">
+    <div class="card-header">
+      {% comment %}Translators: This is the title of the form where coordiantors can merge partner suggestions. {% endcomment %}
+      <strong><span class="card-title">{% trans 'Merge Suggestions' %}</span></strong>
+    </div>
+    <div class="card-body">
+      <form class="w-75 mx-auto" {% if user.is_authenticated %} method="post" {% elif request.GET %} method="get"
+        action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}" {% else %}
+        method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}" {% endif %}>
+        {% crispy form %}
+      </form>
+    </div>
+  </div>
+  {% for each_suggestion in all_suggestions %}
+  <div class="card full-width mb-4">
+    <div class="card-header merge-card-header">
+      <div class="card-title pull-left"><span class="card-title">{{ each_suggestion.suggested_company_name }}</span>
+      </div>
+
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input mergeInto" id='mergeInto-{{each_suggestion.id}}'
+          key={{each_suggestion.id}} display-text={{each_suggestion.suggested_company_name}}>
+        <label class="custom-control-label" for='mergeInto-{{each_suggestion.id}}'>Main suggestion</label>
+      </div>
+    </div>
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-lg-10">
+          <p>
+            <strong>{% trans 'Description' %}: </strong>
+            {{ each_suggestion.description | safe }}
+          </p>
+          <p>
+            <strong>{% trans 'URL' %}:</strong>
+            <a class="twl-links" href="{{ each_suggestion.company_url }}">
+              {{ each_suggestion.company_url }}
+            </a>
+          </p>
+          <p>
+            <strong>{% trans 'Proposer' %}:</strong>
+            <a class="twl-links" href="{{ each_suggestion.author.editor.wp_link_central_auth }}">
+              {{ each_suggestion.author.editor.wp_username }}
+            </a>
+          </p>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input merge" id='merge-{{each_suggestion.id}}'
+              key={{each_suggestion.id}} display-text={{each_suggestion.suggested_company_name}}>
+            <label class="custom-control-label" for='merge-{{each_suggestion.id}}'>Secondary suggestion</label>
+          </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="col-lg-2 pull-right" style="text-align: right;">
+          <button class="btn upvote btn-success">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            <span class="utext">
+              {% comment %}Translators: This is the text that shows upvotes for a suggestion {% endcomment %}
+              {% trans 'Upvotes' %}
+            </span>
+            <span class="count badge badge-light text-success">
+              {{ each_suggestion.upvoted_users.count }}
+            </span>
+          </button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<p> No suggestions to merge. </p>
+{% endif %}
+{% endblock content %}
+
+{% block javascript %}
+<script>
+  var merged_suggestions = []
+  var merge_into = null;
+  // Whenever a secondary suggestion checkbox is clicked, the Secondary suggestions form will change
+  $('.merge').click(
+    function () {
+      merged_suggestions = [];
+      $('.merge:checkbox:checked').each(
+        function (ind, item) {
+          var merged_suggestion_id = $(item).attr('id');
+          var suggestion_id = merged_suggestion_id.split("-")[1];
+          // Check if the main suggestion checkbox is checked
+          if($('#mergeInto-' + suggestion_id).prop('checked') && $(item).prop('checked')){
+            // Uncheck both and reset form
+            $('#mergeInto-' + suggestion_id).prop('checked', false);
+            $('.merge:checkbox:checked').prop('checked', false)
+            $('#id_secondary_suggestions').val("");
+            $('#id_main_suggestion').val("");
+          }
+          else{
+            merged_suggestions.push($(item).attr('key'));
+          }
+        }
+      );
+      $('#id_secondary_suggestions').val(merged_suggestions);
+    }
+  );
+  // Whenever a main suggestion checkbox is clicked, the Main suggestion form will change
+  $('.mergeInto').click(
+    function () {
+      var this_ = $(this);
+      var id = this_.attr('id');
+      var suggestion_id = id.split("-")[1];
+      // Check if the secondary suggestion checkbox is checked
+      if($('#merge-' + suggestion_id).prop('checked') && this_.prop('checked')){
+        // Uncheck both and reset form
+        $('.merge:checkbox:checked').prop('checked', false)
+        this_.prop('checked', false);
+        $('#id_secondary_suggestions').val("");
+        $('#id_main_suggestion').val("");
+      }
+      else{
+        $('.mergeInto').not(this_).prop('checked', false);
+        merge_into = this_.is(":checked") ? this_.attr("key") : "";
+        $('#id_main_suggestion').val(merge_into);
+      }
+    }
+  );
+  // Whenever there is a change in secondary suggestions, the secondary checkboxes will be checked
+  $('#id_secondary_suggestions').change(function () {
+    merged_suggestions = $(this).val()
+    $('#id_secondary_suggestions option').not(':selected').each(function (ind, ele) {
+      $(`input[id=merge-${ele.value}]`).prop('checked', false);;
+    })
+    $.each(
+      merged_suggestions, function (ind, item) {
+        $(`input[id=merge-${item}]`).prop('checked', true);;
+      }
+    );
+  })
+  // Whenever there is a change in the main suggestion, the main checkbox will be checked
+  $('#id_main_suggestion').change(function () {
+    merge_into = $(this).val()
+    $(`input[id=mergeInto-${merge_into}]`).click()
+
+  })
+</script>
+{% endblock javascript%}

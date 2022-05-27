@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
+from TWLight.resources.models import Suggestion
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
@@ -33,4 +34,23 @@ class SuggestionForm(forms.Form):
             "next",
             # Translators: This labels a button which users click to submit their suggestion.
             Submit("submit", _("Submit"), css_class="twl-btn"),
+        )
+
+
+class SuggestionMergeForm(forms.Form):
+
+    main_suggestion = forms.ModelChoiceField(queryset=Suggestion.objects.all())
+    secondary_suggestions = forms.ModelMultipleChoiceField(
+        queryset=Suggestion.objects.all()
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["main_suggestion"].label = "Main suggestion"
+        self.fields["secondary_suggestions"].label = "Secondary suggestions"
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            "main_suggestion",
+            "secondary_suggestions",
+            Submit("submit", "Submit", css_class="twl-btn"),
         )

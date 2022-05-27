@@ -33,6 +33,15 @@
       </div>
     </div>
     {% if all_suggestions %}
+    {% if user.is_staff %}
+      <a class="btn btn-outline-dark mb-1"
+          href="{% url 'suggest-merge' %}"s>
+        <span class="utext">
+            {% comment %}Translators: This is the text that appears in the button for staff to merge. {% endcomment %}
+            {% trans 'Merge' %}
+        </span>
+      </a>
+    {% endif %}
       <div class="card full-width">
         <div class="card-header">
           {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
