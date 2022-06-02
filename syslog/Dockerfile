@@ -1,4 +1,4 @@
-FROM quay.io/wikipedialibrary/alpine:3.11
+FROM quay.io/wikipedialibrary/alpine:3.11-updated
 RUN apk add --update \
   python3 \
   syslog-ng \
