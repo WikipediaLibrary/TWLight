@@ -23,7 +23,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:38+0000\n"
+"PO-Revision-Date: 2022-06-02 11:22:43+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1387,7 +1387,7 @@ msgstr "Koleksiyonları filtrele"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Önerileri Birleştir"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71
@@ -1401,9 +1401,8 @@ msgstr "Öneren"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "Destekle"
+msgstr "Olumlu oy"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1714,7 +1713,7 @@ msgstr "İş ortağı öner"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
 msgid "Merge"
-msgstr ""
+msgstr "Birleştir"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:48
@@ -2055,9 +2054,9 @@ msgstr "Daha fazla bilgi"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Normalde ücretli abonelik sistemiyle çalışan dünyanın en iyi 90+ veritabanı, her kesimden Vikipedistlerin erişimine açıktır."
+msgstr "%(no_of_languages)s dilde içeriğe sahip olan ve abonelik gerektiren dünyanın en iyi 90'dan fazla veritabanı, herhangi bir geçmişi olan Vikipedistler için ücretsiz!"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40

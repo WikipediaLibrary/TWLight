@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:35+0000\n"
+"PO-Revision-Date: 2022-06-02 11:22:38+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1411,7 +1411,7 @@ msgstr "مجموعات المرشحات"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "اقتراحات الدمج"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71

@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:36+0000\n"
+"PO-Revision-Date: 2022-06-02 11:22:40+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1113,7 +1113,7 @@ msgstr "<p>Cher/chère %(user)s,</p><p>Nos enregistrements indiquent que vous ê
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:10
 msgid "Breakdown"
-msgstr "Panne"
+msgstr "Évaluation"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16

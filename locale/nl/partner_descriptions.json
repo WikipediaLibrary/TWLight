@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"McDutchie",
 			"Romaine"
 		]
 	},
@@ -32,7 +33,7 @@
 	"71_short_description": "<strong>Economisch &amp; Political Weekly</strong> is een sociaalwetenschappelijk tijdschrift dat wekelijks wordt gepubliceerd. Toegang omvat alle recente publicaties naast archieven die teruggaan tot 1949. Prioriteit zal worden gegeven aan redacteuren die bijdragen aan onderwerpen die verband houden met India.",
 	"45_short_description": "<strong>Edinburgh University Press</strong> is een academische uitgeverij van boeken en tijdschriften in de geesteswetenschappen en sociale wetenschappen. EUP biedt toegang tot hun tijdschriftencollectie, over onderwerpen als film- en mediastudies, geschiedenis, literatuurwetenschap en Schotse studies.",
 	"9_short_description": "<strong>Édition Diffusion Presse Sciences</strong> is een wetenschappelijke uitgever van tijdschriften in zowel het Frans als het Engels. Hun tijdschriften omvatten Astronomy &amp; Astrophysics, Movement &amp; Sport Sciences en Mechanics &amp; Industry.",
-	"85_short_description": "<strong>Electronic Enlightenment</strong> is een uitgebreide online verzameling van bewerkte correspondentie van het begin van de 17e tot het midden van de 19e eeuw. EE geeft je toegang tot meer dan 70.000 historische documenten waarin meer dan 8.500 historische figuren alles bespreken, van religieuze tolerantie tot dierenrechten, vulkanologie tot klassieke archeologie, economische modellering tot beroemdheidscultuur.",
+	"85_short_description": "<strong>Electronic Enlightenment</strong> is een uitgebreide online verzameling van bewerkte correspondentie uit de periode van de vroege 17e tot het midden van de 19e eeuw. Met EE krijgt u toegang tot meer dan 70.000 historische documenten waarin meer dan 8.500 historische figuren van alles bespreken, van religieuze tolerantie tot dierenrechten, van vulkanologie tot klassieke archeologie, van economische modellering tot beroemdheidscultuur.",
 	"23_short_description": "<strong>ScienceDirect van Elsevier</strong> omvat meer dan 2500 tijdschriften, 900 series en 26.000 boektitels. Tijdschriften zijn onder andere The Lancet, Cell, Current Biology, Biomaterials, Biological Psychiatry, Social Science &amp; Medicine, Current Biology, Cognition, and Behavioural Brain Research.",
 	"23_description": "Naast abonnementsinhoud heeft Elsevier ook materiaal dat voor iedereen toegankelijk is. Naast het zoeken naar het open-access-symbool, kunt u het als volgt vinden:\n<ul>\n<li>Blader door de lijst met open-access-tijdschriften</li>\n<li>Vind een lijst van alle tijdschriften met open-access-artikelen op de ScienceDirect homepage door te klikken op \"View all publications with Open Access articles\"</li>\n<li>Gebruik de geavanceerde zoekfunctie en vink het vakje aan met de tekst \"Open access articles only\"</li>\n</ul>",
 	"56_short_description": "<strong>Emerald Group Publishing</strong> biedt toegang tot een reeks boeken en tijdschriften over verschillende onderwerpen, waaronder economie, onderwijs, techniek, gezondheid &amp; sociale zorg, marketing en sociologie.",
@@ -117,5 +118,7 @@
 	"125_short_description": "<strong>OESO iLibrary</strong> is een online bibliotheek met boeken, papers en statistieken gepubliceerd door de Organisatie voor Economische Samenwerking en Ontwikkeling (OESO).",
 	"126_short_description": "<strong>OESO Data</strong> is een verzameling grafieken, kaarten, tabellen en gerelateerde publicaties die zijn gepubliceerd door de Organisatie voor Economische Samenwerking en Ontwikkeling (OESO).",
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong> is een audiovisuele galerij met podcasts en foto's die zijn gepubliceerd door de Organisatie voor Economische Samenwerking en Ontwikkeling (OESO).",
-	"128_short_description": "<strong>Wiley</strong> biedt collecties van online tijdschriften, boeken en onderzoeksbronnen, die betrekking hebben op levenswetenschappen, gezondheid, sociale wetenschappen en natuurwetenschappen."
+	"128_short_description": "<strong>Wiley</strong> biedt collecties van online tijdschriften, boeken en onderzoeksbronnen, die betrekking hebben op levenswetenschappen, gezondheid, sociale wetenschappen en natuurwetenschappen.",
+	"129_short_description": "<strong>SPIE</strong> biedt toegang tot de SPIE Digital Library, een van de grootste verzamelingen van toegepast onderzoek op het gebied van optica en fotonica. De informatie is beschikbaar in de vorm van tijdschriften en eBooks.",
+	"130_short_description": "<strong>De University of Chicago Press</strong> is een academische uitgeverij van boeken en tijdschriften in de geestes- en sociale wetenschappen. Zij bieden toegang tot hun tijdschriften."
 }
