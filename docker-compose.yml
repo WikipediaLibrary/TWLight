@@ -9,7 +9,7 @@ services:
   db:
     ports:
       - "3306:3306"
-    image: quay.io/wikipedialibrary/mariadb:10
+    image: quay.io/wikipedialibrary/mariadb:10-updated
     volumes:
       - mysql:/var/lib/mysql
       - type: bind
@@ -51,7 +51,7 @@ services:
   web:
     ports:
       - "80:80"
-    image: quay.io/wikipedialibrary/nginx:latest
+    image: quay.io/wikipedialibrary/nginx:latest-updated
     volumes:
       - type: bind
         source: ./conf/robots.txt

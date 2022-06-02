@@ -1,4 +1,4 @@
-FROM quay.io/wikipedialibrary/python:3.7-slim-buster as twlight_base
+FROM quay.io/wikipedialibrary/python:3.7-slim-buster-updated as twlight_base
 # Base dependencies.
 RUN apt update ; \
     apt install -y --no-install-recommends \
