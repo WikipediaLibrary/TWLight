@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Amire80
+# Author: Asma
 # Author: Dr. Mohammed
 # Author: FiberAhmed
 # Author: Hhaboh162002
@@ -24,7 +25,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-06-02 11:22:38+0000\n"
+"PO-Revision-Date: 2022-06-06 11:23:44+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1425,9 +1426,8 @@ msgstr ""
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "تصويت إيجابي"
+msgstr "التصويتات المؤيدة"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1740,7 +1740,7 @@ msgstr "اقتراح شركاء"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
 msgid "Merge"
-msgstr ""
+msgstr "دمج"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:48
