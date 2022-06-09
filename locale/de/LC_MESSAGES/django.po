@@ -25,13 +25,14 @@
 # Author: Sandro Halank (WMDE)
 # Author: Seewolf
 # Author: SoWhy
+# Author: ThisCarthing
 # Author: Umlaut
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-06-02 11:22:39+0000\n"
+"PO-Revision-Date: 2022-06-09 11:24:08+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2068,9 +2069,9 @@ msgstr "Weitere Informationen"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Über 90 der weltweit besten abonnementpflichtigen Datenbanken mit Inhalt in %(no_of_languages) Sprachen, kostenlos für Aktive der Wikimedia-Projekte!"
+msgstr "Über 90 der weltweit besten abonnementpflichtigen Datenbanken mit Inhalt in %(no_of_languages)s Sprachen, kostenlos für Aktive der Wikimedia-Projekte!"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
