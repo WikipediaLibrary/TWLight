@@ -16,12 +16,13 @@
 # Author: Yusuke1109
 # Author: ネイ
 # Author: 春春眠眠
+# Author: 紅い目の女の子
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:36+0000\n"
+"PO-Revision-Date: 2022-06-13 11:25:20+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -275,7 +276,7 @@ msgstr "この提携組織は図書館バンドル制度に加盟しており、
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr "現在、この申請は保留されています。提携組織においてアクセス経費が確保できませんでした。"
+msgstr "この申請は保留されています。現在、提携組織から提供されている利用可能なアクセス権が不足しているためです。"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
@@ -283,7 +284,7 @@ msgstr "現在、この申請は保留されています。提携組織におい
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr "調整役の皆さんへ: このページには本名やメールアドレスなど個人情報が含まれている可能性があります。これらは秘匿すべき情報であることをご注意しておきます。"
+msgstr "調整役の皆さんへ: このページには、本名やメールアドレスなどの個人情報が含まれている可能性があります。これらは秘匿すべき情報であることに注意してください。"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
@@ -2055,9 +2056,9 @@ msgstr "詳細情報"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "世界最高の90件超の購読制データベースを、あらゆる立場のウィキメディアンがフリーに利用"
+msgstr "%(no_of_languages)s の言語で提供されている、世界でもトップクラスの90件以上の購読制データベースを、あらゆる立場のウィキメディアンが無償で利用できます"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40

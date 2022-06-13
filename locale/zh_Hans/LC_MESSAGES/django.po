@@ -37,7 +37,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:38+0000\n"
+"PO-Revision-Date: 2022-06-13 11:25:23+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1401,7 +1401,7 @@ msgstr "筛选馆藏"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "合并建议"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71
@@ -1728,7 +1728,7 @@ msgstr "建议合作伙伴"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
 msgid "Merge"
-msgstr ""
+msgstr "合并"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:48
