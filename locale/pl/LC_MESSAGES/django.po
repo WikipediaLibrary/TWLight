@@ -20,11 +20,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:37+0000\n"
+"PO-Revision-Date: 2022-06-16 11:24:40+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
@@ -709,7 +709,7 @@ msgstr "Do jakich zasobów chcesz uzyskać dostęp?"
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:26
 msgid "Library Bundle partners are not shown as eligibility is determined automatically."
-msgstr "Lista nie obejmuje partnerów z Pakietu Bazowego, ponieważ dostęp do nich jest przyznawany automatycznie po spełnieniu kryteriów."
+msgstr "Lista nie obejmuje partnerów wchodzących w skład Pakietu Bazowego, do których dostęp jest przyznawany automatycznie po spełnieniu kryteriów."
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
 #: TWLight/applications/templates/applications/request_for_application.html:48
@@ -1306,7 +1306,7 @@ msgstr "Strona internetowa"
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
 msgid "Not searchable"
-msgstr "Nie jest wyszukiwalna"
+msgstr "Nie jest przeszukiwalna"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1315,7 +1315,7 @@ msgstr "Nie jest wyszukiwalna"
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
-msgstr "Częściowo wyszukiwalna"
+msgstr "Częściowo uwzgl. w wyszukiwaniu"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1347,7 +1347,7 @@ msgstr "Biblioteka Wikipedia umożliwia aktywnym wikipedystom bezpłatny dostęp
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr "Skorzystaj z wyszukiwarki u góry strony lub przeglądaj bezpośrednio witryny wydawców."
+msgstr "Skorzystaj z wyszukiwarki u góry strony lub przeglądaj witryny wydawców indywidualnie."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -1411,7 +1411,7 @@ msgstr "Głosy poparcia"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
-msgstr "Powrót do Mojej biblioteki"
+msgstr "Wróć do swojej biblioteki"
 
 #: TWLight/resources/templates/resources/partner_detail.html:22
 msgid "Back to partners"
@@ -1512,7 +1512,7 @@ msgstr "Dostęp w ramach Pakietu Bazowego"
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:138
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr "Masz dostęp do partnerów z Pakietu Bazowego. Kliknij powyższy przycisk, aby przejść do kolekcji."
+msgstr "Kwalifikujesz się do dostępu do zasobów partnerów wchodzących w skład Pakietu Bazowego. Kliknij przycisk powyżej, aby przejść do kolekcji."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
@@ -1978,7 +1978,7 @@ msgstr "EZProxy jest serwerem proxy, którego używamy do uwierzytelniania naszy
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr "Podczas uzyskiwania dostępu do treści za pośrednictwem EZPRoxy można zauważyć, że adresy URL są dynamicznie aktualizowane. Z tego powodu zalecamy logowanie się za pośrednictwem naszej platformy, a nie bezpośrednie otwieranie witryn naszych partnerów. W przypadku wątpliwości co do korzystania z serwera proxy należy sprawdzić, czy adres URL zawiera „idm.oclc”. Jeśli tak, oznacza to, że użytkownik korzysta z EZProxy."
+msgstr "Podczas uzyskiwania dostępu do materiałów źródłowych za pośrednictwem EZPRoxy można zauważyć, że ich adresy URL są dynamicznie aktualizowane. Nie jest to możliwe przy przeglądaniu stron naszych partnerów z pominięciem EZPRoxy, dlatego zalecamy, aby uprzednio zalogować się w naszej platformie. W przypadku wątpliwości co do korzystania z serwera proxy należy sprawdzić, czy adres URL zawiera ciąg „idm.oclc”. Jeśli tak, oznacza to, że użytkownik korzysta z EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:182
@@ -2515,22 +2515,22 @@ msgstr "Profil/Ustawienia"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
 #: TWLight/users/templates/users/filter_section.html:32
 msgid "Key"
-msgstr "Klucz"
+msgstr "Legenda"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:39
 msgid "Collection is fully searchable via the search bar"
-msgstr "Kolekcja jest w pełni wyszukiwalna przy użyciu paska wyszukiwania"
+msgstr "Kolekcja jest w pełni przeszukiwalna poprzez pasek wyszukiwania"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:48
 msgid "Collection is only partially searchable via the search bar"
-msgstr "Kolekcja jest częściowo wyszukiwalna przy użyciu paska wyszukiwania"
+msgstr "Kolekcja jest częściowo przeszukiwalna poprzez pasek wyszukiwania"
 
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
-msgstr "Pozostałe kolekcje należy przeglądać indywidualnie"
+msgstr "Pozostałe kolekcje należy przeszukiwać indywidualnie"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2921,7 +2921,7 @@ msgstr ""
 #: TWLight/users/views.py:159
 #, python-brace-format
 msgid "Please <a class='twl-links' href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
-msgstr "Aby ułatwić koordynatorom ocenę Twoich zgłoszeń, zaktualizuj <a class='twl-links' href='{url}'>opis swojego wkładu</a> w Wikipedii."
+msgstr "Aby ułatwić koordynatorom sprawdzanie Twoich zgłoszeń, uzupełnij <a class='twl-links' href='{url}'>opis swojego wkładu</a> w Wikipedii."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:272
