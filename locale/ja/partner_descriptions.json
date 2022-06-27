@@ -5,6 +5,7 @@
 			"MirukuPC",
 			"Omotecho",
 			"Ryoon",
+			"SawaTszm",
 			"Yusuke1109",
 			"紅い目の女の子"
 		]
@@ -120,6 +121,9 @@
 	"120_short_description": "<strong>Future Science</strong> フューチャー・サイエンスには、生物学と薬学関連のリソースをまとめてあります。",
 	"119_short_description": "<strong>Future Medicine</strong> フューチャー・メディスンは生化学関連のリソース集です。",
 	"125_short_description": "<strong>OECD iLibrary</strong>はオンライン図書館\n\n<strong>OECD iLibrary</strong>は、経済協力開発機構（OECD）が発行する書籍、論文、統計などのオンライン図書館です。",
+	"126_short_description": "<strong>OECD Data</strong> は、経済協力開発機構（OECD: the Organisation for Economic Cooperation and Development）が発行する図表、地図、表、および関連出版物のリポジトリです。",
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong>は、経済協力開発機構（OECD）によって公開されたポッドキャストや写真を含む、視聴覚ギャラリーです。",
+	"128_short_description": "<strong>Wiley</strong>は、生命科学、健康科学、社会科学、物理科学をカバーするオンラインジャーナル、書籍、研究資料のコレクションを提供します。",
+	"129_short_description": "<strong>SPIE</strong>は、光学およびフォトニクスの応用研究の最大級のコレクションであるSPIEデジタルライブラリーへのアクセスを提供しています。リソースはジャーナルと電子ブックで提供されています。",
 	"130_short_description": "<strong>The University of Chicago Press</strong>は、人文科学と社会科学に関する書籍・雑誌の出版社です。雑誌へのアクセス権が提供されています。"
 }

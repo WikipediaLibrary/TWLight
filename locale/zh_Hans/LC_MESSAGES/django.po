@@ -15,6 +15,7 @@
 # Author: Ice bulldog
 # Author: Interestinghe
 # Author: Josephine W.
+# Author: LNDDYL
 # Author: Liuxinyu970226
 # Author: MuratTheTurkish
 # Author: Nikkimaria
@@ -37,11 +38,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-06-13 11:25:23+0000\n"
+"PO-Revision-Date: 2022-06-27 11:22:17+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -259,7 +260,7 @@ msgstr "3个月"
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
 msgid "6 months"
-msgstr "6個月"
+msgstr "6个月"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
@@ -1918,7 +1919,7 @@ msgstr "如果您打算申请可用的馆藏，请先检查您是否无法通过
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr "如果您的帐户在一个或多个维基媒体项目上被封禁，仍可能被获准访问维基百科图书馆。但您将需要与维基百科图书馆团队联系，以便他们检查您的封禁情况。如果您因内容问题而被封禁，最明显的是侵犯版权，或者是被多次长期封禁，我们可能会拒绝您的请求。此外，如果您的封禁状态在批准后发生了变化，您将需要再次申请审核。"
+msgstr "如果您的帐户在一个或多个维基媒体项目上被封禁，仍可能被获准访问维基百科图书馆。但您将需要与维基百科图书馆团队联系，以便他们检查您的封禁情况。如果您因内容问题而被封禁，特别是侵犯版权，或者是被多次长期封禁，我们可能会拒绝您的请求。此外，如果您的封禁状态在批准后发生了变化，您将需要再次申请审核。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2418,7 +2419,7 @@ msgstr "没有在任何项目上被封禁？"
 #: TWLight/users/templates/users/editor_detail_data.html:133
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "看起来您的帐户有一个活跃的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a class=\"twl-links\" href=\"%(contact_url)s\">与我们联系</a>。"
+msgstr "看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a class=\"twl-links\" href=\"%(contact_url)s\">与我们联系</a>。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:148
@@ -2473,7 +2474,7 @@ msgstr "个人数据"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:257
 msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
-msgstr "以下信息仅对您、站点管理员、出版商合作伙伴（如果需要）和维基百科thus图书馆志愿协调员（已签署保密协议）可见。"
+msgstr "以下信息仅对您、站点管理员、出版商合作伙伴（如果需要）和维基百科图书馆志愿协调员（已签署保密协议）可见。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:267
@@ -2510,7 +2511,7 @@ msgstr "是否同意该站点的<a href=\"%(terms)s\" class=\"text-danger\">使�
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "看起来您的帐户有一个活跃的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a href=\"%(contact_url)s\">与我们联系</a>。"
+msgstr "看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a href=\"%(contact_url)s\">与我们联系</a>。"
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -2995,5 +2996,5 @@ msgstr "在上个月至少编辑10次"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:836 TWLight/views.py:44
 msgid "No active blocks"
-msgstr "无有效的封禁"
+msgstr "没有生效的封禁"
 

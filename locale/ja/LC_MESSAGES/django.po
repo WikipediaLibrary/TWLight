@@ -10,6 +10,7 @@
 # Author: Omotecho
 # Author: Otokoume
 # Author: Sabelöga
+# Author: SawaTszm
 # Author: Shirayuki
 # Author: Tamaki Wakita
 # Author: Tmv
@@ -22,11 +23,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:33+0000\n"
-"PO-Revision-Date: 2022-06-13 11:25:20+0000\n"
+"PO-Revision-Date: 2022-06-27 11:22:14+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -83,9 +84,8 @@ msgstr "提携組織名"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:312
-#, fuzzy
 msgid "Renewal confirmation"
-msgstr "利用者情報"
+msgstr "更新確認"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -684,7 +684,7 @@ msgstr "状態を設定"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "応募が成功した場合、当社はお客様のメールアドレスを%(partner)sと共有することがあります。これは、お客様のリソースへのアクセスを設定するために必要です。このフォームを送信することにより、あなたは、あなたのアプリケーションが成功した場合、アカウント設定の目的で、あなたの電子メールアドレスが%(partner)sと共有されることに同意するものとします。"
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -1402,7 +1402,6 @@ msgstr "提案者"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
 msgstr "支持する"
 
@@ -1900,7 +1899,7 @@ msgstr "現状でウィキメディアのいずれのプロジェクトでもブ
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr ""
+msgstr "利用可能なコレクションに申し込む場合、まず、他の図書館や機関を通じて既にアクセス権を持っていないかどうかを確認してください。もしお持ちであれば、この資料のためにWikipedia Libraryを使用する代わりに、そのアクセスを利用することをご検討ください。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99

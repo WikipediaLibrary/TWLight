@@ -20,11 +20,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:38+0000\n"
+"PO-Revision-Date: 2022-06-27 11:22:17+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -516,7 +516,7 @@ msgstr "Không có phiên bản cũ hơn."
 
 #: TWLight/applications/templates/applications/application_list.html:37
 msgid "View applications which are..."
-msgstr "Xem các hồ sơ..."
+msgstr "Xem các yêu cầu…"
 
 #: TWLight/applications/templates/applications/application_list.html:43
 msgid "Pending review"
