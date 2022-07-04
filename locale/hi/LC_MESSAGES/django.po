@@ -13,6 +13,7 @@
 # Author: Omkhandade
 # Author: Prong$31
 # Author: RaoSahil88
+# Author: Saurmandal
 # Author: Shypoetess
 # Author: UY Scuti
 msgid ""
@@ -20,11 +21,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:36+0000\n"
+"PO-Revision-Date: 2022-07-04 11:22:00+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -52,7 +53,7 @@ msgstr "आपके बारे में"
 #: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>आपके व्यक्तिगत डेटा को हमारी <a class='twl-links' href='{terms_url}'>गोपनीयता नीति के अनुसार संसाधित किया जाएगा</a>.</i></small></p>"
+msgstr "<p><small>आपके व्यक्तिगत डेटा को हमारी <a class='twl-links' href='{terms_url}'>गोपनीयता नीति के अनुसार संसाधित किया जाएगा</a>।</small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
@@ -81,9 +82,8 @@ msgstr "भागीदार का नाम"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:312
-#, fuzzy
 msgid "Renewal confirmation"
-msgstr "उपयोगकर्ता जानकारी"
+msgstr "नवीकरण जानकारी"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -295,7 +295,7 @@ msgstr "आवेदन का मूल्यांकन करें"
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
 msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
-msgstr "इस उपयोगकर्ता ने अपने डेटा के प्रसंस्करण पर प्रतिबंध का अनुरोध किया है, इसलिए आप उनके आवेदन की स्थिति नहीं बदल सकते।"
+msgstr "इस सदस्य ने अपने डेटा के प्रोसेसिंग पर प्रतिबंध का अनुरोध किया है, इसलिए आप उनके आवेदन की स्थिति नहीं बदल सकते।"
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:48
@@ -485,7 +485,7 @@ msgstr "टिप्पणियाँ सभी समन्वयकों औ
 #: TWLight/resources/templates/resources/partner_users.html:29
 #: TWLight/resources/templates/resources/partner_users.html:69
 msgid "User"
-msgstr "उपयोगकर्ता"
+msgstr "सदस्य"
 
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
 #: TWLight/applications/templates/applications/application_evaluation.html:309
@@ -2375,7 +2375,7 @@ msgstr ""
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:47
 msgid "User information"
-msgstr "उपयोगकर्ता जानकारी"
+msgstr "सदस्य की जानकारी"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:49
@@ -2385,7 +2385,7 @@ msgstr "संपादक डेटा"
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:59
 msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
-msgstr "* वाली सूचना  सीधे विकिपीडिया से प्राप्त की गई थी। अन्य जानकारी सीधे उपयोगकर्ताओं या साइट प्रबंधकों द्वारा उनकी पसंदीदा भाषा में डाली गई थी।"
+msgstr "'*' वाली जानकारी सीधे विकिपीडिया से प्राप्त की गई थी। दूसरी जानकारी सीधे सदस्यों या साइट प्रबंधकों द्वारा उनकी पसंदीदा भाषा में डाली गई थी।"
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:71
@@ -2425,9 +2425,8 @@ msgstr "उपयोग की शर्तें संतुष्ट कर�
 
 #. Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer.
 #: TWLight/users/templates/users/editor_detail_data.html:57
-#, fuzzy
 msgid "at their last login, did this user meet the criteria set forth in the terms of use?"
-msgstr "उनके अंतिम लॉगिन पर, क्या यह उपयोगकर्ता उपयोग की शर्तों में निर्धारित मानदंडों को पूरा करता है?"
+msgstr "उनके अंतिम लॉग-इन पर, क्या इस सदस्य ने उपयोग की शर्तों में निर्धारित मानदंडों को पूरा किया?"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:72
