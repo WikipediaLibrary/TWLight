@@ -8,6 +8,7 @@
 # Author: Gombang
 # Author: HaEr48
 # Author: Ice bulldog
+# Author: Mahali syarifuddin
 # Author: Mnam23
 # Author: NFarras
 # Author: Naufal06
@@ -20,11 +21,11 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-05-30 11:21:36+0000\n"
+"PO-Revision-Date: 2022-07-07 11:20:25+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-05-28 09:18:00+0000\n"
+"X-POT-Import-Date: 2022-06-13 14:30:43+0000\n"
 "X-Generator: MediaWiki 1.39.0-alpha; Translate 2022-04-26\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1384,7 +1385,7 @@ msgstr "Penyaring koleksi"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Gabungkan Saran"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71
@@ -1710,7 +1711,7 @@ msgstr "Sarankan mitra"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
 msgid "Merge"
-msgstr ""
+msgstr "Gabungkan"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:48
@@ -1750,7 +1751,7 @@ msgstr "Apakah Anda yakin ingin menghapus <b>%(object)s</b>?"
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
 #: TWLight/resources/views.py:257
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "Beberapa otorisasi dikembalikan - ada yang salah. Silakan hubungi kami dan jangan lupa untuk menyebutkan pesan ini."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
 #: TWLight/resources/views.py:301
@@ -1875,22 +1876,22 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
 msgid "You have an account that is a minimum of 6 months old"
-msgstr "Anda memiliki akun yang berusia minimum 6 bulan"
+msgstr "Anda memiliki akun yang berusia minimal 6 bulan;"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "Anda telah berkontribusi setidaknya 500 suntingan di proyek-proyek Wikimedia"
+msgstr "Anda telah membuat minimal 500 suntingan di proyek-proyek Wikimedia;"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:79
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr "Anda telah melakukan setidaknya 10 suntingan di proyek-proyek Wikimedia bulan lalu"
+msgstr "Anda telah membuat setidaknya 10 suntingan di proyek-proyek Wikimedia dalam sebulan terakhir;"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:83
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr ""
+msgstr "Anda saat ini tidak sedang diblokir untuk menyunting proyek Wikimedia."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
@@ -1996,7 +1997,7 @@ msgstr ""
 #: TWLight/templates/about.html:218
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
-msgstr ""
+msgstr "Jika Anda memiliki pertanyaan, membutuhkan bantuan, atau ingin menjadi sukarelawan untuk membantu, silakan lihat <a class=\"twl-links\" href=\"%(contact_url)s\">halaman kontak</a> kami."
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
@@ -2051,18 +2052,18 @@ msgstr "Informasi selengkapnya"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Lebih dari 90 basis data teratas dunia yang hanya bisa diakses melalui langganan, gratis untuk Wikipediawan dengan berbagai latar belakang."
+msgstr "Lebih dari 90 pangkalan data terkemuka di dunia yang hanya bisa diakses dengan berlangganan, dengan konten dalam %(no_of_languages)s bahasa, gratis untuk Wikipediawan dari semua latar belakang"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
 msgid "Meet these criteria for automatic access"
-msgstr ""
+msgstr "Penuhi kriteria berikut untuk akses otomatis"
 
 #: TWLight/templates/login_partial.html:45
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
-msgstr ""
+msgstr "Kriteria berikut ini memberi Anda akses ke koleksi tertentu, tetapi tidak semua. Beberapa koleksi hanya dapat diakses berdasarkan permohonan saja."
 
 #: TWLight/templates/login_partial.html:65
 msgid "Login via Wikipedia"
@@ -2237,7 +2238,7 @@ msgstr ""
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:526
 msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
-msgstr ""
+msgstr "Akun Wikipedia Anda tidak memenuhi kriteria kelayakan dalam syarat penggunaan, sehingga akun Platform Kartu Perpustakaan Wikipedia Anda tidak dapat diaktifkan."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:535
@@ -2323,7 +2324,7 @@ msgstr "Data penyunting"
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:59
 msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
-msgstr ""
+msgstr "Informasi dengan tanda * diambil dari Wikipedia secara langsung. Informasi lainnya dimasukkan langsung oleh pengguna atau admin situs, dalam bahasa pilihan mereka."
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:71
@@ -2455,7 +2456,7 @@ msgstr "Informasi pribadi"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:257
 msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
-msgstr ""
+msgstr "Informasi berikut ini hanya dapat dilihat oleh Anda, administrator situs, mitra penerbitan (jika diperlukan), dan sukarelawan koordinator Perpustakaan Wikipedia (yang telah menandatangani Perjanjian Kerahasiaan).\n\nAnda dapat memperbarui atau menghapus data Anda kapan saja."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:267
@@ -2481,7 +2482,7 @@ msgstr "Institusi"
 #. Translators: This message tells users that they are not eligible to access The Wikipedia Library content.
 #: TWLight/users/templates/users/eligibility_modal.html:7
 msgid "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
-msgstr ""
+msgstr "Maaf, akun Wikipedia Anda saat ini tidak memenuhi syarat untuk mengakses Perpustakaan Wikipedia."
 
 #. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
 #: TWLight/users/templates/users/eligibility_modal.html:30
@@ -2497,12 +2498,12 @@ msgstr ""
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
 msgid "To refresh your data, please log out and back in."
-msgstr ""
+msgstr "Untuk menyegarkan data Anda, silakan keluar log dan masuk kembali."
 
 #. Translators: A button that takes users to their profile.
 #: TWLight/users/templates/users/eligibility_modal.html:58
 msgid "Profile/Settings"
-msgstr ""
+msgstr "Profil/Pengaturan"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
 #: TWLight/users/templates/users/filter_section.html:32
