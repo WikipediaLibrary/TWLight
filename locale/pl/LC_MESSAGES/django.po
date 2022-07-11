@@ -20,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-05-27 16:32+0000\n"
-"PO-Revision-Date: 2022-06-16 11:24:40+0000\n"
+"PO-Revision-Date: 2022-07-11 11:19:47+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2505,7 +2505,7 @@ msgstr "Wygląda na to, że Twoje konto jest aktualnie zablokowane. Jeśli speł
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
 msgid "To refresh your data, please log out and back in."
-msgstr "Aby odświeżyć dane, wyloguj się i zaloguj ponownie."
+msgstr "Aby odświeżyć informacje o swoim koncie, wyloguj się i zaloguj ponownie."
 
 #. Translators: A button that takes users to their profile.
 #: TWLight/users/templates/users/eligibility_modal.html:58
@@ -2970,7 +2970,7 @@ msgstr "Zwolniono dostęp do {}."
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:830 TWLight/views.py:38
 msgid "500+ edits"
-msgstr "Ponad 500 zmian"
+msgstr "Minimum 500 edycji"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:832 TWLight/views.py:40
@@ -2980,7 +2980,7 @@ msgstr "Konto od 6 miesięcy"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:834 TWLight/views.py:42
 msgid "10+ edits in the last month"
-msgstr "Minimum 10 zmian w ostatnim miesiącu"
+msgstr "Minimum 10 edycji w ostatnim miesiącu"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:836 TWLight/views.py:44
