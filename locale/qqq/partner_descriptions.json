@@ -21,6 +21,7 @@
 	"31_short_description": "Short description of BMJ.\n\nWebsite: https://thebmj-frontend.bmj.com/\n\nWikipedia: [[:w:en:The BMJ|The BMJ]]",
 	"46_short_description": "Short description of Cairn.info.\n\nWebsite: https://www.cairn.info/\n\nEnglish Wikipedia: [[:w:en:Cairn.info|Cairn.info]]\n\nFrench Wikipedia: [[:w:fr:Cairn.info|Cairn.info]]",
 	"58_short_description": "Short description of Cambridge University Press.\n\nWebsite: https://www.cambridge.org/\n\nEnglish Wikipedia: [[:w:en:Cambridge University Press|Cambridge University Press]]",
+	"59_short_description": "Short description of Brill.\n\nWebsite: https://brill.com/",
 	"64_short_description": "Short description of CEEOL.\n\nWebsite: https://www.ceeol.com/\n\nEnglish Wikipedia: [[:w:en:Central and Eastern European Online Library|Central and Eastern European Online Library]]",
 	"79_short_description": "Short description of Civilica.\n\nWebsite: https://civilica.com/\n\nEnglish Wikipedia: [[:w:en:Civilica|Civilica]]\n\nPersian Wikipedia: [[:w:fa:سیویلیکا|سیویلیکا]]",
 	"15_short_description": "Short description of Cochrane.\n\nWebsite: https://www.cochrane.org/\n\nEnglish Wikipedia: [[:w:en:Cochrane Library|Cochrane Library]]",
@@ -118,5 +119,9 @@
 	"126_short_description": "Short description of OECD Data.\n\nWebsite: https://data.oecd.org/",
 	"127_short_description": "Short description of OECD Multimedia Gallery.\n\nWebsite: https://oecd-gallery.org/",
 	"128_short_description": "Short description of Wiley.\n\nWebsite: https://onlinelibrary.wiley.com/\n\nEnglish Wikipedia: [[:w:en:Wiley (publisher)|Wiley (publisher)]]",
-	"129_short_description": "Short description of SPIE Digital Library.\n\nEnglish Wikipedia: [[:en:SPIE|SPIE]].\n\nWebsite: https://www.spiedigitallibrary.org/"
+	"129_short_description": "Short description of SPIE Digital Library.\n\nEnglish Wikipedia: [[:en:SPIE|SPIE]].\n\nWebsite: https://www.spiedigitallibrary.org/",
+	"130_short_description": "Short description of University of Chicago Press Journals. \n\nWebsite:https://www.journals.uchicago.edu/",
+	"131_short_description": "Short description of IPSJ. \n\nWebsite:https://ipsj.ixsq.nii.ac.jp/ej/",
+	"132_short_description": "Short description of SAGE Journals. \n\nWebsite:https://journals.sagepub.com/"
+	
 }
