@@ -14,6 +14,13 @@ DEFAULT_FROM_EMAIL = "<twlight.local@localhost.localdomain>"
 
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------
+# Using a less secure, but faster, password hasher for testing
+if "test" in sys.argv:
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.MD5PasswordHasher",
+    ]
+    # Stop whitenoise from inspecting static files when testing
+    WHITENOISE_AUTOREFRESH = True
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
