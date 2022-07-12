@@ -15,19 +15,6 @@ DEFAULT_FROM_EMAIL = "<twlight.local@localhost.localdomain>"
 # TEST CONFIGURATION
 # ------------------------------------------------------------------------------
 
-INSTALLED_APPS += ["django_nose"]
-
-# Use nose to run all tests
-# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    #'--with-coverage',
-    "--cover-package=TWLight.applications,TWLight.emails,TWLight.resources, TWLight.users",
-    #'--nologcapture',
-    #'--cover-html',
-    #'--cover-html-dir=htmlcov',
-]
-
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
 # Identical to base settings other than caching.
