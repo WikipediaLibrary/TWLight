@@ -27,7 +27,7 @@ set -euo pipefail
 
             # Run test suite via coverage so we can get a report without having to run separate tests for it.
             DJANGO_LOG_LEVEL=CRITICAL DJANGO_SETTINGS_MODULE=TWLight.settings.local \
-            coverage run --source TWLight manage.py test --keepdb --noinput
+            coverage run --source TWLight manage.py test --keepdb --noinput --parallel
         else
             # If linting fails, offer some useful feedback to the user.
             black --target-version py38 --quiet --diff TWLight
