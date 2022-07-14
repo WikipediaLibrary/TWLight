@@ -121,7 +121,6 @@
 	"128_short_description": "Short description of Wiley.\n\nWebsite: https://onlinelibrary.wiley.com/\n\nEnglish Wikipedia: [[:w:en:Wiley (publisher)|Wiley (publisher)]]",
 	"129_short_description": "Short description of SPIE Digital Library.\n\nEnglish Wikipedia: [[:en:SPIE|SPIE]].\n\nWebsite: https://www.spiedigitallibrary.org/",
 	"130_short_description": "Short description of University of Chicago Press Journals. \n\nWebsite:https://www.journals.uchicago.edu/",
-	"131_short_description": "Short description of IPSJ. \n\nWebsite:https://ipsj.ixsq.nii.ac.jp/ej/",
-	"132_short_description": "Short description of SAGE Journals. \n\nWebsite:https://journals.sagepub.com/"
-	
+	"131_short_description": "Short description of IPSJ. \n\n* Website: https://ipsj.ixsq.nii.ac.jp/ej/\n* English Wikipedia: [[:w:en:Information Processing Society of Japan|Information Processing Society of Japan]]\n* Japanese Wikipedia: [[:w:ja:情報処理学会|情報処理学会]]",
+	"132_short_description": "Short description of SAGE Journals. \n\n* Website: https://journals.sagepub.com/\n* English Wikipedia: [[:w:en:SAGE Publishing|SAGE Publishing]]"
 }

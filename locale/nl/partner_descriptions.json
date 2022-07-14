@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"McDutchie",
-			"Romaine"
+			"Romaine",
+			"Siebrand"
 		]
 	},
 	"24_short_description": "<strong>AAAS</strong> (The American Association for the Advancement of Science) biedt toegang tot de bronnen op haar website, sciencemag.org, waaronder het tijdschrift <em>Science</em> (1880-heden) en ander wetenschappelijk onderzoek, nieuws, commentaar en media.",
@@ -22,6 +23,7 @@
 	"31_short_description": "<strong>BMJ</strong> (oorspronkelijk het British Medical Journal) is een peer-reviewed medisch tijdschrift.",
 	"46_short_description": "<strong>Cairn.info</strong> is een online webportaal met wetenschappelijk materiaal. Primaire onderzoeksgebieden zijn communicatie, economie, onderwijs, aardrijkskunde, geschiedenis, literatuur, taalkunde, filosofie, politieke wetenschappen, rechten, psychologie, sociologie en culturele studies.",
 	"58_short_description": "<strong>Cambridge University Press</strong> is een uitgever van wetenschappelijke tijdschriften en e-books in verschillende vakgebieden. Ze bieden toegang tot Cambridge Core, waaronder tijdschriftartikelen en e-boeken, en de Orlando-collectie.",
+	"59_short_description": "<strong>Brill</strong> is een Nederlandse internationale wetenschappelijke uitgeverij. Door deze samenwerking krijgt u toegang tot alle e-books en tijdschriften, alle belangrijke naslagwerken, alle primaire bronnencollecties en tekstedities van Brill.",
 	"64_short_description": "<strong>The Central and Eastern European Online Library</strong> is een uitgever van een breed scala aan tijdschriften en e-boeken op het gebied van geesteswetenschappen en sociale wetenschappen. De toegang omvat meer dan 1700 tijdschriften, maar bevat momenteel geen e-boeken.",
 	"79_short_description": "<strong>Civilica</strong> is een uitgever van wetenschappelijke tijdschriften en congresverslagen. Er wordt volledige toegang verleend tot meer dan 700.000 gepubliceerde artikelen.",
 	"15_short_description": "<strong>Cochrane</strong> biedt toegang tot de Cochrane Library; een verzameling van 6 databases over medische onderwerpen, inclusief systematische reviews en beoordelings- en evaluatiedatabases.",
@@ -120,5 +122,7 @@
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong> is een audiovisuele galerij met podcasts en foto's die zijn gepubliceerd door de Organisatie voor Economische Samenwerking en Ontwikkeling (OESO).",
 	"128_short_description": "<strong>Wiley</strong> biedt collecties van online tijdschriften, boeken en onderzoeksbronnen, die betrekking hebben op levenswetenschappen, gezondheid, sociale wetenschappen en natuurwetenschappen.",
 	"129_short_description": "<strong>SPIE</strong> biedt toegang tot de SPIE Digital Library, een van de grootste verzamelingen van toegepast onderzoek op het gebied van optica en fotonica. De informatie is beschikbaar in de vorm van tijdschriften en eBooks.",
-	"130_short_description": "<strong>De University of Chicago Press</strong> is een academische uitgeverij van boeken en tijdschriften in de geestes- en sociale wetenschappen. Zij bieden toegang tot hun tijdschriften."
+	"130_short_description": "<strong>De University of Chicago Press</strong> is een academische uitgeverij van boeken en tijdschriften in de geestes- en sociale wetenschappen. Zij bieden toegang tot hun tijdschriften.",
+	"131_short_description": "<strong>De Information Processing Society of Japan</strong> is een Japans learned society voor computergebruik. Via deze samenwerking heeft u toegang tot IPSJ Journal, IPSJ Transactions en SIG Technical Reports.",
+	"132_short_description": "<strong>SAGE Journals</strong> SAGE is een Amerikaanse onafhankelijke uitgeverij met meer dan 1.000 tijdschriften uit een breed scala aan disciplines."
 }

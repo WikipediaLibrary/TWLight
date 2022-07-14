@@ -22,6 +22,7 @@
 	"31_short_description": "<strong>BMJ</strong> (במקור British Medical Journal) הוא כתב־עת רפואי שעובר ביקורת עמיתים.",
 	"46_short_description": "<strong>Cairn.info</strong> הוא פורטל וב מקוון של חומרים מחקריים. תחומי מחקר עיקריים כוללים תקשורת, כלכלה, חינוך, גאוגרפיה, היסטוריה, ספרות, בלשנות, פילוסופיה, מדעי המדינה, משפטים, פסיכולוגיה, סוציולוגיה, ולימודי תרבות.",
 	"58_short_description": "<strong>הוצאת אוניברסיטת קיימברידג'</strong> (Cambridge University Press) מוציאה לאור כתבי־עת אקדמיים וספרים אלקטרוניים במגוון נושאים. הם מציעים גישה ל־Cambridge Core, שמכיל מאמרים מכתבי־עת וספרים אלקטרוניים, ואת אוסף אורלנדו.",
+	"59_short_description": "<strong>בריל</strong> (<span dir=\"ltr\">Brill</span>) הוא מוציא לאור אקדמי הולנדי בין־לאומי. השותפות הזאת מעניקה לך גישה לכל הספרים האלקטרוניים וכתבי־העת, לכל עבודות העיון העיקריות, לכל אוספי המקורות הראשיים ומהדורות הטקסט של בריל.",
 	"64_short_description": "<strong>הספרייה המקוונת של מרכז אירופה ומזרחה</strong> (The Central and Eastern European Online Library) היא מוציא לאור של מגון רחב של כתבי־עת וספרים אלקטרוניים בנושאי מדעי הרוח ומדעי החברה. הגישה כוללת יותר מ־1700 כתבי־עת, אבל כעת אינה כוללת ספרים אלקטרוניים.",
 	"79_short_description": "<strong>סיוויליקה</strong> (سیویلیکا, Civilica) הוא מוציא לאור של כתבי־עת אקדמיים וסיכומי כנסים. גישה מלאה ניתנת ליותר מ־700,000 מאמרים שיצאו לאור.",
 	"15_short_description": "<strong>קוקרן</strong> (cochrane) מספק גישה לספריית קוקרן; אוסף של 6 מסדי נתונים בנושאים רפואיים, כולל סקירות שיטתיות ומסדי נתונים של אומדן והערכה.",
@@ -120,5 +121,7 @@
 	"127_short_description": "אתר <strong>OECD Multimedia Gallery</strong> הוא גלריה אורקולית שמכילה הסכתים וצילומים שמוציא לאור הארגון לשיתוף פעולה ולפיתוח כלכלי (OECD).",
 	"128_short_description": "<strong>ויילי</strong> (<span dir=\"ltr\">Wiley</span>) מציע אוספים של כתבי־עת מקוונים, ספרים, ומשאבי מחקר, שמכסים את מדעי החיים, הבריאות, החברה, והפיזיקה.",
 	"129_short_description": "<strong>SPIE</strong> מספקת גישה לספרייה הדיגיטלית של SPIE, אחד האוספים הגדולים של מחקר יישומי באופטיקה ובפוטוניקה. המשאבים זמינים בתור כתבי־עת וספרים אלקטרוניים.",
-	"130_short_description": "<strong>הוצאות אוניברסיטת שיקגו</strong> (The University of Chicago Press) היא הוצאה לאור אקדמית של ספרים וכתבי־עת בנושאי מדעי הרוח ומדעי החברה. הם מספקים גישה לכתבי־העת שלהם."
+	"130_short_description": "<strong>הוצאות אוניברסיטת שיקגו</strong> (The University of Chicago Press) היא הוצאה לאור אקדמית של ספרים וכתבי־עת בנושאי מדעי הרוח ומדעי החברה. הם מספקים גישה לכתבי־העת שלהם.",
+	"131_short_description": "<strong>האגודה לעיבוד מידע של יפן</strong> (<strong dir=\"ltr\" lang=\"en\">Information Processing Society of Japan</strong>, <strong dir=\"ltr\" lang=\"ja\">情報処理学会</strong>) היא חברה יפנית למדנית למחשוב. דרך השותפות הזאת באפשרותך לגשת ל־IPSJ Journal, ל־IPSJ Transactions, ול־SIG Technical Reports.",
+	"132_short_description": "<strong>סייג'</strong> (<strong dir=\"ltr\">SAGE Journals</strong>) הוא מוציא לאור עצמאי אמריקאי עם יותר מ־1000 כתבי־עת, ממגוון רחב של תחומים."
 }

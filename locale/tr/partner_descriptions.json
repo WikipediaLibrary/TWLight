@@ -22,6 +22,7 @@
 	"31_short_description": "<strong>BMJ</strong> (aslen British Medical Journal) hakemli bir tıp dergisidir.",
 	"46_short_description": "<strong>Cairn.info</strong>, bilimsel materyallerden oluşan çevrimiçi bir web portalıdır. Birincil araştırma alanları iletişim, ekonomi, eğitim, coğrafya, tarih, edebiyat, dilbilim, felsefe, siyaset bilimi, hukuk, psikoloji, sosyoloji ve kültürel çalışmaları içerir.",
 	"58_short_description": "<strong>Cambridge University Press</strong>, çeşitli konu alanlarında akademik dergilerin ve e-kitapların yayıncısıdır. Dergi makaleleri ve e-kitaplar içeren Cambridge Core'a ve Orlando koleksiyonuna erişim sunar.",
+	"59_short_description": "<strong>Brill</strong>, Hollandalı uluslararası akademik yayıncıdır. Bu ortaklık, Brill'in tüm e-kitaplarına ve dergilerine, tüm önemli referans çalışmalarına, tüm birincil kaynak koleksiyonlarına ve metin baskılarına erişmenizi sağlar.",
 	"64_short_description": "<strong>Orta ve Doğu Avrupa Çevrimiçi Kütüphanesi</strong>, çok çeşitli beşeri ve sosyal Bilimler dergilerinin ve e-kitaplarının yayıncısıdır. Erişim, 1.700'den fazla dergiyi içerir ancak şu anda e-kitaplara erişim mevcut değildir.",
 	"79_short_description": "<strong>Civilica</strong>, bilim dergilerinin ve konferans bildirilerinin yayıncısıdır. 700.000'den fazla yayınlanmış makaleye tam erişim sağlanmaktadır.",
 	"15_short_description": "<strong>Cochrane</strong>, Cochrane Kitaplığına erişim sağlar: sistematik incelemeler ve ölçme ve değerlendirme veri tabanları dahil olmak üzere tıbbi konularda 6 veri tabanı koleksiyonu.",
@@ -120,5 +121,7 @@
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong>, Ekonomik İşbirliği ve Kalkınma Örgütü (OECD) tarafından yayınlanan podcast'leri ve fotoğrafları içeren görsel-işitsel bir galeridir.",
 	"128_short_description": "<strong>Wiley</strong>; yaşam, sağlık, sosyal ve fiziksel bilimleri kapsayan çevrimiçi dergiler, kitaplar ve araştırma kaynakları koleksiyonları sunar.",
 	"129_short_description": "<strong>SPIE</strong>, optik ve fotonik uygulamalı araştırmaların en büyük koleksiyonlarından biri olan SPIE Digital Library'ye erişim sağlıyor. Kaynaklar dergiler ve e-Kitaplar olarak mevcuttur.",
-	"130_short_description": "<strong>The University of Chicago Press</strong>, beşeri bilimler ve sosyal bilimlerde kitap ve dergilerin akademik bir yayıncısıdır. Dergilerine erişim sağlıyor."
+	"130_short_description": "<strong>The University of Chicago Press</strong>, beşeri bilimler ve sosyal bilimlerde kitap ve dergilerin akademik bir yayıncısıdır. Dergilerine erişim sağlıyor.",
+	"131_short_description": "<strong>Japonya Bilgi İşleme Derneği</strong>, bilgi işlem için Japonca öğrenen bir toplumdur. Bu ortaklık sayesinde IPSJ Dergisi, IPSJ İşlemleri ve SIG Teknik Raporlarına erişebilirsiniz.",
+	"132_short_description": "<strong>SAGE Journals</strong> SAGE, çok çeşitli disiplinlerden 1000'den fazla dergiye sahip bir Amerikan bağımsız yayıncısıdır."
 }
