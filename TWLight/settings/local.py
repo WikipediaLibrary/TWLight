@@ -21,6 +21,7 @@ if "test" in sys.argv:
     ]
     # Stop whitenoise from inspecting static files when testing
     WHITENOISE_AUTOREFRESH = True
+    TEST_RUNNER = "TWLight.runner.TimeLoggingTestRunner"
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------

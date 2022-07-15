@@ -8,6 +8,7 @@ from django.test import Client, RequestFactory
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models import Prefetch
 from django.urls import reverse
 
 from TWLight.applications.factories import ApplicationFactory
@@ -24,14 +25,11 @@ def logged_in_example_coordinator(client, coordinator):
     Creates a logged in coordinator user. Compacted version of EditorCraftRoom
     used in tests.
     """
-    terms_url = reverse("terms")
-
     coordinator.set_password("editor")
     coordinator.save()
 
     # Log user in
     client = Client(SERVER_NAME="twlight.vagrant.localdomain")
-    session = client.session
     client.login(username=coordinator.username, password="editor")
 
     coordinator.terms_of_use = True
@@ -48,7 +46,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num_applications = options["num"][0]
 
-        available_partners = Partner.objects.all()
+        applications_qs = Application.objects.select_related("editor")
+        available_partners = Partner.objects.prefetch_related(
+            Prefetch("applications", queryset=applications_qs)
+        ).all()
         # Don't fire any applications from the superuser.
         all_editors = Editor.objects.exclude(user__is_superuser=True)
 
@@ -191,9 +192,7 @@ class Command(BaseCommand):
 
             request.user = coordinator
 
-            response = SendReadyApplicationsView.as_view()(
-                request, pk=approved_app.partner.pk
-            )
+            _ = SendReadyApplicationsView.as_view()(request, pk=approved_app.partner.pk)
 
         # Renew a selection of sent apps.
         all_apps = Application.objects.filter(status=Application.SENT)

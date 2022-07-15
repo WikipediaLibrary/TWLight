@@ -1,5 +1,6 @@
 import copy
 from django_countries import countries
+from math import ceil
 from faker import Faker
 import random
 import string
@@ -34,7 +35,9 @@ class Command(BaseCommand):
             "multidisciplinary_tag",
         ]
 
-        coordinators = User.objects.filter(groups__name="coordinators")
+        coordinators = User.objects.prefetch_related("groups").filter(
+            groups__name="coordinators"
+        )
 
         for _ in range(num_partners):
             partner = PartnerFactory(
@@ -72,10 +75,14 @@ class Command(BaseCommand):
             partner.save()
 
         all_partners = Partner.even_not_available.all()
-        # Set 5 partners to need a registration URL. We do this separately
+        five_percent = ceil(num_partners * 0.05)
+        ten_percent = ceil(num_partners * 0.1)
+        fifteen_percent = ceil(num_partners * 0.15)
+        twenty_five_percent = ceil(num_partners * 0.25)
+        # Set 15% of partners to need a registration URL. We do this separately
         # because it requires both the account_email and registration_url
         # fields to be set concurrently.
-        for registration_partner in random.sample(list(all_partners), 5):
+        for registration_partner in random.sample(list(all_partners), fifteen_percent):
             registration_partner.account_email = True
             registration_partner.registration_url = Faker(
                 random.choice(settings.FAKER_LOCALES)
@@ -85,18 +92,18 @@ class Command(BaseCommand):
         # While most fields can be set at random, we want to make sure we
         # get partners with certain fields set to particular values.
 
-        # Set 5 random partners to be unavailable
-        for unavailable_partner in random.sample(list(all_partners), 5):
+        # Set 15% of random partners to be unavailable
+        for unavailable_partner in random.sample(list(all_partners), fifteen_percent):
             unavailable_partner.status = Partner.NOT_AVAILABLE
             unavailable_partner.save()
 
         # Set 5% random partners to have excerpt limit in words
-        for words in random.sample(list(all_partners), 10):
+        for words in random.sample(list(all_partners), five_percent):
             words.excerpt_limit = random.randint(100, 250)
             words.save()
 
         # Set 5% random partners to have excerpt limit in words
-        for percentage in random.sample(list(all_partners), 10):
+        for percentage in random.sample(list(all_partners), five_percent):
             percentage.excerpt_limit_percentage = random.randint(5, 50)
             percentage.save()
 
@@ -108,20 +115,20 @@ class Command(BaseCommand):
 
         available_partners = all_partners.exclude(status=Partner.NOT_AVAILABLE)
 
-        # Set 10 random available partners to be waitlisted
-        for waitlisted_partner in random.sample(list(available_partners), 10):
+        # Set 10% of random available partners to be waitlisted
+        for waitlisted_partner in random.sample(list(available_partners), ten_percent):
             waitlisted_partner.status = Partner.WAITLIST
             waitlisted_partner.save()
 
-        # Set 25 random partners to have a long description
-        for long_description in random.sample(list(all_partners), 25):
+        # Set 25% of random partners to have a long description
+        for long_description in random.sample(list(all_partners), twenty_five_percent):
             long_description.description = Faker(
                 random.choice(settings.FAKER_LOCALES)
             ).paragraph(nb_sentences=10)
             long_description.save()
 
-        # Set 10 random available partners to be featured
-        for featured_partner in random.sample(list(available_partners), 10):
+        # Set 10% of random available partners to be featured
+        for featured_partner in random.sample(list(available_partners), ten_percent):
             featured_partner.featured = True
             featured_partner.save()
 
@@ -130,8 +137,8 @@ class Command(BaseCommand):
             accounts.accounts_available = random.randint(10, 550)
             accounts.save()
 
-        # Set 15 partners to have somewhere between 1 and 5 video tutorial URLs
-        for partner in random.sample(list(all_partners), 15):
+        # Set 15% pf partners to have somewhere between 1 and 5 video tutorial URLs
+        for partner in random.sample(list(all_partners), fifteen_percent):
             for _ in range(random.randint(1, 5)):
                 VideoFactory(
                     partner=partner,
@@ -158,12 +165,14 @@ class Command(BaseCommand):
             )
             suggestion.save()
             suggestion.upvoted_users.add(author_user)
-            random_users = random.sample(list(all_users), random.randint(1, 10))
+            random_users = random.sample(
+                list(all_users), random.randint(1, all_users.count())
+            )
             suggestion.upvoted_users.add(*random_users)
 
-        # Set 5 partners use the access code authorization method,
+        # Set 5% of partners use the access code authorization method,
         # and generate a bunch of codes for each.
-        for partner in random.sample(list(available_partners), 5):
+        for partner in random.sample(list(available_partners), five_percent):
             partner.authorization_method = Partner.CODES
             partner.save()
 
@@ -176,9 +185,9 @@ class Command(BaseCommand):
                 new_access_code.partner = partner
                 new_access_code.save()
 
-        # Set 5 partners use the access code authorization method,
+        # Set 5% of partners use the access code authorization method,
         # and generate a bunch of codes for each.
-        for partner in random.sample(list(available_partners), 5):
+        for partner in random.sample(list(available_partners), five_percent):
             partner.authorization_method = Partner.CODES
             partner.save()
 
