@@ -490,10 +490,11 @@ class ExampleApplicationsDataTest(TestCase):
     def test_command_output(self):
         # Needs a superuser first.
         user = UserFactory()
-
-        call_command("user_example_data", "200")
-        call_command("resources_example_data", "50")
-        call_command("applications_example_data", "300")
+        # Lowering number of sample data created because commands take a while
+        # to execute
+        call_command("user_example_data", "5")
+        call_command("resources_example_data", "15")
+        call_command("applications_example_data", "25")
 
 
 class UserRenewalNoticeTest(TestCase):

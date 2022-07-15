@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from math import ceil
 from faker import Faker
 import random
 from django.utils.timezone import get_current_timezone
@@ -69,7 +70,11 @@ class Command(BaseCommand):
             )
 
         # All users who aren't the superuser
-        all_users = User.objects.exclude(username="TWL Team").exclude(is_superuser=True)
+        all_users = (
+            User.objects.select_related("editor")
+            .exclude(username="TWL Team")
+            .exclude(is_superuser=True)
+        )
 
         # Flag wp_valid correctly if user is valid
         for user in all_users:
@@ -82,15 +87,16 @@ class Command(BaseCommand):
                 user.editor.wp_valid = True
                 user.editor.save()
 
-        # Make 5 random users coordinators
+        fifteen_percent = ceil(num_editors * 0.15)
+        # Make 15% random users coordinators
         coordinators = get_coordinators()
-        for user in random.sample(list(all_users), 5):
+        for user in random.sample(list(all_users), fifteen_percent):
             user.groups.add(coordinators)
             user.save()
 
-        # Set 5 random non-coordinator users to have restricted data processing
+        # Set 15% random non-coordinator users to have restricted data processing
         restricted = get_restricted()
         non_coordinators = all_users.exclude(groups__name="coordinators")
-        for user in random.sample(list(non_coordinators), 5):
+        for user in random.sample(list(non_coordinators), fifteen_percent):
             user.groups.add(restricted)
             user.save()
