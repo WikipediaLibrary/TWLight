@@ -199,12 +199,6 @@ HEADER CSS
     display: none;
 }
 
-.feedback-link{
-    float: left;
-    font-size: 12px;
-    margin-left: 12%;
-}
-
 .top-navbar-button{
     margin-top: 15px;
     height: 32px;
