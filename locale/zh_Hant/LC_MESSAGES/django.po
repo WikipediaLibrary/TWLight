@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-07-15 01:58+0000\n"
+"POT-Creation-Date: 2022-08-12 01:13+0000\n"
 "PO-Revision-Date: 2022-07-14 11:19:59+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1801,7 +1801,7 @@ msgstr ""
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
-#: TWLight/templates/header_partial_b4.html:111
+#: TWLight/templates/header_partial_b4.html:106
 msgid "Log in"
 msgstr "登入"
 
@@ -2472,28 +2472,23 @@ msgstr "維基百科圖書館首頁"
 msgid "Search the library"
 msgstr "搜尋圖書館館藏"
 
-#. Translators: Link that takes a user to an external site to provide feedback on the search bar.
-#: TWLight/templates/header_partial_b4.html:58
-msgid "Feedback"
-msgstr "意見回饋"
-
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b4.html:77
+#: TWLight/templates/header_partial_b4.html:72
 msgid "Review"
 msgstr "審核"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b4.html:83
+#: TWLight/templates/header_partial_b4.html:78
 msgid "Send data to partners"
 msgstr "發送資料給合作夥伴"
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b4.html:91
+#: TWLight/templates/header_partial_b4.html:86
 msgid "Suggest a collection"
 msgstr "典藏建議"
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b4.html:104
+#: TWLight/templates/header_partial_b4.html:99
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr "登出"
@@ -3886,3 +3881,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Feedback"
+#~ msgstr "意見回饋"

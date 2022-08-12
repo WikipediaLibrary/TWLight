@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-07-15 01:58+0000\n"
+"POT-Creation-Date: 2022-08-12 01:13+0000\n"
 "PO-Revision-Date: 2022-07-14 11:19:55+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1746,7 +1746,7 @@ msgstr ""
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
-#: TWLight/templates/header_partial_b4.html:111
+#: TWLight/templates/header_partial_b4.html:106
 msgid "Log in"
 msgstr "Kevreañ"
 
@@ -2354,30 +2354,24 @@ msgstr "Diwar-benn Levraoueg Wikipedia"
 msgid "Search the library"
 msgstr ""
 
-#. Translators: Link that takes a user to an external site to provide feedback on the search bar.
-#: TWLight/templates/header_partial_b4.html:58
-#, fuzzy
-msgid "Feedback"
-msgstr "Sonjoù"
-
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b4.html:77
+#: TWLight/templates/header_partial_b4.html:72
 msgid "Review"
 msgstr "Adwelet"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b4.html:83
+#: TWLight/templates/header_partial_b4.html:78
 msgid "Send data to partners"
 msgstr "Kas ar roadennoù d'ar gevelerien"
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b4.html:91
+#: TWLight/templates/header_partial_b4.html:86
 #, fuzzy
 msgid "Suggest a collection"
 msgstr "Kodoù moned"
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b4.html:104
+#: TWLight/templates/header_partial_b4.html:99
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr "Digevreañ"
@@ -3638,3 +3632,7 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Feedback"
+#~ msgstr "Sonjoù"

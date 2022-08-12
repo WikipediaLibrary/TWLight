@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TWLight HEAD\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-07-15 01:58+0000\n"
+"POT-Creation-Date: 2022-08-12 01:13+0000\n"
 "PO-Revision-Date: 2022-07-14 11:19:57+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1692,7 +1692,7 @@ msgstr ""
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
-#: TWLight/templates/header_partial_b4.html:111
+#: TWLight/templates/header_partial_b4.html:106
 msgid "Log in"
 msgstr ""
 
@@ -2295,29 +2295,24 @@ msgstr "Vikipēdijas bibliotēkas Twitter konts"
 msgid "Search the library"
 msgstr ""
 
-#. Translators: Link that takes a user to an external site to provide feedback on the search bar.
-#: TWLight/templates/header_partial_b4.html:58
-msgid "Feedback"
-msgstr ""
-
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b4.html:77
+#: TWLight/templates/header_partial_b4.html:72
 msgid "Review"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b4.html:83
+#: TWLight/templates/header_partial_b4.html:78
 msgid "Send data to partners"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b4.html:91
+#: TWLight/templates/header_partial_b4.html:86
 #, fuzzy
 msgid "Suggest a collection"
 msgstr "Ieteikt partneri"
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b4.html:104
+#: TWLight/templates/header_partial_b4.html:99
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr ""
