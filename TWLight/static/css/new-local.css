@@ -205,12 +205,6 @@ HEADER CSS
     display: none;
 }
 
-.feedback-link{
-    float: right;
-    font-size: 12px;
-    margin-right: 10%;
-}
-
 .top-navbar-button{
     margin-top: 15px;
     height: 32px;
