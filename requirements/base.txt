@@ -17,7 +17,7 @@ django-reversion==4.0.1
 djangorestframework==3.13.1
 djmail==2.0.0
 factory_boy>=2.10.0,<4.0
-jsonschema==3.2.0
+jsonschema==4.14.0
 mwoauth==0.3.7
 pillow==9.0.1
 python-dateutil==2.8.2
