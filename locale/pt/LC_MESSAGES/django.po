@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-08-12 01:13+0000\n"
-"PO-Revision-Date: 2022-08-15 11:18:59+0000\n"
+"PO-Revision-Date: 2022-08-25 11:20:16+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1383,7 +1383,7 @@ msgstr "Filtrar conjuntos de recursos"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Fundir as sugestões"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71
@@ -1397,9 +1397,8 @@ msgstr "Proponente"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "Apoiar"
+msgstr "Votos de apoio"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1710,7 +1709,7 @@ msgstr "Parceiros sugeridos"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
 msgid "Merge"
-msgstr ""
+msgstr "Fundir"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:48
@@ -2047,9 +2046,9 @@ msgstr "Mais informações"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Mais de 90 das melhores bases de dados de acesso por assinatura, disponíveis gratuitamente para todos os utilizadores da Wikipédia"
+msgstr "Mais de 90 das melhores bases de dados do mundo, de acesso exclusivo por assinatura, com conteúdo em %(no_of_languages)s línguas, disponíveis gratuitamente para todos os utilizadores da Wikipédia"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
