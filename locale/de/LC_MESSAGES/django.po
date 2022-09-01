@@ -32,7 +32,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-08-12 01:13+0000\n"
-"PO-Revision-Date: 2022-08-15 11:18:57+0000\n"
+"PO-Revision-Date: 2022-09-01 11:23:36+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2008,7 +2008,7 @@ msgstr "Richtlinien für Belege"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:206
 msgid "Citation practices vary by project and even by article. Generally, we support editors citing where they found information, in a form that allows others to check it for themselves. That often means providing both original source details as well as a link to the partner database in which the source was found."
-msgstr "Die Angabe von Belegen kann je Wikimedia-Projekt oder sogar Artikel unterschiedlich sein. Allgemein empfehlen den Herkunftsort der Information beim Belegen anzugeben, damit andere die Angaben selbst überprüfen können. Üblicherweise sind dabei sowohl Details zu ursprünglichen Quelle, als auch die Datenbank unseres Partners, in dem die Quelle gefunden wurde, anzugeben."
+msgstr "Die Angabe von Belegen kann je nach Wikimedia-Projekt oder sogar je nach Artikel unterschiedlich sein. Allgemein empfehlen wir den Herkunftsort der Information beim Belegen anzugeben, damit andere die Angaben selbst überprüfen können. Üblicherweise sind dabei sowohl Details zur ursprünglichen Quelle als auch die Datenbank unseres Partners, in der die Quelle gefunden wurde, anzugeben. Bitte verlinke nicht auf einen Link über deinen Proxyzugang, da Dritte darauf keinen Zugriff haben. In der deutschsprachigen Wikipedia unterbindet dies sogar ein Filter."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:218

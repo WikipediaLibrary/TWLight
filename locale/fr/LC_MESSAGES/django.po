@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-08-12 01:13+0000\n"
-"PO-Revision-Date: 2022-08-15 11:18:58+0000\n"
+"PO-Revision-Date: 2022-09-01 11:23:37+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1979,7 +1979,7 @@ msgstr "EZProxy est un logiciel de type proxy utilisé pour authentifier les uti
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr "Vous pouvez remarquer que lors de l’accès aux ressources via EZProxy, les URLs sont dynamiquement réécrites. C’est pourquoi nous vous recommandons de vous connecter via la plateforme de Carte de Bibliothèque plutôt que directement sur le site web non mandaté du partenaire. En cas de doute, vérifiez la présence de « idm.oclc » dans l’URL : si elle y est, alors vous êtes connecté via EZProxy."
+msgstr "Vous pouvez remarquer que lors de l’accès aux ressources via EZProxy, les URL sont réécrites dynamiquement. C’est pourquoi nous vous recommandons de vous connecter via la plateforme de Carte de Bibliothèque plutôt que directement sur le site web non mandaté du partenaire. En cas de doute, vérifiez la présence du paramètre « idm.oclc » dans l’URL : s’il est présent, alors vous êtes connecté via EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:182
