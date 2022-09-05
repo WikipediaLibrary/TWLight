@@ -14,13 +14,14 @@
 # Author: Sabelöga
 # Author: Stryn
 # Author: Veikk0.ma
+# Author: Yupik
 msgid ""
 msgstr ""
 ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-08-12 01:13+0000\n"
-"PO-Revision-Date: 2022-08-15 11:18:58+0000\n"
+"PO-Revision-Date: 2022-09-05 11:19:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -235,9 +236,8 @@ msgstr ""
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
-#, fuzzy
 msgid "1 month"
-msgstr "Kuukausi"
+msgstr "1 kuukausi"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
