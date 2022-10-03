@@ -9,7 +9,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-09-27 19:36+0000\n"
-"PO-Revision-Date: 2022-09-29 11:21:31+0000\n"
+"PO-Revision-Date: 2022-10-03 11:20:43+0000\n"
 "Language: sr_ec\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1295,7 +1295,7 @@ msgstr "Веб-сајт"
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
 msgid "Not searchable"
-msgstr "Није претраживо"
+msgstr "Непретраживо"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1320,7 +1320,7 @@ msgstr ""
 #: TWLight/users/templates/users/available_collection_tile.html:55
 #: TWLight/users/templates/users/user_collection_tile.html:67
 msgid "Not Available"
-msgstr "Није доступно"
+msgstr "Недоступно"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1350,7 +1350,7 @@ msgstr "Сазнајте више"
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
 msgid "Discuss"
-msgstr "Дискусија"
+msgstr "Разговор"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this label indicates the start of the filter section.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
@@ -1371,12 +1371,12 @@ msgstr "Ресетуј филтере"
 #: TWLight/resources/templates/resources/filter_section.html:48
 #: TWLight/users/templates/users/filter_section.html:70
 msgid "Filter"
-msgstr "Филтер"
+msgstr "Филтрирај"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
 msgid "Filter collections"
-msgstr "Филтрирај колекције"
+msgstr "Филтрирајте збирке"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -2022,7 +2022,7 @@ msgstr "Пошаљи податке партнерима"
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
 #: TWLight/templates/header_partial_b4.html:86
 msgid "Suggest a collection"
-msgstr "Предложи колекцију"
+msgstr "Предложи збирку"
 
 #. Translators: A button to log out of The Wikipedia Library.
 #: TWLight/templates/header_partial_b4.html:99
@@ -2265,7 +2265,7 @@ msgstr "Доступне збирке"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
 #: TWLight/users/templates/users/collections_section.html:31
 msgid "View my applications >"
-msgstr "Списак мојих апликација >"
+msgstr "Моји захтеви >"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
 #: TWLight/users/templates/users/collections_section.html:54
