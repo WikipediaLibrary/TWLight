@@ -129,6 +129,14 @@
         {% endif %}
       {% else %}
         <div class="col-12" style="padding: 0px;">
+            {% for task in user_collection.partner_phabricator_tasks %}
+            <a href="{{ task.url }}" class="btn btn-sm phab-task-button btn-{{ task.severity }}"
+                type="button" name="button" target="_blank" rel="noopener">
+              {{ task.display }}
+            </a>
+            {% endfor %}
+        </div>
+        <div class="col-12" style="padding: 0px;">
           <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                   type="button" name="button" target="_blank" rel="noopener">
               {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}

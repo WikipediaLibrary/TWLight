@@ -34,7 +34,7 @@ from django.utils.translation import get_language
 
 from TWLight.resources.filters import PartnerFilter
 from TWLight.resources.helpers import get_partner_description, get_tag_names
-from TWLight.resources.models import Partner, PartnerLogo
+from TWLight.resources.models import Partner, PartnerLogo, PhabricatorTask
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
     SelfOnly,
@@ -83,6 +83,19 @@ def _is_real_url(url):
         return True
     except Resolver404:
         return False
+
+
+def _build_phab_task_list(phab_task_qs):
+    task_list = []
+    for task in phab_task_qs:
+        task_list.append(
+            {
+                "severity": str(task.severity_display),
+                "display": str(task.type_display),
+                "url": str(task.url),
+            }
+        )
+    return task_list
 
 
 def _redirect_to_next_param(request):
@@ -981,6 +994,10 @@ class MyLibraryView(TemplateView):
                         partner_short_description_key,
                         partner_description_key,
                     )
+                    partner_phabricator_tasks = _build_phab_task_list(
+                        user_authorization_partner.phab_task_qs
+                    )
+
                     try:
                         partner_logo = user_authorization_partner.logos.logo.url
                     except PartnerLogo.DoesNotExist:
@@ -1005,6 +1022,7 @@ class MyLibraryView(TemplateView):
                             "short_description"
                         ],
                         "partner_description": partner_descriptions["description"],
+                        "partner_phabricator_tasks": partner_phabricator_tasks,
                         "partner_languages": user_authorization_partner.get_languages,
                         "partner_tags": translated_tags,
                         "partner_authorization_method": user_authorization_partner.authorization_method,
@@ -1042,6 +1060,7 @@ class MyLibraryView(TemplateView):
                                     "partner_name": user_authorization_partner.company_name,
                                     "partner_short_description": partner_short_desc,
                                     "partner_description": partner_desc,
+                                    "partner_phabricator_tasks": partner_phabricator_tasks,
                                     "collection_type": "FAVORITES",
                                 }
                             )
@@ -1054,6 +1073,7 @@ class MyLibraryView(TemplateView):
                                 "partner_name": user_authorization_partner.company_name,
                                 "partner_short_description": partner_short_desc,
                                 "partner_description": partner_desc,
+                                "partner_phabricator_tasks": partner_phabricator_tasks,
                                 "collection_type": "USER",
                             }
                         )
@@ -1123,6 +1143,10 @@ class MyLibraryView(TemplateView):
             except PartnerLogo.DoesNotExist:
                 partner_logo = None
 
+            partner_phabricator_tasks = _build_phab_task_list(
+                available_collection.phab_task_qs
+            )
+
             # Getting tags from locale files
             translated_tags = get_tag_names(
                 language_code, available_collection.new_tags
@@ -1134,6 +1158,7 @@ class MyLibraryView(TemplateView):
                     "partner_logo": partner_logo,
                     "short_description": partner_descriptions["short_description"],
                     "description": partner_descriptions["description"],
+                    "partner_phabricator_tasks": partner_phabricator_tasks,
                     "languages": available_collection.get_languages,
                     "tags": translated_tags,
                     "is_not_available": available_collection.is_not_available,

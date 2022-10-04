@@ -1001,6 +1001,16 @@ NEW MY LIBRARY COLLECTION TILES CSS
     text-align: right;
 }
 
+.phab-task-button{
+    -webkit-appearance: none;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.75rem;
+}
+
 .access-apply-button{
     -webkit-appearance: none;
     width: 98%;

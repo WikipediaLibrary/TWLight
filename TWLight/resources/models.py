@@ -457,6 +457,10 @@ class Partner(models.Model):
             access_url = self.target_url
         return access_url
 
+    @property
+    def phab_task_qs(self):
+        return PhabricatorTask.objects.filter(partners__pk=self.pk)
+
 
 class PartnerLogo(models.Model):
     partner = models.OneToOneField(
@@ -467,6 +471,60 @@ class PartnerLogo(models.Model):
         null=True,
         help_text="Optional image file that can be used to represent this " "partner.",
     )
+
+
+class PhabricatorTask(models.Model):
+    class Meta:
+        verbose_name = "Phabricator Task"
+        verbose_name_plural = "Phabricator Tasks"
+
+    partners = models.ManyToManyField(
+        Partner,
+        blank=True,
+        # Limit to available partners.
+        help_text="The partner(s) affected by this task.",
+    )
+
+    INFO = 0
+    WARNING = 1
+    DANGER = 2
+
+    TYPE_CHOICES = (
+        # Translators: link to a phabricator task with information about the current status of this partner
+        (INFO, _("Service Information")),
+        # Translators: link to a phabricator task with information about a current issue with this partner
+        (WARNING, _("Service Issue")),
+        # Translators: link to a phabricator task with information about a current outage for this partner
+        (DANGER, _("Service Outage")),
+    )
+
+    TYPE_SEVERITY = (
+        (INFO, "info"),
+        (WARNING, "warning"),
+        (DANGER, "danger"),
+    )
+
+    task_type = models.IntegerField(
+        choices=TYPE_CHOICES,
+        default=INFO,
+        help_text="Will linking this task inform them of ongoing changes, warn them of issues impacting some users, or indicate an outage?",
+    )
+
+    phabricator_task = models.CharField(
+        max_length=255, help_text="Phabricator Task ID, eg. T314780"
+    )
+
+    @property
+    def url(self):
+        return "https://phabricator.wikimedia.org/" + self.phabricator_task
+
+    @property
+    def type_display(self):
+        return self.TYPE_CHOICES[self.task_type][1]
+
+    @property
+    def severity_display(self):
+        return self.TYPE_SEVERITY[self.task_type][1]
 
 
 class Contact(models.Model):
