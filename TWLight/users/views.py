@@ -90,8 +90,10 @@ def _build_phab_task_list(phab_task_qs):
     for task in phab_task_qs:
         task_list.append(
             {
-                "severity": str(task.severity_display),
-                "display": str(task.type_display),
+                "id": str(task.phabricator_task),
+                "severity": str(task.task_display[1]),
+                "display": str(task.task_display[0]),
+                "help": str(task.task_display[2]),
                 "url": str(task.url),
             }
         )
@@ -1153,7 +1155,7 @@ class MyLibraryView(TemplateView):
             )
             available_collection_obj.append(
                 {
-                    "pk": available_collection.pk,
+                    "partner_pk": available_collection.pk,
                     "partner_name": available_collection.company_name,
                     "partner_logo": partner_logo,
                     "short_description": partner_descriptions["short_description"],

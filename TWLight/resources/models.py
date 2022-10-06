@@ -490,12 +490,21 @@ class PhabricatorTask(models.Model):
     DANGER = 2
 
     TYPE_CHOICES = (
-        # Translators: link to a phabricator task with information about the current status of this partner
-        (INFO, _("Service Information")),
-        # Translators: link to a phabricator task with information about a current issue with this partner
-        (WARNING, _("Service Issue")),
-        # Translators: link to a phabricator task with information about a current outage for this partner
-        (DANGER, _("Service Outage")),
+        # Translators: Expandable element with information about the status of this partner
+        (INFO, _("Service information")),
+        # Translators: Expandable element with information about the status of this partner
+        (WARNING, _("Service issue")),
+        # Translators: Expandable element with information about the status of this partner
+        (DANGER, _("Temporarily unavailable")),
+    )
+
+    TYPE_HELP = (
+        # Translators: information about the current status of this partner
+        (INFO, _("Ongoing work may impact your access")),
+        # Translators: information about a current issue with this partner
+        (WARNING, _("A known issue is impacting access for some users")),
+        # Translators: information about a current outage for this partner
+        (DANGER, _("Access is currently unavaiable")),
     )
 
     TYPE_SEVERITY = (
@@ -519,12 +528,12 @@ class PhabricatorTask(models.Model):
         return "https://phabricator.wikimedia.org/" + self.phabricator_task
 
     @property
-    def type_display(self):
-        return self.TYPE_CHOICES[self.task_type][1]
-
-    @property
-    def severity_display(self):
-        return self.TYPE_SEVERITY[self.task_type][1]
+    def task_display(self):
+        return (
+            self.TYPE_CHOICES[self.task_type][1],
+            self.TYPE_SEVERITY[self.task_type][1],
+            self.TYPE_HELP[self.task_type][1],
+        )
 
 
 class Contact(models.Model):

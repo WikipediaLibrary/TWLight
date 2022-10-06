@@ -47,6 +47,7 @@ COMMON CONTENT BLOCK CSS
 #main-content {
   padding: 0.5rem 1rem;
 }
+
 .twl-btn {
   white-space: nowrap;
   font-family: Roboto;
@@ -1001,14 +1002,33 @@ NEW MY LIBRARY COLLECTION TILES CSS
     text-align: right;
 }
 
+.phab-task-info{
+    border-color: #17a2b8;
+}
+
+.phab-task-warning{
+    border-color: #ffc107;
+}
+
+.phab-task-danger{
+    border-color: #dc3545;
+}
+
 .phab-task-button{
+    background-color: #FFFFFF;
+    color: #000000;
     -webkit-appearance: none;
     width: 98%;
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 0.75rem;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.phab-task-button:hover{
+    text-decoration: underline;
 }
 
 .access-apply-button{
