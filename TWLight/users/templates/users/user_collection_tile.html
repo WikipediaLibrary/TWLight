@@ -113,6 +113,7 @@
             {% if user_collection.auth_latest_sent_app %}
               {% if not user_collection.auth_has_expired %}
                 <div class="col-xl-6 col-lg-12" style="padding: 0px;">
+                {% if not user_collection.partner_phabricator_disabled %}
                   <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                         type="button" name="button" target="_blank" rel="noopener"
                         style="font-size: 14px;">
@@ -124,6 +125,7 @@
                         {% trans "Access collection" %}
                     {% endif %}
                   </a>
+                {% endif %}
                 </div>
               {% endif %}
               <div class="col-xl-6 col-lg-12" style="padding: 0px;">
@@ -142,7 +144,7 @@
             {% endif %}
           </div>
         {% endif %}
-      {% else %}
+      {% elif not user_collection.partner_phabricator_disabled %}
         <div class="col-12" style="padding: 0px;">
           <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                   type="button" name="button" target="_blank" rel="noopener">

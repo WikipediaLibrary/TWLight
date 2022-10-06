@@ -85,9 +85,12 @@ def _is_real_url(url):
         return False
 
 
-def _build_phab_task_list(phab_task_qs):
+def _build_task_state(phab_task_qs):
     task_list = []
+    disabled = False
     for task in phab_task_qs:
+        if task.task_type == 2:
+            disabled = True
         task_list.append(
             {
                 "id": str(task.phabricator_task),
@@ -97,7 +100,7 @@ def _build_phab_task_list(phab_task_qs):
                 "url": str(task.url),
             }
         )
-    return task_list
+    return task_list, disabled
 
 
 def _redirect_to_next_param(request):
@@ -996,9 +999,10 @@ class MyLibraryView(TemplateView):
                         partner_short_description_key,
                         partner_description_key,
                     )
-                    partner_phabricator_tasks = _build_phab_task_list(
-                        user_authorization_partner.phab_task_qs
-                    )
+                    (
+                        partner_phabricator_tasks,
+                        partner_phabricator_disabled,
+                    ) = _build_task_state(user_authorization_partner.phab_task_qs)
 
                     try:
                         partner_logo = user_authorization_partner.logos.logo.url
@@ -1025,6 +1029,7 @@ class MyLibraryView(TemplateView):
                         ],
                         "partner_description": partner_descriptions["description"],
                         "partner_phabricator_tasks": partner_phabricator_tasks,
+                        "partner_phabricator_disabled": partner_phabricator_disabled,
                         "partner_languages": user_authorization_partner.get_languages,
                         "partner_tags": translated_tags,
                         "partner_authorization_method": user_authorization_partner.authorization_method,
@@ -1145,7 +1150,7 @@ class MyLibraryView(TemplateView):
             except PartnerLogo.DoesNotExist:
                 partner_logo = None
 
-            partner_phabricator_tasks = _build_phab_task_list(
+            partner_phabricator_tasks, partner_phabricator_disabled = _build_task_state(
                 available_collection.phab_task_qs
             )
 
@@ -1161,6 +1166,7 @@ class MyLibraryView(TemplateView):
                     "short_description": partner_descriptions["short_description"],
                     "description": partner_descriptions["description"],
                     "partner_phabricator_tasks": partner_phabricator_tasks,
+                    "partner_phabricator_disabled": partner_phabricator_disabled,
                     "languages": available_collection.get_languages,
                     "tags": translated_tags,
                     "is_not_available": available_collection.is_not_available,
