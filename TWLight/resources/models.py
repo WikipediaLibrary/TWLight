@@ -500,11 +500,11 @@ class PhabricatorTask(models.Model):
 
     TYPE_HELP = (
         # Translators: information about the current status of this partner
-        (INFO, _("Ongoing work may impact your access")),
+        (INFO, _("Ongoing work may impact access")),
         # Translators: information about a current issue with this partner
-        (WARNING, _("A known issue is impacting access for some users")),
+        (WARNING, _("An issue is impacting access")),
         # Translators: information about a current outage for this partner
-        (DANGER, _("Access is currently unavaiable")),
+        (DANGER, _("Access is currently unavailable")),
     )
 
     TYPE_SEVERITY = (
