@@ -459,7 +459,9 @@ class Partner(models.Model):
 
     @property
     def phab_task_qs(self):
-        return PhabricatorTask.objects.filter(partners__pk=self.pk)
+        return PhabricatorTask.objects.filter(partners__pk=self.pk).order_by(
+            "-task_type"
+        )
 
 
 class PartnerLogo(models.Model):

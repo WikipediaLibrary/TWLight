@@ -71,21 +71,21 @@
   </div>
   <div class="card-footer">
     <div class="container">
-        <div class="col-12" style="padding: 0px;margin-bottom: 0.75rem;">
-            {% for task in user_collection.partner_phabricator_tasks %}
+      {% for task in user_collection.partner_phabricator_tasks %}
+        <div class="col-12 phab-task-wrapper">
             <a href="#P{{ user_collection.partner_pk }}{{ task.id }}" aria-controls="P{{ user_collection.partner_pk }}{{ task.id }}" data-toggle="collapse" role="button" aria-expanded="false" class="btn btn-sm phab-task-button phab-task-{{ task.severity }}">
               {{ task.display }}
             </a>
             <div class="collapse" id="P{{ user_collection.partner_pk }}{{ task.id }}">
-              <div class="card card-body phab-task-{{ task.severity }}" style="width: 98%;">
+              <div class="card card-body phab-task-card phab-task-{{ task.severity }}">
                 {{ task.help }}
                 <a href="{{ task.url }}" target="_blank" rel="noopener">
                   {{ task.id }}
                 </a>
               </div>
             </div>
-            {% endfor %}
         </div>
+      {% endfor %}
       {% if user_collection.partner_authorization_method != bundle_authorization %}
         {% if user_collection.auth_date_expires %}
           <p class="expiry-date-text">

@@ -58,21 +58,21 @@
       </p>
     </div>
     <div class="card-footer">
-      <div class="col-12" style="padding: 0px;margin-bottom: 0.75rem;">
-          {% for task in available_collection.partner_phabricator_tasks %}
+      {% for task in available_collection.partner_phabricator_tasks %}
+        <div class="col-12 phab-task-wrapper">
           <a href="#P{{ available_collection.partner_pk }}{{ task.id }}" aria-controls="P{{ available_collection.partner_pk }}{{ task.id }}" data-toggle="collapse" role="button" aria-expanded="false" class="btn btn-sm phab-task-button phab-task-{{ task.severity }}">
             {{ task.display }}
           </a>
           <div class="collapse" id="P{{ available_collection.partner_pk }}{{ task.id }}">
-            <div class="card card-body phab-task-{{ task.severity }}" style="width: 98%;">
+            <div class="card card-body phab-task-card phab-task-{{ task.severity }}">
               {{ task.help }}
               <a href="{{ task.url }}" target="_blank" rel="noopener">
                 {{ task.id }}
               </a>
             </div>
           </div>
-          {% endfor %}
-      </div>
+        </div>
+      {% endfor %}
       <a href="{% url 'applications:apply_single' available_collection.partner_pk %}"
           class="btn btn-sm twl-btn access-apply-button {% if available_collection.is_not_available %} disabled {% endif %}"
           type="button" name="button">

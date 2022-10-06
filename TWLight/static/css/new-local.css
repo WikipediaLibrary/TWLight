@@ -1027,6 +1027,15 @@ NEW MY LIBRARY COLLECTION TILES CSS
     background-color: #FFFFFF;
 }
 
+.phab-task-wrapper{
+    padding: 0;
+    margin-bottom: 0.75rem;
+}
+
+.phab-task-card{
+    width: 98%;
+}
+
 .phab-task-button:hover{
     text-decoration: underline;
 }
