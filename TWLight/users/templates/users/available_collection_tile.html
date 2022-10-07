@@ -1,5 +1,5 @@
 {% load i18n %}
-<div id="tile-partner-{{available_collection.pk}}" class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+<div id="tile-partner-{{available_collection.partner_pk}}" class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
   <div class="card collection-tile">
     {% if available_collection.searchable == searchable %}
       {% comment %}Translators: Hovertext for an icon which indicates whether a collection is searchable or not. {% endcomment %}
@@ -9,12 +9,12 @@
       <i class="fa fa-search partially-searchable-icon" title="{% trans 'Partially searchable' %}"></i>
     {% endif %}
     {% if available_collection.partner_logo %}
-      <a href="{% url 'partners:detail' available_collection.pk %}" class="tile-partner-link">
+      <a href="{% url 'partners:detail' available_collection.partner_pk %}" class="tile-partner-link">
         <img src="{{ available_collection.partner_logo }}" class="card-img-top library-tile-image"
             alt="{{ available_collection.partner_name }} logo">
       </a>
     {% else %}
-      <a href="{% url 'partners:detail' available_collection.pk %}" class="tile-partner-link">
+      <a href="{% url 'partners:detail' available_collection.partner_pk %}" class="tile-partner-link">
         <img src="..." class="card-img-top" alt="{{ available_collection.partner_name }} logo">
       </a>
     {% endif %}
@@ -58,7 +58,22 @@
       </p>
     </div>
     <div class="card-footer">
-      <a href="{% url 'applications:apply_single' available_collection.pk %}"
+      {% for task in available_collection.partner_phabricator_tasks %}
+        <div class="col-12 phab-task-wrapper">
+          <a href="#P{{ available_collection.partner_pk }}{{ task.id }}" aria-controls="P{{ available_collection.partner_pk }}{{ task.id }}" data-toggle="collapse" role="button" aria-expanded="false" class="btn btn-sm phab-task-button phab-task-{{ task.severity }}">
+            {{ task.display }}
+          </a>
+          <div class="collapse" id="P{{ available_collection.partner_pk }}{{ task.id }}">
+            <div class="card card-body phab-task-card phab-task-{{ task.severity }}">
+              {{ task.help }}
+              <a href="{{ task.url }}" target="_blank" rel="noopener">
+                {{ task.id }}
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      <a href="{% url 'applications:apply_single' available_collection.partner_pk %}"
           class="btn btn-sm twl-btn access-apply-button {% if available_collection.is_not_available %} disabled {% endif %}"
           type="button" name="button">
         {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's application page, where they can apply for access. {% endcomment %}

@@ -71,6 +71,21 @@
   </div>
   <div class="card-footer">
     <div class="container">
+      {% for task in user_collection.partner_phabricator_tasks %}
+        <div class="col-12 phab-task-wrapper">
+            <a href="#P{{ user_collection.partner_pk }}{{ task.id }}" aria-controls="P{{ user_collection.partner_pk }}{{ task.id }}" data-toggle="collapse" role="button" aria-expanded="false" class="btn btn-sm phab-task-button phab-task-{{ task.severity }}">
+              {{ task.display }}
+            </a>
+            <div class="collapse" id="P{{ user_collection.partner_pk }}{{ task.id }}">
+              <div class="card card-body phab-task-card phab-task-{{ task.severity }}">
+                {{ task.help }}
+                <a href="{{ task.url }}" target="_blank" rel="noopener">
+                  {{ task.id }}
+                </a>
+              </div>
+            </div>
+        </div>
+      {% endfor %}
       {% if user_collection.partner_authorization_method != bundle_authorization %}
         {% if user_collection.auth_date_expires %}
           <p class="expiry-date-text">
@@ -98,6 +113,7 @@
             {% if user_collection.auth_latest_sent_app %}
               {% if not user_collection.auth_has_expired %}
                 <div class="col-xl-6 col-lg-12" style="padding: 0px;">
+                {% if not user_collection.partner_phabricator_disabled %}
                   <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                         type="button" name="button" target="_blank" rel="noopener"
                         style="font-size: 14px;">
@@ -109,6 +125,7 @@
                         {% trans "Access collection" %}
                     {% endif %}
                   </a>
+                {% endif %}
                 </div>
               {% endif %}
               <div class="col-xl-6 col-lg-12" style="padding: 0px;">
@@ -127,7 +144,7 @@
             {% endif %}
           </div>
         {% endif %}
-      {% else %}
+      {% elif not user_collection.partner_phabricator_disabled %}
         <div class="col-12" style="padding: 0px;">
           <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
                   type="button" name="button" target="_blank" rel="noopener">

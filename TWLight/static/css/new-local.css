@@ -47,6 +47,7 @@ COMMON CONTENT BLOCK CSS
 #main-content {
   padding: 0.5rem 1rem;
 }
+
 .twl-btn {
   white-space: nowrap;
   font-family: Roboto;
@@ -935,6 +936,10 @@ NEW MY LIBRARY COLLECTION TILES CSS
     font-size: 20px;
     padding: 5px 0px 0px 10px;
 }
+/* hint for css janus rtl processing */
+.fa-search:before {
+    float: left;
+}
 .partially-searchable-icon{
     color: #AAADB0;
     font-size: 20px;
@@ -999,6 +1004,44 @@ NEW MY LIBRARY COLLECTION TILES CSS
 .expiry-date-text{
     font-size: 13px;
     text-align: right;
+}
+
+.phab-task-info{
+    border-color: #17a2b8;
+}
+
+.phab-task-warning{
+    border-color: #ffc107;
+}
+
+.phab-task-danger{
+    border-color: #dc3545;
+}
+
+.phab-task-button{
+    background-color: #FFFFFF;
+    color: #000000;
+    -webkit-appearance: none;
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+.phab-task-wrapper{
+    padding: 0;
+    margin-bottom: 0.75rem;
+}
+
+.phab-task-card{
+    width: 98%;
+}
+
+.phab-task-button:hover{
+    text-decoration: underline;
 }
 
 .access-apply-button{

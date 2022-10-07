@@ -14,6 +14,7 @@ from .models import (
     Contact,
     Language,
     Video,
+    PhabricatorTask,
     Suggestion,
     AccessCode,
 )
@@ -231,3 +232,16 @@ class SuggestionAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Suggestion, SuggestionAdmin)
+
+
+class PhabricatorTaskAdmin(admin.ModelAdmin):
+    def partner_strings(self, object):
+        return [str(partner) for partner in object.partners.all()]
+
+    partner_strings.short_description = "partners"
+
+    search_fields = ("partner_strings", "phabricator_task")
+    list_display = ("id", "url", "task_type", "partner_strings")
+
+
+admin.site.register(PhabricatorTask, PhabricatorTaskAdmin)
