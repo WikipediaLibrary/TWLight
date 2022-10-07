@@ -936,6 +936,10 @@ NEW MY LIBRARY COLLECTION TILES CSS
     font-size: 20px;
     padding: 5px 0px 0px 10px;
 }
+/* hint for css janus rtl processing */
+.fa-search:before {
+    float: left;
+}
 .partially-searchable-icon{
     color: #AAADB0;
     font-size: 20px;
