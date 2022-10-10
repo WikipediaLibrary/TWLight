@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-09-27 19:35+0000\n"
+"POT-Creation-Date: 2022-10-10 11:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:61
 #: TWLight/resources/templates/resources/partner_detail_apply.html:39
 #: TWLight/resources/templates/resources/partner_detail_apply.html:42
-#: TWLight/users/templates/users/available_collection_tile.html:65
+#: TWLight/users/templates/users/available_collection_tile.html:80
 msgid "Apply"
 msgstr ""
 
@@ -716,7 +716,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
-#: TWLight/users/views.py:511
+#: TWLight/users/views.py:529
 msgid "Confirm"
 msgstr ""
 
@@ -1450,6 +1450,36 @@ msgstr ""
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
+msgstr ""
+
+#. Translators: Expandable element with information about the status of this partner
+#: TWLight/resources/models.py:496
+msgid "Service information"
+msgstr ""
+
+#. Translators: Expandable element with information about the status of this partner
+#: TWLight/resources/models.py:498
+msgid "Service issue"
+msgstr ""
+
+#. Translators: Expandable element with information about the status of this partner
+#: TWLight/resources/models.py:500
+msgid "Temporarily unavailable"
+msgstr ""
+
+#. Translators: information about the current status of this partner
+#: TWLight/resources/models.py:505
+msgid "Ongoing work may impact access"
+msgstr ""
+
+#. Translators: information about a current issue with this partner
+#: TWLight/resources/models.py:507
+msgid "An issue is impacting access"
+msgstr ""
+
+#. Translators: information about a current outage for this partner
+#: TWLight/resources/models.py:509
+msgid "Access is currently unavailable"
 msgstr ""
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
@@ -2914,7 +2944,7 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:25
-#: TWLight/users/views.py:380
+#: TWLight/users/views.py:398
 msgid "Update"
 msgstr ""
 
@@ -3356,37 +3386,37 @@ msgid "Add this collection to favorites"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
-#: TWLight/users/templates/users/user_collection_tile.html:78
+#: TWLight/users/templates/users/user_collection_tile.html:93
 msgid "Expiry date"
 msgstr ""
 
-#: TWLight/users/templates/users/user_collection_tile.html:83
+#: TWLight/users/templates/users/user_collection_tile.html:98
 msgid "Click to return this access"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
-#: TWLight/users/templates/users/user_collection_tile.html:93
+#: TWLight/users/templates/users/user_collection_tile.html:108
 msgid "Go to application"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
-#: TWLight/users/templates/users/user_collection_tile.html:106
+#: TWLight/users/templates/users/user_collection_tile.html:122
 msgid "Go to site"
 msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
-#: TWLight/users/templates/users/user_collection_tile.html:109
-#: TWLight/users/templates/users/user_collection_tile.html:135
+#: TWLight/users/templates/users/user_collection_tile.html:125
+#: TWLight/users/templates/users/user_collection_tile.html:152
 msgid "Access collection"
 msgstr ""
 
 #. Translators: Labels a button users can click to renew an expired account.
-#: TWLight/users/templates/users/user_collection_tile.html:120
+#: TWLight/users/templates/users/user_collection_tile.html:137
 msgid "Renew"
 msgstr ""
 
 #. Translators: Labels a button users can click to extend the duration of their access.
-#: TWLight/users/templates/users/user_collection_tile.html:123
+#: TWLight/users/templates/users/user_collection_tile.html:140
 msgid "Extend"
 msgstr ""
 
@@ -3428,7 +3458,7 @@ msgid "Coordinators only"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:159
+#: TWLight/users/views.py:177
 #, python-brace-format
 msgid ""
 "Please <a class='twl-links' href='{url}'>update your contributions</a> to "
@@ -3436,7 +3466,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:272
+#: TWLight/users/views.py:290
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -3444,63 +3474,63 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:280
+#: TWLight/users/views.py:298
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:362 TWLight/users/views.py:443
-#: TWLight/users/views.py:496
+#: TWLight/users/views.py:380 TWLight/users/views.py:461
+#: TWLight/users/views.py:514
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:395
+#: TWLight/users/views.py:413
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:427
+#: TWLight/users/views.py:445
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:455
+#: TWLight/users/views.py:473
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:466
+#: TWLight/users/views.py:484
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:765
+#: TWLight/users/views.py:783
 msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:830 TWLight/views.py:38
+#: TWLight/users/views.py:848 TWLight/views.py:38
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:832 TWLight/views.py:40
+#: TWLight/users/views.py:850 TWLight/views.py:40
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:834 TWLight/views.py:42
+#: TWLight/users/views.py:852 TWLight/views.py:42
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:836 TWLight/views.py:44
+#: TWLight/users/views.py:854 TWLight/views.py:44
 msgid "No active blocks"
 msgstr ""
 
