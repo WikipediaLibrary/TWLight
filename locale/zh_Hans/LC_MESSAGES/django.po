@@ -35,13 +35,14 @@
 # Author: 科劳
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-09-29 11:21:31+0000\n"
+"PO-Revision-Date: 2022-10-13 11:20:16+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2022-09-27 20:30:20+0000\n"
+"X-POT-Import-Date: 2022-10-10 12:30:40+0000\n"
 "X-Generator: MediaWiki 1.40.0-alpha; Translate 2022-07-28\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -68,12 +69,8 @@ msgstr "关于你"
 #. Translators: This note appears in a section of a form where we ask users to enter info (like country of residence) when applying for resource access.
 #: TWLight/applications/forms.py:179
 #, python-brace-format
-msgid ""
-"<p><small><i>Your personal data will be processed according to our <a "
-"class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr ""
-"<p><small><i>您的个人数据将根据我们的<a class='twl-links' href='{terms_url}'>"
-"隐私政策</a>处理。</i></small></p>"
+msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
+msgstr "<p><small><i>您的个人数据将根据我们的<a class='twl-links' href='{terms_url}'>隐私政策</a>处理。</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
@@ -114,9 +111,7 @@ msgstr "您在合作伙伴网站上的账户的电子邮件地址"
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:106
-msgid ""
-"The number of months you wish to have this access for before renewal is "
-"required"
+msgid "The number of months you wish to have this access for before renewal is required"
 msgstr "您希望在需要续订之前拥有此访问权限的月数"
 
 #. Translators: When filling out an application, users may need to specify their name
@@ -218,12 +213,8 @@ msgstr "电子邮件"
 
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
-msgid ""
-"Our terms of use have changed. Your applications will not be processed until "
-"you log in and agree to our updated terms."
-msgstr ""
-"我们的使用条款已变更。 您必须先登录并同意我们已更新的条款，否则您的申请将不会"
-"得到处理。"
+msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
+msgstr "我们的使用条款已变更。 您必须先登录并同意我们已更新的条款，否则您的申请将不会得到处理。"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -289,23 +280,17 @@ msgstr "访问网址：{access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:332
-msgid ""
-"You can expect to receive access details within a week or two once it has "
-"been processed."
+msgid "You can expect to receive access details within a week or two once it has been processed."
 msgstr "预计您可能会在处理后的一两周内收到访问权限的详细信息。"
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:240
-msgid ""
-"This partner joined the Library Bundle, which does not require applications. "
-"This application will be marked as invalid."
+msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
 msgstr "该合作伙伴加入了“Library Bundle”，不需要申请。 该申请将被标记为无效。"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
-msgid ""
-"This application is on the waitlist because this partner does not have any "
-"access grants available at this time."
+msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
 msgstr "该申请正在在等待队列中，因为目前该和做伙伴没有任何可用的访问授权。"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
@@ -313,11 +298,8 @@ msgstr "该申请正在在等待队列中，因为目前该和做伙伴没有任
 #: TWLight/applications/templates/applications/application_list_include.html:6
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
-msgid ""
-"Coordinators: This page may contain personal information such as real names "
-"and email addresses. Please remember that this information is confidential."
-msgstr ""
-"协调员：此页面可能包含个人信息，如实名和电子邮件地址。谨记这些信息是保密的。"
+msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
+msgstr "协调员：此页面可能包含个人信息，如实名和电子邮件地址。谨记这些信息是保密的。"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
@@ -326,9 +308,7 @@ msgstr "评估申请"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
-msgid ""
-"This user has requested a restriction on the processing of their data, so "
-"you cannot change the status of their application."
+msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
 msgstr "该用户请求对其数据处理进行限制，因此您无法更改其申请的状态。"
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
@@ -402,9 +382,7 @@ msgstr "未知"
 
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
-msgid ""
-"Please request the applicant add their country of residence to their profile "
-"before proceeding further."
+msgid "Please request the applicant add their country of residence to their profile before proceeding further."
 msgstr "请要求申请人在其个人资料中添加居住地之后再继续。"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
@@ -415,9 +393,7 @@ msgstr "可用账户"
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
 #, python-format
-msgid ""
-"Has agreed to the site's <a class=\"twl-links\" href=\"%(terms_url)s\">terms "
-"of use</a>?"
+msgid "Has agreed to the site's <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a>?"
 msgstr "是否同意该站点的<a href=\"%(terms_url)s\">使用条款</a>？"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
@@ -453,9 +429,7 @@ msgstr "否"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:159
-msgid ""
-"Please request the applicant agree to the site's terms of use before "
-"approving this application."
+msgid "Please request the applicant agree to the site's terms of use before approving this application."
 msgstr "请要求申请人同意网站的使用条款后再批准。"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
@@ -476,8 +450,7 @@ msgstr "续订现有的访问授权？"
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:195
 #, python-format
-msgid ""
-"Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
+msgid "Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
 msgstr "是（<a href=\"%(parent_url)s\">之前的申请</a>）"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
@@ -512,9 +485,7 @@ msgstr "留言"
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:297
-msgid ""
-"Comments are visible to all coordinators and to the editor who submitted "
-"this application."
+msgid "Comments are visible to all coordinators and to the editor who submitted this application."
 msgstr "所有的协调员和提交此申请的编者都可以看到留言。"
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
@@ -726,16 +697,8 @@ msgstr "设置状态"
 
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
-msgid ""
-"If your application is successful we may share your email address with "
-"%(partner)s. This is required to set up your access to their resources. By "
-"submitting this form you agree to allow your email address to be shared with "
-"%(partner)s if your application is successful, for the purposes of account "
-"setup."
-msgstr ""
-"在您的申请获准后，我们可能与%(partner)s分享您的电子邮件地址。这是设定您有权访"
-"问其资源的必要条件。提交此表单即代表您同意在申请获准后与%(partner)s分享您的电"
-"子邮件地址用于设定账户。"
+msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
+msgstr "在您的申请获准后，我们可能与%(partner)s分享您的电子邮件地址。这是设定您有权访问其资源的必要条件。提交此表单即代表您同意在申请获准后与%(partner)s分享您的电子邮件地址用于设定账户。"
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -763,9 +726,7 @@ msgstr "您想访问哪些资源？"
 
 #. Translators: This text explains that Library Bundle partners are not shown in this list.
 #: TWLight/applications/templates/applications/request_for_application.html:26
-msgid ""
-"Library Bundle partners are not shown as eligibility is determined "
-"automatically."
+msgid "Library Bundle partners are not shown as eligibility is determined automatically."
 msgstr "Library Bundle合作伙伴未显示，其资格自动确定。"
 
 #. Translators: On the page where users can apply for multiple partners, this message shows next to the partner name, taking them to the full application page when clicked.
@@ -780,14 +741,8 @@ msgstr "尚未添加任何合作伙伴数据。"
 
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:74
-msgid ""
-"You can apply to <span class=\"badge badge-warning\">Waitlisted</span> "
-"partners, but they don't have access grants available right now. We will "
-"process those applications when access becomes available."
-msgstr ""
-"您可以向位于<span class=\"badge badge-warning\">等待队列</span>中的合作伙伴提"
-"出申请，但是他们现在没有可用的访问授权。当访问变得可用时，我们将处理这些申"
-"请。"
+msgid "You can apply to <span class=\"badge badge-warning\">Waitlisted</span> partners, but they don't have access grants available right now. We will process those applications when access becomes available."
+msgstr "您可以向位于<span class=\"badge badge-warning\">等待队列</span>中的合作伙伴提出申请，但是他们现在没有可用的访问授权。当访问变得可用时，我们将处理这些申请。"
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
 #: TWLight/applications/templates/applications/send.html:10
@@ -808,12 +763,8 @@ msgstr "%(object)s的申请数据"
 #. Translators: This message is shown when applications exceed the number of accounts available.
 #: TWLight/applications/templates/applications/send_partner.html:54
 #, python-format
-msgid ""
-"Application(s) for %(object)s, if sent, will exceed the total available "
-"accounts for the partner. Please proceed at your own discretion."
-msgstr ""
-"如果发送%(object)s的申请，则将超过合作伙伴的可用账户总数。请自行决定是否继"
-"续。"
+msgid "Application(s) for %(object)s, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion."
+msgstr "如果发送%(object)s的申请，则将超过合作伙伴的可用账户总数。请自行决定是否继续。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
 #: TWLight/applications/templates/applications/send_partner.html:65
@@ -828,9 +779,7 @@ msgstr[0] "联系人"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows if there is no information about who the applications should be sent to. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/applications/templates/applications/send_partner.html:89
-msgid ""
-"Whoops, we don't have any listed contacts. Please notify Wikipedia Library "
-"administrators."
+msgid "Whoops, we don't have any listed contacts. Please notify Wikipedia Library administrators."
 msgstr "糟糕，我们没有列出任何联系人。请通知维基百科图书馆管理员。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is the title of the section containing the information about those applications.
@@ -846,12 +795,8 @@ msgstr "标为发送"
 
 #. Translators: This text guides coordinators in using the code sending interface for approved applications.
 #: TWLight/applications/templates/applications/send_partner.html:152
-msgid ""
-"Use the dropdown menus to denote which editor will receive each code. Access "
-"codes will be sent to users automatically."
-msgstr ""
-"使用下拉菜单指定每个编者将要收到的代码。在单击\"标记为发送\"之前，请确保通过"
-"电子邮件发送了访问授权代码。"
+msgid "Use the dropdown menus to denote which editor will receive each code. Access codes will be sent to users automatically."
+msgstr "使用下拉菜单指定每个编者将要收到的代码。在单击\"标记为发送\"之前，请确保通过电子邮件发送了访问授权代码。"
 
 #. Translators: This labels a drop-down selection where staff can assign an access code to a user.
 #: TWLight/applications/templates/applications/send_partner.html:173
@@ -866,22 +811,14 @@ msgstr "没有已批准且未发送的申请。"
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #: TWLight/applications/views.py:142 TWLight/applications/views.py:1285
-msgid ""
-"This partner does not have any access grants available at this time. You may "
-"still apply for access; your application will be reviewed when access grants "
-"become available."
-msgstr ""
-"该合作伙伴目前没有可用的访问授权。您仍然可以申请访问；当访问授权可用时，您的"
-"申请将被审核。"
+msgid "This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."
+msgstr "该合作伙伴目前没有可用的访问授权。您仍然可以申请访问；当访问授权可用时，您的申请将被审核。"
 
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:165
 #, python-brace-format
-msgid ""
-"Your application has been submitted for review. Head over to <a "
-"href='{applications_url}'>My Applications</a> to view the status."
-msgstr ""
-"您的申请已提交审核。前往<a href='{applications_url}'>我的申请</a>查看状态。"
+msgid "Your application has been submitted for review. Head over to <a href='{applications_url}'>My Applications</a> to view the status."
+msgstr "您的申请已提交审核。前往<a href='{applications_url}'>我的申请</a>查看状态。"
 
 #. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
 #: TWLight/applications/views.py:278
@@ -929,19 +866,13 @@ msgstr "发送申请"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
 #: TWLight/applications/views.py:758
-msgid ""
-"Cannot approve application as partner with proxy authorization method is "
-"waitlisted."
+msgid "Cannot approve application as partner with proxy authorization method is waitlisted."
 msgstr "由于采用代理授权法的合作伙伴已列入等待队列，因此无法批准申请。"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:782
-msgid ""
-"Cannot approve application as partner with proxy authorization method is "
-"waitlisted and (or) has zero accounts available for distribution."
-msgstr ""
-"由于采用代理授权法的合作伙伴已列入等待队列，并且（或）有零个帐户可供分配，因"
-"此无法批准该申请。"
+msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
+msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）有零个帐户可供分配，因此无法批准该申请。"
 
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
 #: TWLight/applications/views.py:805
@@ -951,15 +882,8 @@ msgstr "您试图创建一个重复的授权。"
 #. Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
 #: TWLight/applications/views.py:859
 #, python-brace-format
-msgid ""
-"This application cannot be modified since this partner is now part of our <a "
-"href='{bundle}'>bundle access</a>. If you are eligible, you can access this "
-"resource from <a href='{library}'>your library</a>. <a "
-"href='{contact}'>Contact us</a> if you have any questions."
-msgstr ""
-"该合作伙伴现在是我们<a href='{bundle}'>打包访问</a>的一部分，因此无法变更此申"
-"请。如果您符合资格，则可以从 <a href='{library}'>你的图书馆</a>访问此资源。如"
-"有任何疑问，请<a href='{contact}'>与我们联系</a>。"
+msgid "This application cannot be modified since this partner is now part of our <a href='{bundle}'>bundle access</a>. If you are eligible, you can access this resource from <a href='{library}'>your library</a>. <a href='{contact}'>Contact us</a> if you have any questions."
+msgstr "该合作伙伴现在是我们<a href='{bundle}'>打包访问</a>的一部分，因此无法变更此申请。如果您符合资格，则可以从 <a href='{library}'>你的图书馆</a>访问此资源。如有任何疑问，请<a href='{contact}'>与我们联系</a>。"
 
 #. Translators: this lets a reviewer set the status of a single application.
 #: TWLight/applications/views.py:875
@@ -968,9 +892,7 @@ msgstr "设置申请状态"
 
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:893
-msgid ""
-"There are more pending applications than available accounts. Your "
-"application might get waitlisted."
+msgid "There are more pending applications than available accounts. Your application might get waitlisted."
 msgstr "有待处理的申请多于可用帐户。您的申请可能会被列入等待队列。"
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
@@ -990,15 +912,8 @@ msgstr "批量更新申请{}成功。"
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1054
-msgid ""
-"Cannot approve application(s) {} as partner(s) with proxy authorization "
-"method is/are waitlisted and (or) has/have not enough accounts available. If "
-"not enough accounts are available, prioritise the applications and then "
-"approve applications equal to the accounts available."
-msgstr ""
-"由于采用代理授权法的合作伙伴已列入等待队列，并且（或）没有足够的可用帐户，因"
-"此无法批准{}申请。如果没有足够的可用帐户，请对申请进行优先级排序，然后批准与"
-"可用帐户数相等的申请。"
+msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
+msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）没有足够的可用帐户，因此无法批准{}申请。如果没有足够的可用帐户，请对申请进行优先级排序，然后批准与可用帐户数相等的申请。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1194
@@ -1012,12 +927,8 @@ msgstr "所有选定的申请都已被标记为发送。"
 
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
 #: TWLight/applications/views.py:1275
-msgid ""
-"Cannot renew application at this time as partner is not available. Please "
-"check back later, or contact us for more information."
-msgstr ""
-"由于目前合作伙伴不可用，因此无法续订申请。请稍后再回来检查，或与我们联系以获"
-"取更多信息。"
+msgid "Cannot renew application at this time as partner is not available. Please check back later, or contact us for more information."
+msgstr "由于目前合作伙伴不可用，因此无法续订申请。请稍后再回来检查，或与我们联系以获取更多信息。"
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
 #: TWLight/applications/views.py:1311
@@ -1027,16 +938,12 @@ msgstr "尝试续订未经批准的申请#{pk}已被拒绝"
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
 #: TWLight/applications/views.py:1388
-msgid ""
-"This object cannot be renewed. (This probably means that you have already "
-"requested that it be renewed.)"
+msgid "This object cannot be renewed. (This probably means that you have already requested that it be renewed.)"
 msgstr "该对象无法续订。（这可能意味着您已经请求过续订了。）"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
 #: TWLight/applications/views.py:1398
-msgid ""
-"Your renewal request has been received. A coordinator will review your "
-"request."
+msgid "Your renewal request has been received. A coordinator will review your request."
 msgstr "您的续订请求已经收到。协调员会审核你的请求。"
 
 #. Translators: This labels a textfield where users can enter their email ID.
@@ -1046,12 +953,8 @@ msgstr "你的电子邮件"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
-msgid ""
-"This field is automatically updated with the email from your <a class='twl-"
-"links' href='{}'>user profile</a>."
-msgstr ""
-"该字段会自动使用您的<a class='twl-links' href='{}'>用户个人资料</a>中的电子邮"
-"件进行更新。"
+msgid "This field is automatically updated with the email from your <a class='twl-links' href='{}'>user profile</a>."
+msgstr "该字段会自动使用您的<a class='twl-links' href='{}'>用户个人资料</a>中的电子邮件进行更新。"
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1074,24 +977,14 @@ msgstr "提交"
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
-msgid ""
-"<p>Your approved application to %(partner)s has now been finalised. Your "
-"access code or login details can be found below:</p> <p><b>%(access_code)s</"
-"b></p> <p>%(access_code_instructions)s</p>"
-msgstr ""
-"<p>您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到："
-"</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到：</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
 #, python-format
-msgid ""
-"Your approved application to %(partner)s has now been finalised. Your access "
-"code or login details can be found below: %(access_code)s "
-"%(access_code_instructions)s"
-msgstr ""
-"您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到："
-"%(access_code)s %(access_code_instructions)s"
+msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(access_code_instructions)s"
+msgstr "您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到：%(access_code)s %(access_code_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1101,31 +994,14 @@ msgstr "您的维基百科图书馆访问代码"
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
-msgid ""
-"<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
-"resources through The Wikipedia Library. We are happy to inform you that "
-"your application has been approved.</p> <p>%(user_instructions)s</p> <p>You "
-"can view the collections you're authorized to access at My Library: "
-"%(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr ""
-"<p>尊敬的%(user)s，</p><p>感谢您通过维基百科图书馆申请访问%(partner)s的资源。"
-"我们很高兴地通知您，您的申请已获批准。</p> <p>%(user_instructions)s</p><p>您"
-"可以在“我的图书馆”中查看您有权访问的馆藏：%(link)s</p> <p>再会！</p> <p>维基"
-"百科图书馆</p>"
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>感谢您通过维基百科图书馆申请访问%(partner)s的资源。我们很高兴地通知您，您的申请已获批准。</p> <p>%(user_instructions)s</p><p>您可以在“我的图书馆”中查看您有权访问的馆藏：%(link)s</p> <p>再会！</p> <p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. We are happy to inform you that your "
-"application has been approved. %(user_instructions)s You can view the "
-"collections you're authorized to access at My Library: %(link)s Cheers! The "
-"Wikipedia Library"
-msgstr ""
-"尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。我们很高兴"
-"地通知您，您的申请已获批准。%(user_instructions)s您可以在“我的图书馆”中查看您"
-"有权访问的馆藏：%(link)s再会！维基百科图书馆"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
+msgstr "尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。我们很高兴地通知您，您的申请已获批准。%(user_instructions)s您可以在“我的图书馆”中查看您有权访问的馆藏：%(link)s再会！维基百科图书馆"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1135,25 +1011,14 @@ msgstr "您的维基百科图书馆申请已批准"
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-html.html:5
 #, python-format
-msgid ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at: <a "
-"href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia "
-"Library</p>"
-msgstr ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> <p>回复请访问一下网址：<a href="
-"\"%(app_url)s\">%(app_url)s</a></p> <p>祝好，</p> <p>维基百科图书馆</p>"
+msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at: <a href=\"%(app_url)s\">%(app_url)s</a></p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>回复请访问一下网址：<a href=\"%(app_url)s\">%(app_url)s</a></p> <p>祝好，</p> <p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to coordinators when a comment is left on an application they are processing. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_coordinator-body-text.html:3
 #, python-format
-msgid ""
-"%(submit_date)s - %(commenter)s %(comment)s Please reply to this at: "
-"%(app_url)s Best, The Wikipedia Library"
-msgstr ""
-"%(submit_date)s - %(commenter)s %(comment)s请到这里回复：%(app_url)s 祝好，维"
-"基百科图书馆"
+msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to this at: %(app_url)s Best, The Wikipedia Library"
+msgstr "%(submit_date)s - %(commenter)s %(comment)s请到这里回复：%(app_url)s 祝好，维基百科图书馆"
 
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
@@ -1163,26 +1028,14 @@ msgstr "有新留言在您处理的维基百科图书馆申请中"
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
 #, python-format
-msgid ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a "
-"href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</"
-"p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> <p>请在<a href=\"%(app_url)s\">"
-"%(app_url)s</a>进行回复，这样我们就可以评估您的申请。</p><p>祝好，</p><p>维基"
-"百科图书馆</p>"
+msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>请在<a href=\"%(app_url)s\">%(app_url)s</a>进行回复，这样我们就可以评估您的申请。</p><p>祝好，</p><p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
 #, python-format
-msgid ""
-"%(submit_date)s - %(commenter)s %(comment)s Please reply to these at: "
-"%(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
-msgstr ""
-"%(submit_date)s - %(commenter)s %(comment)s请在这里回复：%(app_url)s 如此我们"
-"才可以评估您的申请。祝好，维基百科图书馆"
+msgid "%(submit_date)s - %(commenter)s %(comment)s Please reply to these at: %(app_url)s so we can evaluate your application. Best, The Wikipedia Library"
+msgstr "%(submit_date)s - %(commenter)s %(comment)s请在这里回复：%(app_url)s 如此我们才可以评估您的申请。祝好，维基百科图书馆"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
@@ -1192,24 +1045,14 @@ msgstr "新留言在您的维基百科图书馆申请中"
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
 #, python-format
-msgid ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s"
-"\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
-msgstr ""
-"<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote>在<a href=\"%(app_url)s\">"
-"%(app_url)s</a>中查看。感谢帮助审核维基百科图书馆申请！"
+msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote>在<a href=\"%(app_url)s\">%(app_url)s</a>中查看。感谢帮助审核维基百科图书馆申请！"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-text.html:3
 #, python-format
-msgid ""
-"%(submit_date)s - %(commenter)s %(comment)s See it at: %(app_url)s Thanks "
-"for helping review Wikipedia Library applications!"
-msgstr ""
-"%(submit_date)s - %(commenter)s %(comment)s参见：%(app_url)s感谢帮助审核维基"
-"百科图书馆申请！"
+msgid "%(submit_date)s - %(commenter)s %(comment)s See it at: %(app_url)s Thanks for helping review Wikipedia Library applications!"
+msgstr "%(submit_date)s - %(commenter)s %(comment)s参见：%(app_url)s感谢帮助审核维基百科图书馆申请！"
 
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
@@ -1227,12 +1070,8 @@ msgstr "联系我们"
 #. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
 #: TWLight/emails/templates/emails/contact.html:33
 #, python-format
-msgid ""
-"(If you would like to suggest a partner, <a class=\"twl-links\" href="
-"\"%(suggest)s\"><strong>go here</strong></a>.)"
-msgstr ""
-"（如果您想建议一个合作伙伴，<a class=\"twl-links\" href=\"%(suggest)s"
-"\"><strong>请到这里</strong></a>。）"
+msgid "(If you would like to suggest a partner, <a class=\"twl-links\" href=\"%(suggest)s\"><strong>go here</strong></a>.)"
+msgstr "（如果您想建议一个合作伙伴，<a class=\"twl-links\" href=\"%(suggest)s\"><strong>请到这里</strong></a>。）"
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:42
@@ -1279,13 +1118,8 @@ msgstr "来自%(editor_wp_username)s的维基百科图书证平台的消息"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
-msgid ""
-"<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated "
-"coordinator for partners that have a total of %(total_apps)s applications.</"
-"p>"
-msgstr ""
-"<p>尊敬的%(user)s，</p><p>我们的记录表明，您总共有%(total_apps)s个申请的合作"
-"伙伴指定协调员</p>"
+msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications.</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>我们的记录表明，您总共有%(total_apps)s个申请的合作伙伴指定协调员</p>"
 
 #. Translators: Breakdown as in 'cost breakdown'; analysis.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
@@ -1320,41 +1154,20 @@ msgstr[0] "%(counter)s个批准的申请。"
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
 #, python-format
-msgid ""
-"<p>This is a gentle reminder that you may review applications at <a href="
-"\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under "
-"'preferences' in your user profile.</p> <p>If you received this message in "
-"error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for "
-"helping review Wikipedia Library applications!</p>"
-msgstr ""
-"<p>这是一个温馨的提醒，您可以在<a href=\"%(link)s\">%(link)s</a>中查看申请。"
-"</p><p>您可以在您的用户个人资料的“首选项”中自定义提醒。</p><p>如果您收到此消"
-"息有误，请通过wikipedialibrary@wikimedia.org给我们留言。</p><p>感谢您帮助审核"
-"维基百科图书馆的申请！<p>"
+msgid "<p>This is a gentle reminder that you may review applications at <a href=\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under 'preferences' in your user profile.</p> <p>If you received this message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for helping review Wikipedia Library applications!</p>"
+msgstr "<p>这是一个温馨的提醒，您可以在<a href=\"%(link)s\">%(link)s</a>中查看申请。</p><p>您可以在您的用户个人资料的“首选项”中自定义提醒。</p><p>如果您收到此消息有误，请通过wikipedialibrary@wikimedia.org给我们留言。</p><p>感谢您帮助审核维基百科图书馆的申请！<p>"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:3
 #, python-format
-msgid ""
-"Dear %(user)s, Our records indicate that you are the designated coordinator "
-"for partners that have a total of %(total_apps)s applications."
-msgstr ""
-"尊敬的%(user)s，我们的记录表明您是拥有%(total_apps)s个申请的合作伙伴的指定协"
-"调员。"
+msgid "Dear %(user)s, Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications."
+msgstr "尊敬的%(user)s，我们的记录表明您是拥有%(total_apps)s个申请的合作伙伴的指定协调员。"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate the email address either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:38
 #, python-format
-msgid ""
-"This is a gentle reminder that you may review applications at: %(link)s. You "
-"can customise your reminders under 'preferences' in your user profile. If "
-"you received this message in error, drop us a line at: "
-"wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library "
-"applications!"
-msgstr ""
-"谨在此提醒您，您可以查看申请在：%(link)s。您可以在用户个人资料的“首选项”下自"
-"定义提醒。如果您错误地收到此消息，请给我们发送邮件至："
-"wikipedialibrary@wikimedia.org。感谢您帮助审核维基百科图书馆的申请！"
+msgid "This is a gentle reminder that you may review applications at: %(link)s. You can customise your reminders under 'preferences' in your user profile. If you received this message in error, drop us a line at: wikipedialibrary@wikimedia.org Thanks for helping review Wikipedia Library applications!"
+msgstr "谨在此提醒您，您可以查看申请在：%(link)s。您可以在用户个人资料的“首选项”下自定义提醒。如果您错误地收到此消息，请给我们发送邮件至：wikipedialibrary@wikimedia.org。感谢您帮助审核维基百科图书馆的申请！"
 
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
@@ -1364,29 +1177,14 @@ msgstr "维基百科图书馆申请等待您的审核"
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
 #, python-format
-msgid ""
-"<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
-"resources through The Wikipedia Library. Unfortunately at this time your "
-"application has not been approved. You can view your application and review "
-"comments at <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Best,</p> <p>The "
-"Wikipedia Library</p>"
-msgstr ""
-"<p>尊敬的的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资"
-"源。不幸的是，现在您的申请还没有被批准。您可以在<a href=\"%(app_url)s\">"
-"%(app_url)s</a>中查看申请和审核并留言。</p><p>祝好，</p><p>维基百科图书馆</p>"
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at <a href=\"%(app_url)s\">%(app_url)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>尊敬的的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资源。不幸的是，现在您的申请还没有被批准。您可以在<a href=\"%(app_url)s\">%(app_url)s</a>中查看申请和审核并留言。</p><p>祝好，</p><p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. Unfortunately at this time your application "
-"has not been approved. You can view your application and review comments at: "
-"%(app_url)s Best, The Wikipedia Library"
-msgstr ""
-"尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。不幸的是，"
-"此时您的申请还没有被批准。您可以查看申请并在查看留言：%(app_url)s 祝好，维基"
-"百科图书馆"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
+msgstr "尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。不幸的是，此时您的申请还没有被批准。您可以查看申请并在查看留言：%(app_url)s 祝好，维基百科图书馆"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -1396,36 +1194,14 @@ msgstr "您的维基百科图书馆申请"
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
 #, python-format
-msgid ""
-"<p>Dear %(user)s,</p> <p>According to our records, your access to "
-"%(partner_name)s will soon expire and you may lose access. If you want to "
-"continue making use of your free account, you can request renewal of your "
-"account by clicking the 'Renew' or 'Extend' button at %(partner_link)s.</p> "
-"<p>Best,</p> <p>The Wikipedia Library</p> <p>You can disable these emails in "
-"your user page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
-msgstr ""
-"<p>尊敬的%(user)s，</p><p>根据我们的记录，您对%(partner_name)s的访问权限即将"
-"过期，并且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点"
-"击%(partner_link)s处的“续订”或“延长”按钮请求续订帐户。</p> <p>祝好，</p> <p>"
-"维基百科图书馆</p> <p>您可以在用户页面首选项中禁用这些电子邮件：https://"
-"wikipedialibrary.wmflabs.org/users/</p>"
+msgid "<p>Dear %(user)s,</p> <p>According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the 'Renew' or 'Extend' button at %(partner_link)s.</p> <p>Best,</p> <p>The Wikipedia Library</p> <p>You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>根据我们的记录，您对%(partner_name)s的访问权限即将过期，并且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点击%(partner_link)s处的“续订”或“延长”按钮请求续订帐户。</p> <p>祝好，</p> <p>维基百科图书馆</p> <p>您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/</p>"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
-msgid ""
-"Dear %(user)s, According to our records, your access to %(partner_name)s "
-"will soon expire and you may lose access. If you want to continue making use "
-"of your free account, you can request renewal of your account by clicking "
-"the Renew button at %(partner_link)s. Best, The Wikipedia Library You can "
-"disable these emails in your user page preferences: https://wikipedialibrary."
-"wmflabs.org/users/"
-msgstr ""
-"尊敬的%(user)s，根据我们的记录，您对%(partner_name)s的访问权限将很快到期，并"
-"且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点"
-"击%(partner_link)s上的“续订”按钮来请求续订帐户。祝好，维基百科图书馆。您可以"
-"在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/"
-"users/"
+msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
+msgstr "尊敬的%(user)s，根据我们的记录，您对%(partner_name)s的访问权限将很快到期，并且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点击%(partner_link)s上的“续订”按钮来请求续订帐户。祝好，维基百科图书馆。您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
@@ -1435,32 +1211,14 @@ msgstr "您的维基百科图书馆访问权限即将过期"
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
 #, python-format
-msgid ""
-"<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s "
-"resources through The Wikipedia Library. There are no accounts currently "
-"available so your application has been waitlisted. Your application will be "
-"evaluated if/when more accounts become available. You can see all available "
-"resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The "
-"Wikipedia Library</p>"
-msgstr ""
-"<p>尊敬的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资源。"
-"目前没有可用的帐户，因此您的申请已被列入等待队列。如果/当更多的帐户可用时，您"
-"的申请将被评估。你可以在<a href=\"%(link)s\">%(link)s</a>上查看所有可用的资源"
-"</p> <p>祝好，</p><p>维基百科图书馆</p>"
+msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资源。目前没有可用的帐户，因此您的申请已被列入等待队列。如果/当更多的帐户可用时，您的申请将被评估。你可以在<a href=\"%(link)s\">%(link)s</a>上查看所有可用的资源</p> <p>祝好，</p><p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3
 #, python-format
-msgid ""
-"Dear %(user)s, Thank you for applying for access to %(partner)s resources "
-"through The Wikipedia Library. There are no accounts currently available so "
-"your application has been waitlisted. Your application will be evaluated if/"
-"when more accounts become available. You can see all available resources at: "
-"%(link)s Best, The Wikipedia Library"
-msgstr ""
-"尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。目前没有可"
-"用的账号，所以申请已被列入等待队列。如果/当更多帐户可用时，您的申请将被评。您"
-"可以查看所有可用的资源在：%(link)s 祝好，维基百科图书馆"
+msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at: %(link)s Best, The Wikipedia Library"
+msgstr "尊敬的%(user)s，感谢您通过维基百科图书馆申请访问%(partner)s的资源。目前没有可用的账号，所以申请已被列入等待队列。如果/当更多帐户可用时，您的申请将被评。您可以查看所有可用的资源在：%(link)s 祝好，维基百科图书馆"
 
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
@@ -1571,10 +1329,8 @@ msgstr "部分可搜索"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
-#| msgid "User information"
 msgid "Service information"
-msgstr "用户信息"
+msgstr "服务信息"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
@@ -1583,10 +1339,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
-#| msgid "Terms of use not available."
 msgid "Temporarily unavailable"
-msgstr "使用条款不可用。"
+msgstr "暂时不可用"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1600,10 +1354,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
-#| msgid "Accounts available"
 msgid "Access is currently unavailable"
-msgstr "可用账户"
+msgstr "目前无法访问"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1627,17 +1379,14 @@ msgstr "不可用"
 #: TWLight/resources/templates/resources/filter_section.html:14
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
-msgid ""
-"The Wikipedia Library allows active editors to access a wide range of "
-"collections of paywalled reliable sources for free!"
+msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
 msgstr "维基百科图书馆允许活跃的编辑者免费访问各种广泛的付费可靠来源！"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
-msgid ""
-"Start with the search bar at the top or browse publisher websites directly."
+msgid "Start with the search bar at the top or browse publisher websites directly."
 msgstr "在顶部搜索栏中搜索或者直接浏览出版者网站以开始。"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -1712,66 +1461,39 @@ msgstr "回到合作伙伴"
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
 #: TWLight/resources/templates/resources/partner_detail_apply.html:17
-msgid ""
-"There are no access grants available for this partner at this time. You can "
-"still apply for access; applications will be processed when access is "
-"available."
-msgstr ""
-"目前没有该合作伙伴的访问授权。您仍然可以申请访问权限；可以访问时，将会处理申"
-"请。"
+msgid "There are no access grants available for this partner at this time. You can still apply for access; applications will be processed when access is available."
+msgstr "目前没有该合作伙伴的访问授权。您仍然可以申请访问权限；可以访问时，将会处理申请。"
 
 #. Translators: This text links to the minimum user requirements and terms of use on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:48
 #: TWLight/resources/templates/resources/partner_detail_apply.html:29
 #, python-format
-msgid ""
-"Before applying, please review the <strong><a class=\"twl-links\" href="
-"\"%(about)s#req\">minimum requirements</a></strong> for access and our "
-"<strong><a class=\"twl-links\" href=\"%(terms)s\">terms of use</a></strong>."
-msgstr ""
-"申请之前，请查看<strong><a class=\"twl-links\" href=\"%(about)s#req\">获取访"
-"问权限的最低要求</a></strong>，以及我们的<strong><a class=\"twl-links\" href="
-"\"%(terms)s\">使用条款</a></strong>。"
+msgid "Before applying, please review the <strong><a class=\"twl-links\" href=\"%(about)s#req\">minimum requirements</a></strong> for access and our <strong><a class=\"twl-links\" href=\"%(terms)s\">terms of use</a></strong>."
+msgstr "申请之前，请查看<strong><a class=\"twl-links\" href=\"%(about)s#req\">获取访问权限的最低要求</a></strong>，以及我们的<strong><a class=\"twl-links\" href=\"%(terms)s\">使用条款</a></strong>。"
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
 #: TWLight/resources/templates/resources/partner_detail.html:69
 #, python-format
-msgid ""
-"View the status of your access in <strong><a class=\"twl-links\" href="
-"\"%(library_url)s\">My Library</a></strong> page."
-msgstr ""
-"在<strong><a class=\"twl-links\" href=\"%(library_url)s\">我的图书馆</a></"
-"strong>页面中查看访问状态。"
+msgid "View the status of your access in <strong><a class=\"twl-links\" href=\"%(library_url)s\">My Library</a></strong> page."
+msgstr "在<strong><a class=\"twl-links\" href=\"%(library_url)s\">我的图书馆</a></strong>页面中查看访问状态。"
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:78
 #, python-format
-msgid ""
-"View the status of your application(s) on your <strong><a class=\"twl-links"
-"\" href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr ""
-"在<strong><a class=\"twl-links\" href=\"%(applications_url)s\">我的申请</a></"
-"strong>页面上查看申请状态。"
+msgid "View the status of your application(s) on your <strong><a class=\"twl-links\" href=\"%(applications_url)s\">My Applications</a></strong> page."
+msgstr "在<strong><a class=\"twl-links\" href=\"%(applications_url)s\">我的申请</a></strong>页面上查看申请状态。"
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
 #, python-format
-msgid ""
-"View the status of your access on your <strong><a href=\"%(library_url)s\" "
-"class=\"twl-links\">My Library</a></strong> page."
-msgstr ""
-"在<strong><a href=\"%(library_url)s\" class=\"twl-links\">我的图书馆</a></"
-"strong>页面上查看您的访问状态。"
+msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
+msgstr "在<strong><a href=\"%(library_url)s\" class=\"twl-links\">我的图书馆</a></strong>页面上查看您的访问状态。"
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
 #, python-format
-msgid ""
-"View the status of your application(s) on your <strong><a href="
-"\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr ""
-"在<strong><a href=\"%(applications_url)s\">我的申请</a></strong>页面上查看申"
-"请状态。"
+msgid "View the status of your application(s) on your <strong><a href=\"%(applications_url)s\">My Applications</a></strong> page."
+msgstr "在<strong><a href=\"%(applications_url)s\">我的申请</a></strong>页面上查看申请状态。"
 
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:73
@@ -1800,14 +1522,8 @@ msgstr "Special:EmailUser页面"
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/resources/templates/resources/partner_detail_apply.html:112
-msgid ""
-"The Wikipedia Library team will process this application. Want to help? <a "
-"class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/Wikipedia:"
-"The_Wikipedia_Library/Coordinators/Signup\">Sign up as a coordinator.</a>"
-msgstr ""
-"维基百科图书馆团队将处理此申请。想帮忙吗？<a class=\"twl-links\" href="
-"\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/"
-"Signup\">注册为协调员。</a>"
+msgid "The Wikipedia Library team will process this application. Want to help? <a class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup\">Sign up as a coordinator.</a>"
+msgstr "维基百科图书馆团队将处理此申请。想帮忙吗？<a class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library/Coordinators/Signup\">注册为协调员。</a>"
 
 #. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
 #: TWLight/resources/templates/resources/partner_detail_apply.html:121
@@ -1836,21 +1552,14 @@ msgstr "Library bundle访问"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:138
-msgid ""
-"You are eligible to access Library Bundle partners. Click the button above "
-"to access the collection."
+msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
 msgstr "您有资格访问Library Bundle合作伙伴。点击上方按钮以访问馆藏。"
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
 #, python-format
-msgid ""
-"You are not eligible to access Library Bundle partners. Visit the <a class="
-"\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the eligibility "
-"criteria."
-msgstr ""
-"您没有资格访问Library Bundle合作伙伴。访问<a class=\"twl-links\" href="
-"\"%(homepage)s\">首页</a>检查资格标准。"
+msgid "You are not eligible to access Library Bundle partners. Visit the <a class=\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
+msgstr "您没有资格访问Library Bundle合作伙伴。访问<a class=\"twl-links\" href=\"%(homepage)s\">首页</a>检查资格标准。"
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
@@ -1861,14 +1570,8 @@ msgstr "登录"
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:168
 #, python-format
-msgid ""
-"This resource is part of our <a class=\"twl-links\" href=\"%(about)s"
-"\">Library Bundle</a>, which you can access if you meet our minimum "
-"eligibility criteria. Log in to find out if you are eligible."
-msgstr ""
-"该资源是我们<a class=\"twl-links\" href=\"%(about)s\">Library Bundle</a>的一"
-"部分，如果您符合我们的最低资格标准，则可以访问该资源。登录以了解您是否符合条"
-"件。"
+msgid "This resource is part of our <a class=\"twl-links\" href=\"%(about)s\">Library Bundle</a>, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
+msgstr "该资源是我们<a class=\"twl-links\" href=\"%(about)s\">Library Bundle</a>的一部分，如果您符合我们的最低资格标准，则可以访问该资源。登录以了解您是否符合条件。"
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:21
@@ -1918,31 +1621,20 @@ msgstr "摘录限制"
 #. Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:99
 #, python-format
-msgid ""
-"%(object)s allows a maximum of %(excerpt_limit)s words or "
-"%(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia "
-"article."
-msgstr ""
-"%(object)s允许在维基百科条目中最多摘录文章的%(excerpt_limit)s个单词"
-"或%(excerpt_limit_percentage)s。"
+msgid "%(object)s allows a maximum of %(excerpt_limit)s words or %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
+msgstr "%(object)s允许在维基百科条目中最多摘录文章的%(excerpt_limit)s个单词或%(excerpt_limit_percentage)s。"
 
 #. Translators: If a partner has specified the excerpt limit in words, this message will display the number of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:106
 #, python-format
-msgid ""
-"%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a "
-"Wikipedia article."
+msgid "%(object)s allows a maximum of %(excerpt_limit)s words be excerpted into a Wikipedia article."
 msgstr "%(object)s允许最多%(excerpt_limit)s个单词被摘录到维基百科条目中。"
 
 #. Translators: If a partner has specified the excerpt limit in percentage, this message will display the percentage of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:113
 #, python-format
-msgid ""
-"%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article "
-"be excerpted into a Wikipedia article."
-msgstr ""
-"%(object)s允许一篇文章最多百分之%(excerpt_limit_percentage)s被摘录到维基百科"
-"条目中。"
+msgid "%(object)s allows a maximum of %(excerpt_limit_percentage)s%% of an article be excerpted into a Wikipedia article."
+msgstr "%(object)s允许一篇文章最多百分之%(excerpt_limit_percentage)s被摘录到维基百科条目中。"
 
 #. Translators: If a partner has other requirements for access, this text shows as the title for that information field. (e.g. https://wikipedialibrary.wmflabs.org/partners/10/).
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:132
@@ -1952,9 +1644,7 @@ msgstr "申请人特殊要求"
 #. Translators: If a user must agree to a Terms of Use document, they see this message, and must enter the name of the resource. Don't translate publisher or url.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:140
 #, python-format
-msgid ""
-"%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of "
-"use</a>."
+msgid "%(publisher)s requires that you agree with its <a href=\"%(url)s\">terms of use</a>."
 msgstr "%(publisher)s要求您同意它的<a href=\"%(url)s\">使用条款</a>。"
 
 #. Translators: If a user must provide their real name to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
@@ -1984,17 +1674,13 @@ msgstr "%(publisher)s要求您提供您的机构隶属关系。"
 #. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:186
 #, python-format
-msgid ""
-"%(publisher)s requires that you specify a particular title that you want to "
-"access."
+msgid "%(publisher)s requires that you specify a particular title that you want to access."
 msgstr "%(publisher)s要求您指定要访问的特定标题。"
 
 #. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:196
 #, python-format
-msgid ""
-"%(publisher)s requires that you sign up for an account before applying for "
-"access."
+msgid "%(publisher)s requires that you sign up for an account before applying for access."
 msgstr "%(publisher)s要求您在申请访问权限之前注册账户。"
 
 #. Translators: If a partner has their location listed, this message is a label for that location
@@ -2112,9 +1798,7 @@ msgstr "您真的要删除<b>%(object)s</b>吗？"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
 #: TWLight/resources/views.py:257
-msgid ""
-"Multiple authorizations were returned – something's wrong. Please contact us "
-"and don't forget to mention this message."
+msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
 msgstr "返回了多个授权-出了点问题。请与我们联系，不要忘记提及此消息。"
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
@@ -2155,21 +1839,8 @@ msgstr "对不起，我们不知道该怎么办。"
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:20
 #, python-format
-msgid ""
-"If you think we should know what to do with that, please email us about this "
-"error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-"
-"links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Bad%%20Request\">Phabricator</a>"
-msgstr ""
-"如果您认为我们应该知道该怎么处理，请发邮件给我们<a class=\"twl-links\" href="
-"\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library"
-"%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a>或"
-"<a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/"
-"task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia"
-"%%20Library%%20%(path)s%%20Bad%%20Request\">报告给我们</a>"
+msgid "If you think we should know what to do with that, please email us about this error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">Phabricator</a>"
+msgstr "如果您认为我们应该知道该怎么处理，请发邮件给我们<a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a>或<a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">报告给我们</a>"
 
 #. Translators: Alt text for an image shown on the 400 error page.
 #. Translators: Alt text for an image shown on the 403 error page.
@@ -2190,23 +1861,8 @@ msgstr "对不起，您不能这样做。"
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
 #: TWLight/templates/403.html:20
 #, python-format
-msgid ""
-"If you think your account should be able to do that, please email us about "
-"this error at <a class=\"twl-links\" href=\"mailto:"
-"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s"
-"%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it "
-"to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">Phabricator</a>"
-msgstr ""
-"如果您认为您的账户应该能够做到这一点，请在<a class=\"twl-links\" href="
-"\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library"
-"%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a>给我"
-"们发电子邮件告知这个错误或在<a class=\"twl-links\" href=\"https://"
-"phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-"
-"Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">这里</a>报告给我们"
+msgid "If you think your account should be able to do that, please email us about this error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">Phabricator</a>"
+msgstr "如果您认为您的账户应该能够做到这一点，请在<a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a>给我们发电子邮件告知这个错误或在<a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">这里</a>报告给我们"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:11
@@ -2221,22 +1877,8 @@ msgstr "对不起; 我们找不到。"
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
 #: TWLight/templates/404.html:19
 #, python-format
-msgid ""
-"If you are certain that something should be here, please email us about this "
-"error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> "
-"wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links"
-"\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Not%%20found\">Phabricator</a>"
-msgstr ""
-"如果您确定应该有东西在这里，请<a class=\"twl-links\" href=\"mailto:"
-"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s"
-"%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a>给我们发邮件告知此问题"
-"或者<a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">在网页中告"
-"知这个错误</a>"
+msgid "If you are certain that something should be here, please email us about this error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</a>"
+msgstr "如果您确定应该有东西在这里，请<a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> wikipedialibrary@wikimedia.org</a>给我们发邮件告知此问题或者<a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">在网页中告知这个错误</a>"
 
 #. Translators: Alt text for an image shown on the 404 error page.
 #: TWLight/templates/404.html:32
@@ -2250,42 +1892,19 @@ msgstr "关于维基百科图书馆"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
-msgid ""
-"This platform is our central tool for facilitating access to our available "
-"collections. Here you can see which partnerships are available, search their "
-"contents, and apply for and access the ones you’re interested in."
-msgstr ""
-"此平台是我们的中心工具，用于审核申请并提供对我们可用馆藏的访问。在这里，您可"
-"以看到哪些合作伙伴可用，检索它们的内容，并申请以及访问您感兴趣的合作伙伴。"
+msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
+msgstr "此平台是我们的中心工具，用于审核申请并提供对我们可用馆藏的访问。在这里，您可以看到哪些合作伙伴可用，检索它们的内容，并申请以及访问您感兴趣的合作伙伴。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
-msgid ""
-"All users receive immediate access to some collections, which can be browsed "
-"by clicking the 'Access collection' buttons or using the search bar at the "
-"top of the page. Other collections require an application before access is "
-"granted, and may be accessed directly or via an individual login or access "
-"code. Volunteer coordinators, who have signed non-disclosure agreements with "
-"the Wikimedia Foundation, review these applications and work with publishers "
-"to get you your free access."
-msgstr ""
-"所有用户都可以立即访问馆藏，您可以通过点击“访问馆藏”按钮或者使用页面顶部的搜"
-"索框来浏览。其他馆藏需要提交申请才能被授予访问权限，并且可直接访问或者通过个"
-"人登录或访问码访问。与维基媒体基金会签署了保密协议的志愿协调员会审查申请并与"
-"出版社合作，为您提供免费访问。"
+msgid "All users receive immediate access to some collections, which can be browsed by clicking the 'Access collection' buttons or using the search bar at the top of the page. Other collections require an application before access is granted, and may be accessed directly or via an individual login or access code. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review these applications and work with publishers to get you your free access."
+msgstr "所有用户都可以立即访问馆藏，您可以通过点击“访问馆藏”按钮或者使用页面顶部的搜索框来浏览。其他馆藏需要提交申请才能被授予访问权限，并且可直接访问或者通过个人登录或访问码访问。与维基媒体基金会签署了保密协议的志愿协调员会审查申请并与出版社合作，为您提供免费访问。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
 #, python-format
-msgid ""
-"For more information about how your information is stored and reviewed "
-"please see our <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use "
-"and privacy policy</a>. Accounts you apply for are also subject to the Terms "
-"of Use provided by each partner’s platform; please review them."
-msgstr ""
-"有关如何存储和审核你的信息的更多信息，请参阅我们的<a class=\"twl-links\" "
-"href=\"%(terms_url)s\">使用条款和隐私政策</a>。您申请的账户还必须遵守每个合作"
-"伙伴平台提供的使用条款；请对其检查。"
+msgid "For more information about how your information is stored and reviewed please see our <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
+msgstr "有关如何存储和审核你的信息的更多信息，请参阅我们的<a class=\"twl-links\" href=\"%(terms_url)s\">使用条款和隐私政策</a>。您申请的账户还必须遵守每个合作伙伴平台提供的使用条款；请对其检查。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51
@@ -2294,16 +1913,8 @@ msgstr "谁可以获得访问权限？"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
-msgid ""
-"Any active editor in good standing can receive access. For publishers with "
-"limited numbers of accounts, applications are reviewed based on the editor’s "
-"needs and contributions. If you think you could use access to one of our "
-"partner resources and are an active editor in any project supported by the "
-"Wikimedia Foundation, please apply."
-msgstr ""
-"任何信誉良好的活跃编者都可以获得访问权限。对于帐户数量有限的出版商，将根据编"
-"者的需求和贡献来审核申请。如果您认为您需要使用我们的合作伙伴之一的资源访问权"
-"限，并且是在维基媒体基金会支持的任何项目中的一个活跃编者，那么请提出申请。"
+msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
+msgstr "任何信誉良好的活跃编者都可以获得访问权限。对于帐户数量有限的出版商，将根据编者的需求和贡献来审核申请。如果您认为您需要使用我们的合作伙伴之一的资源访问权限，并且是在维基媒体基金会支持的任何项目中的一个活跃编者，那么请提出申请。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
@@ -2332,30 +1943,13 @@ msgstr "当前您没有被禁止编辑维基媒体项目"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
-msgid ""
-"If you are applying for an available collection, please first check that you "
-"don't already have access through another library or institution. If you do, "
-"please consider using that access rather than taking up a seat for this "
-"resource in The Wikipedia Library."
-msgstr ""
-"如果您打算申请可用的馆藏，请先检查您是否无法通过其他图书馆或机构的渠道访问馆"
-"藏。如果可以，请考虑其他渠道，而非在维基百科图书馆中占用此资源的席位。"
+msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
+msgstr "如果您打算申请可用的馆藏，请先检查您是否无法通过其他图书馆或机构的渠道访问馆藏。如果可以，请考虑其他渠道，而非在维基百科图书馆中占用此资源的席位。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
-msgid ""
-"If your account is blocked on one or more Wikimedia projects, you may still "
-"be granted access to The Wikipedia Library. You will need to contact the "
-"Wikipedia Library team, who will review your blocks. If you have been "
-"blocked for content issues, most notably copyright violations, or have "
-"multiple long-term blocks, we may decline your request. Additionally, if "
-"your block status changes after being approved, you will need to request "
-"another review."
-msgstr ""
-"如果您的帐户在一个或多个维基媒体项目上被封禁，仍可能被获准访问维基百科图书"
-"馆。但您将需要与维基百科图书馆团队联系，以便他们检查您的封禁情况。如果您因内"
-"容问题而被封禁，特别是侵犯版权，或者是被多次长期封禁，我们可能会拒绝您的请"
-"求。此外，如果您的封禁状态在批准后发生了变化，您将需要再次申请审核。"
+msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
+msgstr "如果您的帐户在一个或多个维基媒体项目上被封禁，仍可能被获准访问维基百科图书馆。但您将需要与维基百科图书馆团队联系，以便他们检查您的封禁情况。如果您因内容问题而被封禁，特别是侵犯版权，或者是被多次长期封禁，我们可能会拒绝您的请求。此外，如果您的封禁状态在批准后发生了变化，您将需要再次申请审核。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2389,9 +1983,7 @@ msgstr "批准的编者<i>不应</i>："
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:136
-msgid ""
-"Share their account logins or passwords with others, or sell their access to "
-"other parties"
+msgid "Share their account logins or passwords with others, or sell their access to other parties"
 msgstr "同他人分享他们的登录账户或密码，或向其他伙伴出售自己的账户"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -2401,24 +1993,17 @@ msgstr "大量抓取或大量下载合作伙伴的内容"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:144
-msgid ""
-"Systematically make printed or electronic copies of multiple extracts of "
-"restricted content available for any purpose"
+msgid "Systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose"
 msgstr "系统地制作可用于任何目的的受限内容的多个摘要的印刷或电子复制品"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
 #: TWLight/templates/about.html:148
-msgid ""
-"Datamine metadata without permission, in order, for instance, to use "
-"metadata for auto-created stub articles"
-msgstr ""
-"未经许可就对数据挖掘元数据进行操作，例如为了自动创建小作品而是用元数据。"
+msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
+msgstr "未经许可就对数据挖掘元数据进行操作，例如为了自动创建小作品而是用元数据。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:154
-msgid ""
-"Respecting these agreements allows us to continue growing the partnerships "
-"available to the community."
+msgid "Respecting these agreements allows us to continue growing the partnerships available to the community."
 msgstr "遵守这些协议才能使我们能够继续发展对社群可用的伙伴关系。"
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
@@ -2428,55 +2013,23 @@ msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
-msgid ""
-"EZProxy is a proxy server used to authenticate users for many Wikipedia "
-"Library partners. Users sign into EZProxy via the Library Card platform to "
-"verify that they are authorized users, and then the server accesses "
-"requested resources using its own IP address."
-msgstr ""
-"EZProxy是用于许多维基百科图书馆合作伙伴的认证用户的代理服务器。用户通过图书卡"
-"平台登录EZProxy以验证他们是否是授权用户，然后服务器使用其自己的IP地址访问请求"
-"的资源。"
+msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
+msgstr "EZProxy是用于许多维基百科图书馆合作伙伴的认证用户的代理服务器。用户通过图书卡平台登录EZProxy以验证他们是否是授权用户，然后服务器使用其自己的IP地址访问请求的资源。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
-msgid ""
-"You may notice that when accessing resources via EZProxy that URLs are "
-"dynamically rewritten. This is why we recommend logging in via the Library "
-"Card platform rather than going directly to the unproxied partner website. "
-"When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re "
-"connected via EZProxy."
-msgstr ""
-"您可能会注意到，通过EZProxy访问资源时，URL是动态重写的。这就是为什么我们建议"
-"您通过图书卡平台登录而不是不通过代理直接访问合作伙伴网站的原因。如有疑问，请"
-"检查“idm.oclc”的网址。如果是这个网址，那么您将通过EZProxy连接。"
+msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
+msgstr "您可能会注意到，通过EZProxy访问资源时，URL是动态重写的。这就是为什么我们建议您通过图书卡平台登录而不是不通过代理直接访问合作伙伴网站的原因。如有疑问，请检查“idm.oclc”的网址。如果是这个网址，那么您将通过EZProxy连接。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:182
-msgid ""
-"Typically once you’ve logged in your session will remain active in your "
-"browser for up to two hours after you’ve finished searching. Note that use "
-"of EZProxy requires you to enable cookies. If you are having problems you "
-"should also try clearing your cache and restarting your browser."
-msgstr ""
-"通常在登录后，会话将在搜索完成后最多两个小时内在浏览器中保持活动状态。请注"
-"意，使用EZProxy要求您启用cookie。如果遇到问题，请尝试清除缓存并重新启动浏览"
-"器。"
+msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
+msgstr "通常在登录后，会话将在搜索完成后最多两个小时内在浏览器中保持活动状态。请注意，使用EZProxy要求您启用cookie。如果遇到问题，请尝试清除缓存并重新启动浏览器。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:193
-msgid ""
-"The Library Bundle is a collection of resources for which no application is "
-"required. If you meet the criteria laid out above, you will be authorized "
-"for access automatically upon logging in to the platform. Only some of our "
-"content is currently included in the Library Bundle, however we hope to "
-"expand the collection as more publishers become comfortable with "
-"participating. All Bundle content is accessed via EZProxy."
-msgstr ""
-"Library Bundle是不需要任何申请的资源馆藏。如果满足上述条件，则将在登录平台后"
-"自动获得访问权限。目前，我们的某些内容仅包含在“Library Bundle”中，但是随着更"
-"多出版商对参与的适应性提高，我们希望扩大馆藏。所有Bundle内容均可通过EZProxy访"
-"问。"
+msgid "The Library Bundle is a collection of resources for which no application is required. If you meet the criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only some of our content is currently included in the Library Bundle, however we hope to expand the collection as more publishers become comfortable with participating. All Bundle content is accessed via EZProxy."
+msgstr "Library Bundle是不需要任何申请的资源馆藏。如果满足上述条件，则将在登录平台后自动获得访问权限。目前，我们的某些内容仅包含在“Library Bundle”中，但是随着更多出版商对参与的适应性提高，我们希望扩大馆藏。所有Bundle内容均可通过EZProxy访问。"
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:202
@@ -2485,26 +2038,14 @@ msgstr "引用实践"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:206
-msgid ""
-"Citation practices vary by project and even by article. Generally, we "
-"support editors citing where they found information, in a form that allows "
-"others to check it for themselves. That often means providing both original "
-"source details as well as a link to the partner database in which the source "
-"was found."
-msgstr ""
-"引文实践因项目甚至条目而不同。一般来说，我们支持编辑引用他们在某处找到的信"
-"息，允许别人自己检查的形式。这通常意味着提供原始来源的细节，以及提供指向找到"
-"的来源的合作伙伴数据库的链接。"
+msgid "Citation practices vary by project and even by article. Generally, we support editors citing where they found information, in a form that allows others to check it for themselves. That often means providing both original source details as well as a link to the partner database in which the source was found."
+msgstr "引文实践因项目甚至条目而不同。一般来说，我们支持编辑引用他们在某处找到的信息，允许别人自己检查的形式。这通常意味着提供原始来源的细节，以及提供指向找到的来源的合作伙伴数据库的链接。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:218
 #, python-format
-msgid ""
-"If you have questions, need help, or want to volunteer to help, please see "
-"our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
-msgstr ""
-"如果您有任何疑问，需要帮助或想自愿提供帮助，请参阅我们的<a class=\"twl-links"
-"\" href=\"%(contact_url)s\">联系页面</a>。"
+msgid "If you have questions, need help, or want to volunteer to help, please see our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
+msgstr "如果您有任何疑问，需要帮助或想自愿提供帮助，请参阅我们的<a class=\"twl-links\" href=\"%(contact_url)s\">联系页面</a>。"
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
@@ -2555,12 +2096,8 @@ msgstr "更多信息"
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
 #, python-format
-msgid ""
-"Over 90 of the world's top subscription-only databases, with content in "
-"%(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr ""
-"世界超过百分之九十的包含%(no_of_languages)s种语言的订阅制数据库对所有背景的维"
-"基百科人免费"
+msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
+msgstr "世界超过百分之九十的包含%(no_of_languages)s种语言的订阅制数据库对所有背景的维基百科人免费"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2568,12 +2105,8 @@ msgid "Meet these criteria for automatic access"
 msgstr "自动获准访问门槛"
 
 #: TWLight/templates/login_partial.html:45
-msgid ""
-"These criteria grant you access to certain collections but not all. Some "
-"collections are accessible on a per application basis only."
-msgstr ""
-"这些条件授予您访问某些集合（但不是所有集合）的权限。\n"
-"有些集合只能在每个应用程序的基础上访问。"
+msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
+msgstr "这些条件授予您访问某些集合（但不是所有集合）的权限。\n有些集合只能在每个应用程序的基础上访问。"
 
 #: TWLight/templates/login_partial.html:65
 msgid "Login via Wikipedia"
@@ -2582,37 +2115,20 @@ msgstr "通过维基百科登录"
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
 #: TWLight/templates/message_partial.html:15
 #, python-format
-msgid ""
-"You don't have an email on file. We can't finalize your access to partner "
-"resources, and you won't be able to <a class=\"twl-links\" href="
-"\"%(contact_us_url)s\">contact us</a> without an email. Please <a class="
-"\"twl-links\" href=\"%(email_url)s\">update your email</a>."
-msgstr ""
-"文件中没有您的电子邮件地址。我们无法在没有电子邮件的情况下完成对合作伙伴资源"
-"的<a class=\"twl-links\" href=\"%(contact_us_url)s\">访问</a>。请<a class="
-"\"twl-links\" href=\"%(email_url)s\">更新您的电子邮件地址</a>。"
+msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a class=\"twl-links\" href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a class=\"twl-links\" href=\"%(email_url)s\">update your email</a>."
+msgstr "文件中没有您的电子邮件地址。我们无法在没有电子邮件的情况下完成对合作伙伴资源的<a class=\"twl-links\" href=\"%(contact_us_url)s\">访问</a>。请<a class=\"twl-links\" href=\"%(email_url)s\">更新您的电子邮件地址</a>。"
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/message_partial.html:26
 #, python-format
-msgid ""
-"You have requested a restriction on the processing of your data. Most site "
-"functionality will not be available to you until you <a class=\"twl-links\" "
-"href=\"%(restrict_url)s\">lift this restriction</a>."
-msgstr ""
-"您已要求对数据的处理进行限制。大多数站点功能将无法提供给您，直到您<a class="
-"\"twl-links\" href=\"%(restrict_url)s\">解除此限制</a>。"
+msgid "You have requested a restriction on the processing of your data. Most site functionality will not be available to you until you <a class=\"twl-links\" href=\"%(restrict_url)s\">lift this restriction</a>."
+msgstr "您已要求对数据的处理进行限制。大多数站点功能将无法提供给您，直到您<a class=\"twl-links\" href=\"%(restrict_url)s\">解除此限制</a>。"
 
 #. Translators: Shown if the current user has not agreed to the terms of use.
 #: TWLight/templates/message_partial.html:37
 #, python-format
-msgid ""
-"You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s"
-"\">terms of use</a> of this site. Your applications will not be processed "
-"and you won't be able to apply or access resources you are approved for."
-msgstr ""
-"您尚未同意本网站的<a class=\"twl-links\" href=\"%(terms_url)s\">使用条款</"
-"a>。您的申请将不会被处理，您将无法申请或访问被批准使用的资源。"
+msgid "You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
+msgstr "您尚未同意本网站的<a class=\"twl-links\" href=\"%(terms_url)s\">使用条款</a>。您的申请将不会被处理，您将无法申请或访问被批准使用的资源。"
 
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/new_base.html:86
@@ -2658,12 +2174,8 @@ msgstr "重设密码"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
-msgid ""
-"Forgot your password? Enter your email address below, and we'll email "
-"instructions for setting a new one."
-msgstr ""
-"忘记密码了吗？在下面输入您的电子邮件地址，我们将通过电子邮件发送有关设置新密"
-"码的说明。"
+msgid "Forgot your password? Enter your email address below, and we'll email instructions for setting a new one."
+msgstr "忘记密码了吗？在下面输入您的电子邮件地址，我们将通过电子邮件发送有关设置新密码的说明。"
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:36
@@ -2707,31 +2219,18 @@ msgstr "我同意以上使用条款"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
-msgid ""
-"By unchecking this box and clicking “Update” you may explore the site, but "
-"you will not be able to apply for access to materials or evaluate "
-"applications unless you agree with the terms of use."
-msgstr ""
-"通过取消选中此框并点击\"更新\"，您可以浏览网站，但除非您同意使用条款，否则您"
-"将无法获取资料或评估申请。"
+msgid "By unchecking this box and clicking “Update” you may explore the site, but you will not be able to apply for access to materials or evaluate applications unless you agree with the terms of use."
+msgstr "通过取消选中此框并点击\"更新\"，您可以浏览网站，但除非您同意使用条款，否则您将无法获取资料或评估申请。"
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:206
-msgid ""
-"Use my Wikipedia email address (will be updated the next time you login)."
+msgid "Use my Wikipedia email address (will be updated the next time you login)."
 msgstr "使用我的维基百科电子邮件地址（下次登录时将更新）。"
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:227
 msgid "Update email"
 msgstr "更新电子邮件"
-
-#. Translators: Do not translate.
-#: TWLight/users/models.py:778
-#, fuzzy, python-brace-format
-#| msgid "Username"
-msgid "{wp_username}"
-msgstr "用户名"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:250
@@ -2751,9 +2250,7 @@ msgstr "握手程序未启动，请尝试重新登录。"
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:398
-msgid ""
-"To view this link you need to be an eligible library user. Please login to "
-"continue."
+msgid "To view this link you need to be an eligible library user. Please login to continue."
 msgstr "要查看此链接，您需要是符合条件的图书馆用户。请先登录以继续。"
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
@@ -2783,22 +2280,13 @@ msgstr "访问令牌生成失败。"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:526
-msgid ""
-"Your Wikipedia account does not meet the eligibility criteria in the terms "
-"of use, so your Wikipedia Library Card Platform account cannot be activated."
-msgstr ""
-"您的维基百科账号不符合使用条款中的资格标准，因此无法激活您的维基百科图书卡台"
-"帐户。"
+msgid "Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."
+msgstr "您的维基百科账号不符合使用条款中的资格标准，因此无法激活您的维基百科图书卡台帐户。"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:535
-msgid ""
-"Your Wikipedia account no longer meets the eligibility criteria in the terms "
-"of use, so you cannot be logged in. If you think you should be able to log "
-"in, please email wikipedialibrary@wikimedia.org."
-msgstr ""
-"您的维基百科账号不再符合使用条款中的资格标准，因此您无法登录。如果您认为您应"
-"该能够登录，请发送电子邮件至wikipedialibrary@wikimedia.org。"
+msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
+msgstr "您的维基百科账号不再符合使用条款中的资格标准，因此您无法登录。如果您认为您应该能够登录，请发送电子邮件至wikipedialibrary@wikimedia.org。"
 
 #. Translators: this message is displayed to users with brand new accounts.
 #: TWLight/users/oauth.py:550
@@ -2808,13 +2296,8 @@ msgstr "欢迎使用！请先同意使用条款。"
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
 #: TWLight/users/templates/users/authorization_confirm_return.html:13
 #, python-format
-msgid ""
-"You will no longer be able to access <b>%(partner)s's</b> resources via the "
-"Library Card platform, but can request access again by clicking 'renew', if "
-"you change your mind. Are you sure you want to return your access?"
-msgstr ""
-"您将不再能够通过图书卡平台访问<b>%(partner)s's</b>的资源，但是如果您改变主"
-"意，可以通过点击“续订”再次请求访问权限。您确定要返回访问权限吗？"
+msgid "You will no longer be able to access <b>%(partner)s's</b> resources via the Library Card platform, but can request access again by clicking 'renew', if you change your mind. Are you sure you want to return your access?"
+msgstr "您将不再能够通过图书卡平台访问<b>%(partner)s's</b>的资源，但是如果您改变主意，可以通过点击“续订”再次请求访问权限。您确定要返回访问权限吗？"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
@@ -2883,13 +2366,8 @@ msgstr "编者数据"
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:59
-msgid ""
-"Information with an * was retrieved from Wikipedia directly. Other "
-"information was entered directly by users or site admins, in their preferred "
-"language."
-msgstr ""
-"带*的信息是直接从维基百科获取的。其他信息由用户或站点管理员以其首选语言直接输"
-"入。"
+msgid "Information with an * was retrieved from Wikipedia directly. Other information was entered directly by users or site admins, in their preferred language."
+msgstr "带*的信息是直接从维基百科获取的。其他信息由用户或站点管理员以其首选语言直接输入。"
 
 #. Translators: This distinguishes users who have been flagged as account coordinators. Don't translate username.
 #: TWLight/users/templates/users/editor_detail.html:71
@@ -2899,13 +2377,8 @@ msgstr "%(username)s在本站拥有协调员权限。"
 
 #. Translators: This is shown on editor profiles, under the heading for Wikipedia editor data.
 #: TWLight/users/templates/users/editor_detail_data.html:5
-msgid ""
-"This information is updated automatically from your Wikimedia account each "
-"time you log in, except for the Contributions field, where you can describe "
-"your Wikimedia editing history."
-msgstr ""
-"除“贡献”字段之外，每次登录时，此信息都会从维基媒体账户自动更新，在该字段中，"
-"您可以描述维基媒体的编辑历史。"
+msgid "This information is updated automatically from your Wikimedia account each time you log in, except for the Contributions field, where you can describe your Wikimedia editing history."
+msgstr "除“贡献”字段之外，每次登录时，此信息都会从维基媒体账户自动更新，在该字段中，您可以描述维基媒体的编辑历史。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
@@ -2934,17 +2407,13 @@ msgstr "满足使用条款吗？"
 
 #. Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer.
 #: TWLight/users/templates/users/editor_detail_data.html:57
-msgid ""
-"at their last login, did this user meet the criteria set forth in the terms "
-"of use?"
+msgid "at their last login, did this user meet the criteria set forth in the terms of use?"
 msgstr "在最后一次登录时，该用户是否符合使用条款中所规定的标准？"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:72
 #, python-format
-msgid ""
-"%(username)s may still be eligible for access grants at the coordinators' "
-"discretion."
+msgid "%(username)s may still be eligible for access grants at the coordinators' discretion."
 msgstr "%(username)s可能仍然有资格由协调员决定是否获得访问权限。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
@@ -2974,13 +2443,8 @@ msgstr "没有在任何项目上被封禁？"
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:133
 #, python-format
-msgid ""
-"It looks like you have an active block on your account. If you meet the "
-"other criteria you may still be permitted access to the library - please <a "
-"class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
-"看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书"
-"馆 - 请<a class=\"twl-links\" href=\"%(contact_url)s\">与我们联系</a>。"
+msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
+msgstr "看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a class=\"twl-links\" href=\"%(contact_url)s\">与我们联系</a>。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:148
@@ -2989,13 +2453,8 @@ msgstr "是否有使用Bundle的资格？"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:151
-msgid ""
-"At their last login, did this user meet the criteria set forth in the "
-"Library Bundle? Note that satisfying terms of use is a prerequisite to "
-"bundle eligibility."
-msgstr ""
-"上次登录时，该用户是否符合Library Bundle中所规定的标准？请注意，符合使用条款"
-"是Library Bundle资格的先决条件。"
+msgid "At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility."
+msgstr "上次登录时，该用户是否符合Library Bundle中所规定的标准？请注意，符合使用条款是Library Bundle资格的先决条件。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:172
@@ -3039,23 +2498,14 @@ msgstr "个人数据"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:257
-msgid ""
-"The following information is visible only to you, site administrators, "
-"publishing partners (where required), and volunteer Wikipedia Library "
-"coordinators (who have signed a Non-Disclosure Agreement)."
-msgstr ""
-"以下信息仅对您、站点管理员、出版商合作伙伴（如果需要）和维基百科图书馆志愿协"
-"调员（已签署保密协议）可见。"
+msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
+msgstr "以下信息仅对您、站点管理员、出版商合作伙伴（如果需要）和维基百科图书馆志愿协调员（已签署保密协议）可见。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:267
 #, python-format
-msgid ""
-"You may <a class=\"twl-links\" href=\"%(update_url)s\">update or delete</a> "
-"your data at any time."
-msgstr ""
-"你可以在任何时候修改、<a class=\"twl-links\" href=\"%(update_url)s\">更新或删"
-"除</a>你的数据。"
+msgid "You may <a class=\"twl-links\" href=\"%(update_url)s\">update or delete</a> your data at any time."
+msgstr "你可以在任何时候修改、<a class=\"twl-links\" href=\"%(update_url)s\">更新或删除</a>你的数据。"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's email. Don't remove the *.
 #: TWLight/users/templates/users/editor_detail_data.html:278
@@ -3074,28 +2524,19 @@ msgstr "所属机构"
 
 #. Translators: This message tells users that they are not eligible to access The Wikipedia Library content.
 #: TWLight/users/templates/users/eligibility_modal.html:7
-msgid ""
-"Sorry, your Wikipedia account doesn’t currently qualify to access The "
-"Wikipedia Library."
+msgid "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
 msgstr "抱歉，您的维基百科账户目前不满足访问维基百科图书馆的要求。"
 
 #. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
 #: TWLight/users/templates/users/eligibility_modal.html:30
 #, python-format
-msgid ""
-"Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
-msgstr ""
-"是否同意该站点的<a href=\"%(terms)s\" class=\"text-danger\">使用条款</a>？"
+msgid "Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
+msgstr "是否同意该站点的<a href=\"%(terms)s\" class=\"text-danger\">使用条款</a>？"
 
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
-msgid ""
-"It looks like you have an active block on your account. If you meet the "
-"other criteria you may still be permitted access to the library - please <a "
-"href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
-"看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书"
-"馆 - 请<a href=\"%(contact_url)s\">与我们联系</a>。"
+msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
+msgstr "看起来您的帐户有一个生效的封禁。如果您符合其他条件，我们仍可能允许您访问图书馆 - 请<a href=\"%(contact_url)s\">与我们联系</a>。"
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -3134,14 +2575,8 @@ msgstr "选择语言"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
-msgid ""
-"You can help translate the tool at <a class=\"twl-links\" href=\"https://"
-"translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform"
-"\">translatewiki.net</a>."
-msgstr ""
-"您可以在<a class=\"twl-links\" href=\"https://translatewiki.net/wiki/"
-"Translate:Wikipedia_Library_Card_Platform\">translatewiki.net</a>上帮助翻译该"
-"工具。"
+msgid "You can help translate the tool at <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
+msgstr "您可以在<a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translate:Wikipedia_Library_Card_Platform\">translatewiki.net</a>上帮助翻译该工具。"
 
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
@@ -3160,9 +2595,7 @@ msgstr "请求续订"
 
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
 #: TWLight/users/templates/users/my_applications.html:79
-msgid ""
-"Renewals are either not required, not available right now, or you have "
-"already requested a renewal."
+msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
 msgstr "不需要续订，或当前不可用，或者您已经请求续订。"
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
@@ -3226,22 +2659,12 @@ msgstr "限制数据处理"
 
 #. Translators: This message is displayed on the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:15
-msgid ""
-"Checking this box and clicking “Restrict” will pause all processing of the "
-"data you have entered into this website. You will not be able to apply for "
-"access to resources, your applications will not be further processed, and "
-"none of your data will be altered, until you return to this page and uncheck "
-"the box. This is not the same as deleting your data."
-msgstr ""
-"选中此框并点击“限制”将暂停对您输入到本网站的数据的所有处理。您将无法申请访问"
-"资源，您将无法申请对资源的访问权限，并且将无法进一步处理您的申请。同时您的任"
-"何数据都不会更改，直到您返回此页面并取消选中该框。这与删除数据不同。"
+msgid "Checking this box and clicking “Restrict” will pause all processing of the data you have entered into this website. You will not be able to apply for access to resources, your applications will not be further processed, and none of your data will be altered, until you return to this page and uncheck the box. This is not the same as deleting your data."
+msgstr "选中此框并点击“限制”将暂停对您输入到本网站的数据的所有处理。您将无法申请访问资源，您将无法申请对资源的访问权限，并且将无法进一步处理您的申请。同时您的任何数据都不会更改，直到您返回此页面并取消选中该框。这与删除数据不同。"
 
 #. Translators: This warning message is shown to coordinators who view the data restriction page.
 #: TWLight/users/templates/users/restrict_data.html:26
-msgid ""
-"You are a coordinator on this site. If you restrict the processing of your "
-"data, your coordinator flag will be removed."
+msgid "You are a coordinator on this site. If you restrict the processing of your data, your coordinator flag will be removed."
 msgstr "您是本站的协调员。如果您限制数据处理，那么您的协调员标志将被删除。"
 
 #. Translators: use the date *when you are translating*, in a language-appropriate format.
@@ -3261,33 +2684,13 @@ msgstr "维基百科图书卡使用条款和隐私声明"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:54
-msgid ""
-"<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/"
-"The_Wikipedia_Library\"> The Wikipedia Library </a> has partnered with "
-"publishers around the world to allow users to access otherwise paywalled "
-"resources. This website allows Wikipedia editors to search and access these "
-"resources."
-msgstr ""
-"<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/"
-"The_Wikipedia_Library/zh\">维基百科图书馆</a>已经与世界各地的出版商建立了合作"
-"伙伴关系，以允许用户访问其需要付费的资源。本网站允许维基百科编辑者搜索和访问"
-"这些资源。"
+msgid "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library </a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows Wikipedia editors to search and access these resources."
+msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/zh\">维基百科图书馆</a>已经与世界各地的出版商建立了合作伙伴关系，以允许用户访问其需要付费的资源。本网站允许维基百科编辑者搜索和访问这些资源。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:66
-msgid ""
-"This program is administered by the Wikimedia Foundation (WMF). These terms "
-"of use and privacy notice pertain to your application for access to "
-"resources through the Wikipedia Library, your use of this website, and your "
-"access to and use of those resources. They also describe our handling of the "
-"information you provide to us in order to create and administer your "
-"Wikipedia Library account. If we make material changes to the terms, we will "
-"notify users."
-msgstr ""
-"本程序由维基媒体基金会（WMF）管理。这些使用条款和隐私声明涉及到使用维基百科图"
-"书馆资源的申请，以及对这些资源的访问和使用。它们还描述了我们对您提供给我们的"
-"信息的处理方式，以便创建和管理您的维基百科图书馆账户。如果我们对条款进行重大"
-"更改，我们将通知用户。"
+msgid "This program is administered by the Wikimedia Foundation (WMF). These terms of use and privacy notice pertain to your application for access to resources through the Wikipedia Library, your use of this website, and your access to and use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. If we make material changes to the terms, we will notify users."
+msgstr "本程序由维基媒体基金会（WMF）管理。这些使用条款和隐私声明涉及到使用维基百科图书馆资源的申请，以及对这些资源的访问和使用。它们还描述了我们对您提供给我们的信息的处理方式，以便创建和管理您的维基百科图书馆账户。如果我们对条款进行重大更改，我们将通知用户。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:77
@@ -3296,50 +2699,18 @@ msgstr "维基百科图书卡账户的要求"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:81
-msgid ""
-"Access to resources via The Wikipedia Library is reserved for community "
-"members who have demonstrated their commitment to the Wikimedia projects, "
-"and who will use their access to these resources to improve project content. "
-"To that end, in order to be eligible for The Wikipedia Library, we require "
-"that you be registered for a user account on the projects, with at least 500 "
-"edits, six (6) months of activity, and 10+ edits in the last month. We ask "
-"that you do not request access to any publishers with a limited number of "
-"available accounts whose resources you can already access for free through "
-"your local library or university, or another institution or organization, in "
-"order to provide that opportunity to others."
-msgstr ""
-"透过维基百科图书馆取用资源的权限仅限于已经表明了对维基媒体项目的承诺，并将使"
-"用这些资源来改善项目的内容的维基人。对此，为了取得使用维基百科图书馆的资格，"
-"我们会要求您是项目上的已注册使用者。我们会优先考虑编辑超过500次，至少有6个月"
-"活动，且上个月编辑达10次以上的维基人使用。不过，若您已可以透过图书馆、大学、"
-"机构，或是其它组织来免费获得一些出版者的资源，我们请求您不要再向这些出版者提"
-"出申请，以便让机会留给其他人。"
+msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for The Wikipedia Library, we require that you be registered for a user account on the projects, with at least 500 edits, six (6) months of activity, and 10+ edits in the last month. We ask that you do not request access to any publishers with a limited number of available accounts whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
+msgstr "透过维基百科图书馆取用资源的权限仅限于已经表明了对维基媒体项目的承诺，并将使用这些资源来改善项目的内容的维基人。对此，为了取得使用维基百科图书馆的资格，我们会要求您是项目上的已注册使用者。我们会优先考虑编辑超过500次，至少有6个月活动，且上个月编辑达10次以上的维基人使用。不过，若您已可以透过图书馆、大学、机构，或是其它组织来免费获得一些出版者的资源，我们请求您不要再向这些出版者提出申请，以便让机会留给其他人。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:97
-msgid ""
-"Additionally, if you are currently blocked or banned from a Wikimedia "
-"project, applications to resources may be rejected or restricted. If you "
-"obtain a Wikipedia Library account, but a block or ban is subsequently "
-"instituted against you on one of the projects, you may lose access to your "
-"Wikipedia Library account."
-msgstr ""
-"此外，如果您当前被维基媒体项目封禁或禁止编辑，对资源的申请可能会被拒绝或限"
-"制。如果您获得了维基百科图书馆账户，但随后其中一个项目对您实施了封禁或禁止编"
-"辑，那么您可能会失去对维基百科图书馆帐户的访问权限。"
+msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
+msgstr "此外，如果您当前被维基媒体项目封禁或禁止编辑，对资源的申请可能会被拒绝或限制。如果您获得了维基百科图书馆账户，但随后其中一个项目对您实施了封禁或禁止编辑，那么您可能会失去对维基百科图书馆帐户的访问权限。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:107
-msgid ""
-"Your eligibility to access The Wikipedia Library is assessed at each login. "
-"While more than half of the library's content is provided via this automated "
-"eligibility check, access to other publisher's content may be time limited, "
-"typically lapsing after one year, after which you will usually need to apply "
-"for renewal."
-msgstr ""
-"每次登录都会评估您访问维基百科图书馆的资格。尽管图书馆超过一半的内容是通过此"
-"自动资格检查程序提供的，但对其他出版者内容的访问可能会有时间限制，通常会在一"
-"年后失效，在那之后您通常需要申请续订。"
+msgid "Your eligibility to access The Wikipedia Library is assessed at each login. While more than half of the library's content is provided via this automated eligibility check, access to other publisher's content may be time limited, typically lapsing after one year, after which you will usually need to apply for renewal."
+msgstr "每次登录都会评估您访问维基百科图书馆的资格。尽管图书馆超过一半的内容是通过此自动资格检查程序提供的，但对其他出版者内容的访问可能会有时间限制，通常会在一年后失效，在那之后您通常需要申请续订。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:117
@@ -3348,60 +2719,28 @@ msgstr "通过您的维基百科图书卡帐户申请"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:121
-msgid ""
-"In order to apply for access to a partner resource, you must provide us with "
-"certain information, which we will use to evaluate your application. If your "
-"application is approved, we may transfer the information you have given us "
-"to the publishers whose resources you wish to access. They will either "
-"contact you with the account information directly or we will send access "
-"information to you ourselves."
-msgstr ""
-"为了申请合作伙伴资源的访问权限，您必须向我们提供某些信息，我们将使用这些信息"
-"来评估您的申请。如果您的申请获得批准，我们可能会将您提供给我们的信息转递给您"
-"希望访问其资源的出版商。他们会直接与您联系并提供帐户信息，或者我们会自己将访"
-"问信息发送给您。"
+msgid "In order to apply for access to a partner resource, you must provide us with certain information, which we will use to evaluate your application. If your application is approved, we may transfer the information you have given us to the publishers whose resources you wish to access. They will either contact you with the account information directly or we will send access information to you ourselves."
+msgstr "为了申请合作伙伴资源的访问权限，您必须向我们提供某些信息，我们将使用这些信息来评估您的申请。如果您的申请获得批准，我们可能会将您提供给我们的信息转递给您希望访问其资源的出版商。他们会直接与您联系并提供帐户信息，或者我们会自己将访问信息发送给您。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:133
-msgid ""
-"In addition to the basic information you provide to us, our system will "
-"retrieve some information directly from the Wikimedia projects: your "
-"username, email address, edit count, registration date, user ID number, "
-"groups to which you belong, and any special user rights."
-msgstr ""
-"除了您提供给我们的基本信息之外，我们的系统还将直接从维基媒体项目中获取一些信"
-"息：您的用户名、电子邮件地址、编辑次数、注册日期、用户ID、您所属的用户组以及"
-"任何特殊的用户权限。"
+msgid "In addition to the basic information you provide to us, our system will retrieve some information directly from the Wikimedia projects: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights."
+msgstr "除了您提供给我们的基本信息之外，我们的系统还将直接从维基媒体项目中获取一些信息：您的用户名、电子邮件地址、编辑次数、注册日期、用户ID、您所属的用户组以及任何特殊的用户权限。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:143
-msgid ""
-"Each time you log in to the Wikipedia Library Card Platform, this "
-"information will be automatically updated."
+msgid "Each time you log in to the Wikipedia Library Card Platform, this information will be automatically updated."
 msgstr "每次您登录维基百科图书卡平台时，此信息将自动更新。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:151
-msgid ""
-"We will ask you to provide us with some information about your history of "
-"contributions to the Wikimedia projects. Information on contribution history "
-"is optional, but will greatly assist us in evaluating your application."
-msgstr ""
-"我们将要求您向我们提供一些关于您在维基媒体项目上所做贡献的历史信息。贡献历史"
-"的信息是可选的，但将极大地帮助我们评估您的申请。"
+msgid "We will ask you to provide us with some information about your history of contributions to the Wikimedia projects. Information on contribution history is optional, but will greatly assist us in evaluating your application."
+msgstr "我们将要求您向我们提供一些关于您在维基媒体项目上所做贡献的历史信息。贡献历史的信息是可选的，但将极大地帮助我们评估您的申请。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:160
-msgid ""
-"The information you provide when creating your account will be visible to "
-"you while on the site but not to others unless they are approved Wikipedia "
-"Library Coordinators, WMF Staff, or WMF Contractors who need access to this "
-"data in order to carry out their work with the Wikipedia Library, all of "
-"whom are subject to non-disclosure obligations."
-msgstr ""
-"您在本站创建帐户时会看到您创建的信息，但对其他用户则不可见，除非他们是获得批"
-"准的维基百科图书馆协调员、WMF（维基媒体基金会）员工或 WMF承包商。他们需要访问"
-"这些数据才能与维基百科图书馆一起工作，所有这些人均须承担保密义务。"
+msgid "The information you provide when creating your account will be visible to you while on the site but not to others unless they are approved Wikipedia Library Coordinators, WMF Staff, or WMF Contractors who need access to this data in order to carry out their work with the Wikipedia Library, all of whom are subject to non-disclosure obligations."
+msgstr "您在本站创建帐户时会看到您创建的信息，但对其他用户则不可见，除非他们是获得批准的维基百科图书馆协调员、WMF（维基媒体基金会）员工或 WMF承包商。他们需要访问这些数据才能与维基百科图书馆一起工作，所有这些人均须承担保密义务。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:170
@@ -3410,53 +2749,33 @@ msgstr "您对出版商资源的使用"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:174
-msgid ""
-"In order to access an individual publisher’s resources, you must agree to "
-"that publisher’s terms of use and privacy policy. You agree that you will "
-"not violate such terms and policies in connection with your use of the "
-"Wikipedia Library. Additionally, the following activities are prohibited "
-"while accessing publisher resources through the Wikipedia Library."
-msgstr ""
-"为了访问某个出版商的资源，您必须同意该出版商的使用条款和隐私政策。您同意不会"
-"因使用维基百科图书馆而违反此类条款和政策。此外，在通过维基百科图书馆访问出版"
-"商资源时，禁止以下活动。"
+msgid "In order to access an individual publisher’s resources, you must agree to that publisher’s terms of use and privacy policy. You agree that you will not violate such terms and policies in connection with your use of the Wikipedia Library. Additionally, the following activities are prohibited while accessing publisher resources through the Wikipedia Library."
+msgstr "为了访问某个出版商的资源，您必须同意该出版商的使用条款和隐私政策。您同意不会因使用维基百科图书馆而违反此类条款和政策。此外，在通过维基百科图书馆访问出版商资源时，禁止以下活动。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:187
-msgid ""
-"Sharing your Wikipedia account, usernames, passwords, or any access codes "
-"for publisher resources with others;"
+msgid "Sharing your Wikipedia account, usernames, passwords, or any access codes for publisher resources with others;"
 msgstr "与其他人分享您的维基百科账户、用户名、密码或任何访问出版商资源的代码；"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:194
-msgid ""
-"Automatically scraping or downloading restricted content from publishers;"
+msgid "Automatically scraping or downloading restricted content from publishers;"
 msgstr "自动从出版商抓取或下载受限制的内容；"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:200
-msgid ""
-"Systematically making printed or electronic copies of multiple extracts of "
-"restricted content available for any purpose;"
+msgid "Systematically making printed or electronic copies of multiple extracts of restricted content available for any purpose;"
 msgstr "有系统地制作多个受限制内容题录的印刷或电子复制品，以用于任何目的；"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:207
-msgid ""
-"Data mining metadata without permission—for example, in order to use "
-"metadata for auto-created stub articles;"
-msgstr ""
-"未经许可进行元数据的数据挖掘——例如，为了将元数据用于自动创建小作品条目；"
+msgid "Data mining metadata without permission—for example, in order to use metadata for auto-created stub articles;"
+msgstr "未经许可进行元数据的数据挖掘——例如，为了将元数据用于自动创建小作品条目；"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:214
-msgid ""
-"Using the access you receive through the Wikipedia Library for profit by "
-"selling access to your account or resources which you have through it."
-msgstr ""
-"利用您通过维基百科图书馆获得的访问权限，出售对您拥有的帐户或资源的访问权限来"
-"牟利。"
+msgid "Using the access you receive through the Wikipedia Library for profit by selling access to your account or resources which you have through it."
+msgstr "利用您通过维基百科图书馆获得的访问权限，出售对您拥有的帐户或资源的访问权限来牟利。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:223
@@ -3465,21 +2784,12 @@ msgstr "外部搜索和代理服务"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:227
-msgid ""
-"Certain resources may only be accessed using an external search service, "
-"such as the EBSCO Discovery Service, or a proxy service, such as OCLC "
-"EZProxy. If you use such external search and/or proxy services, please "
-"review the applicable terms of use and privacy policies."
-msgstr ""
-"某些资源只能使用外部搜索服务（例如EBSCO发现服务）或代理服务（例如OCLC "
-"EZProxy）来访问。如果您使用此类外部搜索和/或代理服务，请查看适用的使用条款和"
-"隐私政策。"
+msgid "Certain resources may only be accessed using an external search service, such as the EBSCO Discovery Service, or a proxy service, such as OCLC EZProxy. If you use such external search and/or proxy services, please review the applicable terms of use and privacy policies."
+msgstr "某些资源只能使用外部搜索服务（例如EBSCO发现服务）或代理服务（例如OCLC EZProxy）来访问。如果您使用此类外部搜索和/或代理服务，请查看适用的使用条款和隐私政策。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:237
-msgid ""
-"In addition, if you use OCLC EZProxy, please note that you may not use it "
-"for commercial purposes."
+msgid "In addition, if you use OCLC EZProxy, please note that you may not use it for commercial purposes."
 msgstr "此外，如果您使用OCLC EZProxy，请注意，您不得将其用于商业目的。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
@@ -3489,165 +2799,50 @@ msgstr "数据保留与处理"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:248
-msgid ""
-"The Wikimedia Foundation and our service providers use your information for "
-"the legitimate purpose of providing Wikipedia Library services in support of "
-"our charitable mission. When you apply for a Wikipedia Library account, or "
-"use your Wikipedia Library account, we may routinely collect the following "
-"information: your username, email address, edit count, registration date, "
-"user ID number, groups to which you belong, and any special user rights; "
-"your name, country of residence, occupation, and/or affiliation, if required "
-"by a partner to which you are applying; your narrative description of your "
-"contributions and reasons for applying for access to partner resources; and "
-"the date you agree to these terms of use."
-msgstr ""
-"维基媒体基金会和我们的服务提供商出于合法目的使用您的信息，以提供维基百科图书"
-"馆服务来支持我们的慈善使命。当您申请维基百科图书馆帐户或使用维基百科图书馆帐"
-"户时，我们可能会定期收集以下信息：您的用户名，电子邮件地址，编辑数量，注册日"
-"期，用户ID号，您所属的用户组以及任何特殊用户权限; 您的姓名，居住地，职业和/或"
-"隶属关系（如果您要申请的合作伙伴要求的话）；您对自己贡献的叙述性描述以及申请"
-"访问合作伙伴资源的原因；以及您同意这些使用条款的日期。"
+msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, occupation, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
+msgstr "维基媒体基金会和我们的服务提供商出于合法目的使用您的信息，以提供维基百科图书馆服务来支持我们的慈善使命。当您申请维基百科图书馆帐户或使用维基百科图书馆帐户时，我们可能会定期收集以下信息：您的用户名，电子邮件地址，编辑数量，注册日期，用户ID号，您所属的用户组以及任何特殊用户权限; 您的姓名，居住地，职业和/或隶属关系（如果您要申请的合作伙伴要求的话）；您对自己贡献的叙述性描述以及申请访问合作伙伴资源的原因；以及您同意这些使用条款的日期。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:265
 #, python-format
-msgid ""
-"Each publisher who is a member of the Wikipedia Library program requires "
-"different specific information in the application. Some publishers may "
-"request only an email address, while others request more detailed data, such "
-"as your name, location, occupation, or institutional affiliation. When you "
-"complete your application, you will only be asked to supply information "
-"required by the publishers you have chosen, and each publisher will only "
-"receive the information they require for providing you with access. Please "
-"see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner "
-"information</a> pages to learn what information is required by each "
-"publisher to gain access to their resources."
-msgstr ""
-"每个出版商都是维基百科图书馆程序的一个成员，在申请时需要不同的特定信息。有些"
-"出版商可能只要求一个电子邮件地址，而其他出版商则要求更详细的数据，如您的姓"
-"名、所在地、职业或机构隶属关系。完成申请后，只会要求您提供您所选的出版商所需"
-"的信息，并且每个出版商将只会收到他们为您提供访问权限所需的信息。请参阅我们的"
-"<a class=\"twl-links\" href=\"%(all_partners_url)s\">合作伙伴信息</a>页面，以"
-"了解每个出版商需要哪些信息才能访问其资源。"
+msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
+msgstr "每个出版商都是维基百科图书馆程序的一个成员，在申请时需要不同的特定信息。有些出版商可能只要求一个电子邮件地址，而其他出版商则要求更详细的数据，如您的姓名、所在地、职业或机构隶属关系。完成申请后，只会要求您提供您所选的出版商所需的信息，并且每个出版商将只会收到他们为您提供访问权限所需的信息。请参阅我们的<a class=\"twl-links\" href=\"%(all_partners_url)s\">合作伙伴信息</a>页面，以了解每个出版商需要哪些信息才能访问其资源。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:280
-msgid ""
-"Some Wikipedia Library pages are visible without logging in, but you will "
-"need to log in to apply or access proprietary partner resources. We use the "
-"data provided by you via OAuth and Wikimedia API calls to assess your "
-"application for access and to process approved requests."
-msgstr ""
-"一些维基百科图书馆无需登录即可查看，但是您需要登录才能申请或访问专有合作伙伴"
-"的资源。我们使用您通过OAuth和Wikimedia API调用提供的数据来评估您申请的访问权"
-"限并处理批准的请求。"
+msgid "Some Wikipedia Library pages are visible without logging in, but you will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
+msgstr "一些维基百科图书馆无需登录即可查看，但是您需要登录才能申请或访问专有合作伙伴的资源。我们使用您通过OAuth和Wikimedia API调用提供的数据来评估您申请的访问权限并处理批准的请求。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:291
 #, python-format
-msgid ""
-"In order to administer the Wikipedia Library program, we will retain the "
-"application data we collect from you for three years after your most recent "
-"login, unless you delete your account, as described below. You can log in "
-"and go to <a class=\"twl-links\" href=\"%(profile_url)s\">your profile page</"
-"a> in order to see the information associated with your account, and can "
-"download it in JSON format. You may access, update, restrict, or delete this "
-"information at any time, except for the information that is automatically "
-"retrieved from the projects. If you have any questions or concerns about the "
-"handling of your data, please contact <a class=\"twl-links\" href=\"mailto:"
-"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card"
-"%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
-msgstr ""
-"为了管理Wikipedia Library程序，我们将保留无限期从你最近登录之后的三年收集的应"
-"用程序数据，除非您删除账户，如下所述。您可以登录并转到<a class=\"twl-links\" "
-"href=\"%(profile_url)s\">配置文件页</a>，以便查看与您的帐户相关联的信息，可以"
-"以 JSON 格式下载。您可以随时访问、更新、限制或删除此信息，除了从项目中自动检"
-"索的信息之外。如果您对数据的处理有任何疑问或疑虑，请联系 <a class=\"twl-links"
-"\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library"
-"%%20Card%%20account%%20deactivation\"></a>。"
+msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a class=\"twl-links\" href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
+msgstr "为了管理Wikipedia Library程序，我们将保留无限期从你最近登录之后的三年收集的应用程序数据，除非您删除账户，如下所述。您可以登录并转到<a class=\"twl-links\" href=\"%(profile_url)s\">配置文件页</a>，以便查看与您的帐户相关联的信息，可以以 JSON 格式下载。您可以随时访问、更新、限制或删除此信息，除了从项目中自动检索的信息之外。如果您对数据的处理有任何疑问或疑虑，请联系 <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"></a>。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:308
-msgid ""
-"If you decide to disable your Wikipedia Library account, you can use the "
-"delete button on your profile to delete certain personal information "
-"associated with your account. We will delete your real name, occupation, "
-"institutional affiliation, and country of residence. Please note that the "
-"system will retain a record of your username, the publishers to which you "
-"applied or had access, and the dates of that access. Note that deletion is "
-"not reversible. Deletion of your Wikipedia Library account may also "
-"correspond with the removal of any resource access to which you were "
-"eligible or approved. If you request the deletion of account information and "
-"later wish to apply for a new account, you will need to provide the "
-"necessary information again."
-msgstr ""
-"如果您决定注销您的维基百科图书馆账户，可以使用个人资料上的删除按钮删除与您的"
-"帐户相关联的某些个人信息。我们将删除您的真实姓名，职业，机构隶属关系和居住"
-"地。请注意，系统将保留您的用户名，您已申请或有权访问的出版商，以及访问日期的"
-"记录。请注意，删除是不可逆的。删除维基百科图书馆帐户也可能与删除您有资格或被"
-"批准的任何资源访问权限相对应。如果您请求删除帐户信息，但以后又想申请一个新帐"
-"户，则需要再次提供必要的信息。"
+msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, occupation, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
+msgstr "如果您决定注销您的维基百科图书馆账户，可以使用个人资料上的删除按钮删除与您的帐户相关联的某些个人信息。我们将删除您的真实姓名，职业，机构隶属关系和居住地。请注意，系统将保留您的用户名，您已申请或有权访问的出版商，以及访问日期的记录。请注意，删除是不可逆的。删除维基百科图书馆帐户也可能与删除您有资格或被批准的任何资源访问权限相对应。如果您请求删除帐户信息，但以后又想申请一个新帐户，则需要再次提供必要的信息。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:324
-msgid ""
-"The Wikipedia Library is run by WMF Staff, Contractors, and approved "
-"volunteer Coordinators. The data associated with your account will be shared "
-"with the WMF staff, contractors, service providers, and volunteer "
-"coordinators who need to process the information in connection with their "
-"work for the Wikipedia Library, and who are subject to confidentiality "
-"obligations. We will also use your data for internal Wikipedia Library "
-"purposes such as distributing user surveys and account notifications, and in "
-"a depersonalized or aggregated fashion for statistical analysis and "
-"administration. Finally, we will share your information with the publishers "
-"whom you specifically select in order to provide you with access to "
-"resources. Otherwise, your information will not be shared with third "
-"parties, with the exception of the circumstances described below."
-msgstr ""
-"维基百科图书馆由WMF工作人员、承包商和经批准的志愿者协调员管理。与您的帐户关联"
-"的数据将与WMF工作人员、承包商、服务提供商和志愿者协调员共享，他们需要处理与维"
-"基百科图书馆工作相关的信息，并承担保密义务。我们还会将您的数据用于维基百科图"
-"书馆的内部目的，例如分发用户调查和帐户通知，并以非个性化或汇总的方式进行统计"
-"分析和管理。最后，我们将与您专门选择的出版商共享您的信息，以便为您提供对资源"
-"的访问权限。否则，除下述情况外，您的信息将不会与第三方共享。"
+msgid "The Wikipedia Library is run by WMF Staff, Contractors, and approved volunteer Coordinators. The data associated with your account will be shared with the WMF staff, contractors, service providers, and volunteer coordinators who need to process the information in connection with their work for the Wikipedia Library, and who are subject to confidentiality obligations. We will also use your data for internal Wikipedia Library purposes such as distributing user surveys and account notifications, and in a depersonalized or aggregated fashion for statistical analysis and administration. Finally, we will share your information with the publishers whom you specifically select in order to provide you with access to resources. Otherwise, your information will not be shared with third parties, with the exception of the circumstances described below."
+msgstr "维基百科图书馆由WMF工作人员、承包商和经批准的志愿者协调员管理。与您的帐户关联的数据将与WMF工作人员、承包商、服务提供商和志愿者协调员共享，他们需要处理与维基百科图书馆工作相关的信息，并承担保密义务。我们还会将您的数据用于维基百科图书馆的内部目的，例如分发用户调查和帐户通知，并以非个性化或汇总的方式进行统计分析和管理。最后，我们将与您专门选择的出版商共享您的信息，以便为您提供对资源的访问权限。否则，除下述情况外，您的信息将不会与第三方共享。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated.
 #: TWLight/users/templates/users/terms.html:341
-msgid ""
-"We may disclose any collected information when required by law, when we have "
-"your permission, when needed to protect our rights, privacy, safety, users, "
-"or the general public, and when necessary to enforce these terms, WMF’s "
-"general <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/"
-"Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
-msgstr ""
-"我们可能会在法律要求时，当我们征得您的许可后，当需要保护我们的权利、隐私、安"
-"全、用户或公众时，以及为执行这些条款而有必要时，披露WMF的一般性<a class="
-"\"twl-links\" href =“ https://foundation.wikimedia.org/wiki/Terms_of_Use“>使"
-"用条款</a>或任何其他WMF政策。"
+msgid "We may disclose any collected information when required by law, when we have your permission, when needed to protect our rights, privacy, safety, users, or the general public, and when necessary to enforce these terms, WMF’s general <a class=\"twl-links\" href=\"https://foundation.wikimedia.org/wiki/Terms_of_Use\">Terms of Use</a>, or any other WMF policy."
+msgstr "我们可能会在法律要求时，当我们征得您的许可后，当需要保护我们的权利、隐私、安全、用户或公众时，以及为执行这些条款而有必要时，披露WMF的一般性<a class=\"twl-links\" href =“ https://foundation.wikimedia.org/wiki/Terms_of_Use“>使用条款</a>或任何其他WMF政策。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:352
-msgid ""
-"We take the security of your personal data seriously, and take reasonable "
-"precautions to ensure your data is protected. These precautions include "
-"access controls to limit who has access to your data and security "
-"technologies to protect data stored on the server. However, we cannot "
-"guarantee the safety of your data as it is transmitted and stored."
-msgstr ""
-"我们认真对待您的个人数据安全，并采取合理的预防措施以确保您的数据受到保护。这"
-"些预防措施包括访问控制，以限制谁可以访问您的数据，以及安全技术以保护存储在服"
-"务器上的数据。但是，我们无法保证您的数据在传输和存储时的安全性。"
+msgid "We take the security of your personal data seriously, and take reasonable precautions to ensure your data is protected. These precautions include access controls to limit who has access to your data and security technologies to protect data stored on the server. However, we cannot guarantee the safety of your data as it is transmitted and stored."
+msgstr "我们认真对待您的个人数据安全，并采取合理的预防措施以确保您的数据受到保护。这些预防措施包括访问控制，以限制谁可以访问您的数据，以及安全技术以保护存储在服务器上的数据。但是，我们无法保证您的数据在传输和存储时的安全性。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:363
-msgid ""
-"Please note that these terms do not control the use and handling of your "
-"data by the publishers and service providers whose resources you access or "
-"apply to access. Please read their individual privacy policies for that "
-"information."
-msgstr ""
-"请注意，这些条款并不控制您访问或申请访问其资源的出版商和服务提供商对数据的使"
-"用和处理。 请阅读他们的个人隐私政策以获取相关信息。"
+msgid "Please note that these terms do not control the use and handling of your data by the publishers and service providers whose resources you access or apply to access. Please read their individual privacy policies for that information."
+msgstr "请注意，这些条款并不控制您访问或申请访问其资源的出版商和服务提供商对数据的使用和处理。 请阅读他们的个人隐私政策以获取相关信息。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:371
@@ -3656,47 +2851,18 @@ msgstr "重要提示"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:376
-msgid ""
-"The Wikimedia Foundation is a nonprofit organization based in San Francisco, "
-"California. The Wikipedia Library program provides access to resources held "
-"by publishers in multiple countries. If you apply for a Wikipedia Library "
-"account (whether you are inside or outside of the United States), you "
-"understand that your personal data will be collected, transferred, stored, "
-"processed, disclosed and otherwise used in the U.S. as described in this "
-"privacy policy. You also understand that your information may be transferred "
-"by us from the U.S. to other countries, which may have different or less "
-"stringent data protection laws than your country, in connection with "
-"providing services to you, including evaluating your application and "
-"securing access to your chosen publishers (locations for each publisher are "
-"outlined on their respective partner information pages)."
-msgstr ""
-"维基媒体基金会（Wikimedia Foundation）是总部设在美国加利福尼亚州旧金山的一家"
-"非营利性组织。维基百科图书馆提供对多个国家/地区出版商所拥有资源的访问权限。如"
-"果您申请维基百科图书馆账户（无论您在美国境内或境外），您都将了解，您的个人数"
-"据将按照本隐私政策的规定在美国收集、传输、存储、处理、披露和以其他方式使用。"
-"您还应了解，在向您提供服务（包括评估您的申请并确保对您选择内容的访问权限）方"
-"面，我们可能会将我们的信息从美国转移到其他国家，这些国家/地区的数据保护法律可"
-"能与您所在国家/地区的法律不同或更严格。出版商（每个出版商的所在地在其相应的合"
-"作伙伴信息页面上都有概述）。"
+msgid "The Wikimedia Foundation is a nonprofit organization based in San Francisco, California. The Wikipedia Library program provides access to resources held by publishers in multiple countries. If you apply for a Wikipedia Library account (whether you are inside or outside of the United States), you understand that your personal data will be collected, transferred, stored, processed, disclosed and otherwise used in the U.S. as described in this privacy policy. You also understand that your information may be transferred by us from the U.S. to other countries, which may have different or less stringent data protection laws than your country, in connection with providing services to you, including evaluating your application and securing access to your chosen publishers (locations for each publisher are outlined on their respective partner information pages)."
+msgstr "维基媒体基金会（Wikimedia Foundation）是总部设在美国加利福尼亚州旧金山的一家非营利性组织。维基百科图书馆提供对多个国家/地区出版商所拥有资源的访问权限。如果您申请维基百科图书馆账户（无论您在美国境内或境外），您都将了解，您的个人数据将按照本隐私政策的规定在美国收集、传输、存储、处理、披露和以其他方式使用。您还应了解，在向您提供服务（包括评估您的申请并确保对您选择内容的访问权限）方面，我们可能会将我们的信息从美国转移到其他国家，这些国家/地区的数据保护法律可能与您所在国家/地区的法律不同或更严格。出版商（每个出版商的所在地在其相应的合作伙伴信息页面上都有概述）。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:395
-msgid ""
-"Please note that in the event of any differences in meaning or "
-"interpretation between the original English version of these terms and a "
-"translation, the original English version takes precedence."
-msgstr ""
-"请注意，如果这些条款的原始英文版本与翻译之间在含义或解释上存在任何差异，则以"
-"原始英文版本为准。"
+msgid "Please note that in the event of any differences in meaning or interpretation between the original English version of these terms and a translation, the original English version takes precedence."
+msgstr "请注意，如果这些条款的原始英文版本与翻译之间在含义或解释上存在任何差异，则以原始英文版本为准。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:406
-msgid ""
-"See also the <a class=\"twl-links\" href=\"https://wikimediafoundation.org/"
-"wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
-msgstr ""
-"另请参见<a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/"
-"Privacy_policy\">维基媒体基金会隐私政策</a>。"
+msgid "See also the <a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Wikimedia Foundation Privacy Policy</a>."
+msgstr "另请参见<a class=\"twl-links\" href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">维基媒体基金会隐私政策</a>。"
 
 #. Translators: This is the second to last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:415
@@ -3715,14 +2881,8 @@ msgstr "维基媒体基金会"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:429
-msgid ""
-"By checking this box and clicking “Submit”, you agree that you have read the "
-"above terms and that you will adhere to the terms of use in your application "
-"to and use of the The Wikipedia Library, and the publishers’ services to "
-"which you gain access through The Wikipedia Library program."
-msgstr ""
-"选中此框并点击“提交”，即表示您已阅读并同意上述条款，并在维基百科图书馆申请"
-"时，以及您通过维基百科图书馆程序访问所获得的出版商服务中遵守这些使用条款。"
+msgid "By checking this box and clicking “Submit”, you agree that you have read the above terms and that you will adhere to the terms of use in your application to and use of the The Wikipedia Library, and the publishers’ services to which you gain access through The Wikipedia Library program."
+msgstr "选中此框并点击“提交”，即表示您已阅读并同意上述条款，并在维基百科图书馆申请时，以及您通过维基百科图书馆程序访问所获得的出版商服务中遵守这些使用条款。"
 
 #: TWLight/users/templates/users/user_collection_tile.html:23
 msgid "Remove this collection from favorites"
@@ -3774,38 +2934,19 @@ msgstr "删除所有数据"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:17
-msgid ""
-"<b>Warning:</b> Performing this action will delete your Wikipedia Library "
-"Card user account and all associated applications. This process is not "
-"reversible. You may lose any partner accounts you were granted, and will not "
-"be able to renew those accounts or apply for new ones."
-msgstr ""
-"<b>警告：</b>执行此操作将删除您的维基百科图书卡用户账户和所有关联的申请。这个"
-"过程是不可逆的。您可能会失去任何已被授予的合作伙伴帐户，并且将无法续订这些帐"
-"户或申请新的帐户。"
+msgid "<b>Warning:</b> Performing this action will delete your Wikipedia Library Card user account and all associated applications. This process is not reversible. You may lose any partner accounts you were granted, and will not be able to renew those accounts or apply for new ones."
+msgstr "<b>警告：</b>执行此操作将删除您的维基百科图书卡用户账户和所有关联的申请。这个过程是不可逆的。您可能会失去任何已被授予的合作伙伴帐户，并且将无法续订这些帐户或申请新的帐户。"
 
 #. Translators: this should show up for people who log in with a username/password and not OAuth, so we don't know what their Wikipedia identity is.
-#.
 #: TWLight/users/templates/users/user_detail.html:12
 #, python-format
-msgid ""
-"Hi, %(username)s! You don't have a Wikipedia editor profile attached to your "
-"account here, so you are probably a site administrator."
-msgstr ""
-"您好，%(username)s！您的帐户没有附加维基百科编者个人资料，因此您可能是本站管"
-"理员。"
+msgid "Hi, %(username)s! You don't have a Wikipedia editor profile attached to your account here, so you are probably a site administrator."
+msgstr "您好，%(username)s！您的帐户没有附加维基百科编者个人资料，因此您可能是本站管理员。"
 
 #. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
 #: TWLight/users/templates/users/user_detail.html:20
-msgid ""
-"If you aren't a site administrator, something weird has happened. You won't "
-"be able to apply for access without a Wikipedia editor profile. You should "
-"log out and create a new account by logging in via OAuth, or contact a site "
-"administrator for help."
-msgstr ""
-"如果您不是本站管理员，就发生了一些奇怪的事情。如果没有维基百科编者个人资料，"
-"您将无法申请访问权限。您应该注销并通过OAuth登录来创建新帐户，或者与本站管理员"
-"联系以获取帮助。"
+msgid "If you aren't a site administrator, something weird has happened. You won't be able to apply for access without a Wikipedia editor profile. You should log out and create a new account by logging in via OAuth, or contact a site administrator for help."
+msgstr "如果您不是本站管理员，就发生了一些奇怪的事情。如果没有维基百科编者个人资料，您将无法申请访问权限。您应该注销并通过OAuth登录来创建新帐户，或者与本站管理员联系以获取帮助。"
 
 #. Translators: Labels a sections where coordinators can select their email preferences.
 #: TWLight/users/templates/users/user_email_preferences.html:15
@@ -3815,22 +2956,13 @@ msgstr "仅协调员"
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
 #: TWLight/users/views.py:177
 #, python-brace-format
-msgid ""
-"Please <a class='twl-links' href='{url}'>update your contributions</a> to "
-"Wikipedia to help coordinators evaluate your applications."
-msgstr ""
-"请<a class=\"twl-links\" href='{url}'>更新</a>您对维基百科的贡献，以帮助协调"
-"员评估申请。"
+msgid "Please <a class='twl-links' href='{url}'>update your contributions</a> to Wikipedia to help coordinators evaluate your applications."
+msgstr "请<a class=\"twl-links\" href='{url}'>更新</a>您对维基百科的贡献，以帮助协调员评估申请。"
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-msgid ""
-"You have chosen not to receive reminder emails. As a coordinator, you should "
-"receive at least one type of reminder emails, so consider changing your "
-"preferences."
-msgstr ""
-"您已选择不接收提醒电子邮件。作为协调员，您应该至少收到一种提醒电子邮件，因此"
-"请考虑更改您的首选项。"
+msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
+msgstr "您已选择不接收提醒电子邮件。作为协调员，您应该至少收到一种提醒电子邮件，因此请考虑更改您的首选项。"
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
@@ -3863,12 +2995,8 @@ msgstr "您的电子邮箱已经被改变到{email}。"
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:484
-msgid ""
-"Your email is blank. You can still explore the site, but you won't be able "
-"to apply for access to partner resources without an email."
-msgstr ""
-"您的电子邮件为空。您仍然可以浏览本站，但是如果没有电子邮件，您将无法申请合作"
-"伙伴资源的访问权限。"
+msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
+msgstr "您的电子邮件为空。您仍然可以浏览本站，但是如果没有电子邮件，您将无法申请合作伙伴资源的访问权限。"
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:783
@@ -3895,31 +3023,3 @@ msgstr "在上个月至少编辑10次"
 msgid "No active blocks"
 msgstr "没有生效的封禁"
 
-#: tests/shunit/data/bad_i18n_comment_1.py:3
-#: tests/shunit/data/bad_i18n_newline_1.py:5
-msgid "1"
-msgstr ""
-
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non viverra vitae, interdum ut aenean ipsum.
-#. Translators: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae ipsum ut purus faucibus pretium. Proin tempus neque et aliquet consectetur. Ut egestas sapien in consectetur sagittis. Mauris neque lacus, dapibus non.
-#: tests/shunit/data/bad_i18n_comment_2.py:4
-#: tests/shunit/data/bad_i18n_newline_2.py:5 tests/shunit/data/good_i18n_1.py:2
-#: tests/shunit/data/good_i18n_2.py:2
-msgid "2"
-msgstr ""
-
-#: tests/shunit/data/bad_i18n_newline_3.py:5
-msgid "3"
-msgstr ""
-
-#: tests/shunit/data/bad_i18n_newline_4.py:5
-msgid "4"
-msgstr ""
-
-#: tests/shunit/data/bad_i18n_newline_5.py:5
-msgid "5"
-msgstr ""
-
-#: tests/shunit/data/bad_i18n_newline_6.py:5
-msgid "6"
-msgstr ""
