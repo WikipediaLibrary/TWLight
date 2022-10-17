@@ -32,7 +32,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:12+0000\n"
+"PO-Revision-Date: 2022-10-17 11:19:58+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1329,36 +1329,33 @@ msgstr "Teilweise durchsuchbar"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Kontoinformationen"
+msgstr "Service-Information"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "Serviceproblem"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Nutzungsbedingungen nicht verfügbar."
+msgstr "Vorübergehend nicht erreichbar"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "Laufende Arbeiten können den Zugriff beeinträchtigen"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "Ein Problem beeinträchtigt den Zugriff"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Verfügbare Zugänge"
+msgstr "Der Zugriff ist derzeit nicht möglich"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.

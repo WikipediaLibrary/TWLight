@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Aotake
+# Author: CmplstofB
 # Author: DDPAT
 # Author: Fumi37s
 # Author: Ice bulldog
@@ -24,7 +25,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:32+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:13+0000\n"
+"PO-Revision-Date: 2022-10-17 11:20:00+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,7 +63,7 @@ msgstr "<p><small><i>利用者の個人情報は\n当方の<a class='twl-links'>
 #: TWLight/applications/forms.py:189
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr "{partner} に対する申請手続き"
+msgstr "{partner}に対する申請手続き"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:220
@@ -262,12 +263,12 @@ msgstr "終了"
 #: TWLight/applications/models.py:326
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr "アクセスURL：{access_url}"
+msgstr "参照先のURL: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:332
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr "申し込み受理後、1、2週間のうちにアクセスの詳細が届く予定です。"
+msgstr "申し込みが受理された後、1から2週間以内に詳細情報が届く予定です。"
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:240
@@ -369,7 +370,7 @@ msgstr "不明"
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr "申請者にはプロフィール登録の時、まず居住国を入力すること、その後、ほかの記入欄に取りかかるようお勧めください。"
+msgstr "利用者情報を入力するさい、まず居住国を優先して入力するよう申請者にお勧めください。"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
@@ -416,7 +417,7 @@ msgstr "いいえ"
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:159
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr "この申請の承認前に、申請者にサイトの利用規約に同意するようにお勧めください。"
+msgstr "この申請を承認する前に、サイトの利用規約に同意するよう申請者にお勧めください。"
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:176
@@ -437,7 +438,7 @@ msgstr "現在の利用権助成金を更新しますか？"
 #: TWLight/applications/templates/applications/application_evaluation.html:195
 #, python-format
 msgid "Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
-msgstr "はい (<a class=\"twl-links\" href=\"%(parent_url)s\">前回の申請を更新します</a>)"
+msgstr "はい（<a class=\"twl-links\" href=\"%(parent_url)s\">前回の申請を更新します</a>）"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
@@ -467,12 +468,12 @@ msgstr "協議"
 #. Translators: This labels the button which users click to send a typed comment.
 #: TWLight/applications/templates/applications/application_evaluation.html:289
 msgid "Add comment"
-msgstr "コメントを追加します。"
+msgstr "コメントを追加する"
 
 #. Translators: On an application page, this text tells users that the comments posted on the application are visible to coordinators and the submitting user only.
 #: TWLight/applications/templates/applications/application_evaluation.html:297
 msgid "Comments are visible to all coordinators and to the editor who submitted this application."
-msgstr "ここに記入されたコメントは申請した編集者と調整役の皆さん全員に表示されます。"
+msgstr "ここに記入したコメントは、全調整役員と申請者自身が閲覧できます。"
 
 #. Translators: This is the title of the section of an application page which lists information about the user who submitted the application.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for the username.
@@ -565,7 +566,7 @@ msgstr "前のページ"
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
 msgid "Previous"
-msgstr "前回の申請"
+msgstr "前へ"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -581,7 +582,7 @@ msgstr "次へ"
 #: TWLight/applications/templates/applications/application_list.html:236
 #: TWLight/applications/templates/applications/application_list.html:249
 msgid "Last"
-msgstr "最後のページ"
+msgstr "最後へ"
 
 #: TWLight/applications/templates/applications/application_list.html:243
 msgid "Next page"
@@ -691,7 +692,7 @@ msgstr "応募が成功した場合、当社はお客様のメールアドレス
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr "Click 'confirm' to renew your application for %(partner)sへの申請を更新するには、「確定」（confirm）ボタンを押します"
+msgstr "%(partner)sへの申請を更新するには、「確定 (confirm)」ボタンを押します"
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.
@@ -1322,7 +1323,7 @@ msgstr "サービス情報"
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "サービスの問題"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
@@ -1332,12 +1333,12 @@ msgstr "一時的に利用できません"
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "アクセスに影響しうる作業が行なわれています"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "アクセスに影響する問題があります"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509

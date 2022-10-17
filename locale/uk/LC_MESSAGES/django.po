@@ -13,12 +13,13 @@
 # Author: Sabelöga
 # Author: Vlad5250
 # Author: Ата
+# Author: Пан Хаунд
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:16+0000\n"
+"PO-Revision-Date: 2022-10-17 11:20:02+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1332,9 +1333,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Умови використання недоступні."
+msgstr "Тимчасово недоступний"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1344,7 +1344,7 @@ msgstr ""
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "Проблема впливає на доступ"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509

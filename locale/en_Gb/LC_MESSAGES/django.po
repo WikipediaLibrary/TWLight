@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:12+0000\n"
+"PO-Revision-Date: 2022-10-17 11:19:59+0000\n"
 "Language: en_gb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1321,32 +1321,32 @@ msgstr ""
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
 msgid "Service information"
-msgstr "တာဝန်ထမ်းစွာသတင်းစကားတိ"
+msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr "ဝန်ဆောင်စွာကိစ္စ"
+msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
 msgid "Temporarily unavailable"
-msgstr "တနားချေမရဟိန့်နိုင်ပါ"
+msgstr ""
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr "လုပ်နေရေအလုပ်သည် ဝင်ရောက်မှုကို ထိခိုက်စီနိုင်ပါရေ"
+msgstr ""
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr "ပြဿနာတစ်ခုရေ ဝင်ရောက်စာကို ထိခိုက်စေပါရေ"
+msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
 msgid "Access is currently unavailable"
-msgstr "အသုံးပြုခွင့်ကို လောလောဆယ် မရဟိန့်နိုင်ပါ"
+msgstr ""
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.

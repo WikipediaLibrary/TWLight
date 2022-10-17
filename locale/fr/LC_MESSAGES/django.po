@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:13+0000\n"
+"PO-Revision-Date: 2022-10-17 11:19:59+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -1336,17 +1336,17 @@ msgstr "Temporairement indisponible"
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr "Le travail en cours peut impacter l’accès"
+msgstr "Un travail en cours peut impacter l’accès."
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr "Un problème impacte l’accès"
+msgstr "Un problème impacte l’accès."
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
 msgid "Access is currently unavailable"
-msgstr "L’accès est actuellement indisponible"
+msgstr "L’accès est actuellement indisponible."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.

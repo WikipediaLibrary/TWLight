@@ -9,6 +9,7 @@
 # Author: Lluis tgn
 # Author: Medol
 # Author: Mguix
+# Author: Qllach
 # Author: Vfc
 # Author: Xavier Dengra
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:12+0000\n"
+"PO-Revision-Date: 2022-10-17 11:19:58+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1311,9 +1312,8 @@ msgstr "Navegable parcialment"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Informació de l'usuari"
+msgstr "Informació de servei"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
@@ -1322,9 +1322,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Les condicions d'ús no estan disponibles."
+msgstr "Temporalment no disponible"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1338,9 +1337,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Comptes disponibles"
+msgstr "Actualment, l'accés no està disponible"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
