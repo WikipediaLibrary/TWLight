@@ -2,7 +2,7 @@ black==21.12b0
 bleach==4.1.0
 click==8.0.4 # This version of click has to be set because 8.1 breaks black formatting
 defusedxml==0.7.1
-django==3.2.15
+django==3.2.16
 django-annoying==0.10.6
 django-autocomplete-light==3.8.2
 django-contrib-comments==2.1.0
