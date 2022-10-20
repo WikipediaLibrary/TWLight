@@ -25,7 +25,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:32+0000\n"
-"PO-Revision-Date: 2022-10-17 11:20:00+0000\n"
+"PO-Revision-Date: 2022-10-20 11:29:19+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2046,7 +2046,7 @@ msgstr "ウィキペディア図書館のホーム"
 
 #: TWLight/templates/header_partial_b4.html:46
 msgid "Search the library"
-msgstr "そのライブラリーを検索"
+msgstr "蔵書を検索する"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
 #: TWLight/templates/header_partial_b4.html:72
