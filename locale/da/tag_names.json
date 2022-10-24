@@ -4,11 +4,15 @@
 			"Saederup92"
 		]
 	},
+	"languages-and-literature_tag": "Sprog og litteratur",
+	"physical-sciences_tag": "Idræt",
 	"music_tag": "Musik",
 	"art_tag": "Kunst",
 	"law_tag": "Jura",
 	"education_tag": "Uddannelse",
+	"philosophy-and-religion_tag": "Filosofi og religion",
 	"social-sciences_tag": "Socialvidenskab",
 	"history_tag": "Historie",
-	"culture_tag": "Kultur"
+	"culture_tag": "Kultur",
+	"technology_tag": "Teknologi"
 }
