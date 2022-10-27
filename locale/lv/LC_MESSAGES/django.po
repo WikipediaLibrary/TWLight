@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: TWLight HEAD\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:13+0000\n"
+"PO-Revision-Date: 2022-10-27 11:28:35+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: lv\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n != 0) ? 1 : 2 );\n"
 "X-POT-Import-Date: 2022-10-10 12:30:40+0000\n"
-"X-Generator: MediaWiki 1.40.0-alpha; Translate 2022-07-28\n"
+"X-Generator: MediaWiki 1.40.0-alpha; Translate 2022-10-21\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
 #. Translators: On the page where users can apply for multiple partners, this text labels the button, which when clicked submits the selections.

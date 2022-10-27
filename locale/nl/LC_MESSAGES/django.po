@@ -18,12 +18,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-13 11:20:14+0000\n"
+"PO-Revision-Date: 2022-10-27 11:28:36+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2022-10-10 12:30:40+0000\n"
-"X-Generator: MediaWiki 1.40.0-alpha; Translate 2022-07-28\n"
+"X-Generator: MediaWiki 1.40.0-alpha; Translate 2022-10-21\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -1313,36 +1313,33 @@ msgstr "Deels doorzoekbaar"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Gebruikersgegevens"
+msgstr "Dienstgegevens"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "Serviceprobleem"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Geen gebruikersvoorwaarden beschikbaar."
+msgstr "Tijdelijk niet beschikbaar"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "Lopende werkzaamheden kunnen van invloed zijn op de toegang"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "Een probleem heeft invloed op de toegang"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Beschikbare accounts"
+msgstr "Momenteel niet toegankelijk"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
