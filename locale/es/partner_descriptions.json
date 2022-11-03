@@ -6,6 +6,7 @@
 			"Jakeukalane",
 			"La Mantis",
 			"McDutchie",
+			"SpikeShroom",
 			"Suecarmol"
 		]
 	},
@@ -119,5 +120,7 @@
 	"125_short_description": "<strong>OECD iLibrary</strong> es una biblioteca en línea de libros, papers y estadísticas publicadas por la Organización para la Cooperación y el Desarrollo Económicos (OCDE).",
 	"126_short_description": "<strong>OECD Data</strong> es un repositorio de gráficos, mapas, tables y publicaciones relacionadas publicado por la Organización para la Cooperación y el Desarrollo Económicos (OCDE).",
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong> es una galería multimedia que contiene podcasts y fotos publicadas por la Organización para la Cooperación y el Desarrollo Económicos (OCDE).",
-	"128_short_description": "<strong>Wiley</strong> ofrece colecciones de journals, libros y fuentes para investigación acerca de ciencias de la vida, sociales y físicas."
+	"128_short_description": "<strong>Wiley</strong> ofrece colecciones de journals, libros y fuentes para investigación acerca de ciencias de la vida, sociales y físicas.",
+	"137_short_description": "<strong>Wikilala</strong> es un repositorio digital de más de 109.000 documentos en formato impreso, incluyendo 45.000 periódicos, 32.000 revistas, 4.000 libros y 26.000 artículos sobre la historia del Imperio Otomano desde su existencia hasta tiempos modernos.",
+	"139_short_description": "<strong>Findmypast</strong> alberga billones de registros de información de censo, directorio e historia que están abiertos a la búsqueda."
 }

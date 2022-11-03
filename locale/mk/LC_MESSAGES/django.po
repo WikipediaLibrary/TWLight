@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-27 11:28:35+0000\n"
+"PO-Revision-Date: 2022-11-03 12:22:26+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -435,9 +435,8 @@ msgstr ""
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "Претходна страница"
+msgstr "Претходен истек на пристапот"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:218
@@ -1089,12 +1088,12 @@ msgstr "Поштенски список"
 #. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:63
 msgid "Wikipedia Library Facebook page"
-msgstr "Википедиината библиотека на Facebook"
+msgstr "Википедиината библиотека на Фејсбук"
 
 #. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
 #: TWLight/emails/templates/emails/contact.html:69
 msgid "Wikipedia Library Twitter page"
-msgstr "Википедиината библиотека на Twitter"
+msgstr "Википедиината библиотека на Твитер"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
@@ -2306,21 +2305,18 @@ msgstr "Омилени"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
-#, fuzzy
 msgid "My Collections"
-msgstr "Збирки"
+msgstr "Мои збирки"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user does not have access to.
 #: TWLight/users/templates/users/collections_section.html:24
-#, fuzzy
 msgid "Available Collections"
-msgstr "Збирки"
+msgstr "Расположиви збирки"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
 #: TWLight/users/templates/users/collections_section.html:31
-#, fuzzy
 msgid "View my applications >"
-msgstr "Погл. барање"
+msgstr "Погл. барање >"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
 #: TWLight/users/templates/users/collections_section.html:54
@@ -2632,13 +2628,11 @@ msgstr ""
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
-#, fuzzy
 msgid "Last updated at:"
-msgstr "Последна страница"
+msgstr "Последна поднова:"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:72
-#, fuzzy
 msgid "View Terms of Use"
 msgstr "Услови на употреба"
 
@@ -2911,9 +2905,8 @@ msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:108
-#, fuzzy
 msgid "Go to application"
-msgstr "Датум на аплицирањето"
+msgstr "Оди на барањето"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:122
@@ -2923,9 +2916,8 @@ msgstr ""
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:125
 #: TWLight/users/templates/users/user_collection_tile.html:152
-#, fuzzy
 msgid "Access collection"
-msgstr "Ваше занимање"
+msgstr "Пристап до збирката"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/user_collection_tile.html:137
