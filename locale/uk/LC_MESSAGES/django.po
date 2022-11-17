@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-27 11:28:37+0000\n"
+"PO-Revision-Date: 2022-11-17 12:20:03+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1328,7 +1328,7 @@ msgstr "Сервісна інформація"
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "Сервісна проблема"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
