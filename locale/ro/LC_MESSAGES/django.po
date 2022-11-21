@@ -9,13 +9,14 @@
 # Author: MuratTheTurkish
 # Author: NGC 54
 # Author: Popetedenis
+# Author: Tanea.d
 # Author: WebSourceContentRO
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-27 11:28:36+0000\n"
+"PO-Revision-Date: 2022-11-21 12:18:20+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -525,7 +526,7 @@ msgstr "Trimis"
 
 #: TWLight/applications/templates/applications/application_list.html:63
 msgid "Up for renewal"
-msgstr "Sus pentru reînnoire"
+msgstr "\nÎn curs de reînnoire"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:78
@@ -785,7 +786,7 @@ msgstr "Selectați codul:"
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this message shows when there are none to show the coordinator.
 #: TWLight/applications/templates/applications/send_partner.html:192
 msgid "There are no approved, unsent applications."
-msgstr "Nu există solicităro aprobate, neexpediate."
+msgstr "Nu există solicitări aprobate sau neexpediate."
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
@@ -968,7 +969,7 @@ msgstr "Solcitarea dvs. aprobată pentru %(partner)s a fost finalizată. Codul d
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
 msgid "Your Wikipedia Library access code"
-msgstr "Codul tău de acces Biblioteca Wikipedia"
+msgstr "Codul tău de acces la Wikipedia Library"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
