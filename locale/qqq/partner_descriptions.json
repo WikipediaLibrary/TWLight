@@ -123,11 +123,11 @@
 	"130_short_description": "Short description of University of Chicago Press Journals. \n\nWebsite:https://www.journals.uchicago.edu/",
 	"131_short_description": "Short description of IPSJ. \n\n* Website: https://ipsj.ixsq.nii.ac.jp/ej/\n* English Wikipedia: [[:w:en:Information Processing Society of Japan|Information Processing Society of Japan]]\n* Japanese Wikipedia: [[:w:ja:情報処理学会|情報処理学会]]",
 	"132_short_description": "Short description of SAGE Journals. \n\n* Website: https://journals.sagepub.com/\n* English Wikipedia: [[:w:en:SAGE Publishing|SAGE Publishing]]",
-	"133_short_description": "Short description of Edward Elgar. \n\nWebsite:https://www.e-elgar.com/",
-	"134_short_description": "Short description of E-Yearbook. \n\nWebsite:https://www.e-yearbook.com/",
+	"133_short_description": "Short description of Edward Elgar. \n\n* Website: https://www.e-elgar.com/\n* English Wikipedia: [[:w:en:Edward Elgar Publishing|Edward Elgar Publishing]]",
+	"134_short_description": "Short description of E-Yearbook. \n\nWebsite: https://www.e-yearbook.com/",
 	"135_short_description": "Short description of Corriere della Sera. \n\nWebsite:https://www.corriere.it/",
 	"136_short_description": "Short description of Corriere della Sera Archives. \n\nWebsite:https://archivio.corriere.it/",
-	"137_short_description": "Short description of Wikilala. \n\nWebsite:https://www.wikilala.com/",
-	"138_short_description": "Short description of The British Newspaper Archive. \n\nWebsite:https://www.britishnewspaperarchive.co.uk/",
-	"139_short_description": "Short description of Findmypast. \n\nWebsite:https://www.findmypast.co.uk/"
+	"137_short_description": "Short description of Wikilala. \n\n* Website: https://www.wikilala.com/\n* English Wikipedia: [[:w:en:Wikilala|Wikilala]]",
+	"138_short_description": "Short description of The British Newspaper Archive. \n\n* Website: https://www.britishnewspaperarchive.co.uk/\n* English Wikipedia: [[:w:en:British Newspaper Archive|British Newspaper Archive]]",
+	"139_short_description": "Short description of Findmypast. \n\n* Website: https://www.findmypast.co.uk/\n* English Wikipedia: [[:w:en:Findmypast|Findmypast]]"
 }
