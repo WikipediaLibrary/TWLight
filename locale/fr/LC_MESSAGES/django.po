@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-10-10 11:31+0000\n"
-"PO-Revision-Date: 2022-10-27 11:28:34+0000\n"
+"PO-Revision-Date: 2022-12-05 12:20:08+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2479,7 +2479,7 @@ msgstr "Enregistrement sur Méta-Wiki ou date de fusion SUL *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:239
 msgid "Wikipedia user ID *"
-msgstr "ID de l’utilisateur sur Wikipédia *"
+msgstr "Identifiant de l’utilisateur sur Wikipédia *"
 
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:250
