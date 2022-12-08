@@ -3,6 +3,7 @@
 		"authors": [
 			"Diskdance",
 			"GuoPC",
+			"Lantianjialiang",
 			"Sean0115",
 			"Shizhao",
 			"Tranve",
@@ -122,5 +123,6 @@
 	"126_short_description": "<strong>OECD Data</strong>是经济合作与发展组织（OECD）发布的图表、地图、表格和相关出版物的存储库。",
 	"127_short_description": "<strong>OECD Multimedia Gallery</strong>是一个视听画廊，其中包含经济合作与发展组织（OECD）发布的播客和照片。",
 	"128_short_description": "<strong>Wiley</strong>提供在线期刊、书籍和研究资源的内容，涵盖生命、健康、社会和物理科学。",
-	"129_short_description": "<strong>SPIE</strong>提供对SPIE数字图书馆的访问权限，这是光学和光子学应用研究的最大资源集之一。资源以期刊和电子书的形式提供。"
+	"129_short_description": "<strong>SPIE</strong>提供对SPIE数字图书馆的访问权限，这是光学和光子学应用研究的最大资源集之一。资源以期刊和电子书的形式提供。",
+	"140_short_description": "<strong>密歇根大学出版社</strong>是同行评审书籍的出版商，主要的领域是政治学、表演艺术、美国研究、古典和中世纪研究以及亚洲研究"
 }
