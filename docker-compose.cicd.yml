@@ -8,8 +8,4 @@ services:
     build:
       context: .
     env_file:
-      - ./conf/travis.twlight.env
-    environment:
-      - TRAVIS_JOB_ID
-      - TRAVIS_BRANCH
-      - COVERALLS_REPO_TOKEN
+      - ./conf/cicd.twlight.env
