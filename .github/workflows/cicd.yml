@@ -15,11 +15,6 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: docker/login-action@v2
-        with:
-          registry: quay.io
-          username: ${{ secrets.QUAYBOT_USERNAME }}
-          password: ${{ secrets.QUAYBOT_PASSWORD }}
       - name: build & run
         run: >
           sudo .cicd/build.sh
@@ -45,6 +40,8 @@ jobs:
           ${GITHUB_EVENT_NAME}
           ${GITHUB_REPOSITORY}
           ${{ secrets.WIKIBOT_TOKEN }}
+          ${{ secrets.QUAYBOT_USERNAME }}
+          ${{ secrets.QUAYBOT_PASSWORD }}
       - name: cleanup
         if: always()
         run: sudo chown -R ${USER}:${USER} .
