@@ -63,12 +63,21 @@ git_prod() {
 # Push built images to quay.io
 docker_push() {
     echo ${FUNCNAME[0]}
+    echo "$quaybot_password" | docker login quay.io -u "$quaybot_username" --password-stdin
+    branch_tag="branch_${branch}"
+    if [ "${branch}" = "master" ]
+    then
+        branch_tag="branch_production"
+        docker tag "quay.io/wikipedialibrary/twlight:local" "quay.io/wikipedialibrary/twlight:${branch_tag}"
+        docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialibrary/twlight_syslog:${branch_tag}"
+    fi
     declare -a repositories=("twlight" "twlight_syslog")
     for repo in "${repositories[@]}"
     do
       docker push quay.io/wikipedialibrary/${repo}:commit_${commit}
-      docker push quay.io/wikipedialibrary/${repo}:branch_${branch}
+      docker push quay.io/wikipedialibrary/${repo}:${branch_tag}
     done
+    docker logout quay.io
 }
 
 if [ "${event_name}" = "push" ] && [ -n "${twlight_missing_migrations:-}" ]
@@ -102,15 +111,7 @@ then
                 echo "pushed to production"
             fi
             # Push built images to quay.io
-            # login if we have container registry credentials
-            if [ -n "${quaybot_username}" ] && [ -n "${quaybot_password}" ]
-            then
-                echo "$quaybot_password" | docker login quay.io -u "$cr_username" --password-stdin
-                docker_push
-                docker logout quay.io
-            else
-                docker_push
-            fi
+            docker_push
         fi
     fi
 fi
