@@ -287,7 +287,7 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
                         messages.WARNING,
                         # fmt: off
                         # Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-                        _("You have chosen not to receive reminder emails; as a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."),
+                        _("You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."),
                         # fmt: on
                     )
                 else:
