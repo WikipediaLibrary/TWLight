@@ -21,49 +21,46 @@ twlight_i18n_files_updated=$(git diff --name-only -- 'locale/*/LC_MESSAGES/djang
 # Add new and updated to get change count.
 twlight_i18n_files_changed=$((twlight_i18n_files_added+twlight_i18n_files_updated))
 
-# Update origin and checkout branch
+# Add remote and checkout branch
 git_config() {
     echo ${FUNCNAME[0]}
     # Configure user.
     git config --global user.email "41753804+WikipediaLibraryBot@users.noreply.github.com"
     git config --global user.name "WikipediaLibraryBot"
-    # Remove the anonymous origin.
-    git remote rm origin
-    # Add our authenticated origin using encrypted travis environment variables.
-    git remote add origin https://WikipediaLibraryBot:${wikibot_token}@github.com/${gh_repo}.git > /dev/null 2>&1
+    # Add our authenticated remote using encrypted travis environment variables.
+    git remote add deploy https://WikipediaLibraryBot:${wikibot_token}@github.com/${gh_repo}.git > /dev/null 2>&1
 }
 # Commit migrations
-git_commit_migrations() {
+git_migrate() {
     echo ${FUNCNAME[0]}
     msg="${commit} migrations"
     git add 'TWLight/*/migrations/*.py'
     # Continue even if there is nothing to commit
     git commit --message "commit ${msg}" ||:
-    git fetch origin ${branch} --quiet
-    git merge --strategy recursive -X theirs origin/${branch} --message "merge ${msg}" --quiet
+    git fetch deploy ${branch} --quiet
+    git merge --strategy recursive -X theirs deploy/${branch} --message "merge ${msg}" --quiet
 }
 # Commit translations
-git_commit_i18n() {
+git_i18n() {
     echo ${FUNCNAME[0]}
     msg="${commit} translations"
     git add 'locale/*/LC_MESSAGES/*.po'
     git add 'locale/*/LC_MESSAGES/*.mo'
     # Continue even if there is nothing to commit
     git commit --message "commit ${msg}" ||:
-    git fetch origin ${branch} --quiet
-    git merge --strategy recursive -X ours origin/${branch} --message "merge ${msg}" --quiet
+    git fetch deploy ${branch} --quiet
+    git merge --strategy recursive -X ours deploy/${branch} --message "merge ${msg}" --quiet
 }
 # Commit prod changes
-git_commit_prod() {
+git_prod() {
     echo ${FUNCNAME[0]}
     msg="${commit} deployment"
-    git fetch origin production --quiet
     git checkout "production"
     git add -A
     # Exit if there is nothing to commit
     git commit --message "commit ${msg}" || exit 0
-    git merge --strategy ours origin/production --message "merge ${msg}" --quiet
-    git push origin "production" --quiet
+    git fetch deploy production --quiet
+    git merge --strategy ours deploy/production --message "merge ${msg}" --quiet
 }
 # Push built images to quay.io
 docker_push() {
@@ -86,14 +83,14 @@ then
         # commit and merge any missing migrations
         if [ "${twlight_missing_migrations}" -gt 0 ]
         then
-            git_commit_migrations
+            git_migrate
         fi
         # commit and merge any updated translations
         if [ "${twlight_i18n_files_changed}" -gt 0 ]
         then
-            git_commit_i18n
+            git_i18n
         fi
-        git push origin ${branch} --quiet
+        git push --set-upstream deploy ${branch} --quiet
         echo "pushed to ${branch}"
     elif [ "${twlight_missing_migrations}" -eq 0 ] && [ "${twlight_i18n_files_changed}" -eq 0 ]
     then
@@ -102,7 +99,8 @@ then
             # If no changes are needed for this commit to master, then push it to production
             if [ "${branch}" = "master" ]
             then
-                git_commit_prod
+                git_prod
+                git push --set-upstream deploy "production" --quiet
                 echo "pushed to production"
             fi
             # Push built images to quay.io
