@@ -3,8 +3,8 @@ set -euo pipefail
 export DOCKER_BUILDKIT=1 # enable buildkit for parallel builds
 export COMPOSE_DOCKER_CLI_BUILD=1 # use docker cli for building
 
-branch=${1}
-commit=${2}
+branch="${1//[\/]/-}"
+commit="${2}"
 
 chown -R root:root .
 docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.cicd.yml build twlight syslog 2>/dev/null

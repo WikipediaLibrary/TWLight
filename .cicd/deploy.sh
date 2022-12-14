@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-branch="${1}"
+branch="${1//[\/]/-}"
 commit="${2}"
 event_name="${3}"
 gh_repo="${4}"
