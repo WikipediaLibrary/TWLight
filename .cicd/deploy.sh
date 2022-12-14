@@ -102,15 +102,7 @@ then
                 echo "pushed to production"
             fi
             # Push built images to quay.io
-            # login if we have container registry credentials
-            if [ -n "${quaybot_username}" ] && [ -n "${quaybot_password}" ]
-            then
-                echo "$quaybot_password" | docker login quay.io -u "$cr_username" --password-stdin
-                docker_push
-                docker logout quay.io
-            else
-                docker_push
-            fi
+            docker_push
         fi
     fi
 fi
