@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-branch=${1}
-commit=${2}
-event_name=${3}
-gh_repo=${4}
-wikibot_token=${5}
+branch="${1}"
+commit="${2}"
+event_name="${3}"
+gh_repo="${4}"
+wikibot_token="${5}"
+quaybot_username="${6:-}"
+quaybot_password="${7:-}"
 
 # Search for missing migrations and count them.
 twlight_missing_migrations=$(git ls-files --others --exclude-standard 'TWLight/*/migrations/*.py' | wc -l)
@@ -105,7 +107,7 @@ then
             fi
             # Push built images to quay.io
             # login if we have container registry credentials
-            if [ -n "${quaybot_username:-}" ] && [ -n "${quaybot_password:-}" ]
+            if [ -n "${quaybot_username}" ] && [ -n "${quaybot_password}" ]
             then
                 echo "$quaybot_password" | docker login quay.io -u "$cr_username" --password-stdin
                 docker_push
