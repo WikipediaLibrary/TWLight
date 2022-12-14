@@ -7,7 +7,6 @@ set -euo pipefail
 {
     # print the date for logging purposes
     echo [$(date)]
-    exit 1
 
     # Load virtual environment
     if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh

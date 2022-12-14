@@ -202,6 +202,7 @@ class ViewsTestCase(TestCase):
         # Make sure the editor is not a coordinator, because coordinators *can*
         # see others' pages!
         coordinators = get_coordinators()
+        self.assertEqual(True, False)
         try:
             assert self.user_editor not in coordinators.user_set.all()
         except AssertionError:
