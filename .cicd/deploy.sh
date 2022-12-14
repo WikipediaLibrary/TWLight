@@ -54,8 +54,9 @@ git_i18n() {
 # Commit prod changes
 git_prod() {
     echo ${FUNCNAME[0]}
+    deploy_branch="${commit}-deployment"
     msg="${commit} deployment"
-    git checkout "production"
+    git checkout -b "${deploy_branch}"
     git add -A
     # Exit if there is nothing to commit
     git commit --message "commit ${msg}" || exit 0
@@ -100,7 +101,7 @@ then
             if [ "${branch}" = "master" ]
             then
                 git_prod
-                git push --set-upstream deploy "production" --quiet
+                git push --set-upstream deploy "${deploy_branch}:production" --quiet
                 echo "pushed to production"
             fi
             # Push built images to quay.io
