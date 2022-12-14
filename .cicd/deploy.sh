@@ -103,7 +103,7 @@ then
             fi
             # Push built images to quay.io
             # login if we have container registry credentials
-            if [ -n "${quaybot_username}" ] && [ -n "${quaybot_password}" ]
+            if [ -n "${quaybot_username+isset}" ] && [ -n "${quaybot_password+isset}" ]
             then
                 echo "$quaybot_password" | docker login quay.io -u "$cr_username" --password-stdin
                 docker_push
