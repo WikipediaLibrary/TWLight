@@ -37,7 +37,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-12-14 17:15+0000\n"
+"POT-Creation-Date: 2022-12-14 20:20+0000\n"
 "PO-Revision-Date: 2022-11-24 12:20:46+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1074,22 +1074,30 @@ msgstr "提交"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below:</p> <p><b>"
+#| "%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 msgid ""
 "<p>Your approved application to %(partner)s has now been finalised. Your "
 "access code or login details can be found below:</p> <p><b>%(access_code)s</"
-"b></p> <p>%(access_code_instructions)s</p>"
+"b></p> <p>%(user_instructions)s</p>"
 msgstr ""
 "<p>您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到："
 "</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below: %(access_code)s "
+#| "%(access_code_instructions)s"
 msgid ""
 "Your approved application to %(partner)s has now been finalised. Your access "
 "code or login details can be found below: %(access_code)s "
-"%(access_code_instructions)s"
+"%(user_instructions)s"
 msgstr ""
 "您对%(partner)s的申请现已批准。您的访问代码或登录详细信息可以在下面找到："
 "%(access_code)s %(access_code_instructions)s"
@@ -3825,7 +3833,7 @@ msgstr ""
 #| "should receive at least one type of reminder emails, so consider changing "
 #| "your preferences."
 msgid ""
-"You have chosen not to receive reminder emails; as a coordinator, you should "
+"You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
 "preferences."
 msgstr ""
