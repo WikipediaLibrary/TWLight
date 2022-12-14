@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-12-14 17:14+0000\n"
+"POT-Creation-Date: 2022-12-14 20:18+0000\n"
 "PO-Revision-Date: 2022-10-27 11:28:34+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3686,7 +3686,7 @@ msgstr ""
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
 msgid ""
-"You have chosen not to receive reminder emails; as a coordinator, you should "
+"You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
 "preferences."
 msgstr ""
