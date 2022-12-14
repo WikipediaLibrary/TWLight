@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-12-14 20:18+0000\n"
+"POT-Creation-Date: 2022-12-14 20:25+0000\n"
 "PO-Revision-Date: 2022-10-27 11:28:32+0000\n"
 "Language: bcl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1038,7 +1038,7 @@ msgstr "Isumite"
 msgid ""
 "<p>Your approved application to %(partner)s has now been finalised. Your "
 "access code or login details can be found below:</p> <p><b>%(access_code)s</"
-"b></p> <p>%(access_code_instructions)s</p>"
+"b></p> <p>%(user_instructions)s</p>"
 msgstr ""
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1047,7 +1047,7 @@ msgstr ""
 msgid ""
 "Your approved application to %(partner)s has now been finalised. Your access "
 "code or login details can be found below: %(access_code)s "
-"%(access_code_instructions)s"
+"%(user_instructions)s"
 msgstr ""
 
 #. Translators: This is the subject line of an email sent to users with their access code.

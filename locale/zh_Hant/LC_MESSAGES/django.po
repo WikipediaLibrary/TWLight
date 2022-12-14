@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-12-14 20:18+0000\n"
+"POT-Creation-Date: 2022-12-14 20:25+0000\n"
 "PO-Revision-Date: 2022-12-08 12:22:47+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1055,22 +1055,30 @@ msgstr "提交"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below:</p> <p><b>"
+#| "%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 msgid ""
 "<p>Your approved application to %(partner)s has now been finalised. Your "
 "access code or login details can be found below:</p> <p><b>%(access_code)s</"
-"b></p> <p>%(access_code_instructions)s</p>"
+"b></p> <p>%(user_instructions)s</p>"
 msgstr ""
 "<p>您對於%(partner)s的核准申請程序已完成。您的取用代碼或是登入詳情可在以下找"
 "出：</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below: %(access_code)s "
+#| "%(access_code_instructions)s"
 msgid ""
 "Your approved application to %(partner)s has now been finalised. Your access "
 "code or login details can be found below: %(access_code)s "
-"%(access_code_instructions)s"
+"%(user_instructions)s"
 msgstr ""
 "您對於%(partner)s的核准申請程序已完成。您的取用代碼或是登入詳情可在以下找出："
 "%(access_code)s %(access_code_instructions)s"

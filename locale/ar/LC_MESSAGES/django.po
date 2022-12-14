@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2022-12-14 20:19+0000\n"
+"POT-Creation-Date: 2022-12-14 20:26+0000\n"
 "PO-Revision-Date: 2022-11-03 12:22:23+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1093,11 +1093,15 @@ msgstr "إرسال"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "<p>Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below:</p> <p><b>"
+#| "%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
 msgid ""
 "<p>Your approved application to %(partner)s has now been finalised. Your "
 "access code or login details can be found below:</p> <p><b>%(access_code)s</"
-"b></p> <p>%(access_code_instructions)s</p>"
+"b></p> <p>%(user_instructions)s</p>"
 msgstr ""
 "<p>انتهى الآن العمل على طلبك المقبول إلى %(partner)s. كود الوصول أو بيانات "
 "الدخول المخصصة لك كما يلي:</p> <p><b>%(access_code)s</b></p> <p>"
@@ -1105,11 +1109,15 @@ msgstr ""
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Your approved application to %(partner)s has now been finalised. Your "
+#| "access code or login details can be found below: %(access_code)s "
+#| "%(access_code_instructions)s"
 msgid ""
 "Your approved application to %(partner)s has now been finalised. Your access "
 "code or login details can be found below: %(access_code)s "
-"%(access_code_instructions)s"
+"%(user_instructions)s"
 msgstr ""
 "انتهى الآن العمل على طلبك المقبول إلى %(partner)s. كود الوصول أو بيانات "
 "الدخول المخصصة لك كما يلي: %(access_code)s %(access_code_instructions)s"
