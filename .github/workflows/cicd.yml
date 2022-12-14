@@ -22,7 +22,7 @@ jobs:
       - name: build & run
         run: >
           sudo .cicd/build.sh
-          ${GITHUB_REF_NAME}
+          ${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
           ${GITHUB_SHA}
       - name: migrate
         run: >
