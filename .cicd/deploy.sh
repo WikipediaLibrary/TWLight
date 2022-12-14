@@ -35,7 +35,6 @@ git_migrate() {
     echo ${FUNCNAME[0]}
     msg="${commit} migrations"
     git add 'TWLight/*/migrations/*.py'
-    # Continue even if there is nothing to commit
     git commit --message "commit ${msg}" ||:
     git fetch deploy ${branch} --quiet
     git merge --strategy recursive -X theirs deploy/${branch} --message "merge ${msg}" --quiet
@@ -46,7 +45,6 @@ git_i18n() {
     msg="${commit} translations"
     git add 'locale/*/LC_MESSAGES/*.po'
     git add 'locale/*/LC_MESSAGES/*.mo'
-    # Continue even if there is nothing to commit
     git commit --message "commit ${msg}" ||:
     git fetch deploy ${branch} --quiet
     git merge --strategy recursive -X ours deploy/${branch} --message "merge ${msg}" --quiet
@@ -58,8 +56,7 @@ git_prod() {
     msg="${commit} deployment"
     git checkout -b "${deploy_branch}"
     git add -A
-    # Exit if there is nothing to commit
-    git commit --message "commit ${msg}" || exit 0
+    git commit --message "commit ${msg}" ||:
     git fetch deploy production --quiet
     git merge --strategy ours deploy/production --message "merge ${msg}" --quiet
 }
