@@ -10,6 +10,7 @@
 # Author: Minh Nguyen
 # Author: MuratTheTurkish
 # Author: NguoiDungKhongDinhDanh
+# Author: Nguyenphutrong2
 # Author: Nguyễn Mạnh An
 # Author: Sabelöga
 # Author: Thingofme
@@ -20,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:26+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:37+0000\n"
+"PO-Revision-Date: 2022-12-22 12:21:46+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -962,13 +963,13 @@ msgstr "Nộp"
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr ""
+msgstr "<p>Đơn đăng ký %(partner)s được phê duyệt của bạn hiện đã được hoàn tất. Mã truy cập hoặc chi tiết đăng nhập của bạn có thể được tìm thấy dưới đây:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
 #, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr ""
+msgstr "Đơn đăng ký %(partner)s được phê duyệt của bạn hiện đã được hoàn tất. Bạn có thể tìm thấy mã truy cập hoặc chi tiết đăng nhập của mình bên dưới: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -2951,7 +2952,7 @@ msgstr ""
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr ""
+msgstr "Bạn đã chọn không nhận email nhắc nhở. Với tư cách là điều phối viên, bạn sẽ nhận được ít nhất một loại email nhắc nhở, vì vậy hãy cân nhắc thay đổi tùy chọn của mình."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298

@@ -25,7 +25,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:26+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:34+0000\n"
+"PO-Revision-Date: 2022-12-22 12:21:44+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -970,9 +970,9 @@ msgstr "<p>%(partner)s件の承認済み申請の手続きが完了しました�
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "<p>%(partner)s件の承認済み申請の手続きが完了しました。アクセスコードもしくはログイン情報は次をご参照ください。%(access_code)s %(access_code_instructions)s"
+msgstr "%(partner)s件の承認済み申請の手続きが完了しました。アクセスコードもしくはログイン情報は次をご参照ください。%(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3

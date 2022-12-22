@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Adhiwangsa
+# Author: Agam Riyandana
 # Author: DDPAT
 # Author: Daud I.F. Argana
 # Author: Farras
@@ -21,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:25+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:34+0000\n"
+"PO-Revision-Date: 2022-12-22 12:21:44+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -965,9 +966,9 @@ msgstr "<p>Permohonan Anda ke %(partner)s telah disetujui dan diselesaikan. Kode
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "Permohonan Anda ke %(partner)s telah disetujui dan diselesaikan. Kode akses atau detail masuk log Anda dapat ditemukan di bawah: %(access_code)s %(access_code_instructions)s"
+msgstr "Permohonan Anda yang disetujui ke %(partner)s kini telah diselesaikan. Kode akses atau detail login Anda dapat ditemukan di bawah: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -2947,7 +2948,7 @@ msgstr ""
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr ""
+msgstr "Anda telah memilih untuk tidak menerima email pengingat. Sebagai koordinator, Anda harus menerima setidaknya satu jenis email pengingat, jadi pertimbangkan untuk mengubah preferensi Anda."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
