@@ -8,6 +8,7 @@
 # Author: Pols12
 # Author: Robby
 # Author: Samwalton9 (WMF)
+# Author: Santer
 # Author: Veikk0.ma
 # Author: Verdy p
 # Author: عمر العنزي
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:25+0000\n"
-"PO-Revision-Date: 2022-12-22 12:21:45+0000\n"
+"PO-Revision-Date: 2022-12-26 12:25:27+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -961,7 +962,7 @@ msgstr ""
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "!!nguyenphutrong2!!"
+msgstr "{{Doc-important|\"Application\" here means \"request\" or \"candidacy\". This doesn't mean \"software application\" or \"app\".}}"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3

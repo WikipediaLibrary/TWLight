@@ -3,6 +3,7 @@
 #
 # Author: Amire80
 # Author: Andreyyshore
+# Author: Cezar
 # Author: DDPAT
 # Author: Ice bulldog
 # Author: MSClaudiu
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:26+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:36+0000\n"
+"PO-Revision-Date: 2022-12-26 12:25:27+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2174,7 +2175,7 @@ msgstr "Actualizează profilul"
 #. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
 #: TWLight/users/forms.py:45
 msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
-msgstr "Descrieți contribuțiile dvs. la Wikipedia: subiecte editate, etc."
+msgstr "Descrieți contribuțiile dvs. la Wikipedia: subiecte editate etc."
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
 #: TWLight/users/forms.py:112
