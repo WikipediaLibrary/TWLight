@@ -23,7 +23,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:25+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:36+0000\n"
+"PO-Revision-Date: 2023-01-02 12:22:49+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -962,15 +962,15 @@ msgstr "Enviar"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>A sua candidatura aprovada para o parceiro %(partner)s foi finalizada. O código de acesso ou detalhes para iniciar sessão podem ser encontrados abaixo:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>A sua candidatura aprovada para o parceiro %(partner)s foi finalizada. O código de acesso ou detalhes para iniciar sessão podem ser encontrados abaixo:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "A sua candidatura aprovada para o parceiro %(partner)s foi finalizada. O código de acesso ou detalhes para iniciar sessão podem ser encontrados abaixo: %(access_code)s %(access_code_instructions)s"
+msgstr "A sua candidatura aprovada para o parceiro %(partner)s foi finalizada. O código de acesso ou detalhes para iniciar sessão podem ser encontrados abaixo: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -2953,7 +2953,6 @@ msgstr "Por favor <a class='twl-links' href='{url}'>atualize suas contribuiçõe
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
 msgstr "Você optou por não receber e-mails de lembrete. Como coordenador, você deve receber pelo menos um tipo de e-mail de lembrete, então considere alterar suas preferências."
 

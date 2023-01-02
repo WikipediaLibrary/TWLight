@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2022-12-14 20:26+0000\n"
-"PO-Revision-Date: 2022-12-19 12:20:33+0000\n"
+"PO-Revision-Date: 2023-01-02 12:22:47+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -179,7 +179,7 @@ msgstr "Pyydetty nimike"
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:122
 msgid "Agreed with terms of use"
-msgstr "Hyväksyn käyttöehdot"
+msgstr "Hyväksynyt käyttöehdot"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:124
