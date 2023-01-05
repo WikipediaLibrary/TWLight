@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"languages-and-literature_tag": "Jeziki in literatura",
+	"multidisciplinary_tag": "Multidisciplinarno",
+	"physical-sciences_tag": "Fizikalne vede",
+	"music_tag": "Glasba",
+	"art_tag": "Umetnost",
+	"business-and-economics_tag": "Poslovanje in gospodarstvo",
+	"law_tag": "Pravo",
+	"education_tag": "Izobraževanje",
+	"philosophy-and-religion_tag": "Filozofija in religija",
+	"social-sciences_tag": "Družbene vede",
+	"history_tag": "Zgodovina",
+	"culture_tag": "Kultura",
+	"life-sciences_tag": "Vede o življenju",
+	"health-sciences_tag": "Zdravstvene vede",
+	"earth-sciences_tag": "Vede o Zemlji",
+	"technology_tag": "Tehnika"
+}
