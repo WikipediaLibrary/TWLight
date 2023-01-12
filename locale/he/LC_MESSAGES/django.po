@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-05 12:43+0000\n"
-"PO-Revision-Date: 2023-01-09 12:41:12+0000\n"
+"PO-Revision-Date: 2023-01-12 12:25:26+0000\n"
 "Language: he\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2552,7 +2552,7 @@ msgstr "ניתן לחפש באוספים אחרים באופן פרטני"
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr "בחירת שפה"
+msgstr "הגדרת שפה"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
