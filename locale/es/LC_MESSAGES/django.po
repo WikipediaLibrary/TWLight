@@ -34,7 +34,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-05 12:43+0000\n"
-"PO-Revision-Date: 2023-01-09 12:41:12+0000\n"
+"PO-Revision-Date: 2023-01-16 12:21:23+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -999,7 +999,7 @@ msgstr "<p>Estimado %(user)s,</p> <p> Gracias por solicitar acceso a %(partner)s
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "Querido %(user)s, Gracias para solicitar acceso a %(partner)s recursos a través de La Biblioteca de Wikipedia.  Estamos felices de informarte que tu aplicación ha sido aprobada. %(user_instructions)s Puedes ver las colecciones  que estás autorizado para acceder en Mi Biblioteca: %(link)s Saludos! La Biblioteca de Wikipedia"
+msgstr ""
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
