@@ -148,26 +148,27 @@ class UserProfile(models.Model):
         return cache.delete(self.my_library_cache_key)
 
 
-def favorites_field_changed(sender, **kwargs):
+def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
     """
     This method validates whether a user has access to a partner they want to
     add to their favorites
     Added this signal per https://stackoverflow.com/a/56368721/4612594
     """
-    instance = kwargs["instance"]
-    authorized_partners = []
-    authorizations = instance.user.authorizations.all()
-    for authorization in authorizations:
-        for partner in authorization.partners.all():
-            authorized_partners.append(partner.pk)
 
-    for favorite in instance.favorites.all():
-        if favorite.pk not in authorized_partners:
-            raise ValidationError(
-                "We cannot add partner {partner} to your favorites because you don't have access to it".format(
-                    partner=favorite.company_name
+    if action == "pre_add":
+        authorized_partners = []
+        authorizations = instance.user.authorizations.all()
+        for authorization in authorizations:
+            for partner in authorization.partners.all():
+                authorized_partners.append(partner.pk)
+
+        for pk in pk_set:
+            if pk not in authorized_partners:
+                raise ValidationError(
+                    "We cannot add partner {partner} to your favorites because you don't have access to it".format(
+                        partner=Partner.objects.get(pk=pk)
+                    )
                 )
-            )
 
 
 # This connects the UserProfile.favorites field to a signal to validate the
