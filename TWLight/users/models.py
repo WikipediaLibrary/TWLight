@@ -156,14 +156,10 @@ def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
     """
 
     if action == "pre_add":
-        authorized_partners = []
-        authorizations = instance.user.authorizations.all()
-        for authorization in authorizations:
-            for partner in authorization.partners.all():
-                authorized_partners.append(partner.pk)
-
         for pk in pk_set:
-            if pk not in authorized_partners:
+            if pk not in instance.user.authorizations.values_list(
+                "partners__id", flat=True
+            ):
                 raise ValidationError(
                     "We cannot add partner {partner} to your favorites because you don't have access to it".format(
                         partner=Partner.objects.get(pk=pk)
