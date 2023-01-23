@@ -14,6 +14,8 @@ from TWLight.users.models import (
 )
 from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
 
+from TWLight.resources.models import Partner
+
 
 class EditorInline(admin.StackedInline):
     model = Editor
@@ -50,6 +52,7 @@ class UserProfileInline(admin.StackedInline):
                     "use_wp_email",
                     "lang",
                     "my_library_cache_key",
+                    "favorites",
                 )
             },
         ),

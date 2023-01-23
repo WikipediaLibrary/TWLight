@@ -34,6 +34,7 @@ import json
 import logging
 import urllib.request, urllib.error, urllib.parse
 from annoying.functions import get_object_or_None
+from rest_framework import serializers
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -160,10 +161,13 @@ def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
             if pk not in instance.user.authorizations.values_list(
                 "partners__id", flat=True
             ):
-                raise ValidationError(
-                    "We cannot add partner {partner} to your favorites because you don't have access to it".format(
-                        partner=Partner.objects.get(pk=pk)
-                    )
+                raise serializers.ValidationError(
+                    # fmt: off
+                    {
+                        # Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
+                        "detail": _("Cannot add partner {partner} to your favorites because you don't have access to it").format(partner=Partner.objects.get(pk=pk).company_name)
+                    }
+                    # fmt: on
                 )
 
 
