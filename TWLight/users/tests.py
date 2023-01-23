@@ -3,6 +3,7 @@ import copy
 from datetime import datetime, date, timedelta
 import json
 import re
+import rest_framework
 from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
@@ -927,7 +928,7 @@ class UserProfileModelTestCase(TestCase):
         """
         profile = UserProfile.objects.get(user=self.editor.user)
 
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(rest_framework.exceptions.ValidationError):
             profile.favorites.add(self.proxy_partner_1)
 
 
