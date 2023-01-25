@@ -34,6 +34,15 @@
     var search_input = document.getElementById("collection-live-search");
     search_input.oninput = searchCollections;
 
+    // present problems as django messages
+    function errorMsg(detail) {
+      var div = document.createElement('div');
+      div.classList.add('alert');
+      div.classList.add('alert-danger');
+      div.innerHTML = detail;
+      document.getElementById( 'message-container' ).appendChild(div);
+    }
+
     function searchCollections(obj) {
       var pattern = obj.target.value;
 
@@ -228,7 +237,7 @@
         error: function(response) {
             // log the error if any details are available
             if (response.responseJSON.detail) {
-              console.log(response.responseJSON.detail)
+                  errorMsg(response.responseJSON.detail + '');
             }
         }
       });

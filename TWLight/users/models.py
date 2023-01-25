@@ -34,6 +34,7 @@ import json
 import logging
 import urllib.request, urllib.error, urllib.parse
 from annoying.functions import get_object_or_None
+from rest_framework import serializers
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -148,26 +149,26 @@ class UserProfile(models.Model):
         return cache.delete(self.my_library_cache_key)
 
 
-def favorites_field_changed(sender, **kwargs):
+def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
     """
     This method validates whether a user has access to a partner they want to
     add to their favorites
     Added this signal per https://stackoverflow.com/a/56368721/4612594
     """
-    instance = kwargs["instance"]
-    authorized_partners = []
-    authorizations = instance.user.authorizations.all()
-    for authorization in authorizations:
-        for partner in authorization.partners.all():
-            authorized_partners.append(partner.pk)
 
-    for favorite in instance.favorites.all():
-        if favorite.pk not in authorized_partners:
-            raise ValidationError(
-                "We cannot add partner {partner} to your favorites because you don't have access to it".format(
-                    partner=favorite.company_name
+    if action == "pre_add":
+        for pk in pk_set:
+            if pk not in instance.user.authorizations.values_list(
+                "partners__id", flat=True
+            ):
+                raise serializers.ValidationError(
+                    # fmt: off
+                    {
+                        # Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
+                        "detail": _("Cannot add partner {partner} to your favorites because you don't have access to it").format(partner=Partner.objects.get(pk=pk).company_name)
+                    }
+                    # fmt: on
                 )
-            )
 
 
 # This connects the UserProfile.favorites field to a signal to validate the

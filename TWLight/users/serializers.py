@@ -14,7 +14,6 @@ class FavoriteCollectionSerializer(serializers.Serializer):
         add or remove partner from favorites
         """
         partner_pk = self.validated_data.get("partner").get("pk")
-        added = None
         user_profile = get_object_or_404(
             UserProfile, pk=self.validated_data.get("userprofile").get("pk")
         )
