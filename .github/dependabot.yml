@@ -39,7 +39,6 @@ updates:
     - 0.20.0
     - 0.20.1
 - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      # Check for updates to GitHub Actions every month
-      interval: "monthly"
+  directory: "/"
+  schedule:
+    interval: "monthly"
