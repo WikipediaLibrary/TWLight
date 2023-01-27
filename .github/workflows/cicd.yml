@@ -10,6 +10,7 @@ on:
 jobs:
   cicd:
     runs-on: ubuntu-latest
+    environment: cicd
     steps:
       - uses: actions/checkout@v3
         with:
@@ -33,15 +34,20 @@ jobs:
           docker compose exec --no-TTY twlight
           /app/bin/virtualenv_test.sh
       - name: deploy
+        env:
+          WIKIBOT_TOKEN: ${{secrets.WIKIBOT_TOKEN}}
+          QUAYBOT_USERNAME: ${{secrets.QUAYBOT_USERNAME}}
+          QUAYBOT_PASSWORD: ${{secrets.QUAYBOT_PASSWORD}}
         run: >
           sudo .cicd/deploy.sh
           ${GITHUB_REF_NAME}
           ${GITHUB_SHA}
           ${GITHUB_EVENT_NAME}
           ${GITHUB_REPOSITORY}
-          ${{ secrets.WIKIBOT_TOKEN }}
-          ${{ secrets.QUAYBOT_USERNAME }}
-          ${{ secrets.QUAYBOT_PASSWORD }}
+          ${WIKIBOT_TOKEN}
+          ${QUAYBOT_USERNAME}
+          ${QUAYBOT_PASSWORD}
+
       - name: cleanup
         if: always()
         run: sudo chown -R ${USER}:${USER} .
