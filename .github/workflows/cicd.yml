@@ -39,9 +39,14 @@ jobs:
           ${GITHUB_SHA}
           ${GITHUB_EVENT_NAME}
           ${GITHUB_REPOSITORY}
-          ${{ secrets.WIKIBOT_TOKEN }}
-          ${{ secrets.QUAYBOT_USERNAME }}
-          ${{ secrets.QUAYBOT_PASSWORD }}
+          ${WIKIBOT_TOKEN}
+          ${QUAYBOT_USERNAME}
+          ${QUAYBOT_PASSWORD}
+        env:
+          WIKIBOT_TOKEN: ${{secrets.WIKIBOT_TOKEN}}
+          QUAYBOT_USERNAME: ${{secrets.QUAYBOT_USERNAME}}
+          QUAYBOT_PASSWORD: ${{secrets.QUAYBOT_PASSWORD}}
+
       - name: cleanup
         if: always()
         run: sudo chown -R ${USER}:${USER} .
