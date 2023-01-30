@@ -7,6 +7,7 @@
 # Author: Fumi37s
 # Author: Ice bulldog
 # Author: Kkairri
+# Author: Kokage si
 # Author: MathXplore
 # Author: MuratTheTurkish
 # Author: Omotecho
@@ -25,7 +26,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:26+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:17+0000\n"
+"PO-Revision-Date: 2023-01-30 12:20:35+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -540,12 +541,12 @@ msgstr "更新が必要"
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:78
 msgid "Filter by..."
-msgstr "絞りこみ条件を選んでください..."
+msgstr "絞り込み条件を選んでください..."
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box showing a list of active filters.
 #: TWLight/applications/templates/applications/application_list.html:90
 msgid "Current filters"
-msgstr "現在の絞りこみ条件"
+msgstr "現在の絞り込み条件"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. If no filters are selected, this text is shown under the 'Current filters' heading.
 #: TWLight/applications/templates/applications/application_list.html:101
@@ -942,7 +943,7 @@ msgstr "ご利用のメールアドレス"
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
 msgid "This field is automatically updated with the email from your <a class='twl-links' href='{}'>user profile</a>."
-msgstr "この欄は当該の<a class='twl-links' href='{}'>利用者プロフィール</a>に記入されたメールアドレスを自動で転写します。"
+msgstr "この欄はあなたの<a class='twl-links' href='{}'>利用者プロフィール</a>に記入されたメールアドレスから自動的に更新されます。"
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -952,7 +953,7 @@ msgstr "メッセージ"
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:28
 msgid "Receive a copy of this message"
-msgstr "このメッセージの副本を受け取る"
+msgstr "このメッセージのコピーを受け取る"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
@@ -1059,7 +1060,7 @@ msgstr "連絡先"
 #: TWLight/emails/templates/emails/contact.html:33
 #, python-format
 msgid "(If you would like to suggest a partner, <a class=\"twl-links\" href=\"%(suggest)s\"><strong>go here</strong></a>.)"
-msgstr "((提携組織の推薦をご希望の場合は、<a class=\"twl-links\" href=\"%(suggest)s\"><strong>こちらを開いてください</strong></a>。)"
+msgstr "（提携組織の推薦をご希望の場合は、<a class=\"twl-links\" href=\"%(suggest)s\"><strong>こちらを開いてください</strong></a>。）"
 
 #. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
 #: TWLight/emails/templates/emails/contact.html:42
@@ -1282,7 +1283,7 @@ msgstr "検索可能"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:81
 msgid "Access"
-msgstr "利用"
+msgstr "アクセス"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:18
@@ -1304,7 +1305,7 @@ msgstr "ウェブサイト"
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:290
 msgid "Not searchable"
-msgstr "検索の対象外です"
+msgstr "検索不可能"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1415,7 +1416,7 @@ msgstr "絞り込み"
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
 msgid "Filter collections"
-msgstr "コレクションをしぼり込む"
+msgstr "コレクションを絞り込む"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -2001,7 +2002,7 @@ msgstr "EZProxy"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
 msgid "EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy via the Library Card platform to verify that they are authorized users, and then the server accesses requested resources using its own IP address."
-msgstr "EZProxyとは多くのウィキペディア図書館提携組織が採用する利用者認証用の[[:w:ja:プロキシ|プロキシサーバ]]の名称です。図書館カードプラットフォーム経由でEZProxyにログインすると認証済みの利用者であることの認証を得て、サーバ自体のIPアドレスから利用者が使いたい情報源へアクセスが成立します。"
+msgstr "EZProxyとは多くのウィキペディア図書館提携組織が採用する利用者認証用のプロキシサーバの名称です。図書館カードプラットフォーム経由でEZProxyにログインすると認証済みの利用者であることの認証を得て、サーバ自体のIPアドレスから利用者が使いたい情報源へアクセスが成立します。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
@@ -2032,7 +2033,7 @@ msgstr "出典の提示方法はプロジェクト単位の慣習により、ま
 #: TWLight/templates/about.html:218
 #, python-format
 msgid "If you have questions, need help, or want to volunteer to help, please see our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
-msgstr "質問や助力が必要なとき、ヘルプ対応のボランティアを志望する場合は、<a class=\"twl-links\" href=\"%(contact_url)s\">連絡のしかたのページ</a>をご参照ください。"
+msgstr "質問があるとき、助力が必要なとき、あるいはヘルプ対応のボランティアを志望する場合は、<a class=\"twl-links\" href=\"%(contact_url)s\">連絡先ページ</a>をご参照ください。"
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
@@ -2477,7 +2478,7 @@ msgstr "不明 (利用者の初回ログインから30日未満のため)"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the date the user registered their Meta-wiki account or the date their account was merged by the SUL merge process. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:227
 msgid "Meta-Wiki registration or SUL merge date *"
-msgstr "Meta-Wiki 登録日付もしくは[[:meta:Help:Unified_login/ja|SUL]]（統一ログイン）統合日付 *"
+msgstr "Meta-Wiki 登録日付もしくはSUL（統一ログイン）統合日付 *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:239
@@ -2559,7 +2560,7 @@ msgstr "このコレクションは検索バーから一部を対象に検索で
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
-msgstr "コレクションの閲覧は個別に行います"
+msgstr "その他のコレクションは個別に閲覧する必要があります"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26

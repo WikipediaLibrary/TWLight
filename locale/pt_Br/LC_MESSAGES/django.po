@@ -14,6 +14,7 @@
 # Author: Mariagarbin
 # Author: MuratTheTurkish
 # Author: Rafaelff
+# Author: Robertpontes
 # Author: Svjatysberega
 # Author: TheEduGobi
 # Author: Tks4Fish
@@ -23,7 +24,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:26+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:18+0000\n"
+"PO-Revision-Date: 2023-01-30 12:20:36+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2228,7 +2229,7 @@ msgstr "Atualizar e-mail"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Não é possível adicionar o(a) parceiro(a) {partner} aos seus favoritos porque você não tem acesso a ele(a)"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:250

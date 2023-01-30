@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:16+0000\n"
+"PO-Revision-Date: 2023-01-30 12:20:32+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -2248,7 +2248,7 @@ msgstr "عدل البريد الإلكتروني"
 
 #. Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
 #: TWLight/users/models.py:168
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
 msgstr "لا يمكن إضافة الشريك {partner} إلى مفضلتك لأنه لا يمكنك الوصول إليه{partner}"
 
