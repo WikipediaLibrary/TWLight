@@ -5,6 +5,7 @@ from django.db.utils import ProgrammingError
 
 def site_id():
     # Prefer the current initialized site.
+    # Edit a comment to test cicd from forks
     try:
         return Site.objects.get_current().pk
     # If don't have an initialized database yet, fetch the default from settings.
