@@ -5,7 +5,7 @@ branch="${1//[\/]/-}"
 commit="${2}"
 event_name="${3}"
 gh_repo="${4}"
-wikibot_token="${5}"
+wikibot_token="${5:-}"
 quaybot_username="${6:-}"
 quaybot_password="${7:-}"
 
