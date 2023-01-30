@@ -80,7 +80,7 @@ docker_push() {
     docker logout quay.io
 }
 
-if [ "${event_name}" = "push" ] && [ -n "${twlight_missing_migrations:-}" ]
+if [ "${event_name}" = "push" ] && [ -n "${wikibot_token}" ] && [ -n "${twlight_missing_migrations:-}" ]
 then
     git_config
     if [ "${twlight_i18n_files_changed}" -gt 0 ] || [ "${twlight_missing_migrations}" -gt 0 ]
