@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:18+0000\n"
+"PO-Revision-Date: 2023-02-02 12:23:03+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2219,7 +2219,7 @@ msgstr "E-mail bijwerken"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Kan partner {partner} niet toevoegen aan uw favorieten omdat u er geen toegang toe hebt"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:250

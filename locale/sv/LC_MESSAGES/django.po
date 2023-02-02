@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: DDPAT
+# Author: Haxpett
 # Author: Ice bulldog
 # Author: Sabelöga
 # Author: Sturban
@@ -11,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:19+0000\n"
+"PO-Revision-Date: 2023-02-02 12:23:04+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -261,12 +262,12 @@ msgstr "Du kan räkna med att få åtkomstdetaljer inom en vecka eller två när
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:240
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "Denna partner gick med i bibliotekspaketet, vilket inte kräver godkännande. Denna begäran kommer att markeras som ogiltig."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr ""
+msgstr "Denna ansökan finns på väntelistan eftersom den här partnern inte har några lediga konton för närvarande."
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
@@ -274,7 +275,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr ""
+msgstr "Samordnare: Den här sidan kan innehålla personlig information som riktiga namn och e-postadresser. Kom ihåg att denna information är konfidentiell."
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
@@ -284,7 +285,7 @@ msgstr "Utvärdera ansökning"
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
 msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
-msgstr ""
+msgstr "Den här användaren har begärt en begränsning av behandlingen av sina uppgifter, så du kan inte ändra statusen på hens ansökan."
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:48
@@ -359,7 +360,7 @@ msgstr "Okänd"
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "Be sökanden lägga till sitt hemland i sin profil innan den går vidare."
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
@@ -371,7 +372,7 @@ msgstr "Inte tillgänglig"
 #: TWLight/applications/templates/applications/application_evaluation.html:145
 #, python-format
 msgid "Has agreed to the site's <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a>?"
-msgstr ""
+msgstr "Har samtyckt till webbplatsens <a class=\"twl-links\" href=\"%(terms_url)s\">användarvillkor</a>?"
 
 #. Translators: Displayed to coordinators when they've agreed to the terms of use.
 #. Translators: Displayed if the user has agreed to the terms of use.
@@ -407,7 +408,7 @@ msgstr "Nej"
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:159
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr ""
+msgstr "Vänligen begär att sökanden godkänner webbplatsens användarvillkor innan du godkänner denna ansökan."
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:176
@@ -422,7 +423,7 @@ msgstr "Har inte angetts"
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
 #: TWLight/applications/templates/applications/application_evaluation.html:189
 msgid "Renewal of existing access grant?"
-msgstr ""
+msgstr "Förnyelse av befintligt konto?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:195
@@ -448,7 +449,7 @@ msgstr "Senaste ansökningarna (senaste 90 dagarna)"
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:264
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "Sökanden har inga ansökningar under de senaste 90 dagarna."
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:268
@@ -678,7 +679,7 @@ msgstr "Ändra status"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "Om din ansökan godkänns kan vi komma att dela din e-postadress med %(partner)s. Detta krävs för att ge dig åtkomst till deras resurser. Genom att skicka in det här formuläret godkänner du att din e-postadress delas med %(partner)s om din ansökan godkänns, i syfte att skapa konto."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23

@@ -13,6 +13,7 @@
 # Author: HajFunk
 # Author: Hwboehm
 # Author: Ice bulldog
+# Author: Justman10000
 # Author: Killarnee
 # Author: Lyzzy
 # Author: MBq
@@ -32,7 +33,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:16+0000\n"
+"PO-Revision-Date: 2023-02-02 12:23:00+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2235,7 +2236,7 @@ msgstr "E-Mail-Adresse aktualisieren"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Du kannst Partner {partner} nicht zu deinen Favoriten hinzufügen, weil du keinen Zugriff darauf hast"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:250
