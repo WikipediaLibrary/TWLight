@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:26+0000\n"
-"PO-Revision-Date: 2023-02-02 12:23:04+0000\n"
+"PO-Revision-Date: 2023-02-06 12:22:53+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2229,7 +2229,7 @@ msgstr "Оновити електронну пошту"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Неможливо додати партнера {partner} до вибраного, оскільки ви не маєте до нього доступу"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:250
@@ -2967,9 +2967,8 @@ msgstr "Будь ласка, <a class='twl-links' href='{url}'>оновіть с
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr "Ви вибрали не отримувати листи-нагадування. Як координатор, ви маєте отримувати хоча б один тип листів-нагадувань, тому будь ласка, змініть свої налаштування."
+msgstr "Ви зробили вибір не отримувати листи-нагадування. Як координатор, ви маєте отримувати хоча б один тип листів-нагадувань, тому, будь ласка, змініть свої налаштування."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
