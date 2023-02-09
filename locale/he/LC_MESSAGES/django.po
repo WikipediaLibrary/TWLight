@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-30 12:20:34+0000\n"
+"PO-Revision-Date: 2023-02-09 12:21:06+0000\n"
 "Language: he\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1456,25 +1456,25 @@ msgstr "לפני הגשת בקשה, נא לסקור את <strong><a class=\"twl-
 #: TWLight/resources/templates/resources/partner_detail.html:69
 #, python-format
 msgid "View the status of your access in <strong><a class=\"twl-links\" href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr "צפייה במצב של הבקשות שלך בדף <strong><a class=\"twl-links\" href=\"%(library_url)s\">הספרייה שלי</a></strong>."
+msgstr "צפייה במצב הבקשות שלך בדף <strong><a class=\"twl-links\" href=\"%(library_url)s\">הספרייה שלי</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:78
 #, python-format
 msgid "View the status of your application(s) on your <strong><a class=\"twl-links\" href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr "צפייה במצב של הבקשות שלך בדף <strong><a class=\"twl-links\" href=\"%(applications_url)s\">הבקשות שלי</a></strong> שלך."
+msgstr "צפייה במצב הבקשות שלך בדף <strong><a class=\"twl-links\" href=\"%(applications_url)s\">הבקשות שלי</a></strong> שלך."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
 #, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr "צפייה במצב של הבקשות שלך בדף <strong><a href=\"%(library_url)s\"  class=\"twl-links\">הספרייה שלי</a></strong>."
+msgstr "צפייה במצב הבקשות שלך בדף <strong><a href=\"%(library_url)s\"  class=\"twl-links\">הספרייה שלי</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
 #, python-format
 msgid "View the status of your application(s) on your <strong><a href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr "צפייה במצב של הבקשות שלך בדף <strong><a href=\"%(applications_url)s\">הבקשות שלי</a></strong> שלך."
+msgstr "צפייה במצב הבקשות שלך בדף <strong><a href=\"%(applications_url)s\">הבקשות שלי</a></strong> שלך."
 
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:73
@@ -1499,7 +1499,7 @@ msgstr "דף שיחה"
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:103
 msgid "Special:EmailUser page"
-msgstr "דף מיוחד:שליחת דואר למשתמש"
+msgstr "מיוחד:שליחת דואר למשתמש"
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/resources/templates/resources/partner_detail_apply.html:112
@@ -1562,7 +1562,7 @@ msgstr "חשבונות פעילים"
 #. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:37
 msgid "Users who received access (all time)"
-msgstr "משתמשים שקיבלו גישה (מאז ומתמיד)"
+msgstr "משתמשים קיבלו גישה (מאז ומתמיד)"
 
 #. Translators: This is the label for a number which shows the median (not mean) number of days between users applying and a coordinator making a decision on their application. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:59
