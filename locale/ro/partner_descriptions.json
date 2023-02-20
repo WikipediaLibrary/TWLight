@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"MSClaudiu"
+			"MSClaudiu",
+			"Pafsanias"
 		]
 	},
 	"24_short_description": "<strong>AAAS</strong> (Asociația Americană pentru Avansarea Științei) oferă acces la resursele de pe site-ul său web, sciencemag.org, care includ revista <em>Science</em> (1880-prezent) și alte cercetări științifice, știri, comentarii și mass-media.",
@@ -15,7 +16,7 @@
 	"102_description": "Acest parteneriat nu include accesul la Fold3 sau Newspapers.com, dar acestea pot fi aplicate separat.",
 	"32_short_description": "<strong>Annual Reviews</strong> este un editor de articole de recenzii din științe și științe sociale. Acest parteneriat oferă acces la toate colecțiile lor de reviste.",
 	"11_short_description": "<strong>The American Speech-Language-Hearing Association (Asociația Americană de Vorbire‑Limbaj‑Auz)</strong> (ASHA) oferă acces la reviste ASHA: American Journal of Audiology, American Journal of Speech-Language Pathology, Journal of Speech, Language, and Hearing Research și Language , Servicii de vorbire și audiere în școli.",
-	"47_short_description": "<strong>Baylor University Press</strong> este un editor de cărți electronice academice, în principal în studii religioase și umaniste. Editorii pot selecta titluri de interes din <a href=\"http://www.baylorpress.com/Title\">catalogul lor</a>.",
+	"47_short_description": "<strong>Baylor University Press</strong> este un editor de cărți electronice academice, în principal în studii religioase și umaniste. Editorii pot selecta titluri de interes din <a href=\"https://www.baylorpress.com/books/catalog/\">catalogul lor</a>.",
 	"73_short_description": "<strong>Biblioteca de modă Berg</strong> cuprinde resurse care acoperă subiecte de modă, inclusiv enciclopedii, lucrări de referință și peste 100 de cărți electronice academice. Este publicat de Bloomsbury Publishing.",
 	"63_short_description": "<strong>BioOne</strong> este un editor științific de reviste care acoperă științe biologice, ecologice și de mediu. Acest parteneriat oferă acces la BioOne Complete, care conține peste 200 de reviste cu peste 150.000 de articole.",
 	"31_short_description": "<strong>BMJ</strong> (inițial British Medical Journal) este o revistă medicală evaluată de colegi.",
@@ -70,7 +71,7 @@
 	"86_short_description": "<strong>Oxford Art Online</strong> oferă acces la lucrările de artă de referință ale Oxford: Grove Art Online și Benezit Dictionary of Artists, precum și multe articole și bibliografii comandate special, disponibile exclusiv online. Oxford Art Online are peste 20.000 de imagini și peste 230.000 de intrări despre artă și artiști.",
 	"87_short_description": "<strong>Oxford Bibliographies</strong> oferă ghiduri de cercetare autorizate care combină caracteristicile unei bibliografii adnotate și ale unei enciclopedii de nivel înalt. Această resursă ghidează cercetătorii către cea mai bună bursă disponibilă într-o mare varietate de subiecte.",
 	"88_short_description": "<strong>Dicționarul Oxford de biografie națională</strong> este recordul național al bărbaților și femeilor care au modelat istoria și cultura britanică, în întreaga lume, de la romani până în secolul al XXI-lea. ODNB oferă biografii concise, actualizate, scrise de autori specializați. Este supravegheat de editori academicieni de la Universitatea Oxford.",
-	"93_short_description": "<strong>Oxford University Press Journals</strong> include o varietate de subiecte.",
+	"93_short_description": "<strong>Oxford Academic</strong> include un număr mare de reviste publicate de Oxford University Press, care acoperă o varietate de subiecte.",
 	"99_short_description": "<strong>Oxford University Press Law</strong> oferă o colecție de resurse legate de dreptul internațional.",
 	"90_short_description": "<strong>Grove Music Online</strong> este cea de-a opta ediție a Dicționarului Grove de muzică și muzicieni și conține articole comandate special pentru site. Grove Music Online are peste 100.000 de intrări, cu subiecte variind de la biografii ale muzicienilor până la articole despre structura fizică și asamblarea instrumentelor.",
 	"91_short_description": "<strong>Oxford Reference</strong> reunește 2 milioane de intrări digitizate în dicționarele, însoțitorii și enciclopediile Oxford.",

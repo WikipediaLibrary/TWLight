@@ -9,6 +9,7 @@
 # Author: MSClaudiu
 # Author: MuratTheTurkish
 # Author: NGC 54
+# Author: Pafsanias
 # Author: Popetedenis
 # Author: Tanea.d
 # Author: WebSourceContentRO
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-01-25 00:27+0000\n"
-"PO-Revision-Date: 2023-01-26 12:29:18+0000\n"
+"PO-Revision-Date: 2023-02-20 12:21:50+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -957,15 +958,15 @@ msgstr "Trimite"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>Solicitarea dvs. aprobată pentru %(partner)s acum a fost finalizată. Codul de acces sau detaliile de conectare pot fi găsite mai jos:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>Solicitarea dvs. aprobată pentru %(partner)s acum a fost finalizată. Codul de acces sau detaliile de conectare pot fi găsite mai jos:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "Solcitarea dvs. aprobată pentru %(partner)s a fost finalizată. Codul de acces sau detaliile de conectare pot fi găsite mai jos: %(access_code)s %(access_code_instructions)s"
+msgstr "Solcitarea dvs. aprobată pentru %(partner)s a fost finalizată. Codul de acces sau detaliile de conectare pot fi găsite mai jos: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1316,9 +1317,8 @@ msgstr "Parțial căutabil"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Informații utilizator"
+msgstr "Informații despre serviciu"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
@@ -1327,9 +1327,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Termenii de utilizare nu sunt disponibili."
+msgstr "Temporar indisponibil"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1343,9 +1342,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Conturi disponibile"
+msgstr "Accesul este momentan indisponibil"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1436,9 +1434,8 @@ msgstr "Propunător"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "Vot pentru"
+msgstr "Voturi pentru"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -2085,9 +2082,9 @@ msgstr "Mai multe informații"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Peste 90 dintre cele mai bune baze de date din lume numai cu abonament, gratuite pentru Wikipedianii din toate mediile"
+msgstr "Peste 90 dintre cele mai bune baze de date din lume numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru toți Wikipedianii"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2957,7 +2954,6 @@ msgstr "Vă rugăm <a class='twl-links' href='{url}'>actualizați-vă contribuț
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
 msgstr "Ați ales să nu primiți e-mailuri de memento. În calitate de coordonator, ar trebui să primiți cel puțin un tip de e-mailuri de memento, așa că luați în considerare schimbarea preferințelor."
 
