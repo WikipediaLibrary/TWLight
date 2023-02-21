@@ -6,6 +6,7 @@ from sentry_sdk import capture_exception
 
 WEEKLY = 10080
 DAILY = 1440
+SEMI_DAILY = 720
 
 
 class SendCoordinatorRemindersCronJob(CronJobBase):
@@ -20,7 +21,7 @@ class SendCoordinatorRemindersCronJob(CronJobBase):
 
 
 class BackupCronJob(CronJobBase):
-    schedule = Schedule(run_every_mins=DAILY)
+    schedule = Schedule(run_every_mins=SEMI_DAILY)
     code = "backup"
 
     def do(self):
