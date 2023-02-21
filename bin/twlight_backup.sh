@@ -16,7 +16,7 @@ flock -n ${lockfile}
 
     PATH=/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
 
-    date=$(date +'%d.%H')
+    date=$(date +'%Y%m%d%H%M')
 
     ## Dump DB
 
