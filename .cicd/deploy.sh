@@ -69,9 +69,13 @@ docker_push() {
     then
         branch_tag="branch_production"
         docker tag "quay.io/wikipedialibrary/twlight:local" "quay.io/wikipedialibrary/twlight:${branch_tag}"
-        docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialibrary/twlight_syslog:${branch_tag}"
+        # uncomment to tag syslog
+        # docker tag "quay.io/wikipedialibrary/twlight_syslog:local" "quay.io/wikipedialibrary/twlight_syslog:${branch_tag}"
     fi
-    declare -a repositories=("twlight" "twlight_syslog")
+    # comment out and uncomment the second declaration to push syslog
+    declare -a repositories=("twlight")
+    # uncomment to push syslog
+    # declare -a repositories=("twlight" "twlight_syslog")
     for repo in "${repositories[@]}"
     do
       docker push quay.io/wikipedialibrary/${repo}:commit_${commit}
