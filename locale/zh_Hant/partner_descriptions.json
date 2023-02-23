@@ -15,7 +15,7 @@
 	"102_description": "此合作關係不包含對 Fold3 或 Newspapers.com 的存取，不過可以單獨申請。",
 	"32_short_description": "<strong>Annual Reviews</strong>是生命、生物醫藥、自然和社會科學評論文章的非營利出版商。通過合作夥伴關係，可以訪問其所有51種期刊，包括訂閱開放計畫中的8個開放訪問期刊及其所有主題館藏。",
 	"11_short_description": "<strong>The American Speech-Language-Hearing Association</strong>（ASHA）提供對ASHA期刊的存取權限：美國聽力學雜誌，美國語音語言病理學雜誌，語音、語言和聽力研究雜誌以及學校的語言、語音和聽力服務。",
-	"47_short_description": "<strong>Baylor University Press</strong>是主要從事宗教研究和人文學科領域的學術電子書出版商。編者可以從<a href=\"http://www.baylorpress.com/Title\">其目錄</a>中選擇感興趣的主題。",
+	"47_short_description": "<strong>Baylor University Press</strong>是主要從事宗教研究和人文學科領域的學術電子書出版商。編者可以從<a href=\"https://www.baylorpress.com/books/catalog/\">其目錄</a>中選擇感興趣的主題。",
 	"73_short_description": "<strong>Berg Fashion Library</strong>涵蓋時尚主題的資源，包括百科全書、參考書目和100多本學術電子書。它由Bloomsbury Publishing出版。",
 	"63_short_description": "<strong>BioOne</strong>是涵蓋生物學、生態學和環境科學期刊的科學出版商。通過這種合作夥伴關係，可以訪問BioOne Complete，其中包含200多種期刊，超過15萬篇文章。",
 	"31_short_description": "<strong>BMJ</strong>（原《英國醫學期刊》）是同行評審的醫學期刊。",
@@ -30,6 +30,8 @@
 	"23_description": "除了訂閱內容外，Elsevier還提供了一些可供所有人閱讀的材料。除了尋找開放獲取符號之外，以下是尋找它的方法： <ul> <li>瀏覽開放獲取期刊的列表</li> <li>通過點擊“View all publications with Open Access articles”，在ScienceDirect主頁上找到所有具有開放獲取文章期刊的列表。</li> <li>使用進階搜索，選中“Open access articles only”的框</li> </ul>",
 	"44_short_description": "<strong>Érudit</strong> 是加拿大的學術資料入口網站。著重在人文與社會克學，另外有包含一些物理與自然科學的出版物。",
 	"78_short_description": "<strong>ICE Publishing</strong> 是土木工程師機構之一。提供取用在 ICE 虛擬圖書館裡所有的期刊與電子書。",
+	"77_short_description": "<strong>International Water Association Publishing</strong> 是關於水、廢水，和相關環境領域的書籍和 14 種期刊的出版商。",
+	"72_short_description": "<strong>Kinige</strong> 是一家電子書店，主要出售以泰盧固語編寫的印度書籍。Kinige 每月提供 10 本免費的電子書。",
 	"80_short_description": "<strong>Magiran</strong> 是報紙與科學期刊的出版商。",
 	"27_short_description": "<strong>NewspaperARCHIVE.com</strong> 是數位化報紙的線上資料庫，擁有超過 20 億條新聞文章，涵蓋時間範圍從 1607 年到至今，地點包含美國、加拿大、英國和其他 20 個國家。",
 	"81_short_description": "<strong>Noormags</strong> 是社會科學與人文期刊的出版商。",
@@ -37,6 +39,7 @@
 	"99_short_description": "<strong>Oxford University Press Law</strong> 提供著相關國際法律方面的資源收藏。",
 	"38_short_description": "<strong>Project MUSE</strong> 是一種在人文與社會科學方面的線上資料庫，包含超過 600 種學術期刊與 36000 個電子書。",
 	"100_short_description": "<strong>RILM</strong> 是音樂主題內容的出版商。該合作夥伴關係包含有取用 RILM 音樂百科以及 <strong>MGG Online</strong>。",
+	"37_short_description": "<strong>Retrospective Index to Music Periodicals</strong>（RIPM）是收錄了 1760 年至 1966 年間出版的稀有音樂期刊之最大線上收藏。",
 	"10_short_description": "<strong>Taylor &amp; Francis</strong> 是期刊與書籍的學術出版商，提供取用數種收藏。",
 	"70_short_description": "<strong>Termsoup</strong> 是一種具有協助翻譯內容功能的翻譯工具，包含簡易的使用者介面、術語翻譯、編輯歷史、和協作編輯。",
 	"12_short_description": "<strong>Tilastopaja</strong> 是提供來自芬蘭和世界各地體育統計數據的資料庫。",
@@ -45,8 +48,11 @@
 	"112_short_description": "<strong><em>Merkur</em></strong> 是德語文化雜誌。",
 	"123_short_description": "<strong>Nature</strong> 是國際的科學週刊。",
 	"121_short_description": "<strong>MGG Online</strong> 是德語音樂百科全書，除了更新線上版本之外有提供 MGG（Die Musik in Geschichte und Gegenwart）1994 至 2008 年的印刷版取用。",
+	"120_short_description": "<strong>Future Science</strong> 是收藏生物學和藥理學的相關資源。",
 	"119_short_description": "<strong>Future Medicine</strong> 有收藏生物醫學方面的資源。",
 	"125_short_description": "<strong>OECD iLibrary</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）出版書籍、論文、統計資料的線上圖書館。",
 	"126_short_description": "<strong>OECD Data</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）發布圖表、地圖、表格、相關出版物的典藏庫。",
-	"127_short_description": "<strong>OECD Multimedia Gallery</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）發布包含播客、照片的視聽圖庫。"
+	"127_short_description": "<strong>OECD Multimedia Gallery</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）發布包含播客、照片的視聽圖庫。",
+	"137_short_description": "<strong>Wikilala</strong> 是一個數位典藏庫，包含超過 109000 份印刷形式的文件、45000 份報紙、32000 份期刊、4000 本書籍，和 26000 篇關於鄂圖曼帝國從建國到現代的歷史文章。",
+	"138_short_description": "<strong>The British Newspaper Archive</strong> 提供對英國和愛爾蘭報紙的可搜尋數位化存檔的取用。"
 }
