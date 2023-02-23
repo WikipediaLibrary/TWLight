@@ -421,6 +421,7 @@ class OAuthCallbackView(View):
         request_meta_qs = request.META["QUERY_STRING"]
         request_get = request.GET
         response_qs = None
+        user_preferred_lang_set = False
 
         if request_meta_qs:
             response_qs = request_meta_qs
@@ -540,7 +541,6 @@ class OAuthCallbackView(View):
 
         elif user:
             login(request, user)
-            user_preferred_lang_set = False
 
             if created:
                 messages.add_message(
