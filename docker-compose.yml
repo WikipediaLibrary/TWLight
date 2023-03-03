@@ -21,8 +21,10 @@ services:
     environment:
       # https://mariadb.com/kb/en/mariadb-docker-environment-variables/
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/MYSQL_ROOT_PASSWORD
-      - MARIADB_AUTO_UPGRADE=TRUE           # Any non-empty value will do
-      - MARIADB_DISABLE_UPGRADE_BACKUP=TRUE # Any non-empty value will do
+      # Any non-empty value will do
+      - MARIADB_AUTO_UPGRADE=TRUE
+      # Any non-empty value will do
+      - MARIADB_DISABLE_UPGRADE_BACKUP=TRUE
     secrets:
       - DJANGO_DB_NAME
       - DJANGO_DB_USER
@@ -32,7 +34,7 @@ services:
     build:
       context: .
       args:
-       - REQUIREMENTS_FILE=wmf.txt
+        - REQUIREMENTS_FILE=wmf.txt
     command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
     volumes:
       - type: bind
