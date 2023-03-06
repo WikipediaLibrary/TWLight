@@ -35,7 +35,7 @@ services:
       context: .
       args:
         - REQUIREMENTS_FILE=wmf.txt
-    command: /venv/bin/gunicorn -b 0.0.0.0:80 TWLight.wsgi
+    command: ["/venv/bin/gunicorn", "TWLight.wsgi"]
     volumes:
       - type: bind
         source: ./media

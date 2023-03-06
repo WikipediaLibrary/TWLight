@@ -51,7 +51,6 @@ services:
       - TWLIGHT_EZPROXY_SECRET
   twlight:
     image: quay.io/wikipedialibrary/twlight:branch_production
-    command: /venv/bin/gunicorn TWLight.wsgi
     env_file:
       - ./conf/production.twlight.env
     volumes:
