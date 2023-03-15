@@ -500,7 +500,7 @@ class OAuthCallbackView(View):
         # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
-        except OAuthException as e:
+        except (OAuthException, TypeError) as e:
             logger.warning(e)
             messages.add_message(
                 request,
