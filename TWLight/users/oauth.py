@@ -1,6 +1,7 @@
 import logging
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 from mwoauth.errors import OAuthException
+from sentry_sdk import capture_exception
 import urllib.parse
 
 from django.conf import settings
@@ -502,6 +503,8 @@ class OAuthCallbackView(View):
             access_token = handshaker.complete(request_token, response_qs)
         except (OAuthException, TypeError) as e:
             logger.warning(e)
+            # Send the exception to glitchtip
+            capture_exception(e)
             messages.add_message(
                 request,
                 messages.WARNING,
