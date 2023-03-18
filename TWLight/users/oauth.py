@@ -501,10 +501,13 @@ class OAuthCallbackView(View):
         # See if we can complete the OAuth process.
         try:
             access_token = handshaker.complete(request_token, response_qs)
+        # Send exceptions to glitchtip
         except (OAuthException, TypeError) as e:
             logger.warning(e)
-            # Send the exception to glitchtip
             capture_exception(e)
+
+        # raise an error if we don't have an access token
+        if not access_token:
             messages.add_message(
                 request,
                 messages.WARNING,
