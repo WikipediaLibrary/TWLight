@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-03-17 01:36+0000\n"
+"POT-Creation-Date: 2023-03-18 19:46+0000\n"
 "PO-Revision-Date: 2023-03-16 12:24:13+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2827,12 +2827,12 @@ msgid "No request token."
 msgstr "لا يوجد رمز طلب."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:512
+#: TWLight/users/oauth.py:515
 msgid "Access token generation failed."
 msgstr "فشل توليد رمز وصول."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:530
+#: TWLight/users/oauth.py:533
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2841,7 +2841,7 @@ msgstr ""
 "يمكن تفعيل حساب منصة بطاقة مكتبة ويكيبيديا الخاص بك."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:539
+#: TWLight/users/oauth.py:542
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2852,7 +2852,7 @@ msgstr ""
 "فيُرجَى إرسال بريد إلكتروني إلى wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:553
+#: TWLight/users/oauth.py:556
 msgid "Welcome! Please agree to the terms of use."
 msgstr "أهلا بك! تُرجَى الموافقة على شروط الاستخدام."
 
