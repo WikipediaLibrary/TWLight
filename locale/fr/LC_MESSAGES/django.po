@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-03-18 19:46+0000\n"
+"POT-Creation-Date: 2023-03-19 21:30+0000\n"
 "PO-Revision-Date: 2023-03-16 12:24:15+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
@@ -2965,12 +2965,12 @@ msgid "No request token."
 msgstr "Aucun jeton de demande."
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:515
+#: TWLight/users/oauth.py:516
 msgid "Access token generation failed."
 msgstr "La génération du jeton d’accès a échoué."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:533
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2980,7 +2980,7 @@ msgstr ""
 "Carte de Bibliothèque Wikipédia ne peut pas être activé."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:542
+#: TWLight/users/oauth.py:543
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2992,7 +2992,7 @@ msgstr ""
 "courriel à wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:556
+#: TWLight/users/oauth.py:557
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Bienvenue ! Veuillez accepter les conditions d’utilisation."
 

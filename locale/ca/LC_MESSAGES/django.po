@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-03-18 19:46+0000\n"
+"POT-Creation-Date: 2023-03-19 21:30+0000\n"
 "PO-Revision-Date: 2023-03-16 12:24:14+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2849,12 +2849,12 @@ msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:515
+#: TWLight/users/oauth.py:516
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:533
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2864,7 +2864,7 @@ msgstr ""
 "plataforma de la Biblioteca de la Viquipèdia no podrà ser activat."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:542
+#: TWLight/users/oauth.py:543
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2876,7 +2876,7 @@ msgstr ""
 "l'adreça wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:556
+#: TWLight/users/oauth.py:557
 msgid "Welcome! Please agree to the terms of use."
 msgstr "Us donem la benvinguda! Si us plau, accepteu les condicions d'ús."
 

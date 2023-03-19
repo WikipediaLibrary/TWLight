@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-03-18 19:45+0000\n"
+"POT-Creation-Date: 2023-03-19 21:29+0000\n"
 "PO-Revision-Date: 2023-03-16 12:24:16+0000\n"
 "Language: my\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2598,19 +2598,19 @@ msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:515
+#: TWLight/users/oauth.py:516
 msgid "Access token generation failed."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:533
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:542
+#: TWLight/users/oauth.py:543
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2618,7 +2618,7 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:556
+#: TWLight/users/oauth.py:557
 msgid "Welcome! Please agree to the terms of use."
 msgstr "ကြိုဆိုပါသည်၊ အသုံးပြုခြင်းဆိုင်ရာ သတ်မှတ်ချက်များကို ကျေးဇူးပြု၍ သဘောတူပါ။"
 
