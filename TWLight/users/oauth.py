@@ -499,6 +499,7 @@ class OAuthCallbackView(View):
             raise PermissionDenied
 
         # See if we can complete the OAuth process.
+        access_token = None
         try:
             access_token = handshaker.complete(request_token, response_qs)
         # Send exceptions to glitchtip
