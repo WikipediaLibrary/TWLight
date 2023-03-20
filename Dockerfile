@@ -17,6 +17,7 @@ COPY requirements /requirements
 RUN apt update ; \
     apt install -y --no-install-recommends \
     gcc \
+    git \
     python3-dev ; \
     rm -rf /var/lib/apt/lists/*; \
     virtualenv /venv ; \
