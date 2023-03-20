@@ -503,7 +503,7 @@ class OAuthCallbackView(View):
         try:
             access_token = handshaker.complete(request_token, response_qs)
         # Send exceptions to glitchtip
-        except (OAuthException, TypeError) as e:
+        except OAuthException as e:
             logger.warning(e)
             capture_exception(e)
 
