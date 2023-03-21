@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
+from django.utils.safestring import mark_safe
 from django.utils.translation import (
     get_language,
     gettext as _,
@@ -123,18 +124,6 @@ class OAuthBackend(object):
         # identities.
         logger.info("Creating user.")
 
-        # if not self._meets_minimum_requirement(identity):
-        # This needs to be reworked to actually check against global_userinfo.
-        # Don't create a User or Editor if this person does not meet the
-        # minimum account quality requirement. It would be nice to provide
-        # some user feedback here, but we can't; exception messages don't
-        # get passed on as template context in Django 1.8. (They do in
-        # 1.10, so this can be revisited in future.)
-        # logger.warning('User did not meet minimum requirements; not created.')
-        # messages.add_message (request, messages.WARNING,
-        # _('You do not meet the minimum requirements.'))
-        # raise PermissionDenied
-
         # -------------------------- Create the user ---------------------------
         try:
             email = identity["email"]
@@ -244,9 +233,8 @@ class OAuthBackend(object):
             identity = handshaker.identify(access_token, 15)
         except OAuthException as e:
             logger.warning(e)
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
                 _("You tried to log in but presented an invalid access token."),
             )
@@ -300,9 +288,8 @@ class OAuthInitializeView(View):
             assert domain in settings.ALLOWED_HOSTS  # safety first!
         except (AssertionError, DisallowedHost) as e:
             logger.exception(e)
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
@@ -367,9 +354,8 @@ class OAuthInitializeView(View):
                 redirect, request_token = handshaker.initiate()
             except OAuthException as e:
                 logger.warning(e)
-                messages.add_message(
+                messages.warning(
                     request,
-                    messages.WARNING,
                     # Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
                     _("Handshaker not initiated, please try logging in again."),
                 )
@@ -391,9 +377,8 @@ class OAuthInitializeView(View):
                 logger.info(
                     "Trying to access a link while not logged in, redirecting to homepage"
                 )
-                messages.add_message(
+                messages.info(
                     request,
-                    messages.INFO,
                     # fmt: off
                     # Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
                     _("To view this link you need to be an eligible library user. Please login to continue."),
@@ -435,9 +420,8 @@ class OAuthCallbackView(View):
             assert "oauth_verifier" in response_qs_parsed
         except (AssertionError, TypeError) as e:
             logger.warning(e)
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
                 _("Did not receive a valid oauth response."),
             )
@@ -450,9 +434,8 @@ class OAuthCallbackView(View):
             assert domain in settings.ALLOWED_HOSTS
         except (AssertionError, DisallowedHost) as e:
             logger.warning(e)
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
                 _("{domain} is not an allowed host.").format(domain=domain),
             )
@@ -464,9 +447,8 @@ class OAuthCallbackView(View):
         except AssertionError as e:
             # get_handshaker will throw AssertionErrors for invalid data.
             logger.warning(e)
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Could not find handshaker."),
             )
@@ -477,9 +459,8 @@ class OAuthCallbackView(View):
 
         if not session_token:
             logger.info("No session token.")
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No session token."),
             )
@@ -490,9 +471,8 @@ class OAuthCallbackView(View):
 
         if not request_token:
             logger.warning("No request token.")
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
                 _("No request token."),
             )
@@ -506,16 +486,24 @@ class OAuthCallbackView(View):
         except OAuthException as e:
             logger.warning(e)
             capture_exception(e)
-
         # raise an error if we don't have an access token
         if not access_token:
-            messages.add_message(
+            messages.warning(
                 request,
-                messages.WARNING,
                 # Translators: This message is shown when the OAuth login process fails.
-                _("Access token generation failed."),
+                _("Access token generation failed, please try logging in again."),
             )
-            raise PermissionDenied
+            # @TODO: revert the following after T332650 is resolved
+            # raise PermissionDenied
+            messages.warning(
+                request,
+                mark_safe(
+                    _("See {issue} for more information").format(
+                        issue="<a href='https://phabricator.wikimedia.org/T332650' target='_blank' rel='noopener'>T332650</a>"
+                    )
+                ),
+            )
+            local_redirect = reverse_lazy("homepage")
 
         user = authenticate(
             request=request, access_token=access_token, handshaker=handshaker
@@ -526,18 +514,16 @@ class OAuthCallbackView(View):
             # Do NOT log in the user.
 
             if created:
-                messages.add_message(
+                messages.warning(
                     request,
-                    messages.WARNING,
                     # fmt: off
                     # Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
                     _("Your Wikipedia account does not meet the eligibility criteria in the terms of use, so your Wikipedia Library Card Platform account cannot be activated."),
                     # fmt: on
                 )
             else:
-                messages.add_message(
+                messages.warning(
                     request,
-                    messages.WARNING,
                     # fmt: off
                     # Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
                     _("Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."),
@@ -550,9 +536,8 @@ class OAuthCallbackView(View):
             login(request, user)
 
             if created:
-                messages.add_message(
+                messages.info(
                     request,
-                    messages.INFO,
                     # Translators: this message is displayed to users with brand new accounts.
                     _("Welcome! Please agree to the terms of use."),
                 )
