@@ -498,9 +498,12 @@ class OAuthCallbackView(View):
             messages.warning(
                 request,
                 mark_safe(
+                    # fmt: off
+                    # Translators: This message is shown when more information is available on another page. Do not translate {issue}
                     _("See {issue} for more information").format(
                         issue="<a href='https://phabricator.wikimedia.org/T332650' target='_blank' rel='noopener'>T332650</a>"
                     )
+                    # fmt: on
                 ),
             )
             local_redirect = reverse_lazy("homepage")
