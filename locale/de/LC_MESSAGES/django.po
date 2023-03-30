@@ -33,7 +33,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:26+0000\n"
+"PO-Revision-Date: 2023-03-30 11:22:16+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2281,15 +2281,14 @@ msgstr "Kein Zugangstoken."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:494
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "Die Authentifizierung über den OAuth-Handshaker wurde nicht gestartet, bitte logge dich erneut ein."
+msgstr "Die Generierung des Zugangstokens ist fehlgeschlagen, bitte versuche dich erneut anzumelden."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:503
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "Service-Information"
+msgstr "Siehe {issue} für weitere Informationen"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:524

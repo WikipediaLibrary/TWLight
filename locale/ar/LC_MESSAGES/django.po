@@ -14,6 +14,7 @@
 # Author: MuratTheTurkish
 # Author: NEHAOUA
 # Author: Nikkimaria
+# Author: Sandra Hanbo
 # Author: Sonic N800
 # Author: Tala Ali
 # Author: أَحمد
@@ -26,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:25+0000\n"
+"PO-Revision-Date: 2023-03-30 11:22:15+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -689,7 +690,7 @@ msgstr "تحديد الحالة"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "إذا كان طلبك ناجحًا، فقد نشارك عنوان بريدك الإلكتروني مع%(partner) s. هذا مطلوب لإعداد وصولك إلى مواردهم. بإرسال هذا النموذج ، فإنك توافق على السماح بمشاركة عنوان بريدك الإلكتروني مع %(partner)s إذا كان طلبك ناجحًا ، لأغراض إعداد الحساب."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -972,15 +973,15 @@ msgstr "إرسال"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>انتهى الآن العمل على طلبك المقبول إلى %(partner)s. كود الوصول أو بيانات الدخول المخصصة لك كما يلي:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>انتهى الآن العمل على طلبك المقبول إلى %(partner)s. ترميز الوصول أو بيانات الدخول المخصصة لك كما يلي:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "انتهى الآن العمل على طلبك المقبول إلى %(partner)s. كود الوصول أو بيانات الدخول المخصصة لك كما يلي: %(access_code)s %(access_code_instructions)s"
+msgstr "انتهى الآن العمل على طلبك المقبول إلى %(partner)s. كود الوصول أو بيانات الدخول المخصصة لك كما يلي: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1250,22 +1251,22 @@ msgstr "يجب أن تكون محررا في ويكيبيديا للقيام ب�
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr ""
+msgstr "اسم مستخدم المحرر مفقود."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:55
 msgid "Invalid EZProxy target URL."
-msgstr ""
+msgstr "عنوان مسار الهدف EZProxy غير صالح."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
 #: TWLight/ezproxy/views.py:60
 msgid "Missing EZProxy target URL."
-msgstr ""
+msgstr "عنوان مسار الهدف EZProxy مفقود."
 
 #. Translators: Shown in the search button.
 #: TWLight/forms.py:56 TWLight/templates/header_partial_b4.html:49
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
@@ -1275,12 +1276,12 @@ msgstr "الوصول الفوري (بروكسي)"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
 msgid "Multi-step access"
-msgstr ""
+msgstr "وصول متعدد الخطوات"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "مواضيع"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1300,12 +1301,12 @@ msgstr "اللغات"
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
-msgstr ""
+msgstr "قابل للبحث"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:81
 msgid "Access"
-msgstr ""
+msgstr "وصول"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:18
@@ -1336,7 +1337,7 @@ msgstr "لا يمكن البحث فيها"
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
-msgstr ""
+msgstr "قابل للبحث جزئيًا"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
@@ -1346,7 +1347,7 @@ msgstr "معلومات المستخدم"
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "مشكلة الخدمة"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
@@ -1356,12 +1357,12 @@ msgstr "شروط الإستخدام غير متوفرة."
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "قد يؤثر العمل الجاري على الوصول"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "هناك مشكلة تؤثر على الوصول"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
@@ -1391,14 +1392,14 @@ msgstr "غير متاحة"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr ""
+msgstr "تسمح مكتبة ويكيبيديا للمحررين النشطين بالوصول إلى مجموعة واسعة من مجموعات المصادر الموثوقة المحمية بنظام حظر الاشتراك غير المدفوع مجانًا!"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "ابدأ بشريط البحث في الأعلى أو تصفح مواقع الناشرين مباشرة."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -1453,7 +1454,7 @@ msgstr "المسار"
 #: TWLight/resources/templates/resources/merge_suggestion.html:70
 #: TWLight/resources/templates/resources/suggest.html:77
 msgid "Proposer"
-msgstr ""
+msgstr "مقترح"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
@@ -1485,25 +1486,25 @@ msgstr "قبل التقديم، تُرجًى مراجعة <a class=\"twl-links\"
 #: TWLight/resources/templates/resources/partner_detail.html:69
 #, python-format
 msgid "View the status of your access in <strong><a class=\"twl-links\" href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr ""
+msgstr "اعرض حالة وصولك في صفحة <strong><a class=\"twl-links\" href=\"%(library_url)s\">مكتبتي</a></strong> ."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:78
 #, python-format
 msgid "View the status of your application(s) on your <strong><a class=\"twl-links\" href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr ""
+msgstr "اعرض حالة طلبك (طلباتك) على صفحة <strong><a class=\"twl-links\" href=\"%(applications_url)s\">\"تطبيقاتي\"</a></strong> الخاصة بك."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
 #, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr ""
+msgstr "اعرض حالة وصولك على صفحة <strong><a href=\"%(library_url)s\" class=\"twl-links\">مكتبتي</a></strong> ."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
 #, python-format
 msgid "View the status of your application(s) on your <strong><a href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr ""
+msgstr "اعرض حالة طلبك (طلباتك) على صفحة <strong><a href=\"%(applications_url)s\">\"تطبيقاتي\"</a></strong> الخاصة بك."
 
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:73
@@ -1564,13 +1565,13 @@ msgstr "حزمة المكتبة"
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:138
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr ""
+msgstr "أنت مؤهل للوصول إلى شركاء رزمة المكتبة. انقر فوق الزر أعلاه للوصول إلى المجموعة."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
 #, python-format
 msgid "You are not eligible to access Library Bundle partners. Visit the <a class=\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
-msgstr ""
+msgstr "لست مؤهلاً للوصول إلى شركاء رزمة المكتبة. بإمكانك زيارة <a class=\"twl-links\" href=\"%(homepage)s\">الصفحة الرئيسة</a> للتحقق من معايير الأهلية."
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
@@ -1582,7 +1583,7 @@ msgstr "تسجيل الدخول"
 #: TWLight/resources/templates/resources/partner_detail_apply.html:168
 #, python-format
 msgid "This resource is part of our <a class=\"twl-links\" href=\"%(about)s\">Library Bundle</a>, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr ""
+msgstr "هذا المصدر هو جزء من <a class=\"twl-links\" href=\"%(about)s\">حزمة المكتبة</a> الخاصة بنا ، والتي يمكنك الوصول إليها إذا كنت تستوفي الحد الأدنى من معايير الأهلية لدينا. قم بتسجيل الدخول لمعرفة ما إذا كنت مؤهلاً."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:21
@@ -1787,7 +1788,7 @@ msgstr "حذف"
 
 #: TWLight/resources/templates/resources/suggest.html:84
 msgid "Track Progress"
-msgstr ""
+msgstr "تتبع التقدم"
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
 #: TWLight/resources/templates/resources/suggest.html:99
@@ -1811,7 +1812,7 @@ msgstr "هل أنت متأكد أنك تريد حذف <b>%(object)s</b>؟"
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
 #: TWLight/resources/views.py:257
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
-msgstr ""
+msgstr "أعيدت العديد من التفويضات، هناك خطأ ما. نرجو منك التواصل معنا ولا تنسى ذكر هذه الرسالة."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
 #: TWLight/resources/views.py:301
@@ -1931,7 +1932,7 @@ msgstr "يمكن لأي محرر نشط في وضع جيد الحصول على �
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
 msgid "Any editor can use the library if they meet a few basic requirements:"
-msgstr ""
+msgstr "يمكن لأي محرر استخدام المكتبة إذا استوفى بعض المتطلبات الأساسية:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -1956,12 +1957,12 @@ msgstr "أنت غير ممنوع حاليا من تحرير مشروع ويكي�
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr ""
+msgstr "إذا كنت تقدم طلبًا للحصول على مجموعة متاحة، فيرجى أولاً التحقق من أنه ليس لديك حق الوصول بالفعل من خلال مكتبة أو مؤسسة أخرى. إذاكان لديك وصول. نرجو منك إعادة التفكير في استخدام هذا الوصول بدلاً من شغل مقعد لهذا المورد في مكتبة ويكيبيديا."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr ""
+msgstr "إذا حُظر حسابك في واحد أو أكثر من مشاريع ويكيميديا، فلا يزال بإمكانك الوصول إلى مكتبة ويكيبيديا. ستحتاج إلى الاتصال بفريق مكتبة ويكيبيديا، الذي سيراجع أعمالك. إذا حُظرت بسبب مشكلات المحتوى، وعلى الأخص انتهاكات حقوق النشر، أو كان لديك عدة عمليات حظر طويلة الأجل، فقد نرفض طلبك. بالإضافة إلى ذلك، إذا تغيرت حالة الحظر بعد الموافقة عليها، فستحتاج إلى طلب مراجعة أخرى."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2042,7 +2043,7 @@ msgstr "عادةً ما يظل تسجيل دخولك نشطا في جلستك ل
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:193
 msgid "The Library Bundle is a collection of resources for which no application is required. If you meet the criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only some of our content is currently included in the Library Bundle, however we hope to expand the collection as more publishers become comfortable with participating. All Bundle content is accessed via EZProxy."
-msgstr ""
+msgstr "حزمة المكتبة عبارة عن مجموعة من الموارد التي لا يلزم تقديم أي تطبيق لها. إذا كنت تستوفي المعايير الموضحة أعلاه، فسيسمح لك بالوصول تلقائيًا عند تسجيل الدخول إلى النظام الأساسي. نضمن حالياً بعض المحتوى الخاص بنا فقط في حزمة المكتبة ، ولكننا نأمل في توسيع المجموعة حيث يصبح المزيد من الناشرين مرتاحين للمشاركة. نستخدم EZProxy للوصول إلى جميع محتويات الحزمة."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:202
@@ -2064,7 +2065,7 @@ msgstr "إذا كانت لديك أسئلة أو بحاجة إلى مساعدة 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
 msgid "JavaScript is disabled; use the button below to continue."
-msgstr ""
+msgstr "تم تعطيل جافا سكريبت؛ استخدم الزر أدناه للمتابعة."
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b4.html:14
