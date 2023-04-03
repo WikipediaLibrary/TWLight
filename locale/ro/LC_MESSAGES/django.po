@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:29+0000\n"
+"PO-Revision-Date: 2023-04-03 11:36:34+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2084,7 +2084,7 @@ msgstr "Mai multe informații"
 #: TWLight/templates/login_partial.html:29
 #, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Peste 90 dintre cele mai bune baze de date din lume numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru toți Wikipedianii"
+msgstr "Peste 90 dintre cele mai bune baze de date din lume numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru toți wikipediștii"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
