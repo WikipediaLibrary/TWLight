@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:30+0000\n"
+"PO-Revision-Date: 2023-04-06 11:28:59+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2275,15 +2275,14 @@ msgstr "Немає токена запиту."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:494
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "Рукостискання не ініційовано, спробуйте увійти ще раз."
+msgstr "Не вдалося згенерувати токен доступу, будь ласка, спробуйте увійти ще раз."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:503
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "Сервісна інформація"
+msgstr "Див. {issue} для отримання додаткової інформації"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:524
