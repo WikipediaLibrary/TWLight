@@ -5,13 +5,19 @@
 		]
 	},
 	"languages-and-literature_tag": "Yezhoù ha Lennegezh",
+	"multidisciplinary_tag": "Liesdiskiblezhel",
+	"physical-sciences_tag": "Skiantoù fizikel",
 	"music_tag": "Sonerezh",
 	"art_tag": "Arz",
+	"business-and-economics_tag": "Kenwerzh hag Ekonomiezh",
 	"law_tag": "Gwir",
 	"education_tag": "Deskadurezh",
 	"philosophy-and-religion_tag": "Prederouriezh ha Relijion",
 	"social-sciences_tag": "Skiantoù Sokial",
 	"history_tag": "Istor",
 	"culture_tag": "Sevenadur",
+	"life-sciences_tag": "Skiantoù ar Vuhez",
+	"health-sciences_tag": "Skiantoù ar Yec'hed",
+	"earth-sciences_tag": "Skiantoù an Douar",
 	"technology_tag": "Teknologiezh"
 }

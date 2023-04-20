@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:25+0000\n"
+"PO-Revision-Date: 2023-04-20 11:21:46+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -226,21 +226,18 @@ msgstr "Direizh"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
-#, fuzzy
 msgid "1 month"
-msgstr "Miz"
+msgstr "1 miz"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
-#, fuzzy
 msgid "3 months"
-msgstr "Miz"
+msgstr "3 miz"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
-#, fuzzy
 msgid "6 months"
-msgstr "Miz"
+msgstr "6 miz"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
@@ -250,13 +247,13 @@ msgstr "12 miz"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:160
 msgid "Finalized"
-msgstr ""
+msgstr "Graet"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:326
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr ""
+msgstr "URL da haeziñ: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:332
@@ -985,15 +982,15 @@ msgstr "Kartenn eus Levraoueg Wikipedia"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>%(user)s ker</p> <p> Trugarez da vezañ goulennet ar gwir da dizhout pourvezioù %(partner)s dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn. Rankout a rafec'h resev munudoù diwar-benn ar moned d'ar pourvez-se a-benn ur sizhun pe ziv, ur wech ma vo bet graet graet war e dro.</p><p> Trugarez deoc'h !</p><p>Al Levraoueg Wikipedia</p>"
+msgstr "<p>%(user)s ker</p> <p> Trugarez da vezañ goulennet ar gwir da dizhout pourvezioù %(partner)s dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn.</p> <p>%(user_instructions)s</p> <p>Gallout a rit gwelet an dastumadoù oc'h aotreet da gaout e Ma Levraoueg: %(link)s</p> <p>Trugarez deoc'h!</p> <p>Al Levraoueg Wikipedia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "%(user)s ker, Trugarez da vezañ goulennet ar gwir da dizhout ar pouvezioù dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn. Rankout a rafec'h resev ar munudoù diwar-benn ar moned a-benn ur sizhun pe ziv, amzer deomp d'ober war-dro ho koulenn. Turgarez vras. Al levraoueg Wikipedia."
+msgstr "%(user)s ker, Trugarez da vezañ goulennet ar gwir da dizhout pourvezioù %(partner)s dre al levraoueg Wikipedia. Laouen omp o kelaouiñ ac'hanoc'h eo bet aprouet ho koulenn. %(user_instructions)s Gallout a rit gwelet an dastumadoù oc'h aotreet da gaout e Ma Levraoueg: %(link)s Trugarez deoc'h! Al Levraoueg Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1267,7 +1264,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "Danvezioù"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1354,9 +1351,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "N'eo ket hegerz"
+msgstr "N'haller ket haeziñ evit ar mare"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1427,9 +1423,8 @@ msgstr "Silañ"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:76
-#, fuzzy
 msgid "Filter collections"
-msgstr "Dastumadoù hegerz"
+msgstr "Silañ an dastumadoù"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -1448,9 +1443,8 @@ msgstr ""
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "Vot evit"
+msgstr "Votoù a-du"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1536,9 +1530,8 @@ msgstr ""
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:130
 #: TWLight/resources/templates/resources/partner_detail_apply.html:144
-#, fuzzy
 msgid "Access Collection"
-msgstr "Dastumadoù"
+msgstr "Haeziñ an dastumad"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:133
@@ -1600,7 +1593,7 @@ msgstr ""
 #. Translators: If a partner has video tutorials, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:48
 msgid "Video tutorials"
-msgstr ""
+msgstr "Heforzhiadurioù video"
 
 #. Translators: If a partner has video tutorials, this text links to the video(s).
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:53
@@ -1712,9 +1705,8 @@ msgstr ""
 
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_list.html:20
-#, fuzzy
 msgid "Suggest a partner"
-msgstr "Kas d'ar c'heveler"
+msgstr "Aliañ ur c'heveler"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_list.html:29
@@ -1758,9 +1750,8 @@ msgstr "Enporzhiet"
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:19
-#, fuzzy
 msgid "Suggest partners"
-msgstr "Kas d'ar c'heveler"
+msgstr "Aliañ kevelerien"
 
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:41
@@ -2061,9 +2052,8 @@ msgstr ""
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b4.html:14
-#, fuzzy
 msgid "The Wikipedia Library home"
-msgstr "Diwar-benn Levraoueg Wikipedia"
+msgstr "Degemer Levraoueg Wikipedia"
 
 #: TWLight/templates/header_partial_b4.html:46
 msgid "Search the library"
@@ -2326,7 +2316,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all favorite collections a user has.
 #: TWLight/users/templates/users/collections_section.html:9
 msgid "Favorites"
-msgstr ""
+msgstr "Muiañ-karet"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this tab shows all collections a user has access to.
 #: TWLight/users/templates/users/collections_section.html:17
@@ -2347,7 +2337,7 @@ msgstr "Diskouez ma goulennoù >"
 #: TWLight/users/templates/users/collections_section.html:54
 #: TWLight/users/templates/users/collections_section.html:82
 msgid "Expired"
-msgstr ""
+msgstr "Aet d'e dermen"
 
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:15
@@ -2941,9 +2931,8 @@ msgstr "Mont d'al lec'hienn"
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:125
 #: TWLight/users/templates/users/user_collection_tile.html:152
-#, fuzzy
 msgid "Access collection"
-msgstr "Kodoù moned"
+msgstr "Haeziñ an dastumad"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/user_collection_tile.html:137
@@ -2958,7 +2947,7 @@ msgstr ""
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:11
 msgid "Delete all data"
-msgstr ""
+msgstr "Dilemel an holl roadennoù"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:17
@@ -3003,7 +2992,7 @@ msgstr ""
 #: TWLight/users/views.py:380 TWLight/users/views.py:461
 #: TWLight/users/views.py:514
 msgid "You must be logged in to do that."
-msgstr ""
+msgstr "Ret eo deoc'h bezañ kevreet evit ober se."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:413
@@ -3034,21 +3023,20 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:848 TWLight/views.py:38
 msgid "500+ edits"
-msgstr ""
+msgstr "500+ kemmoù"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:850 TWLight/views.py:40
-#, fuzzy
 msgid "6+ months editing"
-msgstr "Miz"
+msgstr "O kemmañ abaoe 6+ miz"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:852 TWLight/views.py:42
 msgid "10+ edits in the last month"
-msgstr ""
+msgstr "10+ kemmoù er miz tremenet"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:854 TWLight/views.py:44
 msgid "No active blocks"
-msgstr ""
+msgstr "Stankadennoù oberiant ebet"
 
