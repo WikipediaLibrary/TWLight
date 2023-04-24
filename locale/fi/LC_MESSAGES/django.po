@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-03-27 15:49:26+0000\n"
+"PO-Revision-Date: 2023-04-24 11:27:29+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -56,7 +56,7 @@ msgstr "Tietoja sinusta"
 #: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr ""
+msgstr "<p><small><i>Henkilötietojasi käsitellään <a class='twl-links' href='{terms_url}'> tietosuojakäytäntömme</a> mukaisesti.</i></small> </p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
@@ -85,21 +85,20 @@ msgstr "Yhteistyökumppanin nimi"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:312
-#, fuzzy
 msgid "Renewal confirmation"
-msgstr "Käyttäjätiedot"
+msgstr "Uusimisen vahvistaminen"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
 #: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:103
 msgid "The email for your account on the partner's website"
-msgstr ""
+msgstr "Yhteistyökumppanin verkkosivustolla olevan tilisi sähköpostiosoite"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:106
 msgid "The number of months you wish to have this access for before renewal is required"
-msgstr ""
+msgstr "Kuinka monta kuukautta haluat käyttää tätä käyttöoikeutta, ennen kuin uusiminen vaaditaan"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:85
@@ -201,7 +200,7 @@ msgstr "Sähköposti"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "Käyttöehtomme ovat muuttuneet. Hakemuksiasi ei käsitellä ennen kuin kirjaudut sisään ja hyväksyt päivitetyt ehdot."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -227,12 +226,12 @@ msgstr "Hylätty"
 #. Translators: This is the status of an application that has been sent to a partner upon approval.
 #: TWLight/applications/models.py:62
 msgid "Sent to partner"
-msgstr "Lähetä yhteistyökumppanille"
+msgstr "Lähetetty yhteistyökumppanille"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:64
 msgid "Invalid"
-msgstr ""
+msgstr "Virheellinen"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
@@ -257,7 +256,7 @@ msgstr "12 kuukautta"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:160
 msgid "Finalized"
-msgstr ""
+msgstr "Viimeistelty"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:326
@@ -360,7 +359,7 @@ msgstr "Yhteistyökumppani"
 #: TWLight/users/templates/users/available_collection_tile.html:49
 #: TWLight/users/templates/users/user_collection_tile.html:61
 msgid "Waitlisted"
-msgstr ""
+msgstr "Odotuslistalla"
 
 #. Translators: This is the alternate text displayed when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:120
@@ -370,13 +369,12 @@ msgstr "Tuntematon"
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "Pyydä hakijaa lisäämään asuinmaansa profiiliinsa ennen jatkamista."
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "Ei kuvausta"
+msgstr "Tunnuksia saatavilla"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -418,7 +416,7 @@ msgstr "Ei"
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:159
 msgid "Please request the applicant agree to the site's terms of use before approving this application."
-msgstr ""
+msgstr "Pyydä hakijaa hyväksymään sivuston käyttöehdot ennen tämän hakemuksen hyväksymistä."
 
 #. Translators: This labels the section of an application containing the user's motivation for wanting access to this resource.
 #: TWLight/applications/templates/applications/application_evaluation.html:176
@@ -532,7 +530,7 @@ msgstr "Hylätty"
 
 #: TWLight/applications/templates/applications/application_list.html:58
 msgid "Sent"
-msgstr ""
+msgstr "Lähetetty"
 
 #: TWLight/applications/templates/applications/application_list.html:63
 #, fuzzy
@@ -1103,9 +1101,9 @@ msgstr "Wikipedian Lähdekirjaston Twitter-sivu"
 
 #. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
 #: TWLight/emails/templates/emails/contact_us_email-subject.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
-msgstr "Wikipedian Lähdekirjaston käyttöoikeustoimisto"
+msgstr "Wikipedian Lähdekirjaston käyttöoikeustoimiston viesti käyttäjältä %(editor_wp_username)s"
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
@@ -1122,29 +1120,29 @@ msgstr ""
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:16
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s pending application."
 msgid_plural "%(counter)s pending applications."
-msgstr[0] "Aseta hakemuksen tila"
-msgstr[1] "Aseta hakemuksen tila"
+msgstr[0] "%(counter)s odottava hakemus."
+msgstr[1] "%(counter)s odottavaa hakemusta."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:24
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:23
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s under discussion application."
 msgid_plural "%(counter)s under discussion applications."
-msgstr[0] "Hakijoiden lukumäärä"
-msgstr[1] "Hakijoiden lukumäärä"
+msgstr[0] "%(counter)s keskustelun alla oleva hakemus."
+msgstr[1] "%(counter)s keskustelun alla olevaa hakemusta."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like counter.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:32
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-text.html:31
-#, fuzzy, python-format
+#, python-format
 msgid "%(counter)s approved application."
 msgid_plural "%(counter)s approved applications."
-msgstr[0] "Hyväksyttyjen hakemusten määrä"
-msgstr[1] "Hyväksyttyjen hakemusten määrä"
+msgstr[0] "%(counter)s hyväksytty hakemus."
+msgstr[1] "%(counter)s hyväksyttyä hakemusta."
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Don't translate Jinja variables in curly braces like link; don't translate email addresses or html tags either.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
@@ -1223,7 +1221,7 @@ msgstr "Wikipedian Lähdekirjaston hakemuksesi on lisätty odotuslistalle"
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:51
 msgid "Your message has been sent. We'll get back to you soon!"
-msgstr ""
+msgstr "Viestisi on lähetetty. Palaamme asiaan pian!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
@@ -1324,9 +1322,8 @@ msgstr "Osittain etsittävä"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Käyttäjätiedot"
+msgstr "Palvelun tiedot"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
@@ -1335,9 +1332,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Käyttöehdot eivät ole saatavilla"
+msgstr "Väliaikaisesti ei saatavilla"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1351,9 +1347,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Ei kuvausta"
+msgstr "Tällä hetkellä pääsyä ei saatavilla"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -2285,9 +2280,9 @@ msgstr ""
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:503
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "Käyttäjätiedot"
+msgstr "Katso lisätietoja kohdasta {issue}"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:524
@@ -2464,9 +2459,8 @@ msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:151
-#, fuzzy
 msgid "At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility."
-msgstr "Tåyttikö käyttäjä viimeisimmässä kirjautumisessaan Wikipedian Lähdekirjaston käyttöoikeustoimiston käyttöehdot?"
+msgstr "Täyttikö tämä käyttäjä Library Bundlessa asetetut ehdot viimeisellä kirjautumisella? Huomaa, että käyttöehtojen täyttäminen on Bundlen kelpoisuuden edellytys."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:172
@@ -2925,9 +2919,8 @@ msgstr "Lisää tämä kokoelma suosikkeihisi"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:93
-#, fuzzy
 msgid "Expiry date"
-msgstr "Muokkaajan tiedot"
+msgstr "Vanhenemispäivä"
 
 #: TWLight/users/templates/users/user_collection_tile.html:98
 msgid "Click to return this access"
@@ -2935,9 +2928,8 @@ msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:108
-#, fuzzy
 msgid "Go to application"
-msgstr "Hakemuksen päivämäärä"
+msgstr "Siirry hakemukseen"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:122
@@ -2999,9 +2991,8 @@ msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
-#, fuzzy
 msgid "Your reminder email preferences are updated."
-msgstr "Tietosi on päivitetty."
+msgstr "Sähköpostimuistutusasetuksesi on päivitetty."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
