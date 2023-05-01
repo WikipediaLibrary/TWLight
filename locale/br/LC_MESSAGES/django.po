@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-03-21 17:50+0000\n"
-"PO-Revision-Date: 2023-04-27 11:25:18+0000\n"
+"PO-Revision-Date: 2023-05-01 11:24:56+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -976,9 +976,8 @@ msgstr ""
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
-#, fuzzy
 msgid "Your Wikipedia Library access code"
-msgstr "Kartenn eus Levraoueg Wikipedia"
+msgstr "Ho kod moned Levraoueg Wikipedia"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
@@ -1069,9 +1068,8 @@ msgstr "Mont e darempred"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
 #: TWLight/emails/templates/emails/contact.html:46
-#, fuzzy
 msgid "Meta page"
-msgstr "Pajenn war-lerc'h"
+msgstr "Pajenn meta"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #. Translators: Name of the project/tool.
@@ -2402,7 +2400,7 @@ msgstr "Anv implijer *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
 #: TWLight/users/templates/users/editor_detail_data.html:24
 msgid "CentralAuth"
-msgstr ""
+msgstr "CentralAuth"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's description of their Wikipedia edits.
 #: TWLight/users/templates/users/editor_detail_data.html:34
@@ -2446,9 +2444,8 @@ msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:100
-#, fuzzy
 msgid "Satisfies minimum edit count?"
-msgstr "Niver a gemmoù war Wikipedia"
+msgstr "A respont d'an divizoù implijout?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
