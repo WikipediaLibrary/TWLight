@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"languages-and-literature_tag": "Kalbos ir literatūra",
+	"multidisciplinary_tag": "Daugiadisciplininis",
+	"physical-sciences_tag": "Fiziniai mokslai",
+	"music_tag": "Muzika",
+	"art_tag": "Menas",
+	"business-and-economics_tag": "Verslas ir ekonomika",
+	"law_tag": "Teisė",
+	"education_tag": "Švietimas",
+	"philosophy-and-religion_tag": "Filosofija ir religija",
+	"social-sciences_tag": "Socialiniai mokslai",
+	"history_tag": "Istorija",
+	"culture_tag": "Kultūra",
+	"life-sciences_tag": "Gyvybės mokslai",
+	"health-sciences_tag": "Sveikatos mokslai",
+	"earth-sciences_tag": "Žemės mokslai",
+	"technology_tag": "Technologija"
+}
