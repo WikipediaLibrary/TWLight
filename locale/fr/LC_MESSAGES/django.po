@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-05-04 11:33+0000\n"
-"PO-Revision-Date: 2023-05-08 11:33:30+0000\n"
+"PO-Revision-Date: 2023-05-11 12:09:50+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2808,7 +2808,7 @@ msgstr "La Fondation Wikimedia et nos fournisseurs de services utilisent vos inf
 #: TWLight/users/templates/users/terms.html:265
 #, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, occupation, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Chaque éditeur partenaire, membre du programme de La Bibliothèque Wikipédia, a besoin d’informations différentes dans les actes de candidatures. Certains peuvent ne demander qu’une adresse de courriel, tandis que d’autres demandent des données plus détaillées telles que votre nom, votre pays de résidence, votre profession ou votre affiliation institutionnelle. Lorsque vous remplissez votre candidature, vous serez invité(e) à ne fournir que les informations requises par les partenaires que vous avez choisis et chaque partenaire ne recevra que les informations dont il a besoin pour vous fournir l’accès. Vous pouvez consulter les pages d’<a class=\"twl-links\" href=\"%(all_partners_url)s\">informations sur nos partenaires</a> pour apprendre quelles informations sont requises par chaque éditeur pour obtenir un accès à ses ressources."
+msgstr "Chaque éditeur de publication partenaire, membre du programme de La Bibliothèque Wikipédia, a besoin d’informations différentes dans les actes de candidatures. Certains peuvent ne demander qu’une adresse de courriel, tandis que d’autres demandent des données plus détaillées telles que votre nom, votre pays de résidence, votre profession ou votre affiliation institutionnelle. Lorsque vous remplissez votre candidature, vous serez invité(e) à ne fournir que les informations requises par les partenaires que vous avez choisis et chaque partenaire ne recevra que les informations dont il a besoin pour vous fournir l’accès. Vous pouvez consulter les pages d’<a class=\"twl-links\" href=\"%(all_partners_url)s\">informations sur nos partenaires</a> pour apprendre quelles informations sont requises par chaque éditeur de publication pour obtenir un accès à ses ressources."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:280
