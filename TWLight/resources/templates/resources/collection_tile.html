@@ -3,12 +3,21 @@
   <div class="card collection-tile">
     {% if collection.partner_logo %}
       <a href="{% url 'partners:detail' collection.pk %}" class="tile-partner-link">
-        <img src="{{ collection.partner_logo }}" class="card-img-top library-tile-image"
-            alt="{{ collection.partner_name }} logo">
+        <img
+          src="{{ collection.partner_logo }}"
+          class="card-img-top library-tile-image"
+          alt="{{ collection.partner_name }} logo"
+          loading="lazy"
+        >
       </a>
     {% else %}
       <a href="{% url 'partners:detail' collection.pk %}" class="tile-partner-link">
-        <img src="..." class="card-img-top" alt="{{ collection.partner_name }} logo">
+        <img
+          src="..."
+          class="card-img-top"
+          alt="{{ collection.partner_name }} logo"
+          loading="lazy"
+         >
       </a>
     {% endif %}
     <div class="card-body">
