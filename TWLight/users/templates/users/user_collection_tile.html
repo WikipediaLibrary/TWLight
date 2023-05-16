@@ -9,12 +9,21 @@
   {% endif %}
   {% if user_collection.partner_logo %}
     <a href="{% url 'partners:detail' user_collection.partner_pk %}" class="tile-partner-link">
-      <img src="{{ user_collection.partner_logo }}" class="card-img-top library-tile-image"
-        alt="{{ user_collection.partner_name }} logo">
+      <img
+        src="{{ user_collection.partner_logo }}"
+        class="card-img-top library-tile-image"
+        alt="{{ user_collection.partner_name }} logo"
+        loading="lazy"
+       >
     </a>
   {% else %}
     <a href="{% url 'partners:detail' user_collection.partner_pk %}" class="tile-partner-link">
-      <img src="..." class="card-img-top" alt="{{ user_collection.partner_name }} logo">
+      <img
+        src="..."
+        class="card-img-top"
+        alt="{{ user_collection.partner_name }} logo"
+        loading="lazy"
+      >
     </a>
   {% endif %}
   {% if user_collection.partner_pk in favorite_ids %}

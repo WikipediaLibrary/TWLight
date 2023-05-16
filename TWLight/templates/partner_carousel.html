@@ -68,7 +68,9 @@
             <div class="partner-image-container">
               <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
                   class="mx-auto d-block partner-glider-image fade-in-transition"
-                  alt="{{partner.partner_name}} logo"/>
+                  alt="{{partner.partner_name}} logo"
+                  loading="lazy"
+              />
             </div>
             <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
               {{ partner.short_description|safe }}
