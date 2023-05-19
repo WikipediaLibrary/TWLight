@@ -100,6 +100,7 @@ class SetLanguageForm(forms.Form):
 
 class UserEmailForm(forms.Form):
     send_renewal_notices = forms.BooleanField(required=False)
+    enable_suggestion_notification = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
         super(UserEmailForm, self).__init__(*args, **kwargs)
@@ -110,6 +111,13 @@ class UserEmailForm(forms.Form):
             "send_renewal_notices"
             # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
         ].label = _("Send renewal notices")
+        self.fields[
+            "enable_suggestion_notification"
+        ].initial = user.userprofile.enable_suggestion_notification
+        self.fields[
+            "enable_suggestion_notification"
+            # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive suggestion notifications.
+        ].label = _("Send notices when upvoted suggestions become available")
 
 
 class CoordinatorEmailForm(forms.Form):
