@@ -5,10 +5,6 @@
 {% load static %}
 {% load twlight_perms %}
 
-{% block head_javascript %}
-  <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.5.1.min.js" %}"></script>
-{% endblock head_javascript %}
-
 {% block content %}
   {% include "header_partial_b4.html" %}
   {% include "message_partial.html" %}
@@ -42,6 +38,9 @@
         </span>
       </a>
     {% endif %}
+    {% comment %}Translators: On the Suggest Partners page (https://wikipedialibrary.wmflabs.org/suggest/), this is a placeholder for an input that helps users filter suggestions. {% endcomment %}
+    <input id="suggestion-live-search" class="form-control form-control mx-2 my-3"
+        type="search" placeholder="{% trans 'Filter suggestions' %}" aria-label="Filter">
       <div class="card full-width">
         <div class="card-header">
           {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
@@ -49,7 +48,7 @@
         </div>
         <div class="card-body">
           {% for each_suggestion in all_suggestions %}
-            <div class="card full-width mb-4">
+            <div id="suggestion-card-{{ each_suggestion.id}}" class="card full-width mb-4 suggestion-class">
               <div class="card-header">
                 <div class="card-title pull-left"><span class="card-title">{{ each_suggestion.suggested_company_name }}</span></div>
                 {% if user_is_coordinator %}
@@ -161,5 +160,68 @@
   </script>
   <script>
     function viewUpvoters(e,suggestion,box){}
+  </script>
+  <script type="text/javascript">
+    var search_input = document.getElementById("suggestion-live-search");
+    search_input.oninput = searchSuggestions;
+
+    function searchSuggestions(obj) {
+      var pattern = obj.target.value;
+
+      var options = {
+        threshold: 0.4,
+        includeMatches: true,
+        keys: [
+          "suggested_company_name",
+          "description",
+          "company_url"
+        ]
+      };
+
+      var list = {{serialized_suggestions|safe}};
+      var fuse = new Fuse(list, options);
+      var searchResults = fuse.search(pattern);
+      console.log(searchResults);
+
+      var filteredSuggestionElems = [];
+      var suggestionElems = document.getElementsByClassName("suggestion-class"); 
+
+      if (searchResults.length === 0 && pattern !== "") {
+        // Hide all collections, no results to that search text found
+        displaySuggestions(suggestionElems, filteredSuggestionElems, pattern);
+      }
+      else if (searchResults.length === 0 && pattern === ""){
+        // No search text and no search results, display everything again
+        displaySuggestions(suggestionElems, filteredSuggestionElems, pattern);
+      }
+      else{
+        for(var result in searchResults){
+          var suggestionId = searchResults[result].item.id;
+          filteredSuggestionElems.push("suggestion-card-" + suggestionId)
+        }
+        console.log(filteredSuggestionElems);
+        displaySuggestions( suggestionElems, filteredSuggestionElems, pattern);
+      } 
+
+    }
+
+    function displaySuggestions(suggestionElems, filteredSuggestionElems, pattern){
+      Array.prototype.slice.call(suggestionElems).forEach(function(elem){
+        var elementId = elem.id.toString();
+        if(pattern !== "" || filteredSuggestionElems.length > 0){
+          if (filteredSuggestionElems.includes(elementId)){
+            elem.style.display = "flex";
+          }
+          else{
+            elem.style.display = "none";
+          }
+        }
+        else{
+          elem.style.display = "flex";
+        }
+        console.log(pattern);
+        console.log(filteredSuggestionElems.length);
+      });
+    }
   </script>
 {% endblock javascript %}

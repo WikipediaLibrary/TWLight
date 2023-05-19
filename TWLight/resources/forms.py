@@ -43,7 +43,6 @@ class SuggestionForm(forms.Form):
 
 
 class SuggestionMergeForm(forms.Form):
-
     main_suggestion = forms.ModelChoiceField(queryset=Suggestion.objects.all())
     secondary_suggestions = forms.ModelMultipleChoiceField(
         queryset=Suggestion.objects.all()

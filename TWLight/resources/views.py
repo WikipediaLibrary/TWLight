@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse, reverse_lazy
 from django.db.models import Count, Prefetch
 from django.http import Http404, HttpResponseRedirect
@@ -30,6 +31,7 @@ from .models import Partner, Suggestion
 from urllib.parse import urlparse
 import bleach
 import logging
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -459,7 +461,6 @@ class PartnerSuggestionView(FormView):
         return Suggestion.objects.order_by("suggested_company_name")
 
     def get_context_data(self, **kwargs):
-
         context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
 
         user_qs = User.objects.select_related("editor")
@@ -472,6 +473,9 @@ class PartnerSuggestionView(FormView):
         )
         if all_suggestions.count() > 0:
             context["all_suggestions"] = all_suggestions
+            context["serialized_suggestions"] = json.dumps(
+                list(all_suggestions.values()), cls=DjangoJSONEncoder
+            )
 
         else:
             context["all_suggestions"] = None
@@ -552,7 +556,6 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
 
 @method_decorator(login_required, name="post")
 class SuggestionMergeView(StaffOnly, FormView):
-
     model = Suggestion
     template_name = "resources/merge_suggestion.html"
     form_class = SuggestionMergeForm
@@ -607,7 +610,6 @@ class SuggestionMergeView(StaffOnly, FormView):
         return context
 
     def form_valid(self, form):
-
         try:
             main_suggestion = form.cleaned_data["main_suggestion"]
             secondary_suggestions = Suggestion.objects.filter(
