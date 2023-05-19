@@ -582,7 +582,7 @@ class Suggestion(models.Model):
         ordering = ["suggested_company_name"]
 
     suggested_company_name = models.CharField(
-        max_length=40, help_text="Potential partner's name (e.g. McFarland)."
+        max_length=80, help_text="Potential partner's name (e.g. McFarland)."
     )
 
     description = models.TextField(
