@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-05-19 08:49+0000\n"
+"POT-Creation-Date: 2023-05-19 09:30+0000\n"
 "PO-Revision-Date: 2023-05-18 11:23:52+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1094,7 +1094,7 @@ msgstr "Отримати копію цього повідомлення"
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:36
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:41
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "Надіслати"
@@ -1611,7 +1611,7 @@ msgid "Description"
 msgstr "Опис"
 
 #. Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
-#: TWLight/resources/forms.py:22
+#: TWLight/resources/forms.py:27
 msgid "Website"
 msgstr "Веб-сайт"
 

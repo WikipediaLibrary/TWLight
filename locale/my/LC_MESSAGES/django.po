@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-05-19 08:50+0000\n"
+"POT-Creation-Date: 2023-05-19 09:31+0000\n"
 "PO-Revision-Date: 2023-05-18 11:23:51+0000\n"
 "Language: my\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1019,7 +1019,7 @@ msgstr "ဤမက်ဆေ့၏မိတ္တူကို လက်ခံမ�
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
 #. Translators: this 'Submit' is referenced in the terms of use and should be translated the same way both places.
-#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:36
+#: TWLight/emails/forms.py:44 TWLight/resources/forms.py:41
 #: TWLight/users/forms.py:191
 msgid "Submit"
 msgstr "ထည့်သွင်းရန်"
@@ -1448,7 +1448,7 @@ msgid "Description"
 msgstr "ဖော်ပြချက်"
 
 #. Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
-#: TWLight/resources/forms.py:22
+#: TWLight/resources/forms.py:27
 msgid "Website"
 msgstr "ဝဘ်ဆိုဒ်"
 
