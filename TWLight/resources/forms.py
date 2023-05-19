@@ -18,6 +18,7 @@ class SuggestionForm(forms.Form):
         self.fields["suggested_company_name"].label = _("Name of the potential partner")
         # Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
         self.fields["description"].label = _("Description")
+        self.fields["description"].widget = forms.Textarea(attrs={'placeholder': 'You may use any language here. However, it is not translatable via TranslateWiki.'})
         # Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
         self.fields["company_url"].label = _("Website")
         # @TODO: This sort of gets repeated in PartnerSuggestionView.
