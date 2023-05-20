@@ -46,7 +46,9 @@
           {% comment %}Translators: This is the title of the panel where user suggestions are displayed. {% endcomment %}
           <strong><span class="card-title">{% trans 'Browse and support suggestions' %}</span></strong>
         </div>
-        <div class="card-body">
+        <div id="browse-suggestions-body" class="card-body">
+          {% comment %}Translators: This text will show when there are no matches in a suggestion search. {% endcomment %}
+          <p id="no-suggestions-msg" style="display: none;"> {% trans 'No suggestions matching this search.' %} </p>
           {% for each_suggestion in all_suggestions %}
             <div id="suggestion-card-{{ each_suggestion.id}}" class="card full-width mb-4 suggestion-class">
               <div class="card-header">
@@ -181,7 +183,6 @@
       var list = {{serialized_suggestions|safe}};
       var fuse = new Fuse(list, options);
       var searchResults = fuse.search(pattern);
-      console.log(searchResults);
 
       var filteredSuggestionElems = [];
       var suggestionElems = document.getElementsByClassName("suggestion-class"); 
@@ -189,17 +190,18 @@
       if (searchResults.length === 0 && pattern !== "") {
         // Hide all collections, no results to that search text found
         displaySuggestions(suggestionElems, filteredSuggestionElems, pattern);
+        document.getElementById("no-suggestions-msg").style.display = "flex";
       }
       else if (searchResults.length === 0 && pattern === ""){
         // No search text and no search results, display everything again
         displaySuggestions(suggestionElems, filteredSuggestionElems, pattern);
+        document.getElementById("no-suggestions-msg").style.display = "none";
       }
       else{
         for(var result in searchResults){
           var suggestionId = searchResults[result].item.id;
           filteredSuggestionElems.push("suggestion-card-" + suggestionId)
         }
-        console.log(filteredSuggestionElems);
         displaySuggestions( suggestionElems, filteredSuggestionElems, pattern);
       } 
 
@@ -219,8 +221,6 @@
         else{
           elem.style.display = "flex";
         }
-        console.log(pattern);
-        console.log(filteredSuggestionElems.length);
       });
     }
   </script>
