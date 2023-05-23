@@ -11,6 +11,8 @@ from django.views.generic.edit import FormView, DeleteView
 from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
 
+from dal import autocomplete
+
 from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.applications.models import Application
 from TWLight.users.groups import get_coordinators
@@ -24,7 +26,7 @@ from TWLight.view_mixins import (
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from .filters import MainPartnerFilter, MergeSuggestionFilter
-from .forms import SuggestionForm, SuggestionMergeForm
+from .forms import SuggestionForm, SuggestionMergeForm, NotifySuggestionUpvotersForm
 from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Suggestion
 from urllib.parse import urlparse
@@ -487,6 +489,8 @@ class PartnerSuggestionView(FormView):
         else:
             context["user_is_coordinator"] = False
 
+        context["notify_upvoters_form"] = NotifySuggestionUpvotersForm(user=self.request.user)
+
         return context
 
     def form_valid(self, form):
@@ -639,3 +643,9 @@ class SuggestionMergeView(StaffOnly, FormView):
                 "Some Error Occured",
             )
             raise PermissionDenied
+
+class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        partners = Partner.objects.all()
+
+        return partners

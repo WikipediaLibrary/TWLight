@@ -80,6 +80,9 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
 
+class SuggestionNotification(template_mail.TemplateMail):
+    name = "suggestion_notification"
+
 
 @receiver(Reminder.coordinator_reminder)
 def send_coordinator_reminder_emails(sender, **kwargs):
@@ -530,3 +533,30 @@ def contact_us_emails(sender, **kwargs):
     logger.info("Email constructed.")
     email.send()
     logger.info("Email queued.")
+
+def send_suggestion_notification(instance):
+    """
+    When a suggested collections becomes available, users who upvoted
+    the suggestion should be notified
+    """
+    base_url = get_current_site(None).domain
+    path = reverse_lazy("users:my_library")
+    link = "https://{base}{path}".format(base=base_url, path=path)
+
+    email = SuggestionNotification()
+
+    if instance.editor:
+        email.send(
+            instance.user.email,
+            {
+                "user": instance.user.editor.wp_username,
+                "lang": instance.user.userprofile.lang,
+                "partner": instance.partner,
+                "link": link,
+            },
+        )
+    else:
+        logger.error(
+            "Tried to send an email to an editor that doesn't "
+            "exist, perhaps because their account is deleted."
+        )
