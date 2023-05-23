@@ -121,6 +121,9 @@ class UserProfile(models.Model):
     send_renewal_notices = models.BooleanField(
         default=True, help_text="Does this user want renewal reminder notices?"
     )
+    enable_suggestion_notification = models.BooleanField(
+        default=True, help_text="Does this user want suggestion notifications?"
+    )
     pending_app_reminders = models.BooleanField(
         default=True,
         help_text="Does this coordinator want pending app reminder notices?",
