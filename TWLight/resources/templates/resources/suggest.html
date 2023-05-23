@@ -5,10 +5,6 @@
 {% load static %}
 {% load twlight_perms %}
 
-{% block head_javascript %}
-  <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.5.1.min.js" %}"></script>
-{% endblock head_javascript %}
-
 {% block content %}
   {% include "header_partial_b4.html" %}
   {% include "message_partial.html" %}
@@ -106,6 +102,26 @@
                           {{ each_suggestion.upvoted_users.count }}
                         </span>
                       </a>
+                      {% if user.is_staff %}
+                      <!-- TODO: invoke send_suggestion_notification -->
+                        <a class="btn notify" data-suggestionId="{{ each_suggestion.id }}"
+                          href="">
+                          <span class="utext">
+                            {% comment %}Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed). {% endcomment %}
+                            {% trans 'Notify upvoters' %}
+                          </span>
+                        </a>
+
+                        <div id="notify-suggestion-{{ each_suggestion.id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              TEST
+                              <!-- TODO: review NotifySuggestionUpvotersForm to render form correctly here -->
+                              {% crispy notify_upvoters_form %}
+                            </div>
+                          </div>
+                        </div>
+                      {% endif %}
                     </div>
                   {% endif %}
                 </div>
@@ -157,6 +173,16 @@
       var this_ = $(this);
       var upvoteURL = this_.attr("data-href");
       $.get(upvoteURL);
+    });
+    $('.notify').click(function(e){
+      e.preventDefault();
+
+      var suggestionId = this.dataset.suggestionid;
+      console.log('$(this).dataset', this.dataset);
+      console.log('suggestionId', suggestionId);
+      $('#notify-suggestion-' + suggestionId).modal(
+        { show: true }
+      );
     });
   </script>
   <script>

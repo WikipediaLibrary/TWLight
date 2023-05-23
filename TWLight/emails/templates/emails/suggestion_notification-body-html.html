@@ -1,0 +1,13 @@
+{% load i18n %}
+<html>
+<body>
+{% comment %}Translators: This is the subject of an email sent to users when a collection suggestion they have upvoted is now available.{% endcomment %}
+{% blocktranslate trimmed %}
+  <p>Hi,</p>
+	<p>This is an automated notice to let you know that a Wikipedia Library suggestion you upvoted, {{ partner }}, is now available!</p>
+	<p>You can now [apply for access to / access] {{ partner }} at {{ link }}.</p>
+	<p>If you have any issues or questions please contact us at wikipedialibrary@wikimedia.org</p>
+  <p>The Wikipedia Library team</p>
+{% endblocktranslate %}
+</body>
+</html>
