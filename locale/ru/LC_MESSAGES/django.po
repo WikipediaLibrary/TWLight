@@ -46,7 +46,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-05-19 09:31+0000\n"
-"PO-Revision-Date: 2023-05-22 11:21:03+0000\n"
+"PO-Revision-Date: 2023-05-29 11:21:31+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1353,7 +1353,7 @@ msgstr "Служебная информация"
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "Проблема с сервисом"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
@@ -1363,12 +1363,12 @@ msgstr "Временно недоступен"
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "Ведутся работы, доступ к ресурсу может пропасть"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:507
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "Недоступно из-за неполадок"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
@@ -2160,7 +2160,7 @@ msgstr "Условия использования и политика прива
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:98
 msgid "Translate the Library"
-msgstr ""
+msgstr "Перевести Библиотеку"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
@@ -2253,7 +2253,7 @@ msgstr "Обновить эл. почту"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Невозможно добавить {partner} в избранное: у вас нет доступа"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:239
@@ -2990,9 +2990,8 @@ msgstr "Пожалуйста, <a class=\"twl-links\" href='{url}'>опишите
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr "Вы выбрали не получать электронные письма с напоминаниями. Координаторы должны получать хотя бы один тип электронных писем с напоминаниями, поэтому подумайте о смене настроек."
+msgstr "Вы выбрали не получать электронные письма с напоминаниями. Координаторы должны получать хотя бы один тип электронных писем с напоминаниями, поэтому просим поменять настройки."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
