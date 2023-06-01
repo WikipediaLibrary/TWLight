@@ -21,7 +21,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-05-19 09:30+0000\n"
-"PO-Revision-Date: 2023-05-22 11:21:04+0000\n"
+"PO-Revision-Date: 2023-06-01 11:27:57+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1314,20 +1314,18 @@ msgstr "Tìm được một phần"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:496
-#, fuzzy
 msgid "Service information"
-msgstr "Thông tin cá nhân"
+msgstr "Thông tin dịch vụ"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:498
 msgid "Service issue"
-msgstr ""
+msgstr "Vấn đề của dịch vụ"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:500
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Điều khoản sử dụng không có sẵn."
+msgstr "Hiện không dùng được"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:505
@@ -1341,9 +1339,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:509
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Số tài khoản còn dư:"
+msgstr "Hiện không có quyền truy cập"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1420,7 +1417,7 @@ msgstr "Lọc bộ sưu tập"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Nhập đề xuất"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:71
@@ -2163,7 +2160,7 @@ msgstr "Đặt lại mật khẩu"
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
 msgid "Forgot your password? Enter your email address below, and we'll email instructions for setting a new one."
-msgstr ""
+msgstr "Bạn quên mật khẩu? Hãy điền địa chỉ thư điện tử bên dưới để chúng tôi gửi bạn thư hướng dẫn lập mật khẩu mới."
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:36
@@ -2173,7 +2170,7 @@ msgstr "Cập nhật hồ sơ"
 #. Translators: This labels a field where users can describe their activity on Wikipedia in a small biography.
 #: TWLight/users/forms.py:45
 msgid "Describe your contributions to Wikipedia: topics edited, et cetera."
-msgstr ""
+msgstr "Mô tả đóng góp của bạn cho Wikipedia như các chủ đề đã chỉnh sửa, v.v."
 
 #. Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
 #: TWLight/users/forms.py:112
@@ -2791,7 +2788,7 @@ msgstr ""
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:237
 msgid "In addition, if you use OCLC EZProxy, please note that you may not use it for commercial purposes."
-msgstr ""
+msgstr "Ngoài ra, nếu bạn dùng OCLC EZProxy, xin để ý đừng dùng công cụ này cho mục đích thương mại."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:244
@@ -2888,11 +2885,11 @@ msgstr ""
 
 #: TWLight/users/templates/users/user_collection_tile.html:32
 msgid "Remove this collection from favorites"
-msgstr ""
+msgstr "Xoá bộ sưu tập này khỏi danh sách yêu thích"
 
 #: TWLight/users/templates/users/user_collection_tile.html:38
 msgid "Add this collection to favorites"
-msgstr ""
+msgstr "Thêm bộ sưu tập này vào danh sách yêu thích"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:102
@@ -2993,12 +2990,12 @@ msgstr ""
 #: TWLight/users/views.py:473
 #, python-brace-format
 msgid "Your email has been changed to {email}."
-msgstr ""
+msgstr "Địa chỉ thư điện tử của bạn đã được đổi thành {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:484
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
-msgstr ""
+msgstr "Địa chỉ thư điện tử của bạn bị thiếu. Bạn vẫn có thể tìm duyệt trang này, nhưng bạn sẽ không thể yêu cầu cấp quyền truy cập tài nguyên của bên đối tác nếu không có địa chỉ thư điện tử."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:783
@@ -3009,7 +3006,7 @@ msgstr "Ý kiến đã bị xóa."
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:848 TWLight/views.py:38
 msgid "500+ edits"
-msgstr ""
+msgstr "500+ lần sửa đổi"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:850 TWLight/views.py:40
@@ -3019,7 +3016,7 @@ msgstr "Có tài khoản 6+ tháng"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:852 TWLight/views.py:42
 msgid "10+ edits in the last month"
-msgstr ""
+msgstr "10+ lần sửa đổi trong tháng qua"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:854 TWLight/views.py:44
