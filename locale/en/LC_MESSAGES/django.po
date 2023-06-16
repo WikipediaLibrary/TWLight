@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-05-19 09:31+0000\n"
+"POT-Creation-Date: 2023-06-16 15:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1357,7 +1357,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:517
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:521
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -1429,7 +1429,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
 #: TWLight/resources/forms.py:20
 #: TWLight/resources/templates/resources/merge_suggestion.html:60
-#: TWLight/resources/templates/resources/suggest.html:66
+#: TWLight/resources/templates/resources/suggest.html:67
 msgid "Description"
 msgstr ""
 
@@ -1563,12 +1563,12 @@ msgid "Merge Suggestions"
 msgstr ""
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
-#: TWLight/resources/templates/resources/suggest.html:71
+#: TWLight/resources/templates/resources/suggest.html:72
 msgid "URL"
 msgstr ""
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:70
-#: TWLight/resources/templates/resources/suggest.html:77
+#: TWLight/resources/templates/resources/suggest.html:78
 msgid "Proposer"
 msgstr ""
 
@@ -1917,41 +1917,50 @@ msgid "Imported"
 msgstr ""
 
 #. Translators: This is the title of the form where users can submit partner suggestions.
-#: TWLight/resources/templates/resources/suggest.html:19
+#: TWLight/resources/templates/resources/suggest.html:15
 msgid "Suggest partners"
 msgstr ""
 
 #. Translators: This is the text that appears in the button for staff to merge.
-#: TWLight/resources/templates/resources/suggest.html:41
+#: TWLight/resources/templates/resources/suggest.html:37
 msgid "Merge"
 msgstr ""
 
+#: TWLight/resources/templates/resources/suggest.html:43
+msgid "Filter suggestions"
+msgstr ""
+
 #. Translators: This is the title of the panel where user suggestions are displayed.
-#: TWLight/resources/templates/resources/suggest.html:48
+#: TWLight/resources/templates/resources/suggest.html:47
 msgid "Browse and support suggestions"
+msgstr ""
+
+#. Translators: This text will show when there are no matches in a suggestion search.
+#: TWLight/resources/templates/resources/suggest.html:51
+msgid "No suggestions matching this search."
 msgstr ""
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
-#: TWLight/resources/templates/resources/suggest.html:57
+#: TWLight/resources/templates/resources/suggest.html:58
 #: TWLight/users/templates/users/preferences.html:99
 msgid "Delete"
 msgstr ""
 
-#: TWLight/resources/templates/resources/suggest.html:84
+#: TWLight/resources/templates/resources/suggest.html:85
 msgid "Track Progress"
 msgstr ""
 
 #. Translators: This is the text that appears in the button after a user has clicked upvote (already endorsed).
-#: TWLight/resources/templates/resources/suggest.html:99
-#: TWLight/resources/templates/resources/suggest.html:127
-#: TWLight/resources/templates/resources/suggest.html:131
+#: TWLight/resources/templates/resources/suggest.html:100
+#: TWLight/resources/templates/resources/suggest.html:128
+#: TWLight/resources/templates/resources/suggest.html:132
 msgid "Upvoted"
 msgstr ""
 
 #. Translators: This is the text that appears in the button before a user has clicked upvote (yet to endorse).
-#: TWLight/resources/templates/resources/suggest.html:102
-#: TWLight/resources/templates/resources/suggest.html:129
+#: TWLight/resources/templates/resources/suggest.html:103
+#: TWLight/resources/templates/resources/suggest.html:130
 msgid "Upvote"
 msgstr ""
 
@@ -1962,34 +1971,34 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:257
+#: TWLight/resources/views.py:259
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:301
+#: TWLight/resources/views.py:303
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:391
+#: TWLight/resources/views.py:393
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:404
+#: TWLight/resources/views.py:406
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:509
+#: TWLight/resources/views.py:513
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:534
+#: TWLight/resources/views.py:538
 msgid "Suggestion has been deleted."
 msgstr ""
 
