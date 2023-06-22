@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-06-16 15:52+0000\n"
-"PO-Revision-Date: 2023-06-19 11:21:28+0000\n"
+"PO-Revision-Date: 2023-06-22 11:36:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -1745,9 +1745,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this is a placeholder for an input that helps users filter collections."
+msgstr "On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this is a placeholder for an input that helps users filter collections."
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47

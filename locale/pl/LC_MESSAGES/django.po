@@ -20,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-06-16 15:52+0000\n"
-"PO-Revision-Date: 2023-06-19 11:21:28+0000\n"
+"PO-Revision-Date: 2023-06-22 11:36:11+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1751,9 +1751,8 @@ msgid "Merge"
 msgstr "Scal"
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Scalanie propozycji"
+msgstr "Filtruj sugestie"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47

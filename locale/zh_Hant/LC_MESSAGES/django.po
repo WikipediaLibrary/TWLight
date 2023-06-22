@@ -22,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-06-16 15:52+0000\n"
-"PO-Revision-Date: 2023-06-19 11:21:29+0000\n"
+"PO-Revision-Date: 2023-06-22 11:36:13+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1890,7 +1890,7 @@ msgstr "此平台是我們用來審查申請程序，以及提供取用我們的
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
 msgid "All users receive immediate access to some collections, which can be browsed by clicking the 'Access collection' buttons or using the search bar at the top of the page. Other collections require an application before access is granted, and may be accessed directly or via an individual login or access code. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review these applications and work with publishers to get you your free access."
-msgstr "此平台是我們用來審查申請程序，以及提供取用我們的典藏之中心工具。在這裡您可以查看有哪些可利用的合作夥伴關係，搜索他們的內容，並對您有興趣取用的資源做出申請。與維基媒體基金會簽署保密協議的協調員，負責審查申請程序並與出版者之間往來，為您爭取能自由取用的權利。部份內容則無需申請便可使用。"
+msgstr "所有使用者都可以透過點擊「取用典藏」按鈕來立即取用部份典藏，或是使用頁面頂部的搜尋工具來瀏覽內容。其他典藏需要先申請才能授予取用權限，之後可以直接取用（或是透過個人登入、取用代碼等方式）。與維基媒體基金會簽署過保密協議的志工協調員會審查這些申請，並與出版商合作來提供您免費取用。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
