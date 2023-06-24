@@ -11,7 +11,7 @@ django-crispy-forms==1.14.0
 django-cron==0.5.1
 django-durationfield==0.5.5
 django_extensions==3.2.3
-django-filter==22.1
+django-filter==23.2
 django-premailer==0.2.0
 django-reversion==5.0.4
 djangorestframework==3.14.0
