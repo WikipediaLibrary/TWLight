@@ -26,7 +26,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-06-16 15:51+0000\n"
-"PO-Revision-Date: 2023-06-26 11:30:50+0000\n"
+"PO-Revision-Date: 2023-07-03 11:28:37+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1761,7 +1761,7 @@ msgstr "提案の閲覧と支持"
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
 msgid "No suggestions matching this search."
-msgstr ""
+msgstr "この検索に対するおすすめはヒットしませんでした。"
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
@@ -2233,7 +2233,7 @@ msgstr "メールアドレスを更新"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "先方へのアクセス権がないため、パートナー組織の {partner} をお気に入りに追加できませんでした"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:239
@@ -2970,7 +2970,6 @@ msgstr "申請の審査を担当するコーディネーターが参照できる
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
 msgstr "確認メールが受信拒否に設定してあります。連絡係である以上、最低でも確認メールを1種類は受信する必要があり、ぜひ個人設定の変更をご検討ください。"
 

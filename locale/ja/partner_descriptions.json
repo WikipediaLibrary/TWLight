@@ -73,7 +73,7 @@
 	"53_short_description": "<strong>MIT Press Journals</strong> は学術誌30本超を出版しています。分野は人文科学、科学、社会科学です。",
 	"27_short_description": "<strong>NewspaperARCHIVE.com</strong> は新聞をデジタル化したウェブ上のデータベースです。収載記事数は20億件以上で、1607年以降のアメリカ、カナダ、イギリス、その他20ヵ国の新聞が対象です。",
 	"27_description": "Newspaperarchive.comのコンテンツを引用するときは、可能な場合は切り抜きを使用してください。そうすることで、購読しなくても読者がオープンアクセスURLを介して原文を閲覧できます。",
-	"26_short_description": "<strong>Newspapers.com</strong>は、3千件超の新聞から7300万ページ以上を掲載しています。コレクションには、主要な新聞がいくつか（たとえばニューヨークタイムズ50年分）期間を限定して含まれるものの、ほとんどは1700年代から1980年代後半までのアメリカの地方紙で構成されます。ウィキペディア図書館を介した無料アカウントには、Newspapers.com PublisherExtraのコンテンツへのアクセスが含まれます。",
+	"26_short_description": "<strong>Newspapers.com</strong>は、2万件超の新聞から8億ページ以上を掲載しています。コレクションには、主要な新聞がいくつか（たとえばニューヨークタイムズ50年分）期間を限定して含まれるものの、ほとんどは1700年代から1980年代後半までのアメリカの地方紙で構成されます。ウィキペディア図書館を介した無料アカウントには、Newspapers.com PublisherExtraのコンテンツへのアクセスが含まれます。",
 	"26_description": "Newspaperarchive.comのコンテンツを引用するときは、可能な場合は切り抜きを使用してください。切り抜きによりオープンアクセスURLを介してソーステキストを閲覧でき、読者は購読しなくても済みます。",
 	"106_short_description": "<strong>Nomos</strong>は学術出版社です。Nomos eLibrary を通じて利用可能なすべての電子リソースへのアクセスを提供し、芸術、人文科学、社会科学、法学、一般的な参考文献の電子書籍やジャーナルがあります。それらは主にドイツ語のリソースであり、英語のリソースも含まれます。",
 	"81_short_description": "<strong>Noormags（ヌアマグ）</strong> は社会科学系、人文科学系の学術雑誌の出版社です。",
@@ -137,10 +137,13 @@
 	"133_short_description": "<strong>Edward Elgar</strong>は、法律、ビジネス、社会科学に重点を置いた独立系学術専門出版社です。",
 	"134_short_description": "<strong>E-Yearbook</strong>は、アメリカ合衆国の高校、軍、大学、大学年鑑の歴史的資料を電子化した最大のオンラインコレクションの1つです。<br/><strong>注</strong>: サイトの利用規約では、画像の再アップロードは許可されていません。",
 	"135_short_description": "<strong>Corriere della Sera</strong>は、ミラノで発行されているイタリアの日刊紙です。イタリアで最も古く、最も読まれている新聞の1つです。",
-	"136_short_description": "<strong>Corriere della Sera</strong>は、ミラノで発行されているイタリアの日刊紙です。イタリアで最も古く、最も読まれている新聞の1つです。このコレクションは、Corriere della Seraアーカイブへのアクセスを提供します。",
+	"136_short_description": "<strong>Corriere della Sera Archives</strong>は、イタリアの日刊紙『Corriere della Sera』の歴史的なアーカイブ100年分へのアクセスを提供します。これはイタリアで最も古く、最も読まれている新聞の1つです。",
 	"137_short_description": "<strong>Wikilala</strong>は、オスマン帝国の建国から現代までの歴史に関する45,000の新聞、32,000のジャーナル、4,000の書籍、26,000の記事を含む、109,000を超える印刷形式の文書で構成されるデジタルレポジトリです。",
 	"138_short_description": "<strong>British Newspaper Archive</strong>は、イギリスとアイルランドの新聞の検索可能なデジタルアーカイブへのアクセスを提供します。",
 	"139_short_description": "<strong>Findmypast</strong>は、国勢調査、住所録、歴史的記録の何十億もの検索可能なデータを提供しています。",
 	"140_short_description": "<strong>University of Michigan Press</strong>は、政治学、舞台芸術、アメリカ研究、古典および中世研究、アジア研究に焦点を当てた査読済み書籍の出版社です。",
-	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong>は、人文科学および社会科学を研究するための基礎としてAmerican Council of Learned Sociitiesの学者によって選ばれた何千冊もの本へのアクセスを提供します。書籍は125を超える出版社から提供され、すべて査読済みです。"
+	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong>は、人文科学および社会科学を研究するための基礎としてAmerican Council of Learned Sociitiesの学者によって選ばれた何千冊もの本へのアクセスを提供します。書籍は125を超える出版社から提供され、すべて査読済みです。",
+	"142_short_description": "<strong>デューク大学出版局</strong>（Duke University Press）の強みは人文科学、社会科学、数学分野の出版物で、年平均で書籍は120冊、専門誌は50件超を発行しています。",
+	"143_short_description": "<strong>Mohr Siebeck</strong>はドイツの学術出版社で歴史も長く、人文科学と社会科学に特化しています。eLibrary（電子図書館）には書籍2000冊超、数え切れない専門誌を揃え、宗教学、歴史学、哲学、法学、経済学、社会学をおさえています。",
+	"144_short_description": "<strong>Perlego</strong> はオンラインの電子図書館で、学術的で専門分野のノンフィクション系電子書籍の配布に注力しています。"
 }
