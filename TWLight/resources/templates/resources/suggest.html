@@ -198,6 +198,7 @@
         document.getElementById("no-suggestions-msg").style.display = "none";
       }
       else{
+        document.getElementById("no-suggestions-msg").style.display = "none";
         for(var result in searchResults){
           var suggestionId = searchResults[result].item.id;
           filteredSuggestionElems.push("suggestion-card-" + suggestionId)
