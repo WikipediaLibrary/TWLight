@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alesaru",
 			"MSClaudiu",
 			"Pafsanias"
 		]
@@ -117,5 +118,6 @@
 	"126_short_description": "<strong>Date OCDE</strong> este un depozit de diagrame, hărți, tabele și publicații conexe publicate de Organizația pentru Cooperare și Dezvoltare Economică (OCDE).",
 	"127_short_description": "<strong>Galeria Multimedia OCDE</strong> este o galerie audiovizuală care conține podcasturi și fotografii publicate de Organizația pentru Cooperare și Dezvoltare Economică (OCDE).",
 	"128_short_description": "<strong>Wiley</strong> oferă colecții de reviste online, cărți și resurse de cercetare, care acoperă științele vieții, sănătății, sociale și fizice.",
-	"129_short_description": "<strong>SPIE</strong> oferă acces la Biblioteca digitală SPIE, una dintre cele mai mari colecții de cercetare aplicată în optică și fotonică. Resursele sunt disponibile ca reviste și cărți electronice."
+	"129_short_description": "<strong>SPIE</strong> oferă acces la Biblioteca digitală SPIE, una dintre cele mai mari colecții de cercetare aplicată în optică și fotonică. Resursele sunt disponibile ca reviste și cărți electronice.",
+	"145_short_description": "sâni"
 }
