@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-07-10 12:23+0000\n"
-"PO-Revision-Date: 2023-07-13 11:31:15+0000\n"
+"PO-Revision-Date: 2023-07-20 11:24:22+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -677,7 +677,7 @@ msgstr "Fixa l'estat"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "Si la vostra sol·licitud té èxit, probablement haguem de compartir la vostra adreça de correu electrònic amb els nostres %(partner)s. Això és necessari a fi i efecte de programar l'accés als seus continguts. Quan empleneu aquest formulari, accepteu que el vostre correu electrònic es comparteixi amb els %(partner)s en cas que la vostra sol·licitud sigui acceptada i per a propòsits d'activació de la subscripció."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -956,15 +956,15 @@ msgstr "Envia"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>La sol·licitud aprovada per accedir a %(partner)s ha finalitzat. El vostre codi d'accés o detalls d'inici de sessió són els següents:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>La sol·licitud aprovada per accedir a %(partner)s ha finalitzat. El vostre codi d'accés o detalls d'inici de sessió són els següents:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "La vostra sol·licitud aprovada per accedir a %(partner)s ha finalitzat. El vostre codi d'accés o detalls d'inici de sessió són els següents: %(access_code)s %(access_code_instructions)s"
+msgstr "La vostra sol·licitud aprovada per accedir a %(partner)s ha finalitzat. El vostre codi d'accés o detalls d'inici de sessió són els següents: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1003,13 +1003,13 @@ msgstr "%(submit_date)s - %(commenter)s %(comment)s Si us plau, respongueu a aix
 #. Translators: This is the subject line of an email sent to coordinators when a comment is left on an application they processed.
 #: TWLight/emails/templates/emails/comment_notification_coordinator-subject.html:3
 msgid "New comment on a Wikipedia Library application you processed"
-msgstr ""
+msgstr "Nou comentari en la sol·licitud a la Biblioteca de la Viquipèdia que vau tramitar"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-html.html:5
 #, python-format
 msgid "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Please reply to these at <a href=\"%(app_url)s\">%(app_url)s</a> so we can evaluate your application.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr ""
+msgstr "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> <blockquote><p>%(comment)s</p></blockquote> <p>Si us plau, respongueu a això a<a href=\"%(app_url)s\">%(app_url)s</a> de manera que puguem avaluar la vostra sol·licitud.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when they receive a comment on their application. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-body-text.html:3
@@ -1020,7 +1020,7 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users who have a comment added to one of their applications. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_editors-subject.html:3
 msgid "New comment on your Wikipedia Library application"
-msgstr ""
+msgstr "Nou comentari en la vostra sol·licitud a la Biblioteca de la Viquipèdia"
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-body-html.html:5
@@ -2088,9 +2088,9 @@ msgstr "Més informació"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Més de 90 dels repositoris bibliogràfics de pagament més prestigiosos del món, ara de franc per a viquipedistes de qualsevol especialitat"
+msgstr "Més de 90 dels repositoris bibliogràfics de pagament més prestigiosos del món, amb contingut en %(no_of_languages)s llengües, ara de franc per a viquipedistes de qualsevol especialitat"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2541,7 +2541,7 @@ msgstr ""
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
+msgstr "Sembla que teniu un blocatge actiu al teu compte d'usuari. Si compliu amb les altres condicions, potser encara podríem donar-vos accés a la Biblioteca, però si us plau <a href=\"%(contact_url)s\">contacteu-nos</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -2561,17 +2561,17 @@ msgstr "Clau"
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:39
 msgid "Collection is fully searchable via the search bar"
-msgstr ""
+msgstr "La col·lecció és plenament navegable a través de la barra de cerca"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:48
 msgid "Collection is only partially searchable via the search bar"
-msgstr ""
+msgstr "La col·lecció és només parcialment navegable a través de la barra de cerca"
 
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:52
 msgid "Other collections must be browsed individually"
-msgstr ""
+msgstr "Altres col·leccions són només cercables individualment"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2601,7 +2601,7 @@ msgstr "Sol·licita'n la renovació"
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
 #: TWLight/users/templates/users/my_applications.html:79
 msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
-msgstr ""
+msgstr "Les renovacions o bé no són necessàries, o bé no estan disponibles a hores d'ara, o bé ja les heu demanades."
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
