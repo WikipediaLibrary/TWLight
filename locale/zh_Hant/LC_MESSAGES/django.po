@@ -22,7 +22,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-07-10 12:23+0000\n"
-"PO-Revision-Date: 2023-07-13 11:31:21+0000\n"
+"PO-Revision-Date: 2023-08-07 11:28:04+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2759,7 +2759,7 @@ msgstr "為了取用各出版者的資源，您必須同意該出版者的使用
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:187
 msgid "Sharing your Wikipedia account, usernames, passwords, or any access codes for publisher resources with others;"
-msgstr "與其他人分享您的維基百科帳戶、使用者名稱、密碼或任何訪問出版商資源的代碼；"
+msgstr "與其他人分享您的維基百科帳戶、使用者名稱、密碼或任何訪問出版商資源的代碼。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:194
