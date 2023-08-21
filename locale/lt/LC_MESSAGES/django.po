@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-07-10 12:23+0000\n"
-"PO-Revision-Date: 2023-07-13 11:31:17+0000\n"
+"PO-Revision-Date: 2023-08-21 11:26:58+0000\n"
 "Language: lt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -795,7 +795,7 @@ msgstr "Jūsų paraiška pateikta peržiūrai. Eikite į <a href='{applications_
 #. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
 #: TWLight/applications/views.py:278
 msgid "This field consists only of restricted text."
-msgstr ""
+msgstr "Šį lauką sudaro tik apribotas tekstas."
 
 #. Translators: This message is shown to user when he tries to apply to same partner more than once
 #: TWLight/applications/views.py:374
