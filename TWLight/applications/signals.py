@@ -83,6 +83,7 @@ def set_partner_status(sender, **kwargs):
 # passed to a template filter that needs an integer).
 @receiver(pre_save, sender=Application)
 def update_app_status_on_save(sender, instance, **kwargs):
+
     # Make sure not using a mix of dates and datetimes
     if instance.date_created and isinstance(instance.date_created, datetime):
         instance.date_created = instance.date_created.date()
@@ -101,6 +102,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
                 not bool(instance.date_closed),
             ]
         ):
+
             instance.date_closed = localtime(now()).date()
             instance.days_open = (instance.date_closed - instance.date_created).days
 
@@ -112,12 +114,14 @@ def update_app_status_on_save(sender, instance, **kwargs):
             instance.status in Application.FINAL_STATUS_LIST
             and not instance.date_closed
         ):
+
             instance.date_closed = localtime(now()).date()
             instance.days_open = 0
 
 
 @receiver(post_save, sender=Application)
 def post_revision_commit(sender, instance, **kwargs):
+
     # For some authorization methods, we can skip the manual Approved->Sent
     # step and just immediately take an Approved application and give it
     # a finalised status.
@@ -203,40 +207,40 @@ def post_revision_commit(sender, instance, **kwargs):
             authorization.save()
 
 
-# @receiver(post_save, sender=Partner)
-# def invalidate_bundle_partner_applications(sender, instance, **kwargs):
-#     """
-#     Invalidates open applications for bundle partners.
-#     """
+@receiver(post_save, sender=Partner)
+def invalidate_bundle_partner_applications(sender, instance, **kwargs):
+    """
+    Invalidates open applications for bundle partners.
+    """
 
-#     twl_team = User.objects.get(username="TWL Team")
+    twl_team = User.objects.get(username="TWL Team")
 
-#     if sender == Partner:
-#         partner = instance
+    if sender == Partner:
+        partner = instance
 
-#     if partner and partner.authorization_method == Partner.BUNDLE:
-#         # All open applications for this partner.
-#         applications = Application.objects.filter(
-#             partner=partner,
-#             status__in=(
-#                 Application.PENDING,
-#                 Application.QUESTION,
-#                 Application.APPROVED,
-#             ),
-#         )
+    if partner and partner.authorization_method == Partner.BUNDLE:
+        # All open applications for this partner.
+        applications = Application.objects.filter(
+            partner=partner,
+            status__in=(
+                Application.PENDING,
+                Application.QUESTION,
+                Application.APPROVED,
+            ),
+        )
 
-#         for application in applications:
-#             # Add a comment.
-#             comment = Comment.objects.create(
-#                 content_object=application,
-#                 site_id=site_id(),
-#                 user=twl_team,
-#                 # fmt: off
-#                 # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-#                 comment=_("This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."),
-#                 # fmt: on
-#             )
-#             comment.save()
-#             # Mark application invalid.
-#             application.status = Application.INVALID
-#             application.save()
+        for application in applications:
+            # Add a comment.
+            comment = Comment.objects.create(
+                content_object=application,
+                site_id=site_id(),
+                user=twl_team,
+                # fmt: off
+                # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
+                comment=_("This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."),
+                # fmt: on
+            )
+            comment.save()
+            # Mark application invalid.
+            application.status = Application.INVALID
+            application.save()
