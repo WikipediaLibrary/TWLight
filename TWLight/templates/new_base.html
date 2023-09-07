@@ -16,11 +16,20 @@
     <meta property="og:image:width" content="200" />
     <meta property="og:image:height" content="200" />
     <meta property="og:url" content="https://wikipedialibrary.wmflabs.org/" />
-    <meta property="og:description" content="Over 90 of the world's top subscription-only databases, with content in 33 languages, free for Wikipedians of all backgrounds." />
+    <meta property="og:description" content="{% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
+    {% blocktranslate trimmed %}
+    Over 90 of the world's top subscription-only databases,
+    with content in {{ no_of_languages }} languages,
+    free for Wikipedians of all backgrounds
+    {% endblocktranslate %}"
+    />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia_library_logo.png" />
     <meta property="twitter:site" content="@WikiLibrary" />
-
+    <meta property="og:locale" content=en_US />
+    {% for language in all_languages %}
+      <meta property="og:locale:alternate" content={{language}} />
+    {% endfor %}
     <title>
       {% comment %}Translators: Name of the project/tool.{% endcomment %}
       {% trans "The Wikipedia Library" %}

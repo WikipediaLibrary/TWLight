@@ -15,7 +15,7 @@ from django.template import TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.debug import sensitive_variables
 
-from TWLight.resources.models import Partner, PartnerLogo
+from TWLight.resources.models import Partner, PartnerLogo, Language
 from TWLight.resources.helpers import get_partner_description, get_tag_dict
 
 from .forms import EdsSearchForm
@@ -124,6 +124,7 @@ class NewHomePageView(TemplateView):
         context["no_of_languages"] = (
             Partner.objects.values("languages").distinct().count()
         )
+        context["all_languages"] = Language.objects.values_list("language", flat=True)
         param_next_url = self.request.GET.get("next_url", None)
         if param_next_url:
             context["next_url"] = param_next_url
