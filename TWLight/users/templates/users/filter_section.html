@@ -17,13 +17,14 @@
       <div class="about-links">
         <a href="{% url 'about' %}" class="twl-links twl-links-underline learn-more-link">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
-          {% trans "Learn more" %}
-        </a>
+          {% trans "Learn more" %}</a>
         &ndash;
         <a href="https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library" class="twl-links twl-links-underline discuss-link">
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library) {% endcomment %}
-          {% trans "Discuss" %}
-        </a>
+          {% trans "Discuss" %}</a>
+        {% if community_page_url %}
+          (<a href ="{{ community_page_url }}"  class="twl-links twl-links-underline community-page-link">{{ language_code }}.wiki</a>)
+        {% endif %}
       </div>
     </div>
     <hr>

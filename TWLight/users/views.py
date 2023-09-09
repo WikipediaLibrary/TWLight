@@ -32,6 +32,7 @@ from django_comments.models import Comment
 from django.utils import timezone
 from django.utils.translation import get_language
 
+from TWLight.config.models import get_community_page_url
 from TWLight.resources.filters import PartnerFilter
 from TWLight.resources.helpers import get_partner_description, get_tag_names
 from TWLight.resources.models import Partner, PartnerLogo, PhabricatorTask
@@ -830,6 +831,10 @@ class MyLibraryView(TemplateView):
         self._build_available_collection_object(
             context, language_code, context["partner_id_set"], partner_search_list
         )
+
+        # Language code and community page URL for filter section
+        context["language_code"] = language_code
+        context["community_page_url"] = get_community_page_url(language_code)
 
         # Store the result of `learn_cache_key` for invalidation
         user.userprofile.my_library_cache_key = learn_cache_key(

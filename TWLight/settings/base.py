@@ -136,6 +136,7 @@ TWLIGHT_APPS = [
     "TWLight.api",
     "TWLight.ezproxy",
     "TWLight.common",
+    "TWLight.config",
 ]
 
 # dal (autocomplete_light) must go before django.contrib.admin.
