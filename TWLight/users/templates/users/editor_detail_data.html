@@ -127,7 +127,11 @@
       {% else %}
           {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this shows if the user does not qualify the technical requirements. {% endcomment %}
           <strong class="warning">{% trans "No" %}</strong>
-          <p class="block-notice">
+          {% if editor.ignore_wp_blocks %}
+            {% comment %}Translators: If a user has received an exemption against the 'no blocks' criterion, this is shown next to "No" on their user page and applications next to this criterion. {% endcomment %}
+            {% trans "(exemption granted)" %}
+          {% else %}
+            <p>
             {% url 'contact' as contact_url %}
             {% comment %}Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify. {% endcomment %}
             {% blocktranslate trimmed %}
@@ -135,7 +139,8 @@
               the other criteria you may still be permitted access to the library -
               please <a class="twl-links" href="{{ contact_url }}">contact us</a>.
             {% endblocktranslate %}
-          </p>
+            </p>
+          {% endif %}
       {% endif %}
   </div>
 </div>
