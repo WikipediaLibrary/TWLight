@@ -759,12 +759,12 @@ class Editor(models.Model):
         # This will be True the first time the user logs in, since use_wp_email
         # defaults to True. Therefore we will initialize the email field if
         # they have an email at WP for us to initialize it with.
+        # We should only overwrite saved data if an email is present in the
+        # response.
         if self.user.userprofile.use_wp_email:
-            try:
+            if "email" in identity and identity["email"] != "":
                 self.user.email = identity["email"]
-            except KeyError:
-                # Email isn't guaranteed to be present in identity - don't do
-                # anything if we can't find it.
+            else:
                 logger.exception("Unable to get Editor email address from Wikipedia.")
 
         self.user.save()
