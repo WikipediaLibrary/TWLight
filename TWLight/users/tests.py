@@ -636,6 +636,32 @@ class ViewsTestCase(TestCase):
         bundle_auth_count = Authorization.objects.filter(pk=bundle_auth_id).count()
         self.assertEqual(bundle_auth_count, 0)
 
+    def test_user_delete_with_invalid_applications(self):
+        """
+        Verify that users can delete their account even if they have an
+        invalidated application.
+        """
+        partner = PartnerFactory()
+
+        # Create an invalid application
+        application = ApplicationFactory(
+            status=Application.INVALID, editor=self.editor1, partner=partner
+        )
+
+        delete_url = reverse("users:delete_data", kwargs={"pk": self.user_editor.pk})
+
+        # Need a password so we can login
+        self.editor1.user.set_password("editor")
+        self.editor1.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password="editor")
+
+        submit = self.client.post(delete_url)
+
+        assert not User.objects.filter(username=self.username1).exists()
+
     def test_user_data_download(self):
         """
         Verify that if users try to download their personal data they
