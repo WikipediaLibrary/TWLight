@@ -1593,9 +1593,7 @@ class EditorModelTestCase(TestCase):
         new_editor.user.save()
 
         lang = get_language()
-        new_editor.update_from_wikipedia(
-            new_identity, lang, new_global_userinfo
-        )
+        new_editor.update_from_wikipedia(new_identity, lang, new_global_userinfo)
 
         self.assertEqual(new_editor.user.email, test_email)
 
