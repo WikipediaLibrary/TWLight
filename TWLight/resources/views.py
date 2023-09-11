@@ -450,6 +450,7 @@ class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
 
 @method_decorator(login_required, name="post")
 class PartnerSuggestionView(FormView):
+    """Build view where users can suggest new partnerships."""
     model = Suggestion
     template_name = "resources/suggest.html"
     form_class = SuggestionForm
@@ -473,11 +474,14 @@ class PartnerSuggestionView(FormView):
         return initial
 
     def get_queryset(self):
+        """Get queryset of suggestions and order by name by default."""
         return Suggestion.objects.order_by("suggested_company_name")
 
     def get_context_data(self, **kwargs):
         context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
 
+        # Retrieve all suggestion objects, while also grabbing user objects
+        # to reduce query counts.
         user_qs = User.objects.select_related("editor")
         all_suggestions = (
             Suggestion.objects.all()
@@ -501,6 +505,7 @@ class PartnerSuggestionView(FormView):
         user = self.request.user
         coordinators = get_coordinators()
 
+        # We allow coordinators to take certain additional actions on this page.
         if coordinators in user.groups.all() or user.is_superuser:
             context["user_is_coordinator"] = True
         else:
