@@ -425,10 +425,12 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
 
 class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
+    """Build view which lists all successful user applications for a partner."""
     model = Partner
     template_name_suffix = "_users"
 
     def get_context_data(self, **kwargs):
+        """Add querysets for approved and sent applications to context data."""
         context = super(PartnerUsers, self).get_context_data(**kwargs)
 
         partner = self.get_object()
