@@ -544,6 +544,8 @@ class PartnerSuggestionView(FormView):
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
+    """Build view which enables coordinators and staff to delete suggestions.
+    """
     model = Suggestion
     form_class = SuggestionForm
     success_url = reverse_lazy("suggest")
@@ -561,11 +563,14 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
 
 
 class SuggestionUpvoteView(EditorsOnly, RedirectView):
+    """Build view which enables users to upvote suggestions."""
     def get_redirect_url(self, *args, **kwargs):
         suggestion_id = self.kwargs.get("pk")
         obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
         user = self.request.user
+
+        # Toggle upvote status
         if user.is_authenticated:
             if user in obj.upvoted_users.all():
                 obj.upvoted_users.remove(user)
@@ -576,6 +581,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
 
 @method_decorator(login_required, name="post")
 class SuggestionMergeView(StaffOnly, FormView):
+    """Build view enabling staff to merge duplicate suggestions."""
     model = Suggestion
     template_name = "resources/merge_suggestion.html"
     form_class = SuggestionMergeForm
@@ -591,19 +597,22 @@ class SuggestionMergeView(StaffOnly, FormView):
 
         suggestions : Queryset<Suggestion>
             The queryset of suggestions to merge
+        main_suggestion : Suggestion
+            The suggestion being merged into
 
         Returns
         -------
         The `queryset` of upvoted users
 
         """
-        total_upvoted_users = main_suggestion.upvoted_users.all()
+        all_upvoted_users = main_suggestion.upvoted_users.all()
         for suggestion in suggestions.all():
-            total_upvoted_users |= suggestion.upvoted_users.all()
+            all_upvoted_users |= suggestion.upvoted_users.all()
 
-        return total_upvoted_users.distinct()
+        return all_upvoted_users.distinct()
 
     def get_queryset(self):
+        # Fetch all Suggestions, while prefetching user objects.
         user_qs = User.objects.select_related("editor")
 
         return (
@@ -631,12 +640,15 @@ class SuggestionMergeView(StaffOnly, FormView):
 
     def form_valid(self, form):
         try:
+            # main_suggestion will survive; secondary_suggestions will be
+            # merged into it.
             main_suggestion = form.cleaned_data["main_suggestion"]
             secondary_suggestions = Suggestion.objects.filter(
                 id__in=form.cleaned_data["secondary_suggestions"].values_list(
                     "id", flat=True
                 )
             ).exclude(id=main_suggestion.id)
+
             main_suggestion.upvoted_users.add(
                 *self.get_total_upvotes(
                     suggestions=secondary_suggestions,
@@ -658,6 +670,6 @@ class SuggestionMergeView(StaffOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                "Some Error Occured",
+                "Some Error Occurred",
             )
             raise PermissionDenied
