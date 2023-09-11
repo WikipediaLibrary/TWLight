@@ -35,10 +35,10 @@ logger = logging.getLogger(__name__)
 
 
 class PartnersFilterView(ListView):
-    """
+    """Build the view listing all library partners.
     Since T278337, this View has passed from FilterView to ListView because we have to
     build a Partner dictionary element from the partner descriptions in a JSON file instead of
-    getting everything from the database
+    getting everything from the database.
     """
 
     model = Partner
