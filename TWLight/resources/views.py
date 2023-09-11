@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
 from django.views.generic import DetailView, View, RedirectView, ListView
 from django.views.generic.edit import FormView, DeleteView
-from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
 
 from TWLight.applications.helpers import count_valid_authorizations
@@ -28,7 +27,6 @@ from .filters import MainPartnerFilter, MergeSuggestionFilter
 from .forms import SuggestionForm, SuggestionMergeForm
 from .helpers import get_partner_description, get_tag_names, get_median
 from .models import Partner, Suggestion
-from urllib.parse import urlparse
 import bleach
 import logging
 import json
