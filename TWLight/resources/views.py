@@ -44,13 +44,10 @@ class PartnersFilterView(ListView):
     model = Partner
 
     def get_queryset(self):
-        qs = (
-            Partner.objects.prefetch_related("languages")
-            .select_related("coordinator", "logos")
-            .order_by("company_name")
-        )
-        # The ordering here is useful primarily to people familiar with the
-        # English alphabet. :/
+        """Return the queryset of all partners based on user group.
+        Staff can see all resources, even those which are marked not
+        available, so we use the custom Manager even_not_available.
+        """
         if self.request.user.is_staff:
             messages.add_message(
                 self.request,
@@ -58,13 +55,17 @@ class PartnersFilterView(ListView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            qs = (
-                Partner.even_not_available.prefetch_related("languages")
-                .select_related("coordinator", "logos")
-                .order_by("company_name")
-            )
+            qs = Partner.even_not_available.prefetch_related("languages")
+        else:
+            qs = Partner.objects.prefetch_related("languages")
 
-        return qs
+        # The ordering here is useful primarily to people familiar with the
+        # English alphabet. :/
+        partner_queryset = qs.select_related("coordinator", "logos").order_by(
+            "company_name"
+        )
+
+        return partner_queryset
 
     def get_context_data(self, **kwargs):
         """
