@@ -388,6 +388,7 @@ class PartnersDetailView(DetailView):
 
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
+    """View to allow coordinators to toggle a partner's waitlist status."""
     def post(self, request, *args, **kwargs):
         try:
             # This only looks at AVAILABLE and WAITLIST partners, which is
