@@ -176,6 +176,7 @@ class PartnersDetailView(DetailView):
 
         context["tags"] = get_tag_names(language_code, partner.new_tags)
 
+        # Only staff members are permitted to view Not Available resources
         if partner.status == Partner.NOT_AVAILABLE:
             messages.add_message(
                 self.request,
@@ -185,12 +186,16 @@ class PartnersDetailView(DetailView):
                 "users.",
             )
 
+        # Count valid authorizations to determine how many users have access
         context["total_accounts_distributed_partner"] = count_valid_authorizations(
             partner
         )
 
+        # Count all time users who had access, by counting all user
+        # authorizations, including those which expired.
         context["total_users"] = Authorization.objects.filter(partners=partner).count()
 
+        # Determine median wait time for applications to be finalised
         application_end_states = [
             Application.APPROVED,
             Application.NOT_APPROVED,
@@ -244,8 +249,10 @@ class PartnersDetailView(DetailView):
                 if not partner.specific_title:
                     self._evaluate_apply(context, partner)
                 self._evaluate_has_auths(context, user, partner)
+            # If the user has no authorization, no special behaviour.
             except Authorization.DoesNotExist:
                 pass
+            # There should never be multiple authorizations for a resource
             except Authorization.MultipleObjectsReturned:
                 logger.info(
                     "Multiple authorizations returned for partner {} and user {}".format(
@@ -256,7 +263,7 @@ class PartnersDetailView(DetailView):
                     self.request,
                     messages.ERROR,
                     # fmt: off
-                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                    # Translators: If multiple authorizations where returned for a collection, this message is shown to a user
                     _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
                     # fmt: on
                 )
