@@ -305,7 +305,7 @@ class PartnersDetailView(DetailView):
         try:
             partner = self.get_object()
         except Http404:
-            # If partner object does not exists check if the partner's status is NOT_AVAILABLE.
+            # If partner object does not exist check if the partner's status is NOT_AVAILABLE.
             partner_pk = self.kwargs.get("pk")
             if Partner.even_not_available.filter(pk=partner_pk).exists():
                 messages.add_message(
