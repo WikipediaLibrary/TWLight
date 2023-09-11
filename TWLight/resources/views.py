@@ -73,12 +73,11 @@ class PartnersFilterView(ListView):
         If there's no filtering or tags involved, we carry on. Otherwise,
         we add the tag to the context and get the corresponding meta url
         in the template.
-        :param kwargs:
-        :return:
         """
         context = super().get_context_data(**kwargs)
 
         language_code = get_language()
+
         # Changed since T278337: add filter to queryset before we build the partners
         # dictionary
         partner_filtered_list = MainPartnerFilter(
@@ -86,15 +85,20 @@ class PartnersFilterView(ListView):
         )
         context["filter"] = partner_filtered_list
 
+        # Retrieve the current user and add to context
         user = self.request.user
         if user.is_authenticated:
             user = User.objects.select_related("editor").get(pk=self.request.user.pk)
             context["user"] = user
-            context["editor"] = user.editor
+
         partners_list = []
         partner_search_list = []
+        # Build a list of partners, with a dictionary for each containing
+        # relevant data for building the page.
         for partner in partner_filtered_list.qs:
             partner_dict = {}
+
+            # Retrieve basic partner data
             partner_dict["pk"] = partner.pk
             partner_dict["company_name"] = partner.company_name
             try:
@@ -103,12 +107,14 @@ class PartnersFilterView(ListView):
                 partner_dict["partner_logo"] = None
             partner_dict["is_not_available"] = partner.is_not_available
             partner_dict["is_waitlisted"] = partner.is_waitlisted
-            new_tags = partner.new_tags
+
             # Getting tags from locale files
+            new_tags = partner.new_tags
             translated_tags = get_tag_names(language_code, new_tags)
             partner_dict["tags"] = translated_tags
-            partner_dict["languages"] = partner.get_languages
+
             # Obtaining translated partner description
+            partner_dict["languages"] = partner.get_languages
             partner_short_description_key = "{pk}_short_description".format(
                 pk=partner.pk
             )
@@ -116,12 +122,14 @@ class PartnersFilterView(ListView):
             partner_descriptions = get_partner_description(
                 language_code, partner_short_description_key, partner_description_key
             )
-
             partner_dict["short_description"] = partner_descriptions[
                 "short_description"
             ]
             partner_dict["description"] = partner_descriptions["description"]
+
             partners_list.append(partner_dict)
+
+            # Sanitize descriptions
             if partner_descriptions["description"]:
                 partner_desc = bleach.clean(
                     partner_descriptions["description"],
@@ -140,6 +148,7 @@ class PartnersFilterView(ListView):
             else:
                 partner_short_desc = ""
 
+            # Build list of searchable elements for text search functionality
             partner_search_list.append(
                 {
                     "partner_pk": partner.pk,
@@ -148,6 +157,7 @@ class PartnersFilterView(ListView):
                     "partner_description": partner_desc,
                 }
             )
+
         context["partners_list"] = partners_list
         context["partner_search_list"] = partner_search_list
 
