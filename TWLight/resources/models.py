@@ -482,6 +482,7 @@ class Partner(models.Model):
             self.get_description_key,
         )
 
+
 class PartnerLogo(models.Model):
     partner = models.OneToOneField(
         "Partner", related_name="logos", on_delete=models.CASCADE

@@ -389,6 +389,7 @@ class PartnersDetailView(DetailView):
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
     """View to allow coordinators to toggle a partner's waitlist status."""
+
     def post(self, request, *args, **kwargs):
         try:
             # This only looks at AVAILABLE and WAITLIST partners, which is
@@ -426,6 +427,7 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
 class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
     """Build view which lists all successful user applications for a partner."""
+
     model = Partner
     template_name_suffix = "_users"
 
@@ -451,6 +453,7 @@ class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
 @method_decorator(login_required, name="post")
 class PartnerSuggestionView(FormView):
     """Build view where users can suggest new partnerships."""
+
     model = Suggestion
     template_name = "resources/suggest.html"
     form_class = SuggestionForm
@@ -544,8 +547,8 @@ class PartnerSuggestionView(FormView):
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
-    """Build view which enables coordinators and staff to delete suggestions.
-    """
+    """Build view which enables coordinators and staff to delete suggestions."""
+
     model = Suggestion
     form_class = SuggestionForm
     success_url = reverse_lazy("suggest")
@@ -564,6 +567,7 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
 
 class SuggestionUpvoteView(EditorsOnly, RedirectView):
     """Build view which enables users to upvote suggestions."""
+
     def get_redirect_url(self, *args, **kwargs):
         suggestion_id = self.kwargs.get("pk")
         obj = get_object_or_404(Suggestion, id=suggestion_id)
@@ -582,6 +586,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
 @method_decorator(login_required, name="post")
 class SuggestionMergeView(StaffOnly, FormView):
     """Build view enabling staff to merge duplicate suggestions."""
+
     model = Suggestion
     template_name = "resources/merge_suggestion.html"
     form_class = SuggestionMergeForm
