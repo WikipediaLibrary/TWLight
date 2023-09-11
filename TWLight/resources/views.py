@@ -159,6 +159,8 @@ class PartnersFilterView(ListView):
 
 
 class PartnersDetailView(DetailView):
+    """Build the view for individual resource pages."""
+
     model = Partner
 
     def get_context_data(self, **kwargs):
