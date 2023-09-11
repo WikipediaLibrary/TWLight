@@ -271,8 +271,10 @@ class PartnersDetailView(DetailView):
         return context
 
     def get_queryset(self):
-        # We have three types of users who might try to access partner pages - the partner's coordinator, staff,
-        # and normal users. We want to limit the list of viewable partner pages in different ways for each.
+        """Return queryset of viewable partners based on user group
+        We have three types of users who might try to access partner pages - the partner's coordinator, staff,
+        and normal users. We want to limit the list of viewable partner pages in different ways for each.
+        """
 
         # By default users can only view available partners
         available_partners = Partner.objects.select_related(
@@ -280,13 +282,15 @@ class PartnersDetailView(DetailView):
         ).all()
         partner_list = available_partners
 
-        # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
+        # If logged in, what's the list of unavailable partners, if any,
+        # for which the current user is the coordinator?
         if self.request.user.is_authenticated:
             coordinator_partners = Partner.even_not_available.select_related(
                 "coordinator", "logos"
             ).filter(coordinator=self.request.user, status=Partner.NOT_AVAILABLE)
             if coordinator_partners.exists():
-                # Coordinated partners are also valid for this user to view
+                # Not available partners coordinated by this user
+                # are also valid for this user to view
                 partner_list = available_partners | coordinator_partners
 
         if self.request.user.is_staff:
