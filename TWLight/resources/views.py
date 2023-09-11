@@ -25,7 +25,7 @@ from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from .filters import MainPartnerFilter, MergeSuggestionFilter
 from .forms import SuggestionForm, SuggestionMergeForm
-from .helpers import get_partner_description, get_tag_names, get_median
+from .helpers import get_tag_names, get_median
 from .models import Partner, Suggestion
 import bleach
 import logging
@@ -115,13 +115,7 @@ class PartnersFilterView(ListView):
 
             # Obtaining translated partner description
             partner_dict["languages"] = partner.get_languages
-            partner_short_description_key = "{pk}_short_description".format(
-                pk=partner.pk
-            )
-            partner_description_key = "{pk}_description".format(pk=partner.pk)
-            partner_descriptions = get_partner_description(
-                language_code, partner_short_description_key, partner_description_key
-            )
+            partner_descriptions = partner.get_descriptions(language_code)
             partner_dict["short_description"] = partner_descriptions[
                 "short_description"
             ]
@@ -173,11 +167,7 @@ class PartnersDetailView(DetailView):
 
         # Obtaining translated partner description
         language_code = get_language()
-        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
-        partner_description_key = "{pk}_description".format(pk=partner.pk)
-        partner_descriptions = get_partner_description(
-            language_code, partner_short_description_key, partner_description_key
-        )
+        partner_descriptions = partner.get_descriptions(language_code)
 
         context["partner_short_description"] = partner_descriptions["short_description"]
         context["partner_description"] = partner_descriptions["description"]

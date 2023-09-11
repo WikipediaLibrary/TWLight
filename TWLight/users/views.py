@@ -33,7 +33,7 @@ from django.utils import timezone
 from django.utils.translation import get_language
 
 from TWLight.resources.filters import PartnerFilter
-from TWLight.resources.helpers import get_partner_description, get_tag_names
+from TWLight.resources.helpers import get_tag_names
 from TWLight.resources.models import Partner, PartnerLogo, PhabricatorTask
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
@@ -988,16 +988,8 @@ class MyLibraryView(TemplateView):
 
                 for user_authorization_partner in partner_filtered_list.qs:
                     # Obtaining translated partner description
-                    partner_short_description_key = "{pk}_short_description".format(
-                        pk=user_authorization_partner.pk
-                    )
-                    partner_description_key = "{pk}_description".format(
-                        pk=user_authorization_partner.pk
-                    )
-                    partner_descriptions = get_partner_description(
+                    partner_descriptions = user_authorization_partner.get_descriptions(
                         language_code,
-                        partner_short_description_key,
-                        partner_description_key,
                     )
                     (
                         partner_phabricator_tasks,
@@ -1136,14 +1128,8 @@ class MyLibraryView(TemplateView):
         available_collection_obj = []
         for available_collection in partner_filtered_list.qs:
             # Obtaining translated partner description
-            partner_short_description_key = "{pk}_short_description".format(
-                pk=available_collection.pk
-            )
-            partner_description_key = "{pk}_description".format(
-                pk=available_collection.pk
-            )
-            partner_descriptions = get_partner_description(
-                language_code, partner_short_description_key, partner_description_key
+            partner_descriptions = available_collection.get_descriptions(
+                language_code,
             )
             try:
                 partner_logo = available_collection.logos.logo.url
