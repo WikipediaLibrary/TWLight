@@ -474,7 +474,7 @@ class Partner(models.Model):
         """Return the description key for this partner."""
         return "{pk}_description".format(pk=self.pk)
 
-    def get_descriptions(self, language_code):
+    def get_descriptions(self, language_code: str):
         """Return both the long and short descriptions for this partner."""
         return get_partner_description(
             language_code,
