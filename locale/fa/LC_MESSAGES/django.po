@@ -25,7 +25,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-07-10 12:23+0000\n"
-"PO-Revision-Date: 2023-07-13 11:31:16+0000\n"
+"PO-Revision-Date: 2023-09-14 11:35:57+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -656,7 +656,7 @@ msgstr "تاریخ درخواست"
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
 msgid "Has agreed to the terms of use?"
-msgstr "با شرایط استفاده موافقید؟"
+msgstr "با شرایط استفاده موافقت شده؟"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
@@ -965,15 +965,15 @@ msgstr "ثبت"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>درخواست تأییدشدهٔ شما برای %(partner)s نهایی شده‌است. کد دسترسی یا جزئیات ورود به سیستم را می‌توانید در زیر بیابید: :</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>درخواست تأییدشدهٔ شما برای %(partner)s نهایی شده‌است. کد دسترسی یا جزئیات ورود به سیستم را می‌توانید در زیر بیابید: :</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "درخواست تأییدشدهٔ شما برای %(partner)s اکنون نهایی شده‌است. کد دسترسی یا جزئیات ورود به سیستم را می‌توانید در زیر پیدا کنید: %(access_code)s %(access_code_instructions)s"
+msgstr "درخواست تأییدشدهٔ شما برای %(partner)s اکنون نهایی شده‌است. کد دسترسی یا جزئیات ورود به سیستم را می‌توانید در زیر پیدا کنید: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1763,7 +1763,7 @@ msgstr "مرور و حمایت از پیشنهادها"
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
 msgid "No suggestions matching this search."
-msgstr ""
+msgstr "هیچ پیشنهادی مطابق با این جستجو وجود ندارد."
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
@@ -2096,9 +2096,9 @@ msgstr "اطلاعات بیش‌تر"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29
-#, fuzzy, python-format
+#, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "بیش از ۹۰ پایگاه دانش غیر رایگان برتر جهان، رایگان برای ویکی‌نویس‌ها"
+msgstr "بیش از ۹۰ پایگاه دانش غیر رایگان برتر جهان، با مطالبی به %(no_of_languages)s زبان، رایگان برای ویکی‌نویس‌ها"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2282,15 +2282,14 @@ msgstr "رمز درخواستی وجود ندارد."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:494
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "Handshaker شروع نشده‌است، لطفاً دوباره وارد سیستم شوید."
+msgstr "تولید رمز دسترسی ناموفق بود، لطفاً دوباره وارد سیستم شوید."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:503
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "اطلاعات خدمات"
+msgstr "برای اطلاعات بیشتر به {issue} مراجعه کنید"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:524
@@ -2979,9 +2978,8 @@ msgstr "لطفاً <a class='twl-links' href='{url}'>مشارکت‌هایتان
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:290
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr "شما انتخاب کرده‌اید که ایمیل‌های یادآوری را دریافت نکنید. به‌عنوان یک هماهنگ‌کننده، باید حداقل یک نوع ایمیل یادآوری دریافت کنید، بنابراین تنظیمات برگزیدهٔ خود را تغییر دهید."
+msgstr "شما انتخاب کرده‌اید که ایمیل‌های یادآوری را دریافت نکنید. به‌عنوان یک هماهنگ‌کننده، باید حداقل یک نوع ایمیل یادآوری دریافت کنید، بنابراین تنظیمات خود را تغییر دهید."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:298
