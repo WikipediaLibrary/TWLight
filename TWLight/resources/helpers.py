@@ -4,48 +4,6 @@ import json
 import os
 
 
-def check_for_target_url_duplication_and_generate_error_message(self, partner=False):
-    """
-    Filter for partners (PROXY and BUNDLE) where the
-    target_url is the same as self. On filtering, if we have
-    a non-zero number of matches, we generate the appropriate
-    error message to be shown to the staff.
-
-    :param self:
-    :param partner:
-    :return:
-    """
-    from TWLight.resources.models import Partner
-
-    duplicate_target_url_partners = Partner.objects.filter(
-        authorization_method__in=[Partner.PROXY, Partner.BUNDLE],
-        target_url=self.target_url,
-    ).values_list("company_name", flat=True)
-    # Exclude self from the filtered partner list, if the operation
-    # is performed on Partners.
-    if partner:
-        duplicate_target_url_partners = duplicate_target_url_partners.exclude(
-            pk=self.pk
-        )
-
-    partner_duplicates_count = duplicate_target_url_partners.count()
-
-    if partner_duplicates_count != 0:
-        validation_error_msg = (
-            "No two or more partners can have the same target url. "
-            "The following partner(s) have the same target url: "
-        )
-        validation_error_msg_partners = "None"
-        if partner_duplicates_count > 1:
-            validation_error_msg_partners = ", ".join(duplicate_target_url_partners)
-        elif partner_duplicates_count == 1:
-            validation_error_msg_partners = duplicate_target_url_partners[0]
-
-        return validation_error_msg + " Partner(s): " + validation_error_msg_partners
-
-    return None
-
-
 def get_partner_description_json_schema():
     """
     JSON Schema for partner description translations

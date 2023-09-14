@@ -25,10 +25,8 @@ from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.models import Authorization
 
 from .factories import PartnerFactory, SuggestionFactory
-from .helpers import (
-    check_for_target_url_duplication_and_generate_error_message,
-    get_partner_description_json_schema,
-)
+from .helpers import get_partner_description_json_schema
+
 from .models import (
     Language,
     RESOURCE_LANGUAGES,
@@ -430,42 +428,6 @@ class PartnerModelTests(TestCase):
                 )
             ),
         )
-
-    def test_helper_function_for_target_url_uniqueness(self):
-        partner1 = PartnerFactory(authorization_method=Partner.PROXY)
-        partner2 = PartnerFactory(authorization_method=Partner.BUNDLE)
-
-        example_url = "https://www.example.com"
-        partner1.target_url = example_url
-        partner1.requested_access_duration = (
-            True  # We don't want the ValidationError from requested_access_duration
-        )
-        partner1.save()
-        partner2.target_url = example_url
-        partner2.save()
-
-        msg = check_for_target_url_duplication_and_generate_error_message(
-            partner1, partner=True
-        )
-        self.assertIsNotNone(msg)
-        self.assertIn(partner2.company_name, msg)
-
-        self.assertRaises(ValidationError, partner1.clean)
-        try:
-            partner1.clean()
-        except ValidationError as e:
-            self.assertEqual([msg], e.messages)
-
-        msg = check_for_target_url_duplication_and_generate_error_message(
-            partner2, partner=True
-        )
-        self.assertIsNotNone(msg)
-        # We only want the duplicate partner names to be shown,
-        # not self.
-        self.assertNotIn(partner2.company_name, msg)
-        self.assertIn(partner1.company_name, msg)
-
-        self.assertIsNotNone(msg)
 
     def test_user_instructions(self):
         partner1 = PartnerFactory(authorization_method=Partner.CODES)

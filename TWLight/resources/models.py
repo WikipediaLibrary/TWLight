@@ -17,10 +17,7 @@ from django_countries.fields import CountryField
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-from TWLight.resources.helpers import (
-    check_for_target_url_duplication_and_generate_error_message,
-    get_tags_json_schema,
-)
+from TWLight.resources.helpers import get_tags_json_schema
 
 # Use language autonyms from Wikimedia.
 # We periodically pull:
@@ -206,6 +203,7 @@ class Partner(models.Model):
         blank=True,
         null=True,
         help_text="Link to partner resources. Required for proxied resources; optional otherwise.",
+        unique=True,
     )
 
     terms_of_use = models.URLField(
@@ -387,16 +385,6 @@ class Partner(models.Model):
                     ]
                 }
             )
-        if self.target_url:
-            # Validate the form for the uniqueness of self.target_url across
-            # all PROXY and BUNDLE partners.
-            validation_error_msg = (
-                check_for_target_url_duplication_and_generate_error_message(
-                    self, partner=True
-                )
-            )
-            if validation_error_msg:
-                raise ValidationError({"target_url": validation_error_msg})
 
         if self.authorization_method in [self.CODES, self.LINK] and (
             not self.user_instructions
