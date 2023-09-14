@@ -1,4 +1,3 @@
-import copy
 from django_countries import countries
 from math import ceil
 from faker import Faker

@@ -7,8 +7,6 @@ from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.cache import cache
-from django.core.cache.utils import make_template_fragment_key
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.urls import reverse_lazy, reverse
