@@ -420,7 +420,7 @@ def update_app_status_on_save(sender, instance, **kwargs):
 
     # Case 1: Application already existed; status has been changed.
     if instance.id:
-        orig_app = Application.objects.get(pk=instance.id)
+        orig_app = Application.include_invalid.get(pk=instance.id)
         orig_status = orig_app.status
 
         if orig_status != instance.status:
