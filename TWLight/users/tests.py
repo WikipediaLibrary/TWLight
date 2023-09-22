@@ -1600,6 +1600,29 @@ class EditorModelTestCase(TestCase):
         # emails
         self.assertEqual(len(mail.outbox), 0)
 
+    def test_editor_email_not_overwritten(self):
+        """
+        When a user has no Wikipedia email, but defines one in the
+        platform, we shouldn't be overwriting it with a blank string.
+        """
+        new_editor = EditorFactory(wp_registered=None)
+        new_identity = FAKE_IDENTITY
+        new_global_userinfo = FAKE_GLOBAL_USERINFO
+        new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
+
+        new_identity["email"] = ""
+
+        # User sets own email
+        test_email = "test@example.com"
+        new_editor.user.email = test_email
+        new_editor.user.save()
+
+        lang = get_language()
+        new_editor.update_from_wikipedia(new_identity, lang, new_global_userinfo)
+
+        self.assertEqual(new_editor.user.email, test_email)
+
 
 class OAuthTestCase(TestCase):
     @classmethod
