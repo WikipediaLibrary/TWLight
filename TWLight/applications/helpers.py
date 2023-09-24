@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from TWLight.resources.models import Partner
 
 from .models import Application
-from ..users.helpers.authorizations import get_valid_partner_authorizations
 
 """
 Lists and characterizes the types of information that partners can require as
@@ -156,21 +155,13 @@ def get_output_for_application(app):
     return output
 
 
-def count_valid_authorizations(partner_pk):
-    """
-    Retrieves the numbers of valid authorizations using the
-    get_valid_partner_authorizations() method above.
-    """
-    return get_valid_partner_authorizations(partner_pk).count()
-
-
 def get_accounts_available(app):
     """
     Because we allow number of accounts available on the partner level,
     we base our calculations on the partner level.
     """
     if app.partner.accounts_available is not None:
-        valid_authorizations = count_valid_authorizations(app.partner)
+        valid_authorizations = app.partner.get_valid_authorization_count
         return app.partner.accounts_available - valid_authorizations
 
 
