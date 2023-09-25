@@ -38,8 +38,8 @@ class NewHomePageView(TemplateView):
             _("500+ edits"),
             # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
             _("6+ months editing"),
-            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-            _("10+ edits in the last month"),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
+            _("10+ edits in the last 30 days"),
             # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
             _("No active blocks"),
         ]
