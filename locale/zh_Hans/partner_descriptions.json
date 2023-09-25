@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"2NumForIce",
 			"Diskdance",
 			"GuoPC",
 			"Lantianjialiang",
@@ -142,5 +143,6 @@
 	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong>提供对由美国学术协会理事会的学者挑选的数千本书籍的访问，这些书籍是研究人文和社会科学的基础。这些书籍来自超过 125 家出版商，并且都经过同行评审。",
 	"142_short_description": "<strong>杜克大学出版社</strong>以出版人文、社会科学和数学而闻名，每年出版约 120 本书和 50 多种期刊。",
 	"143_short_description": "<strong>Mohr Siebeck</strong>是德国一家历史悠久的学术出版商，专注于人文和社会科学。该电子图书馆包含2000多本书籍和众多期刊，涉及宗教研究、历史、哲学、法律、经济学和社会学。",
-	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。"
+	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。",
+	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利时出版的佛兰德日报。"
 }
