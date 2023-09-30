@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <meta property="og:title" content="The Wikipedia Library" />
+    {% comment %}Translators: Name of the project/tool.{% endcomment %}
+    <meta property="og:title" content="{% trans "The Wikipedia Library" %}" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia_library_logo.png" />
     <meta property="og:image:width" content="200" />
@@ -26,8 +27,8 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/6/63/Wikipedia_library_logo.png" />
     <meta property="twitter:site" content="@WikiLibrary" />
-    <meta property="og:locale" content=en_US />
-    {% for language in all_languages %}
+    <meta property="og:locale" content="{{current_language}}" />
+    {% for language in all_languages_except_current %}
       <meta property="og:locale:alternate" content={{language}} />
     {% endfor %}
     <title>
