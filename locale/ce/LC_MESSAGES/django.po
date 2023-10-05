@@ -7,7 +7,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-09-28 11:41+0000\n"
-"PO-Revision-Date: 2023-10-02 11:29:27+0000\n"
+"PO-Revision-Date: 2023-10-05 11:30:57+0000\n"
 "Language: ce\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -166,7 +166,7 @@ msgstr ""
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:124
 msgid "Account email"
-msgstr ""
+msgstr "Аккаунтан эл. пошта"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
@@ -2584,7 +2584,7 @@ msgstr ""
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
 #: TWLight/users/templates/users/my_applications.html:73
 msgid "Has your account expired?"
-msgstr ""
+msgstr "Хьан аккаунт чекхйаьлла?"
 
 #. Translators: On the page listing applications, this text labels a link which users can click to request a renewal of their application.
 #: TWLight/users/templates/users/my_applications.html:76
@@ -2599,7 +2599,7 @@ msgstr ""
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
 msgid "Preferences"
-msgstr ""
+msgstr "Нисдаран гӀирс"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change the site language.
 #: TWLight/users/templates/users/preferences.html:11
