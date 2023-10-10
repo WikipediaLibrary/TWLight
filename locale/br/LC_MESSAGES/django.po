@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-10-10 19:26+0000\n"
+"POT-Creation-Date: 2023-10-10 19:36+0000\n"
 "PO-Revision-Date: 2023-10-02 11:29:26+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3621,7 +3621,7 @@ msgid "6+ months editing"
 msgstr "O kemmañ abaoe 6+ miz"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:852 TWLight/views.py:43
+#: TWLight/users/views.py:852
 msgid "10+ edits in the last month"
 msgstr "10+ kemmoù er miz tremenet"
 
@@ -3629,6 +3629,13 @@ msgstr "10+ kemmoù er miz tremenet"
 #: TWLight/users/views.py:854 TWLight/views.py:45
 msgid "No active blocks"
 msgstr "Stankadennoù oberiant ebet"
+
+#. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
+#: TWLight/views.py:43
+#, fuzzy
+#| msgid "10+ edits in the last month"
+msgid "10+ edits in the last 30 days"
+msgstr "10+ kemmoù er miz tremenet"
 
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5

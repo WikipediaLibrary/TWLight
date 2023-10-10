@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-10-10 19:26+0000\n"
+"POT-Creation-Date: 2023-10-10 19:36+0000\n"
 "PO-Revision-Date: 2023-10-02 11:29:30+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3601,7 +3601,7 @@ msgid "6+ months editing"
 msgstr "6개월 이상 편집"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:852 TWLight/views.py:43
+#: TWLight/users/views.py:852
 msgid "10+ edits in the last month"
 msgstr "지난 달 편집 수 10건 이상"
 
@@ -3609,6 +3609,13 @@ msgstr "지난 달 편집 수 10건 이상"
 #: TWLight/users/views.py:854 TWLight/views.py:45
 msgid "No active blocks"
 msgstr "현재 차단되지 않은 상태"
+
+#. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
+#: TWLight/views.py:43
+#, fuzzy
+#| msgid "10+ edits in the last month"
+msgid "10+ edits in the last 30 days"
+msgstr "지난 달 편집 수 10건 이상"
 
 #: tests/shunit/data/bad_i18n_comment_1.py:3
 #: tests/shunit/data/bad_i18n_newline_1.py:5
