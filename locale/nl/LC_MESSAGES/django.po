@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-10-10 19:36+0000\n"
-"PO-Revision-Date: 2023-10-12 11:33:37+0000\n"
+"PO-Revision-Date: 2023-10-16 11:32:01+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3036,7 +3036,6 @@ msgstr "Geen actieve blokkades"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:43
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "10+ bewerkingen in de afgelopen maand"
+msgstr "10+ bewerkingen in de afgelopen 30 dagen"
 

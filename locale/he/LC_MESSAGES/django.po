@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-10-10 19:36+0000\n"
-"PO-Revision-Date: 2023-10-12 11:33:35+0000\n"
+"PO-Revision-Date: 2023-10-16 11:31:58+0000\n"
 "Language: he\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3034,7 +3034,6 @@ msgstr "אין חסימות פעילות"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:43
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "מעל 10 עריכות בחודש האחרון"
+msgstr "מעל 10 עריכות ב־30 הימים האחרונים"
 
