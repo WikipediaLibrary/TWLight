@@ -762,7 +762,7 @@ class Editor(models.Model):
         # We should only overwrite saved data if an email is present in the
         # response.
         if self.user.userprofile.use_wp_email:
-            if "email" in identity and identity["email"] != "":
+            if "email" in identity and identity["email"] and identity["email"] != "":
                 self.user.email = identity["email"]
             else:
                 logger.exception("Unable to get Editor email address from Wikipedia.")
