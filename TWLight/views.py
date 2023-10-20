@@ -14,8 +14,9 @@ from django.utils.translation import get_language, gettext_lazy as _
 from django.template import TemplateDoesNotExist, loader
 from django.views.decorators.csrf import requires_csrf_token
 from django.views.decorators.debug import sensitive_variables
+from django.utils.translation import get_language_from_request
 
-from TWLight.resources.models import Partner, PartnerLogo
+from TWLight.resources.models import Partner, PartnerLogo, Language
 from TWLight.resources.helpers import get_tag_dict
 
 from .forms import EdsSearchForm
@@ -38,8 +39,8 @@ class NewHomePageView(TemplateView):
             _("500+ edits"),
             # Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
             _("6+ months editing"),
-            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-            _("10+ edits in the last month"),
+            # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
+            _("10+ edits in the last 30 days"),
             # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
             _("No active blocks"),
         ]
@@ -118,6 +119,16 @@ class NewHomePageView(TemplateView):
         context["no_of_languages"] = (
             Partner.objects.values("languages").distinct().count()
         )
+        current_language = get_language_from_request(self.request)
+        all_languages = list(Language.objects.values_list("language", flat=True))
+        try:
+            all_languages.remove(current_language)
+            all_languages_except_current = all_languages
+        except ValueError:
+            all_languages_except_current = all_languages
+        context["current_language"] = current_language
+        context["all_languages_except_current"] = all_languages_except_current
+
         param_next_url = self.request.GET.get("next_url", None)
         if param_next_url:
             context["next_url"] = param_next_url

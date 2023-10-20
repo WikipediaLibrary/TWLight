@@ -636,6 +636,32 @@ class ViewsTestCase(TestCase):
         bundle_auth_count = Authorization.objects.filter(pk=bundle_auth_id).count()
         self.assertEqual(bundle_auth_count, 0)
 
+    def test_user_delete_with_invalid_applications(self):
+        """
+        Verify that users can delete their account even if they have an
+        invalidated application.
+        """
+        partner = PartnerFactory()
+
+        # Create an invalid application
+        application = ApplicationFactory(
+            status=Application.INVALID, editor=self.editor1, partner=partner
+        )
+
+        delete_url = reverse("users:delete_data", kwargs={"pk": self.user_editor.pk})
+
+        # Need a password so we can login
+        self.editor1.user.set_password("editor")
+        self.editor1.user.save()
+
+        self.client = Client()
+        session = self.client.session
+        self.client.login(username=self.username1, password="editor")
+
+        submit = self.client.post(delete_url)
+
+        assert not User.objects.filter(username=self.username1).exists()
+
     def test_user_data_download(self):
         """
         Verify that if users try to download their personal data they
@@ -1573,6 +1599,52 @@ class EditorModelTestCase(TestCase):
         # The user's block status never changed, so we shouldn't send any
         # emails
         self.assertEqual(len(mail.outbox), 0)
+
+    def test_editor_email_not_null(self):
+        """
+        When a user has no Wikipedia email, but defines one in the
+        platform, we shouldn't be overwriting it with a blank string.
+        """
+        new_editor = EditorFactory(wp_registered=None)
+        new_identity = FAKE_IDENTITY
+        new_global_userinfo = FAKE_GLOBAL_USERINFO
+        new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
+
+        new_identity["email"] = None
+
+        # User sets own email
+        test_email = "test@example.com"
+        new_editor.user.email = test_email
+        new_editor.user.save()
+
+        lang = get_language()
+        new_editor.update_from_wikipedia(new_identity, lang, new_global_userinfo)
+
+        self.assertEqual(new_editor.user.email, test_email)
+
+    def test_editor_email_not_overwritten_with_blank(self):
+        """
+        When a user has no Wikipedia email, but defines one in the
+        platform, we shouldn't be overwriting it with a blank string.
+        """
+        new_editor = EditorFactory(wp_registered=None)
+        new_identity = FAKE_IDENTITY
+        new_global_userinfo = FAKE_GLOBAL_USERINFO
+        new_identity["sub"] = new_editor.wp_sub
+        new_global_userinfo["id"] = new_identity["sub"]
+
+        new_identity["email"] = ""
+
+        # User sets own email
+        test_email = "test@example.com"
+        new_editor.user.email = test_email
+        new_editor.user.save()
+
+        lang = get_language()
+        new_editor.update_from_wikipedia(new_identity, lang, new_global_userinfo)
+
+        self.assertEqual(new_editor.user.email, test_email)
 
 
 class OAuthTestCase(TestCase):

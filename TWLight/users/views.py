@@ -41,7 +41,6 @@ from TWLight.view_mixins import (
     test_func_coordinators_only,
 )
 from TWLight.users.groups import get_coordinators, get_restricted
-from TWLight.users.helpers.authorizations import get_valid_partner_authorizations
 from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from rest_framework import status
@@ -723,7 +722,7 @@ class AuthorizedUsers(APIView):
             message = "Couldn't find a partner with this ID."
             return Response(message, status=status.HTTP_404_NOT_FOUND)
 
-        valid_partner_auths = get_valid_partner_authorizations(pk)
+        valid_partner_auths = partner.get_valid_authorizations
 
         # For Bundle partners, get auths for users who logged in within the last 2 weeks.
         if partner.authorization_method == partner.BUNDLE:

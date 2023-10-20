@@ -83,7 +83,7 @@
 	"86_short_description": "<strong>Oxford Art Online</strong>は、オックスフォード大学出版局の美術参考作品へのアクセスを提供します。「Grove Art Online」と「Benezit Dictionary of Artists」のほか、オンラインでのみ入手可能な記事や参考文献が含まれます。Oxford Art Online には画像2万件超と、芸術及び芸術家に関する23万件超の項目があります。",
 	"87_short_description": "<strong>Oxford Bibliographies</strong> は権威のある研究ガイドとして、注釈付きの参考文献目録とハイレベルの百科事典の機能を組み合わせてあります。研究者を対象に、広範な主題の入手できる最高の学識へ導きます。",
 	"88_short_description": "<strong>Oxford Dictionary of National Biography</strong>（ODNB）は、イギリスの歴史と文化を世界中で形作った全国の男性と女性を、ローマ時代から21世紀までまとめた記録です。 ODNBは、専門の執筆者によって簡潔に書かれた最新の伝記を提供します。イギリスのオックスフォード大学の学術編集者の監修を受けます。",
-	"93_short_description": "<strong>Oxford Academic</strong>では、沢山のオックスフォード大学出版誌が閲覧できます。扱う分野は多岐にわたります。",
+	"93_short_description": "<strong>Oxford Academic</strong>（オクスフォード・アカデミック）は、オックスフォード大学出版発行の大量の専門誌を閲覧できます。扱う分野は多岐にわたります。加えて書籍版叢書のデータベースも2件提供を受けました。Oxford Scholarship Online（分野別学術単行書<ref> https://www.kinokuniya.co.jp/03f/denhan/oup/indexoso.htm </ref>）、Oxford Handbooks Online（オンライン版オクスフォード・ハンドブック集）。",
 	"99_short_description": "<strong>Oxford University Press Law</strong>（オックスフォード大学出版局法学部門）は、国際法に関連するリソース集を提供します。",
 	"90_short_description": "<strong>Grove Music Online</strong>は、Grove's Dictionary of Music and Musiciansの第8版であり、ウィキペディア図書館のために特別に委託された記事が含まれています。 Grove Music Onlineには10万件超の項目があり、その範囲は音楽家の経歴から楽器の物理的構造にわたります。",
 	"91_short_description": "<strong>Oxford Reference</strong>は、オックスフォード大学出版局の辞書類やコンパニオン、百科事典全体で200万の電子化した項目をまとめています。",
@@ -147,5 +147,6 @@
 	"142_short_description": "<strong>デューク大学出版局</strong>（Duke University Press）の強みは人文科学、社会科学、数学分野の出版物で、年平均で書籍は120冊、専門誌は50件超を発行しています。",
 	"143_short_description": "<strong>Mohr Siebeck</strong>はドイツの学術出版社で歴史も長く、人文科学と社会科学に特化しています。eLibrary（電子図書館）には書籍2000冊超、数え切れない専門誌を揃え、宗教学、歴史学、哲学、法学、経済学、社会学をおさえています。",
 	"144_short_description": "<strong>Perlego</strong> はオンラインの電子図書館で、学術的で専門分野のノンフィクション系電子書籍の配布に注力しています。",
-	"145_short_description": "<strong>De Standaard</strong> De Standaard は、ベルギーで Mediahuis によって発行されているフランダースの日刊紙です。"
+	"145_short_description": "<strong>De Standaard</strong> De Standaard は、ベルギーで Mediahuis によって発行されているフランダースの日刊紙です。",
+	"146_short_description": "<strong>Duncker & Humblot</strong>電子ライブラリは、1万2500冊の電子書籍のほか、法律、経済学、社会、政治、歴史、哲学、文学の分野から合計25本の学術専門誌、1万2500件超の電子記にアクセスを提供します。"
 }

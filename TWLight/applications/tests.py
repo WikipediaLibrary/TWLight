@@ -48,7 +48,6 @@ from .helpers import (
     AFFILIATION,
     ACCOUNT_EMAIL,
     get_output_for_application,
-    count_valid_authorizations,
     more_applications_than_accounts_available,
 )
 from .factories import ApplicationFactory
@@ -2133,7 +2132,7 @@ class EvaluateApplicationTest(TestCase):
         self.partner.refresh_from_db()
         self.assertEqual(self.partner.status, Partner.WAITLIST)
 
-    def test_count_valid_authorizations(self):
+    def test_get_valid_authorization_count(self):
         for _ in range(5):
             # valid
             auth1 = Authorization(
@@ -2164,17 +2163,14 @@ class EvaluateApplicationTest(TestCase):
         )
         self.assertRaises(ValidationError, auth4.save)
 
-        total_valid_authorizations = count_valid_authorizations(self.partner)
+        total_valid_authorizations = self.partner.get_valid_authorization_count
         self.assertEqual(total_valid_authorizations, 6)
 
-        # Filter logic in .helpers.get_valid_partner_authorizations and
+        # Filter logic in Partner.get_valid_authorizations and
         # TWLight.users.models.Authorization.is_valid must be in sync.
         # We test that here.
         all_authorizations_using_is_valid = Authorization.objects.filter(
             partners=self.partner
-        )
-        total_valid_authorizations_using_helper = count_valid_authorizations(
-            self.partner
         )
 
         total_valid_authorizations_using_is_valid = 0
@@ -2184,7 +2180,7 @@ class EvaluateApplicationTest(TestCase):
 
         self.assertEqual(
             total_valid_authorizations_using_is_valid,
-            total_valid_authorizations_using_helper,
+            total_valid_authorizations,
         )
 
     def test_sets_days_open(self):

@@ -56,7 +56,6 @@ from .helpers import (
     PARTNER_FORM_OPTIONAL_FIELDS,
     PARTNER_FORM_BASE_FIELDS,
     get_output_for_application,
-    count_valid_authorizations,
     get_accounts_available,
     is_proxy_and_application_approved,
     more_applications_than_accounts_available,
@@ -982,11 +981,10 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         # on their valid authorizations to ensure we have enough accounts available and set the
         # boolean value for the corresponding partner_pk in the partners_distribution_flag dictionary.
         for partner_pk, app_count in applications_per_partner.items():
-            total_accounts_available = Partner.objects.filter(pk=partner_pk).values(
-                "accounts_available"
-            )[0]["accounts_available"]
+            this_partner = Partner.objects.get(pk=partner_pk)
+            total_accounts_available = this_partner.accounts_available
             if total_accounts_available is not None:
-                valid_authorizations = count_valid_authorizations(partner_pk)
+                valid_authorizations = this_partner.get_valid_authorization_count
                 total_accounts_available_for_distribution = (
                     total_accounts_available - valid_authorizations
                 )

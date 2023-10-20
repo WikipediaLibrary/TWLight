@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"2NumForIce",
 			"Diskdance",
 			"GuoPC",
 			"Lantianjialiang",
@@ -58,7 +59,7 @@
 	"78_short_description": "<strong>ICE Publishing</strong>是土木工程师协会的一部分。可以访问他们ICE虚拟图书馆中包含的所有期刊和电子书。",
 	"68_short_description": "<strong>Invaluable</strong>是一个拍卖网站，其中包含艺术家和拍卖的数据库。他们将提供5000万个拍卖品和超过500,000位艺术家的信息，以提供其专业级别的订阅。注意：请注意，尽管不会向您收费，但Invaluable的注册过程当前需要您提供详细付费信息。",
 	"77_short_description": "<strong>International Water Association Publishing</strong>是有关水、废水和相关环境领域的书籍和14种期刊的出版商。",
-	"54_short_description": "<strong>JSTOR</strong>是世界上最大、最负盛名的期刊档案之一。 维基百科编者当前可获得的内容集包括JSTOR的所有档案期刊典藏和19世纪英国小册子典藏。",
+	"54_short_description": "<strong>JSTOR</strong>是世界上最大、最负盛名的期刊档案之一。 维基百科编者当前可获得的内容集包括JSTOR的众多档案期刊典藏和19世纪英国小册子典藏。",
 	"72_short_description": "<strong>Kinige</strong>是一家电子书商店，主要由印度语书籍（主要是泰卢固语文字书籍）组成。Kinige每月免费提供10本电子书。",
 	"72_description": "申请时，请描述您在维基百科上撰写参考内容的经验，包括您先前如何使用Kinige的书籍（如果有）。每月25日之前收到的请求将在月底发送给Kinige。",
 	"18_short_description": "<strong>L'Harmattan</strong>是法国的社会科学和人文学科出版商，拥有27,000种社会科学、文学、五大洲的专业文学、稀有书籍、视频和期刊的书目。",
@@ -142,5 +143,6 @@
 	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong>提供对由美国学术协会理事会的学者挑选的数千本书籍的访问，这些书籍是研究人文和社会科学的基础。这些书籍来自超过 125 家出版商，并且都经过同行评审。",
 	"142_short_description": "<strong>杜克大学出版社</strong>以出版人文、社会科学和数学而闻名，每年出版约 120 本书和 50 多种期刊。",
 	"143_short_description": "<strong>Mohr Siebeck</strong>是德国一家历史悠久的学术出版商，专注于人文和社会科学。该电子图书馆包含2000多本书籍和众多期刊，涉及宗教研究、历史、哲学、法律、经济学和社会学。",
-	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。"
+	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。",
+	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利时出版的佛兰德日报。"
 }

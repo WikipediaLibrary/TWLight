@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
-from TWLight.applications.helpers import count_valid_authorizations
 from TWLight.resources.models import Partner
 
 import logging
@@ -18,7 +16,7 @@ class Command(BaseCommand):
         ).exclude(accounts_available__isnull=True)
 
         for each_partner in all_partners:
-            valid_authorizations = count_valid_authorizations(each_partner.pk)
+            valid_authorizations = each_partner.get_valid_authorization_count
             total_accounts_available_for_distribution = (
                 each_partner.accounts_available - valid_authorizations
             )
