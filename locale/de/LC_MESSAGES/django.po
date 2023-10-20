@@ -31,7 +31,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-10-19 13:04+0000\n"
+"POT-Creation-Date: 2023-10-20 11:21+0000\n"
 "PO-Revision-Date: 2023-10-12 11:33:33+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgstr "Name deines Kontos"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:93
+#: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:92
 msgid "Partner name"
 msgstr "Name des Partners"
 
@@ -102,13 +102,13 @@ msgstr "Erneuerungsbestätigung"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:103
+#: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:102
 msgid "The email for your account on the partner's website"
 msgstr "Die E-Mail-Addresse für deinen Account auf der Website des Partners."
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:106
+#: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:105
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
@@ -117,48 +117,48 @@ msgstr ""
 "erneuert werden muss."
 
 #. Translators: When filling out an application, users may need to specify their name
-#: TWLight/applications/helpers.py:85
+#: TWLight/applications/helpers.py:84
 msgid "Your real name"
 msgstr "Dein echter Name"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
-#: TWLight/applications/helpers.py:87
+#: TWLight/applications/helpers.py:86
 msgid "Your country of residence"
 msgstr "Das Land deines Wohnsitzes"
 
 #. Translators: When filling out an application, users may need to specify their current occupation
-#: TWLight/applications/helpers.py:89
+#: TWLight/applications/helpers.py:88
 msgid "Your occupation"
 msgstr "Dein Beruf"
 
 #. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
-#: TWLight/applications/helpers.py:91
+#: TWLight/applications/helpers.py:90
 msgid "Your institutional affiliation"
 msgstr "Zugehörigkeit zu einer Universität oder ähnlichen Institution"
 
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
-#: TWLight/applications/helpers.py:95
+#: TWLight/applications/helpers.py:94
 msgid "Why do you want access to this resource?"
 msgstr "Warum möchtest du auf diesen Inhalt Zugriff erhalten?"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
-#: TWLight/applications/helpers.py:97
+#: TWLight/applications/helpers.py:96
 msgid "Which book do you want?"
 msgstr "Zu welchem bestimmten Buch möchtest du Zugang erhalten?"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
-#: TWLight/applications/helpers.py:99
+#: TWLight/applications/helpers.py:98
 msgid "Anything else you want to say"
 msgstr "Sonstige Anmerkungen"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
-#: TWLight/applications/helpers.py:101
+#: TWLight/applications/helpers.py:100
 msgid "You must agree with the partner's terms of use"
 msgstr "Du musst den Nutzungsbedingungen des Partners zustimmen"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:112
+#: TWLight/applications/helpers.py:111
 #: TWLight/users/templates/users/editor_detail_data.html:297
 msgid "Real name"
 msgstr "Echter Name"
@@ -166,7 +166,7 @@ msgstr "Echter Name"
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: This labels the section of an application that shows the country of residence of the applicant.
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
-#: TWLight/applications/helpers.py:114
+#: TWLight/applications/helpers.py:113
 #: TWLight/applications/templates/applications/application_evaluation.html:115
 #: TWLight/users/templates/users/editor_detail_data.html:309
 msgid "Country of residence"
@@ -174,30 +174,30 @@ msgstr "Land deines Wohnsitzes"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's occupation
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:116
+#: TWLight/applications/helpers.py:115
 #: TWLight/users/templates/users/editor_detail_data.html:321
 msgid "Occupation"
 msgstr "Beruf"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
-#: TWLight/applications/helpers.py:118
+#: TWLight/applications/helpers.py:117
 msgid "Affiliation"
 msgstr "(Institutionelle) Zugehörigkeit"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
-#: TWLight/applications/helpers.py:120
+#: TWLight/applications/helpers.py:119
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
 msgstr "Angefragter Titel"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-#: TWLight/applications/helpers.py:122
+#: TWLight/applications/helpers.py:121
 msgid "Agreed with terms of use"
 msgstr "Den Nutzungsbestimmungen zugestimmt"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-#: TWLight/applications/helpers.py:124
+#: TWLight/applications/helpers.py:123
 msgid "Account email"
 msgstr "E-Mail-Addresse des Kontos"
 
@@ -205,7 +205,7 @@ msgstr "E-Mail-Addresse des Kontos"
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:138
+#: TWLight/applications/helpers.py:137
 #: TWLight/emails/templates/emails/contact.html:51
 #: TWLight/resources/templates/resources/partner_users.html:31
 #: TWLight/resources/templates/resources/partner_users.html:71
@@ -382,7 +382,7 @@ msgstr "Monat(e)"
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
 #: TWLight/applications/templates/applications/application_evaluation.html:102
-#: TWLight/applications/views.py:473 TWLight/applications/views.py:552
+#: TWLight/applications/views.py:472 TWLight/applications/views.py:551
 msgid "Partner"
 msgstr "Partner"
 
@@ -773,7 +773,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
-#: TWLight/users/views.py:529
+#: TWLight/users/views.py:528
 msgid "Confirm"
 msgstr "Bestätigen"
 
@@ -897,7 +897,7 @@ msgstr ""
 
 #. Translators: When a user applies for a set of resources, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
-#: TWLight/applications/views.py:142 TWLight/applications/views.py:1285
+#: TWLight/applications/views.py:141 TWLight/applications/views.py:1283
 msgid ""
 "This partner does not have any access grants available at this time. You may "
 "still apply for access; your application will be reviewed when access grants "
@@ -908,7 +908,7 @@ msgstr ""
 "verfügbar sind."
 
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
-#: TWLight/applications/views.py:165
+#: TWLight/applications/views.py:164
 #, python-brace-format
 msgid ""
 "Your application has been submitted for review. Head over to <a "
@@ -919,52 +919,52 @@ msgstr ""
 "einsehen."
 
 #. Translators: This text is displayed to users when the user has chosen to restrict data and is trying to apply for multiple partners
-#: TWLight/applications/views.py:278
+#: TWLight/applications/views.py:277
 msgid "This field consists only of restricted text."
 msgstr "Der Text in diesem Feld ist eingeschränkt sichtbar."
 
 #. Translators: This message is shown to user when he tries to apply to same partner more than once
-#: TWLight/applications/views.py:374
+#: TWLight/applications/views.py:373
 msgid "You already have an application for this Partner."
 msgstr ""
 "Du hast dich bereits für einen Zugang zur Plattform dieses Partners beworben."
 
 #. Translators: Editor = wikipedia editor, gender unknown.
-#: TWLight/applications/views.py:471 TWLight/applications/views.py:550
+#: TWLight/applications/views.py:470 TWLight/applications/views.py:549
 msgid "Editor"
 msgstr "Benutzer*in"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
-#: TWLight/applications/views.py:596
+#: TWLight/applications/views.py:595
 msgid "Applications to review"
 msgstr "Zu überprüfende Bewerbungen"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Approved' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'approved' status
-#: TWLight/applications/views.py:637
+#: TWLight/applications/views.py:636
 #: TWLight/resources/templates/resources/partner_users.html:23
 msgid "Approved applications"
 msgstr "Bestätigte Bewerbungen"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Rejected' applications.
-#: TWLight/applications/views.py:663
+#: TWLight/applications/views.py:662
 msgid "Rejected applications"
 msgstr "Abgelehnte Bewerbungen"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Up for renewal' applications.
-#: TWLight/applications/views.py:697
+#: TWLight/applications/views.py:696
 msgid "Access grants up for renewal"
 msgstr "Zu erneuernde Zugänge"
 
 #. Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Sent' applications.
 #. Translators: On the page listing approved users for a partner, this is the title of the section listing applications with the 'sent' status
-#: TWLight/applications/views.py:723
+#: TWLight/applications/views.py:722
 #: TWLight/resources/templates/resources/partner_users.html:63
 msgid "Sent applications"
 msgstr "Gesendete Bewerbungen"
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection is waitlisted this message appears.
-#: TWLight/applications/views.py:758
+#: TWLight/applications/views.py:757
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted."
@@ -973,7 +973,7 @@ msgstr ""
 "Authorisierung auf der Warteliste stehen."
 
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:782
+#: TWLight/applications/views.py:781
 msgid ""
 "Cannot approve application as partner with proxy authorization method is "
 "waitlisted and (or) has zero accounts available for distribution."
@@ -983,12 +983,12 @@ msgstr ""
 "stehen."
 
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
-#: TWLight/applications/views.py:805
+#: TWLight/applications/views.py:804
 msgid "You attempted to create a duplicate authorization."
 msgstr "Du hast versucht, eine doppelte Authorisierung zu erstellen."
 
 #. Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
-#: TWLight/applications/views.py:859
+#: TWLight/applications/views.py:858
 #, python-brace-format
 msgid ""
 "This application cannot be modified since this partner is now part of our <a "
@@ -1003,12 +1003,12 @@ msgstr ""
 "href='{contact}'>Kontaktiere uns</a>, wenn du Fragen haben solltest."
 
 #. Translators: this lets a reviewer set the status of a single application.
-#: TWLight/applications/views.py:875
+#: TWLight/applications/views.py:874
 msgid "Set application status"
 msgstr "Status der Bewerbung wählen"
 
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
-#: TWLight/applications/views.py:893
+#: TWLight/applications/views.py:892
 msgid ""
 "There are more pending applications than available accounts. Your "
 "application might get waitlisted."
@@ -1017,23 +1017,23 @@ msgstr ""
 "ggfs. auf die Warteliste gesetzt."
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
-#: TWLight/applications/views.py:906
+#: TWLight/applications/views.py:905
 msgid "Status of INVALID applications cannot be changed."
 msgstr ""
 "Der Status von INVALID (ungültigen) Bewerbungen kann nicht verändert werden."
 
 #. Translators: When a coordinator is batch editing (https://wikipedialibrary.wmflabs.org/applications/list/), they receive this message if they click Set Status without selecting any applications.
-#: TWLight/applications/views.py:942
+#: TWLight/applications/views.py:941
 msgid "Please select at least one application."
 msgstr "Bitte wähle mindestens eine Bewerbung aus."
 
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
-#: TWLight/applications/views.py:1045
+#: TWLight/applications/views.py:1043
 msgid "Batch update of application(s) {} successful."
 msgstr "Batchupdate von Bewerbung(en) {} erfolgreich."
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
-#: TWLight/applications/views.py:1054
+#: TWLight/applications/views.py:1052
 msgid ""
 "Cannot approve application(s) {} as partner(s) with proxy authorization "
 "method is/are waitlisted and (or) has/have not enough accounts available. If "
@@ -1047,17 +1047,17 @@ msgstr ""
 "Anzahl."
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
-#: TWLight/applications/views.py:1194
+#: TWLight/applications/views.py:1192
 msgid "Error: Code used multiple times."
 msgstr "Fehler: Der Code wurde mehrmals verwendet."
 
 #. Translators: After a coordinator has marked a number of applications as 'sent', this message appears.
-#: TWLight/applications/views.py:1244
+#: TWLight/applications/views.py:1242
 msgid "All selected applications have been marked as sent."
 msgstr "Alle gewählten Bewerbungen wurden als gesendet markiert."
 
 #. Translators: When a user tries to renew their resource, they receive this message if the partner is not available.
-#: TWLight/applications/views.py:1275
+#: TWLight/applications/views.py:1273
 msgid ""
 "Cannot renew application at this time as partner is not available. Please "
 "check back later, or contact us for more information."
@@ -1067,13 +1067,13 @@ msgstr ""
 "um mehr Informationen zu erhalten."
 
 #. Translators: This message is displayed when an attempt by a user to renew an application has been denied for some reason.
-#: TWLight/applications/views.py:1311
+#: TWLight/applications/views.py:1309
 #, python-brace-format
 msgid "Attempt to renew unapproved application #{pk} has been denied"
 msgstr "Der Versuch, die unbestätigte App #{pk} zu erneuern, wurde abgelehnt."
 
 #. Translators: If a user requests the renewal of their account, but it wasn't renewed, this message is shown to them.
-#: TWLight/applications/views.py:1388
+#: TWLight/applications/views.py:1386
 msgid ""
 "This object cannot be renewed. (This probably means that you have already "
 "requested that it be renewed.)"
@@ -1082,7 +1082,7 @@ msgstr ""
 "du schon eine Erneuerung angefragt hast.)"
 
 #. Translators: If a user requests the renewal of their account, this message is shown to them.
-#: TWLight/applications/views.py:1398
+#: TWLight/applications/views.py:1396
 msgid ""
 "Your renewal request has been received. A coordinator will review your "
 "request."
@@ -1563,7 +1563,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:521
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:520
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Dazu musst du in den Wikimedia-Projekten aktiv sein."
 
@@ -1615,7 +1615,7 @@ msgstr "Sprachen"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/filters.py:74 TWLight/resources/models.py:286
+#: TWLight/resources/filters.py:74 TWLight/resources/models.py:288
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
@@ -1645,13 +1645,13 @@ msgid "Website"
 msgstr "Website"
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
-#: TWLight/resources/models.py:288
+#: TWLight/resources/models.py:290
 msgid "Not searchable"
 msgstr "Nicht durchsuchbar"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/models.py:290
+#: TWLight/resources/models.py:292
 #: TWLight/users/templates/users/available_collection_tile.html:9
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
@@ -1659,32 +1659,32 @@ msgid "Partially searchable"
 msgstr "Teilweise durchsuchbar"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:484
+#: TWLight/resources/models.py:522
 msgid "Service information"
 msgstr "Service-Information"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:486
+#: TWLight/resources/models.py:524
 msgid "Service issue"
 msgstr "Serviceproblem"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:488
+#: TWLight/resources/models.py:526
 msgid "Temporarily unavailable"
 msgstr "Vorübergehend nicht erreichbar"
 
 #. Translators: information about the current status of this partner
-#: TWLight/resources/models.py:493
+#: TWLight/resources/models.py:531
 msgid "Ongoing work may impact access"
 msgstr "Laufende Arbeiten können den Zugriff beeinträchtigen"
 
 #. Translators: information about a current issue with this partner
-#: TWLight/resources/models.py:495
+#: TWLight/resources/models.py:533
 msgid "An issue is impacting access"
 msgstr "Ein Problem beeinträchtigt den Zugriff"
 
 #. Translators: information about a current outage for this partner
-#: TWLight/resources/models.py:497
+#: TWLight/resources/models.py:535
 msgid "Access is currently unavailable"
 msgstr "Der Zugriff ist derzeit nicht möglich"
 
@@ -2225,7 +2225,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "Bist du sicher, <b>%(object)s</b> löschen zu wollen?"
 
 #. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:259
+#: TWLight/resources/views.py:258
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2234,27 +2234,27 @@ msgstr ""
 "kontaktiere uns und erwähne dabei diesen Hinweis."
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:303
+#: TWLight/resources/views.py:302
 msgid "This partner is currently not open for applications"
 msgstr "Dieser Partner nimmt derzeit keine Bewerbungen an."
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:393
+#: TWLight/resources/views.py:392
 msgid "This partner is now waitlisted"
 msgstr "Dieser Partner ist jetzt auf der Warteliste."
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:406
+#: TWLight/resources/views.py:405
 msgid "This partner is now available for applications"
 msgstr "Dieser Partner nimmt neue Bewerbungen an."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:513
+#: TWLight/resources/views.py:512
 msgid "Your suggestion has been added."
 msgstr "Dein Vorschlag wurde hinzugefügt."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:538
+#: TWLight/resources/views.py:537
 msgid "Suggestion has been deleted."
 msgstr "Vorschlag gelöscht."
 
@@ -3416,7 +3416,7 @@ msgstr "Passwort"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:25
-#: TWLight/users/views.py:398
+#: TWLight/users/views.py:397
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -4145,7 +4145,7 @@ msgid "Coordinators only"
 msgstr "Ausschließlich für Koordinatoren"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:177
+#: TWLight/users/views.py:176
 #, python-brace-format
 msgid ""
 "Please <a class='twl-links' href='{url}'>update your contributions</a> to "
@@ -4156,7 +4156,7 @@ msgstr ""
 "Bewerbung zu erleichtern."
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:290
+#: TWLight/users/views.py:289
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -4167,38 +4167,38 @@ msgstr ""
 "erhalten können. Bitte passe deine Einstellungen dementsprechend an."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:298
+#: TWLight/users/views.py:297
 msgid "Your reminder email preferences are updated."
 msgstr "Deine Einstellungen zu Erinnerungsnachrichten wurden aktualisiert."
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:380 TWLight/users/views.py:461
-#: TWLight/users/views.py:514
+#: TWLight/users/views.py:379 TWLight/users/views.py:460
+#: TWLight/users/views.py:513
 msgid "You must be logged in to do that."
 msgstr "Du musst eingeloggt sein, um diese Aktion durchzuführen."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:413
+#: TWLight/users/views.py:412
 msgid "Your information has been updated."
 msgstr "Deine Angaben wurden aktualisiert."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:445
+#: TWLight/users/views.py:444
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 "Es können nicht beide Angaben leer sein. Bitte gib entweder eine E-Mail-"
 "Adresse an oder klicke die Box an."
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:473
+#: TWLight/users/views.py:472
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "Deine E-Mail-Adresse wurde wie folgt geändert: {email}."
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:484
+#: TWLight/users/views.py:483
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -4208,27 +4208,27 @@ msgstr ""
 "Inhalten unserer Partner abgeben."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:783
+#: TWLight/users/views.py:782
 msgid "Access to {} has been returned."
 msgstr "Der Zugang zu {} wurde zurückgegeben."
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:848 TWLight/views.py:39
+#: TWLight/users/views.py:847 TWLight/views.py:39
 msgid "500+ edits"
 msgstr ">500 Bearbeitungen"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:850 TWLight/views.py:41
+#: TWLight/users/views.py:849 TWLight/views.py:41
 msgid "6+ months editing"
 msgstr ">6 Monate angemeldet"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:852
+#: TWLight/users/views.py:851
 msgid "10+ edits in the last month"
 msgstr ">10 Bearbeitungen im letzten Monat"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:854 TWLight/views.py:45
+#: TWLight/users/views.py:853 TWLight/views.py:45
 msgid "No active blocks"
 msgstr "keine aktiven Sperren"
 
