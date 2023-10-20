@@ -21,7 +21,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-10-20 11:20+0000\n"
+"POT-Creation-Date: 2023-10-20 11:42+0000\n"
 "PO-Revision-Date: 2023-10-12 11:33:39+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1578,7 +1578,7 @@ msgstr "Diller"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/filters.py:74 TWLight/resources/models.py:288
+#: TWLight/resources/filters.py:74 TWLight/resources/models.py:286
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:35
 #: TWLight/users/templates/users/user_collection_tile.html:5
@@ -1608,13 +1608,13 @@ msgid "Website"
 msgstr "Web sitesi"
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
-#: TWLight/resources/models.py:290
+#: TWLight/resources/models.py:288
 msgid "Not searchable"
 msgstr "Aranamaz"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/models.py:292
+#: TWLight/resources/models.py:290
 #: TWLight/users/templates/users/available_collection_tile.html:9
 #: TWLight/users/templates/users/filter_section.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:8
@@ -1622,32 +1622,32 @@ msgid "Partially searchable"
 msgstr "Kısmen aranabilir"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:522
+#: TWLight/resources/models.py:520
 msgid "Service information"
 msgstr "Hizmet bilgisi"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:524
+#: TWLight/resources/models.py:522
 msgid "Service issue"
 msgstr "Hizmet sorunu"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:526
+#: TWLight/resources/models.py:524
 msgid "Temporarily unavailable"
 msgstr "Geçici olarak kullanım dışı"
 
 #. Translators: information about the current status of this partner
-#: TWLight/resources/models.py:531
+#: TWLight/resources/models.py:529
 msgid "Ongoing work may impact access"
 msgstr "Devam eden çalışma erişimi etkileyebilir"
 
 #. Translators: information about a current issue with this partner
-#: TWLight/resources/models.py:533
+#: TWLight/resources/models.py:531
 msgid "An issue is impacting access"
 msgstr "Bir sorun erişimi etkiliyor"
 
 #. Translators: information about a current outage for this partner
-#: TWLight/resources/models.py:535
+#: TWLight/resources/models.py:533
 msgid "Access is currently unavailable"
 msgstr "Erişim şu anda kullanılamıyor"
 
