@@ -9,7 +9,7 @@ from crispy_forms.layout import Submit, Layout
 class SuggestionForm(forms.Form):
     suggested_company_name = forms.CharField(max_length=80)
     description = forms.CharField(widget=forms.Textarea, max_length=500)
-    company_url = forms.URLField(initial="http://")
+    company_url = forms.URLField(initial="https://")
     next = forms.CharField(widget=forms.HiddenInput, max_length=40)
 
     def __init__(self, *args, **kwargs):

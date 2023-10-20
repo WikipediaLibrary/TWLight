@@ -1,5 +1,5 @@
 from django import forms
-from django.db.models import Q, Value, F, CharField
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Language, Partner, Suggestion

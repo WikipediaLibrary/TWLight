@@ -1,6 +1,6 @@
 from django.core.cache import cache
-from django.dispatch import receiver, Signal
-from django.db.models.signals import pre_save, post_save, post_delete
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from TWLight.resources.models import Partner, PhabricatorTask
 
 
