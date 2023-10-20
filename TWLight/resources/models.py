@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import datetime
 import json
 import os
 
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError as JSONSchemaValidationError
 
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
@@ -450,6 +452,42 @@ class Partner(models.Model):
         return PhabricatorTask.objects.filter(partners__pk=self.pk).order_by(
             "-task_type"
         )
+
+    @property
+    def get_valid_authorizations(self):
+        """Return a queryset of all valid Authorization objects
+        for this partner.
+        """
+        today = datetime.date.today()
+        from TWLight.users.models import Authorization
+
+        try:
+            # The filter below is equivalent to retrieving all authorizations for a partner
+            # and checking every authorization against the is_valid property
+            # of the authorization model, and hence *must* be kept in sync with the logic in
+            # TWLight.users.model.Authorization.is_valid property. We don't need to check for
+            # partner_id__isnull since it is functionally covered by partners=partner_pk.
+            valid_authorizations = Authorization.objects.filter(
+                models.Q(date_expires__isnull=False, date_expires__gte=today)
+                | models.Q(date_expires__isnull=True),
+                authorizer__isnull=False,
+                user__isnull=False,
+                date_authorized__isnull=False,
+                date_authorized__lte=today,
+                partners=self,
+            )
+
+            return valid_authorizations
+        except Authorization.DoesNotExist:
+            return Authorization.objects.none()
+
+    @property
+    def get_valid_authorization_count(self):
+        """
+        Retrieves the number of valid authorizations using the
+        get_valid_authorizations property.
+        """
+        return self.get_valid_authorizations.count()
 
 
 class PartnerLogo(models.Model):

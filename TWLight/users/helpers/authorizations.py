@@ -17,35 +17,6 @@ def get_all_bundle_authorizations():
     ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
 
 
-def get_valid_partner_authorizations(partner_pk):
-    """
-    Retrieves the valid authorizations available for a particular
-    partner. Valid authorizations are authorizations with which we can operate,
-    and is decided by certain conditions as spelled out in the is_valid property
-    of the Authorization model object (users/models.py).
-    """
-    today = datetime.date.today()
-    try:
-        # The filter below is equivalent to retrieving all authorizations for a partner
-        # and checking every authorization against the is_valid property
-        # of the authorization model, and hence *must* be kept in sync with the logic in
-        # TWLight.users.model.Authorization.is_valid property. We don't need to check for
-        # partner_id__isnull since it is functionally covered by partners=partner_pk.
-        valid_authorizations = Authorization.objects.filter(
-            Q(date_expires__isnull=False, date_expires__gte=today)
-            | Q(date_expires__isnull=True),
-            authorizer__isnull=False,
-            user__isnull=False,
-            date_authorized__isnull=False,
-            date_authorized__lte=today,
-            partners=partner_pk,
-        )
-
-        return valid_authorizations
-    except Authorization.DoesNotExist:
-        return Authorization.objects.none()
-
-
 def create_resource_dict(authorization, partner):
     resource_item = {
         "partner": partner,
