@@ -54,14 +54,16 @@ class PartnersFilterView(ListView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            qs = Partner.even_not_available.prefetch_related("languages")
+            qs = Partner.even_not_available.all()
         else:
-            qs = Partner.objects.prefetch_related("languages")
+            qs = Partner.objects.all()
 
         # The ordering here is useful primarily to people familiar with the
         # English alphabet. :/
-        partner_queryset = qs.select_related("coordinator", "logos").order_by(
-            "company_name"
+        partner_queryset = (
+            qs.select_related("coordinator", "logos")
+            .order_by("company_name")
+            .prefetch_related("languages")
         )
 
         return partner_queryset
