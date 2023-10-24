@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-10-20 11:42+0000\n"
+"POT-Creation-Date: 2023-10-24 18:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1358,7 +1358,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:520
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:545
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -1454,32 +1454,32 @@ msgid "Partially searchable"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:520
+#: TWLight/resources/models.py:538
 msgid "Service information"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:522
+#: TWLight/resources/models.py:540
 msgid "Service issue"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:524
+#: TWLight/resources/models.py:542
 msgid "Temporarily unavailable"
 msgstr ""
 
 #. Translators: information about the current status of this partner
-#: TWLight/resources/models.py:529
+#: TWLight/resources/models.py:547
 msgid "Ongoing work may impact access"
 msgstr ""
 
 #. Translators: information about a current issue with this partner
-#: TWLight/resources/models.py:531
+#: TWLight/resources/models.py:549
 msgid "An issue is impacting access"
 msgstr ""
 
 #. Translators: information about a current outage for this partner
-#: TWLight/resources/models.py:533
+#: TWLight/resources/models.py:551
 msgid "Access is currently unavailable"
 msgstr ""
 
@@ -1971,35 +1971,35 @@ msgstr ""
 msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
-#. Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
-#: TWLight/resources/views.py:258
+#. Translators: If multiple authorizations where returned for a collection, this message is shown to a user
+#: TWLight/resources/views.py:268
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:302
+#: TWLight/resources/views.py:316
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:392
+#: TWLight/resources/views.py:408
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:405
+#: TWLight/resources/views.py:421
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:512
+#: TWLight/resources/views.py:537
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:537
+#: TWLight/resources/views.py:564
 msgid "Suggestion has been deleted."
 msgstr ""
 
