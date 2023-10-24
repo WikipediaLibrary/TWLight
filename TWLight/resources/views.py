@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
 from django.views.generic import DetailView, View, RedirectView, ListView
 from django.views.generic.edit import FormView, DeleteView
-from django_filters.views import FilterView
 from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
@@ -25,9 +24,8 @@ from TWLight.users.helpers.editor_data import editor_bundle_eligible
 
 from .filters import MainPartnerFilter, MergeSuggestionFilter
 from .forms import SuggestionForm, SuggestionMergeForm
-from .helpers import get_partner_description, get_tag_names, get_median
+from .helpers import get_tag_names, get_median
 from .models import Partner, Suggestion
-from urllib.parse import urlparse
 import bleach
 import logging
 import json
@@ -36,22 +34,19 @@ logger = logging.getLogger(__name__)
 
 
 class PartnersFilterView(ListView):
-    """
+    """Build the view listing all library partners.
     Since T278337, this View has passed from FilterView to ListView because we have to
     build a Partner dictionary element from the partner descriptions in a JSON file instead of
-    getting everything from the database
+    getting everything from the database.
     """
 
     model = Partner
 
     def get_queryset(self):
-        qs = (
-            Partner.objects.prefetch_related("languages")
-            .select_related("coordinator", "logos")
-            .order_by("company_name")
-        )
-        # The ordering here is useful primarily to people familiar with the
-        # English alphabet. :/
+        """Return the queryset of all partners based on user group.
+        Staff can see all resources, even those which are marked not
+        available, so we use the custom Manager even_not_available.
+        """
         if self.request.user.is_staff:
             messages.add_message(
                 self.request,
@@ -59,13 +54,19 @@ class PartnersFilterView(ListView):
                 "Because you are a staff member, this page may include "
                 "Partners who are not yet available to all users.",
             )
-            qs = (
-                Partner.even_not_available.prefetch_related("languages")
-                .select_related("coordinator", "logos")
-                .order_by("company_name")
-            )
+            qs = Partner.even_not_available.all()
+        else:
+            qs = Partner.objects.all()
 
-        return qs
+        # The ordering here is useful primarily to people familiar with the
+        # English alphabet. :/
+        partner_queryset = (
+            qs.select_related("coordinator", "logos")
+            .order_by("company_name")
+            .prefetch_related("languages")
+        )
+
+        return partner_queryset
 
     def get_context_data(self, **kwargs):
         """
@@ -73,12 +74,11 @@ class PartnersFilterView(ListView):
         If there's no filtering or tags involved, we carry on. Otherwise,
         we add the tag to the context and get the corresponding meta url
         in the template.
-        :param kwargs:
-        :return:
         """
         context = super().get_context_data(**kwargs)
 
         language_code = get_language()
+
         # Changed since T278337: add filter to queryset before we build the partners
         # dictionary
         partner_filtered_list = MainPartnerFilter(
@@ -86,15 +86,20 @@ class PartnersFilterView(ListView):
         )
         context["filter"] = partner_filtered_list
 
+        # Retrieve the current user and add to context
         user = self.request.user
         if user.is_authenticated:
             user = User.objects.select_related("editor").get(pk=self.request.user.pk)
             context["user"] = user
-            context["editor"] = user.editor
+
         partners_list = []
         partner_search_list = []
+        # Build a list of partners, with a dictionary for each containing
+        # relevant data for building the page.
         for partner in partner_filtered_list.qs:
             partner_dict = {}
+
+            # Retrieve basic partner data
             partner_dict["pk"] = partner.pk
             partner_dict["company_name"] = partner.company_name
             try:
@@ -103,25 +108,23 @@ class PartnersFilterView(ListView):
                 partner_dict["partner_logo"] = None
             partner_dict["is_not_available"] = partner.is_not_available
             partner_dict["is_waitlisted"] = partner.is_waitlisted
-            new_tags = partner.new_tags
+
             # Getting tags from locale files
+            new_tags = partner.new_tags
             translated_tags = get_tag_names(language_code, new_tags)
             partner_dict["tags"] = translated_tags
-            partner_dict["languages"] = partner.get_languages
-            # Obtaining translated partner description
-            partner_short_description_key = "{pk}_short_description".format(
-                pk=partner.pk
-            )
-            partner_description_key = "{pk}_description".format(pk=partner.pk)
-            partner_descriptions = get_partner_description(
-                language_code, partner_short_description_key, partner_description_key
-            )
 
+            # Obtaining translated partner description
+            partner_dict["languages"] = partner.get_languages
+            partner_descriptions = partner.get_descriptions(language_code)
             partner_dict["short_description"] = partner_descriptions[
                 "short_description"
             ]
             partner_dict["description"] = partner_descriptions["description"]
+
             partners_list.append(partner_dict)
+
+            # Sanitize descriptions
             if partner_descriptions["description"]:
                 partner_desc = bleach.clean(
                     partner_descriptions["description"],
@@ -140,6 +143,7 @@ class PartnersFilterView(ListView):
             else:
                 partner_short_desc = ""
 
+            # Build list of searchable elements for text search functionality
             partner_search_list.append(
                 {
                     "partner_pk": partner.pk,
@@ -148,6 +152,7 @@ class PartnersFilterView(ListView):
                     "partner_description": partner_desc,
                 }
             )
+
         context["partners_list"] = partners_list
         context["partner_search_list"] = partner_search_list
 
@@ -155,6 +160,8 @@ class PartnersFilterView(ListView):
 
 
 class PartnersDetailView(DetailView):
+    """Build the view for individual resource pages."""
+
     model = Partner
 
     def get_context_data(self, **kwargs):
@@ -163,17 +170,14 @@ class PartnersDetailView(DetailView):
 
         # Obtaining translated partner description
         language_code = get_language()
-        partner_short_description_key = "{pk}_short_description".format(pk=partner.pk)
-        partner_description_key = "{pk}_description".format(pk=partner.pk)
-        partner_descriptions = get_partner_description(
-            language_code, partner_short_description_key, partner_description_key
-        )
+        partner_descriptions = partner.get_descriptions(language_code)
 
         context["partner_short_description"] = partner_descriptions["short_description"]
         context["partner_description"] = partner_descriptions["description"]
 
         context["tags"] = get_tag_names(language_code, partner.new_tags)
 
+        # Only staff members are permitted to view Not Available resources
         if partner.status == Partner.NOT_AVAILABLE:
             messages.add_message(
                 self.request,
@@ -183,12 +187,16 @@ class PartnersDetailView(DetailView):
                 "users.",
             )
 
+        # Count valid authorizations to determine how many users have access
         context[
             "total_accounts_distributed_partner"
         ] = partner.get_valid_authorization_count
 
+        # Count all time users who had access, by counting all user
+        # authorizations, including those which expired.
         context["total_users"] = Authorization.objects.filter(partners=partner).count()
 
+        # Determine median wait time for applications to be finalised
         application_end_states = [
             Application.APPROVED,
             Application.NOT_APPROVED,
@@ -242,8 +250,10 @@ class PartnersDetailView(DetailView):
                 if not partner.specific_title:
                     self._evaluate_apply(context, partner)
                 self._evaluate_has_auths(context, user, partner)
+            # If the user has no authorization, no special behaviour.
             except Authorization.DoesNotExist:
                 pass
+            # There should never be multiple authorizations for a resource
             except Authorization.MultipleObjectsReturned:
                 logger.info(
                     "Multiple authorizations returned for partner {} and user {}".format(
@@ -254,7 +264,7 @@ class PartnersDetailView(DetailView):
                     self.request,
                     messages.ERROR,
                     # fmt: off
-                    # Translators: If multiple authorizations where returned for a partner with no collections, this message is shown to an user
+                    # Translators: If multiple authorizations where returned for a collection, this message is shown to a user
                     _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
                     # fmt: on
                 )
@@ -262,8 +272,10 @@ class PartnersDetailView(DetailView):
         return context
 
     def get_queryset(self):
-        # We have three types of users who might try to access partner pages - the partner's coordinator, staff,
-        # and normal users. We want to limit the list of viewable partner pages in different ways for each.
+        """Return queryset of viewable partners based on user group
+        We have three types of users who might try to access partner pages - the partner's coordinator, staff,
+        and normal users. We want to limit the list of viewable partner pages in different ways for each.
+        """
 
         # By default users can only view available partners
         available_partners = Partner.objects.select_related(
@@ -271,13 +283,15 @@ class PartnersDetailView(DetailView):
         ).all()
         partner_list = available_partners
 
-        # If logged in, what's the list of unavailable partners, if any, for which the current user is the coordinator?
+        # If logged in, what's the list of unavailable partners, if any,
+        # for which the current user is the coordinator?
         if self.request.user.is_authenticated:
             coordinator_partners = Partner.even_not_available.select_related(
                 "coordinator", "logos"
             ).filter(coordinator=self.request.user, status=Partner.NOT_AVAILABLE)
             if coordinator_partners.exists():
-                # Coordinated partners are also valid for this user to view
+                # Not available partners coordinated by this user
+                # are also valid for this user to view
                 partner_list = available_partners | coordinator_partners
 
         if self.request.user.is_staff:
@@ -292,7 +306,7 @@ class PartnersDetailView(DetailView):
         try:
             partner = self.get_object()
         except Http404:
-            # If partner object does not exists check if the partner's status is NOT_AVAILABLE.
+            # If partner object does not exist check if the partner's status is NOT_AVAILABLE.
             partner_pk = self.kwargs.get("pk")
             if Partner.even_not_available.filter(pk=partner_pk).exists():
                 messages.add_message(
@@ -375,6 +389,8 @@ class PartnersDetailView(DetailView):
 
 
 class PartnersToggleWaitlistView(CoordinatorsOnly, View):
+    """View to allow coordinators to toggle a partner's waitlist status."""
+
     def post(self, request, *args, **kwargs):
         try:
             # This only looks at AVAILABLE and WAITLIST partners, which is
@@ -411,10 +427,13 @@ class PartnersToggleWaitlistView(CoordinatorsOnly, View):
 
 
 class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
+    """Build view which lists all successful user applications for a partner."""
+
     model = Partner
     template_name_suffix = "_users"
 
     def get_context_data(self, **kwargs):
+        """Add querysets for approved and sent applications to context data."""
         context = super(PartnerUsers, self).get_context_data(**kwargs)
 
         partner = self.get_object()
@@ -434,6 +453,8 @@ class PartnerUsers(PartnerCoordinatorOrSelf, DetailView):
 
 @method_decorator(login_required, name="post")
 class PartnerSuggestionView(FormView):
+    """Build view where users can suggest new partnerships."""
+
     model = Suggestion
     template_name = "resources/suggest.html"
     form_class = SuggestionForm
@@ -457,11 +478,14 @@ class PartnerSuggestionView(FormView):
         return initial
 
     def get_queryset(self):
+        """Get queryset of suggestions and order by name by default."""
         return Suggestion.objects.order_by("suggested_company_name")
 
     def get_context_data(self, **kwargs):
         context = super(PartnerSuggestionView, self).get_context_data(**kwargs)
 
+        # Retrieve all suggestion objects, while also grabbing user objects
+        # to reduce query counts.
         user_qs = User.objects.select_related("editor")
         all_suggestions = (
             Suggestion.objects.all()
@@ -485,6 +509,7 @@ class PartnerSuggestionView(FormView):
         user = self.request.user
         coordinators = get_coordinators()
 
+        # We allow coordinators to take certain additional actions on this page.
         if coordinators in user.groups.all() or user.is_superuser:
             context["user_is_coordinator"] = True
         else:
@@ -523,6 +548,8 @@ class PartnerSuggestionView(FormView):
 
 
 class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
+    """Build view which enables coordinators and staff to delete suggestions."""
+
     model = Suggestion
     form_class = SuggestionForm
     success_url = reverse_lazy("suggest")
@@ -540,11 +567,15 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
 
 
 class SuggestionUpvoteView(EditorsOnly, RedirectView):
+    """Build view which enables users to upvote suggestions."""
+
     def get_redirect_url(self, *args, **kwargs):
         suggestion_id = self.kwargs.get("pk")
         obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
         user = self.request.user
+
+        # Toggle upvote status
         if user.is_authenticated:
             if user in obj.upvoted_users.all():
                 obj.upvoted_users.remove(user)
@@ -555,6 +586,8 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
 
 @method_decorator(login_required, name="post")
 class SuggestionMergeView(StaffOnly, FormView):
+    """Build view enabling staff to merge duplicate suggestions."""
+
     model = Suggestion
     template_name = "resources/merge_suggestion.html"
     form_class = SuggestionMergeForm
@@ -570,19 +603,22 @@ class SuggestionMergeView(StaffOnly, FormView):
 
         suggestions : Queryset<Suggestion>
             The queryset of suggestions to merge
+        main_suggestion : Suggestion
+            The suggestion being merged into
 
         Returns
         -------
         The `queryset` of upvoted users
 
         """
-        total_upvoted_users = main_suggestion.upvoted_users.all()
+        all_upvoted_users = main_suggestion.upvoted_users.all()
         for suggestion in suggestions.all():
-            total_upvoted_users |= suggestion.upvoted_users.all()
+            all_upvoted_users |= suggestion.upvoted_users.all()
 
-        return total_upvoted_users.distinct()
+        return all_upvoted_users.distinct()
 
     def get_queryset(self):
+        # Fetch all Suggestions, while prefetching user objects.
         user_qs = User.objects.select_related("editor")
 
         return (
@@ -610,12 +646,15 @@ class SuggestionMergeView(StaffOnly, FormView):
 
     def form_valid(self, form):
         try:
+            # main_suggestion will survive; secondary_suggestions will be
+            # merged into it.
             main_suggestion = form.cleaned_data["main_suggestion"]
             secondary_suggestions = Suggestion.objects.filter(
                 id__in=form.cleaned_data["secondary_suggestions"].values_list(
                     "id", flat=True
                 )
             ).exclude(id=main_suggestion.id)
+
             main_suggestion.upvoted_users.add(
                 *self.get_total_upvotes(
                     suggestions=secondary_suggestions,
@@ -637,6 +676,6 @@ class SuggestionMergeView(StaffOnly, FormView):
             messages.add_message(
                 self.request,
                 messages.WARNING,
-                "Some Error Occured",
+                "Some Error Occurred",
             )
             raise PermissionDenied

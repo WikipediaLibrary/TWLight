@@ -17,7 +17,7 @@ from django.views.decorators.debug import sensitive_variables
 from django.utils.translation import get_language_from_request
 
 from TWLight.resources.models import Partner, PartnerLogo, Language
-from TWLight.resources.helpers import get_partner_description, get_tag_dict
+from TWLight.resources.helpers import get_tag_dict
 
 from .forms import EdsSearchForm
 from .view_mixins import EligibleEditorsOnly
@@ -101,13 +101,7 @@ class NewHomePageView(TemplateView):
 
         for partner in partners:
             # Obtaining translated partner description
-            partner_short_description_key = "{pk}_short_description".format(
-                pk=partner.pk
-            )
-            partner_description_key = "{pk}_description".format(pk=partner.pk)
-            partner_descriptions = get_partner_description(
-                language_code, partner_short_description_key, partner_description_key
-            )
+            partner_descriptions = partner.get_descriptions(language_code)
             try:
                 partner_logo = partner.logos.logo.url
             except PartnerLogo.DoesNotExist:

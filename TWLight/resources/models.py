@@ -17,7 +17,7 @@ from django_countries.fields import CountryField
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
-from TWLight.resources.helpers import get_tags_json_schema
+from TWLight.resources.helpers import get_partner_description, get_tags_json_schema
 
 # Use language autonyms from Wikimedia.
 # We periodically pull:
@@ -449,6 +449,24 @@ class Partner(models.Model):
     def phab_task_qs(self):
         return PhabricatorTask.objects.filter(partners__pk=self.pk).order_by(
             "-task_type"
+        )
+
+    @property
+    def get_short_description_key(self):
+        """Return the short description key for this partner."""
+        return "{pk}_short_description".format(pk=self.pk)
+
+    @property
+    def get_description_key(self):
+        """Return the description key for this partner."""
+        return "{pk}_description".format(pk=self.pk)
+
+    def get_descriptions(self, language_code: str):
+        """Return both the long and short descriptions for this partner."""
+        return get_partner_description(
+            language_code,
+            self.get_short_description_key,
+            self.get_description_key,
         )
 
     @property
