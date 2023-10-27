@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0079_remove_authorization_stream"),
         ("applications", "0003_remove_application_specific_stream"),

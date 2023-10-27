@@ -15,7 +15,6 @@ def create_restricted(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0025_userprofile_data_restricted"),
         ("auth", "0001_initial"),

@@ -46,7 +46,6 @@ def create_restricted(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("users", "0001_initial"),
         ("users", "0002_auto_20160328_2031"),

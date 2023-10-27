@@ -26,7 +26,6 @@ def move_wp_editcounts_to_logs(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0065_editorlog"),
     ]

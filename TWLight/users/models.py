@@ -924,11 +924,14 @@ class Authorization(models.Model):
         else:
             authorizer = None
 
-        return "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - " "company_name: {company_name}".format(
-            authorized_user=authorized_user,
-            authorizer=authorizer,
-            date_authorized=self.date_authorized,
-            company_name=company_name,
+        return (
+            "authorized: {authorized_user} - authorizer: {authorizer} - date_authorized: {date_authorized} - "
+            "company_name: {company_name}".format(
+                authorized_user=authorized_user,
+                authorizer=authorizer,
+                date_authorized=self.date_authorized,
+                company_name=company_name,
+            )
         )
 
     def get_latest_app(self):

@@ -21,7 +21,6 @@ def create_profiles(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("users", "0009_userprofile")]
 
     operations = [migrations.RunPython(create_profiles)]

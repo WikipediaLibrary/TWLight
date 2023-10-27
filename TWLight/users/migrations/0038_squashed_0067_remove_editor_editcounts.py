@@ -27,7 +27,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("users", "0038_auto_20190220_1639"),
         ("users", "0039_auto_20190423_0953"),

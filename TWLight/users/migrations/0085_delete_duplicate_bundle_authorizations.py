@@ -14,7 +14,6 @@ def delete_duplicate_bundle_auths(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0084_alter_userprofile_lang"),
     ]
