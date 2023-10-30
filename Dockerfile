@@ -2,8 +2,8 @@ FROM quay.io/wikipedialibrary/python:3.11-slim-bullseye-updated as twlight_base
 # Base dependencies.
 RUN apt update ; \
     apt install -y --no-install-recommends \
-    libmariadbclient-dev ; \
-    ln -s /usr/bin/mariadb_config /usr/bin/mysql_config ; \
+    libmariadb-dev \
+    libmariadb-dev-compat; \
     rm -rf /var/lib/apt/lists/*; \
     pip3 install virtualenv
 
@@ -28,7 +28,7 @@ FROM twlight_base
 COPY --from=twlight_build /venv /venv
 COPY --from=quay.io/wikipedialibrary/debian_perl:latest /opt/perl /opt/perl
 ENV PATH="/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv"
-
+WORKDIR ${TWLIGHT_HOME}
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
 # mariadb-client Not needed by the running app, but by the backup/restore shell scripts.
