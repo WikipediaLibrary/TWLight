@@ -157,6 +157,7 @@ admin.site.register(EditorLog, EditorLogAdmin)
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
+
 # Cribbed from: https://stackoverflow.com/a/4978234
 class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):

@@ -122,7 +122,6 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
 class SubmitSingleApplicationView(
     EditorsOnly, ToURequired, EmailRequired, DataProcessingRequired, FormView
 ):
-
     template_name = "applications/apply.html"
     form_class = BaseApplicationForm
 

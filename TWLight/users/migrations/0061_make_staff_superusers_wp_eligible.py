@@ -10,7 +10,6 @@ def turn_staff_superusers_bundle_eligible(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("users", "0060_auto_20200804_1634")]
 
     operations = [migrations.RunPython(turn_staff_superusers_bundle_eligible)]

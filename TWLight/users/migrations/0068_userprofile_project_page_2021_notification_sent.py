@@ -12,7 +12,6 @@ def twl_team(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0067_remove_editor_editcounts"),
     ]

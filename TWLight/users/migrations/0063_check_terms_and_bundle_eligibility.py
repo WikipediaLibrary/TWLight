@@ -12,7 +12,6 @@ def remove_bundle_eligibility_on_users_with_unaccepted_terms(apps, schema_editor
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("users", "0062_delete_hanging_userless_bundle_auths")]
 
     operations = [

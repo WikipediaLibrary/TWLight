@@ -16,7 +16,6 @@ def reset_tou(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("users", "0047_auto_20191017_0459")]
 
     operations = [migrations.RunPython(reset_tou, elidable=True)]

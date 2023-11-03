@@ -6,7 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("users", "0055_authorization_data_partners_foreignkey_to_manytomany")
     ]

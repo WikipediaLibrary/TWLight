@@ -66,7 +66,6 @@ class EZProxyTicket(object):
     starting_point_url = None
 
     def __init__(self, user=None, groups=None):
-
         ezproxy_url = settings.TWLIGHT_EZPROXY_URL
         secret = settings.TWLIGHT_EZPROXY_SECRET
 

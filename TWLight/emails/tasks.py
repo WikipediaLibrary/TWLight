@@ -489,7 +489,6 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
         if (
             orig_partner.status != instance.status
         ) and instance.status == Partner.WAITLIST:
-
             for app in orig_partner.applications.filter(
                 status__in=[Application.PENDING, Application.QUESTION]
             ):

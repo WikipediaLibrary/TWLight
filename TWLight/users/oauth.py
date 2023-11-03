@@ -245,7 +245,6 @@ class OAuthBackend(object):
         user, created = self._get_and_update_user_from_identity(identity)
 
         if created:
-
             try:
                 user.editor.save()
             except AssertionError:

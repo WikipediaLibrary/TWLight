@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("resources", "0081_auto_20210928_1820"),
         ("users", "0079_remove_authorization_stream"),

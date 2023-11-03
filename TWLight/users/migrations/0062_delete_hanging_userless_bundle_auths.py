@@ -10,7 +10,6 @@ def delete_hanging_bundle_auths(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [("users", "0061_make_staff_superusers_wp_eligible")]
 
     operations = [migrations.RunPython(delete_hanging_bundle_auths)]

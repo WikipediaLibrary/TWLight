@@ -36,7 +36,7 @@ then
     done
 
     # Run black on all migrations.
-    find ${TWLIGHT_HOME}/TWLight -type d -name "migrations" -print0 | xargs -0 black -t py38
+    find ${TWLIGHT_HOME}/TWLight -type d -name "migrations" -print0 | xargs -0 black -t py311
 else
     exit 1
 fi

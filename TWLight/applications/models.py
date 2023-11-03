@@ -151,7 +151,6 @@ class Application(models.Model):
         return reverse_lazy("applications:evaluate", kwargs={"pk": self.pk})
 
     def get_status_display(self):
-
         if (
             self.status == self.SENT
             and self.partner.authorization_method != self.partner.EMAIL

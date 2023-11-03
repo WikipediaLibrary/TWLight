@@ -26,7 +26,6 @@ def copy_editor_data(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("resources", "0001_initial_squashed_0062_auto_20190220_1639"),
         ("users", "0007_auto_20160511_1454"),
