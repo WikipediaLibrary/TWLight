@@ -34,7 +34,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-11-03 02:21+0000\n"
-"PO-Revision-Date: 2023-11-06 12:35:04+0000\n"
+"PO-Revision-Date: 2023-11-16 12:30:32+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -695,7 +695,7 @@ msgstr "Establecer estado"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "Si su solicitud es exitosa, podemos compartir su dirección de correo electrónico con %(partner)s. Esto es necesario para configurar su acceso a sus recursos. Al enviar este formulario, acepta permitir que su dirección de correo electrónico se comparta con %(partner)s si su solicitud es exitosa, para fines de configuración de la cuenta."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -974,15 +974,15 @@ msgstr "Enviar"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p> Tu solicitud aprobada a %(partner)s ha sido finalizada. Tu código de acceso o información de inicio de sesión la encontrarás abajo: </p>\n<p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p> Tu solicitud aprobada a %(partner)s ha sido finalizada. Tu código de acceso o información de inicio de sesión la encontrarás abajo: </p>\n<p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "Tu solicitud aprobada a %(partner)s ha sido finalizada. Tu código de acceso o información de inicio de sesión la encontrarás abajo:\n%(access_code)s %(access_code_instructions)s"
+msgstr "Tu solicitud aprobada a %(partner)s ha sido finalizada. Tu código de acceso o información de inicio de sesión la encontrarás abajo:\n%(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3

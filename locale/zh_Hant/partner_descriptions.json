@@ -51,7 +51,7 @@
 	"78_short_description": "<strong>ICE Publishing</strong> 是土木工程師機構之一。提供取用在 ICE 虛擬圖書館裡所有的期刊與電子書。",
 	"68_short_description": "<strong>Invaluable</strong> 是一個拍賣網站，含有藝術家與拍賣物品的資料。以該網站提供能取得 5 千萬多個拍賣品、與超過 50 萬名藝術家相關資訊的專業訂閱。<em>備註：請注意，儘管 Invaluable 不會向您收取費用，但在註冊過程時，您仍需提供帳單方面的詳細資訊。</em>",
 	"77_short_description": "<strong>International Water Association Publishing</strong> 是關於水、廢水，和相關環境領域的書籍和 14 種期刊的出版商。",
-	"54_short_description": "<strong>JSTOR</strong> 是世界上最大、最負盛名的期刊保管處之一。維基百科編輯者目前可使用的內容集合，包括 JSTOR 的所有期刊存檔收藏和 19 世紀英國小冊子收藏。",
+	"54_short_description": "<strong>JSTOR</strong> 是世界上最大、最負盛名的期刊保管處之一。維基百科編輯者目前可使用的內容集合，包括 JSTOR 的眾多期刊存檔收藏和 19 世紀英國小冊子收藏。",
 	"72_short_description": "<strong>Kinige</strong> 是一家電子書店，主要出售以泰盧固語編寫的印度書籍。Kinige 每月提供 10 本免費的電子書。",
 	"72_description": "在申請時，請描述您在維基百科上編寫參考內容的經歷，包括您如何使用 Kinige 的舊有書籍（如果有的話）。每月 25 日之前收到的內容，會在月底發送給 Kinige。",
 	"18_short_description": "<strong>L'Harmattan</strong> 是法國社會科學與人文學科的出版商，擁有 27000 種社會科學、文學、來自五大洲的知識性文學、稀有書籍、影片和期刊的書目。",
@@ -72,7 +72,7 @@
 	"86_short_description": "<strong>Oxford Art Online</strong> 提供可以取用牛津的藝術參考作品：《Grove Art Online》和《Benezit Dictionary of Artists》，以及許多特約文章和僅線上提供的參考書目。Oxford Art Online 另有超過 20000 張圖片和超過 230000 個藝術與藝術家作品。",
 	"87_short_description": "<strong>Oxford Bibliographies</strong> 提供結合了帶註釋的參考書目、高級百科全書的權威研究指南。此資源指南指引了研究人員取得涵蓋各學科的最佳內容學問。",
 	"88_short_description": "《<strong>牛津國家人物傳記大辭典</strong>》是記錄從古羅馬到 21 世紀在全球各地曾影響英國歷史與文化的男性與女性的國家紀錄。此辭典提供由專家作者編寫的簡明最新傳記，並由牛津大學的學術編輯審查。",
-	"93_short_description": "<strong>Oxford Academic</strong> 擁有眾多牛津大學出版社的期刊，範圍涵蓋各門學科。",
+	"93_short_description": "<strong>Oxford Academic</strong> 擁有眾多牛津大學出版社的期刊，範圍涵蓋各門學科。另外包含兩種書本收藏：線上牛津獎學金與線上牛津手冊。",
 	"99_short_description": "<strong>Oxford University Press Law</strong> 提供著相關國際法律方面的資源收藏。",
 	"90_short_description": "<strong>Grove Music Online</strong>是《格羅夫音樂與音樂家辭典》第八版內容的網站，包含有該網站委託撰寫的文章。Grove Music Online 有超過 100000 多個條目，主題有從音樂家生平到關於樂器物理結構與配件等等。",
 	"91_short_description": "<strong>Oxford Reference</strong> 匯集了牛津詞典、指南和百科全書裡的 200 萬條數位化條目。",
@@ -137,5 +137,6 @@
 	"143_short_description": "<strong>Mohr Siebeck</strong> 是一間歷史悠久的德國學術出版商，著重在人文和社會科學。該出版社的電子圖書館有 2000 多本書籍和眾多期刊，涉及宗教研究、歷史、哲學、法律、經濟學和社會學。",
 	"144_short_description": "<strong>Perlego</strong> 是一個數位線上圖書館，專注於提供學術、專業、非小說類的電子書。",
 	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利時發行的佛拉蒙語日報。",
-	"146_short_description": "<strong>Duncker & Humblot</strong> 電子圖書館提供取用 12500 本電子書、25 種期刊、12500 多篇電子文章，涉及法律、經濟學、社會、政治、歷史、哲學和文學領域。"
+	"146_short_description": "<strong>Duncker & Humblot</strong> 電子圖書館提供取用 12500 本電子書、25 種期刊、12500 多篇電子文章，涉及法律、經濟學、社會、政治、歷史、哲學和文學領域。",
+	"147_short_description": "<strong>捷克共和國國家圖書館</strong>為維基百科提供免費借閱卡，或是借閱卡的免費延期。請注意此服務僅限於捷克共和國的維基百科使用者。"
 }
