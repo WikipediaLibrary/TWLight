@@ -32,6 +32,7 @@ use case.
 from datetime import datetime, date, timedelta
 import json
 import logging
+import requests
 import urllib.request, urllib.error, urllib.parse
 from annoying.functions import get_object_or_None
 from rest_framework import serializers
@@ -147,6 +148,265 @@ class UserProfile(models.Model):
         This method is for the convenience of skipping the import of django cache in each place that needs to invalidate the my_library cache
         """
         return cache.delete(self.my_library_cache_key)
+
+    @property
+    def talk_page_i18n(self):
+        """
+        This property will return the URL of the relevant Wikipedia Library talk page
+        in the user's preferred language
+        """
+        # Adding en wiki because it will not be included in the languages response
+        wiki_twl_pages = {
+            "en": "https://en.wikipedia.org/wiki/Wikipedia:The_Wikipedia_Library"
+        }
+        data = [
+            {
+                "code": "ar",
+                "name": "العربية",
+                "key": "ويكيبيديا:مكتبة_ويكيبيديا",
+                "title": "ويكيبيديا:مكتبة ويكيبيديا",
+            },
+            {
+                "code": "bn",
+                "name": "বাংলা",
+                "key": "উইকিপিডিয়া:উইকিপিডিয়া_গ্রন্থাগার",
+                "title": "উইকিপিডিয়া:উইকিপিডিয়া গ্রন্থাগার",
+            },
+            {
+                "code": "ca",
+                "name": "català",
+                "key": "Viquipèdia:Biblioteca",
+                "title": "Viquipèdia:Biblioteca",
+            },
+            {
+                "code": "ckb",
+                "name": "کوردی",
+                "key": "ویکیپیدیا:کتێبخانەی_ویکیپیدیا",
+                "title": "ویکیپیدیا:کتێبخانەی ویکیپیدیا",
+            },
+            {
+                "code": "cs",
+                "name": "čeština",
+                "key": "Wikipedie:Wikiknihovna",
+                "title": "Wikipedie:Wikiknihovna",
+            },
+            {
+                "code": "de",
+                "name": "Deutsch",
+                "key": "Wikipedia:Förderung/The_Wikipedia_Library",
+                "title": "Wikipedia:Förderung/The Wikipedia Library",
+            },
+            {
+                "code": "el",
+                "name": "Ελληνικά",
+                "key": "Βικιπαίδεια:Βιβλιοθήκη",
+                "title": "Βικιπαίδεια:Βιβλιοθήκη",
+            },
+            {
+                "code": "es",
+                "name": "español",
+                "key": "Wikipedia:La_biblioteca_Wikipedia",
+                "title": "Wikipedia:La biblioteca Wikipedia",
+            },
+            {
+                "code": "fa",
+                "name": "فارسی",
+                "key": "ویکی‌پدیا:کتابخانه_ویکی‌پدیا",
+                "title": "ویکی‌پدیا:کتابخانه ویکی‌پدیا",
+            },
+            {
+                "code": "fi",
+                "name": "suomi",
+                "key": "Wikipedia:Wikipedian_Lähdekirjasto",
+                "title": "Wikipedia:Wikipedian Lähdekirjasto",
+            },
+            {
+                "code": "fr",
+                "name": "français",
+                "key": "Projet:La_bibliothèque_Wikipédia",
+                "title": "Projet:La bibliothèque Wikipédia",
+            },
+            {
+                "code": "frr",
+                "name": "Nordfriisk",
+                "key": "Wikipedia:TWL",
+                "title": "Wikipedia:TWL",
+            },
+            {
+                "code": "gl",
+                "name": "galego",
+                "key": "Wikipedia:A_Biblioteca_Wikipedia",
+                "title": "Wikipedia:A Biblioteca Wikipedia",
+            },
+            {
+                "code": "he",
+                "name": "עברית",
+                "key": "ויקיפדיה:מיזמי_ויקיפדיה/ויקי-ספרייה",
+                "title": "ויקיפדיה:מיזמי ויקיפדיה/ויקי-ספרייה",
+            },
+            {
+                "code": "hi",
+                "name": "हिन्दी",
+                "key": "विकिपीडिया:विकिपीडिया_पुस्तकालय",
+                "title": "विकिपीडिया:विकिपीडिया पुस्तकालय",
+            },
+            {
+                "code": "id",
+                "name": "Bahasa Indonesia",
+                "key": "Wikipedia:Perpustakaan_Wikipedia",
+                "title": "Wikipedia:Perpustakaan Wikipedia",
+            },
+            {
+                "code": "it",
+                "name": "italiano",
+                "key": "Wikipedia:La_Biblioteca_di_Wikipedia",
+                "title": "Wikipedia:La Biblioteca di Wikipedia",
+            },
+            {
+                "code": "ja",
+                "name": "日本語",
+                "key": "Wikipedia:ウィキペディア図書館",
+                "title": "Wikipedia:ウィキペディア図書館",
+            },
+            {
+                "code": "ko",
+                "name": "한국어",
+                "key": "위키백과:위키백과_도서관",
+                "title": "위키백과:위키백과 도서관",
+            },
+            {
+                "code": "ku",
+                "name": "kurdî",
+                "key": "Wîkîpediya:Kitêbxaneya_Wîkîpediyayê",
+                "title": "Wîkîpediya:Kitêbxaneya Wîkîpediyayê",
+            },
+            {
+                "code": "mwl",
+                "name": "Mirandés",
+                "key": "Biquipédia:La_Biblioteca_Biquipédia",
+                "title": "Biquipédia:La Biblioteca Biquipédia",
+            },
+            {
+                "code": "nl",
+                "name": "Nederlands",
+                "key": "Wikipedia:Bibliotheek",
+                "title": "Wikipedia:Bibliotheek",
+            },
+            {
+                "code": "no",
+                "name": "norsk",
+                "key": "Wikipedia:Biblioteket",
+                "title": "Wikipedia:Biblioteket",
+            },
+            {
+                "code": "pl",
+                "name": "polski",
+                "key": "Wikipedia:Biblioteka_Wikipedia",
+                "title": "Wikipedia:Biblioteka Wikipedia",
+            },
+            {
+                "code": "pt",
+                "name": "português",
+                "key": "Wikipédia:A_Biblioteca_da_Wikipédia",
+                "title": "Wikipédia:A Biblioteca da Wikipédia",
+            },
+            {
+                "code": "ru",
+                "name": "русский",
+                "key": "Проект:Библиотека/Библиотека_Википедии",
+                "title": "Проект:Библиотека/Библиотека Википедии",
+            },
+            {
+                "code": "sd",
+                "name": "سنڌي",
+                "key": "وڪيپيڊيا:وڪيپيڊيا_لائبريري",
+                "title": "وڪيپيڊيا:وڪيپيڊيا لائبريري",
+            },
+            {
+                "code": "simple",
+                "name": "Simple English",
+                "key": "Wikipedia:The_Wikipedia_Library",
+                "title": "Wikipedia:The Wikipedia Library",
+            },
+            {
+                "code": "su",
+                "name": "Sunda",
+                "key": "Wikipedia:Pabukon_Wikipédia",
+                "title": "Wikipedia:Pabukon Wikipédia",
+            },
+            {
+                "code": "sv",
+                "name": "svenska",
+                "key": "Wikipedia:Wikipediabiblioteket",
+                "title": "Wikipedia:Wikipediabiblioteket",
+            },
+            {
+                "code": "th",
+                "name": "ไทย",
+                "key": "วิกิพีเดีย:ห้องสมุดวิกิพีเดีย",
+                "title": "วิกิพีเดีย:ห้องสมุดวิกิพีเดีย",
+            },
+            {
+                "code": "tr",
+                "name": "Türkçe",
+                "key": "Vikipedi:Vikipedi_Kütüphanesi",
+                "title": "Vikipedi:Vikipedi Kütüphanesi",
+            },
+            {
+                "code": "uk",
+                "name": "українська",
+                "key": "Вікіпедія:Бібліотека_Вікіпедії",
+                "title": "Вікіпедія:Бібліотека Вікіпедії",
+            },
+            {
+                "code": "ur",
+                "name": "اردو",
+                "key": "ویکیپیڈیا:ویکیپیڈیا_لائبریری",
+                "title": "ویکیپیڈیا:ویکیپیڈیا لائبریری",
+            },
+            {
+                "code": "vi",
+                "name": "Tiếng Việt",
+                "key": "Wikipedia:Thư_viện_Wikipedia",
+                "title": "Wikipedia:Thư viện Wikipedia",
+            },
+            {
+                "code": "yo",
+                "name": "Yorùbá",
+                "key": "Wikipédíà:Yàrá_ìkàwé_Wikipédíà",
+                "title": "Wikipédíà:Yàrá ìkàwé Wikipédíà",
+            },
+            {
+                "code": "zh",
+                "name": "中文",
+                "key": "Wikipedia:维基百科图书馆",
+                "title": "Wikipedia:维基百科图书馆",
+            },
+            {
+                "code": "zh-classical",
+                "name": "文言",
+                "key": "維基大典:維基書館",
+                "title": "維基大典:維基書館",
+            },
+            {
+                "code": "zh-yue",
+                "name": "粵語",
+                "key": "Wikipedia:維基百科圖書館",
+                "title": "Wikipedia:維基百科圖書館",
+            },
+        ]
+
+        for d in data:
+            wiki_twl_pages[
+                d["code"]
+            ] = "https://{code}.wikipedia.org/wiki/{title}".format(
+                code=d["code"], title=d["title"]
+            )
+
+        if self.lang not in wiki_twl_pages:
+            return {"en": wiki_twl_pages["en"]}
+        else:
+            return {self.lang: wiki_twl_pages[self.lang]}
 
 
 def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
