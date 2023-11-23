@@ -76,3 +76,14 @@ class ClearSessions(CronJobBase):
             management.call_command("clearsessions")
         except Exception as e:
             capture_exception(e)
+
+
+class DeleteOldEmails(CronJobBase):
+    schedule = Schedule(run_every_mins=DAILY)
+    code = "djmail.djmail_delete_old_messages"
+
+    def do(self):
+        try:
+            management.call_command("djmail_delete_old_messages", days=100)
+        except Exception as e:
+            capture_exception(e)
