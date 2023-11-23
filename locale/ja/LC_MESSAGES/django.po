@@ -26,7 +26,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-11-03 02:21+0000\n"
-"PO-Revision-Date: 2023-11-06 12:35:06+0000\n"
+"PO-Revision-Date: 2023-11-23 12:35:13+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3040,7 +3040,6 @@ msgstr "現状でブロックを受けていないこと"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:43
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "前月に10回以上の編集実績があること"
+msgstr "直近30日間に10回以上の編集実績があること"
 
