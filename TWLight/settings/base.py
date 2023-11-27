@@ -152,6 +152,8 @@ CRON_CLASSES = [
     "TWLight.crons.UserUpdateEligibilityCronJob",
     "TWLight.crons.ClearSessions",
 ]
+# We will only be keeping 100 days' worth of cron logs
+DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 100
 
 # REST FRAMEWORK CONFIG
 # ------------------------------------------------------------------------------
