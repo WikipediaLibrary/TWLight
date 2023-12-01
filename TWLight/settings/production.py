@@ -9,5 +9,5 @@ Settings file intended for use on WMF production servers.  This file:
 from .server import *
 
 DEFAULT_FROM_EMAIL = (
-    "Wikipedia Library Card Platform <noreply@wikipedialibrary.wmflabs.org>"
+    "Wikipedia Library Card Platform <no-reply.wikipedialibrary@wmcloud.org>"
 )
