@@ -589,4 +589,12 @@ class OAuthCallbackView(View):
             translation_activate(user.userprofile.lang)
             response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user.userprofile.lang)
 
+        messages.warning(
+            request,
+            # fmt: off
+            # Translators: This error message is shown when there is a problem with email delivery.
+            _("We are currently experiencing a technical issue with email delivery. Emails, including application approvals and access details, may not be received as expected. Please contact us at wikipedialibrary@wikimedia.org if you have any questions. Updates will be posted on Phabricator."
+            ),
+            # fmt: on
+        )
         return response
