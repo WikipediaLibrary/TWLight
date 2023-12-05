@@ -8,6 +8,4 @@ Settings file intended for use on WMF staging servers.  This file:
 
 from .server import *
 
-DEFAULT_FROM_EMAIL = (
-    "Wikipedia Library Card Staging <staging@twl.wmflabs.org>"
-)
+DEFAULT_FROM_EMAIL = "Wikipedia Library Card Staging <staging@twl.wmflabs.org>"

@@ -8,6 +8,4 @@ Settings file intended for use on WMF production servers.  This file:
 
 from .server import *
 
-DEFAULT_FROM_EMAIL = (
-    "Wikipedia Library Card Platform <noreply@twl.wmflabs.org>"
-)
+DEFAULT_FROM_EMAIL = "Wikipedia Library Card Platform <noreply@twl.wmflabs.org>"
