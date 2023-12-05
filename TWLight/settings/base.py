@@ -151,6 +151,7 @@ CRON_CLASSES = [
     "TWLight.crons.ProxyWaitlistDisableCronJob",
     "TWLight.crons.UserUpdateEligibilityCronJob",
     "TWLight.crons.ClearSessions",
+    "TWLight.crons.DeleteOldEmails",
 ]
 # We will only be keeping 100 days' worth of cron logs
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 100
