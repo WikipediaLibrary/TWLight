@@ -41,6 +41,8 @@ echo "Enter DJANGO_DB_USER:"
 read DJANGO_DB_USER
 echo "Enter DJANGO_DB_PASSWORD:"
 read DJANGO_DB_PASSWORD
+echo "Enter DKIM_PRIVATE_KEY:"
+read DKIM_PRIVATE_KEY
 echo "Enter MYSQL_ROOT_PASSWORD:"
 read MYSQL_ROOT_PASSWORD
 echo "Enter SECRET_KEY:"
@@ -72,6 +74,7 @@ cd /srv/TWLight
 printf "${DJANGO_DB_NAME}" | docker secret create DJANGO_DB_NAME -
 printf "${DJANGO_DB_USER}" | docker secret create DJANGO_DB_USER -
 printf "${DJANGO_DB_PASSWORD}" | docker secret create DJANGO_DB_PASSWORD -
+printf "${DKIM_PRIVATE_KEY}" | docker secret create DKIM_PRIVATE_KEY -
 printf "${MYSQL_ROOT_PASSWORD}" | docker secret create MYSQL_ROOT_PASSWORD -
 printf "${SECRET_KEY}" | docker secret create SECRET_KEY -
 printf "${TWLIGHT_OAUTH_CONSUMER_KEY}" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -

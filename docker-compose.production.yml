@@ -9,6 +9,8 @@ secrets:
     external: true
   DJANGO_DB_PASSWORD:
     external: true
+  DKIM_PRIVATE_KEY:
+    external: true
   MYSQL_ROOT_PASSWORD:
     external: true
   SECRET_KEY:
@@ -45,6 +47,7 @@ services:
       - DJANGO_DB_NAME
       - DJANGO_DB_USER
       - DJANGO_DB_PASSWORD
+      - DKIM_PRIVATE_KEY
       - SECRET_KEY
       - TWLIGHT_OAUTH_CONSUMER_KEY
       - TWLIGHT_OAUTH_CONSUMER_SECRET

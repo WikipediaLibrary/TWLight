@@ -29,6 +29,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import to_language
 
+import django_dkim
+
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
 
@@ -417,8 +419,11 @@ COMMENTS_APP = "TWLight.comments"
 # DJMAIL CONFIGURATION
 # ------------------------------------------------------------------------------
 
+DKIM_PRIVATE_KEY = os.environ.get("DKIM_PRIVATE_KEY", None)
+DKIM_SELECTOR = os.environ.get("DKIM_SELECTOR", None)
+DKIM_DOMAIN = os.environ.get("DKIM_DOMAIN", None)
 DJMAIL_REAL_BACKEND = os.environ.get(
-    "DJANGO_EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+    "DJANGO_EMAIL_BACKEND", "django_dkim.backends.console.EmailBackend"
 )
 EMAIL_BACKEND = "djmail.backends.async.EmailBackend"
 EMAIL_HOST = os.environ.get("DJANGO_EMAIL_HOST", "localhost")

@@ -10,6 +10,8 @@ secrets:
     file: ./secrets/DJANGO_DB_USER
   DJANGO_DB_PASSWORD:
     file: ./secrets/DJANGO_DB_PASSWORD
+  DKIM_PRIVATE_KEY:
+    file: ./secrets/DKIM_PRIVATE_KEY
   MYSQL_ROOT_PASSWORD:
     file: ./secrets/MYSQL_ROOT_PASSWORD
   SECRET_KEY:

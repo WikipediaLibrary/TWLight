@@ -15,6 +15,11 @@ then
     export DJANGO_DB_PASSWORD=$(cat /run/secrets/DJANGO_DB_PASSWORD 2>/dev/null)
 fi
 
+if  [ ! -n "${DKIM_PRIVATE_KEY+isset}" ]
+then
+    export DKIM_PRIVATE_KEY=$(cat /run/secrets/DKIM_PRIVATE_KEY 2>/dev/null)
+fi
+
 if  [ ! -n "${SECRET_KEY+isset}" ]
 then
     export SECRET_KEY=$(cat /run/secrets/SECRET_KEY 2>/dev/null)
