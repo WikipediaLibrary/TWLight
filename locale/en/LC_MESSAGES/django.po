@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2023-12-06 17:32+0000\n"
+"POT-Creation-Date: 2023-12-07 18:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,14 +175,13 @@ msgid "Account email"
 msgstr ""
 
 #. Translators: This labels a user's email address on a form for account coordinators
-#. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: Labels the field where the user's email is displayed.
 #: TWLight/applications/helpers.py:137
-#: TWLight/emails/templates/emails/contact.html:51
 #: TWLight/resources/templates/resources/partner_users.html:31
 #: TWLight/resources/templates/resources/partner_users.html:71
-#: TWLight/users/forms.py:203
+#: TWLight/templates/contact.html:23 TWLight/users/forms.py:203
 msgid "Email"
 msgstr ""
 
@@ -1130,65 +1129,6 @@ msgstr ""
 #. Translators: This is the subject line of an email sent to users who have a comment added to an application they also commented on. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/comment_notification_others-subject.html:4
 msgid "New comment on a Wikipedia Library application you commented on"
-msgstr ""
-
-#. Translators: This is the title of the form where users can send messages to the Wikipedia Library team.
-#. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
-#. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
-#: TWLight/emails/templates/emails/contact.html:16
-#: TWLight/templates/about.html:214 TWLight/templates/new_base.html:131
-msgid "Contact us"
-msgstr ""
-
-#. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
-#: TWLight/emails/templates/emails/contact.html:33
-#, python-format
-msgid ""
-"(If you would like to suggest a partner, <a class=\"twl-links\" href="
-"\"%(suggest)s\"><strong>go here</strong></a>.)"
-msgstr ""
-
-#. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
-#: TWLight/emails/templates/emails/contact.html:42
-msgid "Contact info"
-msgstr ""
-
-#. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
-#: TWLight/emails/templates/emails/contact.html:46
-msgid "Meta page"
-msgstr ""
-
-#. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
-#. Translators: Name of the project/tool.
-#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
-#. Translators: Name of the project/tool.
-#: TWLight/emails/templates/emails/contact.html:48
-#: TWLight/templates/header_partial_b4.html:18
-#: TWLight/templates/login_partial.html:10
-#: TWLight/templates/login_partial.html:14 TWLight/templates/new_base.html:14
-#: TWLight/templates/new_base.html:36
-msgid "The Wikipedia Library"
-msgstr ""
-
-#. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
-#: TWLight/emails/templates/emails/contact.html:55
-msgid "Mailing list"
-msgstr ""
-
-#. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:63
-msgid "Wikipedia Library Facebook page"
-msgstr ""
-
-#. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
-#: TWLight/emails/templates/emails/contact.html:69
-msgid "Wikipedia Library Twitter page"
-msgstr ""
-
-#. Translators: This is the subject line of an email sent to the Library Card platform admins from the contact us form.
-#: TWLight/emails/templates/emails/contact_us_email-subject.html:3
-#, python-format
-msgid "Wikipedia Library Card Platform message from %(editor_wp_username)s"
 msgstr ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
@@ -2302,12 +2242,63 @@ msgid ""
 "was found."
 msgstr ""
 
+#. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
+#. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
+#: TWLight/templates/about.html:214 TWLight/templates/new_base.html:131
+msgid "Contact us"
+msgstr ""
+
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:218
 #, python-format
 msgid ""
 "If you have questions, need help, or want to volunteer to help, please see "
 "our <a class=\"twl-links\" href=\"%(contact_url)s\">contact page</a>."
+msgstr ""
+
+#. Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.
+#: TWLight/templates/contact.html:14
+msgid "Contact info"
+msgstr ""
+
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library meta page.
+#: TWLight/templates/contact.html:18
+msgid "Meta page"
+msgstr ""
+
+#. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
+#. Translators: Name of the project/tool.
+#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
+#. Translators: Name of the project/tool.
+#: TWLight/templates/contact.html:20
+#: TWLight/templates/header_partial_b4.html:18
+#: TWLight/templates/login_partial.html:10
+#: TWLight/templates/login_partial.html:14 TWLight/templates/new_base.html:14
+#: TWLight/templates/new_base.html:36
+msgid "The Wikipedia Library"
+msgstr ""
+
+#. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
+#: TWLight/templates/contact.html:27
+msgid "Mailing list"
+msgstr ""
+
+#. Translators: Alt text for the Wikipedia Library Facebook logo shown in the contact info box of the contact us page.
+#: TWLight/templates/contact.html:35
+msgid "Wikipedia Library Facebook page"
+msgstr ""
+
+#. Translators: Alt text for the Wikipedia Library Twitter logo shown in the contact info box of the contact us page.
+#: TWLight/templates/contact.html:41
+msgid "Wikipedia Library Twitter page"
+msgstr ""
+
+#. Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.
+#: TWLight/templates/contact.html:48
+#, python-format
+msgid ""
+"(If you would like to suggest a partner, <a class=\"twl-links\" href="
+"\"%(suggest)s\"><strong>go here</strong></a>.)"
 msgstr ""
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
@@ -3554,12 +3545,12 @@ msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:846 TWLight/views.py:39
+#: TWLight/users/views.py:846 TWLight/views.py:43
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:848 TWLight/views.py:41
+#: TWLight/users/views.py:848 TWLight/views.py:45
 msgid "6+ months editing"
 msgstr ""
 
@@ -3569,12 +3560,12 @@ msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:852 TWLight/views.py:45
+#: TWLight/users/views.py:852 TWLight/views.py:49
 msgid "No active blocks"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
-#: TWLight/views.py:43
+#: TWLight/views.py:47
 msgid "10+ edits in the last 30 days"
 msgstr ""
 
