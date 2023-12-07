@@ -31,6 +31,10 @@ from django.views.defaults import ERROR_400_TEMPLATE_NAME, ERROR_PAGE_TEMPLATE
 logger = logging.getLogger(__name__)
 
 
+class ContactUsView(TemplateView):
+    template_name = "contact.html"
+
+
 class NewHomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

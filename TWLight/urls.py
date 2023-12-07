@@ -17,7 +17,6 @@ from django.views.decorators.cache import cache_page
 
 from TWLight.api.urls import urlpatterns as api_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
-from TWLight.emails.views import ContactUsView
 from TWLight.resources.urls import urlpatterns as partners_urls
 from TWLight.resources.views import (
     PartnerSuggestionView,
@@ -30,7 +29,7 @@ from TWLight.users.urls import urlpatterns as users_urls
 from TWLight.users.views import TermsView
 from TWLight.ezproxy.urls import urlpatterns as ezproxy_urls
 
-from .views import NewHomePageView, SearchEndpointFormView
+from .views import ContactUsView, NewHomePageView, SearchEndpointFormView
 
 handler400 = "TWLight.views.bad_request"
 
