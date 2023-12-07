@@ -36,7 +36,6 @@ from django.shortcuts import get_object_or_404
 
 from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
-from TWLight.emails.signals import ContactUs
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
 from TWLight.users.signals import Notice
@@ -493,39 +492,3 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
                 status__in=[Application.PENDING, Application.QUESTION]
             ):
                 send_waitlist_notification_email(app)
-
-
-@receiver(ContactUs.new_email)
-def contact_us_emails(sender, **kwargs):
-    """
-    Whenever a user submits a message using the contact us form
-    this forwards the message to wikipedialibrary@wikimedia.org
-    with some additional data.
-    """
-    reply_to = []
-    cc = []
-    user_email = kwargs["user_email"]
-    editor_wp_username = kwargs["editor_wp_username"]
-    body = kwargs["body"]
-    reply_to.append(user_email)
-
-    logger.info(
-        "Received contact us form submit signal for {editor_wp_username}; "
-        "preparing to send email to wikipedialibrary@wikimedia.org.".format(
-            editor_wp_username=editor_wp_username
-        )
-    )
-
-    mail_instance = MagicMailBuilder(template_mail_cls=InlineCSSTemplateMail)
-    email = mail_instance.contact_us_email(
-        "wikipedialibrary@wikimedia.org",
-        {"editor_wp_username": editor_wp_username, "body": body},
-    )
-    email.extra_headers["Reply-To"] = ", ".join(reply_to)
-    if kwargs["cc"]:
-        cc.append(user_email)
-        email.extra_headers["Cc"] = ", ".join(cc)
-
-    logger.info("Email constructed.")
-    email.send()
-    logger.info("Email queued.")

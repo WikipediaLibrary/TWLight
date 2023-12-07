@@ -1,7 +1,5 @@
 {% extends "new_base.html" %}
-{% load crispy_forms_tags %}
 {% load i18n %}
-{% load twlight_perms %}
 {% load static %}
 
 {% block content %}
@@ -12,32 +10,6 @@
       <div class="col-flex col-xs-12 col-sm-7 col-md-9">
         <div class="card panel-default full-width">
           <div class="card-header">
-            {% comment %}Translators: This is the title of the form where users can send messages to the Wikipedia Library team.{% endcomment %}
-            <strong><span class="panel-title">{% trans 'Contact us' %}</span></strong>
-          </div>
-          <div class="card-body">
-            <form class="w-75 mx-auto"
-            {% if user.is_authenticated %}
-            method="post"
-            {% elif request.GET %}
-            method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}&{{ request.GET.urlencode }}"
-            {% else %}
-            method="get" action="{% url 'oauth_login' %}?next={{ request.path|urlencode }}"
-            {% endif %}
-            >
-            {% crispy form %}
-            </form>
-            <div class="pull-right">
-              {% url 'suggest' as suggest %}
-              {% comment %}Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.{% endcomment %}
-              {% blocktranslate trimmed %}(If you would like to suggest a partner, <a class="twl-links" href="{{ suggest }}"><strong>go here</strong></a>.){% endblocktranslate %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-flex col-xs-12 col-sm-5 col-md-3">
-        <div class="card panel-info full-width">
-          <div class="card-header contact-info-header">
             {% comment %}Translators: This is the title of the panel box detailing the contact information for the Wikipedia Library team.{% endcomment %}
             <strong><span class="panel-title">{% trans 'Contact info' %}</span></strong>
           </div>
@@ -70,6 +42,11 @@
                 " style="width:30px; height:30px;">
               </a>
             </p>
+            <div class="pull-right">
+              {% url 'suggest' as suggest %}
+              {% comment %}Translators: This is the text that appears at the bottom of the contact us form directing users to the suggestions form.{% endcomment %}
+              {% blocktranslate trimmed %}(If you would like to suggest a partner, <a class="twl-links" href="{{ suggest }}"><strong>go here</strong></a>.){% endblocktranslate %}
+            </div>
           </div>
         </div>
       </div>
