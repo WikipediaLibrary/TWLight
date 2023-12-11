@@ -429,6 +429,7 @@ DJMAIL_REAL_BACKEND = os.environ.get(
 EMAIL_BACKEND = "djmail.backends.async.EmailBackend"
 EMAIL_HOST = os.environ.get("DJANGO_EMAIL_HOST", "localhost")
 EMAIL_PORT = 25
+EMAIL_SMTP_MAIL_FROM = os.environ.get("EMAIL_SMTP_MAIL_FROM", None)
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
