@@ -11,6 +11,7 @@
 # Author: NGC 54
 # Author: Pafsanias
 # Author: Popetedenis
+# Author: Strainu
 # Author: Tanea.d
 # Author: WebSourceContentRO
 msgid ""
@@ -18,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-08 02:38+0000\n"
-"PO-Revision-Date: 2023-12-11 12:30:26+0000\n"
+"PO-Revision-Date: 2023-12-14 12:24:10+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1266,7 +1267,7 @@ msgstr "Informații despre serviciu"
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:540
 msgid "Service issue"
-msgstr ""
+msgstr "Problemă cu serviciul"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:542
@@ -1276,12 +1277,12 @@ msgstr "Temporar indisponibil"
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:547
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "Lucrările în desfășurare pot afecta accesul"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:549
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "O problemă afectează accesul"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:551
@@ -1692,9 +1693,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Sortează colecțiile"
+msgstr "Filtrează colecțiile"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
@@ -1704,7 +1704,7 @@ msgstr "Căutați și susțineți sugestii"
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
 msgid "No suggestions matching this search."
-msgstr ""
+msgstr "Nu există sugestii care să corespundă acestei căutări."
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
@@ -2225,7 +2225,7 @@ msgstr "Actualizați email"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Nu puteți adăuga partenerul {partner} la favorite deoarece nu aveți acces la acesta"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:239
@@ -2270,15 +2270,14 @@ msgstr "Fără cerere jeton."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:493
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "Strângere de mână nu a fost inițializată, vă rugăm să încercați să vă conectați din nou."
+msgstr "Generarea tokenului de acces a eșuat, vă rog încercați să vă conectați din nou."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:502
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "Informații despre serviciu"
+msgstr "Consultați {issue} pentru mai multe informații"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:523
@@ -3037,7 +3036,6 @@ msgstr "Nu există blocări active"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "10+ modificări în ultima lună"
+msgstr "Peste 10 modificări în ultimele 30 de zile"
 
