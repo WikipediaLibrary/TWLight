@@ -33,7 +33,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-14 23:55+0000\n"
-"PO-Revision-Date: 2023-12-18 12:34:16+0000\n"
+"PO-Revision-Date: 2023-12-21 12:27:56+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2309,7 +2309,7 @@ msgstr "Willkommen! Bitte stimme den Nutzungsbedingungen zu."
 #. Translators: This error message is shown when there is a problem with email delivery. Do not translate anything within the <a> tag.
 #: TWLight/users/oauth.py:596
 msgid "We are currently experiencing a technical issue with email delivery. Emails, including application approvals and access details, may not be received as expected. Please contact us at wikipedialibrary@wikimedia.org if you have any questions. Updates will be posted on <a target='_blank' rel='noopener' href='https://phabricator.wikimedia.org/T352760'>Phabricator T353760</a>."
-msgstr ""
+msgstr "Derzeit gibt es ein technisches Problem mit der E-Mail-Zustellung. E-Mails, einschließlich Zugangsbestätigungen und Zugangsdaten, werden möglicherweise nicht wie erwartet zugestellt. Bitte kontaktiere uns unter wikipedialibrary@wikimedia.org, wenn du Fragen hast. Update zu diesem Problem werden unter <a target='_blank' rel='noopener' href='https://phabricator.wikimedia.org/T352760'></a> veröffentlicht."
 
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
 #: TWLight/users/templates/users/authorization_confirm_return.html:13

@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-14 23:55+0000\n"
-"PO-Revision-Date: 2023-12-18 12:34:19+0000\n"
+"PO-Revision-Date: 2023-12-21 12:27:59+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2112,7 +2112,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #: TWLight/templates/new_base.html:113
 msgid "Terms of use and privacy policy"
-msgstr ""
+msgstr "Benotzungsbedingungen an Dateschutzrichtlinnen"
 
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:119
@@ -2671,7 +2671,7 @@ msgstr "Fir d'lescht aktualiséiert den 11. August 2021"
 #. Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:40
 msgid "Wikimedia Foundation privacy policy"
-msgstr ""
+msgstr "Dateschutzrichtlinne vun der Wikimedia Foundation"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:44
