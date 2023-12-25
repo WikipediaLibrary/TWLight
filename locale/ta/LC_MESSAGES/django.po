@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-14 23:55+0000\n"
-"PO-Revision-Date: 2023-12-18 12:34:22+0000\n"
+"PO-Revision-Date: 2023-12-25 12:33:10+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -692,7 +692,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
 #, python-format
 msgid "Click 'confirm' to renew your application for %(partner)s"
-msgstr "%(partner)s க்கான உங்கள் விண்ணப்பத்தைப் புதுப்பிக்க 'உறுதிப்படுத்து' என்பதைக் கிளிக் செய்க"
+msgstr "%(partner)s இற்கான உமது விண்ணப்பத்தை இற்றையாக்க 'உறுதிப்படுத்து' என்பதைச் சொடுக்குக"
 
 #. Translators: Labels the submit button requesting confirmation of application renewal.
 #. Translators: This is the button coordinators click to confirm deletion of a suggestion.

@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-14 23:55+0000\n"
-"PO-Revision-Date: 2023-12-18 12:34:21+0000\n"
+"PO-Revision-Date: 2023-12-25 12:33:08+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1498,7 +1498,7 @@ msgstr "Aanmelden"
 #: TWLight/resources/templates/resources/partner_detail_apply.html:168
 #, python-format
 msgid "This resource is part of our <a class=\"twl-links\" href=\"%(about)s\">Library Bundle</a>, which you can access if you meet our minimum eligibility criteria. Log in to find out if you are eligible."
-msgstr "Deze bron maakt deel uit van onze <a class=\"twl-links\" href=\"%(about)s\">Bibliotheekbundel</a>, die u kunt openen als u voldoet aan onze minimale geschiktheidscriteria. Log in om te zien of u in aanmerking komt."
+msgstr "Deze bron maakt deel uit van onze <a class=\"twl-links\" href=\"%(about)s\">Bibliotheekbundel</a>, die u kunt openen als u voldoet aan onze minimale geschiktheidscriteria. Meld u aan om te zien of u in aanmerking komt."
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:21
@@ -1955,17 +1955,17 @@ msgstr "EZProxy is een proxyserver die wordt gebruikt om gebruikers te authentic
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr "Mogelijk merkt u dat bij het openen van bronnen via EZProxy URL's dynamisch worden aangepast. Daarom raden we aan om in te loggen via het Bibliotheek-platform in plaats van rechtstreeks zonder proxy naar de partnerwebsite te gaan. Controleer bij twijfel de URL voor 'idm.oclc'. Als dit er is, bent u verbonden via EZProxy."
+msgstr "Mogelijk merkt u bij het openen van bronnen via EZProxy dat URL’s dynamisch worden aangepast. Daarom raden we aan om u aan te melden via het Bibliotheek-platform in plaats van rechtstreeks zonder proxy naar de partnerwebsite te gaan. Controleer bij twijfel de URL voor 'idm.oclc'. Als dit er is, bent u verbonden via EZProxy."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:182
 msgid "Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you should also try clearing your cache and restarting your browser."
-msgstr "Als u eenmaal bent ingelogd, blijft uw sessie meestal tot twee uur actief in uw browser nadat u klaar bent met zoeken. Houd er rekening mee dat het gebruik van EZProxy vereist dat u cookies inschakelt. Als u problemen ondervindt, moet u ook proberen uw cachegeheugen te wissen en uw browser opnieuw op te starten."
+msgstr "Als u zich eenmaal hebt aangemeld, blijft uw sessie meestal tot twee uur actief in uw browser nadat u klaar bent met zoeken. Houd er rekening mee dat het gebruik van EZProxy vereist dat u cookies inschakelt. Als u problemen ondervindt, probeer dan ook uw cachegeheugen te wissen en uw browser opnieuw op te starten."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:193
 msgid "The Library Bundle is a collection of resources for which no application is required. If you meet the criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only some of our content is currently included in the Library Bundle, however we hope to expand the collection as more publishers become comfortable with participating. All Bundle content is accessed via EZProxy."
-msgstr "De Bibliotheekbundel is een verzameling bronnen waarvoor geen aanvraag vereist is. Als u aan de bovenstaande criteria voldoet, wordt u automatisch geautoriseerd voor toegang bij het inloggen op het platform. Slechts een deel van onze inhoud is momenteel opgenomen in de Bibliotheekbundel, maar we hopen de collectie uit te breiden naarmate meer uitgevers zich prettig voelen bij deelname. Alle inhoud van de bundel is toegankelijk via EZProxy."
+msgstr "De Bibliotheekbundel is een verzameling bronnen waarvoor geen aanvraag vereist is. Als u aan de bovenstaande criteria voldoet, wordt u automatisch geautoriseerd voor toegang wanneer u zich bij het platform aanmeldt. Slechts een deel van onze inhoud is momenteel opgenomen in de Bibliotheekbundel, maar we hopen de collectie uit te breiden naarmate meer uitgevers deel willen nemen. Alle inhoud van de bundel is toegankelijk via EZProxy."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:202
@@ -2226,7 +2226,7 @@ msgstr "Kan partner {partner} niet toevoegen aan uw favorieten omdat u er geen t
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:239
 msgid "You tried to log in but presented an invalid access token."
-msgstr "U heeft geprobeerd in te loggen, maar u heeft een ongeldig toegangstoken ingegeven."
+msgstr "U hebt geprobeerd zich aan te melden, maar u hebt een ongeldig toegangstoken verstrekt."
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:293 TWLight/users/oauth.py:439
@@ -2237,12 +2237,12 @@ msgstr "{domain} is geen toegestane host."
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
 #: TWLight/users/oauth.py:359
 msgid "Handshaker not initiated, please try logging in again."
-msgstr "OAuth-verbinding niet gestart, probeer opnieuw in te loggen."
+msgstr "Handshaker niet gestart. Probeer u opnieuw aan te melden."
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:383
 msgid "To view this link you need to be an eligible library user. Please login to continue."
-msgstr "Om deze link te bekijken, moet u een in aanmerking komende bibliotheekgebruiker zijn. Gelieve in te loggen om verder te gaan."
+msgstr "Om deze koppeling te bekijken moet u een in aanmerking komende bibliotheekgebruiker zijn. Meld u aan om verder te gaan."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:425
@@ -2267,7 +2267,7 @@ msgstr "Geen aanvraagtoken."
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:493
 msgid "Access token generation failed, please try logging in again."
-msgstr "Het aanmaken van het toegangstoken is mislukt, probeer opnieuw in te loggen."
+msgstr "Het aanmaken van het toegangstoken is mislukt. Probeer u opnieuw aan te melden."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:502
@@ -2283,7 +2283,7 @@ msgstr "Uw Wikipedia-account voldoet niet aan de geschiktheidscriteria in de geb
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:531
 msgid "Your Wikipedia account no longer meets the eligibility criteria in the terms of use, so you cannot be logged in. If you think you should be able to log in, please email wikipedialibrary@wikimedia.org."
-msgstr "Uw Wikipedia-account voldoet niet langer aan de geschiktheidscriteria in de gebruiksvoorwaarden, dus u kunt niet ingelogd zijn. Als u denkt dat u zou moeten kunnen inloggen, stuur dan een e-mail naar wikipedialibrary@wikimedia.org."
+msgstr "Uw Wikipedia-account voldoet niet langer aan de geschiktheidscriteria in de gebruiksvoorwaarden. Daarom kunt u zich niet aanmelden. Als u denkt dat u zich wel zou moeten kunnen aanmelden, stuur dan een e-mail naar wikipedialibrary@wikimedia.org."
 
 #. Translators: this message is displayed to users with brand new accounts.
 #: TWLight/users/oauth.py:544
@@ -2410,7 +2410,7 @@ msgstr "Voldoet aan de gebruiksvoorwaarden?"
 #. Translators: when viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a yes or no answer.
 #: TWLight/users/templates/users/editor_detail_data.html:57
 msgid "at their last login, did this user meet the criteria set forth in the terms of use?"
-msgstr "Voldeed deze gebruiker bij de laatste keer inloggen aan de criteria in de gebruiksvoorwaarden?"
+msgstr "Voldeed deze gebruiker bij de laatste aanmelding aan de criteria in de gebruiksvoorwaarden?"
 
 #. Translators: When viewing a user's profile in an application, this message shows if the software doesn't think that the user is eligible for access. Don't translate username.
 #: TWLight/users/templates/users/editor_detail_data.html:72
@@ -2461,7 +2461,7 @@ msgstr "Komt in aanmerking voor de Bibliotheekbundel?"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:156
 msgid "At their last login, did this user meet the criteria set forth in the Library Bundle? Note that satisfying terms of use is a prerequisite to bundle eligibility."
-msgstr "Voldeed deze gebruiker bij de laatste keer inloggen aan de criteria die zijn uiteengezet in de Bibliotheekbundel? Houd er rekening mee dat het voldoen aan de gebruiksvoorwaarden een voorwaarde is om in aanmerking te komen voor de bundel."
+msgstr "Voldeed deze gebruiker bij de laatste aanmelding aan de criteria die zijn uiteengezet in de Bibliotheekbundel? Houd er rekening mee dat het voldoen aan de gebruiksvoorwaarden een voorwaarde is om in aanmerking te komen voor de bundel."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:177
@@ -2548,7 +2548,7 @@ msgstr "Het lijkt erop dat u een actieve blokkering op uw account heeft. Als u a
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
 msgid "To refresh your data, please log out and back in."
-msgstr "Log uit en weer in om uw gegevens te vernieuwen."
+msgstr "Meld u af en weer aan om uw gegevens te vernieuwen."
 
 #. Translators: A button that takes users to their profile.
 #: TWLight/users/templates/users/eligibility_modal.html:58
@@ -2818,13 +2818,13 @@ msgstr "Elke uitgever die lid is van het programma van de Wikipedia-bibliotheek 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:280
 msgid "Some Wikipedia Library pages are visible without logging in, but you will need to log in to apply or access proprietary partner resources. We use the data provided by you via OAuth and Wikimedia API calls to assess your application for access and to process approved requests."
-msgstr "Sommige Wikipedia-bibliotheekpagina's zijn zichtbaar zonder in te loggen, maar u moet inloggen om bronnen van partners aan te vragen of te openen. We gebruiken de gegevens die u via OAuth en Wikimedia API-aanroepen verstrekt om uw aanvraag voor toegang te beoordelen en goedgekeurde verzoeken te verwerken."
+msgstr "Sommige Wikipedia-bibliotheekpagina’s zijn zichtbaar zonder aanmelden. Wel moet u zich aanmelden om materiaal van partners aan te vragen of te openen. We gebruiken de gegevens die u via OAuth en Wikimedia API-aanroepen verstrekt om uw aanvraag voor toegang te beoordelen en goedgekeurde verzoeken te verwerken."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:291
 #, python-format
 msgid "In order to administer the Wikipedia Library program, we will retain the application data we collect from you for three years after your most recent login, unless you delete your account, as described below. You can log in and go to <a class=\"twl-links\" href=\"%(profile_url)s\">your profile page</a> in order to see the information associated with your account, and can download it in JSON format. You may access, update, restrict, or delete this information at any time, except for the information that is automatically retrieved from the projects. If you have any questions or concerns about the handling of your data, please contact <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
-msgstr "Om het programma van de Wikipedia-bibliotheek te beheren, bewaren we de aanvraaggegevens die we van u verzamelen gedurende drie jaar na uw meest recente login, tenzij u uw account verwijdert, zoals hieronder beschreven. U kunt inloggen en naar <a class=\"twl-links\" href=\"%(profile_url)s\">uw profielpagina</a> gaan om de informatie te zien die aan uw account is gekoppeld en deze in JSON-formaat downloaden. U kunt deze informatie op elk moment openen, bijwerken, beperken of verwijderen, behalve de informatie die automatisch wordt opgehaald uit de projecten. Als u vragen of opmerkingen heeft over de verwerking van uw gegevens, neem dan contact op met <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%% 20deactivatie\"> wikipedialibrary@wikimedia.org </a>."
+msgstr "Om het programma van de Wikipedia-bibliotheek te beheren, bewaren we de aanvraaggegevens die we van u verzamelen gedurende drie jaar na uw meest recente aanmelding, tenzij u uw account verwijdert, zoals hieronder beschreven. U kunt zich aanmelden en naar <a class=\"twl-links\" href=\"%(profile_url)s\">uw profielpagina</a> gaan om de informatie te zien die aan uw account is gekoppeld en deze in JSON-formaat downloaden. U kunt deze informatie op elk moment openen, bijwerken, beperken of verwijderen, behalve de informatie die automatisch wordt opgehaald uit de projecten. Als u vragen of opmerkingen heeft over de verwerking van uw gegevens, neem dan contact op met <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%% 20deactivatie\"> wikipedialibrary@wikimedia.org </a>."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:308
@@ -2953,7 +2953,7 @@ msgstr "Hallo, %(username)s! U heeft hier geen Wikipedia-redacteurprofiel aan uw
 #. Translators: In the unlikely scenario that someone is able to register an account without using OAuth (thus leaving us without some of the information required for applications), users will see this message, encouraging them to re-register.
 #: TWLight/users/templates/users/user_detail.html:20
 msgid "If you aren't a site administrator, something weird has happened. You won't be able to apply for access without a Wikipedia editor profile. You should log out and create a new account by logging in via OAuth, or contact a site administrator for help."
-msgstr "Als u geen sitebeheerder bent, is er iets vreemds gebeurd. U kunt geen toegang aanvragen zonder een Wikipedia-redacteurprofiel. U moet uitloggen en een nieuw account aanmaken door in te loggen via OAuth of contact opnemen met een sitebeheerder voor hulp."
+msgstr "Als u geen sitebeheerder bent, is er iets vreemds gebeurd. U kunt geen toegang aanvragen zonder een Wikipedia-redacteurprofiel. Meld u af en maak dan een nieuw account aan door u aan te melden via OAuth, of neem contact op met een sitebeheerder voor hulp."
 
 #. Translators: Labels a sections where coordinators can select their email preferences.
 #: TWLight/users/templates/users/user_email_preferences.html:15

@@ -23,7 +23,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2023-12-14 23:55+0000\n"
-"PO-Revision-Date: 2023-12-18 12:34:23+0000\n"
+"PO-Revision-Date: 2023-12-25 12:33:10+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -960,15 +960,15 @@ msgstr "Gönder"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>%(partner)s onaylanmış başvurunuz şimdi sonlandırıldı. Erişim kodunuzu veya giriş bilgilerinizi aşağıda bulabilirsiniz:</p> <p><b>%(access_code)s</b></p> <p>%(access_code_instructions)s</p>"
+msgstr "<p>%(partner)s onaylanmış başvurunuz şimdi sonlandırıldı. Erişim kodunuzu veya giriş bilgilerinizi aşağıda bulabilirsiniz:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below: %(access_code)s %(user_instructions)s"
-msgstr "%(partner)s onaylanmış başvurunuz şimdi sonlandırıldı. Erişim kodunuzu veya giriş bilgilerinizi aşağıda bulabilirsiniz: %(access_code)s %(access_code_instructions)s"
+msgstr "%(partner)s onaylanmış başvurunuz şimdi sonlandırıldı. Erişim kodunuzu veya giriş bilgilerinizi aşağıda bulabilirsiniz: %(access_code)s %(user_instructions)s"
 
 #. Translators: This is the subject line of an email sent to users with their access code.
 #: TWLight/emails/templates/emails/access_code_email-subject.html:3
@@ -1689,9 +1689,8 @@ msgid "Merge"
 msgstr "Birleştir"
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Önerileri Birleştir"
+msgstr "Önerileri filtrele"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
@@ -1701,7 +1700,7 @@ msgstr "Önerilere göz at ve destekle"
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
 msgid "No suggestions matching this search."
-msgstr ""
+msgstr "Bu aramayla eşleşen öneri yok."
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
@@ -2222,7 +2221,7 @@ msgstr "E-postayı güncelle"
 #: TWLight/users/models.py:168
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Erişiminiz olmadığı için {partner} iş ortağını favorilerinize ekleyemiyorsunuz"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:239
@@ -2267,15 +2266,14 @@ msgstr "İstenen anahtar mevcut değil."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:493
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "OAuth-Handshaker aracılığıyla kimlik doğrulama başlatılmadı, lütfen tekrar oturum açın."
+msgstr "Erişim belirteci oluşturulamadı. Lütfen tekrar giriş yapmayı deneyin."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:502
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "See {issue} for more information"
-msgstr "Hizmet bilgisi"
+msgstr "Daha fazla bilgi için: {issue}"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:523
