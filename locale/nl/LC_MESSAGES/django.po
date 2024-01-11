@@ -11,6 +11,7 @@
 # Author: McDutchie
 # Author: Robin van der Vliet
 # Author: Romaine
+# Author: Siebrand
 # Author: Spinster
 # Author: Timk70
 # Author: Xbaked potatox
@@ -19,7 +20,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
 "POT-Creation-Date: 2024-01-01 12:41+0000\n"
-"PO-Revision-Date: 2024-01-04 12:29:21+0000\n"
+"PO-Revision-Date: 2024-01-11 12:37:27+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2293,7 +2294,7 @@ msgstr "Welkom! Ga akkoord met de gebruiksvoorwaarden."
 #. Translators: This error message is shown when there is a problem with email delivery. Do not translate anything within the <a> tag.
 #: TWLight/users/oauth.py:596
 msgid "We are currently experiencing a technical issue with email delivery. Emails, including application approvals and access details, may not be received as expected. Please contact us at wikipedialibrary@wikimedia.org if you have any questions. Updates will be posted on <a target='_blank' rel='noopener' href='https://phabricator.wikimedia.org/T352760'>Phabricator T353760</a>."
-msgstr ""
+msgstr "Momenteel ondervinden wij een technisch probleem met de bezorging van e-mail. E-mails, inclusief goedkeuringen van aanvragen en toegangsgegevens, worden mogelijk niet ontvangen zoals verwacht. Neem contact met ons op via wikipedialibrary@wikimedia.org als u vragen heeft. Updates worden geplaatst op <a target='_blank' rel='noopener' href='https://phabricator.wikimedia.org/T352760'>Phabricator T353760</a>."
 
 #. Translators: This message is displayed on the confirmation page where users can return their access to partner collections.
 #: TWLight/users/templates/users/authorization_confirm_return.html:13
