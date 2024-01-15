@@ -62,7 +62,7 @@
 	"78_short_description": "<strong>ICE Publishing</strong>は、イギリス土木学会に属しています。ICEバーチャルライブラリに収蔵されたすべてのジャーナルと電子書籍へのアクセスを提供します。",
 	"68_short_description": "<strong>Invaluable</strong>はオークションWebサイトで、芸術家とオークションのデータベースを含みます。専門家レベルの購読へのアクセスを提供し、オークション出展品5000万件と芸術家50万人超に関する情報を備えています。<em>注記：実際に請求は発生しないものの、現在、 Invaluable の登録手続きには請求情報の詳細を提供する必要がありますのでご留意ください。</em>",
 	"77_short_description": "<strong>International Water Association Publishing</strong> 国際水資源協会出版会は書籍と14の学術誌を発行しています。専門分野は水資源、水質汚染、関連する環境分野です。",
-	"54_short_description": "<strong>JSTOR</strong> は量も評判も世界最高のジャーナルのアーカイブのひとつです。現在、Wikipedia編集者に提供されているコンテンツは、JSTORが保管する全てのジャーナルと「19th Century British Pamphlets collection(19世紀小冊子コレクション)」です。",
+	"54_short_description": "<strong>JSTOR</strong> は量も評判も世界最高の学術専門誌（以下ジャーナル）のアーカイブのひとつです。現在、Wikipedia編集者に提供されているコンテンツは、JSTORが保管する大部分のジャーナルと「19th Century British Pamphlets collection」（19世紀小冊子コレクション）です。",
 	"72_short_description": "<strong>Kinige</strong>は、主にテルグ語で書かれたインド諸語の本を扱う電子書籍ストアです。 Kinigeは、電子書籍への無料アクセスを月間10冊分、提供します。",
 	"72_description": "利用申請に際して、Wikipediaで出典付きの執筆をしてきた経歴を述べ、該当する場合はKinigeの資料をどのように出典としたか記してください。毎月25日までに受信した申請は当月末に Kinige へ提出されます。",
 	"18_short_description": "<strong>L'Harmattan</strong> はフランスの社会科学と人文科学を専門に、 合計2万7千件の社会科学、文学、五大陸の分野別文学部、稀覯本、動画ならびに学術誌を提供します。",
@@ -148,5 +148,9 @@
 	"143_short_description": "<strong>Mohr Siebeck</strong>はドイツの学術出版社で歴史も長く、人文科学と社会科学に特化しています。eLibrary（電子図書館）には書籍2000冊超、数え切れない専門誌を揃え、宗教学、歴史学、哲学、法学、経済学、社会学をおさえています。",
 	"144_short_description": "<strong>Perlego</strong> はオンラインの電子図書館で、学術的で専門分野のノンフィクション系電子書籍の配布に注力しています。",
 	"145_short_description": "<strong>De Standaard</strong> De Standaard は、ベルギーで Mediahuis によって発行されているフランダースの日刊紙です。",
-	"146_short_description": "<strong>Duncker & Humblot</strong>電子ライブラリは、1万2500冊の電子書籍のほか、法律、経済学、社会、政治、歴史、哲学、文学の分野から合計25本の学術専門誌、1万2500件超の電子記にアクセスを提供します。"
+	"146_short_description": "<strong>Duncker & Humblot</strong>電子ライブラリは、1万2500冊の電子書籍のほか、法律、経済学、社会、政治、歴史、哲学、文学の分野から合計25本の学術専門誌、1万2500件超の電子記にアクセスを提供します。",
+	"147_short_description": "<strong>チェコ国立図書館</strong>はウィキペディアンに無料の図書館カード、または既存の図書館カードの無料延長を提供します。このサービスは、チェコ共和国所在のウィキペディアンのみ適用されます。",
+	"148_short_description": "<strong>Journal of the American Medical Association</strong>は査読付きの医学雑誌で、アメリカ医師会が年48回発行します。生物医学のさまざまな面を網羅し、独自の研究やレビュー、論説を掲載します。",
+	"149_short_description": "<strong>ACM 電子ライブラリ</strong>は、Association for Computing Machinery が提供する研究と発見、ネットワーキングのプラットフォームです。当ライブラリには ACM 出版物全件の全文コレクション、出版社を厳選し吟味してホストした出版物の全文コレクション、「ACM Guide to Computing Literature」ほかなど含んでいます。",
+	"151_short_description": "<strong>ブリストル大学出版局</strong>（Bristol University Press）は本拠地をイギリスに置く学術出版社で専門は社会科学と関連の議論であり、主題は世界各地で進む社会機構の変化に着目します。"
 }
