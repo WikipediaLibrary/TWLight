@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Adam N.",
+			"Craqdi",
 			"Jackiezelaya",
 			"Jakeukalane",
 			"La Mantis",
@@ -143,5 +144,6 @@
 	"144_short_description": "<strong>Perlego</strong> es una biblioteca digital en línea que se enfoca en la entrega de libros electrónicos académicos, profesionales y de no ficción.",
 	"145_short_description": "<strong>De Standaard</strong> es un diario flamenco publicado en Bélgica por Mediahuis.",
 	"146_short_description": "<strong>La Duncker & Humblot</strong> eLibrary brinda acceso a 12,500 libros electrónicos, así como 25 journals con más de 12,500 eArticles en los campos de derecho, economía, sociedad, política, historia, fiolosofía y literatura.",
-	"147_short_description": "<strong>La National Library of the Czech Republic</strong> brinda a wikipedistas una tarjeta de biblioteca gratuita o una prolongación de una tarjeta de biblioteca existente. Este servicio sólo puede ser utilizado por wikipedistas de la República Checa."
+	"147_short_description": "<strong>La National Library of the Czech Republic</strong> brinda a wikipedistas una tarjeta de biblioteca gratuita o una prolongación de una tarjeta de biblioteca existente. Este servicio sólo puede ser utilizado por wikipedistas de la República Checa.",
+	"151_short_description": "<fuerte>Bristol Prensa Universitaria</fuerte> es una editorial académica con sede en el Reino Unido en ciencias sociales y disciplinas alineadas, con un enfoque en los desafíos sociales globales."
 }
