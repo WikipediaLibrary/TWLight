@@ -522,11 +522,21 @@ class PartnerSuggestionView(FormView):
         try:
             assert self.request.user.editor
             suggestion = Suggestion()
-            suggestion.suggested_company_name = form.cleaned_data[
-                "suggested_company_name"
-            ]
-            suggestion.description = form.cleaned_data["description"]
-            suggestion.company_url = form.cleaned_data["company_url"]
+            suggestion.suggested_company_name = bleach.clean(
+                form.cleaned_data["suggested_company_name"],
+                tags=[],
+                strip=True,
+            )
+            suggestion.description = bleach.clean(
+                form.cleaned_data["description"],
+                tags=[],
+                strip=True,
+            )
+            suggestion.company_url = bleach.clean(
+                form.cleaned_data["company_url"],
+                tags=[],
+                strip=True,
+            )
             suggestion.author = self.request.user
             suggestion.save()
             suggestion.upvoted_users.add(self.request.user)
