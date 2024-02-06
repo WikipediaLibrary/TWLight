@@ -89,3 +89,17 @@ class DeleteOldEmails(CronJobBase):
             management.call_command("djmail_delete_old_messages", days=100)
         except Exception as e:
             capture_exception(e)
+
+
+class UpdateTwlTalkPage(CronJobBase):
+    RETRY_AFTER_FAILURE_MINS = 120
+    schedule = Schedule(
+        run_every_mins=DAILY, retry_after_failure_mins=RETRY_AFTER_FAILURE_MINS
+    )
+    code = "users.update_twl_talk_page"
+
+    def do(self):
+        try:
+            management.call_command("update_twl_talk_page")
+        except Exception as e:
+            capture_exception(e)
