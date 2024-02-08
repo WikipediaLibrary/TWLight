@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-01-24 17:07+0000\n"
-"PO-Revision-Date: 2024-02-05 12:26:32+0000\n"
+"PO-Revision-Date: 2024-02-08 12:27:26+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1153,12 +1153,12 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when their application is waitlisted because there are no more accounts available. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-subject.html:4
 msgid "Your Wikipedia Library application has been waitlisted"
-msgstr ""
+msgstr "Вашето барање до Википедиината библиотека е ставено на чекање"
 
 #. Translators: Shown to users when they successfully submit a new message using the contact us form.
 #: TWLight/emails/views.py:51
 msgid "Your message has been sent. We'll get back to you soon!"
-msgstr ""
+msgstr "Вашата порака е испратена. Ќе ви одговориме наскоро!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
@@ -1821,7 +1821,7 @@ msgstr ""
 #. Translators: Alt text for an image shown on the 404 error page.
 #: TWLight/templates/404.html:32
 msgid "A crab on a beach looking towards the camera"
-msgstr ""
+msgstr "Краба на плажа како гледа кон апаратот."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/templates/about.html:9
@@ -1852,32 +1852,32 @@ msgstr "Кој може да добие пристап?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr ""
+msgstr "Секој добростоечки активен корисник може да добие пристап. За издавачи со ограничен број на сметки, барањата треба да се разгледуваат врз основа на потребите и придонесите на уредникот. Ако сметате дека ќе ви користи пристпа до еден од нашите партнерски ресурси и сте активен уредник на било кој поддржан проект на Фондацијата Викимедија, тогаш повелете, поднесете барање."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
 msgid "Any editor can use the library if they meet a few basic requirements:"
-msgstr ""
+msgstr "Секој уредник може да ја користи библиотеката ако задоволува неколку основни услови:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
 msgid "You have an account that is a minimum of 6 months old"
-msgstr ""
+msgstr "Имате сметка стара барем 6 месеци"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr ""
+msgstr "Имате најмалку 500 уредувања на Викимедиините проекти"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:79
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr ""
+msgstr "Имате направено барем 10 уредувања на Викимедиините проекти во последниот месец."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:83
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr ""
+msgstr "Моментално не ви е забрането да уредувате Викимедиин проект"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
@@ -2084,7 +2084,7 @@ msgstr "Повеќе инфо"
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
 #, python-format
 msgid "Over 90 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr ""
+msgstr "Преку 90 од најдобрите претплатни бази на податоци со содржини на %(no_of_languages)s јазици, бесплатни за википедијанци од сите профили"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2244,12 +2244,12 @@ msgstr "Ракувањето не е започнато. Најавете се �
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:383
 msgid "To view this link you need to be an eligible library user. Please login to continue."
-msgstr ""
+msgstr "За да ја погледате оваа врска треба да сте подобен корисник на библиотеката. Најавете се за да продолжите."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:425
 msgid "Did not receive a valid oauth response."
-msgstr ""
+msgstr "Не добив важечки одговор од OAuth."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:452
@@ -2269,7 +2269,7 @@ msgstr "Нема шифра за седницата."
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:493
 msgid "Access token generation failed, please try logging in again."
-msgstr ""
+msgstr "Создавањето на пристапната шифра не успеа. Најавете се повторно."
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
 #: TWLight/users/oauth.py:502
