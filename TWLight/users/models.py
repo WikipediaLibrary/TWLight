@@ -148,6 +148,20 @@ class UserProfile(models.Model):
         """
         return cache.delete(self.my_library_cache_key)
 
+    @property
+    def talk_page_i18n(self):
+        """
+        This property will return the URL of the relevant Wikipedia Library talk page
+        in the user's preferred language
+        """
+        with open("locale/language-twl-page.json", "r") as file:
+            wiki_twl_pages = json.load(file)
+
+        if self.lang not in wiki_twl_pages:
+            return {"en": wiki_twl_pages["en"]}
+        else:
+            return {self.lang: wiki_twl_pages[self.lang]}
+
 
 def favorites_field_changed(sender, instance, action, pk_set, **kwargs):
     """

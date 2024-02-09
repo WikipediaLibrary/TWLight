@@ -24,6 +24,12 @@
           {% comment %}Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library) {% endcomment %}
           {% trans "Discuss" %}
         </a>
+        &ndash;
+        {% for key, value in  user.userprofile.talk_page_i18n.items %}
+        <a href="{{ value }}" class="twl-links twl-links-underline">
+          {{ key }}.wiki
+        </a>
+        {% endfor %}
       </div>
     </div>
     <hr>
