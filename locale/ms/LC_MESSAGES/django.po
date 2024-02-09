@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-02-08 16:07+0000\n"
+"POT-Creation-Date: 2024-02-09 19:15+0000\n"
 "PO-Revision-Date: 2024-01-25 12:29:31+0000\n"
 "Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1439,7 +1439,7 @@ msgstr "Bahasa"
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
 #: TWLight/resources/filters.py:74 TWLight/resources/models.py:286
 #: TWLight/users/templates/users/available_collection_tile.html:6
-#: TWLight/users/templates/users/filter_section.html:35
+#: TWLight/users/templates/users/filter_section.html:41
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
 msgstr ""
@@ -1476,7 +1476,7 @@ msgstr "Tiada"
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
 #: TWLight/resources/models.py:290
 #: TWLight/users/templates/users/available_collection_tile.html:9
-#: TWLight/users/templates/users/filter_section.html:44
+#: TWLight/users/templates/users/filter_section.html:50
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
 msgstr ""
@@ -1566,7 +1566,7 @@ msgstr "Perbincangan"
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this label indicates the start of the filter section.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/resources/templates/resources/filter_section.html:36
-#: TWLight/users/templates/users/filter_section.html:59
+#: TWLight/users/templates/users/filter_section.html:65
 #, fuzzy
 msgid "Filters"
 msgstr "Tapis mengikut..."
@@ -1574,7 +1574,7 @@ msgstr "Tapis mengikut..."
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
 #: TWLight/resources/templates/resources/filter_section.html:40
-#: TWLight/users/templates/users/filter_section.html:63
+#: TWLight/users/templates/users/filter_section.html:69
 #, fuzzy
 msgid "Reset filters"
 msgstr "Penapis semasa"
@@ -1582,13 +1582,13 @@ msgstr "Penapis semasa"
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this labels a button that helps users filter collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
 #: TWLight/resources/templates/resources/filter_section.html:48
-#: TWLight/users/templates/users/filter_section.html:70
+#: TWLight/users/templates/users/filter_section.html:76
 #, fuzzy
 msgid "Filter"
 msgstr "Tapis mengikut..."
 
 #: TWLight/resources/templates/resources/filter_section.html:54
-#: TWLight/users/templates/users/filter_section.html:76
+#: TWLight/users/templates/users/filter_section.html:82
 #, fuzzy
 msgid "Filter collections"
 msgstr "Koleksi"
@@ -2658,7 +2658,7 @@ msgid "Update email"
 msgstr "Kemas kini e-mel"
 
 #. Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
-#: TWLight/users/models.py:168
+#: TWLight/users/models.py:182
 #, python-brace-format
 msgid ""
 "Cannot add partner {partner} to your favorites because you don't have access "
@@ -2666,7 +2666,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:779
+#: TWLight/users/models.py:793
 #, fuzzy, python-brace-format
 #| msgid "Username"
 msgid "{wp_username}"
@@ -3039,22 +3039,22 @@ msgid "Profile/Settings"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
-#: TWLight/users/templates/users/filter_section.html:32
+#: TWLight/users/templates/users/filter_section.html:38
 msgid "Key"
 msgstr ""
 
 #. Translators: Text that describes a search icon.
-#: TWLight/users/templates/users/filter_section.html:39
+#: TWLight/users/templates/users/filter_section.html:45
 msgid "Collection is fully searchable via the search bar"
 msgstr ""
 
 #. Translators: Text that describes a search icon.
-#: TWLight/users/templates/users/filter_section.html:48
+#: TWLight/users/templates/users/filter_section.html:54
 msgid "Collection is only partially searchable via the search bar"
 msgstr ""
 
 #. Translators: Text that explains when there is no search icon.
-#: TWLight/users/templates/users/filter_section.html:52
+#: TWLight/users/templates/users/filter_section.html:58
 msgid "Other collections must be browsed individually"
 msgstr ""
 
