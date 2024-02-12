@@ -125,7 +125,8 @@
 	"145_short_description": "Short description of De Standaard \n\n* Website: https://www.standaard.be/",
 	"146_short_description": "Short description of Duncker & Humblot \n\n* German Wikipedia: [[:w:de:Duncker & Humblot|Duncker & Humblot]]\n* Website: https://elibrary.duncker-humblot.com/",
 	"147_short_description": "Short description of National Library of the Czech Republic. \n\nWebsite:https://www.en.nkp.cz/",
-	"148_short_description": "Short description of The Journal of the American Medical Association. \n\nWebsite:https://jamanetwork.com/",
-	"149_short_description": "Short description of The ACM Digital Library. \n\nWebsite:https://dl.acm.org/",
-	"150_short_description": "Short description of IEEE Xplore. \n\nWebsite:https://ieeexplore.ieee.org/Xplore/home.jsp"
+	"148_short_description": "Short description of The Journal of the American Medical Association. \n\n* English Wikipedia: [[:w:en:JAMA Network Open]]\n* Website: https://jamanetwork.com/",
+	"149_short_description": "Short description of The ACM Digital Library. \n\n* English Wikipedia: [[:w:en:Association for Computing Machinery]]\n* Website: https://dl.acm.org/",
+	"150_short_description": "Short description of IEEE Xplore. \n\n* English Wikipedia: [[:w:en:IEEE Xplore]]\n* Website: https://ieeexplore.ieee.org/Xplore/home.jsp",
+	"151_short_description": "Short description of Bristol University Press.\n\n* English Wikipedia: [[:w:en:University of Bristol]]\n* Website: https://bristoluniversitypress.co.uk/"
 }

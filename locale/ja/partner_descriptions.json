@@ -139,5 +139,9 @@
 	"147_short_description": "<strong>チェコ国立図書館</strong>はウィキペディアンに無料の図書館カード、または既存の図書館カードの無料延長を提供します。このサービスは、チェコ共和国所在のウィキペディアンのみ適用されます。",
 	"148_short_description": "<strong>Journal of the American Medical Association</strong>は査読付きの医学雑誌で、アメリカ医師会が年48回発行します。生物医学のさまざまな面を網羅し、独自の研究やレビュー、論説を掲載します。",
 	"149_short_description": "<strong>ACM 電子ライブラリ</strong>は、Association for Computing Machinery が提供する研究と発見、ネットワーキングのプラットフォームです。当ライブラリには ACM 出版物全件の全文コレクション、出版社を厳選し吟味してホストした出版物の全文コレクション、「ACM Guide to Computing Literature」ほかなど含んでいます。",
-	"151_short_description": "<strong>ブリストル大学出版局</strong>（Bristol University Press）は本拠地をイギリスに置く学術出版社で専門は社会科学と関連の議論であり、主題は世界各地で進む社会機構の変化に着目"
+	"151_short_description": "<strong>Bristol University Press</strong>は英国を拠点とする社会科学および関連分野の学術出版社であり、世界的な社会問題に重点を置いています。",
+	"152_short_description": "<strong>Haaretz English</strong>は現在イスラエルで発行されている中で最も古い新聞です（1918年創刊）。ヘブライ語版と英語版があり、これは英語版データベースです。",
+	"153_short_description": "<strong>Haaretz English</strong>は現在イスラエルで発行されている中で最も古い新聞です（1918年創刊）。ヘブライ語版と英語版があり、これはヘブライ語版データベースです。",
+	"154_short_description": "<strong>TheMarker</strong>はHaaretz Groupが発行するイスラエルの日刊ビジネス新聞です。ヘブライ語で書かれています。",
+	"155_short_description": "<strong>British Online Archives</strong>は人文科学・社会科学に関する一次資料のコレクションです。"
 }
