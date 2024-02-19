@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:16+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:16+0000\n"
+"PO-Revision-Date: 2024-02-19 12:27:23+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1487,7 +1487,7 @@ msgstr "Dostęp w ramach Pakietu Bazowego"
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:138
 msgid "You are eligible to access Library Bundle partners. Click the button above to access the collection."
-msgstr "Kwalifikujesz się do dostępu do zasobów partnerów wchodzących w skład Pakietu Bazowego. Kliknij przycisk powyżej, aby przejść do kolekcji."
+msgstr "Masz dostęp do partnerów z Pakietu Bazowego. Kliknij przycisk powyżej, aby przejść do kolekcji."
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
@@ -1836,12 +1836,12 @@ msgstr "Informacje o Bibliotece Wikipedia"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
 msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
-msgstr "Ta platforma to centralne narzędzie ułatwiające korzystanie z udostępnionych kolekcji. Tutaj możesz dowiedzieć się, z którymi wydawcami nawiązaliśmy partnerstwo, przeszukiwać zawartość ich baz danych oraz ubiegać się o dostęp do zasobów, które Cię interesują."
+msgstr "Ta platforma stanowi centralne narzędzie ułatwiające korzystanie ze zbiorów udostępnionych przez naszych partnerów. Tutaj możesz sprawdzić, jakie kolekcje są dostępne, przeszukiwać ich zawartość i składać wnioski o dostęp do interesujących Cię materiałów."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
 msgid "All users receive immediate access to some collections, which can be browsed by clicking the 'Access collection' buttons or using the search bar at the top of the page. Other collections require an application before access is granted, and may be accessed directly or via an individual login or access code. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review these applications and work with publishers to get you your free access."
-msgstr "Niektóre z kolekcji są od razu dostępne dla wszystkich użytkowników. Można je przeglądać, klikając przycisk „Przejdź do kolekcji” lub korzystając z paska wyszukiwania u góry strony. Inne wymagają złożenia wniosku, który zostanie rozpatrzony przez naszych wolontariuszy-koordynatorów, związanych umowami o zachowaniu poufności z Wikimedia Foundation i współpracujących z wydawcami. Po uzyskaniu uprawnienia możesz korzystać z tych zasobów bezpośrednio lub za pośrednictwem indywidualnego kodu dostępu."
+msgstr "Część kolekcji jest dostępna dla wszystkich użytkowników od razu – wystarczy kliknąć przycisk „Przejdź do kolekcji” lub skorzystać z paska wyszukiwania u góry strony. Dostęp do pozostałych zasobów wymaga wcześniejszego złożenia wniosku. Zostanie on rozpatrzony przez naszych wolontariuszy-koordynatorów, związanych umowami o zachowaniu poufności z Wikimedia Foundation i współpracujących z wydawcami. Po uzyskaniu uprawnienia można korzystać z tych zasobów bezpośrednio lub za pomocą indywidualnego loginu lub kodu dostępu."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
@@ -1867,7 +1867,7 @@ msgstr "Każdy redaktor może korzystać z Biblioteki Wikipedia, jeśli spełnia
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
 msgid "You have an account that is a minimum of 6 months old"
-msgstr "konto zarejestrowane co najmniej 6 miesięcy temu,"
+msgstr "konto starsze niż 6 miesięcy,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
@@ -1887,7 +1887,7 @@ msgstr "brak aktywnych blokad uniemożliwiających edytowanie w projektach Wikim
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr "Jeśli ubiegasz się o dostęp do konkretnej kolekcji, najpierw sprawdź, czy nie masz już do niej dostępu za pośrednictwem innej biblioteki lub instytucji. W takim przypadku rozważ wykorzystanie swojego dotychczasowego dostępu, zamiast blokować miejsce w Bibliotece Wikipedia."
+msgstr "Zanim złożysz wniosek o dostęp do interesującej Cię kolekcji, sprawdź, czy nie masz już do niej dostępu za pośrednictwem innej biblioteki lub instytucji. W takim przypadku rozważ wykorzystanie swojego dotychczasowego dostępu, aby nie blokować miejsca innym redaktorom."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
@@ -1897,57 +1897,57 @@ msgstr "Jeśli Twoje konto jest zablokowane w jednym lub kilku projektach Wikime
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
 msgid "What do I do after I get access?"
-msgstr ""
+msgstr "Co można robić po uzyskaniu dostępu?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr ""
+msgstr "Zatwierdzeni redaktorzy <i>mogą</i> wykorzystać swój dostęp do:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:118
 msgid "Search, view, retrieve, and display partner content"
-msgstr ""
+msgstr "wyszukiwania, przeglądania, pobierania i wyświetlania treści partnerów,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:122
 msgid "Electronically save partner content"
-msgstr ""
+msgstr "zapisywania treści partnerów w formie elektronicznej,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:126
 msgid "Print out single copies of partner content"
-msgstr ""
+msgstr "drukowania pojedynczych kopii treści partnerów."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:132
 msgid "Approved editors <i>should not</i>:"
-msgstr ""
+msgstr "Zatwierdzeni redaktorzy <i>nie powinni</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:136
 msgid "Share their account logins or passwords with others, or sell their access to other parties"
-msgstr ""
+msgstr "udostępniać loginów i haseł do swoich kont innym osobom ani odsprzedawać dostępu stronom trzecim,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:140
 msgid "Mass scrape or mass download partner content"
-msgstr ""
+msgstr "masowo pobierać ani kopiować treści partnerów,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:144
 msgid "Systematically make printed or electronic copies of multiple extracts of restricted content available for any purpose"
-msgstr ""
+msgstr "systematycznie tworzyć drukowane lub elektroniczne kopie wielu fragmentów treści o ograniczonym dostępie w jakimkolwiek celu,"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
 #: TWLight/templates/about.html:148
 msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
-msgstr ""
+msgstr "przetwarzać metadanych bez zezwolenia, na przykład, aby wykorzystywać je do automatycznego tworzenia zalążków artykułów."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:154
 msgid "Respecting these agreements allows us to continue growing the partnerships available to the community."
-msgstr ""
+msgstr "Przestrzeganie tych zasad jest kluczowe dla dalszego rozwoju programu i rozszerzania partnerstw dostępnych dla społeczności."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:160
@@ -2087,9 +2087,9 @@ msgstr "Więcej informacji"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Bezpłatny dostęp do ponad 90 najlepszych subskrypcyjnych baz danych z materiałami źródłowymi w %(no_of_languages)s językach dla wszystkich aktywnych wikipedystów!"
+msgstr "Bezpłatny dostęp do ponad 100 najlepszych subskrypcyjnych baz danych z materiałami źródłowymi w %(no_of_languages)s językach dla wszystkich aktywnych wikipedystów!"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40

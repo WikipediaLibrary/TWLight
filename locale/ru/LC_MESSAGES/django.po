@@ -47,7 +47,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:16+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:17+0000\n"
+"PO-Revision-Date: 2024-02-19 12:27:24+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2115,9 +2115,9 @@ msgstr "Подробнее"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Более 90 лучших в мире баз данных, доступных только по подписке, с контентом на %(no_of_languages)s языках, бесплатны для Википедистов любого уровня подготовки"
+msgstr "Более 100 лучших в мире баз данных, доступных только по подписке, с контентом на %(no_of_languages)s языках, бесплатны для Википедистов любого уровня подготовки"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -3062,7 +3062,6 @@ msgstr "Без активных блокировок"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "10+ правок за последний месяц"
+msgstr "10+ правок за последние 30 дней"
 

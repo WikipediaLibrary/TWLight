@@ -4,6 +4,7 @@
 # Author: Ajeje Brazorf
 # Author: DDPAT
 # Author: DreZhsh
+# Author: Framawiki
 # Author: Golmore
 # Author: Gomoko
 # Author: Ice bulldog
@@ -22,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:15+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:12+0000\n"
+"PO-Revision-Date: 2024-02-19 12:27:19+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -625,7 +626,7 @@ msgstr "Dernière évaluation le %(review_date)s"
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
 #: TWLight/users/templates/users/my_applications.html:58
 msgid "Not yet reviewed."
-msgstr "Pas encore évaluée."
+msgstr "En cours de validation."
 
 #. Translators: On the page listing applications, this text is displayed when there are no applications to be shown.
 #. Translators: On the page listing applications, this text is displayed when there are no app;ications to be shown.
@@ -1887,7 +1888,7 @@ msgstr "vous n’êtes actuellement pas bloqué en écriture sur un projet de Wi
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr "Si vous êtes candidat pour accéder à une collection disponible, veuillez d’abord vérifier que vous n’y avez pas déjà accès par une autre bibliothèque ou institution. Si c’est le cas, veuillez songer à utiliser cet accès plutôt que d’occuper un siège pour cette ressource dans la Bibliothèque Wikipédia."
+msgstr "Si vous êtes candidat pour accéder à une collection disponible, veuillez d’abord vérifier que vous n’y avez pas déjà accès par une autre bibliothèque ou institution. Si c’est le cas, veuillez songer à utiliser cet accès plutôt que de prendre une place dans le quota d'accès accordé à la Bibliothèque Wikipédia."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
@@ -3006,7 +3007,7 @@ msgstr "Votre courriel a été changé en {email}."
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
 #: TWLight/users/views.py:483
 msgid "Your email is blank. You can still explore the site, but you won't be able to apply for access to partner resources without an email."
-msgstr "Votre adresse de messagerie est vide. Vous pouvez toujours explorer le site, mais vous ne pourrez pas demander l’accès aux ressources des partenaires sans adresse courriel."
+msgstr "Votre adresse de messagerie n'est pas définie. Vous pouvez toujours parcourir le site, mais vous ne pourrez pas demander l’accès aux ressources des partenaires sans adresse courriel."
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:781
