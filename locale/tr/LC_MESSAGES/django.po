@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:15+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:18+0000\n"
+"PO-Revision-Date: 2024-02-22 12:28:17+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2082,9 +2082,9 @@ msgstr "Daha fazla bilgi"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "%(no_of_languages)s dilde içeriğe sahip olan ve abonelik gerektiren dünyanın en iyi 90'dan fazla veritabanı, herhangi bir geçmişi olan Vikipedistler için ücretsiz!"
+msgstr "%(no_of_languages)s dilde içeriğe sahip olan ve abonelik gerektiren dünyanın en iyi 100'den fazla veritabanı, herhangi bir geçmişi olan Vikipedistler için ücretsiz!"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
@@ -2965,9 +2965,8 @@ msgstr "Koordinatörlerin başvurularınızı değerlendirmesine yardımcı olma
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:289
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr "Hatırlatma e-postaları almamayı seçtiniz. Bir koordinatör olarak, en az bir tür hatırlatma e-postası almalısınız, bu nedenle tercihlerinizi değiştirmeyi düşünün."
+msgstr "Hatırlatma e-postaları almamayı seçtiniz. Bir koordinatör olarak en az bir tür hatırlatma e-postası almalısınız, bu nedenle tercihlerinizi değiştirmeyi düşünün."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:297
@@ -3030,7 +3029,6 @@ msgstr "Engellenmiş olmamak"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "Son ayda 10+ düzenleme yapmak"
+msgstr "Son 30 günde 10+ düzenleme yapmak"
 
