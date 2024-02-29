@@ -6,6 +6,7 @@
 # Author: Ice bulldog
 # Author: Jlrb+
 # Author: KRLS
+# Author: Lluis Cat
 # Author: Lluis tgn
 # Author: Medol
 # Author: Mguix
@@ -18,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:16+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:10+0000\n"
+"PO-Revision-Date: 2024-02-29 12:25:55+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2080,9 +2081,9 @@ msgstr "Més informació"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Més de 90 dels repositoris bibliogràfics de pagament més prestigiosos del món, amb contingut en %(no_of_languages)s llengües, ara de franc per a viquipedistes de qualsevol especialitat"
+msgstr "Més de 100 dels repositoris bibliogràfics de pagament més prestigiosos del món, amb contingut en %(no_of_languages)s llengües, de franc per a viquipedistes de qualsevol especialitat"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
