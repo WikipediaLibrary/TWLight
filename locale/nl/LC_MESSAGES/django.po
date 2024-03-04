@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:16+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:16+0000\n"
+"PO-Revision-Date: 2024-03-04 12:26:20+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2083,9 +2083,9 @@ msgstr "Meer informatie"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Meer dan 90 van 's werelds beste abonnementsgebonden databases, in %(no_of_languages)s talen, gratis voor alle Wikipedianen ongeacht hun achtergrond"
+msgstr "Meer dan 100 van 's werelds beste abonnementsgebonden databases, in %(no_of_languages)s talen, gratis voor alle Wikipedianen ongeacht hun achtergrond"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:40
