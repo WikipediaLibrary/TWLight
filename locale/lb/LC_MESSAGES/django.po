@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:15+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:14+0000\n"
+"PO-Revision-Date: 2024-03-11 12:26:44+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1483,7 +1483,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
 #: TWLight/templates/header_partial_b4.html:106
 msgid "Log in"
-msgstr ""
+msgstr "Aloggen"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:168
