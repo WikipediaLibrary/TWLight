@@ -4,6 +4,7 @@
 # Author: DDPAT
 # Author: Haxpett
 # Author: Ice bulldog
+# Author: Josve05a
 # Author: Sabelöga
 # Author: Sturban
 # Author: WikiPhoenix
@@ -13,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:15+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:18+0000\n"
+"PO-Revision-Date: 2024-03-18 12:28:22+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -937,7 +938,7 @@ msgstr "Din e-post"
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
 msgid "This field is automatically updated with the email from your <a class='twl-links' href='{}'>user profile</a>."
-msgstr ""
+msgstr "Det här fältet uppdateras automatiskt med e-postadressen från din <a class='twl-links' href='{}'>användarprofil</a>."
 
 #. Translators: This labels a textfield where users can enter their email message.
 #: TWLight/emails/forms.py:26
@@ -1277,12 +1278,12 @@ msgstr "Användarvillkor är inte tillgängliga."
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:547
 msgid "Ongoing work may impact access"
-msgstr ""
+msgstr "Pågående arbete kan påverka åtkomsten"
 
 #. Translators: information about a current issue with this partner
 #: TWLight/resources/models.py:549
 msgid "An issue is impacting access"
-msgstr ""
+msgstr "Ett problem påverkar åtkomsten"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:551
@@ -1320,7 +1321,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "Börja med sökfältet högst upp eller bläddra direkt på utgivares webbplatser."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -1707,7 +1708,7 @@ msgstr "Bläddrings- och stödförslag"
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
 msgid "No suggestions matching this search."
-msgstr ""
+msgstr "Inga förslag matchar denna sökning."
 
 #. Translators: This button is at the partner suggestions page for coordinators to delete suggestions.
 #. Translators: This text labels a button users can click to delete their account.
@@ -1857,7 +1858,7 @@ msgstr "Vem kan få åtkomst?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr ""
+msgstr "Alla aktiva användare med god ställning kan få åtkomst. För förlag med begränsat antal konton granskas ansökningar utifrån användarens behov och bidrag. Om du tror att du skulle kunna dra nytta av tillgång till en av våra partnerresurser och är en aktiv användare på något projekt som stöds av Wikimedia Foundation, vänligen ansök."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
@@ -1877,12 +1878,12 @@ msgstr "Du har gjort minst 500 redigeringar på Wikimedias projekt"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:79
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr ""
+msgstr "Du har gjort minst 10 redigeringar på Wikimedia-projekt under den senaste månaden."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:83
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr ""
+msgstr "Du är för närvarande inte blockerad från att redigera ett Wikimedia-projekt."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
@@ -1892,7 +1893,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr ""
+msgstr "Om ditt konto är blockerat på ett eller flera Wikimedia-projekt kan du fortfarande beviljas åtkomst till The Wikipedia Library. Du måste kontakta Wikipedia Library-teamet, som kommer att granska dina blockeringar. Om du har blockerats på grund av innehållsproblem, särskilt upphovsrättsbrott, eller har flera långvariga blockeringar, kan vi avslå din begäran. Dessutom, om din blockeringsstatus ändras efter att du har godkänts, måste du begära en till granskning."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2254,7 +2255,7 @@ msgstr ""
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:425
 msgid "Did not receive a valid oauth response."
-msgstr ""
+msgstr "Mottog inte ett giltigt OAuth-svar."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:452
@@ -2423,7 +2424,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:83
 msgid "Satisfies minimum account age?"
-msgstr ""
+msgstr "Uppfyller minimumkontoåldern?"
 
 #. Translators: This text is shown next to a user's eligibility if they haven't logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:88
@@ -2442,12 +2443,12 @@ msgstr "Uppfyller lägsta redigeringsantalet?"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Is not blocked on any project?"
-msgstr ""
+msgstr "Är inte blockerad på något projekt?"
 
 #. Translators: If a user has received an exemption against a criterion, this is shown next to "No" on their user page and applications next to this criterion.
 #: TWLight/users/templates/users/editor_detail_data.html:132
 msgid "(exemption granted)"
-msgstr ""
+msgstr "(undantag beviljat)"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:137
@@ -2498,7 +2499,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:244
 msgid "Wikipedia user ID *"
-msgstr ""
+msgstr "Wikipedia användar-ID *"
 
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:255
@@ -2590,7 +2591,7 @@ msgstr ""
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
 msgid "Withdraw"
-msgstr ""
+msgstr "Dra tillbaka"
 
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
 #: TWLight/users/templates/users/my_applications.html:73
