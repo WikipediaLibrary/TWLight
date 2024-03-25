@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: A Chinese Wikipedian
+# Author: Cookai1205
 # Author: DDPAT
 # Author: Ericliu1912
 # Author: Ice bulldog
@@ -23,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-02-09 19:15+0000\n"
-"PO-Revision-Date: 2024-02-12 12:38:21+0000\n"
+"PO-Revision-Date: 2024-03-25 12:27:58+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1048,7 +1049,7 @@ msgstr "在您曾評註過維基百科圖書館申請程序的新評註"
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Our records indicate that you are the designated coordinator for partners that have a total of %(total_apps)s applications.</p>"
-msgstr "<p>致 %(user)s：</p><p>我們的紀錄指示出，您是合作夥指定的協調員，且共有 %(total_apps)s 個申請程序。</p>"
+msgstr "<p>致 %(user)s：</p><p>我們的紀錄指出，您是合作夥指定的協調員，且共有 %(total_apps)s 個申請程序。</p>"
 
 #. Translators: Breakdown as in 'cost breakdown'; analysis.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:11
