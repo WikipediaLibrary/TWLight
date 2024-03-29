@@ -112,9 +112,11 @@ class SynchronizeFieldsTest(TestCase):
         return list(
             set(
                 chain.from_iterable(
-                    (field.name, field.attname)
-                    if hasattr(field, "attname")
-                    else (field.name,)
+                    (
+                        (field.name, field.attname)
+                        if hasattr(field, "attname")
+                        else (field.name,)
+                    )
                     for field in model._meta.get_fields()
                     if not (field.many_to_one and field.related_model is None)
                 )
@@ -1432,18 +1434,17 @@ class ListApplicationsTest(BaseApplicationViewTest):
         # Generate expected result for app5
         # Also note that app5 will be excluded from recent apps
         expected_recent_apps = [
-            repr(app8),
-            repr(app7),
-            repr(app6),
-            repr(app4),
-            repr(app3),
+            app8,
+            app7,
+            app6,
+            app4,
+            app3,
         ]
 
         # Visit evaluation page and get recent apps from context data for app5
         app5_url = reverse("applications:evaluate", kwargs={"pk": app5.pk})
         response = self.client.get(app5_url)
         recent_apps = response.context_data["recent_apps"]
-
         # Expected and actual recent app querysets must be equal
         self.assertQuerysetEqual(recent_apps, expected_recent_apps)
 
