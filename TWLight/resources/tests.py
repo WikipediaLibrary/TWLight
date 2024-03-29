@@ -415,7 +415,7 @@ class PartnerModelTests(TestCase):
         assert partner2 not in all_partners
         assert partner3 in all_partners
 
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             Partner.objects.all(),
             list(
                 Partner.even_not_available.filter(

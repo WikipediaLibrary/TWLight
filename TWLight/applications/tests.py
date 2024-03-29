@@ -1446,7 +1446,7 @@ class ListApplicationsTest(BaseApplicationViewTest):
         response = self.client.get(app5_url)
         recent_apps = response.context_data["recent_apps"]
         # Expected and actual recent app querysets must be equal
-        self.assertQuerysetEqual(recent_apps, expected_recent_apps)
+        self.assertQuerySetEqual(recent_apps, expected_recent_apps)
 
 
 class RenewApplicationTest(BaseApplicationViewTest):
