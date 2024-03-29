@@ -1,18 +1,18 @@
-from django.conf.urls import url
+from django.urls import re_path, path
 
 from . import views
 
 urlpatterns = [
-    url(
-        r"^$",
+    path(
+        r"",
         views.PartnersFilterView.as_view(),
         name="filter",
     ),
-    url(r"^(?P<pk>\d+)/$", views.PartnersDetailView.as_view(), name="detail"),
-    url(
+    re_path(r"^(?P<pk>\d+)/$", views.PartnersDetailView.as_view(), name="detail"),
+    re_path(
         r"^toggle_waitlist/(?P<pk>\d+)/$",
         views.PartnersToggleWaitlistView.as_view(),
         name="toggle_waitlist",
     ),
-    url(r"^(?P<pk>\d+)/users/$", views.PartnerUsers.as_view(), name="users"),
+    re_path(r"^(?P<pk>\d+)/users/$", views.PartnerUsers.as_view(), name="users"),
 ]

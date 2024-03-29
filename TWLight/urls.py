@@ -4,9 +4,10 @@ TWLight URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/ref/urls/
 """
+
 import sys
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
@@ -35,62 +36,66 @@ handler400 = "TWLight.views.bad_request"
 
 urlpatterns = [
     # Built-in -----------------------------------------------------------------
-    url(r"^admin/doc", include(admindocs)),
-    url(r"^admin/", admin.site.urls),
-    url(r"^accounts/login/", auth_views.LoginView.as_view(), name="auth_login"),
-    url(
+    re_path(r"^admin/doc", include(admindocs)),
+    re_path(r"^admin/", admin.site.urls),
+    re_path(r"^accounts/login/", auth_views.LoginView.as_view(), name="auth_login"),
+    re_path(
         r"^accounts/logout/",
         auth_views.LogoutView.as_view(),
         {"next_page": "/"},
         name="auth_logout",
     ),
-    url(
+    re_path(
         r"^password/change/$",
         auth_views.PasswordChangeView.as_view(),
         {"post_change_redirect": "users:home"},
         name="password_change",
     ),
-    url(
+    re_path(
         r"^password/reset/$",
         auth_views.PasswordResetView.as_view(),
         {"post_reset_redirect": "users:home"},
         name="password_reset",
     ),
     # Third-party --------------------------------------------------------------
-    url(r"^comments/", include("django_comments.urls")),
+    re_path(r"^comments/", include("django_comments.urls")),
     # TWLight apps -------------------------------------------------------------
     # This makes our custom set language form  available.
-    url(r"^i18n/", include("TWLight.i18n.urls")),
-    url(r"^api/", include((api_urls, "api"), namespace="api")),
-    url(r"^users/", include((users_urls, "users"), namespace="users")),
-    url(
+    re_path(r"^i18n/", include("TWLight.i18n.urls")),
+    re_path(r"^api/", include((api_urls, "api"), namespace="api")),
+    re_path(r"^users/", include((users_urls, "users"), namespace="users")),
+    re_path(
         r"^applications/",
         include((applications_urls, "applications"), namespace="applications"),
     ),
-    url(r"^partners/", include((partners_urls, "resources"), namespace="partners")),
-    url(r"^ezproxy/", include((ezproxy_urls, "ezproxy"), namespace="ezproxy")),
+    re_path(r"^partners/", include((partners_urls, "resources"), namespace="partners")),
+    re_path(r"^ezproxy/", include((ezproxy_urls, "ezproxy"), namespace="ezproxy")),
     # Other TWLight views
-    url(r"^oauth/login/$", auth.OAuthInitializeView.as_view(), name="oauth_login"),
-    url(r"^oauth/callback/$", auth.OAuthCallbackView.as_view(), name="oauth_callback"),
-    url(r"^terms/$", TermsView.as_view(), name="terms"),
+    re_path(r"^oauth/login/$", auth.OAuthInitializeView.as_view(), name="oauth_login"),
+    re_path(
+        r"^oauth/callback/$", auth.OAuthCallbackView.as_view(), name="oauth_callback"
+    ),
+    re_path(r"^terms/$", TermsView.as_view(), name="terms"),
     # For partner suggestions
-    url(r"^suggest/$", PartnerSuggestionView.as_view(), name="suggest"),
-    url(r"^suggest/merge/$", SuggestionMergeView.as_view(), name="suggest-merge"),
-    url(
+    re_path(r"^suggest/$", PartnerSuggestionView.as_view(), name="suggest"),
+    re_path(r"^suggest/merge/$", SuggestionMergeView.as_view(), name="suggest-merge"),
+    re_path(
         r"^suggest/(?P<pk>[0-9]+)/delete/$",
         login_required(SuggestionDeleteView.as_view()),
         name="suggest-delete",
     ),
-    url(
+    re_path(
         r"^suggest/(?P<pk>[0-9]+)/upvote/$",
         login_required(SuggestionUpvoteView.as_view()),
         name="upvote",
     ),
     # For contact us form
-    url(r"^contact/$", ContactUsView.as_view(), name="contact"),
-    url(r"^$", NewHomePageView.as_view(), name="homepage"),
-    url(r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"),
-    url(
+    re_path(r"^contact/$", ContactUsView.as_view(), name="contact"),
+    re_path(r"^$", NewHomePageView.as_view(), name="homepage"),
+    re_path(
+        r"^about/$", TemplateView.as_view(template_name="about.html"), name="about"
+    ),
+    re_path(
         r"^search/$",
         login_required(SearchEndpointFormView.as_view()),
         name="search",
@@ -109,8 +114,8 @@ if (
     # To better debug and improve the error pages, we are making them pages
     # available when django debug toolbar is enabled
     urlpatterns += [
-        url(r"^400/$", TemplateView.as_view(template_name="400.html")),
-        url(r"^403/$", TemplateView.as_view(template_name="403.html")),
-        url(r"^404/$", TemplateView.as_view(template_name="404.html")),
-        url(r"^500/$", TemplateView.as_view(template_name="500/500.html")),
+        re_path(r"^400/$", TemplateView.as_view(template_name="400.html")),
+        re_path(r"^403/$", TemplateView.as_view(template_name="403.html")),
+        re_path(r"^404/$", TemplateView.as_view(template_name="404.html")),
+        re_path(r"^500/$", TemplateView.as_view(template_name="500/500.html")),
     ]

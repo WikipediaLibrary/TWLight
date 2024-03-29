@@ -26,7 +26,7 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
 from django.utils.cache import learn_cache_key
 from django.utils.decorators import classonlymethod, method_decorator
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
 from django.utils import timezone
@@ -106,7 +106,9 @@ def _redirect_to_next_param(request):
     next_param = request.GET.get(REDIRECT_FIELD_NAME, "")
     if (
         next_param
-        and is_safe_url(url=next_param, allowed_hosts=request.get_host())
+        and url_has_allowed_host_and_scheme(
+            url=next_param, allowed_hosts=request.get_host()
+        )
         and _is_real_url(next_param)
     ):
         return next_param

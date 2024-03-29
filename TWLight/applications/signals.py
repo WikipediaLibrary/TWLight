@@ -14,21 +14,31 @@ from TWLight.resources.models import Partner
 from TWLight.applications.models import Application
 from TWLight.users.models import Authorization
 
-no_more_accounts = Signal(providing_args=["partner_pk"])
+"""
+The providing_args argument was deprecated, so it will be in comment form
+for documentation purposes
+providing_args=["partner_pk"]
+"""
+no_more_accounts = Signal()
 
 logger = logging.getLogger(__name__)
 
 
+"""
+The providing_args argument was deprecated, so it will be in comment form
+for documentation purposes
+providing_args=[
+    "app_status",
+    "app_count",
+    "coordinator_wp_username",
+    "coordinator_email",
+    "coordinator_lang",
+]
+"""
+
+
 class Reminder(object):
-    coordinator_reminder = Signal(
-        providing_args=[
-            "app_status",
-            "app_count",
-            "coordinator_wp_username",
-            "coordinator_email",
-            "coordinator_lang",
-        ]
-    )
+    coordinator_reminder = Signal()
 
 
 @receiver(comment_was_posted)

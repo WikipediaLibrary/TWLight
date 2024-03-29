@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url
-from django.urls import LocalePrefixPattern, URLResolver, get_resolver, path
+from django.urls import LocalePrefixPattern, URLResolver, path
 from TWLight.i18n.views import set_language
 
 # Direct rip from django.conf.urls.i18n, but imports our local set_language
