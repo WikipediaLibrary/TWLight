@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-02-09 19:15+0000\n"
+"POT-Creation-Date: 2024-04-01 14:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,7 +262,7 @@ msgid ""
 msgstr ""
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-#: TWLight/applications/signals.py:236
+#: TWLight/applications/signals.py:246
 msgid ""
 "This partner joined the Library Bundle, which does not require applications. "
 "This application will be marked as invalid."
@@ -715,7 +715,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
-#: TWLight/users/views.py:528
+#: TWLight/users/views.py:530
 msgid "Confirm"
 msgstr ""
 
@@ -2964,7 +2964,7 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:25
-#: TWLight/users/views.py:397
+#: TWLight/users/views.py:399
 msgid "Update"
 msgstr ""
 
@@ -3478,7 +3478,7 @@ msgid "Coordinators only"
 msgstr ""
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:176
+#: TWLight/users/views.py:178
 #, python-brace-format
 msgid ""
 "Please <a class='twl-links' href='{url}'>update your contributions</a> to "
@@ -3486,7 +3486,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:289
+#: TWLight/users/views.py:291
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -3494,63 +3494,63 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:297
+#: TWLight/users/views.py:299
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:379 TWLight/users/views.py:460
-#: TWLight/users/views.py:513
+#: TWLight/users/views.py:381 TWLight/users/views.py:462
+#: TWLight/users/views.py:515
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:412
+#: TWLight/users/views.py:414
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:444
+#: TWLight/users/views.py:446
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:472
+#: TWLight/users/views.py:474
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:483
+#: TWLight/users/views.py:485
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:781
+#: TWLight/users/views.py:783
 msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:846 TWLight/views.py:43
+#: TWLight/users/views.py:848 TWLight/views.py:43
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:848 TWLight/views.py:45
+#: TWLight/users/views.py:850 TWLight/views.py:45
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:850
+#: TWLight/users/views.py:852
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:852 TWLight/views.py:49
+#: TWLight/users/views.py:854 TWLight/views.py:49
 msgid "No active blocks"
 msgstr ""
 
