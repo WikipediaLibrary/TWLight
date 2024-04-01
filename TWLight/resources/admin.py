@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django import forms
-from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -104,7 +104,7 @@ class AccessCodeAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(AccessCodeAdmin, self).get_urls()
-        my_urls = [url("import/", self.import_csv)]
+        my_urls = [path("import/", self.import_csv)]
         return my_urls + urls
 
     def import_csv(self, request):

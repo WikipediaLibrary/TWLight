@@ -415,16 +415,11 @@ class PartnerModelTests(TestCase):
         assert partner2 not in all_partners
         assert partner3 in all_partners
 
-        # assertQuerysetEqual compares a queryset to a list of representations.
-        # Sigh.
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             Partner.objects.all(),
             list(
-                map(
-                    repr,
-                    Partner.even_not_available.filter(
-                        status__in=[Partner.WAITLIST, Partner.AVAILABLE]
-                    ),
+                Partner.even_not_available.filter(
+                    status__in=[Partner.WAITLIST, Partner.AVAILABLE]
                 )
             ),
         )

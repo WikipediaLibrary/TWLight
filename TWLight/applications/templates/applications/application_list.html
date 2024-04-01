@@ -130,9 +130,9 @@
           {% comment %}If there are less than 10 number of pages, display the pages in order. No modification requried.{% endcomment %}
           {% if object_list.paginator.num_pages <= 10 %}
             {% for _ in range %}
-              <li class="page-item {% ifequal forloop.counter object_list.number %}
+              <li class="page-item {% if forloop.counter == object_list.number %}
                     active
-                  {% endifequal %}">
+                  {% endif %}">
                 <a class="twl-links page-link" href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                   {{ forloop.counter }}
                 </a>
@@ -194,9 +194,9 @@
           {% comment %}There are more than 10 pages, but initially display only 10 and indicate there's more at the end.{% endcomment %}
           {% else %}
             {% for _ in range|slice:":10" %}
-              <li class="page-item {% ifequal forloop.counter object_list.number %}
+              <li class="page-item {% if forloop.counter == object_list.number %}
                     active
-                  {% endifequal %}">
+                  {% endif %}">
                 <a class="twl-links page-link" href="?page={{ forloop.counter }}{% if filters %}{% for filter in filters %}{% if forloop.counter0 == 0 %}&Editor={{ filter.object.pk|safe }}{% elif forloop.counter0 == 1 %}&Partner={{ filter.object.pk|safe }}{% endif %}{% endfor %}{% else %}{% endif %}">
                   {{ forloop.counter }}
                 </a>

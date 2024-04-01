@@ -6,17 +6,21 @@ from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.models import Authorization, UserProfile
 from TWLight.resources.models import Partner
 
+"""
+The providing_args argument was deprecated, so it will be in comment form
+for documentation purposes
+providing_args=[
+    "user_wp_username",
+    "user_email",
+    "user_lang",
+    "partner_name",
+    "partner_link",
+]
+"""
+
 
 class Notice(object):
-    user_renewal_notice = Signal(
-        providing_args=[
-            "user_wp_username",
-            "user_email",
-            "user_lang",
-            "partner_name",
-            "partner_link",
-        ]
-    )
+    user_renewal_notice = Signal()
 
 
 @receiver(post_save, sender=Authorization)

@@ -2,7 +2,7 @@ black==23.10.1
 bleach==6.0.0
 click==8.0.4 # This version of click has to be set because 8.1 breaks black formatting
 defusedxml==0.7.1
-django==3.2.25
+django==4.2.11
 django-annoying==0.10.6
 django-autocomplete-light==3.9.4
 django-contrib-comments==2.2.0
@@ -23,6 +23,5 @@ mwoauth==0.3.8
 git+https://github.com/WikipediaLibrary/python-mwoauth.git@Jsn.sherman/T332349
 pillow==10.2.0
 python-dateutil==2.8.2
-pytz==2023.3
 sentry-sdk==1.21.1
 whitenoise==6.6.0

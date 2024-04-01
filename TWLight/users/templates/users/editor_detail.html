@@ -50,9 +50,9 @@
 
       {% include 'users/editor_detail_data.html' %}
 
-      {% ifequal user editor.user  %}
+      {% if user == editor.user  %}
         {% include "users/preferences.html" %}    
-      {% endifequal %}
+      {% endif %}
 
       <p>
         {% comment %}Translators: This is shown on editor profiles, in their profile page or on applications.{% endcomment %}

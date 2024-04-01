@@ -37,11 +37,11 @@
         {% if editor.contributions %}
             {{ editor.contributions }}
         {% endif %}
-        {% ifequal editor.user user %}
+        {% if editor.user == user %}
             <br/>
             {% comment %}Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself. {% endcomment %}
             <a class="twl-links" href="{% url 'users:editor_update' editor.pk %}">{% trans "(update)" %}</a>
-        {% endifequal %}
+        {% endif %}
         <br/>
     </div>
 </div>
@@ -249,7 +249,7 @@
 </div>
 
 {# The following is personal data and must ONLY be displayed to its owner. #}
-{% ifequal editor.user user %}
+{% if editor.user == user %}
     <hr/>
     {% comment %}Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.{% endcomment %}
     <h3>{% trans "Personal data" %}</h3>
@@ -338,4 +338,4 @@
     </div>
 
     <hr/>
-{% endifequal %}
+{% endif %}
