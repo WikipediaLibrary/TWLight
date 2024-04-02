@@ -12,9 +12,11 @@ def get_all_bundle_authorizations():
     and not.
     """
 
-    return Authorization.objects.filter(
-        partners__authorization_method=Partner.BUNDLE
-    ).distinct()  # distinct() required because partners__authorization_method is ManyToMany
+    return (
+        Authorization.objects.select_for_update()
+        .filter(partners__authorization_method=Partner.BUNDLE)
+        .distinct()
+    )  # distinct() required because partners__authorization_method is ManyToMany
 
 
 def create_resource_dict(authorization, partner):
