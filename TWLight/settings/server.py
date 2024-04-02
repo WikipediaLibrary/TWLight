@@ -13,9 +13,6 @@ from TWLight.settings.helpers import sentry_before_send
 
 from .base import *
 
-# Let Django know that allowed hosts are trusted for CSRF.
-# Needed to be added for /admin
-CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 # Allow CSRF token access in JavaScript
 CSRF_COOKIE_HTTPONLY = False
 
