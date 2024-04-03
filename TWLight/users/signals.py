@@ -1,7 +1,8 @@
 from datetime import timedelta
 from django.conf import settings
 from django.dispatch import receiver, Signal
-from django.db.models.signals import pre_save, post_save, post_delete
+from django.db import transaction
+from django.db.models.signals import pre_save, post_save
 from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
 from TWLight.users.models import Authorization, UserProfile
 from TWLight.resources.models import Partner
@@ -57,25 +58,28 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
         partner = instance
 
     if partner.account_length or partner.authorization_method == Partner.PROXY:
-        authorizations = Authorization.objects.filter(
-            partners=partner, date_expires=None
+        authorizations = (
+            Authorization.objects.prefetch_related("partners")
+            .select_for_update()
+            .filter(partners=partner, date_expires=None)
         )
-        for authorization in authorizations:
-            if authorization.is_valid:
-                if (
-                    partner.authorization_method == Partner.PROXY
-                    and partner.requested_access_duration is True
-                ):
-                    one_year_from_auth = authorization.date_authorized + timedelta(
-                        days=365
-                    )
-                    authorization.date_expires = one_year_from_auth
-                    authorization.save()
-                elif partner.account_length:
-                    authorization.date_expires = (
-                        authorization.date_authorized + partner.account_length
-                    )
-                    authorization.save()
+        with transaction.atomic():
+            for authorization in authorizations:
+                if authorization.is_valid:
+                    if (
+                        partner.authorization_method == Partner.PROXY
+                        and partner.requested_access_duration is True
+                    ):
+                        one_year_from_auth = authorization.date_authorized + timedelta(
+                            days=365
+                        )
+                        authorization.date_expires = one_year_from_auth
+                        authorization.save()
+                    elif partner.account_length:
+                        authorization.date_expires = (
+                            authorization.date_authorized + partner.account_length
+                        )
+                        authorization.save()
 
 
 @receiver(pre_save, sender=Partner)
@@ -132,25 +136,32 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
         if add_to_auths:
             # Before updating Bundle auths, let's delete any
             # previously existing authorizations for this partner
-            all_partner_authorizations = Authorization.objects.filter(
-                partners__pk=instance.pk
+            all_partner_authorizations = (
+                Authorization.objects.prefetch_related("partners")
+                .select_for_update()
+                .filter(partners__pk=instance.pk)
             )
-            for defunct_authorization in all_partner_authorizations:
-                defunct_authorization.delete()
+            with transaction.atomic():
+                for defunct_authorization in all_partner_authorizations:
+                    defunct_authorization.delete()
 
-            for authorization in authorizations_to_update:
-                authorization.partners.add(instance)
+                for authorization in authorizations_to_update:
+                    authorization.partners.add(instance)
 
         elif remove_from_auths:
-            for authorization in authorizations_to_update:
-                authorization.partners.remove(instance)
+            with transaction.atomic():
+                for authorization in authorizations_to_update:
+                    authorization.partners.remove(instance)
 
         elif delete_defunct_authorizations:
-            all_partner_authorizations = Authorization.objects.filter(
-                partners__pk=instance.pk
+            all_partner_authorizations = (
+                Authorization.objects.prefetch_related("partners")
+                .select_for_update()
+                .filter(partners__pk=instance.pk)
             )
-            for defunct_authorization in all_partner_authorizations:
-                defunct_authorization.delete()
+            with transaction.atomic():
+                for defunct_authorization in all_partner_authorizations:
+                    defunct_authorization.delete()
 
 
 @receiver(post_save, sender=Partner)
@@ -170,5 +181,6 @@ def update_bundle_authorizations_on_bundle_partner_creation(
         authorizations_to_update = get_all_bundle_authorizations()
 
         if authorizations_to_update:
-            for authorization in authorizations_to_update:
-                authorization.partners.add(instance)
+            with transaction.atomic():
+                for authorization in authorizations_to_update:
+                    authorization.partners.add(instance)

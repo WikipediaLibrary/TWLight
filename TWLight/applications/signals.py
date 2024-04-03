@@ -4,6 +4,7 @@ import logging
 
 from TWLight.helpers import site_id
 from django.dispatch import receiver, Signal
+from django.db import transaction
 from django.db.models.signals import pre_save, post_save
 from django_comments.signals import comment_was_posted
 from django_comments.models import Comment
@@ -226,7 +227,7 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
 
     if partner and partner.authorization_method == Partner.BUNDLE:
         # All open applications for this partner.
-        applications = Application.objects.filter(
+        applications = Application.objects.select_for_update().filter(
             partner=partner,
             status__in=(
                 Application.PENDING,
@@ -234,19 +235,19 @@ def invalidate_bundle_partner_applications(sender, instance, **kwargs):
                 Application.APPROVED,
             ),
         )
-
-        for application in applications:
-            # Add a comment.
-            comment = Comment.objects.create(
-                content_object=application,
-                site_id=site_id(),
-                user=twl_team,
-                # fmt: off
-                # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-                comment=_("This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."),
-                # fmt: on
-            )
-            comment.save()
-            # Mark application invalid.
-            application.status = Application.INVALID
-            application.save()
+        with transaction.atomic():
+            for application in applications:
+                # Add a comment.
+                comment = Comment.objects.create(
+                    content_object=application,
+                    site_id=site_id(),
+                    user=twl_team,
+                    # fmt: off
+                    # Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
+                    comment=_("This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."),
+                    # fmt: on
+                )
+                comment.save()
+                # Mark application invalid.
+                application.status = Application.INVALID
+                application.save()
