@@ -58,25 +58,28 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
         partner = instance
 
     if partner.account_length or partner.authorization_method == Partner.PROXY:
-        authorizations = Authorization.objects.filter(
-            partners=partner, date_expires=None
+        authorizations = (
+            Authorization.objects.prefetch_related("partners")
+            .select_for_update()
+            .filter(partners=partner, date_expires=None)
         )
-        for authorization in authorizations:
-            if authorization.is_valid:
-                if (
-                    partner.authorization_method == Partner.PROXY
-                    and partner.requested_access_duration is True
-                ):
-                    one_year_from_auth = authorization.date_authorized + timedelta(
-                        days=365
-                    )
-                    authorization.date_expires = one_year_from_auth
-                    authorization.save()
-                elif partner.account_length:
-                    authorization.date_expires = (
-                        authorization.date_authorized + partner.account_length
-                    )
-                    authorization.save()
+        with transaction.atomic():
+            for authorization in authorizations:
+                if authorization.is_valid:
+                    if (
+                        partner.authorization_method == Partner.PROXY
+                        and partner.requested_access_duration is True
+                    ):
+                        one_year_from_auth = authorization.date_authorized + timedelta(
+                            days=365
+                        )
+                        authorization.date_expires = one_year_from_auth
+                        authorization.save()
+                    elif partner.account_length:
+                        authorization.date_expires = (
+                            authorization.date_authorized + partner.account_length
+                        )
+                        authorization.save()
 
 
 @receiver(pre_save, sender=Partner)
@@ -178,5 +181,6 @@ def update_bundle_authorizations_on_bundle_partner_creation(
         authorizations_to_update = get_all_bundle_authorizations()
 
         if authorizations_to_update:
-            for authorization in authorizations_to_update:
-                authorization.partners.add(instance)
+            with transaction.atomic():
+                for authorization in authorizations_to_update:
+                    authorization.partners.add(instance)
