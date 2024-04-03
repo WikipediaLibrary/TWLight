@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-04-01 14:38+0000\n"
+"POT-Creation-Date: 2024-04-03 23:46+0000\n"
 "PO-Revision-Date: 2024-03-18 12:28:22+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,7 +275,7 @@ msgstr ""
 "har bearbetats."
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
-#: TWLight/applications/signals.py:246
+#: TWLight/applications/signals.py:247
 msgid ""
 "This partner joined the Library Bundle, which does not require applications. "
 "This application will be marked as invalid."
