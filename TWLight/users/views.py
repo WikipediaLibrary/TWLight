@@ -563,7 +563,7 @@ class DeleteDataView(SelfOnly, DeleteView):
 
     # We want to blank applications too, not just delete the user
     # object, so we need to overwrite delete()
-    def delete(self, request, *args, **kwargs):
+    def form_valid(self, form):
         user = self.get_object()
 
         user_applications = user.editor.applications.all()
@@ -612,10 +612,7 @@ class DeleteDataView(SelfOnly, DeleteView):
 
         user.delete()
 
-        return HttpResponseRedirect(self.success_url)
-
-    def post(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
+        return super().form_valid(form)
 
 
 class TermsView(UpdateView):
