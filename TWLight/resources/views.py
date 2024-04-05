@@ -561,19 +561,16 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
     """Build view which enables coordinators and staff to delete suggestions."""
 
     model = Suggestion
-    form_class = SuggestionForm
     success_url = reverse_lazy("suggest")
 
-    def delete(self, *args, **kwargs):
-        suggestion = self.get_object()
-        suggestion.delete()
+    def form_valid(self, form):
         messages.add_message(
             self.request,
             messages.SUCCESS,
             # Translators: Shown to coordinators when they successfully delete a partner suggestion
             _("Suggestion has been deleted."),
         )
-        return HttpResponseRedirect(self.success_url)
+        return super().form_valid(form)
 
 
 class SuggestionUpvoteView(EditorsOnly, RedirectView):
