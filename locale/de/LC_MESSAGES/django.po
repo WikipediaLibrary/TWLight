@@ -35,12 +35,12 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-04-05 17:33+0000\n"
-"PO-Revision-Date: 2024-04-08 12:25:53+0000\n"
+"PO-Revision-Date: 2024-04-11 12:30:18+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2024-04-05 18:30:25+0000\n"
-"X-Generator: MediaWiki 1.42.0-alpha; Translate 2024-01-22\n"
+"X-Generator: MediaWiki 1.43.0-alpha; Translate 2024-01-22\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
@@ -978,7 +978,7 @@ msgstr "Absenden"
 #: TWLight/emails/templates/emails/access_code_email-body-html.html:5
 #, python-format
 msgid "<p>Your approved application to %(partner)s has now been finalised. Your access code or login details can be found below:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
-msgstr "<p>Deine Bewerbung für %(partner)s wurde erfolgreich bearbeitet. Deinen Zugangscode bzw. deine Login-Daten kannst du direkt hier darunter finden: </p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
+msgstr "<p>Deine Bewerbung für %(partner)s wurde erfolgreich bearbeitet. Deinen Zugangscode bzw. deine Login-Daten findest du unten:</p> <p><b>%(access_code)s</b></p> <p>%(user_instructions)s</p>"
 
 #. Translators: This email is sent to users with their access code. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/access_code_email-body-text.html:3
@@ -1427,7 +1427,7 @@ msgstr "Schau dir den Status deines Zuganges auf <strong><a class=\"twl-links\" 
 #: TWLight/resources/templates/resources/partner_detail.html:78
 #, python-format
 msgid "View the status of your application(s) on your <strong><a class=\"twl-links\" href=\"%(applications_url)s\">My Applications</a></strong> page."
-msgstr "Schau dir den Status deiner Bewerbungen auf <strong><a class=\"twl-links\" href=\"%(applications_url)s\">Meine Zugänge</a></strong> an."
+msgstr "Schau dir den Status deiner Bewerbungen auf <strong><a class=\"twl-links\" href=\"%(applications_url)s\">Meine Bewerbungen</a></strong> an."
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
@@ -1671,7 +1671,7 @@ msgstr "Zurück nach oben"
 #: TWLight/resources/templates/resources/partner_users.html:11
 #, python-format
 msgid "%(partner)s approved users"
-msgstr "Von %(partner)s bestätige Zugänge"
+msgstr "Von %(partner)s bestätigte Zugänge"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was made.
 #: TWLight/resources/templates/resources/partner_users.html:33
@@ -1859,7 +1859,7 @@ msgstr "Alle Nutzer erhalten sofortigen Zugang zu einigen Sammlungen, die durch 
 #: TWLight/templates/about.html:43
 #, python-format
 msgid "For more information about how your information is stored and reviewed please see our <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each partner’s platform; please review them."
-msgstr "Mehr Informationen über die Speicherung und Verarbeitung deiner Daten auf der Seite <a class=\"twl-links\" href=\"%(terms_url)s\"> terms of use and privacy policy</a>. Für die Zugänge, auf die du dich beworben hast, gelten auch die Nutzungsbedingungen der Plattformen der jeweiligen Partner; bitte informiere dich bei ihnen."
+msgstr "Mehr Informationen über die Speicherung und Verarbeitung deiner Daten auf der Seite findest du in <a class=\"twl-links\" href=\"%(terms_url)s\">unseren Nutzungsbedingungen und unserer Datenschutzerklärung</a>. Für die Zugänge, auf die du dich beworben hast, gelten auch die Nutzungsbedingungen der Plattformen der jeweiligen Partner; bitte informiere dich bei ihnen."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51
@@ -1899,7 +1899,7 @@ msgstr "Du bist derzeit in keinem Wikimedia-Projekt gesperrt."
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr "Wenn du sich für eine verfügbare Sammlung bewerben möchtest, prüfe bitte zunächst, ob du nicht bereits über eine andere Bibliothek oder Institution Zugang habst. Falls dies der Fall ist, ziehe bitte in Erwägung, diesen Zugang zu nutzen, anstatt einen Zugang für diesen Partner über The Wikipedia Library zu beantragen."
+msgstr "Wenn du dich für eine verfügbare Sammlung bewerben möchtest, prüfe bitte zunächst, ob du nicht bereits über eine andere Bibliothek oder Institution Zugang hast. Falls dies der Fall ist, ziehe bitte in Erwägung, diesen Zugang zu nutzen, anstatt einen Zugang für diesen Partner über The Wikipedia Library zu beanspruchen."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
@@ -1914,7 +1914,7 @@ msgstr "Wozu verpflichte ich mich bei der Nutzung?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr "Bestätige Personen <i>können</i> ihren Zugang wie folgt benutzen:"
+msgstr "Bestätigte Personen <i>können</i> ihren Zugang wie folgt benutzen:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:118
@@ -2120,7 +2120,7 @@ msgstr "Mit Wikipedia anmelden"
 #: TWLight/templates/message_partial.html:15
 #, python-format
 msgid "You don't have an email on file. We can't finalize your access to partner resources, and you won't be able to <a class=\"twl-links\" href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a class=\"twl-links\" href=\"%(email_url)s\">update your email</a>."
-msgstr "Du hast kein E-Mail hinterlegt. Wir können deinen Zugriff auf Inhalte der Partner nicht abschließen, und du kannst <a class=\"twl-links\" href=\"%(contact_us_url)s\"> uns nicht ohne E-Mail kontaktieren </a>. Bitte <a href=\"%(email_url)s\"> aktualisiere dein E-Mail </a>."
+msgstr "Du hast keine E-Mail hinterlegt. Wir können deinen Zugang zu Partnerinhalten nicht abschließen, und du kannst uns ohne E-Mail nicht <a class=\"twl-links\" href=\"%(contact_us_url)s\">kontaktieren</a>. Bitte <a href=\"%(email_url)s\">aktualisiere deine E-Mail</a>."
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
 #: TWLight/templates/message_partial.html:26
@@ -2132,7 +2132,7 @@ msgstr "Du hast die Verarbeitung der Daten eingeschränkt. Die meisten Funktione
 #: TWLight/templates/message_partial.html:37
 #, python-format
 msgid "You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr "Du hast nicht den <a class=\"twl-links\" href=\"%(terms_url)s\">Nutzungsbedingungen</a> dieser Seite zugestimmt. Deine Bewerbung kann damit nicht weiterverarbeitet verwenden und du wirst nicht auf die Inhalte dich bewerben oder zugreifen können, für die du bestätigt wurdest."
+msgstr "Du hast nicht den <a class=\"twl-links\" href=\"%(terms_url)s\">Nutzungsbedingungen</a> dieser Seite zugestimmt. Deine Bewerbung kann damit nicht weiterverarbeitet verwenden und du wirst dich nicht auf die Inhalte bewerben oder zugreifen können, für die du bestätigt wurdest."
 
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/new_base.html:107
@@ -2394,7 +2394,7 @@ msgstr "%(username)s hat einen Koordinatorenzugriff auf dieser Seite."
 #. Translators: This is shown on editor profiles, under the heading for Wikipedia editor data.
 #: TWLight/users/templates/users/editor_detail_data.html:5
 msgid "This information is updated automatically from your Wikimedia account each time you log in, except for the Contributions field, where you can describe your Wikimedia editing history."
-msgstr "Diese Information wird automatisch von deinem Wikimedia-Konto bei jedem Login übernommen. Ausgenommen ist dein Beitrags-Feld, wo du deine Wikimedia-Aktivitäten selber beschreiben kannst."
+msgstr "Diese Information wird automatisch von deinem Wikimedia-Konto bei jedem Login übernommen. Ausgenommen ist das Beitrags-Feld, wo du deine Wikimedia-Aktivitäten selber beschreiben kannst."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
@@ -2520,7 +2520,7 @@ msgstr "Persönliche Daten"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:262
 msgid "The following information is visible only to you, site administrators, publishing partners (where required), and volunteer Wikipedia Library coordinators (who have signed a Non-Disclosure Agreement)."
-msgstr "Folgende Informationen sind nur sichtbar für dich, den Seitenbetreiber, die Verlage (wo benötigt) sowie die Projektmitarbeitenden von „The Wikipedia Library“ (die eine Geheimhaltungsvereinbarung unterzeichnet haben)."
+msgstr "Folgende Informationen sind nur sichtbar für dich, die Seitenbetreiber, die Verlage (wo benötigt) sowie die Projektmitarbeitenden von „The Wikipedia Library“ (die eine Geheimhaltungsvereinbarung unterzeichnet haben)."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels a button which users can click to update or remove their personal information. Don't translate update_url.
 #: TWLight/users/templates/users/editor_detail_data.html:272
@@ -2557,7 +2557,7 @@ msgstr "Wurde den <a href=\"%(terms)s\" class=\"text-danger\">Nutzungsbedingunge
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "Es scheint so, als ob dein Konto in mindestens einem Projekt gesperrt wäre. Dein Konto kann daher nur manuell für das Zugangspaket freigeschaltet werden, bitte wende dich <a href=\"%(contact_url)s\">per E-Mail an uns</a>."
+msgstr "Es scheint so, als ob dein Konto in mindestens einem Projekt gesperrt wäre. Falls du die anderen Anforderungen erfüllst, kannst du dennoch Zugang zu der Library erhalten - bitte <a href=\"%(contact_url)s\">kontaktiere uns</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -2711,7 +2711,7 @@ msgstr "<a class=\"twl-link\" href=\"https://meta.wikimedia.org/wiki/The_Wikiped
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:66
 msgid "This program is administered by the Wikimedia Foundation (WMF). These terms of use and privacy notice pertain to your application for access to resources through the Wikipedia Library, your use of this website, and your access to and use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. If we make material changes to the terms, we will notify users."
-msgstr "Das Programm wird von der Wikimedia Foundation (WMF) administriert. Diese Nutzungsbedingungen und Datenschutzrichtlinie sind gültig für deinen Zugang zu Inhalten in „The Wikipedia Library“, deine Nutzung dieser Website und deinen Zugang sowie die Nutzung der Inhalte. Sie beschreiben außerdem unsere Handhabe an Daten, die du uns übermittelst, um dein Konto bei „The Wikipedia Library“ zu erstellen und zu verwalten. Bei Änderungen an diesen Richtlinien informieren wir unsere Nutzer."
+msgstr "Das Programm wird von der Wikimedia Foundation (WMF) administriert. Diese Nutzungsbedingungen und Datenschutzrichtlinie sind gültig für deinen Zugang zu Inhalten in „The Wikipedia Library“, deine Nutzung dieser Website und deinen Zugang sowie die Nutzung der Inhalte. Sie beschreiben außerdem unsere Handhabe an Daten, die du uns übermittelst, um dein Konto bei „The Wikipedia Library“ zu erstellen und zu verwalten. Bei wesentlichen Änderungen an diesen Richtlinien informieren wir unsere Nutzer."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:77
