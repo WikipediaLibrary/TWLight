@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-04-05 17:32+0000\n"
-"PO-Revision-Date: 2024-04-11 12:30:19+0000\n"
+"PO-Revision-Date: 2024-04-15 12:31:27+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1136,7 +1136,7 @@ msgstr "<p>%(user)s گرامی،</p> <p>طبق سوابق ما، دسترسی ش
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "%(user)s گرامی، سوابق ما نشان می‌دهد که دسترسی شما به %(partner_name)s به‌زودی منقضی می‌شود و ممکن است دسترسی‌تان به این منبع از بین برود. اگر مایلید تا همچنان به این منبع دسترسی رایگان داشته‌باشید، کافی‌ست تا با کلیک بر روی %(partner_link)s درخواست تمدید بدهید. با احترام، کتابخانهٔ ویکی‌پدیا \nمی‌توانید این ایمیل‌ها را در ترجیحات صفحهٔ کاربری خود غیرفعال کنید: https://wikipedialibrary.wmflabs.org/users"
+msgstr "%(user)s گرامی، سوابق ما نشان می‌دهد که دسترسی شما به %(partner_name)s به‌زودی منقضی می‌شود و ممکن است دسترسی‌تان به این منبع از بین برود. اگر مایلید تا همچنان به این منبع دسترسی رایگان داشته باشید، کافی‌ست تا با کلیک بر روی %(partner_link)s درخواست تمدید بدهید. با احترام، کتابخانهٔ ویکی‌پدیا \nمی‌توانید این ایمیل‌ها را در ترجیحات صفحهٔ کاربری خود غیرفعال کنید: https://wikipedialibrary.wmflabs.org/users"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
@@ -1858,7 +1858,7 @@ msgstr "چه کسی می‌تواند دسترسی دریافت کند؟"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr "هر ویرایشگر فعالی با وضعیت خوب می‌تواند دسترسی داشته‌باشد. برای ناشران با تعداد حساب‌هایی محدود، درخواست‌ها بر اساس نیازها و مشارکت‌های ویرایشگر بررسی می‌شوند. اگر فکر می‌کنید می‌توانید از دسترسی به یکی از منابع موجود در پایگاه‌ها ما استفاده کنید و در هر پروژهٔ پشتیبانی‌شده توسط بنیاد ویکی‌مدیا ویرایشگر فعال هستید، لطفاً درخواست دهید."
+msgstr "هر ویرایشگر فعالی با وضعیت خوب می‌تواند دسترسی داشته باشد. برای ناشران با تعداد حساب‌هایی محدود، درخواست‌ها بر اساس نیازها و مشارکت‌های ویرایشگر بررسی می‌شوند. اگر فکر می‌کنید می‌توانید از دسترسی به یکی از منابع موجود در پایگاه‌ها ما استفاده کنید و در هر پروژهٔ پشتیبانی‌شده توسط بنیاد ویکی‌مدیا ویرایشگر فعال هستید، لطفاً درخواست دهید."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
@@ -1873,17 +1873,17 @@ msgstr "شما حسابی دارید که حداقل ۶ ماه سابقه دار
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:75
 msgid "You have made a minimum of 500 edits to Wikimedia projects"
-msgstr "دست‌کم ۵۰۰ ویرایش در پروژه‌های ویکی‌مدیا انجام داده‌باشید."
+msgstr "دست‌کم ۵۰۰ ویرایش در پروژه‌های ویکی‌مدیا انجام داده باشید."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:79
 msgid "You have made at least 10 edits to Wikimedia projects in the last month"
-msgstr "در ماه گذشته دست‌کم ۱۰ ویرایش در پروژه‌های ویکی‌مدیا انجام داده‌باشید"
+msgstr "در ماه گذشته دست‌کم ۱۰ ویرایش در پروژه‌های ویکی‌مدیا انجام داده باشید"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:83
 msgid "You are not currently blocked from editing a Wikimedia project"
-msgstr "در حال حاضر حساب کاربری‌تان در هیچ‌یک از پروژه‌های ویکی‌مدیا بسته نشده‌باشد"
+msgstr "در حال حاضر حساب کاربری‌تان در هیچ‌یک از پروژه‌های ویکی‌مدیا بسته نشده باشد"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
@@ -1965,7 +1965,7 @@ msgstr "EZProxy یک سرور پراکسی است که برای تأیید اع�
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:173
 msgid "You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we recommend logging in via the Library Card platform rather than going directly to the unproxied partner website. When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy."
-msgstr "ممکن است متوجه شده‌باشید که هنگام دسترسی به منابع از طریق EZProxy آدرس‌ها (URL) به صورت پویا بازنویسی می‌شوند. به همین دلیل است که ما توصیه می‌کنیم از طریق سکوی کارت عضویت وارد سیستم شوید نه اینکه مستقیماً به وب‌سایت پایگاه مراجعه کنید. در صورت تردید، آدرس را برای وجود \"idm.oclc\" بررسی کنید. اگر آنجا باشد، از طریق EZProxy متصل شده‌اید."
+msgstr "ممکن است متوجه شده باشید که هنگام دسترسی به منابع از طریق EZProxy آدرس‌ها (URL) به صورت پویا بازنویسی می‌شوند. به همین دلیل است که ما توصیه می‌کنیم از طریق سکوی کارت عضویت وارد سیستم شوید نه اینکه مستقیماً به وب‌سایت پایگاه مراجعه کنید. در صورت تردید، آدرس را برای وجود \"idm.oclc\" بررسی کنید. اگر آنجا باشد، از طریق EZProxy متصل شده‌اید."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:182
@@ -2456,7 +2456,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "به‌نظر می‌رسد که دسترسی حساب شما هم‌اکنون بسته است. اگر سایر معیارها را داشته‌باشید، ممکن است همچنان اجازهٔ دسترسی به کتابخانه را داشته باشید - لطفاً <a class=\"twl-links\" href=\"%(contact_url)s\">با ما تماس بگیرید</a>."
+msgstr "به‌نظر می‌رسد که دسترسی حساب شما هم‌اکنون بسته است. اگر سایر معیارها را داشته باشید، ممکن است همچنان اجازهٔ دسترسی به کتابخانه را داشته باشید - لطفاً <a class=\"twl-links\" href=\"%(contact_url)s\">با ما تماس بگیرید</a>."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
@@ -2548,7 +2548,7 @@ msgstr "با <a href=\"%(terms)s\" class=\"text-danger\"> شرایط استفا�
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "به‌نظر می‌رسد که دسترسی حساب شما هم‌اکنون بسته است. اگر سایر معیارها را داشته‌باشید، ممکن است همچنان اجازهٔ دسترسی به کتابخانه را داشته باشید - لطفاً <a href=\"%(contact_url)s\">با ما تماس بگیرید</a>."
+msgstr "به‌نظر می‌رسد که دسترسی حساب شما هم‌اکنون بسته است. اگر سایر معیارها را داشته باشید، ممکن است همچنان اجازهٔ دسترسی به کتابخانه را داشته باشید - لطفاً <a href=\"%(contact_url)s\">با ما تماس بگیرید</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -3038,7 +3038,7 @@ msgstr "بیش از ۱۰ ویرایش در ماه گذشته"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:851 TWLight/views.py:49
 msgid "No active blocks"
-msgstr "در حال حاضر حساب‌تان قطع دسترسی نشده‌باشد"
+msgstr "در حال حاضر حساب‌تان قطع دسترسی نشده باشد"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
