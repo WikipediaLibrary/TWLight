@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-04-05 17:32+0000\n"
-"PO-Revision-Date: 2024-04-11 12:30:22+0000\n"
+"PO-Revision-Date: 2024-04-18 12:29:45+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -876,7 +876,7 @@ msgstr "Задај состојба на барања"
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:891
 msgid "There are more pending applications than available accounts. Your application might get waitlisted."
-msgstr "Има повеќе необработени барања отколку расположиви сметки. Вашето барање може да биде ставено на чекање."
+msgstr "Има повеќе необработени барања отколку расположливи сметки. Вашето барање може да биде ставено на чекање."
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:904
@@ -1831,7 +1831,7 @@ msgstr "За Википедиината библиотека"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
 msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
-msgstr "Оваа подлога е нашата централна алатка за овозможување на пристап до нашите расположиви збирки. Тука можете да видите кои партнерства се достапни, да ги пребарувате нивните содржини и да поднесете барање за пристап до оние кои ве интересираат."
+msgstr "Оваа подлога е нашата централна алатка за овозможување на пристап до нашите расположливи збирки. Тука можете да видите кои партнерства се достапни, да ги пребарувате нивните содржини и да поднесете барање за пристап до оние кои ве интересираат."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
