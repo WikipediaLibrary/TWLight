@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Chqaz",
 			"CmplstofB",
 			"Kokage si",
 			"MagicAho",
@@ -144,5 +145,6 @@
 	"152_short_description": "<strong>Haaretz English</strong>は現在イスラエルで発行されている中で最も古い新聞です（1918年創刊）。ヘブライ語版と英語版があり、これは英語版データベースです。",
 	"153_short_description": "<strong>Haaretz English</strong>は現在イスラエルで発行されている中で最も古い新聞です（1918年創刊）。ヘブライ語版と英語版があり、これはヘブライ語版データベースです。",
 	"154_short_description": "<strong>TheMarker</strong>はHaaretz Groupが発行するイスラエルの日刊ビジネス新聞です。ヘブライ語で書かれています。",
-	"155_short_description": "<strong>British Online Archives</strong>は人文科学・社会科学に関する一次資料のコレクションです。"
+	"155_short_description": "<strong>British Online Archives</strong>は人文科学・社会科学に関する一次資料のコレクションです。",
+	"156_short_description": "<strong>L'Informé</strong>はフランスの経済調査ウェブサイトで、経済、防衛、エネルギー、消費者問題、メディア、高級品など国に関する幅広いトピックを扱っています。"
 }
