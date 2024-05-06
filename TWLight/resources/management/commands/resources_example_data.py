@@ -49,7 +49,6 @@ class Command(BaseCommand):
                 real_name=self.chance(True, False, 40),
                 country_of_residence=self.chance(True, False, 20),
                 specific_title=self.chance(True, False, 10),
-                occupation=self.chance(True, False, 10),
                 affiliation=self.chance(True, False, 10),
                 agreement_with_terms_of_use=self.chance(True, False, 10),
             )

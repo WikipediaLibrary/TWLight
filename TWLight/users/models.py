@@ -296,7 +296,6 @@ class Editor(models.Model):
     # **** SENSITIVE USER DATA AHOY. ****
     real_name = models.CharField(max_length=128, blank=True)
     country_of_residence = models.CharField(max_length=128, blank=True)
-    occupation = models.CharField(max_length=128, blank=True)
     affiliation = models.CharField(max_length=128, blank=True)
 
     def encode_wp_username(self, username):

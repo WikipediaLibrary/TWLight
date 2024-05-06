@@ -21,7 +21,6 @@ Required/nonharvestable:
 Optional/universal:
     Real name (many partners)
     Country of residence (Pelican, Numerique)
-    Occupation (Elsevier)
     Affiliation (Elsevier)
 
 Optional/unique:
@@ -33,7 +32,6 @@ Optional/unique:
 # ~~~~~ Named constants ~~~~~ #
 REAL_NAME = "real_name"
 COUNTRY_OF_RESIDENCE = "country_of_residence"
-OCCUPATION = "occupation"
 AFFILIATION = "affiliation"
 PARTNER = "partner"
 RATIONALE = "rationale"
@@ -45,7 +43,7 @@ REQUESTED_ACCESS_DURATION = "requested_access_duration"
 
 
 # ~~~~ Basic field names ~~~~ #
-USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, OCCUPATION, AFFILIATION]
+USER_FORM_FIELDS = [REAL_NAME, COUNTRY_OF_RESIDENCE, AFFILIATION]
 
 # These fields are displayed for all partners.
 PARTNER_FORM_BASE_FIELDS = [RATIONALE, COMMENTS]
@@ -64,7 +62,6 @@ PARTNER_FORM_OPTIONAL_FIELDS = [
 FIELD_TYPES = {
     REAL_NAME: forms.CharField(max_length=128),
     COUNTRY_OF_RESIDENCE: forms.CharField(max_length=128),
-    OCCUPATION: forms.CharField(max_length=128),
     AFFILIATION: forms.CharField(max_length=128),
     PARTNER: forms.ModelChoiceField(
         queryset=Partner.objects.all(), widget=forms.HiddenInput
@@ -84,8 +81,6 @@ FIELD_LABELS = {
     REAL_NAME: _("Your real name"),
     # Translators: When filling out an application, users may need to specify the country in which they currently live
     COUNTRY_OF_RESIDENCE: _("Your country of residence"),
-    # Translators: When filling out an application, users may need to specify their current occupation
-    OCCUPATION: _("Your occupation"),
     # Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
     AFFILIATION: _("Your institutional affiliation"),
     # Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
@@ -111,8 +106,6 @@ SEND_DATA_FIELD_LABELS = {
     REAL_NAME: _("Real name"),
     # Translators: When sending application data to partners, this is the text labelling a user's country of residence
     COUNTRY_OF_RESIDENCE: _("Country of residence"),
-    # Translators: When sending application data to partners, this is the text labelling a user's occupation
-    OCCUPATION: _("Occupation"),
     # Translators: When sending application data to partners, this is the text labelling a user's affiliation
     AFFILIATION: _("Affiliation"),
     # Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested

@@ -122,7 +122,7 @@
   {% endif %}
   {% endwith %}
   {% endwith %}
-  {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.occupation or object.affiliation or object.specific_title or object.account_email %}
+  {% if object.agreement_with_terms_of_use or object.real_name or object.country_of_residence or object.affiliation or object.specific_title or object.account_email %}
     <li class="timeline-inverted">
       <div class="timeline-badge"><i class="fa fa-exclamation"></i>
       </div>
@@ -158,15 +158,6 @@
                 {% comment %}Translators: If a user must provide the name of the country where they currently live to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
                 {% blocktranslate trimmed with publisher=object.company_name %}
                   {{ publisher }} requires that you provide your country of residence.
-                {% endblocktranslate %}
-              </li>
-            {% endif %}
-
-            {% if object.occupation %}
-              <li>
-                {% comment %}Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate {{ publisher }}. {% endcomment %}
-                {% blocktranslate trimmed with publisher=object.company_name %}
-                  {{ publisher }} requires that you provide your occupation.
                 {% endblocktranslate %}
               </li>
             {% endif %}

@@ -214,7 +214,6 @@ class EditorDetailView(PartnerCoordinatorOrSelf, DetailView):
                 "contributions",
                 "real_name",
                 "country_of_residence",
-                "occupation",
                 "affiliation",
             ]
             for field in user_field_list:
@@ -365,7 +364,7 @@ class PIIUpdateView(SelfOnly, UpdateView):
 
     model = Editor
     template_name = "users/editor_update.html"
-    fields = ["real_name", "country_of_residence", "occupation", "affiliation"]
+    fields = ["real_name", "country_of_residence", "affiliation"]
 
     def get_object(self):
         """

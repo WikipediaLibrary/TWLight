@@ -111,7 +111,7 @@ We can *deactivate* accounts upon request. To do so:
 * from the `Action:` dropdown, select `Deactivate selected accounts` (do NOT select the delete function) and press `Go`
 
 This will perform the following steps:
-* delete the user's email and, if known, their real name, affiliation, occupation, and country of residence
+* delete the user's email and, if known, their real name, affiliation, and country of residence
 * set their account to inactive
 
 "Inactive" means the following:
