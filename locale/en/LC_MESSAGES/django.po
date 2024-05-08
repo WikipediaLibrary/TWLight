@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-04-05 17:32+0000\n"
+"POT-Creation-Date: 2024-05-13 18:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1318,7 +1318,7 @@ msgid "Missing EZProxy target URL."
 msgstr ""
 
 #. Translators: Shown in the search button.
-#: TWLight/forms.py:56 TWLight/templates/header_partial_b4.html:49
+#: TWLight/forms.py:56 TWLight/templates/header_partial_b4.html:48
 msgid "Search"
 msgstr ""
 
@@ -1653,7 +1653,7 @@ msgstr ""
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
-#: TWLight/templates/header_partial_b4.html:106
+#: TWLight/templates/header_partial_b4.html:105
 msgid "Log in"
 msgstr ""
 
@@ -2311,27 +2311,27 @@ msgstr ""
 msgid "The Wikipedia Library home"
 msgstr ""
 
-#: TWLight/templates/header_partial_b4.html:46
+#: TWLight/templates/header_partial_b4.html:45
 msgid "Search the library"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b4.html:72
+#: TWLight/templates/header_partial_b4.html:71
 msgid "Review"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b4.html:78
+#: TWLight/templates/header_partial_b4.html:77
 msgid "Send data to partners"
 msgstr ""
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b4.html:86
+#: TWLight/templates/header_partial_b4.html:85
 msgid "Suggest a collection"
 msgstr ""
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b4.html:99
+#: TWLight/templates/header_partial_b4.html:98
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr ""

@@ -498,7 +498,7 @@ class PartnerModelTests(TestCase):
         """
         partner5 = PartnerFactory()
 
-        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener noreferrer' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
 
         partner5.new_tags = {"tags": ["this_doesnt_exist_tag", "earth-sciences_tag"]}
 
@@ -515,7 +515,7 @@ class PartnerModelTests(TestCase):
         """
         partner5 = PartnerFactory()
 
-        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener noreferrer' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
 
         partner5.new_tags = {
             "tags": ["law_tag", "earth-sciences_tag"],
@@ -537,7 +537,7 @@ class PartnerModelTests(TestCase):
         """
         partner6 = PartnerFactory()
 
-        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+        message = "Error trying to insert a tag: please choose a tag from <a rel='noopener noreferrer' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
 
         partner6.new_tags = {}
 

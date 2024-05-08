@@ -3,7 +3,7 @@
 # Runs the LTR -> RTL CSS conversion script and collects static files.
 
 # Generate right to left css
-cd ${TWLIGHT_HOME} && node ${TWLIGHT_HOME}/bin/twlight_cssjanus.js || exit 1
+cd ${TWLIGHT_HOME} && node twlight_cssjanus || exit 1
 # Load virtual environment
 if source ${TWLIGHT_HOME}/bin/virtualenv_activate.sh
 then

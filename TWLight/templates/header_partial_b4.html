@@ -21,8 +21,7 @@
     <div class="col-lg-5 col-md-7 col-sm-6 col-9">
       {% if user|bundle_eligible %}
       <!-- EBSCO Search Box Begins -->
-      <form action="https://searchbox.ebsco.com/search/" target="_blank" class="ebsco-single-search">
-      <!-- <form action="https://search.ebscohost.com/login.aspx" target="_blank" class="ebsco-single-search"> -->
+      <form action="https://searchbox.ebsco.com/search/" target="_blank" rel="noopener" class="ebsco-single-search" >
         <input name="schemaId" value="search" type="hidden" />
         <input name="custid" value="ns253359" type="hidden" />
         <input name="groupid" value="main" type="hidden" />
