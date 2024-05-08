@@ -46,11 +46,17 @@ RUN apt update ; \
     npm \
     tar \
     wget ; \
-    rm -rf /var/lib/apt/lists/*; \
-    /usr/bin/npm install cssjanus
+    rm -rf /var/lib/apt/lists/*;
+
 
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
+COPY . /app/
+
+COPY package-lock.json .
+COPY package.json .
+
+RUN npm install;
 
 # Bash config
 COPY conf/bashrc /root/.bashrc
@@ -64,8 +70,6 @@ WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
-# Configure static assets.
-RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
 
 EXPOSE 80
 

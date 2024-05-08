@@ -179,3 +179,5 @@ tramp
 # cask packages
 .cask/
 
+node_modules/
+TWLight/static/css/*-rtl.css
