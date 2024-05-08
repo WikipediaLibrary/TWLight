@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // Load modules
 var fs = require('fs');
 var cssjanus = require('cssjanus');

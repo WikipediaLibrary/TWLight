@@ -1,0 +1,13 @@
+{
+  "name": "twlight_cssjanus",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cssjanus": "^2.1.0"
+  }
+}
