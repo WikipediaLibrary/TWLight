@@ -500,7 +500,7 @@ class OAuthCallbackView(View):
                     # fmt: off
                     # Translators: This message is shown when more information is available on another page. Do not translate {issue}
                     _("See {issue} for more information").format(
-                        issue="<a href='https://phabricator.wikimedia.org/T332650' target='_blank' rel='noopener'>T332650</a>"
+                        issue="<a href='https://phabricator.wikimedia.org/T332650' target='_blank' rel='noopener noreferrer'>T332650</a>"
                     )
                     # fmt: on
                 ),

@@ -83,7 +83,7 @@
                     {% if each_suggestion.ticket_number %}
                       <p>
                         <strong>{% trans 'Track Progress' %}:</strong>
-                        <a class="twl-links" href="https://phabricator.wikimedia.org/{{each_suggestion.ticket_number}}" target="_blank">
+                        <a class="twl-links" href="https://phabricator.wikimedia.org/{{each_suggestion.ticket_number}}" target="_blank" rel="noopener noreferrer">
                           {{ each_suggestion.ticket_number }}
                         </a>
                       </p>
