@@ -51,7 +51,6 @@ RUN apt update ; \
 
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
-#COPY . /app/
 
 COPY package-lock.json .
 COPY package.json .
