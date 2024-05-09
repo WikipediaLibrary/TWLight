@@ -408,7 +408,7 @@ class Partner(models.Model):
             except JSONSchemaValidationError:
                 raise ValidationError(
                     mark_safe(
-                        "Error trying to insert a tag: please choose a tag from <a rel='noopener' target='_blank' href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
+                        "Error trying to insert a tag: please choose a tag from <a rel='noopener noreferrer' target='_blank'  href='https://github.com/WikipediaLibrary/TWLight/blob/production/locale/en/tag_names.json'>tag_names.json</a>."
                     )
                 )
 
