@@ -110,7 +110,6 @@ class Command(BaseCommand):
                 editor.wp_valid = editor_valid(
                     editor.wp_enough_edits,
                     editor.wp_account_old_enough,
-                    # editor.wp_not_blocked can only be rechecked on login, so we're going with the existing value.
                     editor.wp_not_blocked,
                     editor.ignore_wp_blocks,
                 )
