@@ -27,4 +27,3 @@ class Command(BaseCommand):
 
         with open("locale/language-twl-page.json", "w") as language_file:
             language_file.write(json.dumps(wiki_twl_pages))
-        language_file.close()

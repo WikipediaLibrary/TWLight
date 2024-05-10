@@ -936,6 +936,7 @@ class Configuration:
 
         if self.options.output:
             sys.stdout = sys.stderr = open(self.options.output, 'a+', 0)
+
         all_filenames = []
         for self.filename in self.filenames:
             if self.filename == '-':

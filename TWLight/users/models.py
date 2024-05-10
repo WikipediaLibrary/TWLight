@@ -156,6 +156,7 @@ class UserProfile(models.Model):
         """
         with open("locale/language-twl-page.json", "r") as file:
             wiki_twl_pages = json.load(file)
+
         if self.lang not in wiki_twl_pages:
             return {"en": wiki_twl_pages["en"]}
         else:
