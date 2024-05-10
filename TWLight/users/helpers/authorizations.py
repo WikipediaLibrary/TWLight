@@ -22,7 +22,7 @@ def get_all_bundle_authorizations():
     )
 
 
-def create_resource_dict(authorization : Authorization, partner : Partner):
+def create_resource_dict(authorization: Authorization, partner: Partner):
     """
     For a given authorization and associated partner, fetch some additional
     information for use in sort_authorizations_into_resource_list().
@@ -58,7 +58,7 @@ def create_resource_dict(authorization : Authorization, partner : Partner):
     return resource_item
 
 
-def delete_duplicate_bundle_authorizations(authorizations : QuerySet):
+def delete_duplicate_bundle_authorizations(authorizations: QuerySet):
     """
     Given a queryset of Authorization objects, find the ones which are
     Bundle authorizations, then locate and delete any duplicates for
@@ -82,7 +82,7 @@ def delete_duplicate_bundle_authorizations(authorizations : QuerySet):
             duplicate_authorization.delete()
 
 
-def sort_authorizations_into_resource_list(authorizations : QuerySet):
+def sort_authorizations_into_resource_list(authorizations: QuerySet):
     """
     Given a queryset of Authorization objects, return a
     list of dictionaries, sorted alphabetically by partner

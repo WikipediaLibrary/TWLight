@@ -30,7 +30,7 @@ def validate_partners(partners: QuerySet):
             raise ValidationError("Only Bundle Partners support shared Authorization.")
 
 
-def validate_authorizer(authorizer : User):
+def validate_authorizer(authorizer: User):
     """
     Validate that the authorizer of an authorization is permitted to be one.
 

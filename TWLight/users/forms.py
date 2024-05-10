@@ -17,6 +17,7 @@ class EditorUpdateForm(forms.ModelForm):
     Defines form accessed from the user profile page, whereby users can update
     their contributions information.
     """
+
     class Meta:
         model = Editor
         fields = ["contributions"]
@@ -68,6 +69,7 @@ class SetLanguageForm(forms.Form):
     """
     Defines form used by users to change their interface language.
     """
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
 
     def __init__(self, user, *args, **kwargs):
@@ -82,6 +84,7 @@ class UserEmailForm(forms.Form):
     Defines form used by users to opt in or out of emails notifying them that
     one of their collections is up for renewal soon.
     """
+
     send_renewal_notices = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
@@ -100,6 +103,7 @@ class CoordinatorEmailForm(forms.Form):
     Defines form available to coordinators, used to configure email
     preferences for various available reminder emails.
     """
+
     send_pending_application_reminders = forms.BooleanField(required=False)
     send_discussion_application_reminders = forms.BooleanField(required=False)
     send_approved_application_reminders = forms.BooleanField(required=False)
@@ -138,6 +142,7 @@ class RestrictDataForm(forms.Form):
     Defines the form whereby users can opt-in to have their data processing
     restricted.
     """
+
     restricted = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
@@ -160,6 +165,7 @@ class TermsForm(forms.ModelForm):
     """
     Defines the form used by users to agree to the library's terms of use.
     """
+
     class Meta:
         model = UserProfile
         fields = ["terms_of_use"]
@@ -191,6 +197,7 @@ class EmailChangeForm(forms.Form):
     Defines the form used by users to change the email address associated with
     their account, or to automatically fetch their Wikipedia email.
     """
+
     email = forms.EmailField(required=False)
     use_wp_email = forms.BooleanField(required=False)
 

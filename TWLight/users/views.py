@@ -419,6 +419,7 @@ class EmailChangeView(SelfOnly, FormView):
     View through which users can change the email attached to their library
     account, or have it be updated automatically from Wikipedia.
     """
+
     form_class = EmailChangeForm
     template_name = "users/editor_update.html"
 
@@ -561,6 +562,7 @@ class DeleteDataView(SelfOnly, DeleteView):
     Implemented as a separate page because this deletes their
     account. We want to make sure they definitely mean to do this.
     """
+
     model = User
     template_name = "users/user_confirm_delete.html"
     success_url = reverse_lazy("homepage")
@@ -747,6 +749,7 @@ class ListApplicationsUserView(SelfOnly, ListView):
     View providing users with a list of their applications, whether open
     or closed.
     """
+
     model = Editor
     template_name = "users/my_applications.html"
 
@@ -775,6 +778,7 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
     This expires their authorization immediately, rather than on
     the previously expected date.
     """
+
     model = Authorization
     template_name = "users/authorization_confirm_return.html"
     fields = ["date_expires"]
@@ -805,6 +809,7 @@ class LibraryRedirectView(RedirectView):
     We previously used my_collection as the URL for the library's homepage,
     this view supports redirecting from that URL to the current one.
     """
+
     permanent = True
     url = reverse_lazy("users:my_library")
 
@@ -813,6 +818,7 @@ class WithdrawApplication(RedirectView):
     """
     View enabling users to withdraw (close) an application.
     """
+
     url = "/"
 
     def get_redirect_url(self, *args, **kwargs):
@@ -837,6 +843,7 @@ class MyLibraryView(TemplateView):
     Primary landing page for the library for logged-in, eligible, users who
     have agreed to the terms of use. Lists available collections, etc.
     """
+
     template_name = "users/redesigned_my_library.html"
 
     def get_context_data(self, **kwargs):
