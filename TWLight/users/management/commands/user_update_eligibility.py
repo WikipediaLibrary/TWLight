@@ -61,7 +61,6 @@ class Command(BaseCommand):
         now_or_datetime = now()
         datetime_override = None
         timedelta_days = 0
-        wp_username = None
         editors = Editor.objects.all()
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
