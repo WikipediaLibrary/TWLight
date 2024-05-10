@@ -69,6 +69,7 @@ def get_languages_from_locale_subdirectories(dir):
     current_languages = []
     language_data_json = open(os.path.join(dir, "language-data.json"))
     languages = json.loads(language_data_json.read())["languages"]
+    language_data_json.close()
     for locale_dir in os.listdir(dir):
         if os.path.isdir(os.path.join(dir, locale_dir)):
             for lang_code, lang_data in languages.items():

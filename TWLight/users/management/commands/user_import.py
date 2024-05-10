@@ -107,6 +107,7 @@ class Command(BaseCommand):
                                 )
                                 pass
                     pass
+        f.close()
 
     # Cribbed from stack overflow
     # https://stackoverflow.com/a/32232764

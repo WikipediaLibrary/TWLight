@@ -812,7 +812,7 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
         with open("accesscodes.csv", "r") as csv_file:
             response = client.post(self.url, {"access_code_csv": csv_file})
-
+        csv_file.close()
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 3)
 
@@ -834,7 +834,7 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
         with open("accesscodes.csv", "r") as csv_file:
             response = client.post(self.url, {"access_code_csv": csv_file})
-
+        csv_file.close()
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 2)
 
@@ -855,7 +855,7 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
         with open("accesscodes.csv", "r") as csv_file:
             response = client.post(self.url, {"access_code_csv": csv_file})
-
+        csv_file.close()
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 0)
 
@@ -1478,3 +1478,4 @@ class PartnerFilesTest(TestCase):
                             instance=partner_json,
                             schema=get_partner_description_json_schema(),
                         )
+                    partner_file.close()
