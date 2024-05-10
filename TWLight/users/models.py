@@ -691,9 +691,6 @@ class Editor(models.Model):
                 'registered': identity['registered']
             }
 
-            We could attempt to harvest real name, but we won't; we'll let
-            users enter it if required by partners, and avoid knowing the
-            data otherwise.
         lang : str
         global_userinfo : dict
             Optional override currently used for tests only. Defaults to fetching from global_userinfo API.
