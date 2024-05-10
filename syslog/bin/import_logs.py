@@ -936,7 +936,6 @@ class Configuration:
 
         if self.options.output:
             sys.stdout = sys.stderr = open(self.options.output, 'a+', 0)
-            self.options.output.close()
         all_filenames = []
         for self.filename in self.filenames:
             if self.filename == '-':
@@ -955,7 +954,6 @@ class Configuration:
 
         if self.options.exclude_path_from:
             paths = [path.strip() for path in open(self.options.exclude_path_from).readlines()]
-            self.options.exclude_path_from.close()
             self.options.excluded_paths.extend(path for path in paths if len(path) > 0)
         if self.options.excluded_paths:
             self.options.excluded_paths = set(self.options.excluded_paths)
@@ -963,7 +961,6 @@ class Configuration:
 
         if self.options.include_path_from:
             paths = [path.strip() for path in open(self.options.include_path_from).readlines()]
-            self.options.include_path_from.close()
             self.options.included_paths.extend(path for path in paths if len(path) > 0)
         if self.options.included_paths:
             self.options.included_paths = set(self.options.included_paths)

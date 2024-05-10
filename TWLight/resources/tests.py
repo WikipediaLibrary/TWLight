@@ -812,6 +812,7 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
         with open("accesscodes.csv", "r") as csv_file:
             response = client.post(self.url, {"access_code_csv": csv_file})
+
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 3)
 

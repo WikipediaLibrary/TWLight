@@ -186,6 +186,7 @@ def _read_translation_file(language_code: str, filename: str):
     if os.path.isfile(filepath):
         with open(filepath, "r") as translation_file:
             translation_dict = json.load(translation_file)
+
             # Remove the "@metadata" key from the dictionary
             if "@metadata" in translation_dict:
                 translation_dict.pop("@metadata")

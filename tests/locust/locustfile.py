@@ -20,6 +20,7 @@ wpUsers = []
 if path.isfile(wp_users_filepath):
     with open(wp_users_filepath, "r") as wp_users_file:
         wpUsers = json.load(wp_users_file)
+
 reCsrfMiddlewareToken = re.compile(
     r'<input type="hidden" name="csrfmiddlewaretoken" value="([0-9a-zA-Z]+)">',
 )
