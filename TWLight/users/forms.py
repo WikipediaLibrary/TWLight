@@ -2,14 +2,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Column, Row
 
 from django.conf import settings
-from django.contrib.auth.models import User
-
-from django.contrib import admin
-from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
 from django.urls import reverse
 from django import forms
-from django.db import models
 from django.utils.translation import gettext as _
 
 from .helpers.validation import validate_partners, validate_authorizer
@@ -47,15 +42,6 @@ class EditorUpdateForm(forms.ModelForm):
         self.fields["contributions"].help_text = None
 
 
-class AuthorizationUserChoiceForm(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        user = obj
-        if hasattr(user, "editor"):
-            return user.editor.wp_username
-        else:
-            return obj.username
-
-
 class AuthorizationAdminForm(forms.ModelForm):
     """
     This override only exists to run custom validation.
@@ -72,20 +58,6 @@ class AuthorizationAdminForm(forms.ModelForm):
     def clean_authorizer(self):
         validate_authorizer(self.cleaned_data["authorizer"])
         return self.cleaned_data["authorizer"]
-
-
-class AuthorizationInlineForm(forms.ModelForm):
-    authorizer = AuthorizationUserChoiceForm(
-        User.objects.filter(
-            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
-        )
-    )
-    user = AuthorizationUserChoiceForm(
-        queryset=User.objects.all(),
-        widget=ForeignKeyRawIdWidget(
-            Authorization._meta.get_field("user").remote_field, admin.site
-        ),
-    )
 
 
 class SetLanguageForm(forms.Form):
