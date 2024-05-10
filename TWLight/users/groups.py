@@ -15,6 +15,14 @@ RESTRICTED_GROUP_NAME = "Restricted"
 
 
 def get_coordinators():
+    """
+    Retrieve all users who are in the Coordinator user group.
+
+    Returns
+    ----------
+    Queryset
+        A queryset of user objects
+    """
     try:
         return Group.objects.get(name=COORDINATOR_GROUP_NAME)
     except:
@@ -22,6 +30,14 @@ def get_coordinators():
 
 
 def get_restricted():
+    """
+    Retrieve all users who are in the Restricted user group.
+
+    Returns
+    ----------
+    Queryset
+        A queryset of user objects
+    """
     try:
         return Group.objects.get(name=RESTRICTED_GROUP_NAME)
     except:

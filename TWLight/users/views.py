@@ -13,10 +13,9 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import redirect_to_login
-from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, resolve, Resolver404, reverse
-from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.views.decorators.vary import vary_on_headers
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -34,7 +33,7 @@ from django.utils.translation import get_language
 
 from TWLight.resources.filters import PartnerFilter
 from TWLight.resources.helpers import get_tag_names
-from TWLight.resources.models import Partner, PartnerLogo, PhabricatorTask
+from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
     SelfOnly,
@@ -59,7 +58,6 @@ from .forms import (
     UserEmailForm,
     CoordinatorEmailForm,
 )
-from .helpers.authorizations import sort_authorizations_into_resource_list
 from .models import Editor, UserProfile, Authorization
 from .serializers import FavoriteCollectionSerializer, UserSerializer
 from TWLight.applications.models import Application
@@ -417,6 +415,10 @@ class PIIUpdateView(SelfOnly, UpdateView):
 
 
 class EmailChangeView(SelfOnly, FormView):
+    """
+    View through which users can change the email attached to their library
+    account, or have it be updated automatically from Wikipedia.
+    """
     form_class = EmailChangeForm
     template_name = "users/editor_update.html"
 
@@ -554,6 +556,11 @@ class RestrictDataView(SelfOnly, FormView):
 
 
 class DeleteDataView(SelfOnly, DeleteView):
+    """
+    Self-only view that allows users to delete all their data.
+    Implemented as a separate page because this deletes their
+    account. We want to make sure they definitely mean to do this.
+    """
     model = User
     template_name = "users/user_confirm_delete.html"
     success_url = reverse_lazy("homepage")
@@ -680,8 +687,7 @@ class TermsView(UpdateView):
 
         if self.get_object().terms_of_use:
             # If they agreed with the terms, awesome. Send them where they were
-            # trying to go, if there's a meaningful `next` parameter in the URL;
-            # if not, send them to their home page as a sensible default.
+            # trying to go, if there's a meaningful `next` parameter in the URL.
             # Also log the date they agreed.
             self.get_object().terms_of_use_date = datetime.date.today()
             self.get_object().save()
@@ -690,7 +696,7 @@ class TermsView(UpdateView):
 
         else:
             # If they didn't agree, that's cool, but we should make sure they
-            # know about the limits. Send them to their home page rather than
+            # know about the limits. Send them to the home page rather than
             # trying to parse the next parameter, because parsing next will
             # put them in an obnoxious redirect loop - send them to where
             # they were going, which promptly sends them back to the terms
@@ -707,6 +713,8 @@ class AuthorizedUsers(APIView):
     API endpoint returning the list of users authorized to access a specific
     partner. For proxy partners, uses the list of Authorizations. For others,
     uses the full list of sent applications.
+    This is used for the Wikilink tool, which needs to know who has access
+    to what to track data about their citation habits.
     """
 
     authentication_classes = (TokenAuthentication,)
@@ -735,6 +743,10 @@ class AuthorizedUsers(APIView):
 
 
 class ListApplicationsUserView(SelfOnly, ListView):
+    """
+    View providing users with a list of their applications, whether open
+    or closed.
+    """
     model = Editor
     template_name = "users/my_applications.html"
 
@@ -757,6 +769,12 @@ class ListApplicationsUserView(SelfOnly, ListView):
 
 
 class AuthorizationReturnView(SelfOnly, UpdateView):
+    """
+    View supporting the workflow whereby users can 'return' their access
+    to a particular collection, freeing up a spot for other users.
+    This expires their authorization immediately, rather than on
+    the previously expected date.
+    """
     model = Authorization
     template_name = "users/authorization_confirm_return.html"
     fields = ["date_expires"]
@@ -783,11 +801,18 @@ class AuthorizationReturnView(SelfOnly, UpdateView):
 
 
 class LibraryRedirectView(RedirectView):
+    """
+    We previously used my_collection as the URL for the library's homepage,
+    this view supports redirecting from that URL to the current one.
+    """
     permanent = True
     url = reverse_lazy("users:my_library")
 
 
 class WithdrawApplication(RedirectView):
+    """
+    View enabling users to withdraw (close) an application.
+    """
     url = "/"
 
     def get_redirect_url(self, *args, **kwargs):
@@ -808,6 +833,10 @@ class WithdrawApplication(RedirectView):
 # Ensure presence of CSRF Cookie
 @method_decorator(ensure_csrf_cookie, name="get")
 class MyLibraryView(TemplateView):
+    """
+    Primary landing page for the library for logged-in, eligible, users who
+    have agreed to the terms of use. Lists available collections, etc.
+    """
     template_name = "users/redesigned_my_library.html"
 
     def get_context_data(self, **kwargs):

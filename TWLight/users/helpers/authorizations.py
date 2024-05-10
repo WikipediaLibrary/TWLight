@@ -1,6 +1,4 @@
-import datetime
-
-from django.db.models import Q
+from django.db.models import QuerySet
 
 from TWLight.resources.models import Partner
 from TWLight.users.models import Authorization
@@ -10,16 +8,35 @@ def get_all_bundle_authorizations():
     """
     Returns all Bundle authorizations, both active
     and not.
+
+    Returns
+    -------
+    Queryset
     """
 
+    # distinct() required because partners__authorization_method is ManyToMany
     return (
         Authorization.objects.select_for_update()
         .filter(partners__authorization_method=Partner.BUNDLE)
         .distinct()
-    )  # distinct() required because partners__authorization_method is ManyToMany
+    )
 
 
-def create_resource_dict(authorization, partner):
+def create_resource_dict(authorization : Authorization, partner : Partner):
+    """
+    For a given authorization and associated partner, fetch some additional
+    information for use in sort_authorizations_into_resource_list().
+
+    Parameters
+    ----------
+    authorization: Authorization
+        An Authorization object.
+    partner: Partner
+        A Partner object linked to this Authorization object.
+    Returns
+    -------
+    dict
+    """
     resource_item = {
         "partner": partner,
         "authorization": authorization,
@@ -41,10 +58,16 @@ def create_resource_dict(authorization, partner):
     return resource_item
 
 
-def delete_duplicate_bundle_authorizations(authorizations):
+def delete_duplicate_bundle_authorizations(authorizations : QuerySet):
     """
-    Given a queryset of Authorization objects,
-    delete duplicate Bundle authorizations.
+    Given a queryset of Authorization objects, find the ones which are
+    Bundle authorizations, then locate and delete any duplicates for
+    each user.
+
+    Parameters
+    ----------
+    authorizations: QuerySet
+        Queryset of Authorization objects to check for duplicates.
     """
     bundle_authorizations = authorizations.filter(
         partners__authorization_method=Partner.BUNDLE
@@ -59,12 +82,17 @@ def delete_duplicate_bundle_authorizations(authorizations):
             duplicate_authorization.delete()
 
 
-def sort_authorizations_into_resource_list(authorizations):
+def sort_authorizations_into_resource_list(authorizations : QuerySet):
     """
     Given a queryset of Authorization objects, return a
     list of dictionaries, sorted alphabetically by partner
     name, with additional data computed for ease of display
     in the my_library template.
+
+    Parameters
+    ----------
+    authorizations: QuerySet
+        Queryset of Authorization objects
     """
     resource_list = []
     if authorizations:

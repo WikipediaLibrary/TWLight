@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Get all authorization objects with an expiry date in the next
-        # four weeks, for which we haven't yet sent a reminder email, and
+        # two weeks, for which we haven't yet sent a reminder email, and
         # exclude users who disabled these emails and who have already filed
         # for a renewal.
         editor_qs = Editor.objects.select_related("user")

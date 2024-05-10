@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-        Updates editor info and Bundle eligibility for currently-eligible Editors.
+        Updates editor info and Bundle eligibility for all Editors.
         Parameters
         ----------
         args
