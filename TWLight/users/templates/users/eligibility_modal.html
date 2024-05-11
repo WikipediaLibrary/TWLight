@@ -33,7 +33,7 @@
           </p>
         {% endif %}
       </div>
-      {% if not editor.wp_not_blocked %}
+      {% if not editor.wp_not_blocked and not user.editor.ignore_wp_blocks %}
         {% url 'contact' as contact_url %}
         {% comment %}Translators: This message tells users that they have an active block but they can still reach out for access.{% endcomment %}
         <p class="text-center text-danger">
