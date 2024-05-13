@@ -180,4 +180,3 @@ tramp
 .cask/
 
 node_modules/
-TWLight/static/css/*-rtl.css

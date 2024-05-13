@@ -52,11 +52,6 @@ RUN apt update ; \
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
 
-COPY package-lock.json .
-COPY package.json .
-
-RUN npm install;
-
 # Bash config
 COPY conf/bashrc /root/.bashrc
 
@@ -65,11 +60,15 @@ COPY locale /app/locale
 
 COPY TWLight /app/TWLight
 
+COPY twlight_cssjanus /app/twlight_cssjanus
+RUN cd /app/twlight_cssjanus
+RUN npm install
+
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
-
 EXPOSE 80
-
+# Configure static assets.
+RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
 ENTRYPOINT ["/app/bin/twlight_docker_entrypoint.sh"]
