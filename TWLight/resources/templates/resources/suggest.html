@@ -61,7 +61,7 @@
               </div>
               <div class="card-body ">
                 <div class="row">
-                  <div class="col-lg-10">
+                  <div class="col-xl-10 col-lg-12">
                     {% comment %}Translators: This is the text that appears before the description of every partner suggestion. {% endcomment %}
                     <p>
                       <strong>{% trans 'Description' %}: </strong>
@@ -83,14 +83,14 @@
                     {% if each_suggestion.ticket_number %}
                       <p>
                         <strong>{% trans 'Track Progress' %}:</strong>
-                        <a class="twl-links" href="https://phabricator.wikimedia.org/{{each_suggestion.ticket_number}}" target="_blank" rel="noopener noreferrer">
+                        <a class="twl-links" href="https://phabricator.wikimedia.org/{{each_suggestion.ticket_number}}" target="_blank">
                           {{ each_suggestion.ticket_number }}
                         </a>
                       </p>
                     {% endif %}
                   </div>
                   {% if user.is_authenticated %}
-                    <div class="col-lg-2 pull-right" style="text-align: right;">
+                    <div class="col-xl-2 col-lg-12 pull-right align-text-right">
                       <a class="btn upvote{% if user in each_suggestion.upvoted_users.all %} btn-success{% else %} btn-outline-dark{% endif %}" data-href="{{ each_suggestion.get_upvote_url }}"
                           href="">
                         <i class="fa fa-arrow-up" aria-hidden="true"></i>
@@ -185,7 +185,7 @@
       var searchResults = fuse.search(pattern);
 
       var filteredSuggestionElems = [];
-      var suggestionElems = document.getElementsByClassName("suggestion-class"); 
+      var suggestionElems = document.getElementsByClassName("suggestion-class");
 
       if (searchResults.length === 0 && pattern !== "") {
         // Hide all collections, no results to that search text found
@@ -204,7 +204,7 @@
           filteredSuggestionElems.push("suggestion-card-" + suggestionId)
         }
         displaySuggestions( suggestionElems, filteredSuggestionElems, pattern);
-      } 
+      }
 
     }
 

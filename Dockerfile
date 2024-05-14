@@ -46,8 +46,8 @@ RUN apt update ; \
     npm \
     tar \
     wget ; \
-    rm -rf /var/lib/apt/lists/*; \
-    /usr/bin/npm install cssjanus
+    rm -rf /var/lib/apt/lists/*;
+
 
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
@@ -60,13 +60,15 @@ COPY locale /app/locale
 
 COPY TWLight /app/TWLight
 
+COPY twlight_cssjanus /app/twlight_cssjanus
+RUN cd /app/twlight_cssjanus
+RUN npm install
+
 WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
+EXPOSE 80
 # Configure static assets.
 RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
-
-EXPOSE 80
-
 ENTRYPOINT ["/app/bin/twlight_docker_entrypoint.sh"]

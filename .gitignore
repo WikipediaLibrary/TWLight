@@ -178,3 +178,4 @@ tramp
 
 # cask packages
 .cask/
+node_modules/
