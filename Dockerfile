@@ -61,8 +61,7 @@ COPY locale /app/locale
 COPY TWLight /app/TWLight
 
 COPY twlight_cssjanus /app/twlight_cssjanus
-RUN cd /app/twlight_cssjanus
-RUN npm install
+RUN cd /app/twlight_cssjanus/ && npm install
 
 WORKDIR $TWLIGHT_HOME
 
