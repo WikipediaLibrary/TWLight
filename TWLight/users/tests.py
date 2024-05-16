@@ -18,7 +18,7 @@ from django.core.exceptions import (
 )
 from django.urls import resolve, reverse
 from django.core.management import call_command
-from django.test import TestCase, Client, RequestFactory
+from django.test import TestCase, Client, RequestFactory, override_settings
 from django.utils.translation import get_language
 from django.utils.html import escape
 from django.utils.timezone import now
@@ -30,7 +30,7 @@ from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
-from .oauth import OAuthBackend
+from .oauth import OAuthBackend, _check_user_preferred_language
 from .helpers.validation import validate_partners
 from .helpers.authorizations import get_all_bundle_authorizations
 from .helpers.wiki_list import WIKIS, LANGUAGE_CODES
@@ -97,6 +97,7 @@ FAKE_GLOBAL_USERINFO = {
     "editcount": 5000,
     "merged": copy.copy(FAKE_MERGED_ACCOUNTS),
 }
+FAKE_LANGUAGE_CODE = "any_language"
 
 
 # CSRF middleware is helpful for site security, but not helpful for testing
@@ -1740,6 +1741,58 @@ class OAuthTestCase(TestCase):
 
         mock_update.assert_called_once_with(identity, lang)
 
+    @patch("TWLight.users.models.Editor.update_from_wikipedia")
+    @override_settings(LANGUAGE_CODE=FAKE_LANGUAGE_CODE)
+    def test_get_and_update_user_from_identity_and_new_language(
+        self,
+        mock_update,
+    ):
+        """
+        OAuthBackend._get_and_update_user_from_identity() should:
+        * Update user language if profile language setting
+        * is different from browser settings upon logging in.
+        * Call Editor.update_from_wikipedia
+        """
+        # Make sure the test user has the username and language anticipated by our backend.
+        username = FAKE_IDENTITY["sub"]
+        existing_user = UserFactory(username=username)
+        params = {"user": existing_user, "wp_sub": FAKE_IDENTITY["sub"]}
+        _ = EditorFactory(**params)
+
+        oauth_backend = OAuthBackend()
+        user, created = oauth_backend._get_and_update_user_from_identity(FAKE_IDENTITY)
+
+        self.assertFalse(created)
+        mock_update.assert_called_once_with(FAKE_IDENTITY, FAKE_LANGUAGE_CODE)
+
+    @override_settings(LANGUAGE_CODE=FAKE_LANGUAGE_CODE)
+    def test_check_user_preferred_language_returns_true_if_profile_and_browser_language_different(
+        self,
+    ):
+        """
+         OAuthBackend._check_user_preferred_language() should:
+         * Return true
+         * if user profile language is different from
+         * browser language upon logging in.
+         """
+        username = FAKE_IDENTITY["sub"]
+        existing_user = UserFactory(username=username)
+        result = _check_user_preferred_language(existing_user)
+        self.assertTrue(result)
+
+    def test_check_user_preferred_language_returns_false_if_profile_and_browser_language_same(
+        self,
+    ):
+        """
+         OAuthBackend._check_user_preferred_language() should:
+         * Return false
+         * if user profile language is the same as
+         * browser language upon logging in.
+         """
+        username = FAKE_IDENTITY["sub"]
+        existing_user = UserFactory(username=username)
+        result = _check_user_preferred_language(existing_user)
+        self.assertFalse(result)
 
 class TermsTestCase(TestCase):
     def test_terms_page_displays(self):

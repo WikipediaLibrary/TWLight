@@ -176,13 +176,16 @@ class OAuthBackend(object):
         try:
             username = self._get_username(identity)
             user = User.objects.get(username=username)
-
+            should_update_lang = _check_user_preferred_language(user)
+            if should_update_lang:
+                user.userprofile.lang = get_language()
+                user.userprofile.save()
             # This login path should only be used for accounts created via
             # Wikipedia login, which all have editor objects.
             if hasattr(user, "editor"):
                 editor = user.editor
 
-                lang = get_language()
+                lang = user.userprofile.lang
                 editor.update_from_wikipedia(
                     identity, lang
                 )  # This call also saves the editor

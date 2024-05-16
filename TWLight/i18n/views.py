@@ -2,7 +2,6 @@ import itertools
 import json
 import os
 import re
-from urllib.parse import unquote
 
 from django.apps import apps
 from django.conf import settings

@@ -20,6 +20,7 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
     # this same problem in defining the RelatedFactory in UserFactory.)
     user = factory.SubFactory("TWLight.users.factories.UserFactory", profile=None)
     terms_of_use = True
+    lang = "en"
 
 
 @factory.django.mute_signals(post_save)

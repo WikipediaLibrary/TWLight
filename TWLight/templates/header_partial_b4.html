@@ -18,11 +18,10 @@
         <span class="site-title align-middle"> {% trans "The Wikipedia Library" %} </span>
       </a>
     </div>
-    <div class="col-lg-5 col-md-7 col-sm-6 col-9">
+    <div class="col-lg-4 col-md-7 col-sm-6 col-9">
       {% if user|bundle_eligible %}
       <!-- EBSCO Search Box Begins -->
-      <form action="https://searchbox.ebsco.com/search/" target="_blank" rel="noopener noreferrer" class="ebsco-single-search" >
-      <!-- <form action="https://search.ebscohost.com/login.aspx" target="_blank" class="ebsco-single-search" rel="noopener noreferrer"> -->
+      <form action="https://searchbox.ebsco.com/search/" target="_blank" rel="noopener" class="ebsco-single-search" >
         <input name="schemaId" value="search" type="hidden" />
         <input name="custid" value="ns253359" type="hidden" />
         <input name="groupid" value="main" type="hidden" />
@@ -61,10 +60,26 @@
       <i class="navbar-toggler-icon fa fa-user"></i>
       <i class="navbar-toggler-icon fa fa-arrow-down"></i>
     </button>
-
-    <div class="col-lg-4 col-md-8 col-sm-3 col-12 offset-md-4 offset-lg-0">
+    <div class="col-lg-5 col-md-8 col-sm-3 col-12 offset-md-4 offset-lg-0">
       <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-lg-end justify-content-md-end">
         <ul class="navbar-nav">
+          <li class="mobile-menu align-middle nav-item">
+            <form action="/i18n/setlang/?next=/" method="post">
+                {% csrf_token %}
+                {% get_language_info for LANGUAGE_CODE as current_lang %}
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle nav-link nav-links" type="button" id="language-dropdown" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                    {{current_lang.name_local}}
+                  </button>
+              <div class="dropdown-menu" aria-labelledby="language-dropdown">
+                {% get_available_languages as all_languages %}
+                {% for lang_code, lang in all_languages %}
+                  <button name="language" class="dropdown-item language-select-menu" value={{lang_code}} type="submit">{{lang}}</button>
+                {% endfor %}
+              </div>
+               </div>
+            </form></li>
           {% if user|coordinators_only %}
           <li role="presentation" class="mobile-menu align-middle nav-item">
             <a class="nav-link nav-links" href="{% url 'applications:list' %}">
