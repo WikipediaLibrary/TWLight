@@ -316,6 +316,7 @@ LOGIN PARTIAL CSS
         font-weight: 800;
         padding: 20px 0px 0px 30px;
     }
+
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
@@ -357,12 +358,14 @@ LOGIN PARTIAL CSS
         font-weight: 800;
         padding: 20px 20px 0px 30px;
     }
+
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
         padding: 0px 0px 0px 30px;
     }
+
     .criteria-info{
         font-size: 18px;
         margin-right: 20%;
@@ -398,12 +401,14 @@ LOGIN PARTIAL CSS
         font-weight: 800;
         padding: 20px 0px 0px 250px;
     }
+
     .homepage-criteria{
         color:#FFF;
         font-family: Roboto;
         font-style: normal;
         padding: 35px 0px 0px 125px;
     }
+
     .criteria-info{
         font-size: 20px;
         margin-right: 20%;
@@ -412,7 +417,7 @@ LOGIN PARTIAL CSS
         font-family: Roboto-Light;
         font-size: 20px;
         line-height: 32px;
-     }
+    }
     .homepage-login{
         padding: 0px 0px 20px 250px;
     }
