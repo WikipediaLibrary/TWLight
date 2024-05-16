@@ -68,7 +68,9 @@ WORKDIR $TWLIGHT_HOME
 
 COPY manage.py /app/manage.py
 
-EXPOSE 80
 # Configure static assets.
 RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
+
+EXPOSE 80
+
 ENTRYPOINT ["/app/bin/twlight_docker_entrypoint.sh"]
