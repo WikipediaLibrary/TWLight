@@ -24,11 +24,9 @@ if sys.version_info[0] != 3:
 import base64
 import bz2
 import configparser
-import codecs
 import datetime
 import fnmatch
 import gzip
-import hashlib
 import http.client
 import inspect
 import itertools
@@ -1115,6 +1113,7 @@ class Configuration:
 
             filename = stdout
             credentials = open(filename, 'r').readline()
+            filename.close()
             credentials = credentials.split('\t')
             return credentials[1]
 
@@ -2676,6 +2675,9 @@ if __name__ == '__main__':
         resolver = config.get_resolver()
         parser = Parser()
         main()
+        config.options.output.close()
+        config.options.exclude_path_from.close()
+        config.options.include_path_from.close()
         sys.exit(0)
     except KeyboardInterrupt:
         pass

@@ -16,21 +16,21 @@
     <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
   </span>
   <form class="form-inline homepage-title" action="/i18n/setlang/?next=/" method="post">
-                {% csrf_token %}
-                {% get_language_info for LANGUAGE_CODE as current_lang %}
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
-                          aria-haspopup="true" aria-expanded="false">
-                    {{current_lang.name_local}}
-                  </button>
-              <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
-                {% get_available_languages as all_languages %}
-                {% for lang_code, lang in all_languages %}
-                  <button name="language" class="dropdown-item language-select-menu" value={{lang_code}} type="submit">{{lang}}</button>
-                {% endfor %}
-              </div>
-              </div>
-    </form>
+    {% csrf_token %}
+    {% get_language_info for LANGUAGE_CODE as current_lang %}
+    <div class="dropdown">
+      <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        {{current_lang.name_local}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
+        {% get_available_languages as all_languages %}
+        {% for lang_code, lang in all_languages %}
+          <button name="language" class="dropdown-item language-select-menu" value={{lang_code}} type="submit">{{lang}}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </form>
 </div>
 
 {% if messages %}

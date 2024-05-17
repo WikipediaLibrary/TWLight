@@ -48,6 +48,16 @@ COMMON CONTENT BLOCK CSS
   padding: 0.5rem 1rem;
 }
 
+.text-float{
+    text-align: left;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.align-text-right{
+    text-align: right;
+}
+
 .twl-btn {
   white-space: nowrap;
   font-family: Roboto;
@@ -346,6 +356,7 @@ LOGIN PARTIAL CSS
     }
     .criteria-info{
         font-size: 16px;
+        margin-right: 20%;
     }
     .criteria-item{
         font-family: Roboto-Light;
@@ -388,6 +399,7 @@ LOGIN PARTIAL CSS
 
     .criteria-info{
         font-size: 18px;
+        margin-right: 20%;
     }
     .criteria-item{
         font-family: Roboto-Light;
@@ -430,7 +442,8 @@ LOGIN PARTIAL CSS
 
     .criteria-info{
         font-size: 20px;
-    }
+        margin-right: 20%;
+     }
     .criteria-item{
         font-family: Roboto-Light;
         font-size: 20px;
@@ -467,6 +480,7 @@ LOGIN PARTIAL CSS
 .criteria-list{
     list-style-type: none;
     padding: 0px 0px 0px 0px;
+    margin-right: 20%;
 }
 
 .criteria-checkmark{
@@ -843,16 +857,16 @@ NEW MY LIBRARY CSS
 }
 .filter-title-container{
     width: 100%;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .filter-title{
-    text-align: left;
     font-size: 15px;
 }
 
-.reset-filters-link{
-    position: absolute;
-    right: 0px;
-}
+.reset-filters-link{}
 .reset-filters-link:hover{
     color: #3366CC;
     text-decoration: none;

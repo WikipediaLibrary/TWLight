@@ -46,8 +46,8 @@ RUN apt update ; \
     npm \
     tar \
     wget ; \
-    rm -rf /var/lib/apt/lists/*; \
-    /usr/bin/npm install cssjanus
+    rm -rf /var/lib/apt/lists/*;
+
 
 # Utility scripts that run in the virtual environment.
 COPY bin /app/bin/
@@ -59,6 +59,9 @@ COPY conf/bashrc /root/.bashrc
 COPY locale /app/locale
 
 COPY TWLight /app/TWLight
+
+COPY twlight_cssjanus /app/twlight_cssjanus
+RUN cd /app/twlight_cssjanus/ && npm install
 
 WORKDIR $TWLIGHT_HOME
 
