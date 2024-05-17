@@ -1770,11 +1770,11 @@ class OAuthTestCase(TestCase):
         self,
     ):
         """
-         OAuthBackend._check_user_preferred_language() should:
-         * Return true
-         * if user profile language is different from
-         * browser language upon logging in.
-         """
+        OAuthBackend._check_user_preferred_language() should:
+        * Return true
+        * if user profile language is different from
+        * browser language upon logging in.
+        """
         username = FAKE_IDENTITY["sub"]
         existing_user = UserFactory(username=username)
         result = _check_user_preferred_language(existing_user)
@@ -1784,15 +1784,16 @@ class OAuthTestCase(TestCase):
         self,
     ):
         """
-         OAuthBackend._check_user_preferred_language() should:
-         * Return false
-         * if user profile language is the same as
-         * browser language upon logging in.
-         """
+        OAuthBackend._check_user_preferred_language() should:
+        * Return false
+        * if user profile language is the same as
+        * browser language upon logging in.
+        """
         username = FAKE_IDENTITY["sub"]
         existing_user = UserFactory(username=username)
         result = _check_user_preferred_language(existing_user)
         self.assertFalse(result)
+
 
 class TermsTestCase(TestCase):
     def test_terms_page_displays(self):
