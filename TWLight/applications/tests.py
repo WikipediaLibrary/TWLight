@@ -2478,7 +2478,7 @@ class EvaluateApplicationTest(TestCase):
         self.assertContains(response, self.editor.affiliation)
         # Users shouldn't see some things coordinators see
         self.assertNotContains(response, "Evaluate application")
-        self.assertNotContains(response, "select")  # form to change app status
+        self.assertNotContains(response, "Select")  # form to change app status
 
         # Now let's make the coordinator visit the same page
         # In the meantime, editor has disagreed to the terms of use
