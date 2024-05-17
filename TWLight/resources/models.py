@@ -25,6 +25,7 @@ from TWLight.resources.helpers import get_partner_description, get_tags_json_sch
 # into locale/language-data.json
 language_data_json = open(os.path.join(settings.LOCALE_PATHS[0], "language-data.json"))
 languages = json.loads(language_data_json.read())["languages"]
+language_data_json.close()
 RESOURCE_LANGUAGES = []
 for lang_code, lang_data in languages.items():
     autonym = lang_data[-1]
