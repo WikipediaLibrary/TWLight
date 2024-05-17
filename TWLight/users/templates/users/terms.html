@@ -29,12 +29,11 @@
 {% endblock extra_css %}
 
 {% block content %}
-{% include "header_partial_b4.html" %}
-{% include "message_partial.html" %}
-<div class="terms-content">
-  {% get_current_language as LANGUAGE_CODE %}
-  {# Translators: use the date *when you are translating*, in a language-appropriate format. #}
-  <em>{% trans "Last updated 11 August 2021" %}</em>
+  {% include "header_partial_b4.html" %}
+  {% include "message_partial.html" %}
+  <div class="terms-content">
+    {# Translators: use the date *when you are translating*, in a language-appropriate format. #}
+    <em>{% trans "Last updated 11 August 2021" %}</em>
 
     <a class="twl-links" href="https://wikimediafoundation.org/wiki/Privacy_policy" style="float:right">
     {% comment %}Translators: This link is on the Terms of Use page and links to the Wikimedia Foundation Privacy Policy (https://wikimediafoundation.org/wiki/Privacy_policy). Wikimedia Foundation should not be translated.{% endcomment %}
