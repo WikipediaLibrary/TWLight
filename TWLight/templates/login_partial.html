@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load l10n %}
 {% load cache %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <div class="row col-12 nav-bar-header">
   <span class="nav-bar-header-logo">
@@ -16,11 +17,14 @@
   </span>
   <form class="form-inline homepage-title" action="/i18n/setlang/?next=/" method="post">
     {% csrf_token %}
-    {% get_language_info for LANGUAGE_CODE as current_lang %}
     <div class="dropdown">
       <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-        {{current_lang.name_local}}
+        {% for val, text in LANGUAGES %}
+           {% if val == LANGUAGE_CODE %}
+              {{text}}
+          {% endif %}
+        {% endfor %}
       </button>
       <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
         {% for val, text in LANGUAGES %}
