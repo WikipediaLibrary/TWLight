@@ -17,6 +17,9 @@
   </span>
   <form class="form-inline homepage-title" action="/i18n/setlang/?next=/" method="post">
     {% csrf_token %}
+    {% if form_show_errors %}
+      {% include "bootstrap4/errors.html" %}
+    {% endif %}
     <div class="dropdown">
       <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
