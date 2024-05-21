@@ -1,8 +1,9 @@
 {% load i18n %}
 {% load static %}
 {% load twlight_perms %}
-
 {% get_current_language as LANGUAGE_CODE %}
+{% get_language_info for LANGUAGE_CODE as current_language_info %}
+
 <nav id="top-nav" class="navbar navbar-expand-md">
   <div class="row top-nav-row">
     <div class="col-lg-3 col-md-5 col-sm-2 col-1">
@@ -65,22 +66,23 @@
       <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-lg-end justify-content-md-end">
         <ul class="navbar-nav">
           <li class="mobile-menu align-middle nav-item">
-            <form class="form-inline" action="/i18n/setlang/?next=/" method="post">
+            <form action="/i18n/setlang/?next=/" method="post" class="form-inline">
                 {% csrf_token %}
-                {% get_language_info for LANGUAGE_CODE as current_lang %}
+                {% if form_show_errors %}
+                  {% include "bootstrap4/errors.html" %}
+                {% endif %}
                 <div class="dropdown">
-                  <button class="btn btn-link dropdown-toggle nav-link nav-links" type="button" id="language-dropdown" data-toggle="dropdown"
+                  <button class="btn btn-link dropdown-toggle nav-link nav-links language-select-button" type="button" id="language-dropdown" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
-                    {{current_lang.name_local}}
+                    {{current_language_info.name_local}}
                   </button>
-              <div class="dropdown-menu" aria-labelledby="language-dropdown">
-                {% get_available_languages as all_languages %}
-                {% for lang_code, lang in all_languages %}
-                  <button name="language" class="dropdown-item language-select-menu" value={{lang_code}} type="submit">{{lang}}</button>
-                {% endfor %}
-              </div>
-               </div>
-            </form></li>
+                  <div class="dropdown-menu" aria-labelledby="language-dropdown">
+                   {% for val, text in LANGUAGES %}
+                      <button name="language" class="dropdown-item language-select-menu" value={{val}} type="submit">{{text}}</button>
+                    {% endfor %}
+                   </div>
+                </div>
+            </form>
           {% if user|coordinators_only %}
           <li role="presentation" class="mobile-menu align-middle nav-item">
             <a class="nav-link nav-links" href="{% url 'applications:list' %}">

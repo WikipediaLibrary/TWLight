@@ -189,6 +189,10 @@ HEADER CSS
     vertical-align: middle;
 }
 
+.language-select-button:active,.language-select-button:hover,.language-select-button:focus{
+    box-shadow: none;
+}
+
 .nav-links {
     font-family: Roboto;
     color: black !important;

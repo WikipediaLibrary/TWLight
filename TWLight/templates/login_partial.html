@@ -23,9 +23,8 @@
         {{current_lang.name_local}}
       </button>
       <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
-        {% get_available_languages as all_languages %}
-        {% for lang_code, lang in all_languages %}
-          <button name="language" class="dropdown-item language-select-menu" value={{lang_code}} type="submit">{{lang}}</button>
+        {% for val, text in LANGUAGES %}
+          <button name="language" class="dropdown-item language-select-menu" value={{val}} type="submit">{{text}}</button>
         {% endfor %}
       </div>
     </div>
