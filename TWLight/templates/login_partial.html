@@ -23,15 +23,15 @@
     <div class="dropdown">
       <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
-        {% for val, text in LANGUAGES %}
-           {% if val == LANGUAGE_CODE %}
-              {{text}}
-          {% endif %}
-        {% endfor %}
+                {% for code, name in LANGUAGES %}
+                  {% if code == LANGUAGE_CODE %}
+                    {{ name }}
+                  {% endif %}
+                {% endfor %}
       </button>
       <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
-        {% for val, text in LANGUAGES %}
-          <button name="language" class="dropdown-item language-select-menu" value={{val}} type="submit">{{text}}</button>
+        {% for code, name in LANGUAGES %}
+          <button name="language" class="dropdown-item language-select-menu" value={{code}} type="submit">{{name}}</button>
         {% endfor %}
       </div>
     </div>
