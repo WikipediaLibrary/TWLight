@@ -2,16 +2,40 @@
 {% load i18n %}
 {% load l10n %}
 {% load cache %}
+{% get_current_language as LANGUAGE_CODE %}
 
-<div class="row col-12">
-  <!-- logo -->
-  <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
+<div class="row col-12 nav-bar-header">
+  <span class="nav-bar-header-logo">
+    <!-- logo -->
+    <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
   {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
-  {% trans "The Wikipedia Library" %}
-  ">
-  <!-- site name -->
-  {% comment %}Translators: Name of the project/tool.{% endcomment %}
-  <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
+  {% trans " The Wikipedia Library" %}
+    ">
+    <!-- site name -->
+    {% comment %}Translators: Name of the project/tool.{% endcomment %}
+    <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
+  </span>
+  <form class="form-inline homepage-title" action="/i18n/setlang/?next=/" method="post">
+    {% csrf_token %}
+    {% if form_show_errors %}
+      {% include "bootstrap4/errors.html" %}
+    {% endif %}
+    <div class="dropdown">
+      <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+                {% for code, name in LANGUAGES %}
+                  {% if code == LANGUAGE_CODE %}
+                    {{ name }}
+                  {% endif %}
+                {% endfor %}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
+        {% for code, name in LANGUAGES %}
+          <button name="language" class="dropdown-item language-select-menu" value={{code}} type="submit">{{name}}</button>
+        {% endfor %}
+      </div>
+    </div>
+  </form>
 </div>
 
 {% if messages %}
@@ -28,7 +52,7 @@
       {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
       {% blocktranslate trimmed %}
       More than 100 of the world's top subscription-only databases,
-      with content in {{ no_of_languages }} languages, 
+      with content in {{ no_of_languages }} languages,
       free for Wikipedians of all backgrounds
       {% endblocktranslate %}
     </p>

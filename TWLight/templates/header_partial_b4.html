@@ -1,8 +1,8 @@
 {% load i18n %}
 {% load static %}
 {% load twlight_perms %}
-
 {% get_current_language as LANGUAGE_CODE %}
+
 <nav id="top-nav" class="navbar navbar-expand-md">
   <div class="row top-nav-row">
     <div class="col-lg-3 col-md-5 col-sm-2 col-1">
@@ -18,7 +18,7 @@
         <span class="site-title align-middle"> {% trans "The Wikipedia Library" %} </span>
       </a>
     </div>
-    <div class="col-lg-5 col-md-7 col-sm-6 col-9">
+    <div class="col-lg-4 col-md-7 col-sm-6 col-9">
       {% if user|bundle_eligible %}
       <!-- EBSCO Search Box Begins -->
       <form action="https://searchbox.ebsco.com/search/" target="_blank" rel="noopener" class="ebsco-single-search" >
@@ -61,9 +61,31 @@
       <i class="navbar-toggler-icon fa fa-arrow-down"></i>
     </button>
 
-    <div class="col-lg-4 col-md-8 col-sm-3 col-12 offset-md-4 offset-lg-0">
+    <div class="col-lg-5 col-md-8 col-sm-3 col-12 offset-md-4 offset-lg-0">
       <div id="navbarTogglerTWL" class="collapse navbar-collapse justify-content-lg-end justify-content-md-end">
         <ul class="navbar-nav">
+          <li class="mobile-menu align-middle nav-item">
+            <form action="/i18n/setlang/?next=/" method="post" class="form-inline">
+                {% csrf_token %}
+                {% if form_show_errors %}
+                  {% include "bootstrap4/errors.html" %}
+                {% endif %}
+                <div class="dropdown">
+                  <button class="btn btn-link dropdown-toggle nav-link nav-links language-select-button" type="button" id="language-dropdown" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">
+                          {% for code, name in LANGUAGES %}
+                            {% if code == LANGUAGE_CODE %}
+                              {{ name }}
+                            {% endif %}
+                          {% endfor %}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="language-dropdown">
+                   {% for code, name in LANGUAGES %}
+                      <button name="language" class="dropdown-item language-select-menu" value={{code}} type="submit">{{name}}</button>
+                    {% endfor %}
+                   </div>
+                </div>
+            </form>
           {% if user|coordinators_only %}
           <li role="presentation" class="mobile-menu align-middle nav-item">
             <a class="nav-link nav-links" href="{% url 'applications:list' %}">

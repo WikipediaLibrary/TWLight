@@ -189,6 +189,10 @@ HEADER CSS
     vertical-align: middle;
 }
 
+.language-select-button:active,.language-select-button:hover,.language-select-button:focus{
+    box-shadow: none;
+}
+
 .nav-links {
     font-family: Roboto;
     color: black !important;
@@ -301,6 +305,37 @@ and (max-width : 360px) {
 LOGIN PARTIAL CSS
 --------------------------------------------------------------------------
 */
+.nav-bar-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.nav-bar-header-logo{
+    display: flex;
+    flex-direction: row;
+}
+.dropdown-menu {
+    max-height: 16rem;
+    overflow-y: auto;
+}
+.language-select{
+    background: #3366CC;
+    color: #FFF;
+    padding: .65rem;
+    border-radius: 0;
+    border: 1px solid white;
+    margin-right: 2rem;
+}
+.language-select:hover{
+    color: white;
+    text-decoration: underline;
+}
+.language-select-menu{
+    color: #3366CC !important;
+}
+.language-select-menu:hover{
+    text-decoration: underline;
+}
 @media (max-width: 767px) {
     .login-section{
         min-height: 489px;
@@ -432,7 +467,7 @@ LOGIN PARTIAL CSS
 .logo {
 	height:70px;
 	float:left;
-	padding:21px 0px 5px 23px;
+	padding:21px 4px 5px 23px;
 }
 
 .homepage-title{
