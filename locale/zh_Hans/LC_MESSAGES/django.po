@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-05-22 20:25+0000\n"
+"POT-Creation-Date: 2024-05-22 23:41+0000\n"
 "PO-Revision-Date: 2024-05-20 12:24:19+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1790,7 +1790,7 @@ msgstr ""
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160
-#: TWLight/templates/header_partial_b4.html:105
+#: TWLight/templates/header_partial_b4.html:127
 msgid "Log in"
 msgstr "登录"
 
@@ -2469,12 +2469,9 @@ msgstr "元维基页面"
 
 #. Translators: On the contact us page, this text links to the Wikipedia Library meta page.
 #. Translators: Name of the project/tool.
-#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
-#. Translators: Name of the project/tool.
 #: TWLight/templates/contact.html:20
 #: TWLight/templates/header_partial_b4.html:18
-#: TWLight/templates/login_partial.html:10
-#: TWLight/templates/login_partial.html:14 TWLight/templates/new_base.html:14
+#: TWLight/templates/login_partial.html:16 TWLight/templates/new_base.html:14
 #: TWLight/templates/new_base.html:36
 msgid "The Wikipedia Library"
 msgstr "维基百科图书馆"
@@ -2519,22 +2516,22 @@ msgid "Search the library"
 msgstr "搜索本图书馆"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
-#: TWLight/templates/header_partial_b4.html:71
+#: TWLight/templates/header_partial_b4.html:93
 msgid "Review"
 msgstr "审核"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can send approved applications to partners for setup.
-#: TWLight/templates/header_partial_b4.html:77
+#: TWLight/templates/header_partial_b4.html:99
 msgid "Send data to partners"
 msgstr "向合作伙伴发送数据"
 
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
-#: TWLight/templates/header_partial_b4.html:85
+#: TWLight/templates/header_partial_b4.html:107
 msgid "Suggest a collection"
 msgstr "馆藏建议"
 
 #. Translators: A button to log out of The Wikipedia Library.
-#: TWLight/templates/header_partial_b4.html:98
+#: TWLight/templates/header_partial_b4.html:120
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
 msgstr "退出"
@@ -2550,8 +2547,15 @@ msgstr "更少信息"
 msgid "More info"
 msgstr "更多信息"
 
+#. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
+#: TWLight/templates/login_partial.html:12
+#, fuzzy
+#| msgid "The Wikipedia Library"
+msgid " The Wikipedia Library"
+msgstr "维基百科图书馆"
+
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:29 TWLight/templates/new_base.html:21
+#: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, fuzzy, python-format
 msgid ""
 "More than 100 of the world's top subscription-only databases, with content "
@@ -2561,11 +2565,11 @@ msgstr ""
 "基百科人免费"
 
 #. Translators: Information about The Wikipedia Library.
-#: TWLight/templates/login_partial.html:40
+#: TWLight/templates/login_partial.html:64
 msgid "Meet these criteria for automatic access"
 msgstr "自动获准访问门槛"
 
-#: TWLight/templates/login_partial.html:45
+#: TWLight/templates/login_partial.html:69
 msgid ""
 "These criteria grant you access to certain collections but not all. Some "
 "collections are accessible on a per application basis only."
@@ -2573,7 +2577,7 @@ msgstr ""
 "这些条件授予您访问某些集合（但不是所有集合）的权限。\n"
 "有些集合只能在每个应用程序的基础上访问。"
 
-#: TWLight/templates/login_partial.html:65
+#: TWLight/templates/login_partial.html:89
 msgid "Login via Wikipedia"
 msgstr "通过维基百科登录"
 
@@ -2740,61 +2744,61 @@ msgid "{wp_username}"
 msgstr "用户名"
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/oauth.py:239
+#: TWLight/users/oauth.py:242
 msgid "You tried to log in but presented an invalid access token."
 msgstr "您试图登录但您的访问令牌无效。"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:293 TWLight/users/oauth.py:439
+#: TWLight/users/oauth.py:296 TWLight/users/oauth.py:442
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr "{domain}不是有效的主机。"
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:359
+#: TWLight/users/oauth.py:362
 msgid "Handshaker not initiated, please try logging in again."
 msgstr "握手程序未启动，请尝试重新登录。"
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:383
+#: TWLight/users/oauth.py:386
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
 msgstr "要查看此链接，您需要是符合条件的图书馆用户。请先登录以继续。"
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:425
+#: TWLight/users/oauth.py:428
 msgid "Did not receive a valid oauth response."
 msgstr "没有收到有效的OAuth响应。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:452
+#: TWLight/users/oauth.py:455
 msgid "Could not find handshaker."
 msgstr "找不到握手程序。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:464
+#: TWLight/users/oauth.py:467
 msgid "No session token."
 msgstr "没有会话令牌。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:476
+#: TWLight/users/oauth.py:479
 msgid "No request token."
 msgstr "没有请求令牌。"
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:493
+#: TWLight/users/oauth.py:496
 msgid "Access token generation failed, please try logging in again."
 msgstr "访问令牌生成失败，请尝试重新登录。"
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
-#: TWLight/users/oauth.py:502
+#: TWLight/users/oauth.py:505
 #, python-brace-format
 msgid "See {issue} for more information"
 msgstr "参见{issue}以获得更多信息"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:523
+#: TWLight/users/oauth.py:526
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
@@ -2803,7 +2807,7 @@ msgstr ""
 "帐户。"
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:531
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2813,7 +2817,7 @@ msgstr ""
 "该能够登录，请发送电子邮件至wikipedialibrary@wikimedia.org。"
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:544
+#: TWLight/users/oauth.py:547
 msgid "Welcome! Please agree to the terms of use."
 msgstr "欢迎使用！请先同意使用条款。"
 
