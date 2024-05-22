@@ -41,7 +41,7 @@ CACHES = {
 # GLITCHTIP CONFIGURATION
 # ------------------------------------------------------------------------------
 sentry_sdk.init(
-    dsn="https://50e927aaca194181afe5c4b8e790d004@glitchtip-wikipedialibrary.wmflabs.org/1",
+    dsn="https://e9c797c7614440f398f979a0ffc4f8a0@glitchtip-wikipedialibrary.wmflabs.org/1",
     integrations=[DjangoIntegration()],
     before_send=sentry_before_send,
     environment=TWLIGHT_ENV,
