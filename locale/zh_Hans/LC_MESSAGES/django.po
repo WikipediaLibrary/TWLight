@@ -17,6 +17,7 @@
 # Author: Josephine W.
 # Author: LNDDYL
 # Author: Lakejason0
+# Author: LittlePaw365
 # Author: Liuxinyu970226
 # Author: MuratTheTurkish
 # Author: Nikkimaria
@@ -41,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-05-23 16:27+0000\n"
-"PO-Revision-Date: 2024-05-27 12:28:13+0000\n"
+"PO-Revision-Date: 2024-05-30 12:36:28+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -880,7 +881,7 @@ msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
 #: TWLight/applications/views.py:803
 msgid "You attempted to create a duplicate authorization."
-msgstr "您试图创建一个重复的授权。"
+msgstr "您试图创建重复的授权。"
 
 #. Translators: This message is shown to users when they access an application page of a now Bundle partner (new applications aren't allowed for Bundle partners and the status of old applications cannot be modified)
 #: TWLight/applications/views.py:857

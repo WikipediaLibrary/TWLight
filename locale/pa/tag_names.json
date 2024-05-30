@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"AnupamM"
+			"AnupamM",
+			"Cabal"
 		]
 	},
 	"languages-and-literature_tag": "ਭਾਸ਼ਾਵਾਂ ਅਤੇ ਸਾਹਿਤ",
@@ -14,7 +15,7 @@
 	"education_tag": "ਸਿੱਖਿਆ",
 	"philosophy-and-religion_tag": "ਫਿਲਾਸਫੀ ਅਤੇ ਧਰਮ",
 	"social-sciences_tag": "ਸਮਾਜਿਕ ਵਿਗਿਆਨ",
-	"history_tag": "ਇਤਿਹਾਸ",
+	"history_tag": "ਅਤੀਤ",
 	"culture_tag": "ਸੱਭਿਆਚਾਰ",
 	"life-sciences_tag": "ਜੀਵਨ ਵਿਗਿਆਨ",
 	"health-sciences_tag": "ਸਿਹਤ ਵਿਗਿਆਨ",
