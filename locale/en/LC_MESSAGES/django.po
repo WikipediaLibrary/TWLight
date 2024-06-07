@@ -2346,7 +2346,7 @@ msgstr ""
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-msgid " The Wikipedia Library"
+msgid "The Wikipedia Library"
 msgstr ""
 
 #. Translators: Information about The Wikipedia Library.
