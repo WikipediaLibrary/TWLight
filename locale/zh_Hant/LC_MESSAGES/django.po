@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-05-23 16:27+0000\n"
-"PO-Revision-Date: 2024-05-27 12:28:13+0000\n"
+"PO-Revision-Date: 2024-06-11 09:53:06+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2863,7 +2863,7 @@ msgstr "維基媒體基金會是設於加利福尼亞州舊金山的非營利組
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:395
 msgid "Please note that in the event of any differences in meaning or interpretation between the original English version of these terms and a translation, the original English version takes precedence."
-msgstr "請注意，若這些條款的英語版本與翻譯版本之間，存在含意或解譯上的差異，請以原始的英語版本為準。"
+msgstr "請注意，若這些條款的英語版本與譯文版本之間，存在含意或解譯上的差異，請以原始的英語版本為準。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:406
