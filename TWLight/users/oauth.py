@@ -180,6 +180,7 @@ class OAuthBackend(object):
             if should_update_lang:
                 user.userprofile.lang = get_language()
                 user.userprofile.save()
+
             # This login path should only be used for accounts created via
             # Wikipedia login, which all have editor objects.
             if hasattr(user, "editor"):
@@ -264,10 +265,11 @@ class OAuthBackend(object):
         return user
 
     def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist as e:
-            logger.exception(e)
+        user = User.objects.filter(pk=user_id).first()
+        if user is not None:
+            return user
+        else:
+            logger.exception("OAuthBackend.get_user: User does not exist")
             return None
 
 
