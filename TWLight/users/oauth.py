@@ -266,11 +266,9 @@ class OAuthBackend(object):
 
     def get_user(self, user_id):
         user = User.objects.filter(pk=user_id).first()
-        if user is not None:
-            return user
-        else:
-            logger.exception("OAuthBackend.get_user: User does not exist")
-            return None
+        if user is None:
+            logger.warning("OAuthBackend.get_user: User does not exist")
+        return user
 
 
 class OAuthInitializeView(View):
