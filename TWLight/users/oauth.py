@@ -263,8 +263,9 @@ class OAuthBackend(object):
         # The authenticate() function of a Django auth backend must return
         # the user.
         return user
-    
-    # Implementation for https://docs.djangoproject.com/en/4.2/ref/contrib/auth/#django.contrib.auth.get_user
+
+    # Implementation for
+    # https://docs.djangoproject.com/en/4.2/ref/contrib/auth/#django.contrib.auth.get_user
     def get_user(self, user_id):
         user = User.objects.filter(pk=user_id).first()
         if user is None:
