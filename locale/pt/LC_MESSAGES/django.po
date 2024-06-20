@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-06-14 19:00+0000\n"
-"PO-Revision-Date: 2024-06-17 12:27:57+0000\n"
+"PO-Revision-Date: 2024-06-20 12:26:11+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2077,15 +2077,14 @@ msgstr "Mais informações"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "A Biblioteca da Wikipédia"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Mais de 90 das melhores bases de dados do mundo, de acesso exclusivo por assinatura, com conteúdo em %(no_of_languages)s línguas, disponíveis gratuitamente para todos os utilizadores da Wikipédia"
+msgstr "Mais de 100 das melhores bases de dados do mundo de acesso exclusivo por assinatura, com conteúdo em %(no_of_languages)s línguas, disponíveis gratuitamente para todos os utilizadores da Wikipédia"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64

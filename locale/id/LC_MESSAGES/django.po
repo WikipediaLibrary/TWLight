@@ -8,6 +8,7 @@
 # Author: Farras
 # Author: Gombang
 # Author: HaEr48
+# Author: ID Owly01
 # Author: Ice bulldog
 # Author: Mahali syarifuddin
 # Author: Mnam23
@@ -25,7 +26,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-06-14 19:00+0000\n"
-"PO-Revision-Date: 2024-06-17 12:27:55+0000\n"
+"PO-Revision-Date: 2024-06-20 12:26:08+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2080,7 +2081,6 @@ msgstr "Informasi selengkapnya"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "Perpustakaan Wikipedia"
 
