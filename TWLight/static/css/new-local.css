@@ -122,6 +122,20 @@ COMMON CONTENT BLOCK CSS
   background-color:#333
 }
 
+.terms-content {
+    display: flex;
+    flex-direction: column;
+    margin: auto 56px;
+}
+
+.terms-header-right {
+   align-self: flex-end;
+}
+
+.terms-header-left {
+   align-self: flex-start;
+}
+
 .twl-links{
     color: #3366CC;
 }
