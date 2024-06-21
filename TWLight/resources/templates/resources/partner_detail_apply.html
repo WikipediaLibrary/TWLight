@@ -125,7 +125,7 @@
         {% if user.is_authenticated %}
           {% if user.editor.wp_bundle_eligible %}
             {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-            <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}" target="_blank" rel="noopener noreferrer">
+            <a class="btn twl-btn btn-lg btn-block" href="{{ partner.get_access_url }}" target="_blank" rel="noopener">
               {% trans "Access Collection" %}
             </a><br />
             {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
