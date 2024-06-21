@@ -848,7 +848,8 @@ class MyLibraryView(TemplateView):
             # Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
             _("10+ edits in the last month"): user.editor.wp_enough_recent_edits,
             # Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-            _("No active blocks"): user.editor.wp_not_blocked,
+            _("No active blocks"): user.editor.wp_not_blocked
+            or user.editor.ignore_wp_blocks,
         }
 
         return context
