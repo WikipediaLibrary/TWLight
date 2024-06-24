@@ -180,6 +180,7 @@ class OAuthBackend(object):
             if should_update_lang:
                 user.userprofile.lang = get_language()
                 user.userprofile.save()
+
             # This login path should only be used for accounts created via
             # Wikipedia login, which all have editor objects.
             if hasattr(user, "editor"):
@@ -263,12 +264,13 @@ class OAuthBackend(object):
         # the user.
         return user
 
+    # Implementation for
+    # https://docs.djangoproject.com/en/4.2/ref/contrib/auth/#django.contrib.auth.get_user
     def get_user(self, user_id):
-        try:
-            return User.objects.get(pk=user_id)
-        except User.DoesNotExist as e:
-            logger.exception(e)
-            return None
+        user = User.objects.filter(pk=user_id).first()
+        if user is None:
+            logger.warning("OAuthBackend.get_user: User does not exist")
+        return user
 
 
 class OAuthInitializeView(View):
