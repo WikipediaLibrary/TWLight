@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-06-24 18:50+0000\n"
+"POT-Creation-Date: 2024-06-25 01:05+0000\n"
 "PO-Revision-Date: 2024-06-24 12:28:49+0000\n"
 "Language: mr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,7 +69,7 @@ msgstr "सदस्यनाव"
 
 #. Translators: Label of the field where coordinators can enter the name of a partner
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
-#: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:92
+#: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:87
 msgid "Partner name"
 msgstr "भागीदाराचे नाव"
 
@@ -80,61 +80,56 @@ msgstr ""
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
-#: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:102
+#: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:97
 msgid "The email for your account on the partner's website"
 msgstr "आमच्या भागीदाराच्या संकेतस्थळासाठी तुमचा ईमेल पत्ता"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
-#: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:105
+#: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:100
 msgid ""
 "The number of months you wish to have this access for before renewal is "
 "required"
 msgstr ""
 
 #. Translators: When filling out an application, users may need to specify their name
-#: TWLight/applications/helpers.py:84
+#: TWLight/applications/helpers.py:81
 msgid "Your real name"
 msgstr "तुमचे खरे नाव"
 
 #. Translators: When filling out an application, users may need to specify the country in which they currently live
-#: TWLight/applications/helpers.py:86
+#: TWLight/applications/helpers.py:83
 msgid "Your country of residence"
 msgstr "तुम्ही राहता त्या देशाचे नाव"
 
-#. Translators: When filling out an application, users may need to specify their current occupation
-#: TWLight/applications/helpers.py:88
-msgid "Your occupation"
-msgstr "तुमची नोकरी/व्यवसाय"
-
 #. Translators: When filling out an application, users may need to specify if they are affiliated with an institution (e.g. a university)
-#: TWLight/applications/helpers.py:90
+#: TWLight/applications/helpers.py:85
 msgid "Your institutional affiliation"
 msgstr "संस्थात्मक नाते"
 
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
-#: TWLight/applications/helpers.py:94
+#: TWLight/applications/helpers.py:89
 msgid "Why do you want access to this resource?"
 msgstr "तुम्हांला ह्या विशिष्ट संसाधनाची पोहोच/वहिवाट कश्यासाठी हवी आहे?"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
-#: TWLight/applications/helpers.py:96
+#: TWLight/applications/helpers.py:91
 msgid "Which book do you want?"
 msgstr "कोणते पुस्तक तुम्हांला हवे आहे?"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
-#: TWLight/applications/helpers.py:98
+#: TWLight/applications/helpers.py:93
 msgid "Anything else you want to say"
 msgstr "आणखीन तुम्हांला काही म्हणायचे/सांगायचे असल्यास?"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
-#: TWLight/applications/helpers.py:100
+#: TWLight/applications/helpers.py:95
 msgid "You must agree with the partner's terms of use"
 msgstr "आमच्या भागीदाराने घालून दिलेल्या वापराच्या अटी तुम्हांला मान्य असणे आवश्यक आहे."
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
-#: TWLight/applications/helpers.py:111
+#: TWLight/applications/helpers.py:106
 #: TWLight/users/templates/users/editor_detail_data.html:297
 msgid "Real name"
 msgstr "खरे नाव"
@@ -142,38 +137,31 @@ msgstr "खरे नाव"
 #. Translators: When sending application data to partners, this is the text labelling a user's country of residence
 #. Translators: This labels the section of an application that shows the country of residence of the applicant.
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the country in which the user lives.
-#: TWLight/applications/helpers.py:113
+#: TWLight/applications/helpers.py:108
 #: TWLight/applications/templates/applications/application_evaluation.html:115
 #: TWLight/users/templates/users/editor_detail_data.html:309
 msgid "Country of residence"
 msgstr "तुमचा राहता देश"
 
-#. Translators: When sending application data to partners, this is the text labelling a user's occupation
-#. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's occupation.
-#: TWLight/applications/helpers.py:115
-#: TWLight/users/templates/users/editor_detail_data.html:321
-msgid "Occupation"
-msgstr "व्यवसाय/नोकरी"
-
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
-#: TWLight/applications/helpers.py:117
+#: TWLight/applications/helpers.py:110
 msgid "Affiliation"
 msgstr "संस्थांची संबंधीत"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
-#: TWLight/applications/helpers.py:119
+#: TWLight/applications/helpers.py:112
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
 msgstr "विनंती केलेली पुस्तके"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
-#: TWLight/applications/helpers.py:121
+#: TWLight/applications/helpers.py:114
 msgid "Agreed with terms of use"
 msgstr "वापराच्या अटी मान्य आहेत"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
-#: TWLight/applications/helpers.py:123
+#: TWLight/applications/helpers.py:116
 msgid "Account email"
 msgstr "ई-मेल खाते"
 
@@ -181,7 +169,7 @@ msgstr "ई-मेल खाते"
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library email address.
 #. Translators: Labels the field where the user's email is displayed.
-#: TWLight/applications/helpers.py:137
+#: TWLight/applications/helpers.py:130
 #: TWLight/resources/templates/resources/partner_users.html:31
 #: TWLight/resources/templates/resources/partner_users.html:71
 #: TWLight/templates/contact.html:23 TWLight/users/forms.py:203
@@ -730,7 +718,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
-#: TWLight/users/views.py:530
+#: TWLight/users/views.py:529
 msgid "Confirm"
 msgstr ""
 
@@ -1421,32 +1409,32 @@ msgid "Partially searchable"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:539
+#: TWLight/resources/models.py:534
 msgid "Service information"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:541
+#: TWLight/resources/models.py:536
 msgid "Service issue"
 msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:543
+#: TWLight/resources/models.py:538
 msgid "Temporarily unavailable"
 msgstr ""
 
 #. Translators: information about the current status of this partner
-#: TWLight/resources/models.py:548
+#: TWLight/resources/models.py:543
 msgid "Ongoing work may impact access"
 msgstr ""
 
 #. Translators: information about a current issue with this partner
-#: TWLight/resources/models.py:550
+#: TWLight/resources/models.py:545
 msgid "An issue is impacting access"
 msgstr ""
 
 #. Translators: information about a current outage for this partner
-#: TWLight/resources/models.py:552
+#: TWLight/resources/models.py:547
 #, fuzzy
 msgid "Access is currently unavailable"
 msgstr "ई-मेल खाते"
@@ -1797,20 +1785,14 @@ msgstr ""
 msgid "%(publisher)s requires that you provide your country of residence."
 msgstr ""
 
-#. Translators: If a user must provide their occupation to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:168
-#, python-format
-msgid "%(publisher)s requires that you provide your occupation."
-msgstr ""
-
 #. Translators: If a user must provide their institutional affiliation (e.g. university) to apply to a partner, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:177
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:168
 #, python-format
 msgid "%(publisher)s requires that you provide your institutional affiliation."
 msgstr ""
 
 #. Translators: If a user must select a specific resource to apply for, they see this message, and must enter the name of the resource. Don't translate publisher.
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:186
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:177
 #, python-format
 msgid ""
 "%(publisher)s requires that you specify a particular title that you want to "
@@ -1818,7 +1800,7 @@ msgid ""
 msgstr ""
 
 #. Translators: If a user must register on the partner website before applying, they see this message. Don't translate partner.
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:196
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:187
 #, python-format
 msgid ""
 "%(publisher)s requires that you sign up for an account before applying for "
@@ -1826,20 +1808,20 @@ msgid ""
 msgstr ""
 
 #. Translators: If a partner has their location listed, this message is a label for that location
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:215
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:206
 msgid "Location"
 msgstr ""
 
 #. Translators: If a partner has a Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #. Translators: This is the heading of the section of a user's
 #. profile where they disagree their terms of use.
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:219
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:210
 #: TWLight/users/templates/users/preferences.html:57
 msgid "Terms of use"
 msgstr ""
 
 #. Translators: If a partner has no Terms of Use listed, this message is shown in the Terms of Use field (e.g. https://wikipedialibrary.wmflabs.org/partners/12/).
-#: TWLight/resources/templates/resources/partner_detail_timeline.html:222
+#: TWLight/resources/templates/resources/partner_detail_timeline.html:213
 msgid "Terms of use not available."
 msgstr ""
 
@@ -2567,7 +2549,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:793
+#: TWLight/users/models.py:792
 #, fuzzy, python-brace-format
 #| msgid "Username"
 msgid "{wp_username}"
@@ -2905,7 +2887,7 @@ msgid "update"
 msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
-#: TWLight/users/templates/users/editor_detail_data.html:333
+#: TWLight/users/templates/users/editor_detail_data.html:321
 msgid "Institutional affiliation"
 msgstr ""
 
@@ -3022,7 +3004,7 @@ msgstr ""
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:25
-#: TWLight/users/views.py:399
+#: TWLight/users/views.py:398
 msgid "Update"
 msgstr ""
 
@@ -3288,8 +3270,8 @@ msgid ""
 "use your Wikipedia Library account, we may routinely collect the following "
 "information: your username, email address, edit count, registration date, "
 "user ID number, groups to which you belong, and any special user rights; "
-"your name, country of residence, occupation, and/or affiliation, if required "
-"by a partner to which you are applying; your narrative description of your "
+"your name, country of residence, and/or affiliation, if required by a "
+"partner to which you are applying; your narrative description of your "
 "contributions and reasons for applying for access to partner resources; and "
 "the date you agree to these terms of use."
 msgstr ""
@@ -3301,13 +3283,13 @@ msgid ""
 "Each publisher who is a member of the Wikipedia Library program requires "
 "different specific information in the application. Some publishers may "
 "request only an email address, while others request more detailed data, such "
-"as your name, location, occupation, or institutional affiliation. When you "
-"complete your application, you will only be asked to supply information "
-"required by the publishers you have chosen, and each publisher will only "
-"receive the information they require for providing you with access. Please "
-"see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner "
-"information</a> pages to learn what information is required by each "
-"publisher to gain access to their resources."
+"as your name, location, or institutional affiliation. When you complete your "
+"application, you will only be asked to supply information required by the "
+"publishers you have chosen, and each publisher will only receive the "
+"information they require for providing you with access. Please see our <a "
+"class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> "
+"pages to learn what information is required by each publisher to gain access "
+"to their resources."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
@@ -3341,15 +3323,14 @@ msgstr ""
 msgid ""
 "If you decide to disable your Wikipedia Library account, you can use the "
 "delete button on your profile to delete certain personal information "
-"associated with your account. We will delete your real name, occupation, "
-"institutional affiliation, and country of residence. Please note that the "
-"system will retain a record of your username, the publishers to which you "
-"applied or had access, and the dates of that access. Note that deletion is "
-"not reversible. Deletion of your Wikipedia Library account may also "
-"correspond with the removal of any resource access to which you were "
-"eligible or approved. If you request the deletion of account information and "
-"later wish to apply for a new account, you will need to provide the "
-"necessary information again."
+"associated with your account. We will delete your real name, institutional "
+"affiliation, and country of residence. Please note that the system will "
+"retain a record of your username, the publishers to which you applied or had "
+"access, and the dates of that access. Note that deletion is not reversible. "
+"Deletion of your Wikipedia Library account may also correspond with the "
+"removal of any resource access to which you were eligible or approved. If "
+"you request the deletion of account information and later wish to apply for "
+"a new account, you will need to provide the necessary information again."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
@@ -3550,7 +3531,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:291
+#: TWLight/users/views.py:290
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -3558,63 +3539,63 @@ msgid ""
 msgstr ""
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:299
+#: TWLight/users/views.py:298
 msgid "Your reminder email preferences are updated."
 msgstr ""
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:381 TWLight/users/views.py:462
-#: TWLight/users/views.py:515
+#: TWLight/users/views.py:380 TWLight/users/views.py:461
+#: TWLight/users/views.py:514
 msgid "You must be logged in to do that."
 msgstr ""
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:414
+#: TWLight/users/views.py:413
 msgid "Your information has been updated."
 msgstr ""
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:446
+#: TWLight/users/views.py:445
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:474
+#: TWLight/users/views.py:473
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr ""
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:485
+#: TWLight/users/views.py:484
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
 msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:780
+#: TWLight/users/views.py:779
 msgid "Access to {} has been returned."
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:845 TWLight/views.py:43
+#: TWLight/users/views.py:844 TWLight/views.py:43
 msgid "500+ edits"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:847 TWLight/views.py:45
+#: TWLight/users/views.py:846 TWLight/views.py:45
 msgid "6+ months editing"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:849
+#: TWLight/users/views.py:848
 msgid "10+ edits in the last month"
 msgstr ""
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:851 TWLight/views.py:49
+#: TWLight/users/views.py:850 TWLight/views.py:49
 msgid "No active blocks"
 msgstr ""
 
@@ -3651,3 +3632,9 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Your occupation"
+#~ msgstr "तुमची नोकरी/व्यवसाय"
+
+#~ msgid "Occupation"
+#~ msgstr "व्यवसाय/नोकरी"
