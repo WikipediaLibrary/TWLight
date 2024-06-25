@@ -4,9 +4,10 @@
 This file holds user profile information. (The base User model is part of
 Django; profiles extend that with locally useful information.)
 
-TWLight has three user types:
+TWLight has four primary user types:
 * editors
 * coordinators
+* staff
 * site administrators.
 
 _Editors_ are Wikipedia editors who are applying for TWL resource access
@@ -17,7 +18,11 @@ _Coordinators_ are the Wikipedians who have responsibility for evaluating
 and deciding on access grants. Site administrators should add editors to the
 Coordinators group through the Django admin site.
 
-_Site administrators_ have admin privileges for this site. They have no special
+_Staff_ are the Wikimedia Foundation staff who work on The Wikipedia Library.
+They can evaluate applications to all partners and view unavailable
+collections. They cannot view or edit the admin interface.
+
+_Site administrators_ (AKA superusers) have admin privileges for this site. They have no special
 handling in this file; they are handled through the native Django is_admin
 flag, and site administrators have responsibility for designating who has that
 flag through the admin site.
@@ -41,7 +46,6 @@ from django.core.cache import cache
 from django.core.exceptions import (
     MultipleObjectsReturned,
     SuspiciousOperation,
-    ValidationError,
 )
 from django.urls import reverse
 from django.db import models
@@ -70,6 +74,22 @@ logger = logging.getLogger(__name__)
 
 
 def get_company_name(instance):
+    """
+    Given an Authorization object, return a string for the one or more
+    partners associated with the Authorization. Primarily helpful when
+    this is a Bundle authorization and we need to list the bundle
+    partners. Otherwise, Authorizations always have a single partner.
+
+    Parameters
+    ----------
+    instance:
+        Authorization object
+
+    Returns
+    ----------
+    String or None
+        List of partners associated with this authorization.
+    """
     # ManyToMany relationships can only exist if the instance is in the db. Those will have a pk.
     if instance.pk:
         return ", ".join(str(partner) for partner in instance.partners.all())
@@ -133,8 +153,6 @@ class UserProfile(models.Model):
         default=True,
         help_text="Does this coordinator want approved app reminder notices?",
     )
-    # Temporary field to track sending of project page 2021 email to prevent duplication in case of error.
-    project_page_2021_notification_sent = models.BooleanField(default=False)
 
     favorites = models.ManyToManyField(
         Partner,
@@ -144,7 +162,8 @@ class UserProfile(models.Model):
 
     def delete_my_library_cache(self):
         """
-        This method is for the convenience of skipping the import of django cache in each place that needs to invalidate the my_library cache
+        This method is for the convenience of skipping the import of django
+        cache in each place that needs to invalidate the my_library cache
         """
         return cache.delete(self.my_library_cache_key)
 
@@ -215,8 +234,8 @@ class Editor(models.Model):
 
     # ~~~~~~~~~~~~~~~~~~~~~~~ Data from Wikimedia OAuth ~~~~~~~~~~~~~~~~~~~~~~~#
     # Uses same field names as OAuth, but with wp_ prefixed.
-    # Data are current *as of the time of last TWLight login* but may get out of
-    # sync thereafter.
+    # Data are current as of the time of last TWLight login or eligibility
+    # cron run, but may get out of sync at other times.
     wp_username = models.CharField(max_length=235, help_text="Username")
     wp_registered = models.DateField(
         help_text="Date registered at Wikipedia", blank=True, null=True
@@ -498,6 +517,16 @@ class Editor(models.Model):
 
     @cached_property
     def wp_user_page_url(self):
+        """
+        Get the URL for a user's user page on Wikipedia. A user with the
+        username Foo will have a user page on English Wikipedia at
+        https://en.wikipedia.org/wiki/User:Foo
+
+        Returns
+        -------
+        str
+            Encoded user page URL
+        """
         encoded_username = self.encode_wp_username(self.wp_username)
         url = "{base_url}/User:{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
@@ -506,6 +535,16 @@ class Editor(models.Model):
 
     @cached_property
     def wp_talk_page_url(self):
+        """
+        Get the URL for a user's talk page on Wikipedia. A user with the
+        username Foo will have a talk page on English Wikipedia at
+        https://en.wikipedia.org/wiki/User_talk:Foo
+
+        Returns
+        -------
+        str
+            Encoded talk page URL
+        """
         encoded_username = self.encode_wp_username(self.wp_username)
         url = "{base_url}/User_talk:{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
@@ -514,6 +553,16 @@ class Editor(models.Model):
 
     @cached_property
     def wp_email_page_url(self):
+        """
+        Get the URL through which users can be emailed on Wikipedia.
+        A user with the username Foo can be contacted on English Wikipedia
+        at https://en.wikipedia.org/wiki/Special:EmailUser/Foo
+
+        Returns
+        -------
+        str
+            Encoded EmailUser URL
+        """
         encoded_username = self.encode_wp_username(self.wp_username)
         url = "{base_url}/Special:EmailUser/{username}".format(
             base_url=settings.TWLIGHT_OAUTH_PROVIDER_URL, username=encoded_username
@@ -522,6 +571,17 @@ class Editor(models.Model):
 
     @cached_property
     def wp_link_guc(self):
+        """
+        Get the URL through which user contributions across all Wikimedia
+        projects can be viewed for a Wikimedia user.
+        The GUC URL for a user Foo can be viewed at
+        https://tools.wmflabs.org/guc/?user=Foo
+
+        Returns
+        -------
+        str
+            Encoded GUC URL
+        """
         encoded_username = self.encode_wp_username(self.wp_username)
         url = "{base_url}?user={username}".format(
             base_url="https://tools.wmflabs.org/guc/", username=encoded_username
@@ -530,6 +590,17 @@ class Editor(models.Model):
 
     @cached_property
     def wp_link_central_auth(self):
+        """
+        Get the URL through which local accounts on Wikimedia projects
+        can be viewed for a Wikimedia user.
+        The CentralAuth URL for a user Foo can be viewed at
+        https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth%target=Foo
+
+        Returns
+        -------
+        str
+            Encoded CentralAuth URL
+        """
         encoded_username = self.encode_wp_username(self.wp_username)
         url = "{base_url}&target={username}".format(
             base_url="https://meta.wikimedia.org/w/index.php?title=Special%3ACentralAuth",
@@ -561,6 +632,15 @@ class Editor(models.Model):
 
     @property
     def wp_bundle_authorized(self):
+        """
+        Returns information on whether the current user has a valid Bundle
+        authorization.
+
+        Returns
+        -------
+        bool
+            True if the user has a Bundle authorization, False otherwise
+        """
         user_authorization = self.get_bundle_authorization
         # If the user has no Bundle authorization, they're not authorized
         if not user_authorization:
@@ -692,9 +772,6 @@ class Editor(models.Model):
                 'registered': identity['registered']
             }
 
-            We could attempt to harvest real name, but we won't; we'll let
-            users enter it if required by partners, and avoid knowing the
-            data otherwise.
         lang : str
         global_userinfo : dict
             Optional override currently used for tests only. Defaults to fetching from global_userinfo API.
@@ -796,7 +873,12 @@ class Editor(models.Model):
 
 
 class EditorLog(models.Model):
-    """"""
+    """
+    Stores data on editor's edit count over time. We use this data to track
+    whether they meet the "10 edits in the past 30 days" eligibility
+    criterion (ignored on initial login, as we only track this data for users
+    who have logged in).
+    """
 
     class Meta:
         app_label: "users"
@@ -887,9 +969,7 @@ class Authorization(models.Model):
         # We assume the authorization is invalid unless we know better.
         valid = False
         today = datetime.today().date()
-        # When updating this logic, please also update the filter in
-        # TWLight.applications.helpers.get_active_authorizations function,
-        # so that they remain in sync and return the same type of authorizations.
+
         if (
             # Valid authorizations always have an authorizer, and user and a partner_id.
             self.authorizer
@@ -949,7 +1029,7 @@ class Authorization(models.Model):
 
     def get_latest_app(self):
         """
-        Returns the latest app corresponding to this auth in which the the status is *NOT* NOT_APPROVED.
+        Returns the latest app corresponding to this auth in which the status is *NOT* NOT_APPROVED.
         """
         from TWLight.applications.models import Application
 
@@ -987,7 +1067,7 @@ class Authorization(models.Model):
 
     def get_latest_sent_app(self):
         """
-        Returns the latest app corresponding to this auth in which the the status is SENT.
+        Returns the latest app corresponding to this auth in which the status is SENT.
         """
         from TWLight.applications.models import Application
 
@@ -1003,7 +1083,11 @@ class Authorization(models.Model):
 
     @property
     def about_to_expire(self):
-        # less than 30 days but greater than -1 day is when we consider an authorization about to expire
+        """
+        Determines whether an Authorization is soon to expire. This is
+        currently defined as fewer than 30 days from now (and not
+        already expired).
+        """
         today = date.today()
         if (
             self.date_expires

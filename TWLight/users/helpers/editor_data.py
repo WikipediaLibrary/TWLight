@@ -228,6 +228,8 @@ def editor_bundle_eligible(editor: "Editor"):
 def editor_make_block_dict(merged: list):
     """
     Creates a hash based on a JSON string of a user's blocks
+
+    Parameters
     ----------
     merged : list
         A list of merged accounts for this Editor as returned by globaluserinfo.
@@ -261,6 +263,8 @@ def editor_compare_hashes(
     """
     Compares two block hashes. If they are different, it means an editor's block status
     has changed and email is sent to the team to check it.
+
+    Parameters
     ----------
     previous_block_hash : str
         The value of the previous block hash.

@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """
-        Updates editor info and Bundle eligibility for currently-eligible Editors.
+        Updates editor info and Bundle eligibility for all Editors.
         Parameters
         ----------
         args
@@ -61,7 +61,6 @@ class Command(BaseCommand):
         now_or_datetime = now()
         datetime_override = None
         timedelta_days = 0
-        wp_username = None
         editors = Editor.objects.all()
 
         # This may be overridden so that values may be treated as if they were valid for an arbitrary datetime.
@@ -111,7 +110,6 @@ class Command(BaseCommand):
                 editor.wp_valid = editor_valid(
                     editor.wp_enough_edits,
                     editor.wp_account_old_enough,
-                    # editor.wp_not_blocked can only be rechecked on login, so we're going with the existing value.
                     editor.wp_not_blocked,
                     editor.ignore_wp_blocks,
                 )

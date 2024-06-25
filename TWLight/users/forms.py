@@ -2,14 +2,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Column, Row
 
 from django.conf import settings
-from django.contrib.auth.models import User
-
-from django.contrib import admin
-from django.contrib.admin.widgets import ForeignKeyRawIdWidget
 
 from django.urls import reverse
 from django import forms
-from django.db import models
 from django.utils.translation import gettext as _
 
 from .helpers.validation import validate_partners, validate_authorizer
@@ -18,6 +13,11 @@ from .groups import get_restricted
 
 
 class EditorUpdateForm(forms.ModelForm):
+    """
+    Defines form accessed from the user profile page, whereby users can update
+    their contributions information.
+    """
+
     class Meta:
         model = Editor
         fields = ["contributions"]
@@ -47,15 +47,6 @@ class EditorUpdateForm(forms.ModelForm):
         self.fields["contributions"].help_text = None
 
 
-class AuthorizationUserChoiceForm(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        user = obj
-        if hasattr(user, "editor"):
-            return user.editor.wp_username
-        else:
-            return obj.username
-
-
 class AuthorizationAdminForm(forms.ModelForm):
     """
     This override only exists to run custom validation.
@@ -74,21 +65,11 @@ class AuthorizationAdminForm(forms.ModelForm):
         return self.cleaned_data["authorizer"]
 
 
-class AuthorizationInlineForm(forms.ModelForm):
-    authorizer = AuthorizationUserChoiceForm(
-        User.objects.filter(
-            models.Q(is_superuser=True) | models.Q(groups__name="coordinators")
-        )
-    )
-    user = AuthorizationUserChoiceForm(
-        queryset=User.objects.all(),
-        widget=ForeignKeyRawIdWidget(
-            Authorization._meta.get_field("user").remote_field, admin.site
-        ),
-    )
-
-
 class SetLanguageForm(forms.Form):
+    """
+    Defines form used by users to change their interface language.
+    """
+
     language = forms.ChoiceField(choices=settings.LANGUAGES)
 
     def __init__(self, user, *args, **kwargs):
@@ -99,6 +80,11 @@ class SetLanguageForm(forms.Form):
 
 
 class UserEmailForm(forms.Form):
+    """
+    Defines form used by users to opt in or out of emails notifying them that
+    one of their collections is up for renewal soon.
+    """
+
     send_renewal_notices = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
@@ -113,6 +99,11 @@ class UserEmailForm(forms.Form):
 
 
 class CoordinatorEmailForm(forms.Form):
+    """
+    Defines form available to coordinators, used to configure email
+    preferences for various available reminder emails.
+    """
+
     send_pending_application_reminders = forms.BooleanField(required=False)
     send_discussion_application_reminders = forms.BooleanField(required=False)
     send_approved_application_reminders = forms.BooleanField(required=False)
@@ -147,6 +138,11 @@ class CoordinatorEmailForm(forms.Form):
 
 
 class RestrictDataForm(forms.Form):
+    """
+    Defines the form whereby users can opt-in to have their data processing
+    restricted.
+    """
+
     restricted = forms.BooleanField(required=False)
 
     def __init__(self, user, *args, **kwargs):
@@ -166,6 +162,10 @@ class RestrictDataForm(forms.Form):
 
 
 class TermsForm(forms.ModelForm):
+    """
+    Defines the form used by users to agree to the library's terms of use.
+    """
+
     class Meta:
         model = UserProfile
         fields = ["terms_of_use"]
@@ -193,6 +193,11 @@ class TermsForm(forms.ModelForm):
 
 
 class EmailChangeForm(forms.Form):
+    """
+    Defines the form used by users to change the email address associated with
+    their account, or to automatically fetch their Wikipedia email.
+    """
+
     email = forms.EmailField(required=False)
     use_wp_email = forms.BooleanField(required=False)
 

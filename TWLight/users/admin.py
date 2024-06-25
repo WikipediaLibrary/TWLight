@@ -12,9 +12,7 @@ from TWLight.users.models import (
     Authorization,
     get_company_name,
 )
-from TWLight.users.forms import AuthorizationAdminForm, AuthorizationInlineForm
-
-from TWLight.resources.models import Partner
+from TWLight.users.forms import AuthorizationAdminForm
 
 
 class EditorInline(admin.StackedInline):

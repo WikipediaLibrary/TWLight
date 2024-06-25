@@ -1,7 +1,7 @@
 import logging
-from datetime import date, datetime, timedelta
+from datetime import timedelta
 from dateutil.relativedelta import relativedelta
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from TWLight.users.models import Authorization, Partner
 from TWLight.applications.models import Application
 
@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """
-    Creates missing authorizations based on existing setnt applications
+    Creates missing authorizations based on existing sent applications
     Mostly cribbed from TWLight.applications.models.post_receive_commit. Could factor out the common code.
     """
 

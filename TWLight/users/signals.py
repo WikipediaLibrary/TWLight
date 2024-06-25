@@ -26,7 +26,7 @@ class Notice(object):
 
 @receiver(post_save, sender=Authorization)
 def delete_my_library_cache(sender, instance, **kwargs):
-    """Authorizations directly impact resources in in my_library, so delete my_library page cache after saving."""
+    """Authorizations directly impact resources in my_library, so delete my_library page cache after saving."""
     instance.user.userprofile.delete_my_library_cache()
 
 
