@@ -44,7 +44,6 @@ from .helpers import (
     AGREEMENT_WITH_TERMS_OF_USE,
     REAL_NAME,
     COUNTRY_OF_RESIDENCE,
-    OCCUPATION,
     AFFILIATION,
     ACCOUNT_EMAIL,
     get_output_for_application,
@@ -230,7 +229,6 @@ class SynchronizeFieldsTest(TestCase):
         editor = EditorFactory()
         setattr(editor, REAL_NAME, "Alice")
         setattr(editor, COUNTRY_OF_RESIDENCE, "Holy Roman Empire")
-        setattr(editor, OCCUPATION, "Dog surfing instructor")
         setattr(editor, AFFILIATION, "The Long Now Foundation")
         setattr(editor, "wp_username", "wp_alice")
         setattr(editor, "email", "alice@example.com")
@@ -260,7 +258,6 @@ class SynchronizeFieldsTest(TestCase):
         output = get_output_for_application(app)
         self.assertEqual(output[REAL_NAME]["data"], "Alice")
         self.assertEqual(output[COUNTRY_OF_RESIDENCE]["data"], "Holy Roman Empire")
-        self.assertEqual(output[OCCUPATION]["data"], "Dog surfing instructor")
         self.assertEqual(output[AFFILIATION]["data"], "The Long Now Foundation")
         self.assertEqual(output[SPECIFIC_TITLE]["data"], "Alice in Wonderland")
         self.assertEqual(output["Email"]["data"], "alice@example.com")
@@ -269,7 +266,7 @@ class SynchronizeFieldsTest(TestCase):
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(8, len(list(output.keys())))
+        self.assertEqual(7, len(list(output.keys())))
 
     def test_application_output_2(self):
         """
@@ -313,7 +310,6 @@ class SynchronizeFieldsTest(TestCase):
         editor = EditorFactory()
         setattr(editor, REAL_NAME, "Alice")
         setattr(editor, COUNTRY_OF_RESIDENCE, "Holy Roman Empire")
-        setattr(editor, OCCUPATION, "Dog surfing instructor")
         setattr(editor, AFFILIATION, "The Long Now Foundation")
         setattr(editor, "wp_username", "wp_alice")
         setattr(editor, "email", "alice@example.com")
@@ -341,13 +337,12 @@ class SynchronizeFieldsTest(TestCase):
         output = get_output_for_application(app)
         self.assertEqual(output[REAL_NAME]["data"], "Alice")
         self.assertEqual(output[COUNTRY_OF_RESIDENCE]["data"], "Holy Roman Empire")
-        self.assertEqual(output[OCCUPATION]["data"], "Dog surfing instructor")
         self.assertEqual(output[AFFILIATION]["data"], "The Long Now Foundation")
         self.assertEqual(output["Email"]["data"], "alice@example.com")
 
         # Make sure that in enumerating the keys we didn't miss any (e.g. if
         # the codebase changes).
-        self.assertEqual(5, len(list(output.keys())))
+        self.assertEqual(4, len(list(output.keys())))
 
 
 class BaseApplicationViewTest(TestCase):
@@ -441,7 +436,6 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             real_name=True,
             country_of_residence=False,
             specific_title=False,
-            occupation=False,
             affiliation=False,
             agreement_with_terms_of_use=False,
         )
@@ -2474,7 +2468,6 @@ class EvaluateApplicationTest(TestCase):
         self.assertContains(response, self.user.email)
         self.assertContains(response, self.editor.real_name)
         self.assertContains(response, self.editor.country_of_residence)
-        self.assertContains(response, self.editor.occupation)
         self.assertContains(response, self.editor.affiliation)
         # Users shouldn't see some things coordinators see
         self.assertNotContains(response, "Evaluate application")
@@ -2507,7 +2500,6 @@ class EvaluateApplicationTest(TestCase):
         self.assertNotContains(response, self.user.email)
         self.assertNotContains(response, self.editor.real_name)
         self.assertNotContains(response, self.editor.country_of_residence)
-        self.assertNotContains(response, self.editor.occupation)
         self.assertNotContains(response, self.editor.affiliation)
         # Coordinators can evaluate application
         self.assertContains(response, "Evaluate application")

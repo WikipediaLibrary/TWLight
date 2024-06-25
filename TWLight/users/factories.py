@@ -62,7 +62,6 @@ class EditorFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory)
     real_name = "Alice Crypto"
     country_of_residence = "Elsewhere"
-    occupation = "Cat floofer"
     affiliation = "Institut Pasteur"
     wp_username = factory.Faker("name", locale=random.choice(settings.FAKER_LOCALES))
     wp_registered = datetime.today().date()

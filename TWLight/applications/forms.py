@@ -197,7 +197,7 @@ class BaseApplicationForm(forms.Form):
 
         if all_partner_data:
             for datum in all_partner_data:
-                # This will yield fields with names like 'partner_occupation'
+                # This will yield fields with names like 'partner_country'
                 field_name = "partner_{datum}".format(datum=datum)
                 self.fields[field_name] = FIELD_TYPES[datum]
                 self.fields[field_name].label = FIELD_LABELS[datum]

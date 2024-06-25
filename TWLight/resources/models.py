@@ -324,11 +324,6 @@ class Partner(models.Model):
         help_text="Mark as true if this partner requires applicants to "
         "specify the title they want to access.",
     )
-    occupation = models.BooleanField(
-        default=False,
-        help_text="Mark as true if this partner requires applicants to "
-        "specify their occupation.",
-    )
     affiliation = models.BooleanField(
         default=False,
         help_text="Mark as true if this partner requires applicants to "

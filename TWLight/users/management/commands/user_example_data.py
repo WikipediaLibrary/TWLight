@@ -49,7 +49,6 @@ class Command(BaseCommand):
                 country_of_residence=Faker(
                     random.choice(settings.FAKER_LOCALES)
                 ).country(),
-                occupation=Faker(random.choice(settings.FAKER_LOCALES)).job(),
                 affiliation=Faker(random.choice(settings.FAKER_LOCALES)).company(),
                 wp_registered=Faker(
                     random.choice(settings.FAKER_LOCALES)
