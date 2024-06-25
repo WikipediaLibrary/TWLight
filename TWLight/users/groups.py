@@ -35,7 +35,7 @@ def get_restricted():
 
     Returns
     ----------
-    Queryset
+    QuerySet
         A queryset of user objects
     """
     try:
