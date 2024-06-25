@@ -11,7 +11,7 @@ def get_all_bundle_authorizations():
 
     Returns
     -------
-    Queryset
+    QuerySet
     """
 
     # distinct() required because partners__authorization_method is ManyToMany
