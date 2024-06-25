@@ -20,7 +20,7 @@ def get_coordinators():
 
     Returns
     ----------
-    Queryset
+    QuerySet
         A queryset of user objects
     """
     try:
