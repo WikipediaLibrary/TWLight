@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afalau"
+		]
+	},
+	"languages-and-literature_tag": "Iaith a Llenyddiaeth",
+	"multidisciplinary_tag": "Amlddisgyblaethol",
+	"physical-sciences_tag": "Gwyddorau Ffisegol",
+	"music_tag": "Cerddoriaeth",
+	"art_tag": "Celf",
+	"business-and-economics_tag": "Busnes ac Economeg",
+	"law_tag": "Cyfraith",
+	"education_tag": "Addysg",
+	"philosophy-and-religion_tag": "Athroniaeth a Chrefydd",
+	"social-sciences_tag": "Gwyddorau Cymdeithasol",
+	"history_tag": "Hanes",
+	"culture_tag": "Diwylliant",
+	"life-sciences_tag": "Gwyddorau Bywyd",
+	"health-sciences_tag": "Gwyddorau Iechyd",
+	"earth-sciences_tag": "Gwyddorau Daear",
+	"technology_tag": "Technoleg"
+}

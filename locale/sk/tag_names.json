@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Oujon"
+		]
+	},
+	"languages-and-literature_tag": "Jazyky a literatúra",
+	"multidisciplinary_tag": "Multidisciplinárne",
+	"physical-sciences_tag": "Fyzikálne vedy",
+	"music_tag": "Hudba",
+	"art_tag": "Umenie",
+	"business-and-economics_tag": "Podniky a hospodárstvo",
+	"law_tag": "Právo",
+	"education_tag": "Vzdelávanie",
+	"philosophy-and-religion_tag": "Filozofia a náboženstvo",
+	"social-sciences_tag": "Spoločenské vedy",
+	"history_tag": "Dejiny",
+	"culture_tag": "Kultúra",
+	"life-sciences_tag": "Životné vedy",
+	"health-sciences_tag": "Zdravotné vedy",
+	"earth-sciences_tag": "Zemné vedy",
+	"technology_tag": "Technológia"
+}
