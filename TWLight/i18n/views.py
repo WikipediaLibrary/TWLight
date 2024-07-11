@@ -15,15 +15,18 @@ from django.utils.translation import (
     get_language,
 )
 from django.utils.translation.trans_real import DjangoTranslation
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import View
 
 LANGUAGE_QUERY_PARAMETER = "language"
+
 
 # Direct rip from django.views.i18n (from Django repo in GitHub),
 # but with a small update to save the users'
 # selected lang_code at the end of the set_language function
 
 
+@csrf_protect
 def set_language(request):
     """
     Redirect to a given URL while setting the chosen language in the session
