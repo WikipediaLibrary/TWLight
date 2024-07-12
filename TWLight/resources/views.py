@@ -7,9 +7,10 @@ from django.db.models import Count, Prefetch
 from django.http import Http404, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language, gettext as _
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, View, RedirectView, ListView
 from django.views.generic.edit import FormView, DeleteView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 
 from TWLight.applications.models import Application
 from TWLight.users.groups import get_coordinators
@@ -573,10 +574,11 @@ class SuggestionDeleteView(CoordinatorsOnly, DeleteView):
         return super().form_valid(form)
 
 
-class SuggestionUpvoteView(EditorsOnly, RedirectView):
+@method_decorator(csrf_protect, name="dispatch")
+class SuggestionUpvoteView(EditorsOnly, View):
     """Build view which enables users to upvote suggestions."""
 
-    def get_redirect_url(self, *args, **kwargs):
+    def post(self, *args, **kwargs):
         suggestion_id = self.kwargs.get("pk")
         obj = get_object_or_404(Suggestion, id=suggestion_id)
         url_ = obj.get_absolute_url()
@@ -588,7 +590,7 @@ class SuggestionUpvoteView(EditorsOnly, RedirectView):
                 obj.upvoted_users.remove(user)
             else:
                 obj.upvoted_users.add(user)
-        return url_
+        return redirect(url_)
 
 
 @method_decorator(login_required, name="post")

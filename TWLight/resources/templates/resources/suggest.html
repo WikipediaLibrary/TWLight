@@ -157,7 +157,12 @@
       }
       var this_ = $(this);
       var upvoteURL = this_.attr("data-href");
-      $.get(upvoteURL);
+      $.ajax({
+        url: upvoteURL,
+        mode: 'same-origin', // Do not send CSRF token to another domain.
+        type: "POST",
+        headers: {'X-CSRFToken': getCookie("csrftoken")},
+      });
     });
   </script>
   <script>
