@@ -1328,7 +1328,7 @@ class PartnerSuggestionViewTests(TestCase):
 
         # Create a coordinator with a test client session
         EditorCraftRoom(self, Terms=True, Coordinator=True)
-        request = self.client.get(path=suggestion_url, follow=True)
+        request = self.client.post(path=suggestion_url, follow=True)
 
         suggestion = Suggestion.objects.get(pk=self.suggestion.pk)
 
