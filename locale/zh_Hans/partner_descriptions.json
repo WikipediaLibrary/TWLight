@@ -8,6 +8,7 @@
 			"Sean0115",
 			"Shizhao",
 			"Tranve",
+			"XtexChooser",
 			"Yfdyh000",
 			"Zfshuo",
 			"Zhang8569"
@@ -76,7 +77,7 @@
 	"86_short_description": "<strong>Oxford Art Online</strong>可访问牛津的艺术参考作品：《Grove Art Online》和《Benezit Dictionary of Artists》，以及许多专门委托在线撰写的文章和参考书目。牛津在线艺术博物馆（Oxford Art Online）拥有20,000多张图片，以及超过23万份关于艺术和艺术家的作品。",
 	"87_short_description": "<strong>Oxford Bibliographies</strong>提供权威的研究指南，同时具有注解书目和高级百科全书的功能。此资源可指导研究人员获得涵盖各种学科的最佳可用的学问。",
 	"88_short_description": "<strong>Oxford Dictionary of National Biography</strong>是记录从罗马到21世纪在世界范围内影响英国历史和文化的男性与女性的国家记录。ODNB提供由专家撰写的简明最新传记。它由牛津大学的学术编辑监督。",
-	"93_short_description": "<strong>Oxford Academic</strong>包含众多牛津大学出版社期刊，涵盖多种学科。",
+	"93_short_description": "<strong>Oxford Academic</strong>包含众多牛津大学出版社期刊，涵盖多种学科。它还包括两本书集：Oxford Scholarship Online和Oxford Handbooks Online。",
 	"99_short_description": "<strong>Oxford University Press Law</strong>提供了一系列与国际法有关的资源。",
 	"90_short_description": "<strong>Grove Music Online</strong>是《Grove's Dictionary of Music and Musicians》的第八版，其中包含专门为该网站撰写的文章。Grove Music Online有100,000多个条目，主题从音乐家的传记到有关乐器的物理结构和组装的条目不等。",
 	"91_short_description": "<strong>Oxford Reference</strong>汇集了Oxford's Dictionaries，Companions和百科全书中的200万个数字化条目。",
@@ -131,5 +132,7 @@
 	"142_short_description": "<strong>杜克大学出版社</strong>以出版人文、社会科学和数学而闻名，每年出版约 120 本书和 50 多种期刊。",
 	"143_short_description": "<strong>Mohr Siebeck</strong>是德国一家历史悠久的学术出版商，专注于人文和社会科学。该电子图书馆包含2000多本书籍和众多期刊，涉及宗教研究、历史、哲学、法律、经济学和社会学。",
 	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。",
-	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利时出版的佛兰德日报。"
+	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利时出版的佛兰德日报。",
+	"149_short_description": "<strong>The ACM Digital Library</strong>是一个来自计算机协会的研究、发现和连接平台。ACM数字图书馆包括所有ACM出版物的全文合集、精选出版商策划和托管的全文出版物合集、ACM计算文献指南等。",
+	"150_short_description": "<strong>IEEE Xplore</strong>是一个用于发现与取用电脑科学、电气工程、电子学及相关领域的期刊文章、会议论文集、技术标准和相关资料的研究资料库。"
 }
