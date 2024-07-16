@@ -173,41 +173,39 @@ class OAuthBackend(object):
         call and False if we did not.
         """
         logger.info("Attempting to update editor after OAuth login.")
-        try:
-            username = self._get_username(identity)
-            user = User.objects.get(username=username)
-            should_update_lang = _check_user_preferred_language(user)
-            if should_update_lang:
-                user.userprofile.lang = get_language()
-                user.userprofile.save()
-
-            # This login path should only be used for accounts created via
-            # Wikipedia login, which all have editor objects.
-            if hasattr(user, "editor"):
-                editor = user.editor
-
-                lang = user.userprofile.lang
-                editor.update_from_wikipedia(
-                    identity, lang
-                )  # This call also saves the editor
-                logger.info("Editor updated.")
-
-                created = False
-            else:
-                try:
-                    logger.warning(
-                        "A user tried using the Wikipedia OAuth "
-                        "login path but does not have an attached editor."
-                    )
-                    editor = self._create_editor(user, identity)
-                    created = True
-                except:
-                    raise PermissionDenied
-
-        except User.DoesNotExist:
+        username = self._get_username(identity)
+        user = User.objects.filter(username=username).first()
+        if user is None:
             logger.info("Can't find user; creating one.")
             user, editor = self._create_user_and_editor(identity)
-            created = True
+            return user, True
+        should_update_lang = _check_user_preferred_language(user)
+        if should_update_lang:
+            user.userprofile.lang = get_language()
+            user.userprofile.save()
+
+        # This login path should only be used for accounts created via
+        # Wikipedia login, which all have editor objects.
+        if hasattr(user, "editor"):
+            editor = user.editor
+
+            lang = user.userprofile.lang
+            editor.update_from_wikipedia(
+                identity, lang
+            )  # This call also saves the editor
+            logger.info("Editor updated.")
+
+            created = False
+        else:
+            try:
+                logger.warning(
+                    "A user tried using the Wikipedia OAuth "
+                    "login path but does not have an attached editor."
+                )
+                editor = self._create_editor(user, identity)
+                created = True
+            except:
+                raise PermissionDenied
         return user, created
 
     def authenticate(self, request=None, access_token=None, handshaker=None):
