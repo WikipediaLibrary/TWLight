@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-06-25 01:54+0000\n"
+"POT-Creation-Date: 2024-07-16 19:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1286,7 +1286,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:555
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:556
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -1894,34 +1894,34 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a collection, this message is shown to a user
-#: TWLight/resources/views.py:268
+#: TWLight/resources/views.py:269
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:316
+#: TWLight/resources/views.py:317
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:408
+#: TWLight/resources/views.py:409
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:421
+#: TWLight/resources/views.py:422
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:547
+#: TWLight/resources/views.py:548
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:571
+#: TWLight/resources/views.py:572
 msgid "Suggestion has been deleted."
 msgstr ""
 
@@ -2505,68 +2505,68 @@ msgid "{wp_username}"
 msgstr ""
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
-#: TWLight/users/oauth.py:243
+#: TWLight/users/oauth.py:241
 msgid "You tried to log in but presented an invalid access token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:298 TWLight/users/oauth.py:444
+#: TWLight/users/oauth.py:296 TWLight/users/oauth.py:442
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr ""
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:364
+#: TWLight/users/oauth.py:362
 msgid "Handshaker not initiated, please try logging in again."
 msgstr ""
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:388
+#: TWLight/users/oauth.py:386
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
 msgstr ""
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:430
+#: TWLight/users/oauth.py:428
 msgid "Did not receive a valid oauth response."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:457
+#: TWLight/users/oauth.py:455
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:469
+#: TWLight/users/oauth.py:467
 msgid "No session token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:481
+#: TWLight/users/oauth.py:479
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:498
+#: TWLight/users/oauth.py:496
 msgid "Access token generation failed, please try logging in again."
 msgstr ""
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
-#: TWLight/users/oauth.py:507
+#: TWLight/users/oauth.py:505
 #, python-brace-format
 msgid "See {issue} for more information"
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:528
+#: TWLight/users/oauth.py:526
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:536
+#: TWLight/users/oauth.py:534
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2574,7 +2574,7 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:549
+#: TWLight/users/oauth.py:547
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
