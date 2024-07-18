@@ -1,10 +1,11 @@
 from datetime import timedelta
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.dispatch import receiver, Signal
 from django.db import transaction
 from django.db.models.signals import pre_save, post_save
 from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
-from TWLight.users.models import Authorization, UserProfile
+from TWLight.users.models import Authorization, UserProfile, Session
 from TWLight.resources.models import Partner
 
 """
@@ -22,6 +23,15 @@ providing_args=[
 
 class Notice(object):
     user_renewal_notice = Signal()
+
+
+@receiver(post_save, sender=User)
+def clear_inactive_user_sessions(sender, instance, **kwargs):
+    """Clear sessions after user is marked as inactive."""
+    if instance.is_active:
+        return
+    sessions = Session.objects.filter(account_id=(instance.pk))
+    sessions.delete()
 
 
 @receiver(post_save, sender=Authorization)

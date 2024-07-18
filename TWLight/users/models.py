@@ -48,6 +48,8 @@ from django.core.exceptions import (
     SuspiciousOperation,
 )
 from django.urls import reverse
+from django.contrib.sessions.backends.db import SessionStore as DBStore
+from django.contrib.sessions.base_session import AbstractBaseSession
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import m2m_changed
@@ -71,6 +73,41 @@ from TWLight.users.helpers.editor_data import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+class Session(AbstractBaseSession):
+    """
+    Just like the default db session model, but adds an account ID field to
+    query the database for all active sessions for an account. cribbed from:
+    https://docs.djangoproject.com/en/4.2/topics/http/sessions/#example
+    """
+
+    account_id = models.IntegerField(null=True, db_index=True)
+
+    @classmethod
+    def get_session_store_class(cls):
+        return SessionStore
+
+
+class SessionStore(DBStore):
+    """
+    Just like the default db session store, but adds an account ID field to
+    query the database for all active sessions for an account. cribbed from:
+    https://docs.djangoproject.com/en/4.2/topics/http/sessions/#example
+    """
+
+    @classmethod
+    def get_model_class(cls):
+        return Session
+
+    def create_model_instance(self, data):
+        obj = super().create_model_instance(data)
+        try:
+            account_id = int(data.get("_auth_user_id"))
+        except (ValueError, TypeError):
+            account_id = None
+        obj.account_id = account_id
+        return obj
 
 
 def get_company_name(instance):
