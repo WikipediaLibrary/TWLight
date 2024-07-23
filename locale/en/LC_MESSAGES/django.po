@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-07-16 19:00+0000\n"
+"POT-Creation-Date: 2024-07-23 18:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2491,7 +2491,7 @@ msgid "Update email"
 msgstr ""
 
 #. Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
-#: TWLight/users/models.py:201
+#: TWLight/users/models.py:238
 #, python-brace-format
 msgid ""
 "Cannot add partner {partner} to your favorites because you don't have access "
@@ -2499,7 +2499,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Do not translate.
-#: TWLight/users/models.py:869
+#: TWLight/users/models.py:906
 #, python-brace-format
 msgid "{wp_username}"
 msgstr ""
