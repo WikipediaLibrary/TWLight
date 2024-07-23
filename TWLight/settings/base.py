@@ -284,6 +284,9 @@ MESSAGE_TAGS = {messages.ERROR: "danger"}
 # Eliminate duplicate messages
 MESSAGE_STORAGE = "TWLight.message_storage.SessionDedupStorage"
 
+# use our own session engine to allow deletion of individual users' sessions
+SESSION_ENGINE = "TWLight.users.models"
+
 # Overwrite django default SESSION_COOKIE_AGE
 SESSION_COOKIE_AGE = 259200
 

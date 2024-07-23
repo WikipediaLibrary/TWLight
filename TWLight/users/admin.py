@@ -3,7 +3,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.models import User
-from django.contrib.sessions.models import Session
 
 from TWLight.users.models import (
     Editor,
@@ -11,6 +10,7 @@ from TWLight.users.models import (
     UserProfile,
     Authorization,
     get_company_name,
+    Session,
 )
 from TWLight.users.forms import AuthorizationAdminForm
 
@@ -161,7 +161,7 @@ class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):
         return obj.get_decoded()
 
-    list_display = ["session_key", "_session_data", "expire_date"]
+    list_display = ["account_id", "session_key", "_session_data", "expire_date"]
 
 
 admin.site.register(Session, SessionAdmin)
