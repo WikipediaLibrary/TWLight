@@ -4,6 +4,7 @@
 			"2NumForIce",
 			"Diskdance",
 			"GuoPC",
+			"Huajing",
 			"Lantianjialiang",
 			"Sean0115",
 			"Shizhao",
@@ -122,7 +123,7 @@
 	"132_short_description": "<strong>SAGE期刊</strong>SAGE是一家美国独立出版商，拥有 1,000多种期刊，涵盖广泛的学科领域。",
 	"133_short_description": "<strong>Edward Elgar</strong>是一家独立的学术和专业出版商，专注于法律、商业和社会科学。",
 	"134_short_description": "<strong>E-Yearbook</strong>是最大的美国高校、军队、院校历史年鉴扫描的在线收藏之一。<br/><strong>注意</strong>：该网站的使用条款不允许重新上传图像。",
-	"135_short_description": "<strong>Corriere della Sera</strong>是一份在米兰出版的意大利日报。它是意大利历史最悠久、阅读量最大的报纸之一。",
+	"135_short_description": "<strong>Corriere della Sera</strong>是一份在米兰出版的意大利日报。它是意大利历史最悠久、阅读量最大的报纸之一。Corriere della Sera存档提供了对一个世纪的历史档案的访问权限。",
 	"136_short_description": "<strong>Corriere della Sera Archives</strong>提供意大利最古老和阅读量最大的报纸之一的 Corriere della Sera 一个世纪的历史档案。",
 	"137_short_description": "<strong>Wikilala</strong>是一个数字存储库，包含超过 109,000 份印刷形式的文件，包括 45,000 份报纸、32,000 份期刊、4,000 本书和 26,000 篇关于奥斯曼帝国从建国到现代的历史的文章。",
 	"138_short_description": "<strong>英国报纸档案馆</strong>提供对英国和爱尔兰报纸的可搜索数字化档案的访问。",
@@ -133,6 +134,15 @@
 	"143_short_description": "<strong>Mohr Siebeck</strong>是德国一家历史悠久的学术出版商，专注于人文和社会科学。该电子图书馆包含2000多本书籍和众多期刊，涉及宗教研究、历史、哲学、法律、经济学和社会学。",
 	"144_short_description": "<strong>Perlego</strong>是一个数字在线图书馆，专注于提供学术、专业和非小说类电子书。",
 	"145_short_description": "<strong>De Standaard</strong> De Standaard 是由 Mediahuis 在比利时出版的佛兰德日报。",
+	"146_short_description": "<strong>Duncker & Humblot</strong>电子图书馆提供了对法律、经济、社会学、政治、历史、哲学和文学领域的12500本电子书、25种期刊和超过12500篇电子文章。",
+	"147_short_description": "<strong>捷克共和国国家图书馆</strong>为维基百科使用者提供免费图书馆卡，或对已有图书馆卡片的免费延期。本服务仅供来自捷克共和国的维基百科使用者使用。",
+	"148_short_description": "<strong>《美国医学会杂志》</strong>是一份由美国医学会每年出版48期的同行评议医学期刊。其发表内容涵盖生物医学各个方面的原创性研究、评论与社论。",
 	"149_short_description": "<strong>The ACM Digital Library</strong>是一个来自计算机协会的研究、发现和连接平台。ACM数字图书馆包括所有ACM出版物的全文合集、精选出版商策划和托管的全文出版物合集、ACM计算文献指南等。",
-	"150_short_description": "<strong>IEEE Xplore</strong>是一个用于发现与取用电脑科学、电气工程、电子学及相关领域的期刊文章、会议论文集、技术标准和相关资料的研究资料库。"
+	"150_short_description": "<strong>IEEE Xplore</strong>是一个用于发现与取用电脑科学、电气工程、电子学及相关领域的期刊文章、会议论文集、技术标准和相关资料的研究资料库。",
+	"151_short_description": "<strong>布里斯托大学出版社</strong>是一家位于英国的社会科学与相关学科领域的学术出版社，其着重关注全球社会的各种挑战。",
+	"152_short_description": "<strong>《国土报（英文版）》</strong>是一份以色列报纸。其创立于1918年，是目前以色列在印报纸中历史最久的报纸。该报同时以希伯来文和英文出版。此处是《国土报》的英文版。",
+	"153_short_description": "<strong>《国土报（希伯来文版）》</strong>是一份以色列报纸。其创立于1918年，是目前以色列在印报纸中历史最久的报纸。该报同时以希伯来文和英文出版。此处是《国土报》的希伯来文版。",
+	"154_short_description": "<strong>《TheMarker》</strong>是一份由以色列国土报集团出版的希伯来语每日商业报纸。",
+	"155_short_description": "<strong>British Online Archives</strong>提供了人文与社会科学领域独特的原始文献资料。",
+	"156_short_description": "<strong>L'Informé</strong>是一个法国经济调查网站，其内容涵盖与法国相关的广泛主题：经济、国防、能源、消费者事务、媒体、奢侈品等。"
 }
