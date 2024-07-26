@@ -1,10 +1,10 @@
-from django.urls import re_path
+from django.urls import re_path, path
 from django.contrib.auth.decorators import login_required
 
 from TWLight.users import views
 
 urlpatterns = [
-    re_path(r"^$", login_required(views.UserHomeView.as_view()), name="home"),
+    path("", login_required(views.UserHomeView.as_view()), name="home"),
     re_path(
         r"^(?P<pk>\d+)/$",
         login_required(views.EditorDetailView.as_view()),
@@ -15,16 +15,14 @@ urlpatterns = [
         login_required(views.EditorUpdateView.as_view()),
         name="editor_update",
     ),
-    re_path(
-        r"^email_change/$",
+    path(
+        "email_change/",
         login_required(views.EmailChangeView.as_view()),
         name="email_change",
     ),
-    re_path(
-        r"^update/$", login_required(views.PIIUpdateView.as_view()), name="pii_update"
-    ),
-    re_path(
-        r"^restrict_data/$",
+    path("update/", login_required(views.PIIUpdateView.as_view()), name="pii_update"),
+    path(
+        "restrict_data/",
         login_required(views.RestrictDataView.as_view()),
         name="restrict_data",
     ),
@@ -33,8 +31,8 @@ urlpatterns = [
         login_required(views.DeleteDataView.as_view()),
         name="delete_data",
     ),
-    re_path(
-        r"^my_library/$",
+    path(
+        "my_library/",
         login_required(views.MyLibraryView.as_view()),
         name="my_library",
     ),
@@ -59,8 +57,8 @@ urlpatterns = [
         login_required(views.WithdrawApplication.as_view()),
         name="withdraw",
     ),
-    re_path(
-        r"^favorite_collection/$",
+    path(
+        "favorite_collection/",
         login_required(views.FavoriteCollectionView.as_view()),
         name="favorite_collection",
     ),
