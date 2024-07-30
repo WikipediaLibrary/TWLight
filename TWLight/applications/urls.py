@@ -1,4 +1,4 @@
-from django.urls import re_path
+from django.urls import re_path, path
 from django.contrib.auth.decorators import login_required
 
 from TWLight.applications import views
@@ -6,13 +6,13 @@ from TWLight.users.models import Editor
 from TWLight.resources.models import Partner
 
 urlpatterns = [
-    re_path(
-        r"editor/autocomplete/",
+    path(
+        "editor/autocomplete/",
         views.EditorAutocompleteView.as_view(model=Editor),
         name="editor_autocomplete",
     ),
-    re_path(
-        r"^partner/autocomplete/$",
+    path(
+        "partner/autocomplete/",
         views.PartnerAutocompleteView.as_view(model=Partner),
         name="partner_autocomplete",
     ),
@@ -26,31 +26,29 @@ urlpatterns = [
         login_required(views.EvaluateApplicationView.as_view()),
         name="evaluate",
     ),
-    re_path(
-        r"^list/$", login_required(views.ListApplicationsView.as_view()), name="list"
-    ),
-    re_path(
-        r"^list/approved/$",
+    path("list/", login_required(views.ListApplicationsView.as_view()), name="list"),
+    path(
+        "list/approved/",
         login_required(views.ListApprovedApplicationsView.as_view()),
         name="list_approved",
     ),
-    re_path(
-        r"^list/rejected/$",
+    path(
+        "list/rejected/",
         login_required(views.ListRejectedApplicationsView.as_view()),
         name="list_rejected",
     ),
-    re_path(
-        r"^list/expiring/$",
+    path(
+        "list/expiring/",
         login_required(views.ListRenewalApplicationsView.as_view()),
         name="list_renewal",
     ),
-    re_path(
-        r"^list/sent/$",
+    path(
+        "list/sent/",
         login_required(views.ListSentApplicationsView.as_view()),
         name="list_sent",
     ),
-    re_path(
-        r"^send/$",
+    path(
+        "send/",
         login_required(views.ListReadyApplicationsView.as_view()),
         name="send",
     ),
@@ -59,8 +57,8 @@ urlpatterns = [
         login_required(views.SendReadyApplicationsView.as_view()),
         name="send_partner",
     ),
-    re_path(
-        r"^batch_edit/$",
+    path(
+        "batch_edit/",
         login_required(views.BatchEditView.as_view()),
         name="batch_edit",
     ),
