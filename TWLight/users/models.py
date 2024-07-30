@@ -892,7 +892,7 @@ class Editor(models.Model):
             if "email" in identity and identity["email"] and identity["email"] != "":
                 self.user.email = identity["email"]
             else:
-                logger.exception("Unable to get Editor email address from Wikipedia.")
+                logger.warning("Unable to get Editor email address from Wikipedia.")
 
         self.user.save()
 
