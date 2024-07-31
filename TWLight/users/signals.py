@@ -59,8 +59,6 @@ def update_partner_authorization_expiry(sender, instance, **kwargs):
     Updates missing expiration dates upon resource updates.
     Mostly cribbed from
     TWLight.applications.models.post_receive_commit
-    and
-    TWLight.users.management.commands.authorization_backfill
     Could factor out the common code.
     """
 
