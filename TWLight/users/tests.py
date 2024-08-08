@@ -16,7 +16,7 @@ from django.core.exceptions import (
     SuspiciousOperation,
     ValidationError,
 )
-from django.urls import resolve, reverse
+from django.urls import resolve, reverse, reverse_lazy
 from django.core.management import call_command
 from django.test import TestCase, Client, RequestFactory, override_settings
 from django.utils.translation import get_language
@@ -30,7 +30,7 @@ from TWLight.resources.models import Partner
 from TWLight.resources.tests import EditorCraftRoom
 
 from . import views
-from .oauth import OAuthBackend, _check_user_preferred_language
+from .oauth import OAuthBackend, _check_user_preferred_language, _sanitize_next_url
 from .helpers.validation import validate_partners
 from .helpers.authorizations import get_all_bundle_authorizations
 from .factories import EditorFactory, UserFactory
@@ -1792,6 +1792,19 @@ class OAuthTestCase(TestCase):
         existing_user = UserFactory(username=username)
         result = _check_user_preferred_language(existing_user)
         self.assertFalse(result)
+
+    def test_sanitize_next_url_returns_none_if_invalid(
+        self,
+    ):
+        result = _sanitize_next_url(next=["http://bad-domain.com"])
+        self.assertNotEqual(result, ["http://bad-domain.com"])
+        self.assertEqual(result, None)
+
+    def test_sanitize_next_url_when_valid(
+        self,
+    ):
+        result = _sanitize_next_url(next=reverse_lazy("homepage"))
+        self.assertEqual(result, reverse_lazy("homepage"))
 
 
 class TermsTestCase(TestCase):

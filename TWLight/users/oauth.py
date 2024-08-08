@@ -1,4 +1,6 @@
 import logging
+
+from django.utils.http import url_has_allowed_host_and_scheme
 from mwoauth import ConsumerToken, Handshaker, AccessToken
 from mwoauth.errors import OAuthException
 from sentry_sdk import capture_exception
@@ -110,6 +112,18 @@ def _check_user_preferred_language(user):
             return False
     else:
         return False
+
+
+def _sanitize_next_url(next):
+    if url_has_allowed_host_and_scheme(
+        next[0],
+        allowed_hosts=settings.ALLOWED_HOSTS,
+        require_https=True,
+    ):
+        # Set the return url to the value of 'next'. Basic.
+        return next[0]
+    else:
+        return None
 
 
 class OAuthBackend(object):
@@ -315,17 +329,19 @@ class OAuthInitializeView(View):
                 query_dict = QueryDict(urlencode(request.session["get"]), mutable=True)
                 # Pop the 'next' parameter out of the QueryDict.
                 next = query_dict.pop("next")
-                # Set the return url to the value of 'next'. Basic.
-                return_url = next[0]
-                # Pop the 'from_homepage' parameter out of the QueryDict.
-                # We don't need it here.
-                query_dict.pop("from_homepage", None)
-                # If there is anything left in the QueryDict after popping
-                # 'next', append it to the return url. This preserves state
-                # for filtered lists and redirected form submissions like
-                # the partner suggestion form.
-                if query_dict:
-                    return_url += "&" + urlencode(query_dict)
+                return_url = _sanitize_next_url(next=next)
+                if return_url is not None:
+                    # Pop the 'from_homepage' parameter out of the QueryDict.
+                    # We don't need it here.
+                    query_dict.pop("from_homepage", None)
+                    # If there is anything left in the QueryDict after popping
+                    # 'next', append it to the return url. This preserves state
+                    # for filtered lists and redirected form submissions like
+                    # the partner suggestion form.
+                    if query_dict:
+                        return_url += "&" + urlencode(query_dict)
+                else:
+                    return_url = reverse_lazy("homepage")
                 logger.info(
                     "User is already authenticated. Sending them on "
                     'for post-login redirection per "next" parameter.'
@@ -536,7 +552,6 @@ class OAuthCallbackView(View):
                 )
 
             return_url = reverse_lazy("terms")
-
         elif user:
             login(request, user)
 
@@ -559,21 +574,23 @@ class OAuthCallbackView(View):
                         )
                         # Pop the 'next' parameter out of the QueryDict.
                         next = query_dict.pop("next")
-                        # Set the return url to the value of 'next'. Basic.
-                        return_url = next[0]
-                        # Pop the 'from_homepage' parameter out of the QueryDict.
-                        # We don't need it here.
-                        query_dict.pop("from_homepage", None)
-                        # If there is anything left in the QueryDict after popping
-                        # 'next', append it to the return url. This preserves state
-                        # for filtered lists and redirected form submissions like
-                        # the partner suggestion form.
-                        if query_dict:
-                            return_url += "&" + urlencode(query_dict)
-                        logger.info(
-                            "User authenticated. Sending them on for "
-                            'post-login redirection per "next" parameter.'
-                        )
+                        return_url = _sanitize_next_url(next=next)
+                        if return_url is not None:
+                            # Pop the 'from_homepage' parameter out of the QueryDict.
+                            # We don't need it here.
+                            query_dict.pop("from_homepage", None)
+                            # If there is anything left in the QueryDict after popping
+                            # 'next', append it to the return url. This preserves state
+                            # for filtered lists and redirected form submissions like
+                            # the partner suggestion form.
+                            if query_dict:
+                                return_url += "&" + urlencode(query_dict)
+                            logger.info(
+                                "User authenticated. Sending them on for "
+                                'post-login redirection per "next" parameter.'
+                            )
+                        else:
+                            return_url = reverse_lazy("homepage")
                     except KeyError as e:
                         return_url = reverse_lazy("homepage")
                         logger.warning(e)
