@@ -27,12 +27,16 @@ class MainPartnerFilter(django_filters.FilterSet):
         label=_("Topics"),
         choices=get_tag_choices(),
         method="tags_filter",
+        # Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
+        empty_label=_("All tags"),
     )
 
     languages = django_filters.ModelChoiceFilter(
         # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
         label=_("Languages"),
         queryset=Language.objects.all(),
+        # Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
+        empty_label=_("All languages"),
     )
 
     def __init__(self, data=None, *args, **kwargs):
