@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Afalau
+# Author: Ceirios
 # Author: Ice bulldog
 # Author: Robin Owain
 msgid ""
@@ -10,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-08-15 00:58+0000\n"
-"PO-Revision-Date: 2024-08-15 12:26:21+0000\n"
+"PO-Revision-Date: 2024-08-19 12:27:07+0000\n"
 "Language: cy\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
