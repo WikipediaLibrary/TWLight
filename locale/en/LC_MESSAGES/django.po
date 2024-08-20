@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-08-15 00:58+0000\n"
+"POT-Creation-Date: 2024-08-20 16:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1325,20 +1325,30 @@ msgstr ""
 msgid "Topics"
 msgstr ""
 
+#. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
+#: TWLight/resources/filters.py:31
+msgid "All tags"
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
-#: TWLight/resources/filters.py:34
+#: TWLight/resources/filters.py:36
 #: TWLight/resources/templates/resources/collection_tile.html:30
 #: TWLight/users/templates/users/available_collection_tile.html:37
 #: TWLight/users/templates/users/user_collection_tile.html:49
 msgid "Languages"
 msgstr ""
 
+#. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
+#: TWLight/resources/filters.py:39
+msgid "All languages"
+msgstr ""
+
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
-#: TWLight/resources/filters.py:74 TWLight/resources/models.py:287
+#: TWLight/resources/filters.py:78 TWLight/resources/models.py:287
 #: TWLight/users/templates/users/available_collection_tile.html:6
 #: TWLight/users/templates/users/filter_section.html:41
 #: TWLight/users/templates/users/user_collection_tile.html:5
@@ -1346,7 +1356,7 @@ msgid "Searchable"
 msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
-#: TWLight/resources/filters.py:81
+#: TWLight/resources/filters.py:85
 msgid "Access"
 msgstr ""
 
