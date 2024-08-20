@@ -162,6 +162,8 @@ class SessionAdmin(admin.ModelAdmin):
         return obj.get_decoded()
 
     list_display = ["account_id", "session_key", "_session_data", "expire_date"]
+    list_filter = ["account_id"]
+    search_fields = ["account_id"]
 
 
 admin.site.register(Session, SessionAdmin)

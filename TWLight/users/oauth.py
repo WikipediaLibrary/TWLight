@@ -24,7 +24,7 @@ from django.utils.translation import (
 
 from urllib.parse import urlencode
 
-from .models import Editor
+from .models import Editor, Session
 
 
 logger = logging.getLogger(__name__)
@@ -271,6 +271,12 @@ class OAuthBackend(object):
             logger.info("User has been updated.")
 
         request.session["user_created"] = created
+
+        # Checking if more than one session exists
+        sessions = Session.objects.filter(account_id=user.pk)
+        if sessions.count() >= 1:
+            logger.info("Deleting all previous sessions.")
+            sessions.delete()
 
         # The authenticate() function of a Django auth backend must return
         # the user.
@@ -524,7 +530,6 @@ class OAuthCallbackView(View):
                     # fmt: on
                 ),
             )
-            local_redirect = reverse_lazy("homepage")
 
         user = authenticate(
             request=request, access_token=access_token, handshaker=handshaker
