@@ -274,7 +274,7 @@ class OAuthBackend(object):
 
         # Checking if more than one session exists
         sessions = Session.objects.filter(account_id=user.pk)
-        if sessions.count() >= 1:
+        if sessions.exists():
             logger.info("Deleting all previous sessions.")
             sessions.delete()
 
