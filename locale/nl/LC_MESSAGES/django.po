@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-08-22 16:13+0000\n"
-"PO-Revision-Date: 2024-08-26 12:25:18+0000\n"
+"PO-Revision-Date: 2024-08-29 12:24:18+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1193,7 +1193,7 @@ msgstr "Onderwerpen"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Alle labels"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
