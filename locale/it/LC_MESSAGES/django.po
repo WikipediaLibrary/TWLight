@@ -3,6 +3,7 @@
 #
 # Author: Ajeje Brazorf
 # Author: Beta16
+# Author: Dream Indigo
 # Author: Gianfranco
 # Author: JackLantern
 # Author: Mpayansilva
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-08-22 16:13+0000\n"
-"PO-Revision-Date: 2024-08-26 12:25:16+0000\n"
+"PO-Revision-Date: 2024-09-02 12:23:31+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -275,7 +276,7 @@ msgstr "Valuta la richiesta"
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
 msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
-msgstr "Questo utente ha richiesto una restrizione all'elaborazione dei loro dati, sicché non puoi cambiare lo stato della loro richiesta"
+msgstr "Quest'utente ha richiesto una restrizione all'elaborazione dei propri dati, quindi non puoi cambiare lo stato della sua richiesta."
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:48

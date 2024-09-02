@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: ArgonSim
+# Author: B3rnas
 # Author: DDPAT
 # Author: Hamilton Abreu
 # Author: Ice bulldog
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-08-22 16:12+0000\n"
-"PO-Revision-Date: 2024-08-26 12:25:18+0000\n"
+"PO-Revision-Date: 2024-09-02 12:23:33+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1202,9 +1203,8 @@ msgstr "Línguas"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Línguas"
+msgstr "Todos os idiomas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
