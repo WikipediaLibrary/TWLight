@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saraiki"
+		]
+	},
+	"music_tag": "موسیقی",
+	"art_tag": "آرٹ",
+	"business-and-economics_tag": "کاروبار تے معاشیات",
+	"law_tag": "قنون",
+	"education_tag": "تعلیم",
+	"philosophy-and-religion_tag": "فلسفہ تے مذہب",
+	"social-sciences_tag": "سماجی علوم",
+	"history_tag": "تاریخ",
+	"culture_tag": "کلچر",
+	"life-sciences_tag": "حیاتی سائنس",
+	"health-sciences_tag": "صحت علوم",
+	"earth-sciences_tag": "ارضی سائنس",
+	"technology_tag": "ٹیکنالوجی"
+}
