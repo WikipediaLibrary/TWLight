@@ -1136,7 +1136,9 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        max_applications = Application.objects.all().count()
+        max_applications = Application.objects.filter(
+            partner=self.get_object(), status=Application.APPROVED
+        ).count()
         if self.get_object().authorization_method == Partner.EMAIL:
             try:
                 request.POST["applications"]
