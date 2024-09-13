@@ -695,6 +695,22 @@ class AuthorizationBaseTestCase(TestCase):
             authorizer=cls.editor4.user, user=cls.editor2.user, partners=cls.partner2
         )
 
+        # Approve the application
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app9.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
+        )
+        cls.app9.refresh_from_db()
+
+        # Approve the application
+        cls.client.post(
+            reverse("applications:evaluate", kwargs={"pk": cls.app8.pk}),
+            data={"status": Application.APPROVED},
+            follow=True,
+        )
+        cls.app8.refresh_from_db()
+
         # Set up an access code to distribute
         cls.access_code = AccessCode(code="ABCD-EFGH-IJKL", partner=cls.partner3)
         cls.access_code.save()

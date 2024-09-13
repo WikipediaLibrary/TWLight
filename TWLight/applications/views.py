@@ -957,6 +957,9 @@ class BatchEditView(CoordinatorsOnly, ToURequired, View):
         applications_per_partner = {}
         waitlist_dict = {}
         all_apps = request.POST.getlist("applications")
+        if len(all_apps) > Application.objects.all().count():
+            logger.exception("Too many applications")
+            return HttpResponseBadRequest()
         for each_app_pk in all_apps:
             try:
                 each_app = Application.objects.get(pk=each_app_pk)
@@ -1133,6 +1136,9 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
+        max_applications = Application.objects.filter(
+            partner=self.get_object(), status=Application.APPROVED
+        ).count()
         if self.get_object().authorization_method == Partner.EMAIL:
             try:
                 request.POST["applications"]
@@ -1147,7 +1153,9 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
             # will be as you expect. getlist will give you back a list of items
             # instead of a string, and then you can use it as desired.
             app_pks = request.POST.getlist("applications")
-
+            if len(app_pks) > max_applications:
+                logger.exception("Too many applications")
+                return HttpResponseBadRequest()
             for app_pk in app_pks:
                 try:
                     application = self.get_object().applications.get(pk=app_pk)
@@ -1172,6 +1180,9 @@ class SendReadyApplicationsView(PartnerCoordinatorOnly, DetailView):
                 return HttpResponseBadRequest()
 
             select_outputs = request.POST.getlist("accesscode")
+            if len(select_outputs) > max_applications:
+                logger.exception("Too many accesscodes")
+                return HttpResponseBadRequest()
             # The form returns "{{ app_pk }}_{{ access_code }}" for every selected
             # application so that we can associate each code with its application.
             send_outputs = [

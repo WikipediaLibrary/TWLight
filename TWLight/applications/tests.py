@@ -3142,6 +3142,18 @@ class MarkSentTest(TestCase):
         )
         self.assertEqual(response.status_code, 400)
 
+    def test_too_many_applications_raise_http_bad_request(self):
+        # Missing the 'applications' parameter: bad.
+        request = RequestFactory().post(
+            self.url, data={"applications": ["1", "2", "3", "4", "5"]}
+        )
+        request.user = self.user
+
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk
+        )
+        self.assertEqual(response.status_code, 400)
+
     def test_bogus_applications_parameter_handled(self):
         """
         If the applications parameter doesn't correspond to an existing
@@ -3330,6 +3342,35 @@ class MarkSentTest(TestCase):
         # Expected success condition: redirect back to the original page.
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, self.url)
+
+    def test_too_many_access_codes_raise_http_bad_request(self):
+        self.partner.authorization_method = Partner.CODES
+        self.partner.save()
+
+        request = RequestFactory().post(
+            self.url,
+            data={
+                "accesscode": [
+                    "{app_pk}_{code}".format(
+                        app_pk=self.app1.pk, code=self.access_code.code
+                    ),
+                    "{app_pk}_{code}".format(
+                        app_pk=self.app1.pk, code=self.access_code.code
+                    ),
+                    "{app_pk}_{code}".format(
+                        app_pk=self.app1.pk, code=self.access_code.code
+                    ),
+                    "{app_pk}_{code}".format(
+                        app_pk=self.app1.pk, code=self.access_code.code
+                    ),
+                ]
+            },
+        )
+        request.user = self.user
+        response = views.SendReadyApplicationsView.as_view()(
+            request, pk=self.partner.pk
+        )
+        self.assertEqual(response.status_code, 400)
 
     def test_email_authorization_method(self):
         # If partner's authroization method is EMAIL
