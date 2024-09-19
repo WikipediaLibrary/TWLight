@@ -10,6 +10,7 @@
 # Author: Gongsoonyee
 # Author: Ice bulldog
 # Author: Sabelöga
+# Author: Suleiman the Magnificent Television
 # Author: Ykhwong
 # Author: 아라
 msgid ""
@@ -18,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-09-13 18:15+0000\n"
-"PO-Revision-Date: 2024-09-16 12:22:57+0000\n"
+"PO-Revision-Date: 2024-09-19 12:24:43+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,13 +52,13 @@ msgstr "내 정보"
 #: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr ""
+msgstr "<p><small><i>귀하의 개인 데이터는 우리의 <a class='twl-links' href='{terms_url}'>개인정보 보호 정책</a>에 따라 처리됩니다.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr ""
+msgstr "{partner}에 대한 신청"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:220
