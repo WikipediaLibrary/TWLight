@@ -125,7 +125,7 @@
 	"132_short_description": "<strong>SAGE Journals</strong>はアメリカの独立系出版社で、学際的分野で1000以上の論文誌を発行しています。",
 	"133_short_description": "<strong>Edward Elgar</strong>は、法律、ビジネス、社会科学に重点を置いた独立系学術専門出版社です。",
 	"134_short_description": "<strong>E-Yearbook</strong>は、アメリカ合衆国の高校、軍、大学、大学年鑑の歴史的資料を電子化した最大のオンラインコレクションの1つです。<br/><strong>注</strong>: サイトの利用規約では、画像の再アップロードは許可されていません。",
-	"135_short_description": "<strong>Corriere della Sera</strong>は、ミラノで発行されているイタリアの日刊紙です。イタリアで最も古く、最も読まれている新聞の1つです。",
+	"135_short_description": "<strong>Corriere della Sera</strong>（コリエレ・デッラ・セラ）は、ミラノで発行するイタリアの日刊紙です。新聞では国内最古の最も読者数が多い新聞の1つです。歴史的なアーカイブ版の利用は、そのアルキーヴェス（Corriere della Sera Archives）が提供します。",
 	"136_short_description": "<strong>Corriere della Sera Archives</strong>は、イタリアの日刊紙『Corriere della Sera』の歴史的なアーカイブ100年分へのアクセスを提供します。これはイタリアで最も古く、最も読まれている新聞の1つです。",
 	"137_short_description": "<strong>Wikilala</strong>は、オスマン帝国の建国から現代までの歴史に関する45,000の新聞、32,000のジャーナル、4,000の書籍、26,000の記事を含む、109,000を超える印刷形式の文書で構成されるデジタルレポジトリです。",
 	"138_short_description": "<strong>British Newspaper Archive</strong>は、イギリスとアイルランドの新聞の検索可能なデジタルアーカイブへのアクセスを提供します。",
@@ -146,5 +146,6 @@
 	"153_short_description": "<strong>Haaretz English</strong>は現在イスラエルで発行されている中で最も古い新聞です（1918年創刊）。ヘブライ語版と英語版があり、これはヘブライ語版データベースです。",
 	"154_short_description": "<strong>TheMarker</strong>はHaaretz Groupが発行するイスラエルの日刊ビジネス新聞です。ヘブライ語で書かれています。",
 	"155_short_description": "<strong>British Online Archives</strong>は人文科学・社会科学に関する一次資料のコレクションです。",
-	"156_short_description": "<strong>L'Informé</strong>はフランスの経済調査ウェブサイトで、経済、防衛、エネルギー、消費者問題、メディア、高級品など国に関する幅広いトピックを扱っています。"
+	"156_short_description": "<strong>L'Informé</strong>はフランスの経済調査ウェブサイトで、経済、防衛、エネルギー、消費者問題、メディア、高級品など国に関する幅広いトピックを扱っています。",
+	"157_short_description": "<strong>The Hindu Group</strong>（ヒンドゥー・グループ）はインドの出版社で、本拠地はタミールナンド州チェンナイ。当コレクションがアクセスを提供する媒体は、同グループ傘下のザ・ヒンドゥー・デジタル&イーペーパー（The Hindu Digital & ePaper）、ザ・ヒンドゥー・ビジネスライン&同イーペーパー（The Hindu Business Line & Business Line ePaper）、フロントラインならびにスポーツスター（Frontline、Sportstar）です。"
 }
