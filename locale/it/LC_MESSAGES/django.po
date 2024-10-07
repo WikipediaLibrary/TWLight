@@ -4,6 +4,7 @@
 # Author: Ajeje Brazorf
 # Author: Beta16
 # Author: Dream Indigo
+# Author: Egidio24
 # Author: Gianfranco
 # Author: JackLantern
 # Author: Mpayansilva
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-09-30 12:34+0000\n"
-"PO-Revision-Date: 2024-10-03 12:24:34+0000\n"
+"PO-Revision-Date: 2024-10-07 12:25:46+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -665,7 +666,7 @@ msgstr "Imposta stato"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr ""
+msgstr "Se la tua candidatura ha esito positivo, potremmo condividere il tuo indirizzo email con %(partner)s. Ciò è necessario per configurare il tuo accesso alle loro risorse. Inviando questo modulo accetti di consentire che il tuo indirizzo email venga condiviso con %(partner)s se la tua candidatura ha esito positivo, ai fini della configurazione dell'account."
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -709,7 +710,7 @@ msgstr "Nessun dato di partner è stato ancora aggiunto."
 #. Translators: the HTML is so that the word 'waitlisted' will look the same as it does in the page above; please translate 'waitlisted' the same way you did elsewhere in this file.
 #: TWLight/applications/templates/applications/request_for_application.html:74
 msgid "You can apply to <span class=\"badge badge-warning\">Waitlisted</span> partners, but they don't have access grants available right now. We will process those applications when access becomes available."
-msgstr ""
+msgstr "Puoi fare domanda per i partner <span class=\"badge badge-warning\">in lista d'attesa</span> , ma al momento non hanno sovvenzioni di accesso disponibili. Elaboreremo tali domande quando l'accesso sarà disponibile."
 
 #. Translators: On the page where coordinators can see approved applications which have not had their details sent to the partner, this message shows when there are applications ready to be processed.
 #: TWLight/applications/templates/applications/send.html:10
