@@ -15,13 +15,13 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-09-30 12:33+0000\n"
-"PO-Revision-Date: 2024-10-03 12:24:31+0000\n"
+"PO-Revision-Date: 2024-10-24 12:28:09+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2024-09-13 18:30:26+0000\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
-"X-Generator: MediaWiki 1.43.0-alpha; Translate 2024-07-16\n"
+"X-Generator: MediaWiki 1.44.0-alpha; Translate 2024-07-16\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -184,7 +184,7 @@ msgstr ""
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
 msgid "Pending"
-msgstr "বিচারাধীন"
+msgstr "অমীমাংসিত"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
 #: TWLight/applications/models.py:56
@@ -241,7 +241,7 @@ msgstr ""
 #: TWLight/applications/models.py:325
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr "URL: {access_url}-এ প্রবেশ করুন"
+msgstr "প্রবেশের ইউআরএল: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331

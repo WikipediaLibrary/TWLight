@@ -40,8 +40,6 @@
 	"43_short_description": "<strong>Fold3</strong> 是涵蓋美國、英國、澳洲、紐西蘭軍事歷史的文件、圖片、和其他素材的資料庫。重要的典藏包括非裔美國人與美洲原住民的歷史、美國調查局、藍皮書計劃，以及美國歷史、軍事組織、衝突等其他方面內容。",
 	"43_description": "編輯者應確認所有用於維基百科的素材均符合相關可靠來源方針的標準。許多在 Fold3 上的素材包含官方政府文件和紀錄，雖然明顯適合使用，不過也會有包含由使用者做出的素材，這可能不符合在維基百科上使用的條件。",
 	"8_short_description": "《<strong>外交</strong>》是關於國際關係與美國外交政策的美國期刊。《外交》期刊提供免費訂閱，可以取得雜誌、電子書、和 90 多年的檔案。",
-	"22_short_description": "<strong>Future Science Group</strong> 是醫學、生物技術、科學研究的出版商。他們提供兩種期刊合集的取用權限：未來科學與未來醫學。",
-	"22_description": "<ul>\n<li>Future Science 包含生物分析、臨床研究、未來藥物化學、製藥生物加工、製藥專利分析與治療輸送</li>\n<li>Future Medicine 包含老化健康、臨床練習、糖尿病管理、未來微生物學、未來神經病學、HIV 治療、醫學影像、臨床風濕病國際期刊、醫學 3D 列印期刊、奈米醫學、神經精神病學、疼痛管理、小兒健康、與再生醫學</li>\n</ul>",
 	"55_short_description": "<strong>Gale</strong> 是一間有多個研究資料庫的大型美國教育出版商。Gale 的資源取用方面有 Gale Academic OneFile、Gale General OneFile、Gale eBooks、Gale OneFile: News、Gale In Context: Biography、Gale Primary Sources、NewsVault、與 The Times Digital Archive。",
 	"55_description": "<ul>\n<li>Academic OneFile，有超過 17000 種刊物，包含 3000 個同行評審學術期刊的資料庫。</li>\n<li>General OneFile，有超過 14000 種刊物，包含消費者、貿易、工業雜誌。</li>\n<li>Gale eBooks，百科全書與專業參考來源的資料庫。</li>\n<li>OneFile News，可取用主要美國地區、國際、地方報紙以及世界各地的主流書刊。</li>\n<li>Biography In Context，有包含來自 170 多個來源、超過 40 萬名人物傳記條目的資料庫。</li>\n<li>Gale Primary Sources</li>\n<li>NewsVault</li>\n<li>The Times Digital Archive 是《泰晤士報》的線上全文複製本，有包含自 1785 到 2013 超過 200 年期間的每一期每一頁內容。</li>\n</ul>\n<p>編輯者應使用顯示於此的格式來引用 Gale 來源。</p>",
 	"33_short_description": "<strong>HeinOnline</strong> 是一個基於圖像內容的資料庫，有超過 2000 種法律期刊，以及其他與法律歷史相關的資源。",
@@ -100,8 +98,6 @@
 	"124_short_description": "<strong>SpringerLink</strong> 有 26000 多本電子書和 2000 份學術期刊，涉及科學、商業、經濟、工程、人文科學、社會科學、法律和數學。",
 	"122_short_description": "<strong>RILM Music Encyclopedias</strong> 有超過 50 種標題的收藏，包含從 1775 年到至今的 300000 多萬個條目。",
 	"121_short_description": "<strong>MGG Online</strong> 是德語音樂百科全書，除了更新線上版本之外有提供 MGG（Die Musik in Geschichte und Gegenwart）1994 至 2008 年的印刷版取用。",
-	"120_short_description": "<strong>Future Science</strong> 是收藏生物學和藥理學的相關資源。",
-	"119_short_description": "<strong>Future Medicine</strong> 有收藏生物醫學方面的資源。",
 	"125_short_description": "<strong>OECD iLibrary</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）出版書籍、論文、統計資料的線上圖書館。",
 	"125_description": "有關引用 OECD 內容的額外指南，請點擊<a href=\"https://drive.google.com/file/d/1Qqml2xOgfWnqPpukXx7axzGDPCcB2Fed/view?usp=sharing\">這個連結</a>。",
 	"126_short_description": "<strong>OECD Data</strong> 是由經濟合作暨發展組織（Organisation for Economic Cooperation and Development、OECD）發布圖表、地圖、表格、相關出版物的典藏庫。",
@@ -135,5 +131,7 @@
 	"154_short_description": "《<strong>TheMarker</strong>》是一份希伯來語的每日商業報紙，由以色列國土報集團出版。",
 	"155_short_description": "<strong>British Online Archives</strong> 提供可取用獨特的人文、社會科學主要來源文獻收藏。",
 	"156_short_description": "<strong>L'Informé</strong> 是一個法國經濟調查網站，內容涵蓋有關法國的廣泛主題，如：經濟、國防、能源、消費者事務、媒體、奢侈品等。",
-	"157_short_description": "<strong>印度教徒報業集團</strong>是一間位在泰米爾納德邦清奈的印度出版公司。此典藏提供對《印度教徒報》數位內容與電子報、《印度商界報》電子報、《前線》、Sportstar 的取用。"
+	"157_short_description": "<strong>印度教徒報業集團</strong>是一間位在泰米爾納德邦清奈的印度出版公司。此典藏提供對《印度教徒報》數位內容與電子報、《印度商界報》電子報、《前線》、Sportstar 的取用。",
+	"158_short_description": "<strong>《華爾街日報》</strong>投資者捆綁包是道瓊斯公司的一個收集，提供可在網站和行動應用程式取得《華爾街日報》、《巴倫周刊》（Barron's）、《市場觀察》（MarketWatch）和《投資者商業日報》（Investor's Business Daily）。此取用權限可持續 3 年。",
+	"163_short_description": "<strong>《印度快報》</strong>是一份創辦於 1932 年的印度英文日報，由印度快報集團在孟買發行。"
 }
