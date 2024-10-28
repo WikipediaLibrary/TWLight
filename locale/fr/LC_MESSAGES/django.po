@@ -9,6 +9,7 @@
 # Author: Gomoko
 # Author: Ice bulldog
 # Author: JenyxGym
+# Author: Mahabarata
 # Author: MuratTheTurkish
 # Author: Nikkimaria
 # Author: Pols12
@@ -23,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-09-30 12:33+0000\n"
-"PO-Revision-Date: 2024-10-24 12:28:11+0000\n"
+"PO-Revision-Date: 2024-10-28 12:27:01+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2825,9 +2826,8 @@ msgstr "Afin d’administrer le programme de la Bibliothèque Wikipédia, nous c
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:305
-#, fuzzy
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr "Si vous décidez de désactiver votre compte, vous pouvez nous envoyer un courriel à <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> afin de demander la suppression de certaines informations personnelles associées à votre compte. Nous supprimerons vos nom, profession, affiliation institutionnelle et pays de résidence. Notez que le système conservera un enregistrement de votre nom d’utilisateur, des ressources que vous avez demandées ou auxquelles vous avez eu accès et les dates de cet accès. Si vous demandez la suppression des informations de votre compte et plus tard souhaitez un nouveau compte, vous devrez fournir à nouveau les informations nécessaires."
+msgstr "Si vous décidez de désactiver votre compte sur La Bibliothèque Wikipédia, vous pouvez utiliser le bouton Supprimer dans votre profil pour supprimer certaines informations personnelles associées à votre compte. Nous supprimerons vos nom, affiliation institutionnelle et pays de résidence. Notez que le système conservera un enregistrement de votre nom d’utilisateur, des ressources que vous avez demandées ou auxquelles vous avez eu accès et les dates de cet accès. Sachez que la suppression est irréversible. La suppression de votre compte sur La Bibliothèque Wikipédia peut conduire à la suppression de tout accès aux ressources auxquelles vous étiez éligible ou approuvé. Si vous demandez la suppression des informations de votre compte et plus tard souhaitez créer un nouveau compte, vous devrez fournir à nouveau les informations nécessaires."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:321
