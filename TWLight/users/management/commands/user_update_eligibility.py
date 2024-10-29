@@ -112,6 +112,8 @@ class Command(BaseCommand):
                     editor.wp_account_old_enough,
                     editor.wp_not_blocked,
                     editor.ignore_wp_blocks,
+                    editor.ignore_wp_edit_requirement,
+                    editor.ignore_wp_account_age_requirement,
                 )
                 # Determine Bundle eligibility.
                 editor.wp_bundle_eligible = editor_bundle_eligible(editor)

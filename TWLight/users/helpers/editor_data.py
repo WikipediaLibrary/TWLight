@@ -173,6 +173,8 @@ def editor_valid(
     account_old_enough: bool,
     not_blocked: bool,
     ignore_wp_blocks: bool,
+    ignore_wp_enough_edits: bool,
+    ignore_wp_account_old_enough: bool,
 ):
     """
     Check all eligibility criteria laid out in the terms of service.
@@ -184,13 +186,18 @@ def editor_valid(
     account_old_enough : bool
     not_blocked : bool
     ignore_wp_blocks : bool
-
+    ignore_wp_enough_edits : bool
+    ignore_wp_account_old_enough : bool
     Returns
     -------
     bool
         Answer to the question: is the editor account valid?
     """
-    if enough_edits and account_old_enough and (not_blocked or ignore_wp_blocks):
+    if (
+        (enough_edits or ignore_wp_enough_edits)
+        and (account_old_enough or ignore_wp_account_old_enough)
+        and (not_blocked or ignore_wp_blocks)
+    ):
         return True
     else:
         return False
