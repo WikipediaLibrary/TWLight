@@ -1184,8 +1184,6 @@ class EditorModelTestCase(TestCase):
 
         identity = copy.copy(FAKE_IDENTITY)
         global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
-
-        # Valid data
         global_userinfo["editcount"] = 499
         self.editor.update_editcount(global_userinfo["editcount"])
         enough_edits = editor_enough_edits(self.editor.wp_editcount)
@@ -1193,17 +1191,25 @@ class EditorModelTestCase(TestCase):
         account_old_enough = editor_account_old_enough(registered)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         ignore_wp_blocks = False
+
+        # Not enough edits, but ignore the requirement
         valid = editor_valid(
             enough_edits, account_old_enough, not_blocked, ignore_wp_blocks, True, False
         )
         self.assertTrue(valid)
+        # Reset edit count
+        global_userinfo["editcount"] = 501
+        self.editor.update_editcount(global_userinfo["editcount"])
+        enough_edits = editor_enough_edits(self.editor.wp_editcount)
 
+        # Account not old enough, but ignore the requirement
         valid = editor_valid(
-            enough_edits, False, not_blocked, ignore_wp_blocks, True, True
+            enough_edits, False, not_blocked, ignore_wp_blocks, False, True
         )
         self.assertTrue(valid)
 
-        valid = editor_valid(enough_edits, False, False, True, True, True)
+        # Account blocked, but ignore the requirement
+        valid = editor_valid(enough_edits, True, False, True, False, False)
         self.assertTrue(valid)
 
     def test_is_user_bundle_eligible(self):
