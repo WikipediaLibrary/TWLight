@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-09-30 12:34+0000\n"
-"PO-Revision-Date: 2024-10-24 12:28:13+0000\n"
+"PO-Revision-Date: 2024-11-04 12:21:43+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -487,7 +487,7 @@ msgstr ""
 #. Translators: Applications have a revision history section. If no previous versions of the application can be found, this message is shown.
 #: TWLight/applications/templates/applications/application_evaluation.html:359
 msgid "No previous versions."
-msgstr ""
+msgstr "Keng vireg Versiounen."
 
 #: TWLight/applications/templates/applications/application_list.html:37
 msgid "View applications which are..."
@@ -554,7 +554,7 @@ msgstr "Weider"
 #: TWLight/applications/templates/applications/application_list.html:236
 #: TWLight/applications/templates/applications/application_list.html:249
 msgid "Last"
-msgstr ""
+msgstr "Lescht"
 
 #: TWLight/applications/templates/applications/application_list.html:243
 msgid "Next page"
@@ -652,7 +652,7 @@ msgstr ""
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:97
 msgid "Set status"
-msgstr ""
+msgstr "Status änneren"
 
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
@@ -909,7 +909,7 @@ msgstr ""
 #. Translators: This labels a textfield where users can enter their email ID.
 #: TWLight/emails/forms.py:18
 msgid "Your email"
-msgstr "Äer E-Mail"
+msgstr "Är E-Mail"
 
 #. Translators: This is the help text for the email field in the contact us form letting users know the field is updated by value pulled from their respective user profiles.
 #: TWLight/emails/forms.py:21
@@ -924,7 +924,7 @@ msgstr "Message"
 #. Translators: Users click this button to receive a copy of the message sent via the contact us form
 #: TWLight/emails/forms.py:28
 msgid "Receive a copy of this message"
-msgstr ""
+msgstr "Eng Kopie vum Message kréien"
 
 #. Translators: This labels a button which users click to submit their email message.
 #. Translators: This labels a button which users click to submit their suggestion.
@@ -2050,7 +2050,7 @@ msgstr ""
 #. Translators: This text will show when a user clicks on the More Info button and the partner description shows.
 #: TWLight/templates/homepage.html:374
 msgid "Less info"
-msgstr ""
+msgstr "Manner Informatiounen"
 
 #. Translators: A button that reveals more information about a collection.
 #: TWLight/templates/homepage.html:377
@@ -2103,7 +2103,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/new_base.html:107
 msgid "About"
-msgstr ""
+msgstr "Iwwer"
 
 #. Translators: This link is at the bottom of every page and can be clicked by users to navigate to the Terms of Use page.
 #: TWLight/templates/new_base.html:113
@@ -2962,12 +2962,12 @@ msgstr ""
 #: TWLight/users/views.py:378 TWLight/users/views.py:464
 #: TWLight/users/views.py:517
 msgid "You must be logged in to do that."
-msgstr ""
+msgstr "Dir musst ageloggt si fir dat kënnen ze maachen."
 
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:411
 msgid "Your information has been updated."
-msgstr ""
+msgstr "Är Informatioune goufen aktualiséiert."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
 #: TWLight/users/views.py:448
@@ -3003,7 +3003,7 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:884
 msgid "10+ edits in the last month"
-msgstr ""
+msgstr "Méi wéi 10 Ännerungen am leschte Mount"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:886 TWLight/views.py:49
@@ -3013,5 +3013,5 @@ msgstr "Keng aktiv Spären"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
 msgid "10+ edits in the last 30 days"
-msgstr ""
+msgstr "Méi wéi 10 Ännerungen an de leschten 30 Deeg"
 
