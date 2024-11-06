@@ -3,7 +3,8 @@ import copy
 from datetime import datetime, date, timedelta
 import json
 import re
-import rest_framework
+from rest_framework import exceptions as rest_exceptions
+from rest_framework.test import APIRequestFactory
 from unittest.mock import patch, Mock
 from urllib.parse import urlparse
 
@@ -36,7 +37,7 @@ from .helpers.authorizations import get_all_bundle_authorizations
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
 from .models import UserProfile, Editor, Authorization
-from .views import MyLibraryView
+from .views import MyLibraryView, UserEligibility
 
 from TWLight.users.helpers.editor_data import (
     editor_valid,
@@ -954,7 +955,7 @@ class UserProfileModelTestCase(TestCase):
         """
         profile = UserProfile.objects.get(user=self.editor.user)
 
-        with self.assertRaises(rest_framework.exceptions.ValidationError):
+        with self.assertRaises(rest_exceptions.ValidationError):
             profile.favorites.add(self.proxy_partner_1)
 
 
@@ -2839,3 +2840,42 @@ class MyLibraryViewsTest(TestCase):
 
         self.assertIn(escape(self.email_partner_1.company_name), content)
         self.assertIn(escape(self.email_partner_2.company_name), content)
+
+
+class UserEligibilityAPITest(TestCase):
+    def test_user_eligibility_not_exists(self):
+        """
+        Test that, if a username does not exist in TWL, the API returns a 404 error.
+        """
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/eligibility/this_user_doest_exist82738")
+
+        response = UserEligibility.as_view()(request, "this_user_doest_exist82738", 0)
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_user_eligibility_exists(self):
+        """
+        Test that the API endpoint returns a user's eligibility
+        """
+        PartnerFactory(authorization_method=Partner.BUNDLE)
+        PartnerFactory(authorization_method=Partner.BUNDLE)
+        editor = EditorFactory(wp_username="Mr. Frankenstein")
+        editor.wp_bundle_eligible = True
+        editor.save()
+        # Create Bundle auth for this user
+        editor.update_bundle_authorization()
+
+        factory = APIRequestFactory()
+        request = factory.get("/api/v0/users/eligibility/Mr. Frankenstein")
+
+        response = UserEligibility.as_view()(request, editor.wp_username, 0)
+
+        expected_json = {
+            "wp_username": editor.wp_username,
+            "wp_sub": editor.wp_sub,
+            "wp_bundle_authorized": True,
+        }
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, expected_json)
