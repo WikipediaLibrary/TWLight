@@ -1035,7 +1035,12 @@ class EditorModelTestCase(TestCase):
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         ignore_wp_blocks = False
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertTrue(valid)
 
@@ -1044,7 +1049,12 @@ class EditorModelTestCase(TestCase):
         self.editor.update_editcount(global_userinfo["editcount"])
         enough_edits = editor_enough_edits(self.editor.wp_editcount)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertFalse(valid)
 
@@ -1056,7 +1066,12 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertTrue(valid)
 
@@ -1071,7 +1086,12 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertTrue(valid)
 
@@ -1084,7 +1104,12 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertFalse(valid)
 
@@ -1095,7 +1120,12 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertFalse(valid)
 
@@ -1106,7 +1136,12 @@ class EditorModelTestCase(TestCase):
         registered = editor_reg_date(identity, global_userinfo)
         account_old_enough = editor_account_old_enough(registered)
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertTrue(valid)
 
@@ -1114,7 +1149,12 @@ class EditorModelTestCase(TestCase):
         global_userinfo["merged"] = copy.copy(FAKE_MERGED_ACCOUNTS_BLOCKED)
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
         self.assertFalse(valid)
 
@@ -1123,8 +1163,53 @@ class EditorModelTestCase(TestCase):
         not_blocked = editor_not_blocked(global_userinfo["merged"])
         ignore_wp_blocks = True
         valid = editor_valid(
-            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks
+            enough_edits,
+            account_old_enough,
+            not_blocked,
+            ignore_wp_blocks,
+            False,
+            False,
         )
+        self.assertTrue(valid)
+
+    def test_is_user_valid_with_ignores(self):
+        """
+        Users must:
+        * Have >= 500 edits
+        * Be active for >= 6 months
+        * Have Special:Email User enabled
+        * Not be blocked on any projects
+        * unless the above are toggled to ignore
+        """
+
+        identity = copy.copy(FAKE_IDENTITY)
+        global_userinfo = copy.copy(FAKE_GLOBAL_USERINFO)
+        global_userinfo["editcount"] = 499
+        self.editor.update_editcount(global_userinfo["editcount"])
+        enough_edits = editor_enough_edits(self.editor.wp_editcount)
+        registered = editor_reg_date(identity, global_userinfo)
+        account_old_enough = editor_account_old_enough(registered)
+        not_blocked = editor_not_blocked(global_userinfo["merged"])
+        ignore_wp_blocks = False
+
+        # Not enough edits, but ignore the requirement
+        valid = editor_valid(
+            enough_edits, account_old_enough, not_blocked, ignore_wp_blocks, True, False
+        )
+        self.assertTrue(valid)
+        # Reset edit count
+        global_userinfo["editcount"] = 501
+        self.editor.update_editcount(global_userinfo["editcount"])
+        enough_edits = editor_enough_edits(self.editor.wp_editcount)
+
+        # Account not old enough, but ignore the requirement
+        valid = editor_valid(
+            enough_edits, False, not_blocked, ignore_wp_blocks, False, True
+        )
+        self.assertTrue(valid)
+
+        # Account blocked, but ignore the requirement
+        valid = editor_valid(enough_edits, True, False, True, False, False)
         self.assertTrue(valid)
 
     def test_is_user_bundle_eligible(self):

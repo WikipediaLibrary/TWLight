@@ -342,6 +342,16 @@ class Editor(models.Model):
         help_text="Ignore all criteria for bundle access?",
     )
 
+    ignore_wp_edit_requirement = models.BooleanField(
+        default=False,
+        help_text="Ignore edit count criteria for bundle access?",
+    )
+
+    ignore_wp_account_age_requirement = models.BooleanField(
+        default=False,
+        help_text="Ignore account age criteria for bundle access?",
+    )
+
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~ User-entered data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
     contributions = models.TextField(
         help_text="Wiki contributions, as entered by user", blank=True
@@ -875,6 +885,8 @@ class Editor(models.Model):
             self.wp_account_old_enough,
             self.wp_not_blocked,
             self.ignore_wp_blocks,
+            self.ignore_wp_edit_requirement,
+            self.ignore_wp_account_age_requirement,
         )
 
         self.wp_bundle_eligible = editor_bundle_eligible(self)
