@@ -59,7 +59,11 @@ from .forms import (
     CoordinatorEmailForm,
 )
 from .models import Editor, UserProfile, Authorization
-from .serializers import FavoriteCollectionSerializer, UserSerializer
+from .serializers import (
+    FavoriteCollectionSerializer,
+    UserSerializer,
+    ElegibilitySerializer,
+)
 from TWLight.applications.models import Application
 
 logger = logging.getLogger(__name__)
@@ -1250,3 +1254,30 @@ class FavoriteCollectionView(APIView):
                 response_status = status.HTTP_201_CREATED
             return Response(serializer.data, status=response_status)
         return Response(serializer.errors, status=response_status)
+
+
+class UserEligibility(APIView):
+    """
+    API endpoint returning whether a user is eligible to use The Wikipedia Library
+    """
+
+    def get(self, request, wp_username, version, format=None):
+        try:
+            editor = Editor.objects.get(wp_username=wp_username)
+        except Editor.DoesNotExist:
+            message = "Couldn't find an editor with this username."
+            return Response(message, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ElegibilitySerializer(
+            editor,
+            data={
+                "wp_sub": editor.wp_sub,
+                "wp_username": editor.wp_username,
+                "wp_bundle_authorized": editor.wp_bundle_authorized,
+            },
+            partial=True,
+        )
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else:
+            return Response(message, status=status.HTTP_400)
