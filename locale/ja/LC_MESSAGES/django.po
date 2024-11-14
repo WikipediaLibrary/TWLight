@@ -8,6 +8,7 @@
 # Author: Fumi37s
 # Author: Ice bulldog
 # Author: Kkairri
+# Author: Kocgs
 # Author: Kokage si
 # Author: MathXplore
 # Author: MuratTheTurkish
@@ -29,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-08 00:26+0000\n"
-"PO-Revision-Date: 2024-11-11 12:22:40+0000\n"
+"PO-Revision-Date: 2024-11-14 12:24:58+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,7 +63,7 @@ msgstr "利用者情報"
 #: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr "<p><small><i>利用者の個人情報は\n当方の<a class='twl-links'>href='{terms_url}'個人情報保護の方針</a>に従って扱います。</i></small></p>"
+msgstr "<p><small><i>利用者の個人情報は\n当方の<a class='twl-links'>href='{terms_url}'個人情報保護の方針</a>に従い扱われます。</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
@@ -124,12 +125,12 @@ msgstr "利用者の所属"
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
 #: TWLight/applications/helpers.py:89
 msgid "Why do you want access to this resource?"
-msgstr "この情報源を利用する目的は何ですか？"
+msgstr "この情報源の利用目的は何ですか？"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
 #: TWLight/applications/helpers.py:91
 msgid "Which book do you want?"
-msgstr "どの書籍をご希望ですか？"
+msgstr "ご希望の書籍"
 
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
 #: TWLight/applications/helpers.py:93
@@ -139,7 +140,7 @@ msgstr "特記事項"
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:95
 msgid "You must agree with the partner's terms of use"
-msgstr "利用に当たり、必ず提携組織の定める使用規約に同意していただきます。"
+msgstr "ご利用にあたり、必ず提携組織の定める使用規約に同意していただく必要がございます。"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
@@ -167,17 +168,17 @@ msgstr "所属"
 #: TWLight/applications/helpers.py:112
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
-msgstr "申請した標題"
+msgstr "申請したタイトル"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:114
 msgid "Agreed with terms of use"
-msgstr "使用規約に同意済み"
+msgstr "利用規約に同意済み"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:116
 msgid "Account email"
-msgstr "登録メールアカウント"
+msgstr "登録メールア"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
@@ -193,7 +194,7 @@ msgstr "メール"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr "利用者規定が更新されました。利用者がログインして最新の規約に同意するまで、申請は保留されます。"
+msgstr "利用規約が更新されました。利用者がログインして最新の規約に同意するまで、申請は保留されます。"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -255,7 +256,7 @@ msgstr "終了"
 #: TWLight/applications/models.py:325
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr "参照先のURL: {access_url}"
+msgstr "参照先のURL：{access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331
@@ -265,7 +266,7 @@ msgstr "申し込みが受理された後、1から2週間以内に詳細情報�
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr "この提携組織は図書館バンドル制度に加盟しており、申請の必要はありません。そのためこの申請は無効とします。"
+msgstr "この提携組織は図書館バンドル制度に加盟しており、申請の必要はありません。そのためこの申請は無効です。"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
@@ -278,7 +279,7 @@ msgstr "この申請は保留されています。現在、提携組織から提
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr "調整役の皆さんへ: このページには、本名やメールアドレスなどの個人情報が含まれている可能性があります。これらは秘匿すべき情報であることに注意してください。"
+msgstr "調整役の皆さんへ：このページには、本名やメールアドレスなどの個人情報が含まれている可能性があります。これらは秘匿すべき情報であることに注意してください。"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
@@ -362,7 +363,7 @@ msgstr "不明"
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr "利用者情報を入力するさい、まず居住国を優先して入力するよう申請者にお勧めください。"
+msgstr "利用者情報を入力する際は、まず居住国を優先して入力するよう申請者にお勧めください。"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
@@ -1765,7 +1766,7 @@ msgstr "提案を削除しました。"
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:11
 msgid "Bad Request"
-msgstr "無効な要求です"
+msgstr "無効な要求"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:15
@@ -2202,7 +2203,7 @@ msgstr "個人データを制限する"
 #. Translators: Users must click this button when registering to agree to the website terms of use.
 #: TWLight/users/forms.py:177
 msgid "I agree with the terms of use"
-msgstr "利用規約に賛同します"
+msgstr "利用規約に同意します"
 
 #. Translators: This text explains how to disagree to the site's terms of use and the restrictions that will come into effect when users disagree to the terms of use.
 #: TWLight/users/forms.py:185
@@ -2397,7 +2398,7 @@ msgstr "貢献"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for updating a user's description of themself.
 #: TWLight/users/templates/users/editor_detail_data.html:43
 msgid "(update)"
-msgstr "(更新)"
+msgstr "（更新）"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:54
@@ -2427,12 +2428,12 @@ msgstr "アカウント登録の最少年齢よりも年上ですか？"
 #: TWLight/users/templates/users/editor_detail_data.html:164
 #: TWLight/users/templates/users/editor_detail_data.html:182
 msgid "Unknown (requires user login)"
-msgstr "不明 (利用者のログイン待ち)"
+msgstr "不明（利用者のログイン待ち）"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:100
 msgid "Satisfies minimum edit count?"
-msgstr "編集回数の最低値を満たしますか？"
+msgstr "編集回数の要件を満たしていますか？"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
