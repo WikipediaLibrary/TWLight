@@ -247,7 +247,9 @@ class OAuthBackend(object):
         logger.info("Identifying user...")
         try:
             identity = handshaker.identify(access_token, 15)
+            print("identity", identity)
         except OAuthException as e:
+            print("identity", e)
             logger.warning(e)
             messages.warning(
                 request,
