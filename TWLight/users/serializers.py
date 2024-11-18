@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers
-from TWLight.users.models import UserProfile, Editor
+from TWLight.users.models import UserProfile
 
 
 class FavoriteCollectionSerializer(serializers.Serializer):
@@ -40,14 +40,4 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         # Since we only care about one field we could probably return data in a more
         # sensible format, but this is totally functional.
-        fields = ["wp_username"]
-
-
-class ElegibilitySerializer(serializers.ModelSerializer):
-    wp_sub = serializers.IntegerField()
-    wp_username = serializers.CharField()
-    wp_bundle_authorized = serializers.BooleanField()
-
-    class Meta:
-        model = Editor
-        fields = ["wp_sub", "wp_username", "wp_bundle_authorized"]
+        fields = ("wp_username",)
