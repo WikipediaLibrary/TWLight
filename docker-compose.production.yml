@@ -28,7 +28,8 @@ secrets:
 
 services:
   migrate:
-    image: quay.io/wikipedialibrary/twlight:branch_production
+    # @FIXME: https://phabricator.wikimedia.org/T380199
+    image: quay.io/wikipedialibrary/twlight:commit_3b81e5d27afa45db6ae1ec8c85e7f4cebea53c03
     command: >
       bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
     restart: on-failure
@@ -53,7 +54,8 @@ services:
       - TWLIGHT_OAUTH_CONSUMER_SECRET
       - TWLIGHT_EZPROXY_SECRET
   twlight:
-    image: quay.io/wikipedialibrary/twlight:branch_production
+    # @FIXME: https://phabricator.wikimedia.org/T380199
+    image: quay.io/wikipedialibrary/twlight:commit_3b81e5d27afa45db6ae1ec8c85e7f4cebea53c03
     env_file:
       - ./conf/production.twlight.env
     volumes:
