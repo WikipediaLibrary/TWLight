@@ -252,7 +252,9 @@ class OAuthBackend(object):
             messages.warning(
                 request,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
-                _("You tried to log in but presented an invalid access token."),
+                # fmt: off
+                _("There was a problem with the access token. Please try again later or contact The Wikipedia Library team if the problem persists."),
+                # fmt: on
             )
             raise PermissionDenied
 
