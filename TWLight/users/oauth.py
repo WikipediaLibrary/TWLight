@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.core.exceptions import DisallowedHost, PermissionDenied
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.http.request import QueryDict
 from django.views.generic.base import View
@@ -248,11 +248,21 @@ class OAuthBackend(object):
         try:
             identity = handshaker.identify(access_token, 15)
         except OAuthException as e:
+            contact_url = reverse("contact")
             logger.warning(e)
             messages.warning(
                 request,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
-                _("You tried to log in but presented an invalid access token."),
+                mark_safe(
+                    # fmt: off
+                    _("There was a problem with the access token. Please try again later or {contact_link} if the problem persists.")
+                    # fmt: on
+                    .format(
+                        contact_link="<a href='"
+                        + contact_url
+                        + "' class='twl-links' target='_blank' rel='noopener noreferrer'>contact The Wikipedia Library team</a>"
+                    )
+                ),
             )
             raise PermissionDenied
 
