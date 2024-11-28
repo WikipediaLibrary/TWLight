@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:34+0000\n"
+"PO-Revision-Date: 2024-11-28 12:23:30+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2229,7 +2229,7 @@ msgstr "先方へのアクセス権がないため、パートナー組織の {p
 #: TWLight/users/oauth.py:258
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "アクセス・トークンに問題がありました。もう一度しばらくしてから試すか、問題が解決しない場合は、{contact_link} にお問い合わせください。"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:326 TWLight/users/oauth.py:474
