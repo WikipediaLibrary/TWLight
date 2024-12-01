@@ -2464,7 +2464,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "Ga alama kuna da toshe mai aiki akan asusunka. Idan kun cika wasu ƙa'idodin har yanzu ana iya ba ku izinin shiga ɗakin karatu - don Allah <a class=\"twl-links\" href=\"%(contact_url)s\"> tuntube mu </a>."
+msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
