@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:32+0000\n"
+"PO-Revision-Date: 2024-12-02 12:23:20+0000\n"
 "Language: en_gb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,7 +68,7 @@ msgstr "Your application to {partner}"
 #: TWLight/applications/forms.py:220
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "You must register at {url} before applying."
+msgstr ""
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
@@ -360,9 +360,8 @@ msgstr "Please request the applicant add their country of residence to their pro
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "Account email"
+msgstr ""
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -1249,9 +1248,8 @@ msgstr ""
 
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:289
-#, fuzzy
 msgid "Not searchable"
-msgstr "Account email"
+msgstr ""
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1305,9 +1303,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/collection_tile.html:57
 #: TWLight/users/templates/users/available_collection_tile.html:64
 #: TWLight/users/templates/users/user_collection_tile.html:76
-#, fuzzy
 msgid "Not Available"
-msgstr "Account email"
+msgstr ""
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1366,9 +1363,8 @@ msgstr "Filter by..."
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
-#, fuzzy
 msgid "Filter collections"
-msgstr "Access Collection"
+msgstr ""
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -1696,9 +1692,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Access Collection"
+msgstr ""
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
@@ -2464,7 +2459,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "Ga alama kuna da toshe mai aiki akan asusunka. Idan kun cika wasu ƙa'idodin har yanzu ana iya ba ku izinin shiga ɗakin karatu - don Allah <a class=\"twl-links\" href=\"%(contact_url)s\"> tuntube mu </a>."
+msgstr ""
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
