@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:39+0000\n"
+"PO-Revision-Date: 2024-12-09 12:23:24+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2222,7 +2222,7 @@ msgstr "無法添加合作夥伴 {partner} 到您的個人最愛，因為您無�
 #: TWLight/users/oauth.py:258
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "存取權杖發生問題，請稍後再試一次。若問題持續發生，請{contact_link}。"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:326 TWLight/users/oauth.py:474
