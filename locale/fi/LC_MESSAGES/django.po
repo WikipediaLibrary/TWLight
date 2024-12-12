@@ -12,6 +12,7 @@
 # Author: Pyscowicz
 # Author: Rönttönen
 # Author: Sabelöga
+# Author: Samoasambia
 # Author: Stryn
 # Author: Veikk0.ma
 # Author: Yupik
@@ -21,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:33+0000\n"
+"PO-Revision-Date: 2024-12-12 12:28:08+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi\n"
@@ -521,9 +522,8 @@ msgid "Sent"
 msgstr "Lähetetty"
 
 #: TWLight/applications/templates/applications/application_list.html:63
-#, fuzzy
 msgid "Up for renewal"
-msgstr "Uusittavissa olevat käyttöoikeuslahjoitukset"
+msgstr "Uusittavissa"
 
 #. Translators: Coordinators can filter the page which shows a list of applications. This is the heading for the box where filters are selected.
 #: TWLight/applications/templates/applications/application_list.html:78
@@ -1213,9 +1213,8 @@ msgstr "Kielet"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Kielet"
+msgstr "Kaikki kielet"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -2080,15 +2079,14 @@ msgstr "Lisätietoja"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "Wikipedian Lähdekirjasto"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Yli 90 suosittua vain tilaajille tarkoitettua tietokantaa maailmalta, vapaasti kaikille wikipedisteille"
+msgstr "Yli 100 suosittua, vain tilaajille tarkoitettua tietokantaa ympäri maailman, joissa on sisältöä %(no_of_languages)s kielellä, ilmaiseksi kaikille wikipedisteille"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2466,9 +2464,8 @@ msgstr "Täyttikö tämä käyttäjä Library Bundlessa asetetut ehdot viimeisel
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:177
-#, fuzzy
 msgid "Satisfies recent edit count?"
-msgstr "Vastaa käyttöehtoja?"
+msgstr "Vastaa muokkausmäärävaatimuksia?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:198
@@ -2482,9 +2479,8 @@ msgstr "(näytä käyttäjän järjestelmänlaajuiset muokkaukset)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:215
-#, fuzzy
 msgid "Recent global edit count *"
-msgstr "Järjestelmänlaajuisten muokkausten määrä *"
+msgstr "Järjestelmänlaajuinen tuoreiden muokkausten määrä *"
 
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:220
