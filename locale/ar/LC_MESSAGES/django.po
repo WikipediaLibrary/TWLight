@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:31+0000\n"
+"PO-Revision-Date: 2024-12-19 12:25:36+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -2545,7 +2545,7 @@ msgstr "البريد الإلكتروني *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:288
 msgid "update"
-msgstr "(تحديث)"
+msgstr "تحديث"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:321
@@ -2655,7 +2655,7 @@ msgstr "كلمة السر"
 #: TWLight/users/templates/users/user_email_preferences.html:25
 #: TWLight/users/views.py:400
 msgid "Update"
-msgstr "(تحديث)"
+msgstr "تحديث"
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
