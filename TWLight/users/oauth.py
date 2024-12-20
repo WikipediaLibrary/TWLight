@@ -251,7 +251,7 @@ class OAuthBackend(object):
             logger.warning(e)
             # Translators: The message shown for the contact link
             # to the Wikipedia Library team upon errors when logging in.
-            contact_message = "contact The Wikipedia Library team"
+            contact_message = _("contact The Wikipedia Library team")
             messages.warning(
                 request,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
