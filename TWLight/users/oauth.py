@@ -250,6 +250,8 @@ class OAuthBackend(object):
         except OAuthException as e:
             contact_url = reverse("contact")
             logger.warning(e)
+            # Translators: This message is shown in the url to contact the Wikipedia Library when errors logging in.
+            contact_message = "contact The Wikipedia Library team"
             messages.warning(
                 request,
                 # Translators: This error message is shown when there's a problem with the authenticated login process.
@@ -260,7 +262,9 @@ class OAuthBackend(object):
                     .format(
                         contact_link="<a href='"
                         + contact_url
-                        + "' class='twl-links' target='_blank' rel='noopener noreferrer'>contact The Wikipedia Library team</a>"
+                        + "' class='twl-links' target='_blank' rel='noopener noreferrer'>"
+                        + contact_message
+                        + "</a>"
                     )
                 ),
             )
