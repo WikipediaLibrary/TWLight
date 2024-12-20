@@ -26,7 +26,6 @@ from urllib.parse import urlencode
 
 from .models import Editor, Session
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -250,7 +249,8 @@ class OAuthBackend(object):
         except OAuthException as e:
             contact_url = reverse("contact")
             logger.warning(e)
-            # Translators: This message is shown in the url to contact the Wikipedia Library when errors logging in.
+            # Translators: The message shown for the contact link
+            # to the Wikipedia Library team upon errors when logging in.
             contact_message = "contact The Wikipedia Library team"
             messages.warning(
                 request,
