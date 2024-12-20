@@ -249,21 +249,24 @@ class OAuthBackend(object):
         except OAuthException as e:
             contact_url = reverse("contact")
             logger.warning(e)
-            # Translators: The message shown for the contact link
-            # to the Wikipedia Library team upon errors when logging in.
-            contact_message = _("contact The Wikipedia Library team")
+            # Translators: The message shown for the contact link to the team when errors logging in.
+            contact_link_string = _("contact The Wikipedia Library team")
+            # Translators: This error message is shown when there's a problem with the authenticated login process.
+            contact_string = _(
+                """There was a problem with the access token. Please try again later or {contact_link} if the"
+                problem persists."""
+            )
             messages.warning(
                 request,
-                # Translators: This error message is shown when there's a problem with the authenticated login process.
                 mark_safe(
                     # fmt: off
-                    _("There was a problem with the access token. Please try again later or {contact_link} if the problem persists.")
+                    contact_string
                     # fmt: on
                     .format(
                         contact_link="<a href='"
                         + contact_url
                         + "' class='twl-links' target='_blank' rel='noopener noreferrer'>"
-                        + contact_message
+                        + contact_link_string
                         + "</a>"
                     )
                 ),
