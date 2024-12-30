@@ -9,13 +9,14 @@
 # Author: Yahya
 # Author: আফতাবুজ্জামান
 # Author: কমলেশ মন্ডল
+# Author: খাত্তাব হাসান
 msgid ""
 msgstr ""
 ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2024-11-21 18:25+0000\n"
-"PO-Revision-Date: 2024-11-25 12:23:31+0000\n"
+"PO-Revision-Date: 2024-12-30 12:23:43+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,7 +55,7 @@ msgstr "<p><small><i>আপনার ব্যক্তিগত তথ্য �
 #: TWLight/applications/forms.py:189
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr ""
+msgstr "{partner} এর কাছে আপনার আবেদন"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:220
@@ -84,13 +85,13 @@ msgstr "নবায়ন নিশ্চায়ন"
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
 #: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:97
 msgid "The email for your account on the partner's website"
-msgstr ""
+msgstr "অংশীদারের ওয়েবসাইটে আপনার অ্যাকাউন্টের জন্য ইমেইল"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:100
 msgid "The number of months you wish to have this access for before renewal is required"
-msgstr ""
+msgstr "পুনর্নবীকরণের আগে আপনি কত মাস এই প্রবেশাধিকার পেতে চান তা উল্লেখ করা প্রয়োজন"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:81
@@ -125,7 +126,7 @@ msgstr "আর কিছু যা আপন বলতে চান"
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:95
 msgid "You must agree with the partner's terms of use"
-msgstr ""
+msgstr "আপনাকে অবশ্যই অংশীদারের ব্যবহারের শর্তাবলীর সাথে একমত হতে হবে"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
@@ -153,12 +154,12 @@ msgstr "অন্তর্ভুক্তি"
 #: TWLight/applications/helpers.py:112
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
-msgstr ""
+msgstr "শিরোনাম অনুরোধ করা হয়েছে"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:114
 msgid "Agreed with terms of use"
-msgstr ""
+msgstr "ব্যবহারের শর্তাবলীর সাথে একমত"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:116
@@ -179,7 +180,7 @@ msgstr "ইমেইল"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "আমাদের ব্যবহারের শর্তাবলী পরিবর্তিত হয়েছে। আপনি লগ ইন না হওয়া পর্যন্ত এবং আমাদের হালনাগাদ করা শর্তাবলীতে সম্মত না হওয়া পর্যন্ত আপনার আবেদনগুলি প্রক্রিয়া করা হবে না।"
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -205,7 +206,7 @@ msgstr "অনুমোদিত নয়"
 #. Translators: This is the status of an application that has been sent to a partner upon approval.
 #: TWLight/applications/models.py:62
 msgid "Sent to partner"
-msgstr ""
+msgstr "অংশীদারের কাছে প্রেরিত"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:64
@@ -235,7 +236,7 @@ msgstr "১২ মাস"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:159
 msgid "Finalized"
-msgstr ""
+msgstr "চূড়ান্ত হয়েছে"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:325
@@ -246,7 +247,7 @@ msgstr "প্রবেশের ইউআরএল: {access_url}"
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "একবার প্রক্রিয়া হয়ে গেলে আপনি এক বা দুই সপ্তাহের মধ্যে প্রবেশাধিকারের বিশদ বিবরণ পাওয়ার আশা করতে পারেন।"
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
