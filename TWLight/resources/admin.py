@@ -82,6 +82,7 @@ admin.site.register(Partner, PartnerAdmin)
 class ContactAdmin(admin.ModelAdmin):
     search_fields = ("partner__company_name", "full_name", "short_name")
     list_display = ("id", "title", "full_name", "partner", "email")
+    list_select_related = ["partner"]
 
 
 admin.site.register(Contact, ContactAdmin)
@@ -90,6 +91,7 @@ admin.site.register(Contact, ContactAdmin)
 class VideoAdmin(admin.ModelAdmin):
     search_fields = ("partner__company_name", "tutorial_video_url")
     list_display = ("partner", "tutorial_video_url", "id")
+    list_select_related = ["partner"]
 
 
 admin.site.register(Video, VideoAdmin)
@@ -99,6 +101,7 @@ class AccessCodeAdmin(admin.ModelAdmin):
     search_fields = ("code", "partner__company_name")
     list_display = ("code", "partner", "authorization")
     raw_id_fields = ("authorization",)
+    list_select_related = ["partner", "authorization"]
 
     change_list_template = "accesscode_changelist.html"
 
@@ -193,9 +196,11 @@ class AccessCodeAdmin(admin.ModelAdmin):
 
                 # Only upload this code if it doesn't already exist. If it does,
                 # increment a counter so we can report that.
-                access_code_partner_check = AccessCode.objects.filter(
-                    code=access_code, partner=partner_pk
-                ).count()
+                access_code_partner_check = (
+                    AccessCode.objects.select_related("partner")
+                    .filter(code=access_code, partner=partner_pk)
+                    .count()
+                )
                 if access_code_partner_check != 0:
                     skipped_codes += 1
                 else:

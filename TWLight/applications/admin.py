@@ -10,6 +10,7 @@ class ApplicationAdmin(VersionAdmin):
     list_display = ("id", "partner", "editor")
     list_filter = ("status", "partner")
     raw_id_fields = ("editor", "sent_by", "parent", "partner")
+    list_select_related = ["partner", "sent_by", "editor"]
 
     # reversion options
     history_latest_first = True

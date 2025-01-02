@@ -80,6 +80,7 @@ class AuthorizationAdmin(admin.ModelAdmin):
         "authorizer__editor__wp_username",
         "user__editor__wp_username",
     ]
+    list_select_related = ["user", "authorizer", "authorizer__editor", "user__editor"]
 
     form = AuthorizationAdminForm
 
