@@ -26,7 +26,6 @@ from urllib.parse import urlencode
 
 from .models import Editor, Session
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -252,15 +251,18 @@ class OAuthBackend(object):
             logger.warning(e)
             messages.warning(
                 request,
-                # Translators: This error message is shown when there's a problem with the authenticated login process.
                 mark_safe(
                     # fmt: off
+                    # Translators: This error message is shown when there's a problem with the authenticated login process.
                     _("There was a problem with the access token. Please try again later or {contact_link} if the problem persists.")
                     # fmt: on
                     .format(
                         contact_link="<a href='"
                         + contact_url
-                        + "' class='twl-links' target='_blank' rel='noopener noreferrer'>contact The Wikipedia Library team</a>"
+                        + "' class='twl-links' target='_blank' rel='noopener noreferrer'>"
+                        # Translators: The message shown for the contact link to the team when errors logging in.
+                        + _("contact The Wikipedia Library team")
+                        + "</a>"
                     )
                 ),
             )
