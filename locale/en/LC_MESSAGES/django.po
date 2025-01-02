@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2024-11-21 18:25+0000\n"
+"POT-Creation-Date: 2025-01-02 17:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2514,71 +2514,77 @@ msgstr ""
 msgid "{wp_username}"
 msgstr ""
 
-#: TWLight/users/oauth.py:258
+#. Translators: This error message is shown when there's a problem with the authenticated login process.
+#: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid ""
 "There was a problem with the access token. Please try again later or "
 "{contact_link} if the problem persists."
 msgstr ""
 
+#. Translators: The message shown for the contact link to the team when errors logging in.
+#: TWLight/users/oauth.py:264
+msgid "contact The Wikipedia Library team"
+msgstr ""
+
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
-#: TWLight/users/oauth.py:326 TWLight/users/oauth.py:474
+#: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476
 #, python-brace-format
 msgid "{domain} is not an allowed host."
 msgstr ""
 
 #. Translators: This warning message is shown to users when OAuth handshaker can't be initiated.
-#: TWLight/users/oauth.py:394
+#: TWLight/users/oauth.py:396
 msgid "Handshaker not initiated, please try logging in again."
 msgstr ""
 
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
-#: TWLight/users/oauth.py:418
+#: TWLight/users/oauth.py:420
 msgid ""
 "To view this link you need to be an eligible library user. Please login to "
 "continue."
 msgstr ""
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
-#: TWLight/users/oauth.py:460
+#: TWLight/users/oauth.py:462
 msgid "Did not receive a valid oauth response."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:487
+#: TWLight/users/oauth.py:489
 msgid "Could not find handshaker."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:499
+#: TWLight/users/oauth.py:501
 msgid "No session token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:511
+#: TWLight/users/oauth.py:513
 msgid "No request token."
 msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails.
-#: TWLight/users/oauth.py:528
+#: TWLight/users/oauth.py:530
 msgid "Access token generation failed, please try logging in again."
 msgstr ""
 
 #. Translators: This message is shown when more information is available on another page. Do not translate {issue}
-#: TWLight/users/oauth.py:537
+#: TWLight/users/oauth.py:539
 #, python-brace-format
 msgid "See {issue} for more information"
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:557
+#: TWLight/users/oauth.py:559
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:565
+#: TWLight/users/oauth.py:567
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2586,7 +2592,7 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:577
+#: TWLight/users/oauth.py:579
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
