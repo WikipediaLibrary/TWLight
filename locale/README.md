@@ -1,8 +1,9 @@
 # README
-This is where Django will look for translation files, according to
-https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#how-django-discovers-translations .
+This is where Django will look for translation files, according to https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#how-django-discovers-translations.
 
-See https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#localization-how-to-create-language-files for full instructions on creating language files. See https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html for documentation of the `.po` format.
+See https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#localization-how-to-create-language-files for full instructions on creating language files.
+
+See https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html for documentation of the `.po` format.
 
 ## Translation process (for translators)
 
@@ -14,11 +15,11 @@ msgid "Apply"
 msgstr ""
 ```
 
-The first line is the place in the codebase where you can find the translation string; if this is useful to you, the code lives at https://github.com/thatandromeda/TWLight/ ; feel free to ignore this information if it is not useful to you.
+The first line is the place in the codebase where you can find the translation string; if this is useful to you, the code lives at https://github.com/WikipediaLibrary/TWLight/; feel free to ignore this information if it is not useful to you.
 
 The msgid is the original English; please leave this alone.
 
-Fill in the quotation marks in msgstr with the target language.
+Fill in the quotation marks in `msgstr` with the target language.
 
 Please do this in a *text editor* and not a word processor, if those are meaningful terms to you; if they're not, don't worry, just edit with whatever tools you like and save it as text format. Please also preserve the line breaks and the number of quotation marks, if possible.
 
@@ -58,9 +59,9 @@ If this is not the first time a translation has been made in your target languag
 
 Run these commands from the root `TWLight/` directory.
 
-1.`python manage.py makemessages -l <language_code> -e py,html` (make a file for a new language); and/or
-2. `python manage.py makemessages -a` (update existing files)
-3. Send the .po files to your translator(s) and have them fill in translation strings.
+1. `python manage.py makemessages -l <language_code> -e py,html` (make a file for a new language); and/or
+2. `python manage.py makemessages -a` (update existing files) 
+3. Send the .po files to your translator(s) and have them fill in translation strings
 4. `python manage.py compilemessages` (compile .po files processed by your translators into .mo files usable by the computer)
 
 When you deploy a new language:
@@ -70,18 +71,18 @@ When you deploy a new language:
     * Translatable database fields will need to add an additional field for the new language.
     * You need to do this *on the server* as well as on localhost; the migrations for the translated fields in django-taggit are outside of your codebase's version control since it's a dependency, so the new migrations will not automatically come into being on the server when you deploy the code.
 
-The contents of the `LANGUAGES` variable will automatically be offered to users as options for site translation on their user profile pages. If they choose a language that doesn't yet have a translation file available, the site will render in the default language specified by LANGUAGE_CODE. (Users may not be able to read this, but the app will not crash.) If the translation file is incomplete, translation strings will be rendered in their original language (probably English).
+The contents of the `LANGUAGES` variable will automatically be offered to users as options for site translation on their user profile pages. If they choose a language that doesn't yet have a translation file available, the site will render in the default language specified by `LANGUAGE_CODE`. (Users may not be able to read this, but the app will not crash.) If the translation file is incomplete, translation strings will be rendered in their original language (probably English).
 
 ## Troubleshooting (for sysadmins)
 ### Having trouble setting things up?
 
-The `locale/ `directory must be manually created (but it has been, so this should not be a problem).
+The `locale/` directory must be manually created (but it has been, so this should not be a problem).
 
 To make your translation files, you need to run `django-admin.py makemessages -l <language_code> --pythonpath=</path/to/your/project> -e py,html` (not manage.py, apparently).
 
-If you're working on a virtualenv, deactivate it so django-admin can find gettext.
+If you're working on a virtualenv, deactivate it so `django-admin.py` can find `gettext`.
 
-You can manage your gettext installation with homebrew, if you have it. If django-admin claims your version isn't high enough but brew thinks it is, `brew link --force gettext` to tell the system to use the brew version.
+You can manage your `gettext` installation with `homebrew`, if you have it. If `django-admin` claims your version isn't high enough but `brew` thinks it is, `brew link --force gettext` to tell the system to use the brew version.
 
 ### Getting errors like `/path/to/django.po:439:18: invalid multibyte sequence`?
 
@@ -92,7 +93,7 @@ Check your encoding:
 
 Output will look something like `path/to/django.po: text/plain; charset=iso-8859-1`.
 
-Change your encoding to utf-8: `iconv -f iso-8859-1 -t utf-8 path/to/django.po `
+Change your encoding to utf-8: `iconv -f iso-8859-1 -t utf-8 path/to/django.po`.
 
 The from setting should match what `file` told you about the file encoding.
 
