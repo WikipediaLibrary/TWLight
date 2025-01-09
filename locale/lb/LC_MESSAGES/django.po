@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Luxembourgish (Lëtzebuergesch)
 # Exported from translatewiki.net
 #
+# Author: GilPe
 # Author: Robby
 # Author: Volvox
 msgid ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-02 17:13+0000\n"
-"PO-Revision-Date: 2025-01-06 12:23:06+0000\n"
+"PO-Revision-Date: 2025-01-09 12:23:39+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:42
 #: TWLight/users/templates/users/available_collection_tile.html:89
 msgid "Apply"
-msgstr ""
+msgstr "Ufroen"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:170
@@ -42,19 +43,19 @@ msgstr "Iwwer Iech"
 #: TWLight/applications/forms.py:179
 #, python-brace-format
 msgid "<p><small><i>Your personal data will be processed according to our <a class='twl-links' href='{terms_url}'> privacy policy</a>.</i></small></p>"
-msgstr ""
+msgstr "<p><small><i>Är perséinlech Donnéeë ginn no eiser <a class='twl-links' href='{terms_url}'>Dateschutzpolitik</a> verschafft.</i></small></p>"
 
 #. Translators: This is the title of the application form page, where users enter information required for the application. It lets the user know which partner application they are entering data for. {partner}
 #: TWLight/applications/forms.py:189
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr ""
+msgstr "Är Demande fir {partner}"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:220
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr ""
+msgstr "Virum Ufroe musst Dir Iech op {url} umellen."
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
@@ -67,18 +68,18 @@ msgstr "Benotzernumm"
 #. Translators: When filling out an application, this labels the name of the publisher or database the user is applying to
 #: TWLight/applications/forms.py:296 TWLight/applications/helpers.py:87
 msgid "Partner name"
-msgstr ""
+msgstr "Numm vum Partner"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:312
 msgid "Renewal confirmation"
-msgstr ""
+msgstr "Erneierungsconfirmatioun"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
 #: TWLight/applications/forms.py:329 TWLight/applications/helpers.py:97
 msgid "The email for your account on the partner's website"
-msgstr ""
+msgstr "Den E-Mail fir Äre Kont op der Websäit vum Partner"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
@@ -119,7 +120,7 @@ msgstr "Soss Bemierkungen"
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:95
 msgid "You must agree with the partner's terms of use"
-msgstr ""
+msgstr "Dir musst mat de Benotzungskonditioune vum Partner averstane sinn"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
@@ -140,7 +141,7 @@ msgstr "Land vum Wunnsëtz"
 #. Translators: When sending application data to partners, this is the text labelling a user's affiliation
 #: TWLight/applications/helpers.py:110
 msgid "Affiliation"
-msgstr ""
+msgstr "Affiliatioun"
 
 #. Translators: When sending application data to partners, this is the text labelling the specific title (e.g. a particular book) a user requested
 #. Translators: This labels the section of an application showing which resource the user requested access to. 'Title' refers to the title of a book/paper/journal.
@@ -152,7 +153,7 @@ msgstr "Titel obligatoresch"
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:114
 msgid "Agreed with terms of use"
-msgstr ""
+msgstr "Averstane mat de Benotzungskonditiounen"
 
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:116
@@ -173,17 +174,17 @@ msgstr "E-Mail"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr ""
+msgstr "is Benotzungskonditiounen hu g'ännert. Är Ufroe ginn net verschafft bis Dir Iech ageloggt hutt a mat eisen aktualiséierte Konditiounen averstane sidd."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
 msgid "Pending"
-msgstr ""
+msgstr "An der Schwief"
 
 #. Translators: This is the status of an application that reviewers have asked questions about.
 #: TWLight/applications/models.py:56
 msgid "Under discussion"
-msgstr ""
+msgstr "Gëtt diskutéiert"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #: TWLight/applications/models.py:58
@@ -199,12 +200,12 @@ msgstr "Net akzeptéiert"
 #. Translators: This is the status of an application that has been sent to a partner upon approval.
 #: TWLight/applications/models.py:62
 msgid "Sent to partner"
-msgstr ""
+msgstr "Un de Partner geschéckt"
 
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:64
 msgid "Invalid"
-msgstr ""
+msgstr "Net valabel"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
@@ -240,7 +241,7 @@ msgstr "Zougangs-URL: {access_url}"
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr ""
+msgstr "Dir kënnt dermat rechnen, datt Dir d'Detailer fir den Accès bannent enger oder zwou Woche kritt, nodeems se verschafft goufen."
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
@@ -250,7 +251,7 @@ msgstr ""
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr ""
+msgstr "D'Ufro ass op der Waardelëscht well dësem Partner den Ament keng Zougäng zur Verfügung stinn."
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
@@ -258,12 +259,12 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr ""
+msgstr "Koordinatoren: Dës Säit ka perséinlech Donnéeë wéi déi richteg Nimm an d'E-Mail Adressen enthalen. Denkt drun, datt dës Informatioune vertraulech sinn."
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
 msgid "Evaluate application"
-msgstr ""
+msgstr "Ufro préiwen"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42

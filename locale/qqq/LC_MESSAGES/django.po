@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-02 17:14+0000\n"
-"PO-Revision-Date: 2025-01-06 12:23:08+0000\n"
+"PO-Revision-Date: 2025-01-09 12:23:41+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: qqq\n"
@@ -2231,9 +2231,8 @@ msgstr "Bug: \"{contact_link}\" is the English text \"contact The Wikipedia Libr
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
-#, fuzzy
 msgid "contact The Wikipedia Library team"
-msgstr "{{Doc-important|\"Application\" here means \"request\" or \"candidacy\". This doesn't mean \"software application\" or \"app\".}}"
+msgstr ""
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476

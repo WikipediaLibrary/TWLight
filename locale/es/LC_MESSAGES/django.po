@@ -37,7 +37,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-02 17:13+0000\n"
-"PO-Revision-Date: 2025-01-06 12:23:03+0000\n"
+"PO-Revision-Date: 2025-01-09 12:23:37+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1210,7 +1210,7 @@ msgstr "Temas"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Todas las etiquetas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1224,9 +1224,8 @@ msgstr "Idiomas"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Idiomas"
+msgstr "Todos los idiomas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -2242,13 +2241,12 @@ msgstr "No puedes agregar al socio {partner} a tus favoritos porque no tienes ac
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "Hubo un problema con el token de acceso. Por favor inténtalo de nuevo más tarde o {contact_link} si el problema persiste."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
-#, fuzzy
 msgid "contact The Wikipedia Library team"
-msgstr "El Equipo de la Biblioteca de Wikipedia"
+msgstr "ponte en contacto con el equipo de la Biblioteca de Wikipedia"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476
