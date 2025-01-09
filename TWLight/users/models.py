@@ -705,7 +705,7 @@ class Editor(models.Model):
         Verifies that the supplied Global Wikipedia User ID matches stored editor ID.
         Parameters
         ----------
-        wp_sub : int
+        wp_sub : str
             Global Wikipedia User ID, used for guiid parameter in globaluserinfo calls.
 
         Returns
@@ -713,7 +713,7 @@ class Editor(models.Model):
         None
         """
 
-        if self.wp_sub != wp_sub:
+        if self.wp_sub != int(wp_sub):
             raise SuspiciousOperation(
                 "Was asked to update Editor data, but the "
                 "WP sub in the identity passed in did not match the wp_sub on "
