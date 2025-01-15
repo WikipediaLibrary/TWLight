@@ -1,7 +1,7 @@
 # README
-This is where Django will look for translation files, according to https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#how-django-discovers-translations.
+This is where Django will look for translation files, according to https://docs.djangoproject.com/en/4.2/topics/i18n/translation/#how-django-discovers-translations.
 
-See https://docs.djangoproject.com/en/1.7/topics/i18n/translation/#localization-how-to-create-language-files for full instructions on creating language files.
+See https://docs.djangoproject.com/en/4.2/topics/i18n/translation/#localization-how-to-create-language-files for full instructions on creating language files.
 
 See https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html for documentation of the `.po` format.
 
