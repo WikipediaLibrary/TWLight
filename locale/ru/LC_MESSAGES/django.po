@@ -48,7 +48,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-09 17:39+0000\n"
-"PO-Revision-Date: 2025-01-13 12:24:03+0000\n"
+"PO-Revision-Date: 2025-01-16 12:24:12+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1913,7 +1913,7 @@ msgstr "При подаче заявки на имеющуюся в наличи
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr "Если ваш аккаунт заблокирован в одном или более проекте Викимедиа, вы по-прежнему можете получить доступ к Библиотеке Википедии. Вам будет необходимо связаться с командой Библиотеки Википедии, которая проверит ваши блокировки. Если вы были заблокированы за проблемы со статьями, в особенности — за нарушения авторских прав, или же у вас было много длительных блокировок, мы можем отклонить ваш запрос. Кроме того, если статус вашей блокировки был изменён после подтверждения, вам придётся запросить новую проверку."
+msgstr "Если ваша учётная запись заблокирована в одном или более проекте Викимедиа, вы по-прежнему можете получить доступ к Библиотеке Википедии. Вам будет необходимо связаться с командой Библиотеки Википедии, которая проверит ваши блокировки. Если вы были заблокированы за проблемы со статьями, в особенности — за нарушения авторских прав, или же у вас было много длительных блокировок, мы можем отклонить ваш запрос. Кроме того, если статус вашей блокировки был изменён после подтверждения, вам придётся запросить новую проверку."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2240,7 +2240,7 @@ msgstr "Сняв здесь галочку и нажав на «Обновить
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:211
 msgid "Use my Wikipedia email address (will be updated the next time you login)."
-msgstr "Использовать мой адрес электронной почты в Википедии (будет обновлено при следующем входе в аккаунт)."
+msgstr "Использовать мой адрес электронной почты в Википедии (будет обновлено при следующем входе в учётную запись)."
 
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:232
@@ -2564,7 +2564,7 @@ msgstr "Аффиляция с учреждением"
 #. Translators: This message tells users that they are not eligible to access The Wikipedia Library content.
 #: TWLight/users/templates/users/eligibility_modal.html:7
 msgid "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
-msgstr "К сожалению, ваш аккаунт Википедии в настоящее время не имеет права доступа к Библиотеке Википедии."
+msgstr "К сожалению, у вашей учётной записи Википедии в настоящее время нет прав на доступ к Библиотеке Википедии."
 
 #. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
 #: TWLight/users/templates/users/eligibility_modal.html:30
