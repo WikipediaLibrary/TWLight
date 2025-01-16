@@ -697,7 +697,7 @@ class Editor(models.Model):
             return self.get_bundle_authorization.is_valid
 
     def get_global_userinfo(self, identity):
-        self.check_sub(identity["sub"])
+        self.check_sub(int(identity["sub"]))
         return editor_global_userinfo(identity["sub"])
 
     def check_sub(self, wp_sub):
@@ -705,7 +705,7 @@ class Editor(models.Model):
         Verifies that the supplied Global Wikipedia User ID matches stored editor ID.
         Parameters
         ----------
-        wp_sub : str
+        wp_sub : int
             Global Wikipedia User ID, used for guiid parameter in globaluserinfo calls.
 
         Returns
@@ -713,7 +713,7 @@ class Editor(models.Model):
         None
         """
 
-        if self.wp_sub != int(wp_sub):
+        if int(self.wp_sub) != wp_sub:
             raise SuspiciousOperation(
                 "Was asked to update Editor data, but the "
                 "WP sub in the identity passed in did not match the wp_sub on "
@@ -851,7 +851,7 @@ class Editor(models.Model):
             current_datetime = timezone.now()
 
         if global_userinfo:
-            self.check_sub(global_userinfo["id"])
+            self.check_sub(int(global_userinfo["id"]))
         else:
             global_userinfo = self.get_global_userinfo(identity)
 
