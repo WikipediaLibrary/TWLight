@@ -25,5 +25,3 @@ pillow==11.0.0
 python-dateutil==2.9.0.post0
 sentry-sdk==2.20.0
 whitenoise==6.8.2
-# pinning this version of PyJWT dependency needed by mwoauth due to breaking changes in the latest version see T380199
-PyJWT == 2.4.0
