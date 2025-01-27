@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Alfa-ketosav"
+		]
+	},
+	"languages-and-literature_tag": "Nyelvek és irodalom",
+	"multidisciplinary_tag": "Multidiszciplináris",
+	"physical-sciences_tag": "Fizikai tudományok",
+	"music_tag": "Zene",
+	"art_tag": "Művészet",
+	"business-and-economics_tag": "Üzlet és gazdaság",
+	"law_tag": "Jog",
+	"education_tag": "Oktatás",
+	"philosophy-and-religion_tag": "Filozófia és vallás",
+	"social-sciences_tag": "Társadalomtudomány",
+	"history_tag": "Történelem",
+	"culture_tag": "Kultúra",
+	"life-sciences_tag": "Élettudományok",
+	"health-sciences_tag": "Egészségtudományok",
+	"earth-sciences_tag": "Földtudomány",
+	"technology_tag": "Technológia"
+}
