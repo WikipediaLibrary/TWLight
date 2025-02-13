@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-30 12:28+0000\n"
-"PO-Revision-Date: 2025-01-31 09:12:23+0000\n"
+"PO-Revision-Date: 2025-02-13 12:26:22+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1197,7 +1197,7 @@ msgstr "Subiecte"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Toate etichetele"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1211,9 +1211,8 @@ msgstr "Limbi"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Limbi"
+msgstr "Toate limbile"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -1366,7 +1365,7 @@ msgstr "Sortează colecțiile"
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Îmbină Sugestii"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:72
@@ -1686,7 +1685,7 @@ msgstr "Parteneri sugerați"
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:37
 msgid "Merge"
-msgstr ""
+msgstr "Unește"
 
 #: TWLight/resources/templates/resources/suggest.html:43
 msgid "Filter suggestions"
@@ -2077,15 +2076,14 @@ msgstr "Mai multe informații"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "Biblioteca Wikipedia"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Peste 90 dintre cele mai bune baze de date din lume numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru toți wikipediștii"
+msgstr "Peste 100 dintre cele mai bune baze de date din lume numai cu abonament, cu conținut în limbile %(no_of_languages)s, gratuit pentru Wikipedianii de toate mediile"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2230,7 +2228,7 @@ msgstr "Nu puteți adăuga partenerul {partner} la favorite deoarece nu aveți a
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "A apărut o problemă cu tokenul de acces. Vă rugăm să încercați din nou mai târziu sau {contact_link} dacă problema persistă."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
@@ -2449,7 +2447,7 @@ msgstr "Nu este blocat în niciun proiect?"
 #. Translators: If a user has received an exemption against a criterion, this is shown next to "No" on their user page and applications next to this criterion.
 #: TWLight/users/templates/users/editor_detail_data.html:132
 msgid "(exemption granted)"
-msgstr ""
+msgstr "(exceptare acordată)"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:137
@@ -2810,15 +2808,14 @@ msgstr "Păstrarea și manipularea datelor"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "Fundația Wikimedia și furnizorii noștri de servicii utilizează informațiile dvs. în scopul legitim de a furniza servicii Biblioteca Wikipedia în sprijinul misiunii noastre caritabile. Când solicitați un cont Biblioteca Wikipedia sau folosiți contul Biblioteca Wikipedia, este posibil să colectăm în mod obișnuit următoarele informații: numele dvs. de utilizator, adresa de e-mail, numărul de editări, data înregistrării, numărul ID utilizator, grupurile din care faceți parte și orice utilizator special. drepturi; numele, țara de reședință, ocupația și/sau afilierea dvs., dacă este solicitat de un partener la care aplicați; descrierea dumneavoastră narativă a contribuțiilor dumneavoastră și motivele pentru care solicitați acces la resursele partenerilor; și data la care sunteți de acord cu acești termeni de utilizare."
+msgstr "Fundația Wikimedia și furnizorii noștri de servicii utilizează informațiile dvs. în scopul legitim de a furniza servicii Bibliotecii Wikipedia în sprijinul misiunii noastre caritabile. Când solicitați un cont Biblioteca Wikipedia sau folosiți contul Biblioteca Wikipedia, este posibil să colectăm în mod obișnuit următoarele informații: numele dvs. de utilizator, adresa de e-mail, numărul de editări, data înregistrării, numărul ID utilizator, grupurile din care faceți parte și orice drepturi speciale de utilizator; numele, țara de reședință și/sau afilierea dvs., dacă este solicitat de un partener la care aplicați; descrierea dumneavoastră narativă a contribuțiilor dumneavoastră și motivele pentru care solicitați acces la resursele partenerilor; și data la care sunteți de acord cu acești termeni de utilizare."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:262
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Fiecare editor care este membru al programului Bibliotecii Wikipedia necesită diferite informații specifice în aplicație. Unii editori pot solicita doar o adresă de e-mail, în timp ce alții solicită date mai detaliate, cum ar fi numele dvs., locația, ocupația sau afilierea instituțională. Când completați cererea, vi se va solicita să furnizați numai informațiile solicitate de editorii pe care i-ați ales și fiecare editor va primi doar informațiile pe care le solicită pentru a vă oferi acces. Vă rugăm să consultați paginile noastre <a class=\"twl-links\" href=\"%(all_partners_url)s\">informații despre parteneri</a> pentru a afla ce informații sunt necesare de ls fiecare editor pentru a avea acces la resursele sale."
+msgstr "Fiecare editor care este membru al programului Biblioteca Wikipedia necesită informații specifice diferite în aplicație. Unii editori pot solicita doar o adresă de e-mail, în timp ce alții solicită date mai detaliate, cum ar fi numele, locația sau afilierea instituțională. Când vă completați cererea, vi se va cere să furnizați doar informațiile solicitate de editorii pe care i-ați ales, iar fiecare editor va primi doar informațiile necesare pentru a vă oferi acces. Consultați paginile noastre <a class=\"twl-links\" href=\"%(all_partners_url)s\">informații despre parteneri</a> pentru a afla ce informații este cerută de fiecare editor pentru a avea acces la resursele sale."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:277
@@ -2833,9 +2830,8 @@ msgstr "Pentru a administra programul Bibliotecii Wikipedia, vom păstra datele 
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:305
-#, fuzzy
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr "Dacă decideți să vă dezactivați contul de bibliotecă Wikipedia, puteți utiliza butonul de ștergere din profilul dvs. pentru a șterge anumite informații personale asociate contului dvs. Vom șterge numele dvs. real, ocupația, apartenența instituțională și țara de reședință. Vă rugăm să rețineți că sistemul va păstra o înregistrare a numelui dvs. de utilizator, a editorilor la care ați solicitat sau ați avut acces, precum și datele acestui acces. Rețineți că ștergerea nu este reversibilă. Ștergerea contului dvs. de bibliotecă Wikipedia poate corespunde, de asemenea, cu eliminarea oricărui acces la resurse pentru care ați fost eligibil sau aprobat. Dacă solicitați ștergerea informațiilor despre cont și ulterior doriți să solicitați un cont nou, va trebui să furnizați informațiile necesare din nou."
+msgstr "Dacă decideți să vă dezactivați contul Biblioteca Wikipedia, puteți utiliza butonul de ștergere din profilul dvs. pentru a șterge anumite informații personale asociate contului dvs. Vă vom șterge numele real, afilierea instituțională și țara de reședință. Vă rugăm să rețineți că sistemul va păstra o înregistrare a numelui dvs. de utilizator, a editorilor la care ați aplicat sau ați avut acces și datele acelui acces. Rețineți că ștergerea nu este reversibilă. Ștergerea contului dvs. Biblioteca Wikipedia poate corespunde, de asemenea, cu eliminarea oricărui acces la resurse la care ați fost eligibil sau aprobat. Dacă solicitați ștergerea informațiilor despre cont și, ulterior, doriți să aplicați pentru un cont nou, va trebui să furnizați din nou informațiile necesare."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:321
