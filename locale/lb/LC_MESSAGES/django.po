@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-01-30 12:28+0000\n"
-"PO-Revision-Date: 2025-02-10 12:23:34+0000\n"
+"PO-Revision-Date: 2025-02-17 12:25:07+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2464,7 +2464,7 @@ msgstr ""
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:205
 msgid "(view global user contributions)"
-msgstr ""
+msgstr "(global Benotzerkontributioune weisen)"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:215
