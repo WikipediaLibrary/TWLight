@@ -226,9 +226,7 @@ class Partner(models.Model):
         null=True,
         help_text="Optional instructions for editors to use access codes "
         "or free signup URLs for this partner. Sent via email upon "
-        "application approval (for links) or access code assignment. "
-        "If this partner has collections, fill out user instructions "
-        "on each collection instead.",
+        "application approval (for links) or access code assignment.",
     )
 
     excerpt_limit = models.PositiveSmallIntegerField(
