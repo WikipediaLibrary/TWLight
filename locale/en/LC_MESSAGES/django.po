@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: wikipedialibrary@wikimedia.org\n"
-"POT-Creation-Date: 2025-02-26 17:19+0000\n"
+"POT-Creation-Date: 2025-03-07 15:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2570,21 +2570,15 @@ msgstr ""
 msgid "Access token generation failed, please try logging in again."
 msgstr ""
 
-#. Translators: This message is shown when more information is available on another page. Do not translate {issue}
-#: TWLight/users/oauth.py:539
-#, python-brace-format
-msgid "See {issue} for more information"
-msgstr ""
-
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:559
+#: TWLight/users/oauth.py:546
 msgid ""
 "Your Wikipedia account does not meet the eligibility criteria in the terms "
 "of use, so your Wikipedia Library Card Platform account cannot be activated."
 msgstr ""
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
-#: TWLight/users/oauth.py:567
+#: TWLight/users/oauth.py:554
 msgid ""
 "Your Wikipedia account no longer meets the eligibility criteria in the terms "
 "of use, so you cannot be logged in. If you think you should be able to log "
@@ -2592,7 +2586,7 @@ msgid ""
 msgstr ""
 
 #. Translators: this message is displayed to users with brand new accounts.
-#: TWLight/users/oauth.py:579
+#: TWLight/users/oauth.py:566
 msgid "Welcome! Please agree to the terms of use."
 msgstr ""
 
