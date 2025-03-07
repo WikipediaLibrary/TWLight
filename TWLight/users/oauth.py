@@ -529,19 +529,6 @@ class OAuthCallbackView(View):
                 # Translators: This message is shown when the OAuth login process fails.
                 _("Access token generation failed, please try logging in again."),
             )
-            # @TODO: revert the following after T332650 is resolved
-            # raise PermissionDenied
-            messages.warning(
-                request,
-                mark_safe(
-                    # fmt: off
-                    # Translators: This message is shown when more information is available on another page. Do not translate {issue}
-                    _("See {issue} for more information").format(
-                        issue="<a href='https://phabricator.wikimedia.org/T332650' target='_blank' rel='noopener noreferrer'>T332650</a>"
-                    )
-                    # fmt: on
-                ),
-            )
 
         user = authenticate(
             request=request, access_token=access_token, handshaker=handshaker
