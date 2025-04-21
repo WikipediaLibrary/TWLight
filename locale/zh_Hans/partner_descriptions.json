@@ -6,6 +6,7 @@
 			"GuoPC",
 			"Huajing",
 			"Lantianjialiang",
+			"Mishidexfc",
 			"Sean0115",
 			"Shizhao",
 			"TFX202X",
@@ -55,7 +56,7 @@
 	"55_description": "<ul>\n<li>Academic OneFile，一个包含17,000多种期刊的数据库，其中包括3,000种经过同行评审的学术期刊。</li>\n<li>OneFile通用数据库，该数据库包含14,000多种期刊，其中包括消费类杂志以及贸易和行业杂志。</li>\n<li>Gale电子书，这是一个百科全书库和专业参考工具书图书馆。</li>\n<li>OneFile News, 可以访问美国主要地区、州和地方报纸，以及来自世界各地的领先出版物。</li>\n<li>Biography In Context, 这是一个传记条目数据库，其中包含来自170多个来源的40万人的传记。</li>\n<li>Gale Primary Sources</li>\n<li>NewsVault</li>\n<li>The Times Digital Archive is an online，包括200多年来的Time全文传真，涵盖了从1785年到2013年每期的每一页。</li>\n</ul>\n<p>编辑者应使用此处显示的格式引用Gale来源。</p>",
 	"33_short_description": "<strong>HeinOnline</strong>是一个基于图像的数据库，包含2000多种法律期刊以及与法律历史相关的其他资源。",
 	"33_description": "该捐赠中包括以下资源：HeinOnline法律期刊图书馆；HeinOnline国际法史；HeinOnline Selden社会出版物和早期英国法律史；HeinOnline苏格兰法律史；HeinOnline美国法律学院图书馆。",
-	"78_short_description": "<strong>ICE Publishing</strong>是土木工程师协会的一部分。可以访问他们ICE虚拟图书馆中包含的所有期刊和电子书。",
+	"78_short_description": "<strong>ICE出版社</strong>隶属于英国土木工程师学会。他们提供《工程期刊全集》中所有期刊的访问权限。",
 	"68_short_description": "<strong>Invaluable</strong>是一个拍卖网站，其中包含艺术家和拍卖的数据库。他们将提供5000万个拍卖品和超过500,000位艺术家的信息，以提供其专业级别的订阅。注意：请注意，尽管不会向您收费，但Invaluable的注册过程当前需要您提供详细付费信息。",
 	"77_short_description": "<strong>International Water Association Publishing</strong>是有关水、废水和相关环境领域的书籍和14种期刊的出版商。",
 	"54_short_description": "<strong>JSTOR</strong>是世界上最大、最负盛名的期刊档案之一。 维基百科编者当前可获得的内容集包括JSTOR的众多档案期刊典藏和19世纪英国小册子典藏。",
@@ -152,5 +153,7 @@
 	"164_short_description": "<strong>Arcanum</strong>是东欧最大且不断扩展的数字期刊数据库，其中包含科学和专业期刊、百科全书、周报和日报等更多内容。",
 	"165_short_description": "<strong>Les Jours</strong>是一家位于法国的独立综合性在线媒体。Les Jours专注于长篇报道，主题包括媒体大亨、女权主义、污染、歧视等。",
 	"166_short_description": "<strong>East View Press</strong>出版的期刊和书籍关注尤其是与前苏联和中国有关的国际和公共政策问题。其出版物涵盖外交政策、国际安全、斯拉夫和中国研究以及地理等主题，内容经过翻译和编辑，以使全球研究成果供英文读者阅读。",
-	"166_description": "包含以下内容：\n<ul>\n<li>当下俄罗斯报道摘要 - 当年刊物</li>\n<li>当下后苏联时期报道摘要</li>\n<li>当下苏联报道摘要</li>\n<li>国际事务</li>\n<li>社会科学 - 数字档案和当年刊物</li>\n<li>精锐战士：世界各地的特殊作战部队</li>\n<li>俄罗斯石油：过去、现在和未来</li>\n<li>俄罗斯人评特朗普：媒体报道和评论</li>\n<li>格鲁吉亚战争倒计时：俄罗斯对南奥塞梯和阿布哈兹间冲突采取的外交政策和媒体报道</li>\n<li>黑色花园战火纷飞：苏联和俄罗斯媒体视角下的纳戈尔诺-卡拉巴赫冲突</li>\n<li>以色列制图：参考书、查找帮助与索引。第1卷：地形图系列1915-1970</li>\n<li>阿富汗、乌克兰、叙利亚、黎巴嫩地形分析</li>\n</ul>"
+	"166_description": "包含以下内容：\n<ul>\n<li>当下俄罗斯报道摘要 - 当年刊物</li>\n<li>当下后苏联时期报道摘要</li>\n<li>当下苏联报道摘要</li>\n<li>国际事务</li>\n<li>社会科学 - 数字档案和当年刊物</li>\n<li>精锐战士：世界各地的特殊作战部队</li>\n<li>俄罗斯石油：过去、现在和未来</li>\n<li>俄罗斯人评特朗普：媒体报道和评论</li>\n<li>格鲁吉亚战争倒计时：俄罗斯对南奥塞梯和阿布哈兹间冲突采取的外交政策和媒体报道</li>\n<li>黑色花园战火纷飞：苏联和俄罗斯媒体视角下的纳戈尔诺-卡拉巴赫冲突</li>\n<li>以色列制图：参考书、查找帮助与索引。第1卷：地形图系列1915-1970</li>\n<li>阿富汗、乌克兰、叙利亚、黎巴嫩地形分析</li>\n</ul>",
+	"167_short_description": "<strong>《非洲报道》</strong>是一份总部位于巴黎的英文季刊，主要关注非洲的政治和经济。",
+	"168_short_description": "<strong>Vaani Editor</strong>是一款泰米尔语在线校对服务。Vaani Editor 可以帮助您纠正拼写、错别字、连读错误、同音异义词等。"
 }
