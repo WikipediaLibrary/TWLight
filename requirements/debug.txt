@@ -1,2 +1,2 @@
 -r wmf.txt
-django-debug-toolbar==4.4.6
+django-debug-toolbar==5.2.0
