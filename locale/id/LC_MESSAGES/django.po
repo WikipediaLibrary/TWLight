@@ -15,6 +15,7 @@
 # Author: Mnam23
 # Author: NFarras
 # Author: Naufal06
+# Author: NikolasKHF
 # Author: PutriAmalia1991
 # Author: Sonic Speedy
 # Author: Stevannus rua
@@ -27,7 +28,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:36+0000\n"
-"PO-Revision-Date: 2025-04-24 13:10:04+0000\n"
+"PO-Revision-Date: 2025-05-05 12:28:51+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

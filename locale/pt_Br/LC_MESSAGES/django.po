@@ -4,6 +4,7 @@
 # Author: ACheJu
 # Author: ArgonSim
 # Author: DDPAT
+# Author: EGobi
 # Author: Eduardo Addad de Oliveira
 # Author: Eduardoaddad
 # Author: Elilopes
@@ -28,7 +29,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:37+0000\n"
-"PO-Revision-Date: 2025-04-24 13:10:09+0000\n"
+"PO-Revision-Date: 2025-05-05 12:28:54+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
