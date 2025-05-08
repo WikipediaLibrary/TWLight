@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2025-03-13 12:26:38+0000\n"
+"PO-Revision-Date: 2025-05-08 12:31:34+0000\n"
 "X-POT-Import-Date: 2025-03-08 21:36:32+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
-"X-Generator: MediaWiki 1.44.0-alpha; Translate 2025-03-15\n"
+"X-Generator: MediaWiki 1.45.0-alpha; Translate 2025-03-15\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
