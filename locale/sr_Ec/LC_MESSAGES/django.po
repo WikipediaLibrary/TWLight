@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Serbian (Cyrillic script) (српски (ћирилица))
 # Exported from translatewiki.net
 #
+# Author: Aca
 # Author: BadDog
 # Author: Kizule
 # Author: Milicevic01
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:37+0000\n"
-"PO-Revision-Date: 2025-05-08 12:31:37+0000\n"
+"PO-Revision-Date: 2025-05-12 12:29:28+0000\n"
 "Language: sr_ec\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

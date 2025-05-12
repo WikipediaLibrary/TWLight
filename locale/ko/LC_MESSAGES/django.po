@@ -11,6 +11,7 @@
 # Author: Sabelöga
 # Author: Suleiman the Magnificent Television
 # Author: Whatback11
+# Author: YeBoy371
 # Author: Ykhwong
 # Author: 아라
 msgid ""
@@ -19,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:36+0000\n"
-"PO-Revision-Date: 2025-05-08 12:31:33+0000\n"
+"PO-Revision-Date: 2025-05-12 12:29:25+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2030,9 +2031,8 @@ msgstr "자바스크립트가 비활성화되어 있습니다. 계속하려면 �
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/header_partial_b4.html:14
-#, fuzzy
 msgid "The Wikipedia Library home"
-msgstr "위키백과 도서관"
+msgstr "위키백과 도서관 홈"
 
 #: TWLight/templates/header_partial_b4.html:45
 msgid "Search the library"
@@ -2072,7 +2072,6 @@ msgstr "더 많은 정보"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "위키백과 도서관"
 
