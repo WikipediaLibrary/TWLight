@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:37+0000\n"
-"PO-Revision-Date: 2025-05-12 12:29:28+0000\n"
+"PO-Revision-Date: 2025-05-22 12:35:06+0000\n"
 "Language: sr_ec\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1253,9 +1253,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:532
-#, fuzzy
 msgid "Service information"
-msgstr "Корисничке информације"
+msgstr "Информације о услузи"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:534
@@ -1264,9 +1263,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:536
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Услови коришћења нису доступни."
+msgstr "Привремено недоступно"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:541
@@ -1280,9 +1278,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:545
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Доступни налози"
+msgstr "Приступ је тренутно недоступан"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1682,9 +1679,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Филтрирајте збирке"
+msgstr "Филтрирајте предлоге"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
