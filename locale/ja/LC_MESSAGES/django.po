@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-04-21 12:37+0000\n"
-"PO-Revision-Date: 2025-05-08 12:31:33+0000\n"
+"PO-Revision-Date: 2025-05-26 12:31:03+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2116,7 +2116,7 @@ msgstr "そちら様からデータ処理を制限するよう申請を受け付
 #: TWLight/templates/message_partial.html:37
 #, python-format
 msgid "You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr "まだこのサイトの<a class=\"twl-links\" href=\"%(terms_url)s\">利用規約</a>に同意されていません。（訳注：そのため）あなたの申請は手続きが止まっており、すでに認可された情報源への申請やアクセスができない状態です。"
+msgstr "このサイトの<a class=\"twl-links\" href=\"%(terms_url)s\">利用規約</a>にまだ同意していません。申請は処理されず、承認された情報への申請やアクセスもできません。"
 
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/new_base.html:107
@@ -2601,7 +2601,7 @@ msgstr "更新を申請"
 #. Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.
 #: TWLight/users/templates/users/my_applications.html:79
 msgid "Renewals are either not required, not available right now, or you have already requested a renewal."
-msgstr "現在、更新が不要か申請できないか、すでに申請をしてあるかに該当します。"
+msgstr "現在、更新が不要か申請できないか、既に申請をしてあるかに該当します。"
 
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
@@ -2705,7 +2705,7 @@ msgstr "ウィキペディア図書館カードのアカウント要件"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:78
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for The Wikipedia Library, we require that you be registered for a user account on the projects, with at least 500 edits, six (6) months of activity, and 10+ edits in the last month. We ask that you do not request access to any publishers with a limited number of available accounts whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "ウィキペディア図書館経由の情報源へのアクセスを認可する利用者とは、ウィキメディアのプロジェクト群への貢献を裏付ける実績があり、なおかつ承認された情報源へのアクセスを活用してプロジェクトのコンテンツ改善に寄与することが条件です。その限りにおいてウィキペディア図書館プログラムの利用要件として、利用者はいずれかのプロジェクトにアカウントを登録済みであるものとします。また500回以上の編集と6ヵ月超の活動実績、加えてこの1ヵ月に10回超の編集をしていることが条件です。ただし、当該の情報源につき利用者が大学もしくは地域の図書館あるいはその他の機関や組織経由ですでに無料で利用可能な場合には申請を自粛され、他の人への利用権付与にご協力願います。"
+msgstr "ウィキペディア図書館経由の情報源へのアクセスは、ウィキメディアのプロジェクト群に対して確かな貢献実績を示し、かつこれらの情報源を利用してプロジェクトの内容を改善する意思のある利用者に限定されます。そのため、ウィキペディア図書館を利用するには、いずれかのプロジェクトに登録されたアカウントを持ち、500 回以上の編集実績、6か月以上の活動期間、そして直近1か月で 10 回以上の編集を行っていることが条件です。また、利用者が既に大学や地域の図書館、その他の機関や組織を通じて無料で利用可能な情報源については、利用申請を控えていただき、他の利用希望者にその機会を譲っていただくようご協力をお願いします。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:94
