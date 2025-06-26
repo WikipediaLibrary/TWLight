@@ -46,7 +46,7 @@
 	"45_short_description": "<strong>Edinburgh University Press</strong>（EUP＝エディンバラ大学出版局）は、人文科学および社会科学の書籍やジャーナルの学術出版社です。 EUPは映画とメディア研究、歴史学、文学、スコットランド研究などに関するジャーナル集へのアクセスを提供します。",
 	"9_short_description": "<strong>Édition Diffusion Presse Sciences</strong> はフランス語、英語の科学学術専門誌の発行者です。提供される学術誌には『Astronomy &amp; Astrophysics』『Movement &amp; Sport Sciences』『Mechanics &amp; Industry』などがあります。",
 	"85_short_description": "<strong>Electronic Enlightenment</strong>（EE）は17世紀初頭から19世紀半ばの書簡を編纂した、広範囲にわたるオンラインコレクションです。 EEは7万件超の歴史的文書を収蔵しています。これらの文書は8500人超の歴史上の人物が、宗教の寛容から動物の権利、火山学から古典考古学、経済モデルから有名人文化などあらゆることについて論じたものです。",
-	"23_short_description": "<strong>エルゼビア</strong>の ScienceDirect には2,500件超のジャーナル、900件の雑誌、2万6千件の書籍が収蔵されています。ジャーナル:『Lancet』、『Cell』、『Current Biology』、『Biomaterials』、『Biological Psychiatry』、『Social Science &amp; Medicine』、『Current Biology』、『Cognition』、『Behavioural Brain Research』など。",
+	"23_short_description": "<strong>エルゼビア</strong>（Elsevier）の ScienceDirect には2,500件超のジャーナル、900件の雑誌、2万6千件の書籍が収蔵されています。ジャーナル:『The Lancet』、『Cell』、『Current Biology』、『Biomaterials』、『Biological Psychiatry』、『Social Science &amp; Medicine』、<!-- 『Current Biology』、-->『Cognition』、『Behavioural Brain Research』など。",
 	"23_description": "追加条項:\n<ul><li>Elsevierの著作物を要約・改変・翻訳・二次創作することを禁じる。例外的に，事実情報を要約し，Wikipediaの関連方針を遵守した引用方式で情報源を示している場合はこれを禁止しない。</li><li>著作権その他に関する表示や免責事項について，いかなる方法でも削除・曖昧化・改変することを禁じる。</li><li>ロボット・スパイダー・クローラなどの自動ダウンロードプログラム・算法・機器を使用して，Webサイト上において継続的かつ自動的に検索・スクレイピング・抽出・リンク深化・目録作成したり運用を疎外するような行為を全面的に禁止する。</li><li>Elsevierの著作物を大規模または組織的に複製・維持・保存したり，オンラインで再配布・公開することを禁じる。</li><li>個別の内容をSNSへ投稿することを禁じる。</li></ul>",
 	"56_short_description": "<strong>Emerald Group Publishing</strong>（エメラルド・グループ出版）は、経済学、教育学、工学、看護&amp;介護、マーケティング、社会学などのさまざまな分野の書籍やジャーナルへのアクセスを提供します。",
 	"44_short_description": "<strong>Érudit</strong> はカナダに本拠を置く学術資料専門ウェブポータルです。主な対象は人文科学と社会科学ですが、物理科学、自然科学の出版物も扱っています。",
@@ -70,7 +70,7 @@
 	"53_short_description": "<strong>MIT Press Journals</strong> は学術誌30本超を出版しています。分野は人文科学、科学、社会科学です。",
 	"27_short_description": "<strong>NewspaperARCHIVE.com</strong> は新聞をデジタル化したウェブ上のデータベースです。収載記事数は20億件以上で、1607年以降のアメリカ、カナダ、イギリス、その他20ヵ国の新聞が対象です。",
 	"27_description": "Newspaperarchive.comのコンテンツを引用するときは、可能な場合は切り抜きを使用してください。そうすることで、購読しなくても読者がオープンアクセスURLを介して原文を閲覧できます。",
-	"26_short_description": "<strong>Newspapers.com</strong>は、2万件超の新聞から8億ページ以上を掲載しています。コレクションには、主要な新聞がいくつか（たとえばニューヨークタイムズ50年分）期間を限定して含まれるものの、ほとんどは1700年代から1980年代後半までのアメリカの地方紙で構成されます。ウィキペディア図書館を介した無料アカウントには、Newspapers.com PublisherExtraのコンテンツへのアクセスが含まれます。",
+	"26_short_description": "<strong>Newspapers.com</strong>は、2万件超の新聞から8億ページ以上を掲載しています。コレクションには、主要な新聞がいくつか（たとえばニューヨークタイムズは創刊から72年分）期間を限定して含まれるものの、ほとんどは1700年代から1980年代後半までのアメリカの地方紙で構成されます。ウィキペディア図書館を介した無料アカウントには、Newspapers.com Publisher Extra のコンテンツへのアクセスが含まれます。",
 	"26_description": "Newspaperarchive.comのコンテンツを引用するときは、可能な場合は切り抜きを使用してください。切り抜きによりオープンアクセスURLを介してソーステキストを閲覧でき、読者は購読しなくても済みます。",
 	"106_short_description": "<strong>Nomos</strong>は学術出版社です。Nomos eLibrary を通じて利用可能なすべての電子リソースへのアクセスを提供し、芸術、人文科学、社会科学、法学、一般的な参考文献の電子書籍やジャーナルがあります。それらは主にドイツ語のリソースであり、英語のリソースも含まれます。",
 	"81_short_description": "<strong>Noormags（ヌアマグ）</strong> は社会科学系、人文科学系の学術雑誌の出版社です。",
@@ -155,5 +155,6 @@
 	"165_short_description": "<strong>[[:w:fr:Les Jours| Les Jours]]</strong>（レジュー）はフランスに拠点を置く独立系記者のオンライン・メディアです。専門はメディア界の大物やフェミニズム、環境汚染や差別などの主題を追う長編の報道です。",
 	"166_short_description": "<strong>East View Press</strong>（イースト・ビュー・プレス）は定期刊行物と書籍を発行し、特に旧ソビエト連邦と中国に関する国際問題および公共政策の課題に焦点を当てています。その出版物の主題とは外交政策、国際安全保障、スラブ学と中国学、地理などにわたり、グローバルな研究は編集と翻訳により英語で読めるようにしてあります。",
 	"166_description": "利用できるコレクションは次のとおり。\n<ul>\n<li>現在のロシア報道のまとめ - 当年の発刊分</li>\n<li>ソビエト連邦後の報道のまとめ </li>\n<li>現ロシアの報道のまとめ</li>\n<li>国際問題</li>\n<li>社会科学 - 当年の発刊分と電子版アーカイブ</li>\n<li>エリート戦士：世界の特殊作戦部隊</li>\n<li>ロシアの石油：過去と現在と未来</li>\n<li>ロシア人のトランプ評：報道と解説</li>\n<li>対ジョージアとの戦争への秒読み：ロシアの外交政策と南オセチアならびにアブハジアの紛争に関するメディア報道</li>\n<li>燃えるブラックガーデン：ナゴルノ・カラバフ紛争をめぐるソビエトとロシアの報道</li>\n<li>イスラエルのマッピング：参考文献、検索補助、索引。第1巻：地形図シリーズ1915年-1970年</li>\n<li>アフガニスタン、ウクライナ、シリア、レバノンの地形分析</li></ul>\n<!-- <strong>East View Press</strong>（イースト・ビュー・プレス）は定期刊行物と書籍を発行し、特に旧ソビエト連邦と中国に関する国際問題および公共政策の課題に焦点を当てています。その出版物の主題とは外交政策、国際安全保障、スラブと中国の研究、地理などにわたり、編集と翻訳によりグローバルな研究が英語で読めるようにしてあります。叢書には以下を含みます。 -->",
-	"167_short_description": "<strong>アフリカレポート</strong> Africa Report はアフリカ大陸の政治経済を主題にする英語の雑誌で、パリ（フランス）に本拠地を置き、発行は年に4回の旬刊です。"
+	"167_short_description": "<strong>アフリカレポート</strong> Africa Report はアフリカ大陸の政治経済を主題にする英語の雑誌で、パリ（フランス）に本拠地を置き、発行は年に4回の旬刊です。",
+	"168_short_description": "<strong>ヴァーニ・エディター</strong>（Vaani Editor）はオンラインのタミル語版査読サービスです。修正に役立つのは綴り、タイプミス、連打ミス（sandhi）、同音異義語など。"
 }

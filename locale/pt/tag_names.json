@@ -1,23 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"O andras"
 		]
 	},
-	"languages-and-literature_tag": "Línguas e literatura",
+	"languages-and-literature_tag": "Línguas e Literatura",
 	"multidisciplinary_tag": "Multidisciplinar",
-	"physical-sciences_tag": "Ciências físicas",
+	"physical-sciences_tag": "Ciências Físicas",
 	"music_tag": "Música",
 	"art_tag": "Arte",
-	"business-and-economics_tag": "Negócios e economia",
+	"business-and-economics_tag": "Negócios e Economia",
 	"law_tag": "Direito",
 	"education_tag": "Educação",
-	"philosophy-and-religion_tag": "Filosofia e religião",
-	"social-sciences_tag": "Ciências sociais",
+	"philosophy-and-religion_tag": "Filosofia e Religião",
+	"social-sciences_tag": "Ciências Sociais",
 	"history_tag": "História",
 	"culture_tag": "Cultura",
-	"life-sciences_tag": "Ciências da vida",
-	"health-sciences_tag": "Ciências da saúde",
+	"life-sciences_tag": "Ciências da Vida",
+	"health-sciences_tag": "Ciências da Saúde",
 	"earth-sciences_tag": "Ciências da Terra",
 	"technology_tag": "Tecnologia"
 }
