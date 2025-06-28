@@ -25,6 +25,10 @@ class Notice(object):
     user_renewal_notice = Signal()
 
 
+class UserLoginRetrieval(object):
+    user_retrieve_monthly_logins = Signal()
+
+
 @receiver(post_save, sender=User)
 def clear_inactive_user_sessions(sender, instance, **kwargs):
     """Clear sessions after user is marked as inactive."""

@@ -21,9 +21,11 @@ There is no need to faff about with Celery in this file. djmail will decide
 whether to send synchronously or asynchronously based on the value of
 settings.DJMAIL_REAL_BACKEND.
 """
+
 from djmail import template_mail
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 import logging
+import os
 from reversion.models import Version
 
 from django_comments.models import Comment
@@ -38,7 +40,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice
+from TWLight.users.signals import Notice, UserLoginRetrieval
 
 
 logger = logging.getLogger(__name__)
@@ -78,6 +80,10 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
+
+
+class UserRetrieveMonthlyLogins(template_mail.TemplateMail):
+    name = "user_retrieve_monthly_logins"
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -492,3 +498,15 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
                 status__in=[Application.PENDING, Application.QUESTION]
             ):
                 send_waitlist_notification_email(app)
+
+
+@receiver(UserLoginRetrieval.user_retrieve_monthly_logins)
+def send_user_login_retrieval_email(sender, **kwargs):
+    monthly_users = kwargs["monthly_users"]
+    email = UserRetrieveMonthlyLogins()
+    logger.info("Email constructed.")
+    email.send(
+        os.environ.get("TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"),
+        {"monthly_users": monthly_users},
+    )
+    logger.info("Email queued.")
