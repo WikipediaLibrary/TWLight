@@ -89,3 +89,14 @@ class DeleteOldEmails(CronJobBase):
             management.call_command("djmail_delete_old_messages", days=100)
         except Exception as e:
             capture_exception(e)
+
+
+class RetrieveMonthlyUsers(CronJobBase):
+    schedule = Schedule(run_monthly_on_days=1)
+    code = "users.retrieve_monthly_users"
+
+    def do(self):
+        try:
+            management.call_command("retrieve_monthly_users")
+        except Exception as e:
+            capture_exception(e)
