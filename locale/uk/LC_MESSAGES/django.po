@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:19+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:16+0000\n"
+"PO-Revision-Date: 2025-07-07 12:28:10+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1201,7 +1201,7 @@ msgstr "Теми"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Усі мітки"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1215,9 +1215,8 @@ msgstr "Мови"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Мови"
+msgstr "Усі мови"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -2082,7 +2081,6 @@ msgstr "Детальніше"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "Бібліотека Вікіпедії"
 
@@ -2235,13 +2233,12 @@ msgstr "Неможливо додати партнера {partner} до вибр
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "Виникла проблема з токеном доступу. Спробуйте ще раз пізніше або {contact_link}, якщо проблема не зникне."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
-#, fuzzy
 msgid "contact The Wikipedia Library team"
-msgstr "Команда Бібліотеки Вікіпедії"
+msgstr "зв'яжіться з командою Бібліотеки Вікіпедії"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476
@@ -2815,15 +2812,14 @@ msgstr "Зберігання та обробка даних"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "Фонд Вікімедіа та провайдери наших послуг використовують вашу інформацію із законною метою надавати послуги Бібліотеки Вікіпедії на підтримку нашої благодійної мети. Коли ви подаєте заявку на обліковий запис Бібліотеки Вікіпедії або використовуєте свій обліковий запис Бібліотеки Вікіпедії, ми можемо регулярно збирати таку інформацію: ваше ім'я користувача, адресу електронної пошти, кількість редагувань, дату реєстрації, ID-номер користувача, групи, до яких ви належите, та будь-які спеціальні права; ваше ім'я, країну проживання, рід занять та/або афіліацію, якщо цього вимагає партнер, до якого ви хочете отримати доступ; вашу розповідь про свій внесок та причини подачі заявки на доступ до партнерських ресурсів; а також дату, коли ви погодилися з цими умовами використання."
+msgstr "Фонд Вікімедіа та провайдери наших послуг використовують вашу інформацію із законною метою надавати послуги Бібліотеки Вікіпедії на підтримку нашої благодійної мети. Коли ви подаєте заявку на обліковий запис Бібліотеки Вікіпедії або використовуєте свій обліковий запис Бібліотеки Вікіпедії, ми можемо регулярно збирати таку інформацію: ваше ім'я користувача, адресу електронної пошти, кількість редагувань, дату реєстрації, ID-номер користувача, групи, до яких ви належите, та будь-які спеціальні права; ваше ім'я, країну проживання та/або афіліацію, якщо цього вимагає партнер, до якого ви хочете отримати доступ; вашу розповідь про свій внесок та причини подачі заявки на доступ до партнерських ресурсів; а також дату, коли ви погодилися з цими умовами використання."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:262
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Кожен видавець, який є членом програми Бібліотеки Вікіпедії, вимагає іншої інформації у заявці. Деякі видавці можуть запитувати лише адресу електронної пошти, тоді як інші запитують більш детальні дані, такі як ваше ім'я, розташування, рід занять чи інституційна приналежність. Коли ви заповнюєте свою заявку, вас просять надати лише ту інформацію, якої потребують обрані вами видавці, і кожен видавець отримає лише ту інформацію, якої він потребує для надання вам доступу. Будь ласка, перегляньте наші сторінки <a class=\"twl-links\" href=\"%(all_partners_url)s\">інформації про партнерів</a>, щоб дізнатися більше про те, яку інформацію вимагає кожен видавець для отримання доступу до їхніх ресурсів."
+msgstr "Кожен видавець, який є членом програми Бібліотеки Вікіпедії, вимагає іншої інформації у заявці. Деякі видавці можуть запитувати лише адресу електронної пошти, тоді як інші запитують більш детальні дані, такі як ваше ім'я, розташування чи інституційна приналежність. Коли ви заповнюєте свою заявку, вас просять надати лише ту інформацію, якої потребують обрані вами видавці, і кожен видавець отримає лише ту інформацію, якої він потребує для надання вам доступу. Будь ласка, перегляньте наші сторінки <a class=\"twl-links\" href=\"%(all_partners_url)s\">інформації про партнерів</a>, щоб дізнатися більше про те, яку інформацію вимагає кожен видавець для отримання доступу до їхніх ресурсів."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:277
@@ -2838,9 +2834,8 @@ msgstr "З метою адміністрування програми Біблі
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:305
-#, fuzzy
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr "Якщо ви вирішите відімкнути свій обліковий запис Бібліотеки Вікіпедії, ви можете написати нам листа на <a href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\">wikipedialibrary@wikimedia.org</a> із запитом на вилучення певної персональної інформації, пов'язаної з вашим обліковим записом. Ми вилучимо ваше справжнє ім'я, рід занять, інституційну приналежність та країну проживання. Будь ласка, зверніть увагу, що система збереже запис про ваше ім'я користувача, до яких видавців ви подавали запит або отримали доступ і дати цього доступу. Якщо ви подасте запит на вилучення інформації облікового запису, а пізніше забажаєте отримати новий обліковий запис, вам необхідно буде надати потрібну інформацію знову."
+msgstr "Якщо ви вирішите відімкнути свій обліковий запис Бібліотеки Вікіпедії, ви можете скористатися кнопкою вилучення у своєму профілі, щоб вилучити певну персональну інформацію, пов'язану з вашим обліковим записом. Ми вилучимо ваше справжнє ім'я, інституційну приналежність та країну проживання. Будь ласка, зверніть увагу, що система збереже запис про ваше ім'я користувача, до яких видавців ви подавали запит або отримали доступ і дати цього доступу. Зауважте, що вилучення незворотне. Вилучення вашого облікового запису у Бібліотеці Вікіпедії може також спричинити вилучення будь-яких прав доступу, на який ви мали право або були схвалені. Якщо ви подасте запит на вилучення інформації облікового запису, а пізніше забажаєте отримати новий обліковий запис, вам необхідно буде надати потрібну інформацію знову."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:321

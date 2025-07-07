@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:15+0000\n"
+"PO-Revision-Date: 2025-07-07 12:28:09+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2089,7 +2089,7 @@ msgstr "Peste 100 dintre cele mai bune baze de date din lume care pot fi accesat
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
 msgid "Meet these criteria for automatic access"
-msgstr "Îndeplinește aceste criterii pentru acces automat"
+msgstr "Îndepliniți aceste criterii pentru acces automat"
 
 #: TWLight/templates/login_partial.html:69
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
@@ -3025,7 +3025,7 @@ msgstr "10+ modificări în ultima lună"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:890 TWLight/views.py:49
 msgid "No active blocks"
-msgstr "Nu există blocări active"
+msgstr "Fără blocări active"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
