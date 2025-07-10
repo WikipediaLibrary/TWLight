@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:09+0000\n"
+"PO-Revision-Date: 2025-07-10 12:31:08+0000\n"
 "Language: ce\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -299,7 +299,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:82
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:8
 msgid "Status"
-msgstr "Cтатус"
+msgstr "Статус"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
