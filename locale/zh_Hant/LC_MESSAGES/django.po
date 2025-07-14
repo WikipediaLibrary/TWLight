@@ -25,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:16+0000\n"
+"PO-Revision-Date: 2025-07-14 12:27:38+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1091,7 +1091,7 @@ msgstr "此為讓您可以在：%(link)s 做審查的友善提醒。您可以在
 #. Translators: This is the subject line of a scheduled reminder email sent to coordinators who have applications to review. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). Do not translate items in curly braces.
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-subject.html:4
 msgid "Wikipedia Library applications await your review"
-msgstr "維基百科圖書館等待您的審查"
+msgstr "維基百科圖書館申請程序等待您的審查"
 
 #. Translators: This email is sent to users when their application is rejected. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-body-html.html:5
@@ -1875,7 +1875,7 @@ msgstr "您目前並沒有被禁止編輯維基媒體專案"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:89
 msgid "If you are applying for an available collection, please first check that you don't already have access through another library or institution. If you do, please consider using that access rather than taking up a seat for this resource in The Wikipedia Library."
-msgstr "如果您正在申請可用的館藏，請首先確認您尚未通過其他圖書館或機構申請該館藏。如果您這樣做，請考慮使用該訪問權限，而不是在維基百科圖書館中為該資源佔用一個席位。"
+msgstr "如果您正在申請可用的典藏，請首先確認您尚未通過其他圖書館或機構申請該典藏。如果您這樣做，請考慮使用該訪問權限，而不是在維基百科圖書館中為該資源佔用一個席位。"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
@@ -2088,7 +2088,7 @@ msgstr "滿足此自動取用標準"
 
 #: TWLight/templates/login_partial.html:69
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
-msgstr "這些條件授予您訪問某些集合的權限（但不是所有集合）的權限。\n有些集合只能在每個應用程序的基礎上訪問。"
+msgstr "這些條件授予您取用某些典藏（不是全部）的權限。\n有些典藏只能在各個基本申請程序取用。"
 
 #: TWLight/templates/login_partial.html:89
 msgid "Login via Wikipedia"
@@ -2555,17 +2555,17 @@ msgstr "鍵"
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:45
 msgid "Collection is fully searchable via the search bar"
-msgstr "館藏可以透過搜尋欄搜索"
+msgstr "典藏可以透過搜尋欄搜索"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:54
 msgid "Collection is only partially searchable via the search bar"
-msgstr "搜尋欄只可搜尋部份館藏"
+msgstr "搜尋欄只可搜尋部份典藏"
 
 #. Translators: Text that explains when there is no search icon.
 #: TWLight/users/templates/users/filter_section.html:58
 msgid "Other collections must be browsed individually"
-msgstr "其他館藏必須單獨瀏覽"
+msgstr "其他典藏必須單獨瀏覽"
 
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
@@ -2885,11 +2885,11 @@ msgstr "透過勾選方框並點擊「提交」，代表您同意您已閱讀過
 
 #: TWLight/users/templates/users/user_collection_tile.html:32
 msgid "Remove this collection from favorites"
-msgstr "將此收藏自個人最愛移除"
+msgstr "將此典藏自個人最愛移除"
 
 #: TWLight/users/templates/users/user_collection_tile.html:38
 msgid "Add this collection to favorites"
-msgstr "將此資料庫加入收藏"
+msgstr "將此資料庫加入典藏"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:102

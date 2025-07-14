@@ -3,6 +3,7 @@
 #
 # Author: Bodhisattwa
 # Author: Md. Golam Mukit Khan
+# Author: Nokib Sarkar
 # Author: Sumita Roy Dutta
 # Author: Tahmid
 # Author: Titodutta
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:08+0000\n"
+"PO-Revision-Date: 2025-07-14 12:27:30+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -252,12 +253,12 @@ msgstr "একবার প্রক্রিয়া হয়ে গেলে
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr ""
+msgstr "এই অংশীদার লাইব্রেরি বান্ডেলে যোগদান করেছেন, যার জন্য কোনও আবেদনের প্রয়োজন নেই। এই আবেদনটি অবৈধ হিসেবে চিহ্নিত করা হবে।"
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr ""
+msgstr "এই আবেদনটি অপেক্ষা তালিকায় রয়েছে কারণ এই অংশীদারের কাছে এই মুহূর্তে কোনও প্রবেশাধিকার অনুদান নেই।"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
@@ -265,7 +266,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/send_partner.html:45
 #: TWLight/resources/templates/resources/partner_users.html:18
 msgid "Coordinators: This page may contain personal information such as real names and email addresses. Please remember that this information is confidential."
-msgstr ""
+msgstr "সমন্বয়কারী: এই পৃষ্ঠায় ব্যক্তিগত তথ্য যেমন বাস্তবজীবনের নাম এবং ইমেল ঠিকানা থাকতে পারে। দয়া করে মনে রাখবেন যে এই তথ্য গোপনীয়।"
 
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
@@ -275,7 +276,7 @@ msgstr "আবেদন মূল্যায়ন করুন"
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
 msgid "This user has requested a restriction on the processing of their data, so you cannot change the status of their application."
-msgstr ""
+msgstr "এই ব্যবহারকারী তাদের তথ্য প্রক্রিয়াকরণের উপর বিধিনিষেধ আরোপের অনুরোধ করেছেন, তাই আপনি তাদের আবেদনের স্থিতি পরিবর্তন করতে পারবেন না।"
 
 #. Translators: This is the title of the application page shown to users who are not a coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:48
@@ -295,12 +296,12 @@ msgstr "আবেদনের তারিখ"
 #. Translators: This labels the section of an application showing how many days it has been since the application was opened.
 #: TWLight/applications/templates/applications/application_evaluation.html:65
 msgid "Days open"
-msgstr ""
+msgstr "খোলা দিন"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:73
 msgid "Days since application was closed"
-msgstr ""
+msgstr "আবেদন বন্ধ হওয়ার পর থেকে দিন"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #. Translators: This labels the column description indicating the status of the listed applications.
@@ -312,7 +313,7 @@ msgstr "অবস্থা"
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
 msgid "Access duration"
-msgstr ""
+msgstr "প্রবেশের সময়কাল"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:96
@@ -349,12 +350,12 @@ msgstr "অজানা"
 #. Translators: This is the text displayed to coordinators when an applicant has no country of residence in their profile.
 #: TWLight/applications/templates/applications/application_evaluation.html:123
 msgid "Please request the applicant add their country of residence to their profile before proceeding further."
-msgstr ""
+msgstr "আরও এগিয়ে যাওয়ার আগে আবেদনকারীকে তাদের প্রোফাইলে তাদের বসবাসের দেশ যোগ করার অনুরোধ করুন।"
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
 msgid "Accounts available"
-msgstr ""
+msgstr "উপলব্ধ অ্যাকাউন্ট"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -1762,19 +1763,19 @@ msgstr ""
 #. Translators: Shown on the website's 400 page, when a user sends a bad request.
 #: TWLight/templates/400.html:15
 msgid "Sorry; we don't know what to do with that."
-msgstr ""
+msgstr "দুঃখিত; আমরা জানি না এটা দিয়ে কী করব।"
 
 #. Translators: Shown on the website's 400 page, when a user sends a bad request. Don't translate path or Phabricator.
 #: TWLight/templates/400.html:20
 #, python-format
 msgid "If you think we should know what to do with that, please email us about this error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">Phabricator</a>"
-msgstr ""
+msgstr "যদি আপনার মনে হয় যে এর সাথে আমাদের কী করতে হবে তা জানা উচিত, তাহলে অনুগ্রহ করে এই ত্রুটি সম্পর্কে আমাদের <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> ঠিকানায় ইমেল করুন অথবা <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">ফ্যাব্রিকেটরে</a> আমাদের জানান।"
 
 #. Translators: Alt text for an image shown on the 400 error page.
 #. Translators: Alt text for an image shown on the 403 error page.
 #: TWLight/templates/400.html:33 TWLight/templates/403.html:33
 msgid "Sad hamster in a cage"
-msgstr ""
+msgstr "খাঁচায় বিষণ্ণ হ্যামস্টার"
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:11
@@ -1784,7 +1785,7 @@ msgstr "অনুমতি প্রত্যাখ্যাত হয়েছ�
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view.
 #: TWLight/templates/403.html:15
 msgid "Sorry; you aren't allowed to do that."
-msgstr ""
+msgstr "দুঃখিত, আপনার এটা করার অনুমতি নেই।"
 
 #. Translators: Shown on the website's 403 page, when a user attempts to navigate to a page they don't have permission to view. Don't translate path or Phabricator.
 #: TWLight/templates/403.html:20
@@ -1800,7 +1801,7 @@ msgstr "পাওয়া যায়নি"
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:15
 msgid "Sorry; we can't find that."
-msgstr ""
+msgstr "দুঃখিত; আমরা এটি খুঁজে পাচ্ছি না।"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist. Don't translate path or Phabricator.
 #: TWLight/templates/404.html:19
@@ -2431,23 +2432,23 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No ToU question.
 #: TWLight/users/templates/users/editor_detail_data.html:118
 msgid "Is not blocked on any project?"
-msgstr ""
+msgstr "কোনও প্রকল্পে অবরুদ্ধ নন?"
 
 #. Translators: If a user has received an exemption against a criterion, this is shown next to "No" on their user page and applications next to this criterion.
 #: TWLight/users/templates/users/editor_detail_data.html:132
 msgid "(exemption granted)"
-msgstr ""
+msgstr "(ছাড় দেওয়া হয়েছে)"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr ""
+msgstr "মনে হচ্ছে আপনার অ্যাকাউন্টে একটি সক্রিয় বাধা আছে। তবুও যদি আপনি অন্যান্য মানদণ্ড পূরণ করেন তবে আপনাকে গ্রন্থাগারে প্রবাশিকারের অনুমতি দেওয়া হতে পারে - অনুগ্রহ করে <a class=\"twl-links\" href=\"%(contact_url)s\">আমাদের সাথে যোগাযোগ করুন</a>।"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
 msgid "Eligible for Bundle?"
-msgstr ""
+msgstr "বান্ডেলের জন্য যোগ্য?"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this question has a Yes or No answer.
 #: TWLight/users/templates/users/editor_detail_data.html:156
@@ -2492,7 +2493,7 @@ msgstr "উইকিপিডিয়ার ব্যবহারকারী �
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:255
 msgid "Personal data"
-msgstr ""
+msgstr "ব্যক্তিগত তথ্য"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this text is in the 'Personal data' section. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/users/templates/users/editor_detail_data.html:262
@@ -2518,18 +2519,18 @@ msgstr "হালনাগাদ"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:321
 msgid "Institutional affiliation"
-msgstr ""
+msgstr "প্রাতিষ্ঠানিক অধিভুক্তি"
 
 #. Translators: This message tells users that they are not eligible to access The Wikipedia Library content.
 #: TWLight/users/templates/users/eligibility_modal.html:7
 msgid "Sorry, your Wikipedia account doesn’t currently qualify to access The Wikipedia Library."
-msgstr ""
+msgstr "দুঃখিত, আপনার উইকিপিডিয়া অ্যাকাউন্টটি বর্তমানে উইকিপিডিয়া লাইব্রেরিতে প্রবেশের যোগ্য নয়।"
 
 #. Translators: This message tells users that they have not agreed to the terms of use, therefore are ineligible to access the content in The Wikipedia Library.
 #: TWLight/users/templates/users/eligibility_modal.html:30
 #, python-format
 msgid "Agreed with <a href=\"%(terms)s\" class=\"text-danger\"> terms of use </a>"
-msgstr ""
+msgstr "<a href=\"%(terms)s\" class=\"text-danger\">ব্যবহারের শর্তাবলীর</a> সাথে একমত"
 
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
@@ -2549,12 +2550,12 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the key section, that explains some uses for icons.
 #: TWLight/users/templates/users/filter_section.html:38
 msgid "Key"
-msgstr ""
+msgstr "চাবি"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:45
 msgid "Collection is fully searchable via the search bar"
-msgstr ""
+msgstr "সংগ্রহটি সার্চ বারের মাধ্যমে সম্পূর্ণরূপে অনুসন্ধানযোগ্য।"
 
 #. Translators: Text that describes a search icon.
 #: TWLight/users/templates/users/filter_section.html:54
@@ -2569,7 +2570,7 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr ""
+msgstr "ভাষা নির্ধারণ করুন"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
@@ -2579,7 +2580,7 @@ msgstr ""
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
 msgid "Withdraw"
-msgstr ""
+msgstr "প্রত্যাহার করুন"
 
 #. Translators: On the page listing applications, this text labels an area where users can either request for renewals, or be shown a message of why they cannot renew.
 #: TWLight/users/templates/users/my_applications.html:73
@@ -2638,7 +2639,7 @@ msgstr "ব্যবহারের শর্তাবলী দেখুন"
 #. Translators: This is the heading of the section of a user's profile where they can download, restrict, or delete their personal data.
 #: TWLight/users/templates/users/preferences.html:82
 msgid "Data"
-msgstr ""
+msgstr "উপাত্ত"
 
 #. Translators: This text labels a button users can click to download their data.
 #: TWLight/users/templates/users/preferences.html:88
@@ -2648,12 +2649,12 @@ msgstr "ডাউনলোড"
 #. Translators: This text labels a button users can click to enable data processing restriction on their account.
 #: TWLight/users/templates/users/preferences.html:94
 msgid "Restrict"
-msgstr ""
+msgstr "সীমাবদ্ধ করুন"
 
 #. Translators: This is the title of the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:11
 msgid "Restrict data processing"
-msgstr ""
+msgstr "ডেটা প্রক্রিয়াকরণ সীমাবদ্ধ করুন"
 
 #. Translators: This message is displayed on the page where users can request we stop processing their data.
 #: TWLight/users/templates/users/restrict_data.html:15
@@ -2928,7 +2929,7 @@ msgstr ""
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:11
 msgid "Delete all data"
-msgstr ""
+msgstr "সমস্ত ডেটা মুছুন"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:17
