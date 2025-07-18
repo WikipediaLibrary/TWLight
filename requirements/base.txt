@@ -18,7 +18,7 @@ django-reversion==5.1.0
 djangorestframework==3.15.2
 djmail==2.0.0
 factory_boy>=2.10.0,<4.0
-jsonschema==3.2.0
+jsonschema==4.25.0
 mwoauth==0.4.0
 git+https://github.com/WikipediaLibrary/python-mwoauth.git@Jsn.sherman/T332349
 pillow==11.0.0
