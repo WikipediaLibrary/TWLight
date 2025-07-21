@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:12+0000\n"
+"PO-Revision-Date: 2025-07-21 12:28:00+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -385,7 +385,7 @@ msgstr "Jo"
 #: TWLight/users/templates/users/editor_detail_data.html:170
 #: TWLight/users/templates/users/editor_detail_data.html:188
 msgid "No"
-msgstr "Neen"
+msgstr "Nee"
 
 #. Translators: This is the text displayed to coordinators when an applicant has not agreed to the terms of use.
 #: TWLight/applications/templates/applications/application_evaluation.html:159

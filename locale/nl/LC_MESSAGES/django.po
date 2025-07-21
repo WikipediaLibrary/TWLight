@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:14+0000\n"
+"PO-Revision-Date: 2025-07-21 12:28:01+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1488,7 +1488,7 @@ msgstr "U komt in aanmerking voor toegang tot Bibliotheekbundel-partners. Klik o
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
 #, python-format
 msgid "You are not eligible to access Library Bundle partners. Visit the <a class=\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the eligibility criteria."
-msgstr "U komt niet in aanmerking voor toegang tot de partners van de Bibliotheekbundel. Bezoek de <a class=\"twl-links\" href=\"%(homepage)s\">homepage</a> om de geschiktheidscriteria te controleren."
+msgstr "U komt niet in aanmerking voor toegang tot de partners van de Bibliotheekbundel. Bezoek de <a class=\"twl-links\" href=\"%(homepage)s\">startpagina</a> om de geschiktheidscriteria te bekijken."
 
 #. Translators: Buttton prompting users to log in.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:160

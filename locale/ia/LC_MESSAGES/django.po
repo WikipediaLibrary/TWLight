@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-01 18:20+0000\n"
-"PO-Revision-Date: 2025-07-03 12:33:11+0000\n"
+"PO-Revision-Date: 2025-07-21 12:27:59+0000\n"
 "Language: ia\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1170,17 +1170,17 @@ msgstr "Accesso instantanee (per mandatario)"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
 msgid "Multi-step access"
-msgstr ""
+msgstr "Accesso a plure passos"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "Topicos"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Tote le etiquettas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1190,12 +1190,12 @@ msgstr ""
 #: TWLight/users/templates/users/available_collection_tile.html:37
 #: TWLight/users/templates/users/user_collection_tile.html:49
 msgid "Languages"
-msgstr ""
+msgstr "Linguas"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
 msgid "All languages"
-msgstr ""
+msgstr "Tote le linguas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -1205,24 +1205,24 @@ msgstr ""
 #: TWLight/users/templates/users/filter_section.html:41
 #: TWLight/users/templates/users/user_collection_tile.html:5
 msgid "Searchable"
-msgstr ""
+msgstr "Cercabile"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection has instant or multi-step access.
 #: TWLight/resources/filters.py:85
 msgid "Access"
-msgstr ""
+msgstr "Accesso"
 
 #. Translators: This labels a textfield where users can enter the name of the potential partner they'll suggest
 #: TWLight/resources/forms.py:18
 msgid "Name of the potential partner"
-msgstr ""
+msgstr "Nomine del partner potential"
 
 #. Translators: This labels a textfield where users can enter the description of the potential partner they'll suggest
 #: TWLight/resources/forms.py:20
 #: TWLight/resources/templates/resources/merge_suggestion.html:60
 #: TWLight/resources/templates/resources/suggest.html:67
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #. Translators: This labels a textfield where users can enter the website URL of the potential partner they'll suggest
 #: TWLight/resources/forms.py:27
@@ -1232,7 +1232,7 @@ msgstr "Sito web"
 #. Translators: This indicates that a collection is excluded from the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #: TWLight/resources/models.py:287
 msgid "Not searchable"
-msgstr ""
+msgstr "Non cercabile"
 
 #. Translators: This indicates that a collection is partially included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
 #. Translators: Hovertext for an icon which indicates whether a collection is searchable or not.
@@ -1241,7 +1241,7 @@ msgstr ""
 #: TWLight/users/templates/users/filter_section.html:50
 #: TWLight/users/templates/users/user_collection_tile.html:8
 msgid "Partially searchable"
-msgstr ""
+msgstr "Partialmente cercabile"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:532
@@ -1279,7 +1279,7 @@ msgstr "Le accesso es actualmente indisponibile"
 #: TWLight/users/templates/users/available_collection_tile.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:56
 msgid "Language(s) not known"
-msgstr ""
+msgstr "Lingua(s) non cognoscite"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this badge is shown when a collection is not available.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
@@ -1287,7 +1287,7 @@ msgstr ""
 #: TWLight/users/templates/users/available_collection_tile.html:64
 #: TWLight/users/templates/users/user_collection_tile.html:76
 msgid "Not Available"
-msgstr ""
+msgstr "Non disponibile"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1296,82 +1296,82 @@ msgstr ""
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr ""
+msgstr "Le Bibliotheca de Wikipedia permitte a redactores active acceder gratuitemente a un ample gamma de collectiones digne de fide que se trova detra un muro de pagamento!"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
 #: TWLight/resources/templates/resources/filter_section.html:17
 #: TWLight/users/templates/users/filter_section.html:15
 msgid "Start with the search bar at the top or browse publisher websites directly."
-msgstr ""
+msgstr "Comencia con le barra de recerca al initio del pagina o explora le sitos web del editores directemente."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
 msgid "Learn more"
-msgstr ""
+msgstr "Leger plus"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to The Wikipedia Library Talk page on meta (https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library)
 #: TWLight/resources/templates/resources/filter_section.html:28
 #: TWLight/users/templates/users/filter_section.html:25
 msgid "Discuss"
-msgstr ""
+msgstr "Discuter"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this label indicates the start of the filter section.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this label indicates the start of the filter section.
 #: TWLight/resources/templates/resources/filter_section.html:36
 #: TWLight/users/templates/users/filter_section.html:65
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
 #: TWLight/resources/templates/resources/filter_section.html:40
 #: TWLight/users/templates/users/filter_section.html:69
 msgid "Reset filters"
-msgstr ""
+msgstr "Reinitialisar filtros"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this labels a button that helps users filter collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels a button that helps users filter collections.
 #: TWLight/resources/templates/resources/filter_section.html:48
 #: TWLight/users/templates/users/filter_section.html:76
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
 msgid "Filter collections"
-msgstr ""
+msgstr "Filtrar collectiones"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
 msgid "Merge Suggestions"
-msgstr ""
+msgstr "Combinar suggestiones"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:72
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:70
 #: TWLight/resources/templates/resources/suggest.html:78
 msgid "Proposer"
-msgstr ""
+msgstr "Proponente"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
 msgid "Upvotes"
-msgstr ""
+msgstr "Votos in favor"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
-msgstr ""
+msgstr "Retornar a Mi bibliotheca"
 
 #: TWLight/resources/templates/resources/partner_detail.html:22
 msgid "Back to partners"
-msgstr ""
+msgstr "Retornar al partners"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
 #: TWLight/resources/templates/resources/partner_detail.html:36
@@ -1390,7 +1390,7 @@ msgstr "Ante de demandar, per favor relege le <strong><a class=\"twl-links\" hre
 #: TWLight/resources/templates/resources/partner_detail.html:69
 #, python-format
 msgid "View the status of your access in <strong><a class=\"twl-links\" href=\"%(library_url)s\">My Library</a></strong> page."
-msgstr ""
+msgstr "Vide le stato de tu accesso sur le pagina <strong><a class=\"twl-links\" href=\"%(library_url)s\">Mi bibliotheca</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:78
@@ -1402,7 +1402,7 @@ msgstr "Vide le stato de tu demanda(s) sur tu pagina <strong><a class=\"twl-link
 #: TWLight/resources/templates/resources/partner_detail_apply.html:50
 #, python-format
 msgid "View the status of your access on your <strong><a href=\"%(library_url)s\" class=\"twl-links\">My Library</a></strong> page."
-msgstr ""
+msgstr "Vide le stato de tu accesso sur tu pagina <strong><a href=\"%(library_url)s\" class=\"twl-links\">Mi bibliotheca</a></strong>."
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
@@ -1413,11 +1413,11 @@ msgstr "Vide le stato de tu demanda(s) sur tu pagina <strong><a href=\"%(applica
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:73
 msgid "Remove from waitlist"
-msgstr ""
+msgstr "Remover del lista de attender"
 
 #: TWLight/resources/templates/resources/partner_detail_apply.html:73
 msgid "Set as waitlisted"
-msgstr ""
+msgstr "Mitter in lista de attender"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text titles that section. <strong> tags should not be translated, nor should partner.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:86
@@ -1428,12 +1428,12 @@ msgstr "<strong>%(coordinator)s</strong> tracta le demandas a %(partner)s."
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:95
 msgid "Talk page"
-msgstr ""
+msgstr "Pagina de discussion"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:103
 msgid "Special:EmailUser page"
-msgstr ""
+msgstr "Pagina Special:Inviar e-mail a un usator"
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/resources/templates/resources/partner_detail_apply.html:112
