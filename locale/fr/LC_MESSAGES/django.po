@@ -10,6 +10,7 @@
 # Author: Ice bulldog
 # Author: JenyxGym
 # Author: Mahabarata
+# Author: McDutchie
 # Author: MuratTheTurkish
 # Author: Nikkimaria
 # Author: Pols12
@@ -24,7 +25,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:39+0000\n"
-"PO-Revision-Date: 2025-07-28 12:30:23+0000\n"
+"PO-Revision-Date: 2025-07-31 12:36:37+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -2479,7 +2480,7 @@ msgstr "(contributions globales de l’utilisateur)"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the recent edit count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:215
 msgid "Recent global edit count *"
-msgstr "Dernière valeur du compteur global de modifications *"
+msgstr "Nombre global de modifications récentes *"
 
 #. Translators: This text is shown next to a user's recent global edit count if less than 30 days has passed since they first logged in to the Library Card. In this case, we don't yet know if they're eligible.
 #: TWLight/users/templates/users/editor_detail_data.html:220

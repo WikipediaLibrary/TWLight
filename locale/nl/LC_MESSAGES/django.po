@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:40+0000\n"
-"PO-Revision-Date: 2025-07-28 12:30:26+0000\n"
+"PO-Revision-Date: 2025-07-31 12:36:41+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1545,7 +1545,7 @@ msgstr "Geen talen beschikbaar."
 #. Translators: If a partner has specified the excerpt limit, this text shows as the title for that information field.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:92
 msgid "Excerpt limit"
-msgstr "Limiet ingesteld door partner"
+msgstr "Maximumgrootte uittreksel"
 
 #. Translators: If a partner has specified the excerpt limit both in words and percentage, this message will display the percentage of words and the number of words on the partner page.
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:99
@@ -1891,7 +1891,7 @@ msgstr "Wat doe ik nadat ik toegang heb gekregen?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr "Goedgekeurde redacteuren <i>kunnen</i> hun toegang gebruiken om:"
+msgstr "Goedgekeurde redacteuren <i>mogen</i> hun toegang gebruiken om:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:118
