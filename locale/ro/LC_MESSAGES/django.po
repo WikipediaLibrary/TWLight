@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:39+0000\n"
-"PO-Revision-Date: 2025-08-04 12:31:50+0000\n"
+"PO-Revision-Date: 2025-08-11 12:30:44+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2084,7 +2084,7 @@ msgstr "Biblioteca Wikipedia"
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Peste 100 dintre cele mai bune baze de date din lume care pot fi accesate numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru Wikipediștii de toate experiențele"
+msgstr "Peste 100 dintre cele mai bune baze de date din lume accesibile numai cu abonament, cu conținut în %(no_of_languages)s de limbi, gratuit pentru Wikipediștii de toate experiențele"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
