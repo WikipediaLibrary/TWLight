@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:39+0000\n"
-"PO-Revision-Date: 2025-08-04 12:31:47+0000\n"
+"PO-Revision-Date: 2025-08-14 12:31:53+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1253,9 +1253,8 @@ msgstr "부분적으로 검색 가능"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:532
-#, fuzzy
 msgid "Service information"
-msgstr "사용자 정보"
+msgstr "서비스 정보"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:534
@@ -1264,9 +1263,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:536
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "이용 약관을 사용할 수 없습니다."
+msgstr "일시적으로 사용할 수 없음"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:541
@@ -1280,9 +1278,8 @@ msgstr ""
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:545
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "사용 가능한 계정"
+msgstr "현재 접속이 불가능함"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -3028,7 +3025,6 @@ msgstr "현재 차단되지 않은 상태"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "지난 달 편집 수 10건 이상"
+msgstr "지난 30일 동안 10개 이상 편집"
 
