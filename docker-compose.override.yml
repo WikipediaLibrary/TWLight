@@ -1,7 +1,5 @@
 ---
 
-version: '3.4'
-
 # Local environment should mount plaintext files as secrets
 secrets:
   DJANGO_DB_NAME:
