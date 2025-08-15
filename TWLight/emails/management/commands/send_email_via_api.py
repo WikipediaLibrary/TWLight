@@ -103,7 +103,7 @@ class Command(BaseCommand):
         # Step 3: GET request to fetch Email token
         email_token_params = {"action": "query", "meta": "tokens", "format": "json"}
 
-        self.info("Getting emwail token...")
+        self.info("Getting email token...")
         email_token_response = session.get(url=url, params=email_token_params)
         email_token_data = email_token_response.json()
 
