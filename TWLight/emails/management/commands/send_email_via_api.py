@@ -19,6 +19,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         # Named (optional) arguments
+        # TODO: Check if we can add multiple targets, or if we have to make one request at a time
         parser.add_argument(
             "--target",
             type=str,
@@ -58,6 +59,7 @@ class Command(BaseCommand):
                 "The email bot username and/or password were not provided. Exiting..."
             )
         # Code taken in part from https://www.mediawiki.org/wiki/API:Emailuser#Python
+        # TODO: Add solution in case of rate-limiting
         session = requests.Session()
         # TODO: See if we need to change this to Meta or the user's home wiki?
         # Or is this wiki fine?
