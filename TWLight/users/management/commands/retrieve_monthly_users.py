@@ -66,5 +66,5 @@ class Command(BaseCommand):
                 "send_email_via_api",
                 target="Suecarmol",  # TODO: change to Vipin's user
                 subject="Monthly user report",
-                body=f"Here is a list of monthly users: {monthly_users}",
+                body=f"Here is a list of monthly users: \n\n {monthly_users}",
             )
