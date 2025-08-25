@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Portuguese (português)
 # Exported from translatewiki.net
 #
+# Author: Albertoleoncio
 # Author: ArgonSim
 # Author: B3rnas
 # Author: DDPAT
@@ -18,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:40+0000\n"
-"PO-Revision-Date: 2025-08-04 12:31:50+0000\n"
+"PO-Revision-Date: 2025-08-25 12:39:36+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1826,7 +1827,7 @@ msgstr "Esta plataforma é a nossa ferramenta central para facilitar o acesso à
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
 msgid "All users receive immediate access to some collections, which can be browsed by clicking the 'Access collection' buttons or using the search bar at the top of the page. Other collections require an application before access is granted, and may be accessed directly or via an individual login or access code. Volunteer coordinators, who have signed non-disclosure agreements with the Wikimedia Foundation, review these applications and work with publishers to get you your free access."
-msgstr "Todos os utilizadores recebem acesso imediato a algumas coleções, que podem ser exploradas clicando nos botões 'Aceder coleção' ou utilizando a barra de pesquisa no topo da página. Outras coleções exigem uma candidatura antes de ser concedido o acesso, e que poderão ser acedidas diretamente ou através de uma autenticação ou código de acesso individual. Os coordenadores voluntários, que assinaram acordos de confidencialidade com a Fundação Wikimédia, revêm estas candidaturas e trabalham com os editores para lhe obterem o seu acesso gratuito."
+msgstr "Todos os utilizadores recebem acesso imediato a algumas coleções, que podem ser exploradas clicando nos botões 'Aceder coleção' ou utilizando a barra de pesquisa no topo da página. Outras coleções exigem uma candidatura antes de ser concedido o acesso, e que poderão ser acedidas diretamente ou através de uma autenticação ou código de acesso individual. Os coordenadores voluntários, que assinaram acordos de confidencialidade com a Fundação Wikimedia, revêm estas candidaturas e trabalham com os editores para lhe obterem o seu acesso gratuito."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate terms_url.
 #: TWLight/templates/about.html:43
@@ -1877,7 +1878,7 @@ msgstr "Se está a candidatar-se a uma das coleções disponíveis, por favor, v
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/about.html:99
 msgid "If your account is blocked on one or more Wikimedia projects, you may still be granted access to The Wikipedia Library. You will need to contact the Wikipedia Library team, who will review your blocks. If you have been blocked for content issues, most notably copyright violations, or have multiple long-term blocks, we may decline your request. Additionally, if your block status changes after being approved, you will need to request another review."
-msgstr "Se a sua conta estiver bloqueada em um ou mais projetos da Wikimédia, ainda assim poderá receber acesso à 'Biblioteca' da Wikipédia. Terá de contactar a equipa da 'Biblioteca' da Wikipédia, que irá rever os seus bloqueios. Se foi bloqueado por problemas de conteúdo, principalmente por violações de direitos de autor, ou se tem vários bloqueios de longo prazo, nós poderemos recusar o seu pedido. Além disso, se o estado dos seus bloqueios alterar depois de ser aprovado, terá de solicitar outra revisão."
+msgstr "Se a sua conta estiver bloqueada em um ou mais projetos da Wikimedia, ainda assim poderá receber acesso à 'Biblioteca' da Wikipédia. Terá de contactar a equipa da 'Biblioteca' da Wikipédia, que irá rever os seus bloqueios. Se foi bloqueado por problemas de conteúdo, principalmente por violações de direitos de autor, ou se tem vários bloqueios de longo prazo, nós poderemos recusar o seu pedido. Além disso, se o estado dos seus bloqueios alterar depois de ser aprovado, terá de solicitar outra revisão."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:110
@@ -2797,7 +2798,7 @@ msgstr "Retenção e tratamento de dados"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "A Fundação Wikimédia e os nossos fornecedores de serviços utilizam a sua informação com a finalidade legítima de fornecer serviços da 'Biblioteca' da Wikipédia em apoio à nossa missão caritativa. Quando se candidata para uma conta da 'Biblioteca' da Wikipédia, ou utiliza a sua conta da mesma, nós podemos recolher rotineiramente a seguinte informação: o seu nome de utilizador, endereço de correio eletrónico, contagem de edições, data de registo, número de identificação de utilizador, os grupos aos quais pertence e todos os direitos de utilizador especiais; o seu nome, país de residência, profissão e afiliação, se exigido por um parceiro ao qual se esteja a candidatar; a sua descrição narrativa das suas contribuições e razões para pedir acesso aos recursos dos parceiros; e a data em que concorda com estas condições de utilização."
+msgstr "A Fundação Wikimedia e os nossos fornecedores de serviços utilizam a sua informação com a finalidade legítima de fornecer serviços da 'Biblioteca' da Wikipédia em apoio à nossa missão caritativa. Quando se candidata para uma conta da 'Biblioteca' da Wikipédia, ou utiliza a sua conta da mesma, nós podemos recolher rotineiramente a seguinte informação: o seu nome de utilizador, endereço de correio eletrónico, contagem de edições, data de registo, número de identificação de utilizador, os grupos aos quais pertence e todos os direitos de utilizador especiais; o seu nome, país de residência, profissão e afiliação, se exigido por um parceiro ao qual se esteja a candidatar; a sua descrição narrativa das suas contribuições e razões para pedir acesso aos recursos dos parceiros; e a data em que concorda com estas condições de utilização."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:262

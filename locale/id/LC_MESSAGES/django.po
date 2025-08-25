@@ -16,6 +16,7 @@
 # Author: NFarras
 # Author: Naufal06
 # Author: NikolasKHF
+# Author: NoiX180
 # Author: PutriAmalia1991
 # Author: Sonic Speedy
 # Author: Stevannus rua
@@ -28,7 +29,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-07-24 12:39+0000\n"
-"PO-Revision-Date: 2025-08-04 12:31:47+0000\n"
+"PO-Revision-Date: 2025-08-25 12:39:33+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -103,7 +104,7 @@ msgstr "Surel untuk akun Anda di situs web mitra"
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
 #: TWLight/applications/forms.py:339 TWLight/applications/helpers.py:100
 msgid "The number of months you wish to have this access for before renewal is required"
-msgstr "Durasi (dalam bulan) yang Anda butuhkan sebelum harus memperpanjang permohonan ini"
+msgstr "Durasi (dalam bulan) yang Anda inginkan untuk memiliki akses ini sebelum perpanjangan diperlukan"
 
 #. Translators: When filling out an application, users may need to specify their name
 #: TWLight/applications/helpers.py:81
@@ -133,7 +134,7 @@ msgstr "Buku mana yang Anda inginkan?"
 #. Translators: When filling out an application, users are given a text box where they can include any extra relevant information
 #: TWLight/applications/helpers.py:93
 msgid "Anything else you want to say"
-msgstr "Hal lain yang ingin Anda katakan"
+msgstr "Hal lain yang ingin Anda sampaikan"
 
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:95
@@ -166,7 +167,7 @@ msgstr "Afiliasi"
 #: TWLight/applications/helpers.py:112
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
-msgstr "Judul diperlukan"
+msgstr "Judul yang diminta"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:114
@@ -202,7 +203,7 @@ msgstr "Menunggu"
 #. Translators: This is the status of an application that reviewers have asked questions about.
 #: TWLight/applications/models.py:56
 msgid "Under discussion"
-msgstr "Dalam diskusi"
+msgstr "Sedang didiskusikan"
 
 #. Translators: This is the status of an application which has been approved by a reviewer.
 #: TWLight/applications/models.py:58
