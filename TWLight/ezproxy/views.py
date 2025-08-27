@@ -44,7 +44,7 @@ class EZProxyAuth(ToURequired, View):
             ):
                 group = "P" + repr(authorization.partners.get().pk)
                 groups.append(group)
-                logger.info("{group}.".format(group=group))
+                logger.debug("{group}.".format(group=group))
 
         if url:
             try:
