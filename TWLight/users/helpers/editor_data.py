@@ -34,6 +34,9 @@ def editor_global_userinfo(wp_sub: int):
     # If we don't get a response with the expected keys, something else went awry.
     except KeyError:
         global_userinfo = None
+    except urllib.request.HTTPError:
+        global_userinfo = None
+        logger.exception(f"HTTPError:")
     if global_userinfo is None:
         logger.exception(f"Could not fetch global_userinfo for User {wp_sub}")
     return global_userinfo
