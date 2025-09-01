@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: BaRaN6161 TURK
+# Author: Bapham123
 # Author: DDPAT
 # Author: Ice bulldog
 # Author: Keo010122
@@ -23,7 +24,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-08-27 19:05+0000\n"
-"PO-Revision-Date: 2025-08-28 12:39:53+0000\n"
+"PO-Revision-Date: 2025-09-01 12:53:48+0000\n"
 "Language: vi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1193,7 +1194,7 @@ msgstr "Chủ đề"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Tất cả thẻ"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -2930,7 +2931,7 @@ msgstr "Gia hạn"
 #. Translators: Labels a button users can click to extend the duration of their access.
 #: TWLight/users/templates/users/user_collection_tile.html:149
 msgid "Extend"
-msgstr ""
+msgstr "Mở rộng"
 
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:11
