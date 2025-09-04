@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-08-27 19:04+0000\n"
-"PO-Revision-Date: 2025-08-28 12:39:51+0000\n"
+"PO-Revision-Date: 2025-09-04 12:29:01+0000\n"
 "Language: ms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1111,7 +1111,7 @@ msgstr "<p>Wahai %(user)s,</p> <p>Menurut rekod kami, akses anda ke %(partner_na
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "Wahai %(user)s, Menurut rekod kami, akses anda ke %(partner_name)s akan mansuh tidak lama lagi dan anda mungkin kehilangan akses. Jika anda ingin terus memanfaatkan akaun percuma anda, anda boleh meminta pembaharuan akaun anda dengan mengklik butang Perbaharui di %(partner_link)s. Yang benar, Perpustakaan Wikipedia Anda boleh menyahdayakan e-mel ini dalam keutamaan halaman pengguna anda: https://wikipedialibrary.wmflabs.org/users/"
+msgstr "Salam %(user)s, Menurut rekod kami, akses anda ke %(partner_name)s akan mansuh tidak lama lagi dan anda mungkin kehilangan akses. Jika anda ingin terus memanfaatkan akaun percuma anda, anda boleh meminta pembaharuan akaun anda dengan mengklik butang Perbaharui di %(partner_link)s. Yang benar, Perpustakaan Wikipedia Anda boleh menyahdayakan e-mel ini dalam keutamaan halaman pengguna anda: https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
