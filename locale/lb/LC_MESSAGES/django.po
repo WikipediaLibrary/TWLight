@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-08-27 19:05+0000\n"
-"PO-Revision-Date: 2025-08-28 12:39:50+0000\n"
+"PO-Revision-Date: 2025-09-08 12:21:29+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1630,7 +1630,7 @@ msgstr "Kee Partner erfëllt déi gesate Krittären."
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_list.html:38
 msgid "Back to top"
-msgstr "Zréck no uewen"
+msgstr "Zeréck no uewen"
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_users.html:11

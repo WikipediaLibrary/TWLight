@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-08-27 19:05+0000\n"
-"PO-Revision-Date: 2025-08-28 12:39:48+0000\n"
+"PO-Revision-Date: 2025-09-08 12:21:27+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2231,7 +2231,7 @@ msgstr "شریک {partner} را نمی‌توانید به موارد دلخوا
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "مشکلی در توکن دسترسی رخ داد. لطفاً بعداً دوباره تلاش کنید یا اگر مشکل ادامه داشت با {contact_link} تماس بگیرید."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
@@ -2807,15 +2807,14 @@ msgstr "نگهداری و مدیریت داده‌ها"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "بنیاد ویکی‌مدیا و ارائه‌دهندگان خدمات ما از اطلاعات شما برای هدف قانونی ارائهٔ خدمات کتابخانهٔ ویکی‌پدیا در حمایت از مأموریت خیرخواهانهٔ ما استفاده می‌کنند. هنگامی که برای یک حساب کتابخانهٔ ویکی‌پدیا درخواست می‌کنید، یا از حساب کتابخانهٔ ویکی‌پدیای خود استفاده می‌کنید، ما می‌توانیم به‌طور معمول اطلاعات زیر را جمع‌آوری کنیم: نام کاربری، آدرس ایمیل، تعداد ویرایش، تاریخ ثبت نام، شمارهٔ شناسهٔ کاربر، گروه‌های کاربری که به آن‌ها تعلق دارید و اختیارات کاربری؛ نام، کشور محل اقامت، شغل و/یا وابستگی سازمانی شما، در صورت نیاز توسط شریکی که از آن درخواست می‌کنید؛ شرح روایت شما از مشارکت و دلایل درخواست دسترسی به منابع شریک؛ و تاریخ موافقت شما با این شرایط استفاده."
+msgstr "بنیاد ویکی‌مدیا و ارائه‌دهندگان خدمات ما از اطلاعات شما برای هدف مشروع ارائهٔ خدمات کتابخانهٔ ویکی‌پدیا در حمایت از مأموریت خیریه‌ای ما استفاده می‌کنند. هنگامی که برای یک حساب کتابخانهٔ ویکی‌پدیا درخواست می‌دهید یا از حساب کتابخانهٔ ویکی‌پدیا استفاده می‌کنید، ممکن است به‌طور معمول اطلاعات زیر را جمع‌آوری کنیم: نام کاربری، نشانی ایمیل، شمار ویرایش‌ها، تاریخ ثبت‌نام، شمارهٔ شناسهٔ کاربر، گروه‌هایی که عضو آن‌ها هستید، و هرگونه حقوق ویژهٔ کاربری؛ نام، کشور محل سکونت، و/یا وابستگی، اگر توسط یکی از شرکای مورد درخواست شما الزامی باشد؛ توضیح شما دربارهٔ مشارکت‌هایتان و دلایل درخواست دسترسی به منابع شریک؛ و تاریخی که با این شرایط استفاده موافقت می‌کنید."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:262
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "هر ناشری که عضو برنامهٔ کتابخانهٔ ویکی‌پدیا باشد، به اطلاعات خاص متفاوت در درخواست نیاز دارد. برخی از ناشران ممکن است فقط یک آدرس ایمیل درخواست کنند، در حالی که برخی دیگر اطلاعات دقیق‌تری مانند نام، مکان، شغل یا وابستگی سازمانی شما را درخواست می‌کنند. هنگامی که درخواست خود را تکمیل می‌کنید، فقط از شما خواسته می‌شود اطلاعات مورد نیاز ناشران را انتخاب کنید و هر ناشر فقط اطلاعات مورد نیاز شما را برای دسترسی شما دریافت می‌کند. لطفاً از صفحات <a class=\"twl-links\" href=\"%(all_partners_url)s\">اطلاعات پایگاه</a> ما دیدن کنید تا بدانید هر ناشر برای دسترسی به منابع خود چه اطلاعاتی را لازم دارد."
+msgstr "هر ناشری که عضو برنامهٔ کتابخانهٔ ویکی‌پدیا است، در درخواست ثبت‌نام به اطلاعات خاص متفاوتی نیاز دارد. برخی ناشران ممکن است فقط نشانی ایمیل بخواهند، در حالی که برخی دیگر داده‌های دقیق‌تری مانند نام، موقعیت مکانی یا وابستگی نهادی شما را درخواست کنند. هنگامی که درخواست خود را تکمیل می‌کنید، فقط از شما خواسته می‌شود اطلاعاتی را ارائه دهید که ناشران انتخابی شما نیاز دارند، و هر ناشر فقط اطلاعات موردنیاز برای فراهم‌کردن دسترسی شما را دریافت خواهد کرد. لطفاً برای اطلاع از اینکه هر ناشر چه اطلاعاتی برای دسترسی به منابعش نیاز دارد، به صفحات <a class=\"twl-links\" href=\"%(all_partners_url)s\">اطلاعات شرکا</a> مراجعه کنید."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:277
@@ -2830,9 +2829,8 @@ msgstr "به منظور اجرای برنامهٔ کتابخانهٔ ویکی‌
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:305
-#, fuzzy
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr "اگر تصمیم دارید حساب کتابخانهٔ ویکی‌پدیای خود را غیرفعال کنید، می‌توانید با استفاده از دکمهٔ حذف نمایهٔ خود، اطلاعات شخصی مرتبط با حساب خود را حذف کنید. ما نام واقعی، شغل، وابستگی نهادی و کشور محل اقامت شما را حذف خواهیم کرد. لطفاً توجه داشته باشید که این سامانۀ سابقهٔ نام کاربری شما، ناشرانی را که به آن‌ها درخواست کرده‌اید یا به آن‌ها دسترسی داشته‌اید، و تاریخ‌های دسترسی را در خود حفظ می‌کند. توجه داشته باشید که حذف قابل برگشت نیست. حذف حساب کتابخانهٔ ویکی‌پدیا ممکن است با حذف هرگونه دسترسی به منابعی که شما مجاز یا تأیید شده‌اید، مطابقت داشته باشد. اگر درخواست حذف اطلاعات حساب را دارید و بعداً می‌خواهید برای یک حساب جدید درخواست دهید، باید اطلاعات لازم را دوباره ارائه دهید."
+msgstr "اگر تصمیم بگیرید حساب کتابخانهٔ ویکی‌پدیای خود را غیرفعال کنید، می‌توانید با استفاده از دکمهٔ حذف در نمایهٔ خود، برخی اطلاعات شخصی مرتبط با حسابتان را پاک کنید. ما نام واقعی، وابستگی نهادی و کشور محل سکونت شما را حذف خواهیم کرد. لطفاً توجه داشته باشید که سامانه، سابقه‌ای از نام کاربری شما، ناشرانی که برای آن‌ها درخواست داده‌اید یا به آن‌ها دسترسی داشته‌اید، و تاریخ‌های آن دسترسی را نگه خواهد داشت. توجه کنید که حذف غیرقابل بازگشت است. حذف حساب کتابخانهٔ ویکی‌پدیا ممکن است با حذف هرگونه دسترسی به منابعی که واجد شرایط یا تأییدشده بودید نیز همراه باشد. اگر درخواست حذف اطلاعات حساب را بدهید و بعداً بخواهید برای یک حساب جدید درخواست کنید، لازم است اطلاعات لازم را دوباره ارائه دهید."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:321

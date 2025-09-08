@@ -5,6 +5,7 @@
 			"Bananax47",
 			"Derugon",
 			"DreZhsh",
+			"Escargot bleu",
 			"Gomoko",
 			"Mahabarata",
 			"Melimeli",
@@ -152,5 +153,13 @@
 	"166_short_description": "<strong>East View Press</strong> publie des périodiques et des livres axés sur les questions internationales et de politique publique, en particulier celles liées à l'ex-Union soviétique et à la Chine. Leurs publications couvrent des sujets tels que la politique étrangère, la sécurité internationale, les études slaves et chinoises et la géographie, avec du contenu traduit et édité pour rendre la recherche accessible en anglais.",
 	"166_description": "Les collections disponibles sont :\n<ul> \n<li>Recueil actuel de la presse russe - numéros de l'année en cours</li> \n<li>Recueil actuel de la presse post-soviétique</li> \n<li>Recueil actuel de la presse soviétique</li> \n<li>Affaires internationales</li> \n<li>Sciences sociales - Archives numériques et numéros de l'année en cours</li> \n<li>Guerriers d'élite : forces d'opérations spéciales du monde entier</li> \n<li>Le pétrole russe : passé, présent et futur</li> \n<li>Les Russes face à Trump : couverture médiatique et commentaires</li> \n<li>Compte à rebours avant la guerre en Géorgie : la politique étrangère de la Russie et la couverture médiatique du conflit en Ossétie du Sud et en Abkhazie</li> \n<li>Le jardin noir en flammes : le conflit du Haut-Karabakh dans la presse soviétique et russe</li> \n<li>La cartographie d'Israël : bibliographie, instrument de recherche et index. Volume 1 : Série de cartes topographiques 1915-1970</li> \n<li>Analyse du terrain en Afghanistan, en Ukraine, en Syrie et au Liban</li> \n</ul>",
 	"167_short_description": "<strong>The Africa Report</strong> est un magazine trimestriel anglophone basé à Paris qui se concentre sur la politique et l'économie africaines.",
-	"168_short_description": "<strong>Vaani Editor</strong> est un service de relecture en ligne pour le tamoul. Il peut vous aider à corriger l'orthographe, les fautes de frappe, les erreurs de sandhi, les homophones, etc."
+	"168_short_description": "<strong>Vaani Editor</strong> est un service de relecture en ligne pour le tamoul. Il peut vous aider à corriger l'orthographe, les fautes de frappe, les erreurs de sandhi, les homophones, etc.",
+	"169_short_description": "<strong>The Times of Malta</strong> est un quotidien maltais en langue anglaise. Fondé en 1935, il est le plus ancien quotidien encore en circulation à Malte. Il bénéficie du plus fort tirage parmi les journaux maltais.",
+	"170_short_description": "<strong>Africa Intelligence</strong> est publié quotidiennement et propose des informations stratégiques sur les affaires politiques, diplomatiques et économiques qui façonnent le continent africain. Cette collection donne accès à l'édition anglaise d'Africa Intelligence.",
+	"171_short_description": "<strong>Africa Intelligence</strong> est publié quotidiennement et propose des informations stratégiques sur les affaires politiques, diplomatiques et économiques qui façonnent le continent africain. Cette collection donne accès à l'édition française d'Africa Intelligence.",
+	"172_short_description": "<strong>Intelligence Online</strong> est un quotidien d'investigation axé sur le renseignement mondial, allant des agences nationales aux sociétés de renseignement privées collaborant avec de grandes entreprises. Cette collection donne accès à l'édition anglaise d'Intelligence Online.",
+	"173_short_description": "<strong>Intelligence Online</strong> est un quotidien d'investigation axé sur le renseignement mondial, allant des agences nationales aux sociétés de renseignement privées collaborant avec de grandes entreprises. Cette collection donne accès à l'édition française d'Intelligence Online.",
+	"174_short_description": "<strong>La Lettre</strong> est un quotidien couvrant les rouages du pouvoir dans les secteurs politique, économique et médiatique français.",
+	"175_short_description": "<strong>Glitz</strong> est un média d'investigation dédié au secteur du luxe. Chaque semaine, Glitz couvre les décisions stratégiques des familles, maisons et acteurs influents de l'écosystème du luxe. Cette collection donne accès à l'édition anglaise de Glitz.",
+	"176_short_description": "<strong>Glitz</strong> est un média d'investigation dédié au secteur du luxe. Chaque semaine, Glitz couvre les décisions stratégiques des familles, maisons et acteurs influents de l'écosystème du luxe. Cette collection donne accès à l'édition française de Glitz."
 }

@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-08-27 19:04+0000\n"
-"PO-Revision-Date: 2025-08-28 12:39:46+0000\n"
+"PO-Revision-Date: 2025-09-08 12:21:25+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1828,7 +1828,7 @@ msgstr "إذا كنت تعتقد أنه يجب أن يكون حسابك قادر
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:11
 msgid "Not found"
-msgstr "لم يتم العثور عليه"
+msgstr "غير موجود"
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
 #: TWLight/templates/404.html:15
