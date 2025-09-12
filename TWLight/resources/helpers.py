@@ -1,8 +1,21 @@
 from django.conf import settings
-from django.conf.global_settings import LANGUAGES_BIDI
 from numbers import Number
 import json
 import os
+
+
+"""
+Caches the direction (LTR/RTL) of each language by checking if the
+first list value (script type) is defined in the RTL list (rtlscripts)
+"""
+with open(os.path.join(settings.LOCALE_PATHS[0], "language-data.json")) as file:
+    data = json.load(file)
+    languages = data["languages"]
+    rtlscripts = data["rtlscripts"]
+    LANGS_DIRECTION = {
+        lang: "rtl" if meta[0] in rtlscripts else "ltr"
+        for lang, meta in languages.items()
+    }
 
 
 def get_partner_description_json_schema():
@@ -65,9 +78,9 @@ def get_partner_description(
     descriptions["short_description_language"] = (
         "en" if short_description["is_default"] else language_code
     )
-    descriptions["short_description_direction"] = (
-        "rtl" if descriptions["short_description_language"] in LANGUAGES_BIDI else "ltr"
-    )
+    descriptions["short_description_direction"] = LANGS_DIRECTION[
+        descriptions["short_description_language"]
+    ]
 
     description = _get_any_description(
         partner_default_descriptions_dict,
@@ -79,9 +92,9 @@ def get_partner_description(
     descriptions["description_language"] = (
         "en" if description["is_default"] else language_code
     )
-    descriptions["description_direction"] = (
-        "rtl" if descriptions["description_language"] in LANGUAGES_BIDI else "ltr"
-    )
+    descriptions["description_direction"] = LANGS_DIRECTION[
+        descriptions["description_language"]
+    ]
 
     return descriptions
 
