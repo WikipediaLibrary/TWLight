@@ -118,10 +118,16 @@ class PartnersFilterView(ListView):
             # Obtaining translated partner description
             partner_dict["languages"] = partner.get_languages
             partner_descriptions = partner.get_descriptions(language_code)
-            partner_dict["short_description"] = partner_descriptions["short_description"]
-            partner_dict["short_description_direction"] = partner_descriptions["short_description_direction"]
+            partner_dict["short_description"] = partner_descriptions[
+                "short_description"
+            ]
+            partner_dict["short_description_direction"] = partner_descriptions[
+                "short_description_direction"
+            ]
             partner_dict["description"] = partner_descriptions["description"]
-            partner_dict["description_direction"] = partner_descriptions["description_direction"]
+            partner_dict["description_direction"] = partner_descriptions[
+                "description_direction"
+            ]
 
             partners_list.append(partner_dict)
 

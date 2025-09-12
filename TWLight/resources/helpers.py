@@ -62,8 +62,12 @@ def get_partner_description(
     )
 
     descriptions["short_description"] = short_description["text"]
-    descriptions["short_description_language"] = "en" if short_description["is_default"] else language_code
-    descriptions["short_description_direction"] = "rtl" if descriptions["short_description_language"] in LANGUAGES_BIDI else "ltr"
+    descriptions["short_description_language"] = (
+        "en" if short_description["is_default"] else language_code
+    )
+    descriptions["short_description_direction"] = (
+        "rtl" if descriptions["short_description_language"] in LANGUAGES_BIDI else "ltr"
+    )
 
     description = _get_any_description(
         partner_default_descriptions_dict,
@@ -72,8 +76,12 @@ def get_partner_description(
     )
 
     descriptions["description"] = description["text"]
-    descriptions["description_language"] = "en" if description["is_default"] else language_code
-    descriptions["description_direction"] = "rtl" if descriptions["description_language"] in LANGUAGES_BIDI else "ltr"
+    descriptions["description_language"] = (
+        "en" if description["is_default"] else language_code
+    )
+    descriptions["description_direction"] = (
+        "rtl" if descriptions["description_language"] in LANGUAGES_BIDI else "ltr"
+    )
 
     return descriptions
 
@@ -233,7 +241,7 @@ def _get_any_description(
         text = partner_default_descriptions_dict.get(partner_key)
         is_default = True
 
-    return { "text": text, "is_default": is_default }
+    return {"text": text, "is_default": is_default}
 
 
 def get_tags_json_schema():
