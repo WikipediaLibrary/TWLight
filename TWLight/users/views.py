@@ -1055,7 +1055,13 @@ class MyLibraryView(TemplateView):
                         "partner_short_description": partner_descriptions[
                             "short_description"
                         ],
+                        "partner_short_description_direction": partner_descriptions[
+                            "short_description_direction"
+                        ],
                         "partner_description": partner_descriptions["description"],
+                        "partner_description_direction": partner_descriptions[
+                            "description_direction"
+                        ],
                         "partner_phabricator_tasks": partner_phabricator_tasks,
                         "partner_phabricator_disabled": partner_phabricator_disabled,
                         "partner_languages": user_authorization_partner.get_languages,
@@ -1186,7 +1192,13 @@ class MyLibraryView(TemplateView):
                     "partner_name": available_collection.company_name,
                     "partner_logo": partner_logo,
                     "short_description": partner_descriptions["short_description"],
+                    "short_description_direction": partner_descriptions[
+                        "short_description_direction"
+                    ],
                     "description": partner_descriptions["description"],
+                    "description_direction": partner_descriptions[
+                        "description_direction"
+                    ],
                     "partner_phabricator_tasks": partner_phabricator_tasks,
                     "partner_phabricator_disabled": partner_phabricator_disabled,
                     "languages": available_collection.get_languages,

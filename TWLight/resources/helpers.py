@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.conf.global_settings import LANGUAGES_BIDI
 from numbers import Number
 import json
 import os
@@ -54,16 +55,32 @@ def get_partner_description(
         language_code, "partner_descriptions"
     )
 
-    descriptions["short_description"] = _get_any_description(
+    short_description = _get_any_description(
         partner_default_descriptions_dict,
         partner_descriptions_dict,
         partner_short_description_key,
     )
 
-    descriptions["description"] = _get_any_description(
+    descriptions["short_description"] = short_description["text"]
+    descriptions["short_description_language"] = (
+        "en" if short_description["is_default"] else language_code
+    )
+    descriptions["short_description_direction"] = (
+        "rtl" if descriptions["short_description_language"] in LANGUAGES_BIDI else "ltr"
+    )
+
+    description = _get_any_description(
         partner_default_descriptions_dict,
         partner_descriptions_dict,
         partner_description_key,
+    )
+
+    descriptions["description"] = description["text"]
+    descriptions["description_language"] = (
+        "en" if description["is_default"] else language_code
+    )
+    descriptions["description_direction"] = (
+        "rtl" if descriptions["description_language"] in LANGUAGES_BIDI else "ltr"
     )
 
     return descriptions
@@ -215,14 +232,16 @@ def _get_any_description(
 
     Returns
     -------
-    str or None
+    dict
     """
-    if partner_key in partner_descriptions_dict.keys():
-        return partner_descriptions_dict[partner_key]
-    elif partner_key in partner_default_descriptions_dict.keys():
-        return partner_default_descriptions_dict[partner_key]
-    else:
-        return None
+    text = partner_descriptions_dict.get(partner_key)
+    is_default = False
+
+    if text is None:
+        text = partner_default_descriptions_dict.get(partner_key)
+        is_default = True
+
+    return {"text": text, "is_default": is_default}
 
 
 def get_tags_json_schema():
