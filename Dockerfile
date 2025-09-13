@@ -1,4 +1,6 @@
-FROM quay.io/wikipedialibrary/python:3.11-slim-bullseye-updated as twlight_base
+FROM quay.io/wikipedialibrary/python:3.11-slim-bullseye-updated AS twlight_base
+ARG EXPIRES=never
+LABEL quay.expires-after=${EXPIRES}
 # Base dependencies.
 RUN apt update ; \
     apt install -y --no-install-recommends \
@@ -7,7 +9,7 @@ RUN apt update ; \
     rm -rf /var/lib/apt/lists/*; \
     pip3 install virtualenv
 
-FROM twlight_base as twlight_build
+FROM twlight_base AS twlight_build
 # Copy pip requirements.
 ARG REQUIREMENTS_FILE=wmf.txt
 ENV REQUIREMENTS_FILE=${REQUIREMENTS_FILE}
