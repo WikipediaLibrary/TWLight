@@ -70,9 +70,3 @@ services:
         target: /app/500
     depends_on:
       - 'twlight'
-      # - 'syslog'
-#  syslog:
-#    build:
-#      context: syslog
-#    environment:
-#      - MATOMO_FQDN=analytics-wikipedialibrary.wmflabs.org
