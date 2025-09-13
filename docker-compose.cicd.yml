@@ -7,5 +7,7 @@ services:
     image: quay.io/wikipedialibrary/twlight:local
     build:
       context: .
+      args:
+        EXPIRES: 52w
     env_file:
       - ./conf/cicd.twlight.env
