@@ -21,10 +21,6 @@ secrets:
     external: true
   TWLIGHT_EZPROXY_SECRET:
     external: true
-  MATOMO_SITEID:
-    external: true
-  MATOMO_AUTH_TOKEN:
-    external: true
 
 services:
   migrate:
@@ -69,8 +65,3 @@ services:
       - type: bind
         source: ./conf/production.nginx.conf
         target: /etc/nginx/conf.d/default.conf
-#  syslog:
-#    image: quay.io/wikipedialibrary/twlight_syslog:branch_production
-#    secrets:
-#      - MATOMO_SITEID
-#      - MATOMO_AUTH_TOKEN
