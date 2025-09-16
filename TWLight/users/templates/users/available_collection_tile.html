@@ -28,7 +28,7 @@
       </a>
     {% endif %}
     <div class="card-body">
-      <p class="card-text">
+      <p class="card-text" dir="{{ available_collection.short_description_direction }}">
         {{ available_collection.short_description|safe }}
       </p>
       <hr>
