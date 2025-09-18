@@ -24,4 +24,4 @@ git+https://github.com/WikipediaLibrary/python-mwoauth.git@Jsn.sherman/T332349
 pillow==11.0.0
 python-dateutil==2.9.0.post0
 sentry-sdk==2.24.1
-whitenoise==6.8.2
+whitenoise==6.11.0
