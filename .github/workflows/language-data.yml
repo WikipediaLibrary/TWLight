@@ -1,0 +1,25 @@
+name: Update language data
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Download
+        run: curl -o locale/language-data.json https://raw.githubusercontent.com/wikimedia/language-data/refs/heads/master/data/language-data.json
+
+      - name: Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: locale/language-data.json
+          commit-message: Update language-data.json
+          branch: actions/language-data
+          title: Update language data
+          body: An upstream change to `locale/language-data.json` was detected in the [language-data repository](https://github.com/wikimedia/language-data).
