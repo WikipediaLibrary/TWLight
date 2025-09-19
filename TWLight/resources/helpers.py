@@ -1,36 +1,7 @@
 from django.conf import settings
 from numbers import Number
 import json
-import logging
 import os
-
-
-LANGS_DIRECTION = {}
-
-
-def get_language_direction(language_code: str):
-    """
-    Caches the direction (LTR/RTL) of each language by checking if the
-    first list value (script type) is defined in the RTL list (rtlscripts)
-    """
-    if not LANGS_DIRECTION:
-        try:
-            with open(
-                os.path.join(settings.LOCALE_PATHS[0], "language-data.json")
-            ) as file:
-                data = json.load(file)
-                languages = data["languages"]
-                rtlscripts = data["rtlscripts"]
-                LANGS_DIRECTION.update(
-                    {
-                        lang: "rtl" if meta[0] in rtlscripts else "ltr"
-                        for lang, meta in languages.items()
-                    }
-                )
-        except:
-            logging.getLogger(__name__).exception("Failed to load language data")
-
-    return LANGS_DIRECTION.get(language_code, "ltr")
 
 
 def get_partner_description_json_schema():
@@ -93,8 +64,10 @@ def get_partner_description(
     descriptions["short_description_language"] = (
         "en" if short_description["is_default"] else language_code
     )
-    descriptions["short_description_direction"] = get_language_direction(
-        descriptions["short_description_language"]
+    descriptions["short_description_direction"] = (
+        "rtl"
+        if descriptions["short_description_language"] in settings.LANGUAGES_BIDI
+        else "ltr"
     )
 
     description = _get_any_description(
@@ -107,8 +80,10 @@ def get_partner_description(
     descriptions["description_language"] = (
         "en" if description["is_default"] else language_code
     )
-    descriptions["description_direction"] = get_language_direction(
-        descriptions["description_language"]
+    descriptions["description_direction"] = (
+        "rtl"
+        if descriptions["description_language"] in settings.LANGUAGES_BIDI
+        else "ltr"
     )
 
     return descriptions
