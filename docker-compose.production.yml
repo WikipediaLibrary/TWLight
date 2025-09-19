@@ -1,7 +1,5 @@
 ---
 
-version: '3.4'
-
 secrets:
   DJANGO_DB_NAME:
     external: true
