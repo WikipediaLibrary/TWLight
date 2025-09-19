@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2025-08-04 12:31:48+0000\n"
-"X-POT-Import-Date: 2025-03-08 21:36:32+0000\n"
+"PO-Revision-Date: 2025-09-18 12:35:37+0000\n"
+"X-POT-Import-Date: 2025-09-16 20:30:32+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ku-Latn\n"
@@ -1139,7 +1139,7 @@ msgstr ""
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:556
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:562
 msgid "You must be a Wikipedia editor to do that."
 msgstr ""
 
@@ -1716,32 +1716,32 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr ""
 
 #. Translators: If multiple authorizations where returned for a collection, this message is shown to a user
-#: TWLight/resources/views.py:269
+#: TWLight/resources/views.py:275
 msgid "Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."
 msgstr ""
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:317
+#: TWLight/resources/views.py:323
 msgid "This partner is currently not open for applications"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:409
+#: TWLight/resources/views.py:415
 msgid "This partner is now waitlisted"
 msgstr ""
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:422
+#: TWLight/resources/views.py:428
 msgid "This partner is now available for applications"
 msgstr ""
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:548
+#: TWLight/resources/views.py:554
 msgid "Your suggestion has been added."
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:572
+#: TWLight/resources/views.py:578
 msgid "Suggestion has been deleted."
 msgstr ""
 
