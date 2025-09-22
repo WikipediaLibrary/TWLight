@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-09-16 19:43+0000\n"
-"PO-Revision-Date: 2025-09-18 12:35:37+0000\n"
+"PO-Revision-Date: 2025-09-22 12:35:11+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1990,7 +1990,7 @@ msgstr "Meta-Säit"
 #: TWLight/templates/login_partial.html:16 TWLight/templates/new_base.html:14
 #: TWLight/templates/new_base.html:36
 msgid "The Wikipedia Library"
-msgstr "D'Wikipedia Bibliothéik"
+msgstr "D'Wikipedia-Bibliothéik"
 
 #. Translators: On the contact us page, this labels the link to the Wikipedia Library mailing list.
 #: TWLight/templates/contact.html:27
