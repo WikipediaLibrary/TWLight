@@ -66,17 +66,29 @@ NEVER_CACHE_HTTP_HEADER_PATHS = [
 # https://raw.githubusercontent.com/wikimedia/language-data/master/data/language-data.json
 # into locale/language-data.json
 def get_languages_from_locale_subdirectories(dir):
-    current_languages = []
-    language_data_json = open(os.path.join(dir, "language-data.json"))
-    languages = json.loads(language_data_json.read())["languages"]
-    language_data_json.close()
-    for locale_dir in os.listdir(dir):
-        if os.path.isdir(os.path.join(dir, locale_dir)):
-            for lang_code, lang_data in languages.items():
-                autonym = lang_data[-1]
-                if to_language(locale_dir) == lang_code:
-                    current_languages += [(lang_code, autonym)]
-    return sorted(set(current_languages))
+    try:
+        with open(os.path.join(dir, "language-data.json")) as file:
+            data = json.load(file)
+            languages = data["languages"]
+            rtlscripts = data["rtlscripts"]
+
+            current_languages = set()
+            current_bidi = set()
+
+            for locale_dir in os.listdir(dir):
+                if os.path.isdir(os.path.join(dir, locale_dir)):
+                    lang_code = to_language(locale_dir)
+                    lang_data = languages.get(lang_code)
+
+                    if lang_data and len(lang_data) == 3:
+                        current_languages.add((lang_code, lang_data[2]))
+
+                        if lang_data[0] in rtlscripts:
+                            current_bidi.add(lang_code)
+
+            return sorted(current_languages), sorted(current_bidi)
+    except:
+        logging.getLogger(__name__).exception("Failed to load language data")
 
 
 # Get the intersection of available Faker locales and the specified language set.
@@ -310,7 +322,7 @@ LOCALE_PATHS = [
 # available to the system. This keeps our column and index count for db-stored
 # translations as low as possible while allowing translatewiki contributions to
 # be used without reconfiguring the site.
-LANGUAGES = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
+LANGUAGES, LANGUAGES_BIDI = get_languages_from_locale_subdirectories(LOCALE_PATHS[0])
 FAKER_LOCALES = get_django_faker_languages_intersection(LANGUAGES)
 
 TIME_ZONE = "UTC"
