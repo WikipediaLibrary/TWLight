@@ -15,6 +15,9 @@ jobs:
       - name: Download
         run: curl -o locale/language-data.json https://raw.githubusercontent.com/wikimedia/language-data/refs/heads/master/data/language-data.json
 
+      - name: Validate
+        run: jq -ce . locale/language-data.json > /dev/null
+
       - name: Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
