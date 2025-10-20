@@ -6,10 +6,12 @@
 # Author: Druesenfieber
 # Author: Fitoschido
 # Author: Ice bulldog
+# Author: Lisyeng
 # Author: Mirin
 # Author: Remux
 # Author: Robin van der Vliet
 # Author: Sabelöga
+# Author: Tymewalk
 # Author: Vami
 # Author: YvesNevelsteen
 msgid ""
@@ -18,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-09-23 13:49+0000\n"
-"PO-Revision-Date: 2025-09-25 12:40:53+0000\n"
+"PO-Revision-Date: 2025-10-20 05:56:38+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1164,7 +1166,7 @@ msgstr "Vi devas esti vikipedia redaktanto por fari tion."
 #. Translators: When a user is being authenticated to access proxied resources, and the request's missing the editor's username, this error text is displayed.
 #: TWLight/ezproxy/views.py:35
 msgid "Missing Editor username."
-msgstr ""
+msgstr "Mankas uzantnomo de redaktanto."
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:55
@@ -1199,7 +1201,7 @@ msgstr "Temoj"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Ĉiuj etikedoj"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1213,9 +1215,8 @@ msgstr "Lingvoj"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Lingvoj"
+msgstr "Ĉiuj lingvoj"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -2362,7 +2363,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail.html:24
 #: TWLight/users/templates/users/my_applications.html:13
 msgid "My Library"
-msgstr ""
+msgstr "Mia Biblioteko"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:28
@@ -2547,9 +2548,8 @@ msgstr "Retpoŝta adreso *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this link can be clicked to update a user's email.
 #: TWLight/users/templates/users/editor_detail_data.html:288
-#, fuzzy
 msgid "update"
-msgstr "(ĝisdatigi)"
+msgstr "ĝisdatigi"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's institutional affiliation (e.g. university)
 #: TWLight/users/templates/users/editor_detail_data.html:321
@@ -2635,7 +2635,7 @@ msgstr ""
 #. Translators: This text is the heading of a section in a user's profile where they can change their preferences.
 #: TWLight/users/templates/users/preferences.html:6
 msgid "Preferences"
-msgstr ""
+msgstr "Preferoj"
 
 #. Translators: In the preferences section of a user profile, this text labels the form where users can change the site language.
 #: TWLight/users/templates/users/preferences.html:11
@@ -2663,9 +2663,8 @@ msgstr "Ĝisdatigi"
 
 #. Translators: This text labels the date for when the terms of use were most recently changed.
 #: TWLight/users/templates/users/preferences.html:70
-#, fuzzy
 msgid "Last updated at:"
-msgstr "Lasta paĝo"
+msgstr "Laste ĝisdatigita ĉe:"
 
 #. Translators: This link is to the site's terms of use.
 #: TWLight/users/templates/users/preferences.html:72
@@ -3021,7 +3020,7 @@ msgstr ""
 #. Translators: Shown to the user when they successfully modify their personal information.
 #: TWLight/users/views.py:415
 msgid "Your information has been updated."
-msgstr ""
+msgstr "Viaj informoj estas ĝisdatigitaj."
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
 #: TWLight/users/views.py:452

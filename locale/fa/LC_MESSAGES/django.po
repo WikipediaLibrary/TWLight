@@ -14,6 +14,7 @@
 # Author: Ice bulldog
 # Author: Jeeputer
 # Author: Jsn.sherman
+# Author: LordProfo
 # Author: Mahdy Saffar
 # Author: Mardetanha
 # Author: Mohammad ebz
@@ -28,7 +29,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-09-23 13:48+0000\n"
-"PO-Revision-Date: 2025-09-25 12:40:53+0000\n"
+"PO-Revision-Date: 2025-10-20 05:56:39+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1108,7 +1109,7 @@ msgstr "<p>%(user)s عزیز،</p> <p> ممنون از اینکه برای دس�
 #: TWLight/emails/templates/emails/rejection_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. Unfortunately at this time your application has not been approved. You can view your application and review comments at: %(app_url)s Best, The Wikipedia Library"
-msgstr "%(user)s گرامی، از اینکه برای دسترسی به %(partner)s از طریق کتابخانهٔ ویکی‌پدیا درخواست دادید متشکریم. متأسفانه در حال حاضر درخواست شما تأیید نشد. می‌توانید درخواست‌تان را به‌همراه نظرات داده‌شده بر آن را از %(app_url)s ببینید. با احترام، کتابخانهٔ ویکی‌پدیا"
+msgstr "%(user)s گرامی، از اینکه برای دسترسی به %(partner)s از طریق کتابخانهٔ ویکی‌پدیا درخواست دادید سپاسگزاریم. شوربختانه اکنون درخواست شما تأیید نشد. می‌توانید درخواست‌تان را به‌همراه دیدگاه‌های داده‌شده بر آن را از %(app_url)s ببینید. با احترام، کتابخانهٔ ویکی‌پدیا"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been rejected. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/rejection_notification-subject.html:4
@@ -2622,7 +2623,7 @@ msgstr "ایمیل‌ها"
 #. Translators: This is the heading of the section of a user's profile where users can change their password.
 #: TWLight/users/templates/users/preferences.html:36
 msgid "Password"
-msgstr "رمز عبور"
+msgstr "گذرواژه"
 
 #. Translators: This text labels a button which, when clicked, updates a user's acceptance to the site's terms of use.
 #. Translators: This is a button which updates user preference settings
