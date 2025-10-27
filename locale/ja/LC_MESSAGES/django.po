@@ -15,6 +15,7 @@
 # Author: Omotecho
 # Author: Otokoume
 # Author: Sabelöga
+# Author: SaldırganSincap
 # Author: SawaTszm
 # Author: Shirayuki
 # Author: Tamaki Wakita
@@ -30,7 +31,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-10-20 21:28+0000\n"
-"PO-Revision-Date: 2025-10-22 09:00:41+0000\n"
+"PO-Revision-Date: 2025-10-27 12:46:40+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -982,7 +983,7 @@ msgstr "<p>拝啓 %(user)s様、</p> <p>このたびはウィキペディア図�
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "<p>拝啓 %(user)s様、このたびはウィキペディア図書館経由で%(partner)sリソース向けアクセス権を申請していただきありがとうございます。ご申請を承認したことをお知らせします。%(user_instructions)s アクセス承認済みのコレクションは「私の図書館」リンクを開いてご確認ください。%(link)s よろしくお願いします。ウィキペディア図書館一同"
+msgstr "拝啓 %(user)s様、このたびはウィキペディア図書館経由で%(partner)sリソース向けアクセス権を申請していただきありがとうございます。ご申請を承認したことをお知らせします。%(user_instructions)s アクセス承認済みのコレクションは「私の図書館」リンクを開いてご確認ください。%(link)s よろしくお願いします。ウィキペディア図書館一同"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1126,7 +1127,7 @@ msgstr "<p>拝啓　%(user)s様、</p> <p>記録に照会致しましたとこ�
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "<p>拝啓 %(user)s様、記録に照会したところ、まもなく%(partner_name)sアクセス権が満了してご利用いただけなくなります。無料のアクセス権のご利用を今後も継続することを希望される場合は、%(partner_link)sの「更新」ボタンからお手続きください。よろしくお願いします。ウィキペディア図書館担当一同　今後、この種のメール配信がご不要でしたら、右の個人設定で無効にできます。https://wikipedialibrary.wmflabs.org/users/"
+msgstr "拝啓 %(user)s様、記録に照会したところ、まもなく%(partner_name)sアクセス権が満了してご利用いただけなくなります。無料のアクセス権のご利用を今後も継続することを希望される場合は、%(partner_link)sの「更新」ボタンからお手続きください。よろしくお願いします。ウィキペディア図書館担当一同　今後、この種のメール配信がご不要でしたら、右の個人設定で無効にできます。https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
