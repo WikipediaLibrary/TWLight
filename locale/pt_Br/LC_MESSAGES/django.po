@@ -4,6 +4,7 @@
 # Author: ACheJu
 # Author: ArgonSim
 # Author: DDPAT
+# Author: Dheff022
 # Author: EGobi
 # Author: Eduardo Addad de Oliveira
 # Author: Eduardoaddad
@@ -29,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-10-20 21:27+0000\n"
-"PO-Revision-Date: 2025-10-30 12:47:04+0000\n"
+"PO-Revision-Date: 2025-11-27 12:33:12+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3036,7 +3037,6 @@ msgstr "Nenhum bloqueio ativo"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "10+ edições no ultimo mês"
+msgstr "+10 edições nos últimos 30 dias."
 
