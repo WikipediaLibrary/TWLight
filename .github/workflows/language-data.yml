@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download
         run: curl -o locale/language-data.json https://raw.githubusercontent.com/wikimedia/language-data/refs/heads/master/data/language-data.json
