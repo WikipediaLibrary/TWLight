@@ -40,14 +40,10 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, UserLoginRetrieval
+from TWLight.users.signals import Notice, Survey, UserLoginRetrieval
 
 
 logger = logging.getLogger(__name__)
-
-
-# COMMENT NOTIFICATION
-# ------------------------------------------------------------------------------
 
 
 class CommentNotificationEmailEditors(template_mail.TemplateMail):
@@ -72,6 +68,10 @@ class WaitlistNotification(template_mail.TemplateMail):
 
 class RejectionNotification(template_mail.TemplateMail):
     name = "rejection_notification"
+
+
+class SurveyActiveUser(template_mail.TemplateMail):
+    name = "survey_active_user"
 
 
 class CoordinatorReminderNotification(template_mail.TemplateMail):
@@ -165,6 +165,40 @@ def send_user_renewal_notice_emails(sender, **kwargs):
             "lang": user_lang,
             "partner_name": partner_name,
             "partner_link": partner_link,
+        },
+    )
+
+
+@receiver(Survey.survey_active_user)
+def send_survey_active_user_emails(sender, **kwargs):
+    """
+    Any time the related managment command is run, this sends a survey
+    invitation to qualifying editors.
+    """
+    user_email = kwargs["user_email"]
+    user_lang = kwargs["user_lang"]
+    survey_id = kwargs["survey_id"]
+    survey_langs = kwargs["survey_langs"]
+
+    # Default survey language is english
+    survey_lang = "en"
+
+    # Set survey language to user language if available
+    if user_lang in survey_langs:
+        survey_lang = user_lang
+
+    base_url = "https://wikimediafoundation.limesurvey.net/"
+    link = "{base}{id}?lang={lang}".format(
+        base=base_url, id=survey_id, lang=survey_lang
+    )
+
+    email = SurveyActiveUser()
+
+    email.send(
+        user_email,
+        {
+            "lang": user_lang,
+            "link": link,
         },
     )
 

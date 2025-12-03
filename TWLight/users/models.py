@@ -190,11 +190,13 @@ class UserProfile(models.Model):
         default=True,
         help_text="Does this coordinator want approved app reminder notices?",
     )
-
     favorites = models.ManyToManyField(
         Partner,
         blank=True,
         help_text="The partner(s) that the user has marked as favorite.",
+    )
+    survey_email_sent = models.BooleanField(
+        default=False, help_text="Has this user recieved the most recent survey email?"
     )
 
     def delete_my_library_cache(self):
