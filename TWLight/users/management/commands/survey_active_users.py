@@ -14,6 +14,11 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
+            "--staff_test",
+            action="store_true",
+            help="A flag to email only to staff users who qualify other than staff status",
+        )
+        parser.add_argument(
             "survey_id", type=int, help="ID number for corresponding survey"
         )
         parser.add_argument(
@@ -24,6 +29,9 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+
+        staff_check = options["staff_test"]
+
         # All Wikipedia Library users who:
         for user in (
             User.objects.select_related("editor", "userprofile")
@@ -50,7 +58,7 @@ class Command(BaseCommand):
                 # are 'active'
                 is_active=True,
                 # are not staff
-                is_staff=False,
+                is_staff=staff_check,
                 # are not superusers
                 is_superuser=False,
             )
