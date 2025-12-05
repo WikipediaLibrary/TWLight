@@ -29,7 +29,6 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-
         staff_check = options["staff_test"]
 
         # All Wikipedia Library users who:

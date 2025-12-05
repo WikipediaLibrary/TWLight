@@ -7,6 +7,7 @@ coordinator AND must have agreed to the terms of use). If we used that mixin,
 test functions and login URLs would overwrite each other. Using the dispatch
 function and super() means we can chain as many access tests as we'd like.
 """
+
 from itertools import chain
 from urllib.parse import urlencode
 from urllib.parse import ParseResult

@@ -11,6 +11,7 @@ dynamically; we cannot hardcode it here. What we have here instead is a base
 form that takes a dict of required fields, and constructs the form accordingly.
 (See the docstring of BaseApplicationForm for the expected dict format.)
 """
+
 from dal import autocomplete
 from crispy_forms.bootstrap import InlineField
 from crispy_forms.helper import FormHelper
