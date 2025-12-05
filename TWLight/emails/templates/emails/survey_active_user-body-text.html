@@ -1,0 +1,26 @@
+{% load i18n %}
+{% comment %}Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like {{ link }}. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).{% endcomment %}
+{% blocktranslate trimmed %}
+Hi,
+
+We are currently running a survey to understand how editors use
+The Wikipedia Library. According to our records, you have logged in to
+The Wikipedia Library at least once, so we would love to hear from you!
+
+{{ link }}
+
+We really appreciate your feedback - this survey will help us understand how
+The Wikipedia Library is currently being used, and where it could use
+improvement. Your responses will directly impact how the Wikimedia Foundation
+prioritises technical and partnership work for this project.
+
+The survey should take 5-10 minutes to complete.
+
+If you would like to opt-out of being contacted with future Wikipedia Library
+surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we
+will remove you from any future mailing.
+
+Thanks,
+
+The Wikipedia Library team
+{% endblocktranslate %}

@@ -25,6 +25,10 @@ class Notice(object):
     user_renewal_notice = Signal()
 
 
+class Survey(object):
+    survey_active_user = Signal()
+
+
 class UserLoginRetrieval(object):
     user_retrieve_monthly_logins = Signal()
 

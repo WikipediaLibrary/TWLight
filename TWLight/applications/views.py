@@ -4,6 +4,7 @@ Views for managing applications for resource grants go here.
 Examples: users apply for access; coordinators evaluate applications and assign
 status.
 """
+
 import logging
 import urllib.error
 import urllib.parse
