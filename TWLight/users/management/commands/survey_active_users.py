@@ -1,13 +1,12 @@
-from datetime import datetime, timedelta
-
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from django.db.models import Prefetch, Q
-from django.urls import reverse
+from django.db.models import DurationField, ExpressionWrapper, F, Q
+from django.db.models.functions import TruncDate
+from django.utils.timezone import timedelta
 
 from TWLight.users.groups import get_restricted
 from TWLight.users.signals import Survey
-from TWLight.users.models import Editor
 
 
 class Command(BaseCommand):
@@ -25,28 +24,39 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        # restricted users are "inactive"
-        restricted = get_restricted()
-
         # All Wikipedia Library users who:
-        for user in User.objects.select_related("editor", "userprofile").filter(
-            # are 'active'
-            ~Q(groups__name__in=[restricted]),
-            # meet the block criterion or have the 'ignore wp blocks' exemption
-            Q(editor__wp_not_blocked=True) | Q(editor__ignore_wp_blocks=True),
-            # have an non-wikimedia.org email address
-            Q(email__isnull=False) & ~Q(email__endswith="@wikimedia.org"),
-            # have not already received the email
-            userprofile__survey_email_sent=False,
-            # meet the 6 month criterion
-            editor__wp_account_old_enough=True,
-            # meet the 500 edit criterion
-            editor__wp_enough_edits=True,
-            # are not staff
-            is_staff=False,
-            # are not superusers
-            is_superuser=False,
+        for user in (
+            User.objects.select_related("editor", "userprofile")
+            .annotate(
+                # calculate account age at last login
+                last_login_age=ExpressionWrapper(
+                    TruncDate(F("last_login")) - F("editor__wp_registered"),
+                    output_field=DurationField(),
+                )
+            )
+            .filter(
+                # have not restricted data processing
+                ~Q(groups__name__in=[get_restricted()]),
+                # meet the block criterion or have the 'ignore wp blocks' exemption
+                Q(editor__wp_not_blocked=True) | Q(editor__ignore_wp_blocks=True),
+                # have an non-wikimedia.org email address
+                Q(email__isnull=False) & ~Q(email__endswith="@wikimedia.org"),
+                # have not already received the email
+                userprofile__survey_email_sent=False,
+                # meet the 6 month criterion as of last login
+                last_login_age__gt=timedelta(days=182),
+                # meet the 500 edit criterion
+                editor__wp_enough_edits=True,
+                # are 'active'
+                is_active=True,
+                # are not staff
+                is_staff=False,
+                # are not superusers
+                is_superuser=False,
+            )
+            .order_by("last_login")
         ):
+            # Send the email
             Survey.survey_active_user.send(
                 sender=self.__class__,
                 user_email=user.email,
