@@ -44,7 +44,7 @@ class Command(BaseCommand):
                 # have not already received the email
                 userprofile__survey_email_sent=False,
                 # meet the 6 month criterion as of last login
-                last_login_age__gt=timedelta(days=182),
+                last_login_age__gte=timedelta(days=182),
                 # meet the 500 edit criterion
                 editor__wp_enough_edits=True,
                 # are 'active'

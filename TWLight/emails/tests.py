@@ -12,6 +12,7 @@ from django.contrib.sites.models import Site
 from django.core import mail
 from django.core.management import call_command
 from django.urls import reverse
+from django.utils import timezone
 from django.test import TestCase, RequestFactory
 
 from TWLight.applications.factories import (
@@ -33,6 +34,7 @@ from .tasks import (
     send_approval_notification_email,
     send_rejection_notification_email,
     send_user_renewal_notice_emails,
+    send_survey_active_user_emails,
 )
 
 
@@ -712,3 +714,142 @@ class CoordinatorReminderEmailTest(TestCase):
         self.assertIn("1 pending application", mail.outbox[0].body)
         self.assertIn("1 under discussion application", mail.outbox[0].body)
         self.assertIn("1 approved application", mail.outbox[0].body)
+
+
+class SurveyActiveUsersEmailTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        """
+        Creates a survey-eligible user and several eligible users.
+        Returns
+        -------
+        None
+        """
+
+        now = timezone.now()
+
+        eligible = EditorFactory(user__email="editor@example.com")
+        eligible.wp_not_blocked = True
+        eligible.wp_bundle_eligible = True
+        eligible.wp_account_old_enough = True
+        eligible.wp_registered = now - timedelta(days=182)
+        eligible.wp_enough_edits = True
+        eligible.user.userprofile.terms_of_use = True
+        eligible.user.userprofile.save()
+        eligible.user.last_login = now
+        eligible.user.save()
+        eligible.save()
+        cls.eligible = eligible.user
+
+        blocked = EditorFactory(user__email="blocked@example.com")
+        blocked.wp_not_blocked = False
+        blocked.wp_bundle_eligible = True
+        blocked.wp_account_old_enough = True
+        blocked.wp_registered = now - timedelta(days=182)
+        blocked.wp_enough_edits = True
+        blocked.user.userprofile.terms_of_use = True
+        blocked.user.userprofile.save()
+        blocked.user.last_login = now
+        blocked.user.save()
+        blocked.save()
+
+        already_sent = EditorFactory(user__email="alreadysent@example.com")
+        already_sent.wp_not_blocked = True
+        already_sent.wp_bundle_eligible = True
+        already_sent.wp_account_old_enough = True
+        already_sent.wp_registered = now - timedelta(days=182)
+        already_sent.wp_enough_edits = True
+        already_sent.user.userprofile.terms_of_use = True
+        already_sent.user.userprofile.survey_email_sent = True
+        already_sent.user.userprofile.save()
+        already_sent.user.last_login = now
+        already_sent.user.save()
+        already_sent.save()
+
+        wmf_email = EditorFactory(user__email="editor@wikimedia.org")
+        wmf_email.wp_not_blocked = True
+        wmf_email.wp_bundle_eligible = True
+        wmf_email.wp_account_old_enough = True
+        wmf_email.wp_registered = now - timedelta(days=182)
+        wmf_email.wp_enough_edits = True
+        wmf_email.user.userprofile.terms_of_use = True
+        wmf_email.user.userprofile.save()
+        wmf_email.user.last_login = now
+        wmf_email.user.save()
+        wmf_email.save()
+
+        too_new_at_login = EditorFactory(user__email="toonew@example.com")
+        too_new_at_login.wp_not_blocked = True
+        too_new_at_login.wp_bundle_eligible = True
+        too_new_at_login.wp_account_old_enough = True
+        too_new_at_login.wp_registered = now - timedelta(days=182)
+        too_new_at_login.wp_enough_edits = True
+        too_new_at_login.user.userprofile.terms_of_use = True
+        too_new_at_login.user.userprofile.save()
+        too_new_at_login.user.last_login = now - timedelta(days=30)
+        too_new_at_login.user.save()
+        too_new_at_login.save()
+
+        not_enough_edits = EditorFactory(user__email="notenoughedits@example.com")
+        not_enough_edits.wp_not_blocked = True
+        not_enough_edits.wp_bundle_eligible = True
+        not_enough_edits.wp_account_old_enough = True
+        not_enough_edits.wp_registered = now - timedelta(days=182)
+        not_enough_edits.wp_enough_edits = False
+        not_enough_edits.user.userprofile.terms_of_use = True
+        not_enough_edits.user.userprofile.save()
+        not_enough_edits.user.last_login = now
+        not_enough_edits.user.save()
+        not_enough_edits.save()
+
+        inactive = EditorFactory(user__email="inactive@example.com")
+        inactive.wp_not_blocked = True
+        inactive.wp_bundle_eligible = True
+        inactive.wp_account_old_enough = True
+        inactive.wp_registered = now - timedelta(days=182)
+        inactive.wp_enough_edits = True
+        inactive.user.userprofile.terms_of_use = True
+        inactive.user.userprofile.save()
+        inactive.user.last_login = now
+        inactive.user.is_active = False
+        inactive.user.save()
+        inactive.save()
+
+        staff = EditorFactory(user__email="staff@example.com")
+        staff.wp_not_blocked = True
+        staff.wp_bundle_eligible = True
+        staff.wp_account_old_enough = True
+        staff.wp_registered = now - timedelta(days=182)
+        staff.wp_enough_edits = True
+        staff.user.userprofile.terms_of_use = True
+        staff.user.userprofile.save()
+        staff.user.last_login = now
+        staff.user.is_staff = True
+        staff.user.save()
+        staff.save()
+
+        superuser = EditorFactory(user__email="superuser@example.com")
+        superuser.wp_not_blocked = True
+        superuser.wp_bundle_eligible = True
+        superuser.wp_account_old_enough = True
+        superuser.wp_registered = now - timedelta(days=182)
+        superuser.wp_enough_edits = True
+        superuser.user.userprofile.terms_of_use = True
+        superuser.user.userprofile.save()
+        superuser.user.last_login = now
+        superuser.user.is_superuser = True
+        superuser.user.save()
+        superuser.save()
+
+    def test_survey_active_users_command(self):
+        self.assertFalse(self.eligible.userprofile.survey_email_sent)
+        call_command(
+            "survey_active_users",
+            "000001",
+            "en",
+        )
+
+        self.eligible.refresh_from_db()
+        self.assertTrue(self.eligible.userprofile.survey_email_sent)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, [self.eligible.email])
