@@ -29,7 +29,12 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        staff_check = options["staff_test"]
+        # default mode excludes users who are staff or superusers
+        role_filter = Q(is_staff=False) & Q(is_superuser=False)
+
+        # test mode excludes users who are not staff and ignores superuser status
+        if options["staff_test"]:
+            role_filter = Q(is_staff=True)
 
         # All Wikipedia Library users who:
         for user in (
@@ -42,6 +47,8 @@ class Command(BaseCommand):
                 )
             )
             .filter(
+                # meet the mode-dependent role requirements
+                role_filter,
                 # have not restricted data processing
                 ~Q(groups__name__in=[get_restricted()]),
                 # meet the block criterion or have the 'ignore wp blocks' exemption
@@ -56,10 +63,6 @@ class Command(BaseCommand):
                 editor__wp_enough_edits=True,
                 # are 'active'
                 is_active=True,
-                # are not staff
-                is_staff=staff_check,
-                # are not superusers
-                is_superuser=False,
             )
             .order_by("last_login")
         ):
