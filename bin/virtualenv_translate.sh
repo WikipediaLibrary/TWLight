@@ -29,6 +29,7 @@ then
           sed -i 's/# FIRST AUTHOR \<EMAIL\@ADDRESS\>, YEAR./#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
           sed -i 's/# FIRST AUTHOR , YEAR./#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
           sed -i 's/"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"/#/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
+          sed -i 's/Report-Msgid-Bugs-To: wikipedialibrary@wikimedia\.org/Report-Msgid-Bugs-To: translatewiki.net/' ${TWLIGHT_HOME}/locale/${locale}/LC_MESSAGES/django.po
           # Remove fuzzy header on non-english po files. This is a wikimedia-specific thing:
           # https://github.com/wikimedia/mediawiki-extensions-Translate/blob/master/ffs/GettextFFS.php#L108
           if [ "${locale}" != "en" ]
