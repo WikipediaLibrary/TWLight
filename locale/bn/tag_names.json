@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"languages-and-literature_tag": "ভাষা ও সাহিত্য",
+	"multidisciplinary_tag": "বহুশাস্ত্র",
+	"physical-sciences_tag": "ভৌত বিজ্ঞান",
+	"music_tag": "সঙ্গীত",
+	"art_tag": "শিল্প",
+	"business-and-economics_tag": "ব্যবসা ও অর্থনীতি",
+	"law_tag": "আইন",
+	"education_tag": "শিক্ষা",
+	"philosophy-and-religion_tag": "দর্শন ও ধর্ম",
+	"social-sciences_tag": "সামাজিক বিজ্ঞান",
+	"history_tag": "ইতিহাস",
+	"culture_tag": "সংস্কৃতি",
+	"life-sciences_tag": "জীবন বিজ্ঞান",
+	"health-sciences_tag": "স্বাস্থ্য বিজ্ঞান",
+	"earth-sciences_tag": "ভূবিজ্ঞান",
+	"technology_tag": "প্রযুক্তি"
+}
