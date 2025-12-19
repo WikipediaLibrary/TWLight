@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
+from django.core.mail import get_connection
 from django.core.management.base import BaseCommand
 from django.db.models import DurationField, ExpressionWrapper, F, Q
 from django.db.models.functions import TruncDate
@@ -46,7 +47,7 @@ class Command(BaseCommand):
             role_filter = Q(is_staff=True)
 
         # All Wikipedia Library users who:
-        for user in (
+        users = (
             User.objects.select_related("editor", "userprofile")
             .annotate(
                 # calculate account age at last login
@@ -75,17 +76,38 @@ class Command(BaseCommand):
                 # are 'active'
                 is_active=True,
             )
-            .order_by("last_login")
-            )[:batch_size]:
-            # Send the email
-            Survey.survey_active_user.send(
+            .order_by("last_login")[:batch_size]
+        )
+
+        # No users qualify; exit
+        if not users.exists():
+            return
+
+        connection = get_connection(
+            backend="TWLight.emails.backends.mediawiki.EmailBackend"
+        )
+
+        email_messages = []
+
+        for user in users:
+            # Construct the email; getting a return value from a signal reciever is a quick hack
+            email_message = Survey.survey_active_user.send(
                 sender=self.__class__,
+                connection=connection,  # passing in the connection is what lets us handle these in bulk
                 user_email=user.email,
                 user_lang=user.userprofile.lang,
                 survey_id=options["survey_id"],
                 survey_langs=options["lang"],
-            )
+            )[0][1]
+            # add it to the list
+            email_messages.append(email_message)
 
-            # Record that we sent the email so that we only send one.
-            user.userprofile.survey_email_sent = True
-            user.userprofile.save()
+        # send the emails
+        connection.open()
+        for email in email_messages:
+            email.send()
+        connection.close()
+
+        # Record that we sent the email so that we only send one.
+        # user.userprofile.survey_email_sent = True
+        # user.userprofile.save()

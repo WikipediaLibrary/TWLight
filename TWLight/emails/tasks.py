@@ -174,11 +174,17 @@ def send_user_renewal_notice_emails(sender, **kwargs):
 
 
 @receiver(Survey.survey_active_user)
-def send_survey_active_user_emails(sender, **kwargs):
+def construct_survey_active_user_email(sender, **kwargs):
     """
     Any time the related managment command is run, this sends a survey
     invitation to qualifying editors.
     """
+    connection = (
+        kwargs["connection"]
+        if "connection" in kwargs
+        else get_connection(backend="TWLight.emails.backends.mediawiki.EmailBackend")
+    )
+
     user_email = kwargs["user_email"]
     user_lang = kwargs["user_lang"]
     survey_id = kwargs["survey_id"]
@@ -198,10 +204,6 @@ def send_survey_active_user_emails(sender, **kwargs):
 
     template_email = SurveyActiveUser()
 
-    connection = get_connection(
-        backend="TWLight.emails.backends.mediawiki.EmailBackend"
-    )
-
     email = template_email.make_email_object(
         user_email,
         {
@@ -211,7 +213,7 @@ def send_survey_active_user_emails(sender, **kwargs):
         connection=connection,
     )
 
-    email.send()
+    return email
 
 
 @receiver(TestEmail.test)
