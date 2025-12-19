@@ -54,7 +54,9 @@ class Command(BaseCommand):
                 # meet the block criterion or have the 'ignore wp blocks' exemption
                 Q(editor__wp_not_blocked=True) | Q(editor__ignore_wp_blocks=True),
                 # have an non-wikimedia.org email address
-                Q(email__isnull=False) & ~Q(email__endswith="@wikimedia.org"),
+                Q(email__isnull=False)
+                & ~Q(email="")
+                & ~Q(email__endswith="@wikimedia.org"),
                 # have not already received the email
                 userprofile__survey_email_sent=False,
                 # meet the 6 month criterion as of last login
