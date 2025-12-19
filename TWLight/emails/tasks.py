@@ -23,7 +23,6 @@ settings.DJMAIL_REAL_BACKEND.
 """
 
 from djmail import template_mail
-from djmail.models import Message
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 import logging
 import os
@@ -210,12 +209,12 @@ def send_survey_active_user_emails(sender, **kwargs):
 
 @receiver(TestEmail.test)
 def send_test(sender, **kwargs):
-    email = kwargs["email"]
+    user_email = kwargs["email"]
     connection = get_connection(
         backend="TWLight.emails.backends.mediawiki.EmailBackend"
     )
     template_email = Test()
-    email = template_email.make_email_object(email, {}, connection=connection)
+    email = template_email.make_email_object(user_email, {}, connection=connection)
     email.send()
 
 

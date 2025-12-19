@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 
 def retry_conn():
-    """A decorator that handles connetion retries."""
+    """A decorator that handles connection retries."""
     retry_delay = 0
     retry_on_connection_error = 10
     retry_after_conn = 5
@@ -255,7 +255,6 @@ class EmailBackend(BaseEmailBackend):
                 if not emailable:
                     logger.warning("User not emailable, email skipped.")
                     continue
-
                 # POST request to send an email
                 email_params = {
                     "action": "emailuser",
