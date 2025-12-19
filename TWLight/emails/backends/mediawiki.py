@@ -6,7 +6,6 @@ import logging
 from requests import Session
 from requests.exceptions import ConnectionError
 from requests.structures import CaseInsensitiveDict
-from threading import RLock
 from time import sleep
 
 from django.conf import settings
@@ -116,7 +115,6 @@ class EmailBackend(BaseEmailBackend):
         self.password = settings.MW_API_EMAIL_PASSWORD if password is None else password
         self.email_token = None
         self.session = None
-        self._lock = RLock()
         logger.info("Email connection constructed.")
 
     def open(self):
@@ -205,19 +203,18 @@ class EmailBackend(BaseEmailBackend):
         """
         if not email_messages:
             return 0
-        with self._lock:
-            new_session_created = self.open()
-            if not self.session or new_session_created is None:
-                # We failed silently on open().
-                # Trying to send would be pointless.
-                return 0
-            num_sent = 0
-            for message in email_messages:
-                sent = self._send(message)
-                if sent:
-                    num_sent += 1
-            if new_session_created:
-                self.close()
+        new_session_created = self.open()
+        if not self.session or new_session_created is None:
+            # We failed silently on open().
+            # Trying to send would be pointless.
+            return 0
+        num_sent = 0
+        for message in email_messages:
+            sent = self._send(message)
+            if sent:
+                num_sent += 1
+        if new_session_created:
+            self.close()
         return num_sent
 
     @retry_conn()
@@ -234,12 +231,11 @@ class EmailBackend(BaseEmailBackend):
                 )
                 target_qs_count = target_qs.count()
                 if target_qs_count > 1:
-                    logger.warning(
+                    raise Exception(
                         "Email address associated with {} user accounts, email skipped".format(
                             target_qs_count
                         )
                     )
-                    continue
 
                 target = target_qs.first()
 
@@ -264,8 +260,8 @@ class EmailBackend(BaseEmailBackend):
                 emailable_data = _json_maxlag(emailable_response)
                 emailable = "emailable" in emailable_data["query"]["users"][0]
                 if not emailable:
-                    logger.warning("User not emailable, email skipped.")
-                    continue
+                    raise Exception("User not emailable, email skipped.")
+
                 # POST request to send an email
                 email_params = {
                     "action": "emailuser",

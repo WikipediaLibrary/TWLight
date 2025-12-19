@@ -86,26 +86,19 @@ class Command(BaseCommand):
         connection = get_connection(
             backend="TWLight.emails.backends.mediawiki.EmailBackend"
         )
+        connection.open()
 
-        email_messages = []
-
+        # send the emails
         for user in users:
-            # Construct the email; getting a return value from a signal reciever is a quick hack
-            email_message = Survey.survey_active_user.send(
+            Survey.survey_active_user.send(
                 sender=self.__class__,
                 connection=connection,  # passing in the connection is what lets us handle these in bulk
                 user_email=user.email,
                 user_lang=user.userprofile.lang,
                 survey_id=options["survey_id"],
                 survey_langs=options["lang"],
-            )[0][1]
-            # add it to the list
-            email_messages.append(email_message)
+            )
 
-        # send the emails
-        connection.open()
-        for email in email_messages:
-            email.send()
         connection.close()
 
         # Record that we sent the email so that we only send one.
