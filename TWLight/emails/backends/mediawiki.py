@@ -228,9 +228,19 @@ class EmailBackend(BaseEmailBackend):
         try:
             for recipient in email_message.recipients():
                 # lookup the target editor from the email address
-                target = Editor.objects.values_list("wp_username", flat=True).get(
+                target_qs = Editor.objects.values_list("wp_username", flat=True).filter(
                     user__email=recipient
                 )
+                target_qs_count = target_qs.count()
+                if target_qs_count > 1:
+                    logger.warning(
+                        "Email address associated with {} user accounts, email skipped".format(
+                            target_qs_count
+                        )
+                    )
+                    continue
+
+                target = target_qs.first()
 
                 # GET request to check if user is emailable
                 emailable_params = {
