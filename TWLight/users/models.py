@@ -196,7 +196,9 @@ class UserProfile(models.Model):
         help_text="The partner(s) that the user has marked as favorite.",
     )
     survey_email_sent = models.BooleanField(
-        default=False, help_text="Has this user recieved the most recent survey email?"
+        default=False,
+        editable=False,
+        help_text="Has this user recieved the most recent survey email?",
     )
 
     def delete_my_library_cache(self):
