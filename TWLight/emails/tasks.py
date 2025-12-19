@@ -23,9 +23,11 @@ settings.DJMAIL_REAL_BACKEND.
 """
 
 from djmail import template_mail
+from djmail.core import _safe_send_message
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 import logging
 import os
+from uuid import uuid4
 from reversion.models import Version
 
 from django_comments.models import Comment
@@ -33,6 +35,7 @@ from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import get_connection
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
@@ -42,6 +45,7 @@ from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
 from TWLight.users.signals import Notice, Survey, TestEmail, UserLoginRetrieval
+from .models import Message
 
 logger = logging.getLogger(__name__)
 
@@ -174,7 +178,7 @@ def send_user_renewal_notice_emails(sender, **kwargs):
 
 
 @receiver(Survey.survey_active_user)
-def construct_survey_active_user_email(sender, **kwargs):
+def send_survey_active_user_email(sender, **kwargs):
     """
     Any time the related managment command is run, this sends a survey
     invitation to qualifying editors.
@@ -204,7 +208,7 @@ def construct_survey_active_user_email(sender, **kwargs):
 
     template_email = SurveyActiveUser()
 
-    email = template_email.make_email_object(
+    email_message = template_email.make_email_object(
         user_email,
         {
             "lang": user_lang,
@@ -212,8 +216,18 @@ def construct_survey_active_user_email(sender, **kwargs):
         },
         connection=connection,
     )
+    # Save as a djmail instance
+    model_instance = Message.from_email_message(email_message)
+    if hasattr(email_message, "priority"):
+        if email_message.priority <= Message.PRIORITY_LOW:
+            model_instance.priority = email_message.priority
+            model_instance.status = Message.STATUS_PENDING
+    model_instance.created_at = timezone.now()
+    model_instance.uuid = uuid4()
+    model_instance.save()
 
-    return email
+    # send email and update state in djmail
+    _safe_send_message(model_instance, connection)
 
 
 @receiver(TestEmail.test)
