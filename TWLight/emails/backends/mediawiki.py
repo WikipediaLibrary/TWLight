@@ -255,7 +255,6 @@ class EmailBackend(BaseEmailBackend):
                 if not emailable:
                     logger.warning("User not emailable, email skipped.")
                     continue
-
                 # POST request to send an email
                 email_params = {
                     "action": "emailuser",
