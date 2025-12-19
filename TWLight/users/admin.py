@@ -39,7 +39,7 @@ class UserProfileInline(admin.StackedInline):
     extra = 1
     can_delete = False
     raw_id_fields = ("user",)
-    readonly_fields = ("my_library_cache_key",)
+    readonly_fields = ("my_library_cache_key", "survey_email_sent")
     fieldsets = (
         (
             None,
@@ -50,6 +50,7 @@ class UserProfileInline(admin.StackedInline):
                     "use_wp_email",
                     "lang",
                     "my_library_cache_key",
+                    "survey_email_sent",
                     "favorites",
                 )
             },
@@ -125,7 +126,12 @@ class AuthorizationInline(admin.StackedInline):
 class UserAdmin(AuthUserAdmin):
     inlines = [EditorInline, UserProfileInline, AuthorizationInline]
     list_display = ["username", "get_wp_username", "email", "is_staff"]
-    list_filter = ["is_staff", "is_active", "is_superuser"]
+    list_filter = [
+        "is_staff",
+        "is_active",
+        "is_superuser",
+        "userprofile__survey_email_sent",
+    ]
     default_filters = ["is_active__exact=1"]
     search_fields = ["editor__wp_username", "username", "email"]
 
