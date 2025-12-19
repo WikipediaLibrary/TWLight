@@ -196,15 +196,22 @@ def send_survey_active_user_emails(sender, **kwargs):
         base=base_url, id=survey_id, lang=survey_lang
     )
 
-    email = SurveyActiveUser()
+    template_email = SurveyActiveUser()
 
-    email.send(
+    connection = get_connection(
+        backend="TWLight.emails.backends.mediawiki.EmailBackend"
+    )
+
+    email = template_email.make_email_object(
         user_email,
         {
             "lang": user_lang,
             "link": link,
         },
+        connection=connection,
     )
+
+    email.send()
 
 
 @receiver(TestEmail.test)

@@ -14,11 +14,6 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "--staff_test",
-            action="store_true",
-            help="A flag to email only to staff users who qualify other than staff status",
-        )
-        parser.add_argument(
             "survey_id", type=int, help="ID number for corresponding survey"
         )
         parser.add_argument(
@@ -27,10 +22,24 @@ class Command(BaseCommand):
             type=str,
             help="List of localized language codes for this survey",
         )
+        parser.add_argument(
+            "--staff_test",
+            action="store_true",
+            required=False,
+            help="A flag to email only to staff users who qualify other than staff status",
+        )
+        parser.add_argument(
+            "--batch_size",
+            type=int,
+            required=False,
+            help="number of emails to send; default is 1000",
+        )
 
     def handle(self, *args, **options):
         # default mode excludes users who are staff or superusers
         role_filter = Q(is_staff=False) & Q(is_superuser=False)
+
+        batch_size = options["batch_size"] if options["batch_size"] else 1000
 
         # test mode excludes users who are not staff and ignores superuser status
         if options["staff_test"]:
@@ -67,7 +76,7 @@ class Command(BaseCommand):
                 is_active=True,
             )
             .order_by("last_login")
-        ):
+            )[:batch_size]:
             # Send the email
             Survey.survey_active_user.send(
                 sender=self.__class__,
