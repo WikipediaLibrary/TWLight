@@ -29,6 +29,10 @@ class Survey(object):
     survey_active_user = Signal()
 
 
+class TestEmail(object):
+    test = Signal()
+
+
 class UserLoginRetrieval(object):
     user_retrieve_monthly_logins = Signal()
 
