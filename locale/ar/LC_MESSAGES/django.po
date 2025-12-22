@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:29+0000\n"
+"PO-Revision-Date: 2025-12-22 12:34:58+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -1142,19 +1142,18 @@ msgstr "الطلب الذي أرسلت إلى مكتبة ويكيبيديا"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr ""
+msgstr "<p>مرحباً،</p> نحن نقوم حالياً بإجراء مسح لفهم كيف يستخدم المحررون مكتبة ويكيبيديا. وفقاً لسجلاتنا، قمت بالدخول إلى مكتبة ويكيبيديا مرة واحدة على الأقل، لذا سنحب سماعك! <p><a href=\"%(link)s\">% (رابط) s</a></p> نقدر حقاً ردود الفعل الخاصة بك - هذا المسح سيساعدنا على فهم كيفية استخدام مكتبة ويكيبيديا حالياً، وأين يمكن تحسينها. ستؤثر ردودك مباشرة على كيفية إعطاء مؤسسة ويكيميديا الأولوية للعمل التقني والشراكة لهذا المشروع. <p>يجب أن تستغرق الاستبيان 5 إلى 10 دقائق لإكمالها.</p> <p>إذا كنت ترغب في الامتناع عن الاتصال في استطلاعات مكتبة ويكيبيديا المستقبلية، يرجى إعلامنا عن طريق البريد الإلكتروني wikipedialibrary@wikimedia.org وسنقوم بإزالتك من أي رسائل بريدية مستقبلية.</p> شكراً، <p>فريق مكتبة ويكيبيديا</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "مرحباً، نجري حالياً استطلاعاً لفهم كيفية استخدام المحررين لمكتبة ويكيبيديا. وفقاً لسجلاتنا، قمت بتسجيل الدخول إلى مكتبة ويكيبيديا مرة واحدة على الأقل، لذا نودّ أن نسمع رأيك! %(link)s نُقدّر ملاحظاتك كثيراً، فهذا الاستطلاع سيساعدنا على فهم كيفية استخدام مكتبة ويكيبيديا حالياً، والمجالات التي تحتاج إلى تحسين. ستؤثر إجاباتك بشكل مباشر على كيفية تحديد مؤسسة ويكيميديا لأولويات العمل التقني والشراكات لهذا المشروع. يستغرق إكمال الاستطلاع من 5 إلى 10 دقائق. إذا كنت ترغب في إلغاء الاشتراك في استطلاعات مكتبة ويكيبيديا المستقبلية، يُرجى إعلامنا عبر البريد الإلكتروني wikipedialibrary@wikimedia.org وسنقوم بإزالتك من أي قائمة بريدية مستقبلية. شكراً، فريق مكتبة ويكيبيديا"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "مكتبة ويكيبيديا"
+msgstr "مكتبة ويكيبيديا بحاجة إلى مساعدتكم!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1521,9 +1520,8 @@ msgstr "حزمة المكتبة"
 #: TWLight/resources/templates/resources/partner_detail_apply.html:135
 #: TWLight/resources/templates/resources/partner_detail_apply.html:148
 #: TWLight/resources/templates/resources/partner_detail_apply.html:164
-#, fuzzy
 msgid "Library bundle access"
-msgstr "حزمة المكتبة"
+msgstr "الوصول إلى حزمة المكتبة"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:138
@@ -1550,9 +1548,8 @@ msgstr "هذا المصدر هو جزء من <a class=\"twl-links\" href=\"%(abo
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:21
-#, fuzzy
 msgid "Active accounts"
-msgstr "متوسط ​​الحسابات لكل مستخدم"
+msgstr "الحسابات النشطة"
 
 #. Translators: This is the label for a number which shows the total number of users who have received access for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
 #: TWLight/resources/templates/resources/partner_detail_stats.html:37
@@ -1987,9 +1984,8 @@ msgstr "يسمح لنا احترام هذه الاتفاقيات بالاستم�
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:160
-#, fuzzy
 msgid "EZProxy"
-msgstr "الوكيل"
+msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
@@ -2018,9 +2014,8 @@ msgstr "ممارسات الاقتباس"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:206
-#, fuzzy
 msgid "Citation practices vary by project and even by article. Generally, we support editors citing where they found information, in a form that allows others to check it for themselves. That often means providing both original source details as well as a link to the partner database in which the source was found."
-msgstr "تختلف ممارسات الاستشهاد حسب المشروع وحتى حسب المقالة، بشكل عام، نحن ندعم المحررين في الاستشهاد بالمكان الذي وجدوا فيه المعلومات، بشكل يسمح للآخرين بالتحقق من ذلك بأنفسهم: يعني ذلك غالبا توفير تفاصيل المصدر الأصلي بالإضافة إلى رابط إلى قاعدة بيانات الشريك التي تم العثور فيها على المصدر."
+msgstr "تختلف ممارسات التوثيق باختلاف المشاريع وحتى المقالات. عمومًا، ندعم المحررين في توثيق مصادر المعلومات، بشكل يُمكّن الآخرين من التحقق منها بأنفسهم. وهذا يعني غالبًا تقديم تفاصيل المصدر الأصلي، بالإضافة إلى رابط لقاعدة البيانات الشريكة التي عُثر فيها على المصدر."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
@@ -2309,9 +2304,8 @@ msgstr "لا يمكن العثور على مصافح"
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:501
-#, fuzzy
 msgid "No session token."
-msgstr "لا يوجد رمز طلب."
+msgstr "لا يوجد رمز جلسة."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:513
@@ -2739,9 +2733,8 @@ msgstr "<a href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library/ar\">م�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:63
-#, fuzzy
 msgid "This program is administered by the Wikimedia Foundation (WMF). These terms of use and privacy notice pertain to your application for access to resources through the Wikipedia Library, your use of this website, and your access to and use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. If we make material changes to the terms, we will notify users."
-msgstr "تتعلق هذه الشروط بطلبك للوصول إلى موارد مكتبة ويكيبيديا، واستخدامك لتلك الموارد، كما أنها تصف طريقة تعاملنا مع المعلومات التي تقدمها لنا من أجل إنشاء وإدارة حسابك في مكتبة ويكيبيديا، نظام مكتبة ويكيبيديا آخذ في التطور، وبمرور الوقت قد نقوم بتحديث هذه الشروط بسبب التغيرات في التقنية، نوصيك بمراجعة البنود من وقت لآخر، إذا أجرينا تغييرات جوهرية على الشروط، فسوف نرسل إشعارا بالبريد الإلكتروني إلى مستخدمي مكتبة ويكيبيديا."
+msgstr "تُشرف مؤسسة ويكيميديا (WMF) على هذا البرنامج. تنطبق شروط الاستخدام وإشعار الخصوصية هذه على طلبك للوصول إلى الموارد عبر مكتبة ويكيبيديا، واستخدامك لهذا الموقع، ووصولك إلى تلك الموارد واستخدامك لها. كما توضح هذه الشروط كيفية تعاملنا مع المعلومات التي تُقدمها لنا لإنشاء حسابك في مكتبة ويكيبيديا وإدارته. في حال إجراء أي تغييرات جوهرية على هذه الشروط، سنُخطر المستخدمين بذلك."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:74
@@ -2765,9 +2758,8 @@ msgstr "يتم تقييم أهليتك للوصول إلى مكتبة ويكيب
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:114
-#, fuzzy
 msgid "Applying via Your Wikipedia Library Card Account"
-msgstr "تقديم طلب للحصول على حساب بطاقة مكتبة ويكيبيديا الخاصة بك"
+msgstr "التقديم عبر حساب بطاقة مكتبة ويكيبيديا الخاصة بك"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:118
@@ -2816,15 +2808,13 @@ msgstr "إلغاء أو تنزيل المحتوى المحظور تلقائيً�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:197
-#, fuzzy
 msgid "Systematically making printed or electronic copies of multiple extracts of restricted content available for any purpose;"
-msgstr "إجراء نسخ مطبوعة أو إلكترونية بشكل منهجي لمقتطفات متعددة من المحتويات المقيدة المتاحة لأي غرض من الأغراض"
+msgstr "إتاحة نسخ مطبوعة أو إلكترونية بشكل منهجي لمقتطفات متعددة من المحتوى المقيد لأي غرض؛"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:204
-#, fuzzy
 msgid "Data mining metadata without permission—for example, in order to use metadata for auto-created stub articles;"
-msgstr "البيانات الوصفية لمنجم البيانات بدون إذن، على سبيل المثال، من أجل استخدام بيانات التعريف لمقالات البذور المنشأة تلقائيا"
+msgstr "استخراج البيانات الوصفية بدون إذن - على سبيل المثال، من أجل استخدام البيانات الوصفية للمقالات القصيرة التي تم إنشاؤها تلقائيًا؛"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:211
@@ -2900,9 +2890,8 @@ msgstr "تُرجَى ملاحظة أن هذه الشروط لا تتحكم في 
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:368
-#, fuzzy
 msgid "Important Note"
-msgstr "مستورد"
+msgstr "ملاحظة هامة"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:373
@@ -2931,9 +2920,8 @@ msgstr "فريق مكتبة ويكيبيديا"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:418
-#, fuzzy
 msgid "Wikimedia Foundation"
-msgstr "سياسة خصوصية مؤسسة ويكيميديا"
+msgstr "مؤسسة ويكيميديا"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:426
@@ -3056,9 +3044,8 @@ msgstr "بريدك الالكتروني فارغ، لا يزال بإمكانك 
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:805
-#, fuzzy
 msgid "Access to {} has been returned."
-msgstr "تم حذف الاقتراح."
+msgstr "تم استعادة الوصول إلى {}."
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43

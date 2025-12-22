@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:21+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:35+0000\n"
+"PO-Revision-Date: 2025-12-22 12:35:05+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1121,7 +1121,7 @@ msgstr "<p>Hallo,</p> <p>We houden momenteel een enquête om te begrijpen hoe re
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "Hallo, we houden momenteel een enquête om te begrijpen hoe redacteuren de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer aangemeld bij de Wikipedia-bibliotheek, dus we horen graag uw mening! %(link)s We stellen uw terugkoppeling zeer op prijs - deze enquête helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben directe invloed op de prioriteiten van de Wikimedia Foundation op het gebied van technische werkzaamheden en samenwerking voor dit project. Het invullen van de enquête duurt vijf tot tien minuten. Als u in de toekomst geen enquêtes meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We verwijderen u dan van onze mailinglijst. Bedankt, het team van de Wikipedia-bibliotheek"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
