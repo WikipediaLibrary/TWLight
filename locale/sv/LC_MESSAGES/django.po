@@ -6,6 +6,7 @@
 # Author: Ice bulldog
 # Author: Josve05a
 # Author: Sabelöga
+# Author: Stefan2255
 # Author: Sturban
 # Author: WikiPhoenix
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:36+0000\n"
+"PO-Revision-Date: 2025-12-29 12:35:35+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,9 +77,8 @@ msgstr "Partnernamn"
 
 #. Translators: This will be the title of the page where users will have to confirm their renewal request of an application.
 #: TWLight/applications/forms.py:313
-#, fuzzy
 msgid "Renewal confirmation"
-msgstr "Användarinformation"
+msgstr "Förnyelsebekräftelse"
 
 #. Translators: This labels an email field where users will be asked to enter their emails as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
@@ -219,9 +219,8 @@ msgstr "1 månad"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
-#, fuzzy
 msgid "3 months"
-msgstr "Månad"
+msgstr "3 månader"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
@@ -311,9 +310,8 @@ msgstr "Status"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
-#, fuzzy
 msgid "Access duration"
-msgstr "Yrke"
+msgstr "Åtkomsttid"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:96
@@ -354,9 +352,8 @@ msgstr "Be sökanden lägga till sitt hemland i sin profil innan den går vidare
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "Inte tillgänglig"
+msgstr "Tillgängliga konton"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -619,21 +616,18 @@ msgstr "Inga ansökningar just nu."
 
 #. Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
-#, fuzzy
 msgid "Partner (Collection)"
-msgstr "Samlingar"
+msgstr "Partner (Samling)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15
-#, fuzzy
 msgid "Last reviewed"
-msgstr "Ännu inte granskad."
+msgstr "Senast granskad"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
-#, fuzzy
 msgid "Date applied"
-msgstr "Ansökningsdatum"
+msgstr "Datum ansökt"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
@@ -1124,9 +1118,8 @@ msgstr ""
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "Wikipediabibliotekets hemsida"
+msgstr "Wikipedia-biblioteket behöver din hjälp!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1225,9 +1218,8 @@ msgstr "Språk"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Språk"
+msgstr "Alla språk"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -1277,9 +1269,8 @@ msgstr "Potentiellt sökbar"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:532
-#, fuzzy
 msgid "Service information"
-msgstr "Användarinformation"
+msgstr "Tjänstsinformation"
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:534
@@ -1288,9 +1279,8 @@ msgstr ""
 
 #. Translators: Expandable element with information about the status of this partner
 #: TWLight/resources/models.py:536
-#, fuzzy
 msgid "Temporarily unavailable"
-msgstr "Användarvillkor är inte tillgängliga."
+msgstr "Tillfälligt otillgänglig"
 
 #. Translators: information about the current status of this partner
 #: TWLight/resources/models.py:541
@@ -1304,9 +1294,8 @@ msgstr "Ett problem påverkar åtkomsten"
 
 #. Translators: information about a current outage for this partner
 #: TWLight/resources/models.py:545
-#, fuzzy
 msgid "Access is currently unavailable"
-msgstr "Inte tillgänglig"
+msgstr "Åtkomst är för närvarande inte tillgänglig"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown for a partner who has no content languages to show.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown for a partner who has no content languages to show.
@@ -1397,9 +1386,8 @@ msgstr "Förslagsställare"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
-#, fuzzy
 msgid "Upvotes"
-msgstr "Rösta upp"
+msgstr "Uppröster"
 
 #: TWLight/resources/templates/resources/partner_detail.html:17
 msgid "Back to My Library"
@@ -1707,9 +1695,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "Filtrera samlingar"
+msgstr "Filtrera förslag"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
@@ -2096,7 +2083,6 @@ msgstr "Mer info"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
 msgstr "Wikipediabiblioteket"
 
@@ -2253,9 +2239,8 @@ msgstr ""
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
-#, fuzzy
 msgid "contact The Wikipedia Library team"
-msgstr "Wikipediabiblioteks-teamet"
+msgstr "kontakta Wikipedia-bibliotekets team"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476
@@ -2739,9 +2724,8 @@ msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:114
-#, fuzzy
 msgid "Applying via Your Wikipedia Library Card Account"
-msgstr "Ansök om ditt kortkonto på Wikipediabiblioteket"
+msgstr "Ansök via ditt Wikipedia-bibliotekskortkonto"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:118
@@ -2902,9 +2886,8 @@ msgstr "Wikipediabiblioteks-teamet"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:418
-#, fuzzy
 msgid "Wikimedia Foundation"
-msgstr "Antal Wikipedia-redigeringar"
+msgstr "Wikimedia Foundation"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:426
@@ -2988,9 +2971,8 @@ msgstr ""
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
 #: TWLight/users/views.py:292
-#, fuzzy
 msgid "You have chosen not to receive reminder emails. As a coordinator, you should receive at least one type of reminder emails, so consider changing your preferences."
-msgstr "Du har valt att inte få påminnelser via e-post. Som samordnare borde du ta emot minst en sorts påminnelser så, överväg att ändra dina inställningar."
+msgstr "Du har valt att inte ta emot påminnelser via e-post. Som koordinator bör du få minst en typ av påminnelser via e-post, så överväg att ändra dina inställningar."
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
 #: TWLight/users/views.py:300
@@ -3028,9 +3010,8 @@ msgstr ""
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:805
-#, fuzzy
 msgid "Access to {} has been returned."
-msgstr "Förslaget har raderats."
+msgstr "Åtkomst till {} har återlämnats."
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
@@ -3054,7 +3035,6 @@ msgstr "Inga aktiva blockeringar"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
-#, fuzzy
 msgid "10+ edits in the last 30 days"
-msgstr "10+ redigeringar den senaste månaden"
+msgstr "10+ redigeringar under de senaste 30 dagarna"
 
