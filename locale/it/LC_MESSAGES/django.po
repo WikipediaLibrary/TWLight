@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-29 12:35:30+0000\n"
+"PO-Revision-Date: 2026-01-01 12:30:27+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -966,13 +966,13 @@ msgstr "Il tuo codice di accesso alla Biblioteca di Wikipedia"
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access at My Library: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Gentile %(user)s,</p> <p>Grazie per aver richiesto l'accesso alle risorse di %(partner)s tramite The Wikipedia Library. Siamo lieti di informarti che la tua domanda è stata approvata.</p> <p>%(user_instructions)s</p> <p>Puoi visualizzare le collezioni che sei autorizzato a consultare nella sezione La mia biblioteca: %(link)s</p> <p>Cordiali saluti,</p> <p>The Wikipedia Library</p>"
+msgstr "<p>Gentile %(user)s,</p> <p>Grazie per aver richiesto l'accesso alle risorse di %(partner)s tramite The Wikipedia Library. Siamo lieti di informarti che la tua domanda è stata approvata.</p> <p>%(user_instructions)s</p> <p>Puoi visualizzare le collezioni che hai l'autorizzazione di consultare nella sezione La mia biblioteca: %(link)s</p> <p>Cordiali saluti,</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access at My Library: %(link)s Cheers! The Wikipedia Library"
-msgstr "Gentile %(user)s, grazie per aver richiesto l'accesso alle risorse di %(partner)s tramite The Wikipedia Library. Siamo lieti di informarti che la tua domanda è stata approvata. %(user_instructions)s Puoi visualizzare le collezioni che sei autorizzato a consultare nella sezione La mia biblioteca: %(link)s Cordiali saluti, The Wikipedia Library"
+msgstr "Gentile %(user)s, grazie per aver richiesto l'accesso alle risorse di %(partner)s tramite The Wikipedia Library. Siamo lieti di informarti che la tua domanda è stata approvata. %(user_instructions)s Puoi visualizzare le collezioni che hai l'autorizzazione di consultare nella sezione La mia biblioteca: %(link)s Cordiali saluti, The Wikipedia Library"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
