@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2026-01-01 12:30:27+0000\n"
+"PO-Revision-Date: 2026-01-05 12:27:19+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -879,7 +879,7 @@ msgstr "Seleziona almeno una domanda."
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
 #: TWLight/applications/views.py:1046
 msgid "Batch update of application(s) {} successful."
-msgstr "Batch update of application(s) {} successful."
+msgstr "Aggiornamento batch delle applicazioni {} riuscito."
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1055
