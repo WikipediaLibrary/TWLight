@@ -22,6 +22,7 @@
 # Author: Liuxinyu970226
 # Author: MuratTheTurkish
 # Author: Nikkimaria
+# Author: Peterxy12
 # Author: Phenolla
 # Author: Sean0115
 # Author: Shizhao
@@ -44,7 +45,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:37+0000\n"
+"PO-Revision-Date: 2025-12-29 12:35:36+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -113,7 +114,7 @@ msgstr "续订确认"
 #. Translators: When filling out an application, users may be required to enter an email they have used to register on the partner's website.
 #: TWLight/applications/forms.py:330 TWLight/applications/helpers.py:97
 msgid "The email for your account on the partner's website"
-msgstr "您在合作伙伴网站上的账户的电子邮件地址"
+msgstr "您在合作伙伴网站上的账号的电子邮件地址"
 
 #. Translators: This labels a choice field where users will have to select the number of months they wish to have their access for as part of the application renewal confirmation.
 #. Translators: When filling out an application, users may be required to enter the length of the account (expiry) they wish to have for proxy partners.
@@ -192,7 +193,7 @@ msgstr "同意使用条款"
 #. Translators: When sending application data to partners, this is the text labelling the user's email on the partner's website, if they had to register in advance of applying.
 #: TWLight/applications/helpers.py:116
 msgid "Account email"
-msgstr "账户电子邮件"
+msgstr "账号电子邮件"
 
 #. Translators: This labels a user's email address on a form for account coordinators
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for a user's email address.
@@ -382,7 +383,7 @@ msgstr "请要求申请人在其个人资料中添加居住地之后再继续。
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
 msgid "Accounts available"
-msgstr "可用账户"
+msgstr "可用账号"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -692,7 +693,7 @@ msgstr "设置状态"
 #: TWLight/applications/templates/applications/apply.html:20
 #, python-format
 msgid "If your application is successful we may share your email address with %(partner)s. This is required to set up your access to their resources. By submitting this form you agree to allow your email address to be shared with %(partner)s if your application is successful, for the purposes of account setup."
-msgstr "在您的申请获准后，我们可能与%(partner)s分享您的电子邮件地址。这是设定您有权访问其资源的必要条件。提交此表单即代表您同意在申请获准后与%(partner)s分享您的电子邮件地址用于设定账户。"
+msgstr "在您的申请获准后，我们可能与%(partner)s分享您的电子邮件地址。这是设置您有权访问其资源的必要条件。提交此表单即代表您同意在申请获准后与%(partner)s分享您的电子邮件地址用于设置账号。"
 
 #. Translators: This message is displayed on the page where users can confirm their renewal. Please do not translate partner.
 #: TWLight/applications/templates/applications/confirm_renewal.html:23
@@ -758,7 +759,7 @@ msgstr "%(object)s的申请数据"
 #: TWLight/applications/templates/applications/send_partner.html:54
 #, python-format
 msgid "Application(s) for %(object)s, if sent, will exceed the total available accounts for the partner. Please proceed at your own discretion."
-msgstr "如果发送%(object)s的申请，则将超过合作伙伴的可用账户总数。请自行决定是否继续。"
+msgstr "如果发送%(object)s的申请，则将超过合作伙伴的可用账号总数。请自行决定是否继续。"
 
 #. Translators: When viewing the list of applications ready to be sent for a particular partner, this is instructions for the coordinator to click the 'mark as sent' button after they have sent the information.
 #: TWLight/applications/templates/applications/send_partner.html:65
@@ -866,7 +867,7 @@ msgstr "由于采用代理授权法的合作伙伴已列入等待队列，因此
 #. Translators: After a coordinator has changed the status of an application to APPROVED, if the corresponding partner/collection has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:781
 msgid "Cannot approve application as partner with proxy authorization method is waitlisted and (or) has zero accounts available for distribution."
-msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）有零个帐户可供分配，因此无法批准该申请。"
+msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）有零个账号可供分配，因此无法批准该申请。"
 
 #. Translators: This message appears on an "access denied" screen that stops users who attempt to authorize an editor to access a resource during a time period for which they are already authorized.
 #: TWLight/applications/views.py:804
@@ -887,7 +888,7 @@ msgstr "设置申请状态"
 #. Translators: This warning is message is shown to applicants when the number of pending applications is greater than the number of accounts available.
 #: TWLight/applications/views.py:892
 msgid "There are more pending applications than available accounts. Your application might get waitlisted."
-msgstr "有待处理的申请多于可用帐户。您的申请可能会被列入等待队列。"
+msgstr "有待处理的申请多于可用账号。您的申请可能会被列入等待队列。"
 
 #. Translators: this message is shown to coordinators who attempt to change an application's Status from INVALID to any other Status.
 #: TWLight/applications/views.py:905
@@ -907,7 +908,7 @@ msgstr "批量更新申请{}成功。"
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1055
 msgid "Cannot approve application(s) {} as partner(s) with proxy authorization method is/are waitlisted and (or) has/have not enough accounts available. If not enough accounts are available, prioritise the applications and then approve applications equal to the accounts available."
-msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）没有足够的可用帐户，因此无法批准{}申请。如果没有足够的可用帐户，请对申请进行优先级排序，然后批准与可用帐户数相等的申请。"
+msgstr "由于采用代理授权法的合作伙伴已列入等待队列，并且（或）没有足够的可用账号，因此无法批准{}申请。如果没有足够的可用账号，请对申请进行优先级排序，然后批准与可用账号数相等的申请。"
 
 #. Translators: This message is shown to coordinators who attempt to assign the same access code to multiple users.
 #: TWLight/applications/views.py:1203
@@ -1150,13 +1151,13 @@ msgstr "维基百科图书馆需要您的帮助！"
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the 'Renew' or 'Extend' button at %(partner_link)s.</p> <p>Best,</p> <p>The Wikipedia Library</p> <p>You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/</p>"
-msgstr "<p>尊敬的%(user)s，</p><p>根据我们的记录，您对%(partner_name)s的访问权限即将过期，并且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点击%(partner_link)s处的“续订”或“延长”按钮请求续订帐户。</p> <p>祝好，</p> <p>维基百科图书馆</p> <p>您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>根据我们的记录，您对%(partner_name)s的访问权限即将过期，并且您可能会失去访问权限。如果您想继续使用免费账号，可以通过点击%(partner_link)s处的“续订”或“延长”按钮请求续订账号。</p> <p>祝好，</p> <p>维基百科图书馆</p> <p>您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/</p>"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-text.html:3
 #, python-format
 msgid "Dear %(user)s, According to our records, your access to %(partner_name)s will soon expire and you may lose access. If you want to continue making use of your free account, you can request renewal of your account by clicking the Renew button at %(partner_link)s. Best, The Wikipedia Library You can disable these emails in your user page preferences: https://wikipedialibrary.wmflabs.org/users/"
-msgstr "尊敬的%(user)s，根据我们的记录，您对%(partner_name)s的访问权限将很快到期，并且您可能会失去访问权限。如果您想继续使用免费帐户，可以通过点击%(partner_link)s上的“续订”按钮来请求续订帐户。祝好，维基百科图书馆。您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/"
+msgstr "尊敬的%(user)s，根据我们的记录，您对%(partner_name)s的访问权限将很快到期，并且您可能会失去访问权限。如果您想继续使用免费账号，可以通过点击%(partner_link)s上的“续订”按钮来请求续订账号。祝好，维基百科图书馆。您可以在用户页面首选项中禁用这些电子邮件：https://wikipedialibrary.wmflabs.org/users/"
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-subject.html:4
@@ -1167,7 +1168,7 @@ msgstr "您的维基百科图书馆访问权限即将过期"
 #: TWLight/emails/templates/emails/waitlist_notification-body-html.html:5
 #, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. There are no accounts currently available so your application has been waitlisted. Your application will be evaluated if/when more accounts become available. You can see all available resources at <a href=\"%(link)s\">%(link)s</a>.</p> <p>Best,</p> <p>The Wikipedia Library</p>"
-msgstr "<p>尊敬的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资源。目前没有可用的帐户，因此您的申请已被列入等待队列。如果/当更多的帐户可用时，您的申请将被评估。你可以在<a href=\"%(link)s\">%(link)s</a>上查看所有可用的资源</p> <p>祝好，</p><p>维基百科图书馆</p>"
+msgstr "<p>尊敬的%(user)s，</p><p>谢谢您通过维基百科图书馆申请访问%(partner)s的资源。目前没有可用的账号，因此您的申请已被列入等待队列。如果/当更多的账号可用时，您的申请将被评估。你可以在<a href=\"%(link)s\">%(link)s</a>上查看所有可用的资源</p> <p>祝好，</p><p>维基百科图书馆</p>"
 
 #. Translators: This email is sent to users when their application is waitlisted because there are no more accounts available. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/waitlist_notification-body-text.html:3

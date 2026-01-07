@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:30+0000\n"
+"PO-Revision-Date: 2025-12-18 12:39:26+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -418,7 +418,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:195
 #, python-format
 msgid "Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
-msgstr ""
+msgstr "হ্যাঁ (<a class=\"twl-links\" href=\"%(parent_url)s\">পূর্ববর্তী আবেদন</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
@@ -1337,7 +1337,6 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this appears below introductory text and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/resources/templates/resources/filter_section.html:23
 #: TWLight/users/templates/users/filter_section.html:20
-#, fuzzy
 msgid "Learn more"
 msgstr "আরো জানুন"
 
@@ -1657,7 +1656,7 @@ msgstr ""
 #. Translators: This is a button to go back on the top of page.
 #: TWLight/resources/templates/resources/partner_list.html:38
 msgid "Back to top"
-msgstr ""
+msgstr "উপরে ফিরে যান"
 
 #. Translators: This is the heading of a page listing editors who have applications for this partner. Don't translate partner.
 #: TWLight/resources/templates/resources/partner_users.html:11
@@ -2052,7 +2051,7 @@ msgstr ""
 
 #: TWLight/templates/header_partial_b4.html:45
 msgid "Search the library"
-msgstr ""
+msgstr "গ্রন্থাগারে অনুসন্ধান করুন"
 
 #. Translators: Shown in the top bar of almost every page when the current user is an account coordinator, taking them to the page where they can see existing applications.
 #: TWLight/templates/header_partial_b4.html:93
@@ -2089,18 +2088,18 @@ msgstr "আরও তথ্য"
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
 msgid " The Wikipedia Library"
-msgstr ""
+msgstr "উইকিপিডিয়া গ্রন্থাগার"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr ""
+msgstr "বিশ্বের শীর্ষস্থানীয় ১০০টিরও বেশি সাবস্ক্রিপশনভিত্তিক ডাটাবেস—যেগুলোতে %(no_of_languages)sটি ভাষায় বিষয়বস্তু রয়েছে, এটি সকল উইকিপিডিয়ানদের জন্য বিনামূল্যে উপলভ্য।"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
 msgid "Meet these criteria for automatic access"
-msgstr ""
+msgstr "স্বয়ংক্রিয় প্রবেশাধিকারের জন্য এই মানদণ্ডগুলি পূরণ করুন"
 
 #: TWLight/templates/login_partial.html:69
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
@@ -2108,7 +2107,7 @@ msgstr ""
 
 #: TWLight/templates/login_partial.html:89
 msgid "Login via Wikipedia"
-msgstr ""
+msgstr "উইকিপিডিয়ার মাধ্যমে প্রবেশ করুন"
 
 #. Translators: Shown if the current user doesn't have a registered email on their account. Don't translate contact_us_url or email_url.
 #: TWLight/templates/message_partial.html:15
@@ -2141,17 +2140,17 @@ msgstr "ব্যবহারের শর্তাবলী ও গোপনী
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:119
 msgid "Translate the Library"
-msgstr ""
+msgstr "গ্রন্থাগার অনুবাদ করুন"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
 msgid "Featured"
-msgstr ""
+msgstr "নির্বাচিত"
 
 #. Translators: A button that indicates there are more tag filter options.
 #: TWLight/templates/partner_carousel.html:43
 msgid "More"
-msgstr ""
+msgstr "আরও"
 
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:17
@@ -3023,25 +3022,25 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
 msgid "500+ edits"
-msgstr "৫০০+ সম্পাদনা"
+msgstr "৫০০টি+ সম্পাদনা"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:886 TWLight/views.py:45
 msgid "6+ months editing"
-msgstr ""
+msgstr "৬+ মাস সম্পাদনা"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:888
 msgid "10+ edits in the last month"
-msgstr "গত মাসে ১০+ সম্পাদনা"
+msgstr "গত মাসে ১০টি+ সম্পাদনা"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:890 TWLight/views.py:49
 msgid "No active blocks"
-msgstr ""
+msgstr "কোনও সক্রিয় বাধা নেই"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
 msgid "10+ edits in the last 30 days"
-msgstr ""
+msgstr "গত ৩০ দিনে ১০টি+ সম্পাদনা"
 

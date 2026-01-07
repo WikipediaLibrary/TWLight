@@ -10,6 +10,7 @@
 # Author: Kly
 # Author: MuratTheTurkish
 # Author: Nikkimaria
+# Author: Peterxy12
 # Author: Sean0115
 # Author: Sunny00217
 # Author: SupaplexTW
@@ -25,7 +26,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:37+0000\n"
+"PO-Revision-Date: 2025-12-29 12:35:36+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,13 +65,13 @@ msgstr "<p><small><i>您的個人資料將會根據我們的<a class='twl-links'
 #: TWLight/applications/forms.py:190
 #, python-brace-format
 msgid "Your application to {partner}"
-msgstr "您對 {partner} 的申請程序"
+msgstr "您對{partner}的申請程序"
 
 #. Translators: For some applications, users must register at another website before finishing the application form, and must then enter their email address used when registering. Don't translate {url}.
 #: TWLight/applications/forms.py:221
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "申請前您必須要在 <a href=\"{url}\">{url}</a> 註冊。"
+msgstr "申請前您必須要在<a href=\"{url}\">{url}</a>註冊。"
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
@@ -120,7 +121,7 @@ msgstr "您的所屬機構"
 #. Translators: When filling out an application, users must provide an explanation of why these resources would be useful to them
 #: TWLight/applications/helpers.py:89
 msgid "Why do you want access to this resource?"
-msgstr "您為何想要取用此資源？"
+msgstr "您為何想要存取此資源？"
 
 #. Translators: When filling out an application, users may need to specify a particular book they want access to
 #: TWLight/applications/helpers.py:91
@@ -225,22 +226,22 @@ msgstr "無效"
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
 msgid "1 month"
-msgstr "1 個月"
+msgstr "1個月"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
 msgid "3 months"
-msgstr "3 個月"
+msgstr "3個月"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
 msgid "6 months"
-msgstr "6 個月"
+msgstr "6個月"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
 msgid "12 months"
-msgstr "12 個月"
+msgstr "12個月"
 
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:159
@@ -251,12 +252,12 @@ msgstr "完成"
 #: TWLight/applications/models.py:325
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr "取用 URL：{access_url}"
+msgstr "存取URL：{access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331
 msgid "You can expect to receive access details within a week or two once it has been processed."
-msgstr "一旦處理完畢後，您可預期在一到兩週後收到取用詳情。"
+msgstr "一旦處理完畢後，您可預期在一到兩週後收到存取詳情。"
 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
@@ -266,7 +267,7 @@ msgstr "這位伙伴加入圖書館綑綁計畫，並不需要申請，這次申
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
 msgid "This application is on the waitlist because this partner does not have any access grants available at this time."
-msgstr "此申請程序在後補裡，出於此合作夥伴目前尚未有任何可用的取用授予。"
+msgstr "此申請程序在後補裡，出於此合作夥伴目前尚未有任何可用的存取授予。"
 
 #. Translators: This message is shown on pages where coordinators can see personal information about applicants.
 #: TWLight/applications/templates/applications/application_evaluation.html:36
@@ -2096,7 +2097,7 @@ msgstr "維基百科圖書館"
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "100 個以上世界頂級訂閱制資料庫、內容包含 %(no_of_languages)s 種語言，若您身分是維基百科人都可以免費使用"
+msgstr "100個以上世界頂級訂閱制資料庫、內容包含%(no_of_languages)s種語言，若您身分是維基百科人都可以免費使用"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2726,7 +2727,7 @@ msgstr "此外，如果您目前正被維基媒體專案封鎖或禁止編輯，
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:104
 msgid "Your eligibility to access The Wikipedia Library is assessed at each login. While more than half of the library's content is provided via this automated eligibility check, access to other publisher's content may be time limited, typically lapsing after one year, after which you will usually need to apply for renewal."
-msgstr "維基百科圖書館在您每次登錄時都會評估您訪問的資格。儘管圖書館超過一半的內容是通過此自動資格檢查程式就會提供的，但對其他出版者內容的訪問可能有時效性，通常會在一年後失效，在那之後您通常需要申請續訂。"
+msgstr "維基百科圖書館在您每次登入時都會評估您存取的資格。儘管圖書館超過一半的內容是透過此自動資格檢查程式就會提供的，但對其他出版者內容的存取可能有時效性，通常會在一年後失效，在那之後您通常需要申請續訂。"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:114

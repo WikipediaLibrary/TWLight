@@ -12,6 +12,7 @@
 # Author: Mansil alfalb
 # Author: MuratTheTurkish
 # Author: O andras
+# Author: RogueScholar
 # Author: Ruila
 msgid ""
 msgstr ""
@@ -19,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:35+0000\n"
+"PO-Revision-Date: 2026-01-05 12:27:22+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +42,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:42
 #: TWLight/users/templates/users/available_collection_tile.html:89
 msgid "Apply"
-msgstr "Candidatar"
+msgstr "Solicitar"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:171
@@ -129,7 +130,7 @@ msgstr "Mais alguma coisa que queira dizer"
 #. Translators: When filling out an application, users may be required to check a box to say they agree with the website's Terms of Use document, which is linked
 #: TWLight/applications/helpers.py:95
 msgid "You must agree with the partner's terms of use"
-msgstr "Tem de concordar com or termos de utilização do parceiro"
+msgstr "Tem de concordar com os termos de utilização do parceiro"
 
 #. Translators: When sending application data to partners, this is the text labelling a user's real name
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's real name.
@@ -157,7 +158,7 @@ msgstr "Afiliação"
 #: TWLight/applications/helpers.py:112
 #: TWLight/applications/templates/applications/application_evaluation.html:167
 msgid "Title requested"
-msgstr "Título soclicitado"
+msgstr "Título solicitado"
 
 #. Translators: When sending application data to partners, this is the text labelling whether a user agreed with the partner's Terms of Use
 #: TWLight/applications/helpers.py:114
@@ -183,7 +184,7 @@ msgstr "E-mail"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr "Os nossos termos de utilização foram alterados. As suas candidaturas não serão processadas até que inicie a sessão sessão e concorde com os termos atualizados."
+msgstr "Os nossos termos de utilização foram alterados. As suas candidaturas não serão processadas até que inicie sessão e concorde com os nossos termos atualizados."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -1112,19 +1113,18 @@ msgstr "A sua candidatura da Biblioteca da Wikipédia"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr ""
+msgstr "<p>Olá,</p> <p>Estamos atualmente realizando uma pesquisa para entender como os editores usam a Biblioteca da Wikipédia. De acordo com os nossos registros, você já fez login na Biblioteca da Wikipédia pelo menos uma vez, por isso gostaríamos muito de ouvir a sua opinião!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>Agradecemos muito o seu feedback — esta pesquisa nos ajudará a entender como a Biblioteca da Wikipédia está sendo usada atualmente e onde ela pode ser melhorada. As suas respostas terão impacto direto na forma como a Fundação Wikimedia prioriza o trabalho técnico e de parceria para este projeto.</p> <p>A pesquisa deve levar de 5 a 10 minutos para ser concluída.</p> <p>Se desejar optar por não ser contactado para futuras pesquisas da Biblioteca da Wikipédia, informe-nos por e-mail para wikipedialibrary@wikimedia.org e removeremos o seu nome de qualquer correspondência futura.</p> <p>Obrigado,</p> <p>Equipa da Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "Olá, estamos atualmente realizando uma pesquisa para entender como os editores usam a Biblioteca da Wikipédia. De acordo com os nossos registros, você já fez login na Biblioteca da Wikipédia pelo menos uma vez, por isso gostaríamos muito de ouvir a sua opinião! %(link)s Agradecemos muito o seu feedback — esta pesquisa nos ajudará a entender como a Biblioteca da Wikipédia está sendo usada atualmente e onde ela pode ser melhorada. As suas respostas terão impacto direto na forma como a Fundação Wikimedia prioriza o trabalho técnico e de parceria para este projeto. A pesquisa deve levar de 5 a 10 minutos para ser concluída. Se desejar optar por não ser contactado para futuras pesquisas da Biblioteca da Wikipédia, informe-nos por e-mail para wikipedialibrary@wikimedia.org e removeremos o seu nome de qualquer correspondência futura. Obrigado, Equipa da Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "A Página Inicial da Biblioteca da Wikipédia"
+msgstr "A Biblioteca da Wikipédia precisa da sua ajuda!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1985,9 +1985,8 @@ msgstr "Práticas de citação"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:206
-#, fuzzy
 msgid "Citation practices vary by project and even by article. Generally, we support editors citing where they found information, in a form that allows others to check it for themselves. That often means providing both original source details as well as a link to the partner database in which the source was found."
-msgstr "As práticas de citação variam entre projetos e até mesmo de artigo para artigo. Regra geral, os editores devem referir onde encontraram a informação, de forma a permitir que outras pessoas a verifiquem independentemente. Isto geralmente significa fornecer detalhes da fonte original e uma hiperligação para a base de dados do parceiro na qual essa fonte foi encontrada."
+msgstr "As práticas de citação variam entre projetos e até mesmo entre artigos. Regra geral, apoiamos os editores a citarem onde encontraram as informações, de forma a permitir que outros possam verificá-las independentemente. Isto geralmente significa fornecer os detalhes da fonte original e uma hiperligação para a base de dados parceira na qual essa fonte foi encontrada."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
@@ -2235,13 +2234,13 @@ msgstr "Atualizar correio eletrónico"
 #: TWLight/users/models.py:240
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
-msgstr ""
+msgstr "Não é possível adicionar o parceiro {partner} aos seus favoritos porque você não tem acesso a ele."
 
 #. Translators: This error message is shown when there's a problem with the authenticated login process.
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "Ocorreu um problema com o token de acesso. Por favor, tente novamente mais tarde ou {contact_link} se o problema persistir."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264

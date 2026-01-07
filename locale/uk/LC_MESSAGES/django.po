@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:37+0000\n"
+"PO-Revision-Date: 2025-12-25 12:34:15+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -358,9 +358,8 @@ msgstr "Будь ласка, перш ніж продовжувати, попр�
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "Доступні облікові записи:"
+msgstr "Доступні облікові записи"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -623,19 +622,16 @@ msgstr "Зараз немає заявок."
 
 #. Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
-#, fuzzy
 msgid "Partner (Collection)"
-msgstr "Колекції"
+msgstr "Партнер (колекція)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15
-#, fuzzy
 msgid "Last reviewed"
-msgstr "Ще не переглянуто."
+msgstr "Востаннє переглянуто"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
-#, fuzzy
 msgid "Date applied"
 msgstr "Дата подачі заявки"
 
@@ -1132,9 +1128,8 @@ msgstr ""
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "Бібліотека Вікіпедії"
+msgstr "Бібліотека Вікіпедії потребує вашої допомоги!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1965,9 +1960,8 @@ msgstr "Повага до цих угод дозволить нам продов
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:160
-#, fuzzy
 msgid "EZProxy"
-msgstr "Проксі"
+msgstr "EZProxy"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:164
@@ -2286,9 +2280,8 @@ msgstr "Не вдалося знайти протокол."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:501
-#, fuzzy
 msgid "No session token."
-msgstr "Немає токена запиту."
+msgstr "Немає токена сесії."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:513
@@ -2742,9 +2735,8 @@ msgstr "Ваше право на доступ до Бібліотеки Вікі
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:114
-#, fuzzy
 msgid "Applying via Your Wikipedia Library Card Account"
-msgstr "Подання запиту на обліковий запис Карткової платформи Бібліотеки Вікіпедії"
+msgstr "Подання запиту через обліковий запис Бібліотеки Вікіпедії"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:118
@@ -2907,9 +2899,8 @@ msgstr "Команда Бібліотеки Вікіпедії"
 
 #. Translators: This is the last line of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:418
-#, fuzzy
 msgid "Wikimedia Foundation"
-msgstr "Політика приватності Фонду Вікімедіа"
+msgstr "Фонд Вікімедіа"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:426
@@ -3032,9 +3023,8 @@ msgstr "Ваша електронна пошта порожня. Ви й дал�
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:805
-#, fuzzy
 msgid "Access to {} has been returned."
-msgstr "Пропозицію було вилучено."
+msgstr "Доступ до {} було відкликано."
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
