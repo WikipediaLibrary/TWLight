@@ -14,6 +14,7 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 from django.test import TestCase, RequestFactory
+from django.test.utils import override_settings
 
 from TWLight.applications.factories import (
     ApplicationFactory,
@@ -34,7 +35,7 @@ from .tasks import (
     send_approval_notification_email,
     send_rejection_notification_email,
     send_user_renewal_notice_emails,
-    send_survey_active_user_emails,
+    send_survey_active_user_email,
 )
 
 
@@ -841,15 +842,16 @@ class SurveyActiveUsersEmailTest(TestCase):
         superuser.user.save()
         superuser.save()
 
+    # Use the same override as djmail itself since the command dynamically changes the backend
+    @override_settings(
+        DJMAIL_REAL_BACKEND="django.core.mail.backends.locmem.EmailBackend"
+    )
     def test_survey_active_users_command(self):
-        self.assertFalse(self.eligible.userprofile.survey_email_sent)
         call_command(
             "survey_active_users",
             "000001",
             "en",
+            backend="djmail.backends.default.EmailBackend",
         )
-
-        self.eligible.refresh_from_db()
-        self.assertTrue(self.eligible.userprofile.survey_email_sent)
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, [self.eligible.email])

@@ -27,7 +27,7 @@ class Command(BaseCommand):
             "--staff_test",
             action="store_true",
             required=False,
-            help="A flag to email only to staff users who qualify other than staff status",
+            help="Email only staff users who qualify other than staff status",
         )
         parser.add_argument(
             "--batch_size",
@@ -35,12 +35,23 @@ class Command(BaseCommand):
             required=False,
             help="number of emails to send; default is 1000",
         )
+        parser.add_argument(
+            "--backend",
+            type=str,
+            required=False,
+            help="djmail backend to use; default is TWLight.emails.backends.mediawiki.EmailBackend",
+        )
 
     def handle(self, *args, **options):
         # default mode excludes users who are staff or superusers
         role_filter = Q(is_staff=False) & Q(is_superuser=False)
 
         batch_size = options["batch_size"] if options["batch_size"] else 1000
+        backend = (
+            options["backend"]
+            if options["backend"]
+            else "TWLight.emails.backends.mediawiki.EmailBackend"
+        )
 
         # test mode excludes users who are not staff and ignores superuser status
         if options["staff_test"]:
@@ -83,16 +94,15 @@ class Command(BaseCommand):
         if not users.exists():
             return
 
-        connection = get_connection(
-            backend="TWLight.emails.backends.mediawiki.EmailBackend"
-        )
+        connection = get_connection(backend=backend)
         connection.open()
 
         # send the emails
         for user in users:
             Survey.survey_active_user.send(
                 sender=self.__class__,
-                connection=connection,  # passing in the connection is what lets us handle these in bulk
+                backend=backend,  # allows setting the djmail backend back to default for testing
+                connection=connection,  # passing in the connection lets us handle these in bulk
                 user_email=user.email,
                 user_lang=user.userprofile.lang,
                 survey_id=options["survey_id"],

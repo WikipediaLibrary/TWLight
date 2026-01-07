@@ -45,7 +45,7 @@ from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
 from TWLight.users.signals import Notice, Survey, TestEmail, UserLoginRetrieval
-from .models import Message
+from djmail.models import Message
 
 logger = logging.getLogger(__name__)
 
@@ -183,10 +183,15 @@ def send_survey_active_user_email(sender, **kwargs):
     Any time the related managment command is run, this sends a survey
     invitation to qualifying editors.
     """
+    backend = (
+        kwargs["backend"]
+        if "backend" in kwargs
+        else "TWLight.emails.backends.mediawiki.EmailBackend"
+    )
     connection = (
         kwargs["connection"]
         if "connection" in kwargs
-        else get_connection(backend="TWLight.emails.backends.mediawiki.EmailBackend")
+        else get_connection(backend=backend)
     )
 
     user_email = kwargs["user_email"]
