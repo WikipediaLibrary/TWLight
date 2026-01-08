@@ -50,7 +50,7 @@ def retry_conn():
     return wrapper
 
 
-def _json_maxlag(response):
+def _handle_maxlag(response):
     """A helper method that handles maxlag retries."""
     data = response.json()
     try:
@@ -143,7 +143,7 @@ class EmailBackend(BaseEmailBackend):
                 raise Exception(
                     "There was an error in the request for obtaining the login token."
                 )
-            login_token_data = _json_maxlag(response_login_token)
+            login_token_data = _handle_maxlag(response_login_token)
             login_token = login_token_data["query"]["tokens"]["logintoken"]
             if not login_token:
                 raise Exception("There was an error obtaining the login token.")
@@ -175,7 +175,7 @@ class EmailBackend(BaseEmailBackend):
                     "There was an error in the request for the email token."
                 )
 
-            email_token_data = _json_maxlag(email_token_response)
+            email_token_data = _handle_maxlag(email_token_response)
 
             email_token = email_token_data["query"]["tokens"]["csrftoken"]
             if not email_token:
@@ -257,7 +257,7 @@ class EmailBackend(BaseEmailBackend):
                     raise Exception(
                         "There was an error in the request to check if the user can receive emails."
                     )
-                emailable_data = _json_maxlag(emailable_response)
+                emailable_data = _handle_maxlag(emailable_response)
                 emailable = "emailable" in emailable_data["query"]["users"][0]
                 if not emailable:
                     raise Exception("User not emailable, email skipped.")
@@ -279,7 +279,7 @@ class EmailBackend(BaseEmailBackend):
                     raise Exception(
                         "There was an error in the request to send the email."
                     )
-                emailuser_data = _json_maxlag(emailuser_response)
+                emailuser_data = _handle_maxlag(emailuser_response)
                 if emailuser_data["emailuser"]["result"] != "Success":
                     raise Exception("There was an error when trying to send the email.")
                 logger.info("Email sent.")

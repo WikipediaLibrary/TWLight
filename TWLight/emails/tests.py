@@ -721,7 +721,7 @@ class SurveyActiveUsersEmailTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """
-        Creates a survey-eligible user and several eligible users.
+        Creates a survey-eligible user, several ineligible users, and one already sent message.
         Returns
         -------
         None
@@ -761,7 +761,6 @@ class SurveyActiveUsersEmailTest(TestCase):
         already_sent.wp_registered = now - timedelta(days=182)
         already_sent.wp_enough_edits = True
         already_sent.user.userprofile.terms_of_use = True
-        already_sent.user.userprofile.survey_email_sent = True
         already_sent.user.userprofile.save()
         already_sent.user.last_login = now
         already_sent.user.save()
@@ -844,14 +843,24 @@ class SurveyActiveUsersEmailTest(TestCase):
 
     # Use the same override as djmail itself since the command dynamically changes the backend
     @override_settings(
-        DJMAIL_REAL_BACKEND="django.core.mail.backends.locmem.EmailBackend"
+        EMAIL_BACKEND="djmail.backends.default.EmailBackend",
+        DJMAIL_REAL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
     )
     def test_survey_active_users_command(self):
+        # pre-send an email to the "alreadysent" editor
+        already_sent_msg = mail.EmailMessage(
+            "The Wikipedia Library needs your help!",
+            "Body",
+            "sender@example.com",
+            ["alreadysent@example.com"],
+        )
+        already_sent_msg.send()
+
         call_command(
             "survey_active_users",
             "000001",
             "en",
             backend="djmail.backends.default.EmailBackend",
         )
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].to, [self.eligible.email])
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[1].to, [self.eligible.email])

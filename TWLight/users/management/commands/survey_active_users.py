@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
+import logging
+
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.mail import get_connection
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.db.models import DurationField, ExpressionWrapper, F, Q
 from django.db.models.functions import TruncDate
 from django.utils.timezone import timedelta
+from django.utils.translation import gettext_lazy as _
 
+from TWLight.emails.models import Message
+from TWLight.emails.tasks import send_survey_active_user_email
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Survey
+
+logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -43,6 +50,22 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        # Validate the lang args
+        survey_langs = options["lang"]
+        valid_langs = []
+        invalid_langs = []
+        for lang_code, _lang_name in settings.LANGUAGES:
+            valid_langs.append(lang_code)
+
+        for survey_lang in survey_langs:
+            if survey_lang not in valid_langs:
+                invalid_langs.append(survey_lang)
+
+        if invalid_langs:
+            raise CommandError(
+                "invalid lang argument in list: {}".format(invalid_langs)
+            )
+
         # default mode excludes users who are staff or superusers
         role_filter = Q(is_staff=False) & Q(is_superuser=False)
 
@@ -78,8 +101,6 @@ class Command(BaseCommand):
                 Q(email__isnull=False)
                 & ~Q(email="")
                 & ~Q(email__endswith="@wikimedia.org"),
-                # have not already received the email
-                userprofile__survey_email_sent=False,
                 # meet the 6 month criterion as of last login
                 last_login_age__gte=timedelta(days=182),
                 # meet the 500 edit criterion
@@ -87,30 +108,41 @@ class Command(BaseCommand):
                 # are 'active'
                 is_active=True,
             )
-            .order_by("last_login")[:batch_size]
         )
+        previously_sent_user_pks = Message.twl.user_pks_with_subject_list(
+            # Translators: email subject line
+            subject=_("The Wikipedia Library needs your help!"),
+            users=users,
+        )
+        logger.info(
+            "{} users previously sent message".format(len(previously_sent_user_pks))
+        )
+        users = (
+            users.exclude(pk__in=previously_sent_user_pks)
+            .distinct()
+            .order_by("last_login")
+        )
+        logger.info("{} new users qualify".format(users.count()))
+        users = users[:batch_size]
+        logger.info("attempting to send to {} users".format(users.count()))
 
-        # No users qualify; exit
-        if not users.exists():
-            return
-
+        # Use a single connection to send all emails
         connection = get_connection(backend=backend)
         connection.open()
 
         # send the emails
         for user in users:
-            Survey.survey_active_user.send(
-                sender=self.__class__,
-                backend=backend,  # allows setting the djmail backend back to default for testing
-                connection=connection,  # passing in the connection lets us handle these in bulk
-                user_email=user.email,
-                user_lang=user.userprofile.lang,
-                survey_id=options["survey_id"],
-                survey_langs=options["lang"],
-            )
+            try:
+                send_survey_active_user_email(
+                    sender=self.__class__,
+                    backend=backend,  # allows setting the djmail backend back to default for testing
+                    connection=connection,  # passing in the connection lets us handle these in bulk
+                    user_email=user.email,
+                    user_lang=user.userprofile.lang,
+                    survey_id=options["survey_id"],
+                    survey_langs=survey_langs,
+                )
+            except Exception as e:
+                logger.error(e)
 
         connection.close()
-
-        # Record that we sent the email so that we only send one.
-        # user.userprofile.survey_email_sent = True
-        # user.userprofile.save()
