@@ -5,25 +5,20 @@ from TWLight.emails.models import Message
 
 
 class Command(BaseCommand):
-    help = "Delete draft emails."
+    help = "Delete unsent emails."
 
     def add_arguments(self, parser):
         parser.add_argument(
             "--subject",
             type=str,
-            required=True,
+            required=False,
             help="Email subject",
-        )
-        parser.add_argument(
-            "--userprofile_flag_field",
-            type=str,
-            help="Optionally unset userprofile boolean that tracks sent status for messages with the specified subject",
         )
 
     def handle(self, *args, **options):
         subject = options["subject"]
-        userprofile_flag_field = options["userprofile_flag_field"]
 
-        Message.objects.bulk_cleanup_drafts(
-            subject=subject, userprofile_flag_field=userprofile_flag_field
-        )
+        if subject is None:
+            Message.twl.unsent().delete()
+        else:
+            Message.twl.filter(subject=subject).unsent().delete()
