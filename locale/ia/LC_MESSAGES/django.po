@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:32+0000\n"
+"PO-Revision-Date: 2026-01-08 12:33:04+0000\n"
 "Language: ia\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1111,9 +1111,8 @@ msgstr ""
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "Pagina principal del Bibliotheca de Wikipedia"
+msgstr "Le Bibliotheca de Wikipedia ha besonio de tu adjuta!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
