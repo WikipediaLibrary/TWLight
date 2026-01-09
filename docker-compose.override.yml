@@ -25,9 +25,14 @@ secrets:
 
 services:
   twlight:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     image: quay.io/wikipedialibrary/twlight:local
     env_file:
-      - ./conf/local.twlight.env
+      - path: ./conf/local.twlight.env
+        required: true
+      - path: .env
+        required: false
     # Local environment should mount things from the code directory
     volumes:
       - type: bind

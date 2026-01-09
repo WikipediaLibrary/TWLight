@@ -14,6 +14,7 @@ from django.core.management import call_command
 from django.urls import reverse
 from django.utils import timezone
 from django.test import TestCase, RequestFactory
+from django.test.utils import override_settings
 
 from TWLight.applications.factories import (
     ApplicationFactory,
@@ -34,7 +35,7 @@ from .tasks import (
     send_approval_notification_email,
     send_rejection_notification_email,
     send_user_renewal_notice_emails,
-    send_survey_active_user_emails,
+    send_survey_active_user_email,
 )
 
 
@@ -720,7 +721,7 @@ class SurveyActiveUsersEmailTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         """
-        Creates a survey-eligible user and several eligible users.
+        Creates a survey-eligible user, several ineligible users, and one already sent message.
         Returns
         -------
         None
@@ -760,7 +761,6 @@ class SurveyActiveUsersEmailTest(TestCase):
         already_sent.wp_registered = now - timedelta(days=182)
         already_sent.wp_enough_edits = True
         already_sent.user.userprofile.terms_of_use = True
-        already_sent.user.userprofile.survey_email_sent = True
         already_sent.user.userprofile.save()
         already_sent.user.last_login = now
         already_sent.user.save()
@@ -841,15 +841,26 @@ class SurveyActiveUsersEmailTest(TestCase):
         superuser.user.save()
         superuser.save()
 
+    # Use the same override as djmail itself since the command dynamically changes the backend
+    @override_settings(
+        EMAIL_BACKEND="djmail.backends.default.EmailBackend",
+        DJMAIL_REAL_BACKEND="django.core.mail.backends.locmem.EmailBackend",
+    )
     def test_survey_active_users_command(self):
-        self.assertFalse(self.eligible.userprofile.survey_email_sent)
+        # pre-send an email to the "alreadysent" editor
+        already_sent_msg = mail.EmailMessage(
+            "The Wikipedia Library needs your help!",
+            "Body",
+            "sender@example.com",
+            ["alreadysent@example.com"],
+        )
+        already_sent_msg.send()
+
         call_command(
             "survey_active_users",
             "000001",
             "en",
+            backend="djmail.backends.default.EmailBackend",
         )
-
-        self.eligible.refresh_from_db()
-        self.assertTrue(self.eligible.userprofile.survey_email_sent)
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].to, [self.eligible.email])
+        self.assertEqual(len(mail.outbox), 2)
+        self.assertEqual(mail.outbox[1].to, [self.eligible.email])
