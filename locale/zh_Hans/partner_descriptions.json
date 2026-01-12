@@ -125,7 +125,7 @@
 	"135_short_description": "<strong>Corriere della Sera</strong>是一份在米兰出版的意大利日报。它是意大利历史最悠久、阅读量最大的报纸之一。Corriere della Sera存档提供了对一个世纪的历史档案的访问权限。",
 	"136_short_description": "<strong>Corriere della Sera Archives</strong>提供意大利最古老和阅读量最大的报纸之一的 Corriere della Sera 一个世纪的历史档案。",
 	"137_short_description": "<strong>Wikilala</strong>是一个数字存储库，包含超过 109,000 份印刷形式的文件，包括 45,000 份报纸、32,000 份期刊、4,000 本书和 26,000 篇关于奥斯曼帝国从建国到现代的历史的文章。",
-	"138_short_description": "<strong>英国报纸档案馆</strong>提供对英国和爱尔兰报纸的可搜索数字化档案的访问。",
+	"138_short_description": "<strong>英国报纸档案馆</strong>提供对英国和爱尔兰报纸的可搜索数字化档案的访问。注：您需要创建一个免费账号才能访问全文。",
 	"139_short_description": "<strong>Findmypast</strong>拥有数十亿条可搜索的人口普查记录、名录和历史记录信息。",
 	"140_short_description": "<strong>密歇根大学出版社</strong>是同行评审书籍的出版商，主要的领域是政治学、表演艺术、美国研究、古典和中世纪研究以及亚洲研究",
 	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong>提供对由美国学术协会理事会的学者挑选的数千本书籍的访问，这些书籍是研究人文和社会科学的基础。这些书籍来自超过 125 家出版商，并且都经过同行评审。",
@@ -166,5 +166,7 @@
 	"175_short_description": "<strong>Glitz</strong>是一家专注于奢侈品行业的调查媒体。每周，Glitz 都会报道奢侈品生态系统中具有影响力的家族、品牌和参与者的战略决策。本馆藏提供《Glitz》的英文版。",
 	"176_short_description": "<strong>Glitz</strong>是一家专注于奢侈品行业的调查媒体。每周，Glitz 都会报道奢侈品生态系统中具有影响力的家族、品牌和参与者的战略决策。本馆藏提供《Glitz》的法文版。",
 	"177_short_description": "<strong>e-Marefa</strong>是一个收录学术期刊、论文和电子书的阿拉伯语电子数据库，被认为是全球最大的阿拉伯语相关内容和信息产业数据库之一。可提供超过700万条涵盖所有学科和专业的记录。",
-	"178_short_description": "<strong>Inlibra</strong>提供来自100多家出版商的学术内容，包括50,000多本电子书和120种学术期刊。"
+	"178_short_description": "<strong>Inlibra</strong>提供来自100多家出版商的学术内容，包括50,000多本电子书和120种学术期刊。",
+	"179_short_description": "<strong>Newslaundry</strong>是一个提供媒体批判、报道和评论的印度平台。",
+	"180_short_description": "<strong>The News Minute</strong>是一个数字新闻平台，报导和撰写有关印度的各种问题，并特别聚焦于印度南部五邦。"
 }

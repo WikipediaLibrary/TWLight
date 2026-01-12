@@ -112,7 +112,7 @@
 	"135_short_description": "《<strong>晚郵報</strong>》是在米蘭出版的義大利日報。是義大利歷史最悠久、閱讀量最多的報紙之一。晚郵報提供了可取用一世紀份量的歷史存檔。",
 	"136_short_description": "<strong>The Corriere della Sera Archives</strong> 提供了義大利最古老、讀者最多之一的報紙《晚郵報》一整個世紀的歷史檔案。",
 	"137_short_description": "<strong>Wikilala</strong> 是一個數位典藏庫，包含超過 109000 份印刷形式的文件、45000 份報紙、32000 份期刊、4000 本書籍，和 26000 篇關於鄂圖曼帝國從建國到現代的歷史文章。",
-	"138_short_description": "<strong>英國報紙檔案館</strong>提供對英國和愛爾蘭報紙的可搜尋數位化存檔的取用。",
+	"138_short_description": "<strong>英國報紙檔案館</strong>提供對英國和愛爾蘭報紙的可搜尋數位化存檔的取用。註：您需要建立一個免費帳號才能取用全文。",
 	"139_short_description": "<strong>Findmypast</strong> 擁有數十億條可搜尋的人口普查記錄、名錄和歷史紀錄資訊。",
 	"140_short_description": "<strong>密西根大學出版社</strong>是同行評審書籍的出版商，著重在政治學、表演藝術、美國研究、古典和中世紀研究、以及亞洲研究",
 	"141_short_description": "<strong>ACLS Humanities Ebook Collection</strong> 提供可取用由美國學術團體聯合會的學者挑選，用來研究人文與社會科學的數千本基礎書籍。這些書籍來自超過 125 家出版社，並且都通過同行評審。",
@@ -153,5 +153,7 @@
 	"175_short_description": "<strong>Glitz</strong> 是一家專注於奢侈品產業的調查媒體。Glitz 每週會報告奢侈品生態中具有影響力的家族、商號、參與者的策略決策。本收藏提供 Glitz 英文版。",
 	"176_short_description": "<strong>Glitz</strong> 是一家專注於奢侈品產業的調查媒體。Glitz 每週會報告奢侈品生態中具有影響力的家族、商號、參與者的策略決策。本收藏提供 Glitz 法文版。",
 	"177_short_description": "<strong>e-Marefa</strong> 是一個收錄學術期刊、論文和電子書的阿拉伯語電子資料庫，被認為是全球最大的阿拉伯相關內容與資訊產業資料庫之一。可提供超過 700 萬筆涵蓋所有學科和專業的紀錄。",
-	"178_short_description": "<strong>Inlibra</strong> 提供來自 100 多家出版商的學術內容，包括 50000 多本電子書與 120 種學術期刊。"
+	"178_short_description": "<strong>Inlibra</strong> 提供來自 100 多家出版商的學術內容，包括 50000 多本電子書與 120 種學術期刊。",
+	"179_short_description": "<strong>Newslaundry</strong> 是一個提供媒體批判、報導和評論的印度平台。",
+	"180_short_description": "<strong>The News Minute</strong> 是一個數位新聞平台，報導和撰寫有關印度的各種問題，並特別關注在印度南部五邦。"
 }
