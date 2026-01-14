@@ -24,12 +24,11 @@ class MessageQuerySet(models.QuerySet):
         )
 
     def user_pks_with_subject_list(self, subject, users):
-        user_pks = []
         if users is None:
-            return user_pks
+            return []
 
         subjects = []
-        # Get the localized subject for each specified language
+        # Get the localized subject for each available language
         for lang_code, _lang_name in settings.LANGUAGES:
             try:
                 with override(lang_code):
@@ -38,16 +37,14 @@ class MessageQuerySet(models.QuerySet):
             except ValueError:
                 pass
 
-        # Since the message object contains translated text, search for the localized email subject to check for existing messages.
-        for user in users.only("pk", "email"):
-            # search for Message objects with matching subject and recipient
-            existing_messages = self.filter(
-                to_email=user.email,
-                subject__in=subjects,
-            )
-            if existing_messages.exists():
-                user_pks.append(user.pk)
-        return user_pks
+        # Search for repients of sent messages with the one of the localized email subjects.
+        previous_recipients = self.filter(
+            status=Message.STATUS_SENT,
+            subject__in=subjects,
+        ).values_list("to_email", flat=True)
+
+        # return a list of pks for users with matching email addresses
+        return users.filter(email__in=previous_recipients).values_list("pk", flat=True)
 
 
 class MessageManager(models.Manager):

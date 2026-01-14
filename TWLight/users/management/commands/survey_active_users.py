@@ -95,34 +95,39 @@ class Command(BaseCommand):
                 role_filter,
                 # have not restricted data processing
                 ~Q(groups__name__in=[get_restricted()]),
-                # meet the block criterion or have the 'ignore wp blocks' exemption
+                # meet the block criterion or are exempt
                 Q(editor__wp_not_blocked=True) | Q(editor__ignore_wp_blocks=True),
                 # have an non-wikimedia.org email address
                 Q(email__isnull=False)
                 & ~Q(email="")
                 & ~Q(email__endswith="@wikimedia.org"),
-                # meet the 6 month criterion as of last login
-                last_login_age__gte=timedelta(days=182),
-                # meet the 500 edit criterion
-                editor__wp_enough_edits=True,
+                # meet the 6 month criterion as of last login or are exempt
+                Q(last_login_age__gte=timedelta(days=182))
+                | Q(editor__ignore_wp_account_age_requirement=True),
+                # meet the 500 edit criterion or are exempt
+                Q(editor__wp_enough_edits=True)
+                | Q(editor__ignore_wp_edit_requirement=True),
                 # are 'active'
                 is_active=True,
             )
         )
+        logger.info("{} users qualify".format(users.count()))
         previously_sent_user_pks = Message.twl.user_pks_with_subject_list(
             # Translators: email subject line
             subject=_("The Wikipedia Library needs your help!"),
             users=users,
         )
         logger.info(
-            "{} users previously sent message".format(len(previously_sent_user_pks))
+            "{} users previously sent message will be skipped".format(
+                len(previously_sent_user_pks)
+            )
         )
         users = (
             users.exclude(pk__in=previously_sent_user_pks)
             .distinct()
             .order_by("last_login")
         )
-        logger.info("{} new users qualify".format(users.count()))
+        logger.info("{} remaining users qualify".format(users.count()))
         users = users[:batch_size]
         logger.info("attempting to send to {} users".format(users.count()))
 
