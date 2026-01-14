@@ -137,6 +137,7 @@ class EmailBackend(BaseEmailBackend):
                 "format": "json",
             }
             session = Session()
+            session.headers = self.headers
             logger.info("Session created, getting login token...")
             response_login_token = session.get(url=self.url, params=login_token_params)
             if response_login_token.status_code != 200:
