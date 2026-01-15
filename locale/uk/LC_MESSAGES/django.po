@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-25 12:34:15+0000\n"
+"PO-Revision-Date: 2026-01-15 12:39:18+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2785,15 +2785,13 @@ msgstr "Автоматичне зчитування чи завантаженн�
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:197
-#, fuzzy
 msgid "Systematically making printed or electronic copies of multiple extracts of restricted content available for any purpose;"
-msgstr "Систематично робити друковані чи електронні копії численних уривків доступного обмеженого контенту з будь-якою метою"
+msgstr "Систематично робити друковані чи електронні копії численних уривків доступного обмеженого контенту з будь-якою метою;"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:204
-#, fuzzy
 msgid "Data mining metadata without permission—for example, in order to use metadata for auto-created stub articles;"
-msgstr "Використовувати метадані без дозволу, наприклад, щоб на їх основі автоматично створювати статті-заготовки"
+msgstr "Використовувати метадані без дозволу, наприклад, щоб на їх основі автоматично створювати статті-заготовки;"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:211

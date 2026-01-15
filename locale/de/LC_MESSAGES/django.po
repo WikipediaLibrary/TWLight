@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:21+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:31+0000\n"
+"PO-Revision-Date: 2026-01-15 12:39:10+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -646,7 +646,6 @@ msgstr "Zuletzt überprüft"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
-#, fuzzy
 msgid "Date applied"
 msgstr "Bewerbung abgesendet am"
 
