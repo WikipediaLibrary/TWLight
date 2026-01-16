@@ -195,6 +195,7 @@ class UserProfile(models.Model):
         blank=True,
         help_text="The partner(s) that the user has marked as favorite.",
     )
+    # @TODO: drop this field
     survey_email_sent = models.BooleanField(
         default=False, help_text="Has this user recieved the most recent survey email?"
     )
