@@ -19,7 +19,7 @@ jobs:
         run: jq -ce . locale/language-data.json > /dev/null
 
       - name: Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           add-paths: locale/language-data.json
           commit-message: Update language-data.json
