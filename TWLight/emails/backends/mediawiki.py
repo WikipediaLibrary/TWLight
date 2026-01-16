@@ -3,6 +3,7 @@ Email backend that POSTs messages to the MediaWiki Emailuser endpoint.
 see: https://www.mediawiki.org/wiki/API:Emailuser
 """
 import logging
+from json import dumps
 from requests import Session
 from requests.exceptions import ConnectionError
 from requests.structures import CaseInsensitiveDict
@@ -40,7 +41,7 @@ def retry_conn():
                         logger.warning("ConnectionError exhausted retries")
                         raise e
                     logger.warning(
-                        "ConnectionError, retrying in {}s".format(self.retry_after_conn)
+                        "ConnectionError, retrying in {}s".format(retry_after_conn)
                     )
                     sleep(retry_after_conn)
                     continue
@@ -48,43 +49,6 @@ def retry_conn():
         return conn
 
     return wrapper
-
-
-def _handle_maxlag(response):
-    """A helper method that handles maxlag retries."""
-    data = response.json()
-    try:
-        if data["error"]["code"] != "maxlag":
-            return data
-    except KeyError:
-        return data
-
-    retry_after = float(response.headers.get("Retry-After", 5))
-    retry_on_lag_error = 50
-    no_retry = 0 <= retry_on_lag_error < try_count
-
-    message = "Server exceeded maxlag"
-    if not no_retry:
-        message += ", retrying in {}s".format(retry_after)
-    if "lag" in data["error"]:
-        message += ", lag={}".format(data["error"]["lag"])
-    message += ", API=".format(self.url)
-
-    log = logger.warning if no_retry else logger.info
-    log(
-        message,
-        {
-            "code": "maxlag-retry",
-            "retry-after": retry_after,
-            "lag": data["error"]["lag"] if "lag" in data["error"] else None,
-            "x-database-lag": response.headers.get("X-Database-Lag", 5),
-        },
-    )
-
-    if no_retry:
-        raise Exception(message)
-
-    sleep(retry_after)
 
 
 class EmailBackend(BaseEmailBackend):
@@ -117,6 +81,56 @@ class EmailBackend(BaseEmailBackend):
         self.session = None
         logger.info("Email connection constructed.")
 
+    def _handle_request(self, response, try_count=0):
+        """
+        A helper method that handles MW API responses
+        including maxlag retries.
+        """
+        # Raise for any HTTP response errors
+        if response.status_code != 200:
+            raise Exception("HTTP {} error".format(response.status_code))
+        data = response.json()
+        error = data.get("error", {})
+        if "warnings" in data:
+            logger.warning(dumps(data["warnings"], indent=True))
+        # raise for any api error codes besides max lag
+        try:
+            if error.get("code") != "maxlag":
+                raise Exception(dumps(error))
+        except:
+            # return data if there are no errors
+            return data
+
+        # handle retries with max lag
+        lag = error.get("lag")
+        request = response.request
+        retry_after = float(response.headers.get("Retry-After", 5))
+        retry_on_lag_error = 50
+        no_retry = 0 <= retry_on_lag_error < try_count
+        message = "Server exceeded maxlag"
+        if not no_retry:
+            message += ", retrying in {}s".format(retry_after)
+        if lag:
+            message += ", lag={}".format(lag)
+        message += ", url={}".format(self.url)
+        log = logger.warning if no_retry else logger.info
+        log(
+            message,
+            {
+                "code": "maxlag-retry",
+                "retry-after": retry_after,
+                "lag": lag,
+                "x-database-lag": response.headers.get("X-Database-Lag", 5),
+            },
+        )
+        if no_retry:
+            raise Exception(message)
+
+        sleep(retry_after)
+        try_count += 1
+        return self._handle_request(self.session.send(request), try_count)
+
+    @retry_conn()
     def open(self):
         """
         Ensure an open session to the API server. Return whether or not a
@@ -128,6 +142,10 @@ class EmailBackend(BaseEmailBackend):
             return False
 
         try:
+            self.session = Session()
+            self.session.headers = self.headers
+            logger.info("Session created, getting login token...")
+
             # GET request to fetch login token
             login_token_params = {
                 "action": "query",
@@ -136,18 +154,13 @@ class EmailBackend(BaseEmailBackend):
                 "maxlag": self.maxlag,
                 "format": "json",
             }
-            session = Session()
-            session.headers = self.headers
-            logger.info("Session created, getting login token...")
-            response_login_token = session.get(url=self.url, params=login_token_params)
-            if response_login_token.status_code != 200:
-                raise Exception(
-                    "There was an error in the request for obtaining the login token."
-                )
-            login_token_data = _handle_maxlag(response_login_token)
-            login_token = login_token_data["query"]["tokens"]["logintoken"]
+            login_token_response = self._handle_request(
+                self.session.get(url=self.url, params=login_token_params)
+            )
+            login_token = login_token_response["query"]["tokens"]["logintoken"]
             if not login_token:
-                raise Exception("There was an error obtaining the login token.")
+                self.session = None
+                raise Exception(dumps(login_token_response))
 
             # POST request to log in. Use of main account for login is not
             # supported. Obtain credentials via Special:BotPasswords
@@ -161,30 +174,25 @@ class EmailBackend(BaseEmailBackend):
                 "format": "json",
             }
             logger.info("Signing in...")
-            login_response = session.post(url=self.url, data=login_params)
-            if login_response.status_code != 200:
-                raise Exception("There was an error in the request for the login.")
+            login_response = self._handle_request(
+                self.session.post(url=self.url, data=login_params)
+            )
 
             # GET request to fetch Email token
             # see: https://www.mediawiki.org/wiki/API:Emailuser#Token
             email_token_params = {"action": "query", "meta": "tokens", "format": "json"}
 
             logger.info("Getting email token...")
-            email_token_response = session.get(url=self.url, params=email_token_params)
-            if email_token_response.status_code != 200:
-                raise Exception(
-                    "There was an error in the request for the email token."
-                )
-
-            email_token_data = _handle_maxlag(email_token_response)
-
-            email_token = email_token_data["query"]["tokens"]["csrftoken"]
+            email_token_response = self._handle_request(
+                self.session.get(url=self.url, params=email_token_params)
+            )
+            email_token = email_token_response["query"]["tokens"]["csrftoken"]
             if not email_token:
-                raise Exception("There was an error obtaining the email token.")
+                self.session = None
+                raise Exception(dumps(email_token_response))
 
-            # Assign the session and email token
+            # Assign the email token
             self.email_token = email_token
-            self.session = session
             logger.info("Email API session ready.")
             return True
         except:
@@ -227,15 +235,13 @@ class EmailBackend(BaseEmailBackend):
         try:
             for recipient in email_message.recipients():
                 # lookup the target editor from the email address
-                target_qs = Editor.objects.values_list("wp_username", flat=True).filter(
-                    user__email=recipient
+                target_qs = Editor.objects.filter(user__email=recipient).values_list(
+                    "wp_username", flat=True
                 )
                 target_qs_count = target_qs.count()
                 if target_qs_count > 1:
                     raise Exception(
-                        "Email address associated with {} user accounts, email skipped".format(
-                            target_qs_count
-                        )
+                        "skip shared email address: {}".format(list(target_qs))
                     )
 
                 target = target_qs.first()
@@ -250,18 +256,12 @@ class EmailBackend(BaseEmailBackend):
                     "format": "json",
                 }
 
-                logger.info("Checking if user is emailable...")
-                emailable_response = self.session.post(
-                    url=self.url, data=emailable_params
+                emailable_response = self._handle_request(
+                    self.session.post(url=self.url, data=emailable_params)
                 )
-                if emailable_response.status_code != 200:
-                    raise Exception(
-                        "There was an error in the request to check if the user can receive emails."
-                    )
-                emailable_data = _handle_maxlag(emailable_response)
-                emailable = "emailable" in emailable_data["query"]["users"][0]
+                emailable = "emailable" in emailable_response["query"]["users"][0]
                 if not emailable:
-                    raise Exception("User not emailable, email skipped.")
+                    raise Exception("skip not emailable: {}".format(target))
 
                 # POST request to send an email
                 email_params = {
@@ -275,14 +275,12 @@ class EmailBackend(BaseEmailBackend):
                 }
 
                 logger.info("Sending email...")
-                emailuser_response = self.session.post(url=self.url, data=email_params)
-                if emailuser_response.status_code != 200:
-                    raise Exception(
-                        "There was an error in the request to send the email."
-                    )
-                emailuser_data = _handle_maxlag(emailuser_response)
-                if emailuser_data["emailuser"]["result"] != "Success":
-                    raise Exception("There was an error when trying to send the email.")
+                emailuser_response = self._handle_request(
+                    self.session.post(url=self.url, data=email_params)
+                )
+                if emailuser_response["emailuser"]["result"] != "Success":
+                    raise Exception(dumps(emailuser_response))
+
                 logger.info("Email sent.")
         except:
             if not self.fail_silently:
