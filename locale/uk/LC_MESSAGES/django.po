@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2026-01-15 12:39:18+0000\n"
+"PO-Revision-Date: 2026-01-19 12:31:32+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2709,9 +2709,8 @@ msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipe
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:63
-#, fuzzy
 msgid "This program is administered by the Wikimedia Foundation (WMF). These terms of use and privacy notice pertain to your application for access to resources through the Wikipedia Library, your use of this website, and your access to and use of those resources. They also describe our handling of the information you provide to us in order to create and administer your Wikipedia Library account. If we make material changes to the terms, we will notify users."
-msgstr "Ці умови стосуються вашої заявки на доступ до ресурсів Бібліотеки Вікіпедії і вашого використання цих ресурсів. Вони також описують нашу обробку інформації, яку ви нам надаєте, щоб ми створювали й адміністрували ваш обліковий запис Бібліотеки Вікімедіа. Система Бібліотеки Вікімедіа розвивається, і з часом ми можемо оновлювати ці умови внаслідок зміни технологій. Ми рекомендуємо вам переглядати ці умови час від часу. Якщо ми внесемо значні зміни до умов, то надішлемо користувачам Бібліотеки Вікіпедії листа-сповіщення про це."
+msgstr "Ця програма керована Фондом Вікімедіа (WMF). Ці умови використання та повідомлення про конфіденційність стосуються вашої заявки на доступ до ресурсів Бібліотеки Вікіпедії, використання цього вебсайту й вашого доступу до цих ресурсів та їх використання. Вони також описують нашу обробку інформації, яку ви нам надаєте, щоб ми створювали й адміністрували ваш обліковий запис Бібліотеки Вікімедіа. Якщо ми внесемо істотні зміни до умов, то повідомимо користувачам."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:74

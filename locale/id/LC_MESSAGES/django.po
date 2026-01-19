@@ -3,6 +3,7 @@
 #
 # Author: Adhiwangsa
 # Author: Agam Riyandana
+# Author: Bennylin
 # Author: Birusian
 # Author: DDPAT
 # Author: Daud I.F. Argana
@@ -30,7 +31,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2025-12-11 15:22+0000\n"
-"PO-Revision-Date: 2025-12-15 12:34:33+0000\n"
+"PO-Revision-Date: 2026-01-19 12:31:26+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2918,7 +2919,7 @@ msgstr "Tambahkan koleksi ini ke favorit"
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:102
 msgid "Expiry date"
-msgstr "Tanggal kadaluarsa"
+msgstr "Tanggal kedaluwarsa"
 
 #: TWLight/users/templates/users/user_collection_tile.html:107
 msgid "Click to return this access"
