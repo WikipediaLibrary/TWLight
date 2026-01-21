@@ -25,8 +25,8 @@ class Notice(object):
     user_renewal_notice = Signal()
 
 
-class Survey(object):
-    survey_active_user = Signal()
+class TestEmail(object):
+    test = Signal()
 
 
 class UserLoginRetrieval(object):

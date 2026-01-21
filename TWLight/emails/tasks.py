@@ -26,12 +26,15 @@ from djmail import template_mail
 from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
 import logging
 import os
+from uuid import uuid4
 from reversion.models import Version
 
 from django_comments.models import Comment
 from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import get_connection
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
@@ -40,8 +43,8 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, Survey, UserLoginRetrieval
-
+from TWLight.users.signals import Notice, TestEmail, UserLoginRetrieval
+from djmail.models import Message
 
 logger = logging.getLogger(__name__)
 
@@ -72,6 +75,10 @@ class RejectionNotification(template_mail.TemplateMail):
 
 class SurveyActiveUser(template_mail.TemplateMail):
     name = "survey_active_user"
+
+
+class Test(template_mail.TemplateMail):
+    name = "test"
 
 
 class CoordinatorReminderNotification(template_mail.TemplateMail):
@@ -169,12 +176,22 @@ def send_user_renewal_notice_emails(sender, **kwargs):
     )
 
 
-@receiver(Survey.survey_active_user)
-def send_survey_active_user_emails(sender, **kwargs):
+def send_survey_active_user_email(**kwargs):
     """
     Any time the related managment command is run, this sends a survey
     invitation to qualifying editors.
     """
+    backend = (
+        kwargs["backend"]
+        if "backend" in kwargs
+        else "TWLight.emails.backends.mediawiki.EmailBackend"
+    )
+    connection = (
+        kwargs["connection"]
+        if "connection" in kwargs
+        else get_connection(backend=backend)
+    )
+
     user_email = kwargs["user_email"]
     user_lang = kwargs["user_lang"]
     survey_id = kwargs["survey_id"]
@@ -192,15 +209,28 @@ def send_survey_active_user_emails(sender, **kwargs):
         base=base_url, id=survey_id, lang=survey_lang
     )
 
-    email = SurveyActiveUser()
+    template_email = SurveyActiveUser()
 
-    email.send(
+    email = template_email.make_email_object(
         user_email,
         {
             "lang": user_lang,
             "link": link,
         },
+        connection=connection,
     )
+    email.send()
+
+
+@receiver(TestEmail.test)
+def send_test(sender, **kwargs):
+    user_email = kwargs["email"]
+    connection = get_connection(
+        backend="TWLight.emails.backends.mediawiki.EmailBackend"
+    )
+    template_email = Test()
+    email = template_email.make_email_object(user_email, {}, connection=connection)
+    email.send()
 
 
 @receiver(comment_was_posted)

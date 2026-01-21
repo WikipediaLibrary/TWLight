@@ -419,6 +419,13 @@ TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get("TWLIGHT_OAUTH_CONSUMER_SECRET", 
 # ------------------------------------------------------------------------------
 
 TWLIGHT_API_PROVIDER_ENDPOINT = os.environ.get("TWLIGHT_API_PROVIDER_ENDPOINT", None)
+MW_API_URL = os.environ.get("MW_API_URL", None)
+MW_API_REQUEST_TIMEOUT = os.environ.get("MW_API_REQUEST_TIMEOUT", 60)
+MW_API_REQUEST_DELAY = os.environ.get("MW_API_REQUEST_DELAY", 0)
+MW_API_REQUEST_RETRY_DELAY = os.environ.get("MW_API_REQUEST_RETRY_DELAY", 5)
+MW_API_MAXLAG = os.environ.get("MW_API_MAXLAG", 5)
+MW_API_EMAIL_USER = os.environ.get("MW_API_EMAIL_USER", None)
+MW_API_EMAIL_PASSWORD = os.environ.get("MW_API_EMAIL_PASSWORD", None)
 
 # COMMENTS CONFIGURATION
 # ------------------------------------------------------------------------------
