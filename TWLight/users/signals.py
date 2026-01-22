@@ -25,10 +25,6 @@ class Notice(object):
     user_renewal_notice = Signal()
 
 
-class TestEmail(object):
-    test = Signal()
-
-
 class UserLoginRetrieval(object):
     user_retrieve_monthly_logins = Signal()
 

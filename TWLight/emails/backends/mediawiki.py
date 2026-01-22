@@ -195,9 +195,10 @@ class EmailBackend(BaseEmailBackend):
             self.email_token = email_token
             logger.info("Email API session ready.")
             return True
-        except:
+        except Exception as e:
             if not self.fail_silently:
-                raise
+                logger.error(e)
+                raise e
 
     def close(self):
         """Unset the session."""
@@ -282,8 +283,9 @@ class EmailBackend(BaseEmailBackend):
                     raise Exception(dumps(emailuser_response))
 
                 logger.info("Email sent.")
-        except:
+        except Exception as e:
             if not self.fail_silently:
-                raise
+                logger.error(e)
+                raise e
             return False
         return True

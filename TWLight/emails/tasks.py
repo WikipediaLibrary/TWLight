@@ -43,7 +43,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, TestEmail, UserLoginRetrieval
+from TWLight.users.signals import Notice, UserLoginRetrieval
 from djmail.models import Message
 
 logger = logging.getLogger(__name__)
@@ -222,12 +222,19 @@ def send_survey_active_user_email(**kwargs):
     email.send()
 
 
-@receiver(TestEmail.test)
 def send_test(sender, **kwargs):
-    user_email = kwargs["email"]
-    connection = get_connection(
-        backend="TWLight.emails.backends.mediawiki.EmailBackend"
+    backend = (
+        kwargs["backend"]
+        if "backend" in kwargs
+        else "TWLight.emails.backends.mediawiki.EmailBackend"
     )
+    connection = (
+        kwargs["connection"]
+        if "connection" in kwargs
+        else get_connection(backend=backend)
+    )
+
+    user_email = kwargs["email"]
     template_email = Test()
     email = template_email.make_email_object(user_email, {}, connection=connection)
     email.send()
