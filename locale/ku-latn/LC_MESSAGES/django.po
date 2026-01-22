@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2025-12-08 12:32:47+0000\n"
-"X-POT-Import-Date: 2025-12-05 20:30:54+0000\n"
+"PO-Revision-Date: 2026-01-22 12:37:29+0000\n"
+"X-POT-Import-Date: 2026-01-21 20:30:36+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ku-Latn\n"
@@ -1111,7 +1111,9 @@ msgid "Hi, We are currently running a survey to understand how editors use The W
 msgstr ""
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
+#. Translators: email subject line
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
+#: TWLight/users/management/commands/survey_active_users.py:117
 msgid "The Wikipedia Library needs your help!"
 msgstr ""
 
@@ -2220,7 +2222,7 @@ msgid "Update email"
 msgstr "E-nameyê rojane bike"
 
 #. Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
-#: TWLight/users/models.py:240
+#: TWLight/users/models.py:241
 #, python-brace-format
 msgid "Cannot add partner {partner} to your favorites because you don't have access to it"
 msgstr "Partnera {partner} nikare li favoriyên te were zêdekirin çûnkî gihaniya te jê re tine ye"
