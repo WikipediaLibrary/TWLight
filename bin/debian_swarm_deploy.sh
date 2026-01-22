@@ -38,7 +38,7 @@ usermod -a -G docker twlight
 rm -rf /srv/TWLight
 # Pull TWLight code and make twlight user the owner
 git clone https://github.com/WikipediaLibrary/TWLight.git /srv/TWLight
-cd /srv/TWLight
+cd /srv/TWLight || exit
 # Get on correct branch
 echo "Enter git branch:"
 read TWLIGHT_GIT_BRANCH
@@ -46,17 +46,21 @@ git checkout "${TWLIGHT_GIT_BRANCH}" && git pull
 
 # Get input from human
 echo "Enter DJANGO_DB_NAME:"
-read DJANGO_DB_NAME
+read -r DJANGO_DB_NAME
 echo "Enter DJANGO_DB_USER:"
-read DJANGO_DB_USER
+read -r DJANGO_DB_USER
 echo "Enter TWLIGHT_OAUTH_CONSUMER_KEY:"
-read TWLIGHT_OAUTH_CONSUMER_KEY
+read -r TWLIGHT_OAUTH_CONSUMER_KEY
 echo "Enter TWLIGHT_OAUTH_CONSUMER_SECRET:"
-read TWLIGHT_OAUTH_CONSUMER_SECRET
+read -r TWLIGHT_OAUTH_CONSUMER_SECRET
 echo "Enter TWLIGHT_EZPROXY_SECRET:"
-read TWLIGHT_EZPROXY_SECRET
+read -r TWLIGHT_EZPROXY_SECRET
+echo "Enter MW_API_EMAIL_USER"
+read -r MW_API_EMAIL_USER
+echo "Enter MW_API_EMAIL_PASSWORD"
+read -r MW_API_EMAIL_PASSWORD
 echo "Enter stack environment (eg. override | staging | production):"
-read TWLIGHT_STACK_ENV
+read -r TWLIGHT_STACK_ENV
 
 # Setup DKIM
 ssh-keygen -t rsa -b 1024 -m PEM -P "" -f dkim
@@ -92,6 +96,8 @@ printf "${SECRET_KEY}" | docker secret create SECRET_KEY -
 printf "${TWLIGHT_OAUTH_CONSUMER_KEY}" | docker secret create TWLIGHT_OAUTH_CONSUMER_KEY -
 printf "${TWLIGHT_OAUTH_CONSUMER_SECRET}" | docker secret create TWLIGHT_OAUTH_CONSUMER_SECRET -
 printf "${TWLIGHT_EZPROXY_SECRET}" | docker secret create TWLIGHT_EZPROXY_SECRET -
+printf "${MW_API_EMAIL_USER}" | docker secret create MW_API_EMAIL_USER -
+printf "${MW_API_EMAIL_PASSWORD}" | docker secret create MW_API_EMAIL_PASSWORD -
 echo "Deploying stack"
 docker stack deploy -c "docker-compose.yml" -c "docker-compose.${TWLIGHT_STACK_ENV}.yml" "${TWLIGHT_STACK_ENV}"
 echo "Setting up crontab. *WARNING* This will create duplicate jobs if run repeatedly."

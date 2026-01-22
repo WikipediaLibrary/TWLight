@@ -21,6 +21,10 @@ secrets:
     external: true
   TWLIGHT_EZPROXY_SECRET:
     external: true
+  MW_API_EMAIL_USER:
+    external: true
+  MW_API_EMAIL_PASSWORD:
+    external: true
 
 services:
   migrate:

@@ -22,6 +22,10 @@ secrets:
     file: ./secrets/TWLIGHT_OAUTH_CONSUMER_SECRET
   TWLIGHT_EZPROXY_SECRET:
     file: ./secrets/TWLIGHT_EZPROXY_SECRET
+  MW_API_EMAIL_USER:
+    file: ./secrets/MW_API_EMAIL_USER
+  MW_API_EMAIL_PASSWORD:
+    file: ./secrets/MW_API_EMAIL_PASSWORD
 
 services:
   twlight:
