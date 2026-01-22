@@ -197,7 +197,6 @@ class EmailBackend(BaseEmailBackend):
             return True
         except Exception as e:
             if not self.fail_silently:
-                logger.error(e)
                 raise e
 
     def close(self):
@@ -279,13 +278,13 @@ class EmailBackend(BaseEmailBackend):
                 emailuser_response = self._handle_request(
                     self.session.post(url=self.url, data=email_params)
                 )
-                if emailuser_response["emailuser"]["result"] != "Success":
+                result = emailuser_response.get("emailuser", {}).get("result")
+                if result != "Success":
                     raise Exception(dumps(emailuser_response))
 
                 logger.info("Email sent.")
         except Exception as e:
             if not self.fail_silently:
-                logger.error(e)
                 raise e
             return False
         return True
