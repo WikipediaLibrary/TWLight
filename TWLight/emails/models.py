@@ -37,9 +37,8 @@ class MessageQuerySet(models.QuerySet):
             except ValueError:
                 pass
 
-        # Search for repients of sent messages with the one of the localized email subjects.
+        # Search for repients of existing messages with the one of the localized email subjects.
         previous_recipients = self.filter(
-            status=Message.STATUS_SENT,
             subject__in=subjects,
         ).values_list("to_email", flat=True)
 
