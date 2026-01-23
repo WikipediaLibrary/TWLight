@@ -3,7 +3,6 @@ import logging
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.mail import get_connection
 from django.core.management.base import BaseCommand, CommandError
 from django.db.models import DurationField, ExpressionWrapper, F, Q
 from django.db.models.functions import TruncDate
@@ -11,7 +10,7 @@ from django.utils.timezone import timedelta
 from django.utils.translation import gettext_lazy as _
 
 from TWLight.emails.models import Message
-from TWLight.emails.tasks import send_survey_active_user_email
+from TWLight.emails.tasks import email_connection, send_survey_active_user_email
 from TWLight.users.groups import get_restricted
 
 logger = logging.getLogger(__name__)
@@ -70,6 +69,8 @@ class Command(BaseCommand):
         role_filter = Q(is_staff=False) & Q(is_superuser=False)
 
         batch_size = options["batch_size"] if options["batch_size"] else 1000
+
+        # use mediawiki email api by default
         backend = (
             options["backend"]
             if options["backend"]
@@ -132,7 +133,7 @@ class Command(BaseCommand):
         logger.info("attempting to send to {} users".format(users.count()))
 
         # Use a single connection to send all emails
-        connection = get_connection(backend=backend)
+        connection = email_connection(backend=backend)
         connection.open()
 
         # send the emails
@@ -140,7 +141,6 @@ class Command(BaseCommand):
             try:
                 send_survey_active_user_email(
                     sender=self.__class__,
-                    backend=backend,  # allows setting the djmail backend back to default for testing
                     connection=connection,  # passing in the connection lets us handle these in bulk
                     user_email=user.email,
                     user_lang=user.userprofile.lang,

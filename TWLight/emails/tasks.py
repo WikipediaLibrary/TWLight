@@ -44,9 +44,20 @@ from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
 from TWLight.users.signals import Notice, UserLoginRetrieval
+from django.conf import settings
+from djmail.core import _safe_send_message
 from djmail.models import Message
 
 logger = logging.getLogger(__name__)
+
+djmail_backend = getattr(
+    settings, "DJMAIL_REAL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
+
+
+def email_connection(backend=None, connection=None):
+    backend = djmail_backend if backend is None else backend
+    return get_connection(backend=backend) if connection is None else connection
 
 
 class CommentNotificationEmailEditors(template_mail.TemplateMail):
@@ -176,22 +187,11 @@ def send_user_renewal_notice_emails(sender, **kwargs):
     )
 
 
-def send_survey_active_user_email(**kwargs):
+def send_survey_active_user_email(connection=email_connection(), **kwargs):
     """
     Any time the related managment command is run, this sends a survey
     invitation to qualifying editors.
     """
-    backend = (
-        kwargs["backend"]
-        if "backend" in kwargs
-        else "TWLight.emails.backends.mediawiki.EmailBackend"
-    )
-    connection = (
-        kwargs["connection"]
-        if "connection" in kwargs
-        else get_connection(backend=backend)
-    )
-
     user_email = kwargs["user_email"]
     user_lang = kwargs["user_lang"]
     survey_id = kwargs["survey_id"]
@@ -217,27 +217,17 @@ def send_survey_active_user_email(**kwargs):
             "lang": user_lang,
             "link": link,
         },
-        connection=connection,
     )
-    email.send()
+    message = Message.from_email_message(email)
+    _safe_send_message(message, connection=connection)
 
 
-def send_test(sender, **kwargs):
-    backend = (
-        kwargs["backend"]
-        if "backend" in kwargs
-        else "TWLight.emails.backends.mediawiki.EmailBackend"
-    )
-    connection = (
-        kwargs["connection"]
-        if "connection" in kwargs
-        else get_connection(backend=backend)
-    )
-
+def send_test(connection=email_connection(), **kwargs):
     user_email = kwargs["email"]
     template_email = Test()
-    email = template_email.make_email_object(user_email, {}, connection=connection)
-    email.send()
+    email = template_email.make_email_object(user_email, {})
+    message = Message.from_email_message(email)
+    _safe_send_message(message, connection=connection)
 
 
 @receiver(comment_was_posted)
