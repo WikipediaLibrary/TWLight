@@ -4,27 +4,35 @@
 {% block content %}
   {% include "header_partial_b4.html" %}
   {% include "message_partial.html" %}
-  <div id="main-content">
-    {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
-    <h2 class="page-title">{% trans "About the Wikipedia Library" %}</h2>
-    <p>
+  <div id="main-content" class="about-page-wrapper">
+    <div class="about-hero-section">
+      {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
+      <h1 class="about-main-title">{% trans "About the Wikipedia Library" %}</h1>
+      <div class="about-intro-box">
+        <p class="about-lead-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library). {% endcomment %}
       {% blocktranslate trimmed %}
-        The Wikipedia Library allows active editors to access a wide range of
-        collections of paywalled reliable sources for free!
-      {% endblocktranslate %}
-    </p>
+          The Wikipedia Library allows active editors to access a wide range of
+          collections of paywalled reliable sources for free!
+        {% endblocktranslate %}
+        </p>
+      </div>
+    </div>
 
-    <p>
+    <div class="about-content-section">
+      <div class="about-card">
+        <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
       {% blocktranslate trimmed %}
-        This platform is our central tool for facilitating access to our available
-        collections. Here you can see which partnerships are available, search
-        their contents, and apply for and access the ones you’re interested in.
-      {% endblocktranslate %}
-    </p>
+          This platform is our central tool for facilitating access to our available
+          collections. Here you can see which partnerships are available, search
+          their contents, and apply for and access the ones you're interested in.
+        {% endblocktranslate %}
+        </p>
+      </div>
 
-    <p>
+      <div class="about-card">
+        <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. {% endcomment %}
       {% blocktranslate trimmed %}
         All users receive immediate access to some collections, which can be
@@ -32,40 +40,48 @@
         bar at the top of the page. Other collections require an application
         before access is granted, and may be accessed directly or via an
         individual login or access code. Volunteer coordinators, who have signed
-        non-disclosure agreements with the Wikimedia Foundation, review these
-        applications and work with publishers to get you your free access.
-      {% endblocktranslate %}
-    </p>
+          non-disclosure agreements with the Wikimedia Foundation, review these
+          applications and work with publishers to get you your free access.
+        {% endblocktranslate %}
+        </p>
+      </div>
 
-    <p>
+      <div class="about-card">
+        <p class="about-text">
       {% url 'terms' as terms_url %}
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Don't translate {{ terms_url }}. {% endcomment %}
       {% blocktranslate trimmed %}
         For more information about how your information is stored and reviewed please see our <a class="twl-links" href="{{ terms_url }}">
-        terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each
-        partner’s platform; please review them.
-      {% endblocktranslate %}
-    </p>
+          terms of use and privacy policy</a>. Accounts you apply for are also subject to the Terms of Use provided by each
+          partner's platform; please review them.
+        {% endblocktranslate %}
+        </p>
+      </div>
 
-    {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    <h3 id="req">{% trans "Who can receive access?" %}</h3>
+      <div class="about-section-block">
+        {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+        <h3 class="about-section-title" id="req">{% trans "Who can receive access?" %}</h3>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated. {% endcomment %}
       {% blocktranslate trimmed %}
         Any active editor in good standing can receive access. For publishers with limited numbers of accounts,
         applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one
-        of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please
-        apply.
-      {% endblocktranslate %}
-    </p>
+            of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please
+            apply.
+          {% endblocktranslate %}
+          </p>
+        </div>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
       {% blocktranslate trimmed %}
-        Any editor can use the library if they meet a few basic requirements:
-      {% endblocktranslate %}
-      <ul>
+            Any editor can use the library if they meet a few basic requirements:
+          {% endblocktranslate %}
+          </p>
+          <ul class="about-requirements-list">
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
           {% trans "You have an account that is a minimum of 6 months old" %}
@@ -80,39 +96,48 @@
         </li>
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-          {% trans "You are not currently blocked from editing a Wikimedia project" %}
-        </li>
-      </ul>
+            {% trans "You are not currently blocked from editing a Wikimedia project" %}
+          </li>
+        </ul>
+      </div>
 
-      <p>
+      <div class="about-card">
+        <p class="about-text">
         {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
         {% blocktranslate trimmed %}
           If you are applying for an available collection, please first check that
           you don't already have access through another library or institution. If
-          you do, please consider using that access rather than taking up a seat for
-          this resource in The Wikipedia Library.
-        {% endblocktranslate %}
-      </p>
+            you do, please consider using that access rather than taking up a seat for
+            this resource in The Wikipedia Library.
+          {% endblocktranslate %}
+          </p>
+        </div>
 
-      <p>
+        <div class="about-card">
+          <p class="about-text">
         {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
         {% blocktranslate trimmed %}
           If your account is blocked on one or more Wikimedia projects, you may still
           be granted access to The Wikipedia Library. You will need to contact the
           Wikipedia Library team, who will review your blocks. If you have been blocked
           for content issues, most notably copyright violations, or have multiple
-          long-term blocks, we may decline your request. Additionally, if your block
-          status changes after being approved, you will need to request another review.
-        {% endblocktranslate %}
-      </p>
+            long-term blocks, we may decline your request. Additionally, if your block
+            status changes after being approved, you will need to request another review.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
 
-    {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    <h3>{% trans "What do I do after I get access?" %}</h3>
+      <div class="about-section-block">
+        {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+        <h3 class="about-section-title">{% trans "What do I do after I get access?" %}</h3>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-      {% trans "Approved editors <i>may</i> use their access to:" %}
-      <ul>
+            {% trans "Approved editors <i>may</i> use their access to:" %}
+          </p>
+          <ul class="about-list-styled">
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
           {% trans "Search, view, retrieve, and display partner content" %}
@@ -123,14 +148,17 @@
         </li>
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-          {% trans "Print out single copies of partner content" %}
-        </li>
-      </ul>
+            {% trans "Print out single copies of partner content" %}
+          </li>
+        </ul>
+      </div>
 
-    <p>
+      <div class="about-card">
+        <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-      {% trans "Approved editors <i>should not</i>:" %}
-      <ul>
+            {% trans "Approved editors <i>should not</i>:" %}
+          </p>
+          <ul class="about-list-styled warning-list">
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
           {% trans "Share their account logins or passwords with others, or sell their access to other parties" %}
@@ -145,79 +173,105 @@
         </li>
         <li>
           {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language. {% endcomment %}
-          {% trans "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles" %}
-        </li>
-      </ul>
+            {% trans "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles" %}
+          </li>
+        </ul>
+      </div>
 
-    <p>
+      <div class="about-card">
+        <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
       {% blocktranslate trimmed %}
-        Respecting these agreements allows us to continue growing the partnerships available to the community.
-      {% endblocktranslate %}
-    </p>
+            Respecting these agreements allows us to continue growing the partnerships available to the community.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
 
-    {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    <h3>{% trans "EZProxy" %}</h3>
+      <div class="about-section-block">
+        {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+        <h3 class="about-section-title">{% trans "EZProxy" %}</h3>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
         EZProxy is a proxy server used to authenticate users for many Wikipedia Library partners. Users sign into EZProxy
-        via the Library Card platform to verify that they are authorized users, and then the server accesses requested
-        resources using its own IP address.
-      {% endblocktranslate %}
-    </p>
+            via the Library Card platform to verify that they are authorized users, and then the server accesses requested
+            resources using its own IP address.
+          {% endblocktranslate %}
+          </p>
+        </div>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
         You may notice that when accessing resources via EZProxy that URLs are dynamically rewritten. This is why we
         recommend logging in via the Library Card platform rather than going directly to the unproxied partner website.
-        When in doubt, check the URL for ‘idm.oclc’. If it’s there, then you’re connected via EZProxy.
-      {% endblocktranslate %}
-    </p>
+            When in doubt, check the URL for 'idm.oclc'. If it's there, then you're connected via EZProxy.
+          {% endblocktranslate %}
+          </p>
+        </div>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
         Typically once you’ve logged in your session will remain active in your browser for up to two hours after you’ve
         finished searching. Note that use of EZProxy requires you to enable cookies. If you are having problems you
-        should also try clearing your cache and restarting your browser.
-      {% endblocktranslate %}
-    </p>
+            should also try clearing your cache and restarting your browser.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
 
-    <h3 id="bundle-section">Library Bundle</h3>
+      <div class="about-section-block">
+        <h3 class="about-section-title" id="bundle-section">Library Bundle</h3>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/) {% endcomment %}
       {% blocktranslate trimmed %}
         The Library Bundle is a collection of resources for which no application is required. If you meet the
         criteria laid out above, you will be authorized for access automatically upon logging in to the platform. Only
         some of our content is currently included in the Library Bundle, however we hope to expand the collection as
-        more publishers become comfortable with participating. All Bundle content is accessed via EZProxy.
-      {% endblocktranslate %}
-    </p>
+            more publishers become comfortable with participating. All Bundle content is accessed via EZProxy.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
 
-    {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    <h3>{% trans "Citation practices" %}</h3>
+      <div class="about-section-block">
+        {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+        <h3 class="about-section-title">{% trans "Citation practices" %}</h3>
 
-    <p>
+        <div class="about-card">
+          <p class="about-text">
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
         Citation practices vary by project and even by article. Generally, we support editors citing where they found
         information, in a form that allows others to check it for themselves. That often means providing both original
-        source details as well as a link to the partner database in which the source was found.
-      {% endblocktranslate %}
-    </p>
+            source details as well as a link to the partner database in which the source was found.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
 
-    {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
-    <h3>{% trans "Contact us" %}</h3>
-    <p>
+      <div class="about-section-block">
+        {% comment %}Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/). {% endcomment %}
+        <h3 class="about-section-title">{% trans "Contact us" %}</h3>
+
+        <div class="about-card">
+          <p class="about-text">
       {% url 'contact' as contact_url %}
       {% comment %}Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).{% endcomment %}
       {% blocktranslate trimmed %}
-        If you have questions, need help, or want to volunteer to help, please see our <a class="twl-links" href="{{ contact_url }}">contact page</a>.
-      {% endblocktranslate %}
-    </p>
+            If you have questions, need help, or want to volunteer to help, please see our <a class="twl-links" href="{{ contact_url }}">contact page</a>.
+          {% endblocktranslate %}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock content %}

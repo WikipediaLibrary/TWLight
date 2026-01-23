@@ -3,97 +3,123 @@
 {% load l10n %}
 {% load cache %}
 
-<div class="row tag-filters">
+<div class="row partners-tabs">
   <div class="col-12">
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        {% if not selected %}
-          <a class="nav-link more-item active" href="{% url 'homepage' %}?tags=">
-        {% else %}
-          <a class="nav-link more-item" href="{% url 'homepage' %}?tags=">
-        {% endif %}
-          {% comment %}Translators: This is a filter of featured collections of The Wikipedia Library.{% endcomment %}
-          {% blocktranslate trimmed %}
-            Featured
-          {% endblocktranslate %}
-        </a>
-      </li>
+    <nav class="nav justify-content-center flex-wrap">
+      <a class="partners-tab {% if not selected %}active{% endif %}" href="{% url 'homepage' %}?tags=">
+        {% blocktranslate trimmed %}Featured{% endblocktranslate %}
+      </a>
       {% for tag_key, tag_value in tags.items %}
-          <li class="nav-item">
-            {% if selected and tag_key == selected %}
-              <a class="nav-link more-item active" href="{% url 'homepage' %}?tags={{tag_key}}">
-            {% else %}
-              <a class="nav-link more-item" href="{% url 'homepage' %}?tags={{tag_key}}">
-            {% endif %}
-              {{ tag_value }}
-            </a>
-          </li>
-        {% endfor %}
-        {% if more_tags %}
-          <li class="nav-item dropdown more-option">
-            {% if selected and selected in more_tags.keys %}
-              <a class="nav-link dropdown-toggle more-item active" data-toggle="dropdown"
-                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                {{ selected_value }}
-              {% else %}
-              <a class="nav-link dropdown-toggle more-item" data-toggle="dropdown"
-                  href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <strong>
-                  {% comment %}Translators: A button that indicates there are more tag filter options.{% endcomment %}
-                  {% blocktranslate trimmed %}
-                    More
-                  {% endblocktranslate %}
-                </strong>
-              {% endif %}
-            </a>
-            <div class="dropdown-menu">
-              {% for a_tag_key, a_tag_value in more_tags.items %}
-                <a class="dropdown-item more-item" href="{% url 'homepage' %}?tags={{a_tag_key}}">
-                  {{ a_tag_value }}
-                </a>
-              {% endfor %}
-            </div>
-          </li>
-        {% endif %}
-    </ul>
+        <a class="partners-tab {% if selected and tag_key == selected %}active{% endif %}" href="{% url 'homepage' %}?tags={{tag_key}}">
+          {{ tag_value }}
+        </a>
+      {% endfor %}
+      {% if more_tags %}
+        <div class="dropdown partners-more">
+          <a class="partners-tab dropdown-toggle {% if selected and selected in more_tags.keys %}active{% endif %}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            {% blocktranslate trimmed %}More{% endblocktranslate %}
+          </a>
+          <div class="dropdown-menu">
+            {% for a_tag_key, a_tag_value in more_tags.items %}
+              <a class="dropdown-item" href="{% url 'homepage' %}?tags={{a_tag_key}}">{{ a_tag_value }}</a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </nav>
   </div>
 </div>
-<div class="row">
-  <div class="glide">
-    <div class="glide__track" data-glide-el="track">
-      <ul class="glide__slides">
-      {% for partner in partners %}
-        <li>
-          <div id="partner-{{partner.pk}}" class="partner-image-description-container">
-            <div class="partner-image-container">
-              <img id="partner-image-{{partner.pk}}" src="{{ partner.partner_logo }}"
-                  class="mx-auto d-block partner-glider-image fade-in-transition"
-                  alt="{{partner.partner_name}} logo"
-                  loading="lazy"
-              />
-            </div>
-            <p id="partner-description-{{partner.pk}}" class="text-justify mx-auto d-block partner-glider-description truncate-overflow invisible">
-              {{ partner.short_description|safe }}
-            </p>
-          </div>
-          <button id="partner-button-{{partner.pk}}" type="button" class="btn partner-glider-button"
-              onclick="toggleDescription({{partner.pk}})">
-            {% comment %}Translators: A button that reveals more information about a collection.{% endcomment %}
-            {% blocktranslate trimmed %}
-              More info
-            {% endblocktranslate %}
-          </button>
-        </li>
+
+<div class="row partners-section">
+  <div class="col-12">
+    <h2 class="partners-title text-center">
+      {% comment %}Translators: Section heading for partner organizations.{% endcomment %}
+      {% trans "Our Partners" %}
+    </h2>
+    <div class="partners-grid">
+      {% for partner in partners|slice:":8" %}
+        <div class="partner-logo-box">
+          <img src="{{ partner.partner_logo }}"
+               class="partner-logo"
+               alt="{{partner.partner_name}} logo"
+               loading="lazy"
+          />
+        </div>
       {% endfor %}
-    </ul>
     </div>
-    <div class="glide__arrows" data-glide-el="controls">
-      <button class="glide__arrow--left partner-arrow" data-glide-dir="<">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-      </button>
-      <button class="glide__arrow--right partner-arrow" data-glide-dir=">">
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-      </button>
+  </div>
+</div>
+
+<div class="row about-section">
+  <div class="col-12 about-content-wrapper">
+    <div class="about-content">
+      <div class="about-copy">
+        <div class="about-badge">{% trans 'Learn More' %}</div>
+        <h2 class="about-title">
+          {% comment %}Translators: Section heading for information about The Wikipedia Library.{% endcomment %}
+          {% trans 'About The Wikipedia Library' %}
+        </h2>
+        <p class="about-description">
+          {% comment %}Translators: Description of The Wikipedia Library service.{% endcomment %}
+          {% blocktranslate trimmed %}
+          The Wikipedia Library provides free access to paywalled databases for active editors in good standing.
+          More than half of the collections are available immediately after login, and a centralised search tool
+          lets you search across most collections with one query. Additional specialized collections are available
+          with a simple application.
+          {% endblocktranslate %}
+        </p>
+        <div class="about-features">
+          <div class="feature-item">
+            <i class="fa fa-database feature-icon"></i>
+            <span class="feature-text">{% trans '90+ Databases' %}</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa fa-globe feature-icon"></i>
+            <span class="feature-text">{% trans '34 Languages' %}</span>
+          </div>
+          <div class="feature-item">
+            <i class="fa fa-lock feature-icon"></i>
+            <span class="feature-text">{% trans 'Free Access' %}</span>
+          </div>
+        </div>
+        <a href="about" class="about-cta-btn">{% trans 'Learn More' %} <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="about-image">
+        <img src="{% static 'img/image_1.png' %}" alt="{% trans 'The Wikipedia Library search interface preview' %}" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row statistics-section">
+  <div class="col-md-4 col-sm-12 text-center stat-box">
+    <div class="stat-icon">
+      <i class="fa fa-user fa-3x"></i>
+    </div>
+    <div class="stat-number">2000+</div>
+    <div class="stat-label">
+      {% comment %}Translators: Statistics label for active users.{% endcomment %}
+      {% trans "Monthly users" %}
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 text-center stat-box">
+    <div class="stat-icon">
+      <i class="fa fa-bar-chart fa-3x"></i>
+    </div>
+    <div class="stat-number">200,000+</div>
+    <div class="stat-label">
+      {% comment %}Translators: Statistics label for yearly citations.{% endcomment %}
+      {% trans "Yearly citations" %}
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 text-center stat-box">
+    <div class="stat-icon">
+      <i class="fa fa-folder-open-o fa-3x"></i>
+    </div>
+    <div class="stat-number">140+</div>
+    <div class="stat-label">
+      {% comment %}Translators: Statistics label for projects.{% endcomment %}
+      {% trans "Projects" %}
     </div>
   </div>
 </div>

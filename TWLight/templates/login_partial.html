@@ -4,38 +4,41 @@
 {% load cache %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<div class="row col-12 nav-bar-header">
-  <span class="nav-bar-header-logo">
-    <!-- logo -->
-    <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" class="img-responsive logo" alt="
-  {% comment %}Translators: Alt text for the Wikipedia Library shown in the top left of all pages.{% endcomment %}
-  {% trans " The Wikipedia Library" %}
-    ">
-    <!-- site name -->
-    {% comment %}Translators: Name of the project/tool.{% endcomment %}
-    <p class="homepage-title">{% trans "The Wikipedia Library" %}</p>
-  </span>
-  <form class="form-inline homepage-title" action="/i18n/setlang/?next=/" method="post">
-    {% csrf_token %}
-    {% if form_show_errors %}
-      {% include "bootstrap4/errors.html" %}
-    {% endif %}
-    <div class="dropdown">
-      <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-                {% for code, name in LANGUAGES %}
-                  {% if code == LANGUAGE_CODE %}
-                    {{ name }}
-                  {% endif %}
-                {% endfor %}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
-        {% for code, name in LANGUAGES %}
-          <button name="language" class="dropdown-item language-select-menu" value={{code}} type="submit">{{name}}</button>
-        {% endfor %}
-      </div>
-    </div>
+<div class="homepage-topbar">
+  <div class="topbar-logo">
+    <img class="logo" src="{% static 'img/Wikipedia_Library_owl.svg' %}" alt="{% trans 'The Wikipedia Library' %}">
+    <span class="topbar-title">{% trans "The Wikipedia Library" %}</span>
+  </div>
+
+  <form class="topbar-search" method="get" action="/">
+    <input type="search" name="q" class="topbar-search-input" placeholder="{% trans 'Search the library' %}" aria-label="{% trans 'Search the library' %}">
+    <button type="submit" class="btn topbar-search-btn">{% trans "Search" %}</button>
   </form>
+
+  <div class="topbar-actions">
+    <form class="form-inline" action="/i18n/setlang/?next=/" method="post">
+      {% csrf_token %}
+      {% if form_show_errors %}
+        {% include "bootstrap4/errors.html" %}
+      {% endif %}
+      <div class="dropdown">
+        <button class="btn dropdown-toggle language-select" type="button" id="language-dropdown-1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                  {% for code, name in LANGUAGES %}
+                    {% if code == LANGUAGE_CODE %}
+                      {{ name }}
+                    {% endif %}
+                  {% endfor %}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="language-dropdown-1">
+          {% for code, name in LANGUAGES %}
+            <button name="language" class="dropdown-item language-select-menu" value={{code}} type="submit">{{name}}</button>
+          {% endfor %}
+        </div>
+      </div>
+    </form>
+    <a class="topbar-login" href="{% url 'oauth_login' %}?next={{ next_url }}&from_homepage=true">{% trans "Log in" %}</a>
+  </div>
 </div>
 
 {% if messages %}
@@ -46,47 +49,41 @@
   {% endfor %}
 {% endif %}
 
-<div class="row">
-  <div class="col-lg-6 col-md-12 col-sm-12 homepage-description">
-    <p>
-      {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
-      {% blocktranslate trimmed %}
-      More than 100 of the world's top subscription-only databases,
-      with content in {{ no_of_languages }} languages,
-      free for Wikipedians of all backgrounds
-      {% endblocktranslate %}
-    </p>
-  </div>
-
-  <div class="col-lg-6 col-md-12 col-sm-12 homepage-criteria">
-    <p class="criteria-info">
-      {% comment %}Translators: Information about The Wikipedia Library.{% endcomment %}
-      {% blocktranslate trimmed %}
-      Meet these criteria for automatic access
-      {% endblocktranslate %}
-      {% comment %}Translators: A popup that will provide additional information about The Wikipedia Library.{% endcomment %}
-      <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom"
-          data-html="true" title="{% trans 'These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only.' %}">
-      </i>
-    </p>
-    <ul class="criteria-list">
-      {% for criteria in bundle_criteria %}
-        <li>
-          <p class="criteria-item">
-            <i class="fa fa-check criteria-checkmark" aria-hidden="true"></i>
-            {{ criteria }}
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-md-12">
+        <h1 class="hero-title">
+          {% comment %}Translators: Main heading on homepage.{% endcomment %}
+          {% trans "Access to reliable sources for Wikipedia editors" %}
+        </h1>
+        <p class="hero-subtitle">
+          {% comment %}Translators: Subheading describing available collections.{% endcomment %}
+          {% blocktranslate trimmed %}
+          Over 90 of the world's top subscription-only databases, with content in 34 languages, free for Wikipedians of all backgrounds.
+          {% endblocktranslate %}
+        </p>
+        <div class="hero-login mt-4">
+          {% comment %}Translators: Button that logs editors in to access resources.{% endcomment %}
+          <a class="btn btn-lg btn-primary hero-login-button" href="{% url 'oauth_login' %}?next={{ next_url }}&from_homepage=true">
+            {% trans "Log in to access" %}
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-12 hero-criteria">
+        <div class="criteria-card">
+          <p class="criteria-title">
+            {% blocktranslate trimmed %}Meet these criteria for automatic access{% endblocktranslate %}
+            <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="bottom"
+               data-html="true" title="{% trans 'These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only.' %}"></i>
           </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-6 col-md-12 col-sm-12 homepage-login">
-      {% comment %}Translators: Button that logs editors in via Wikipedia.{% endcomment %}
-      <a  class="btn btn-lg btn-light homepage-login-button" href="{% url 'oauth_login' %}?next={{ next_url }}&from_homepage=true">
-        {% trans "Login via Wikipedia" %}
-      </a>
+          <ul class="criteria-list">
+            {% for criteria in bundle_criteria %}
+              <li class="criteria-item"><i class="fa fa-check"></i>{{ criteria }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
