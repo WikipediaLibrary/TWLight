@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-01-22 22:37+0000\n"
+"POT-Creation-Date: 2026-01-23 16:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1260,7 +1260,7 @@ msgstr ""
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: email subject line
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
-#: TWLight/users/management/commands/survey_active_users.py:117
+#: TWLight/users/management/commands/survey_active_users.py:118
 msgid "The Wikipedia Library needs your help!"
 msgstr ""
 
