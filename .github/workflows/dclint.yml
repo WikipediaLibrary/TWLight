@@ -1,0 +1,15 @@
+name: DCLint
+
+on:
+  push:
+    branches: [ master, production ]
+  pull_request:
+      branches: [ master ]
+      types: [ synchronize ]
+
+jobs:
+  dclint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker-compose-linter/dclint-github-action/docker-action@v1.6.0

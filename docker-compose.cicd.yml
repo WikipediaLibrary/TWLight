@@ -1,7 +1,4 @@
 ---
-
-version: '3.4'
-
 services:
   twlight:
     image: quay.io/wikipedialibrary/twlight:local
