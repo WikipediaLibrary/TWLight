@@ -1,8 +1,24 @@
 ---
-
-version: '3.4'
-
-# Local environment should mount plaintext files as secrets
+services:
+  twlight:
+    image: quay.io/wikipedialibrary/twlight:local
+    # Local environment should mount things from the code directory
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    env_file:
+      - path: ./conf/local.twlight.env
+        required: true
+      - path: .env
+        required: false
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  web:
+    volumes:
+      - type: bind
+        source: ./conf/local.nginx.conf
+        target: /etc/nginx/conf.d/default.conf
 secrets:
   DJANGO_DB_NAME:
     file: ./secrets/DJANGO_DB_NAME
@@ -26,24 +42,3 @@ secrets:
     file: ./secrets/MW_API_EMAIL_USER
   MW_API_EMAIL_PASSWORD:
     file: ./secrets/MW_API_EMAIL_PASSWORD
-
-services:
-  twlight:
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    image: quay.io/wikipedialibrary/twlight:local
-    env_file:
-      - path: ./conf/local.twlight.env
-        required: true
-      - path: .env
-        required: false
-    # Local environment should mount things from the code directory
-    volumes:
-      - type: bind
-        source: .
-        target: /app
-  web:
-    volumes:
-      - type: bind
-        source: ./conf/local.nginx.conf
-        target: /etc/nginx/conf.d/default.conf

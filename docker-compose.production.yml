@@ -1,7 +1,47 @@
 ---
-
-version: '3.4'
-
+services:
+  migrate:
+    image: quay.io/wikipedialibrary/twlight:branch_production
+    depends_on:
+      - 'db'
+    volumes:
+      - type: bind
+        source: /data/project/prod
+        target: /app/backup
+      - type: bind
+        source: ./media
+        target: /app/media
+    secrets:
+      - DJANGO_DB_NAME
+      - DJANGO_DB_USER
+      - DJANGO_DB_PASSWORD
+      - DKIM_PRIVATE_KEY
+      - SECRET_KEY
+      - TWLIGHT_OAUTH_CONSUMER_KEY
+      - TWLIGHT_OAUTH_CONSUMER_SECRET
+      - TWLIGHT_EZPROXY_SECRET
+    env_file:
+      - ./conf/production.twlight.env
+    command: >
+      bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
+    restart: on-failure
+  twlight:
+    image: quay.io/wikipedialibrary/twlight:branch_production
+    depends_on:
+      - 'migrate'
+    volumes:
+      - type: bind
+        source: /data/project/prod
+        target: /app/backup
+    env_file:
+      - ./conf/production.twlight.env
+  web:
+    volumes:
+      - type: volume
+        target: /var/lib/nginx/cache
+      - type: bind
+        source: ./conf/production.nginx.conf
+        target: /etc/nginx/conf.d/default.conf
 secrets:
   DJANGO_DB_NAME:
     external: true
@@ -25,47 +65,3 @@ secrets:
     external: true
   MW_API_EMAIL_PASSWORD:
     external: true
-
-services:
-  migrate:
-    image: quay.io/wikipedialibrary/twlight:branch_production
-    command: >
-      bash -c "/app/bin/twlight_backup.sh && /app/bin/virtualenv_migrate.sh"
-    restart: on-failure
-    env_file:
-      - ./conf/production.twlight.env
-    volumes:
-      - type: bind
-        source: /data/project/prod
-        target: /app/backup
-      - type: bind
-        source: ./media
-        target: /app/media
-    depends_on:
-      - 'db'
-    secrets:
-      - DJANGO_DB_NAME
-      - DJANGO_DB_USER
-      - DJANGO_DB_PASSWORD
-      - DKIM_PRIVATE_KEY
-      - SECRET_KEY
-      - TWLIGHT_OAUTH_CONSUMER_KEY
-      - TWLIGHT_OAUTH_CONSUMER_SECRET
-      - TWLIGHT_EZPROXY_SECRET
-  twlight:
-    image: quay.io/wikipedialibrary/twlight:branch_production
-    env_file:
-      - ./conf/production.twlight.env
-    volumes:
-      - type: bind
-        source: /data/project/prod
-        target: /app/backup
-    depends_on:
-      - 'migrate'
-  web:
-    volumes:
-      - type: volume
-        target: /var/lib/nginx/cache
-      - type: bind
-        source: ./conf/production.nginx.conf
-        target: /etc/nginx/conf.d/default.conf
