@@ -1,5 +1,5 @@
 # Only needed to run tests.
 coveralls==4.0.1
-coverage==7.6.4
+coverage==7.11.0
 locust==2.15.1
 tblib==3.0.0
