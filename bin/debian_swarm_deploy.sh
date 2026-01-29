@@ -41,7 +41,7 @@ git clone https://github.com/WikipediaLibrary/TWLight.git /srv/TWLight
 cd /srv/TWLight || exit
 # Get on correct branch
 echo "Enter git branch:"
-read TWLIGHT_GIT_BRANCH
+read -r TWLIGHT_GIT_BRANCH
 git checkout "${TWLIGHT_GIT_BRANCH}" && git pull
 
 # Get input from human
