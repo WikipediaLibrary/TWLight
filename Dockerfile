@@ -7,6 +7,7 @@ RUN apt update ; \
     libmariadb-dev \
     libmariadb-dev-compat; \
     rm -rf /var/lib/apt/lists/*; \
+    python -m pip install --upgrade setuptools wheel pip; \
     pip3 install virtualenv
 
 FROM twlight_base AS twlight_build

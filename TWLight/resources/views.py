@@ -195,9 +195,9 @@ class PartnersDetailView(DetailView):
             )
 
         # Count valid authorizations to determine how many users have access
-        context[
-            "total_accounts_distributed_partner"
-        ] = partner.get_valid_authorization_count
+        context["total_accounts_distributed_partner"] = (
+            partner.get_valid_authorization_count
+        )
 
         # Count all time users who had access, by counting all user
         # authorizations, including those which expired.

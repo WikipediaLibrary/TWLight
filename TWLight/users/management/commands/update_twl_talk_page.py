@@ -19,10 +19,10 @@ class Command(BaseCommand):
         }
 
         for d in data:
-            wiki_twl_pages[
-                d["code"]
-            ] = "https://{code}.wikipedia.org/wiki/{title}".format(
-                code=d["code"], title=d["title"]
+            wiki_twl_pages[d["code"]] = (
+                "https://{code}.wikipedia.org/wiki/{title}".format(
+                    code=d["code"], title=d["title"]
+                )
             )
 
         with open("locale/language-twl-page.json", "w") as language_file:

@@ -594,9 +594,9 @@ class ListApplicationsView(_BaseListApplicationView):
         # Translators: On the page listing applications, this is the page title if the coordinator has selected the list of 'Pending' applications.
         context["title"] = _("Applications to review")
 
-        context[
-            "include_template"
-        ] = "applications/application_list_reviewable_include.html"
+        context["include_template"] = (
+            "applications/application_list_reviewable_include.html"
+        )
 
         # For constructing the dropdown in the batch editing form.
         context["status_choices"] = Application.STATUS_CHOICES

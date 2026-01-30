@@ -89,9 +89,9 @@ class UserEmailForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         super(UserEmailForm, self).__init__(*args, **kwargs)
-        self.fields[
-            "send_renewal_notices"
-        ].initial = user.userprofile.send_renewal_notices
+        self.fields["send_renewal_notices"].initial = (
+            user.userprofile.send_renewal_notices
+        )
         self.fields[
             "send_renewal_notices"
             # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox users can (un)click to change if they wish to receive account renewal notices or not.
@@ -112,25 +112,25 @@ class CoordinatorEmailForm(forms.Form):
         super(CoordinatorEmailForm, self).__init__(*args, **kwargs)
         # We default to the values from the user's userprofile on
         # page (Profile) load.
-        self.fields[
-            "send_pending_application_reminders"
-        ].initial = user.userprofile.pending_app_reminders
+        self.fields["send_pending_application_reminders"].initial = (
+            user.userprofile.pending_app_reminders
+        )
         self.fields[
             "send_pending_application_reminders"
             # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive pending application reminders or not.
         ].label = _("Send pending application reminders")
 
-        self.fields[
-            "send_discussion_application_reminders"
-        ].initial = user.userprofile.discussion_app_reminders
+        self.fields["send_discussion_application_reminders"].initial = (
+            user.userprofile.discussion_app_reminders
+        )
         self.fields[
             "send_discussion_application_reminders"
             # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive application reminders that are under discussion or not.
         ].label = _("Send discussion application reminders")
 
-        self.fields[
-            "send_approved_application_reminders"
-        ].initial = user.userprofile.approved_app_reminders
+        self.fields["send_approved_application_reminders"].initial = (
+            user.userprofile.approved_app_reminders
+        )
         self.fields[
             "send_approved_application_reminders"
             # Translators: In the preferences section (Emails) of a user profile, this text labels the checkbox coordinators can (un)click to change if they wish to receive approved application reminders or not.

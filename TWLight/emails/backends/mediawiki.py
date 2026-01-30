@@ -2,6 +2,7 @@
 Email backend that POSTs messages to the MediaWiki Emailuser endpoint.
 see: https://www.mediawiki.org/wiki/API:Emailuser
 """
+
 import logging
 from json import dumps
 from requests import Session
