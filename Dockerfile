@@ -29,7 +29,7 @@ RUN apt update ; \
 FROM twlight_base
 COPY --from=twlight_build /venv /venv
 COPY --from=quay.io/wikipedialibrary/debian_perl:latest /opt/perl /opt/perl
-ENV PATH="/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv"
+ENV PATH="/venv/bin:/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv"
 WORKDIR ${TWLIGHT_HOME}
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
@@ -74,4 +74,4 @@ RUN SECRET_KEY=twlight /app/bin/twlight_static.sh
 
 EXPOSE 80
 
-ENTRYPOINT ["/app/bin/twlight_docker_entrypoint.sh"]
+ENTRYPOINT ["/app/bin/virtualenv_activate.sh"]

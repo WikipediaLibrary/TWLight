@@ -11,7 +11,7 @@ fi
 # Get secrets.
 if  [ ! -n "${SECRET_KEY+isset}" ]
 then
-    source /app/bin/twlight_docker_secrets.sh
+    source bin/twlight_docker_secrets.sh
 fi
 
 # Virtualenv scripts need to be run as www
@@ -26,11 +26,11 @@ fi
 ACTIVATED=$(python3 -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")')
 if [ "${ACTIVATED}" -eq 0 ]
 then
-
     # Activate Django virtualenv.
     source /venv/bin/activate
 fi
 
 # Move to the project root.
-cd $TWLIGHT_HOME
+cd "$TWLIGHT_HOME" || exit 1
 
+exec "$@"
