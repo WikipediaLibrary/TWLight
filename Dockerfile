@@ -29,7 +29,7 @@ RUN apt update ; \
 FROM twlight_base
 COPY --from=twlight_build /venv /venv
 COPY --from=quay.io/wikipedialibrary/debian_perl:latest /opt/perl /opt/perl
-ENV PATH="/venv/bin:/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv"
+ENV PATH="/venv/bin:/opt/perl/bin:${PATH}" TWLIGHT_HOME=/app PYTHONUNBUFFERED=1 PYTHONPATH="/app:/venv/lib/python3.11/site-packages"
 WORKDIR ${TWLIGHT_HOME}
 # Runtime dependencies.
 # Refactoring shell code could remove bash dependency
