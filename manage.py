@@ -10,7 +10,7 @@ if __name__ == "__main__":
         for filepath in secrets.iterdir():
             with open(filepath, "r") as file:
                 key = filepath.name
-                value = file.readline().strip()
+                value = file.read().strip()
                 environ.setdefault(key, value)
 
     # Production is default for safety
