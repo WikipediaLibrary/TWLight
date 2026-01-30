@@ -23,35 +23,35 @@ twlight_i18n_files_changed=$((twlight_i18n_files_added+twlight_i18n_files_update
 
 # Add remote and checkout branch
 git_config() {
-    echo ${FUNCNAME[0]}
+    echo "${FUNCNAME[0]}"
     # Configure user.
     git config --global user.email "41753804+WikipediaLibraryBot@users.noreply.github.com"
     git config --global user.name "WikipediaLibraryBot"
-    # Add our authenticated remote using encrypted travis environment variables.
-    git remote add deploy https://WikipediaLibraryBot:${wikibot_token}@github.com/${gh_repo}.git > /dev/null 2>&1
+    # Add our authenticated remote using secret variables.
+    git remote add deploy "https://WikipediaLibraryBot:${wikibot_token}@github.com/${gh_repo}.git" > /dev/null 2>&1
 }
 # Commit migrations
 git_migrate() {
-    echo ${FUNCNAME[0]}
+    echo "${FUNCNAME[0]}"
     msg="${commit} migrations"
     git add 'TWLight/*/migrations/*.py'
     git commit --message "commit ${msg}" ||:
-    git fetch deploy ${branch} --quiet
-    git merge --strategy recursive -X theirs deploy/${branch} --message "merge ${msg}" --quiet
+    git fetch deploy "${branch}" --quiet
+    git merge --strategy recursive -X theirs "deploy/${branch}" --message "merge ${msg}" --quiet
 }
 # Commit translations
 git_i18n() {
-    echo ${FUNCNAME[0]}
+    echo "${FUNCNAME[0]}"
     msg="${commit} translations"
     git add 'locale/*/LC_MESSAGES/*.po'
     git add 'locale/*/LC_MESSAGES/*.mo'
     git commit --message "commit ${msg}" ||:
-    git fetch deploy ${branch} --quiet
-    git merge --strategy recursive -X ours deploy/${branch} --message "merge ${msg}" --quiet
+    git fetch deploy "${branch}" --quiet
+    git merge --strategy recursive -X ours "deploy/${branch}" --message "merge ${msg}" --quiet
 }
 # Commit prod changes
 git_prod() {
-    echo ${FUNCNAME[0]}
+    echo "${FUNCNAME[0]}"
     deploy_branch="${commit}-deployment"
     msg="${commit} deployment"
     git checkout -b "${deploy_branch}"
@@ -62,7 +62,7 @@ git_prod() {
 }
 # Push built images to quay.io
 docker_push() {
-    echo ${FUNCNAME[0]}
+    echo "${FUNCNAME[0]}"
     echo "$quaybot_password" | docker login quay.io -u "$quaybot_username" --password-stdin
     branch_tag="branch_${branch}"
     if [ "${branch}" = "master" ]
@@ -73,8 +73,8 @@ docker_push() {
     declare -a repositories=("twlight")
     for repo in "${repositories[@]}"
     do
-      docker push quay.io/wikipedialibrary/${repo}:commit_${commit}
-      docker push quay.io/wikipedialibrary/${repo}:${branch_tag}
+      docker push "quay.io/wikipedialibrary/${repo}:commit_${commit}"
+      docker push "quay.io/wikipedialibrary/${repo}:${branch_tag}"
     done
     docker logout quay.io
 }
@@ -85,7 +85,7 @@ then
     if [ "${twlight_i18n_files_changed}" -gt 0 ] || [ "${twlight_missing_migrations}" -gt 0 ]
     then
         # Checkout branch
-        git checkout ${branch}
+        git checkout "${branch}"
         # commit and merge any missing migrations
         if [ "${twlight_missing_migrations}" -gt 0 ]
         then
@@ -96,7 +96,7 @@ then
         then
             git_i18n
         fi
-        git push --set-upstream deploy ${branch} --quiet
+        git push --set-upstream deploy "${branch}" --quiet
         echo "pushed to ${branch}"
     elif [ "${twlight_missing_migrations}" -eq 0 ] && [ "${twlight_i18n_files_changed}" -eq 0 ]
     then

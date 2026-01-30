@@ -1,0 +1,9 @@
+[coverage:run]
+plugins = django_coverage_plugin
+source = TWLight
+branch = True
+
+[coverage:report]
+fail_under = 10
+show_missing = True
+skip_covered = True
