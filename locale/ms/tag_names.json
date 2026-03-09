@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Tofeiku"
+		]
+	},
+	"music_tag": "Muzik",
+	"art_tag": "Seni",
+	"business-and-economics_tag": "Perniagaan dan Ekonomi",
+	"law_tag": "Undang-undang",
+	"education_tag": "Pendidikan",
+	"philosophy-and-religion_tag": "Falsafah dan Agama",
+	"social-sciences_tag": "Sains Sosial",
+	"history_tag": "Sejarah",
+	"culture_tag": "Budaya",
+	"health-sciences_tag": "Sains Kesihatan",
+	"earth-sciences_tag": "Sains Bumi",
+	"technology_tag": "Teknologi"
+}
