@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"GrogeXaKaba"
+		]
+	},
+	"languages-and-literature_tag": "Lingas ku Literatura",
+	"multidisciplinary_tag": "Multidisiplinar",
+	"physical-sciences_tag": "Siénsas Fíziku",
+	"music_tag": "Muska",
+	"art_tag": "Arti",
+	"business-and-economics_tag": "Nogósis ku Ikunumia",
+	"law_tag": "Diretu",
+	"education_tag": "Idukason",
+	"philosophy-and-religion_tag": "Filuzufia ku Ralijon",
+	"social-sciences_tag": "Siénsas Susial",
+	"history_tag": "Stóra",
+	"culture_tag": "Kultura",
+	"life-sciences_tag": "Siénsas di Bida",
+	"health-sciences_tag": "Siénsas di Saúdi",
+	"earth-sciences_tag": "Siénsas di Téra",
+	"technology_tag": "Teknulujia"
+}

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-02-20 09:58+0000\n"
-"PO-Revision-Date: 2026-02-23 12:37:45+0000\n"
+"PO-Revision-Date: 2026-03-12 12:29:34+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -174,7 +174,7 @@ msgstr "E-Mail"
 #. Translators: This comment is added to pending applications when our terms of use change.
 #: TWLight/applications/management/commands/notify_applicants_tou_changes.py:54
 msgid "Our terms of use have changed. Your applications will not be processed until you log in and agree to our updated terms."
-msgstr "is Benotzungskonditiounen hu g'ännert. Är Ufroe ginn net verschafft bis Dir Iech ageloggt hutt a mat eisen aktualiséierte Konditiounen averstane sidd."
+msgstr "Eis Benotzungskonditiounen hu geännert. Är Demandë gi réischt traitéiert, wann Dir Iech ageloggt a mat eisen aktualiséierte Konditiounen averstanen erkläert hutt."
 
 #. Translators: This is the status of an application that has not yet been reviewed.
 #: TWLight/applications/models.py:54
@@ -264,7 +264,7 @@ msgstr "Koordinatoren: Dës Säit ka perséinlech Donnéeë wéi déi richteg Ni
 #. Translators: This is the title of the application page shown to users who are a coordinator, and are able to accept or reject the application.
 #: TWLight/applications/templates/applications/application_evaluation.html:39
 msgid "Evaluate application"
-msgstr "Ufro préiwen"
+msgstr "Demande evaluéieren"
 
 #. Translators: This text is shown to coordinators on application pages if the applicant has restricted processing of their data.
 #: TWLight/applications/templates/applications/application_evaluation.html:42
@@ -279,12 +279,12 @@ msgstr ""
 #. Translators: This is the title of the section of an application page containing information about the request.
 #: TWLight/applications/templates/applications/application_evaluation.html:51
 msgid "Application"
-msgstr ""
+msgstr "Demande"
 
 #. Translators: This labels the section of an application showing the date the application was submitted.
 #: TWLight/applications/templates/applications/application_evaluation.html:56
 msgid "Date of application"
-msgstr ""
+msgstr "Datum vun der Demande"
 
 #. Translators: This labels the section of an application showing how many days it has been since the application was opened.
 #: TWLight/applications/templates/applications/application_evaluation.html:65
@@ -294,7 +294,7 @@ msgstr ""
 #. Translators: This labels the section of an application showing how many days it has been since the application was closed.
 #: TWLight/applications/templates/applications/application_evaluation.html:73
 msgid "Days since application was closed"
-msgstr ""
+msgstr "Deeg, zënter datt d'Demande zougemaach gouf"
 
 #. Translators: This labels the section of an application showing the current status of the application ('Pending', 'Approved', etc.)
 #. Translators: This labels the column description indicating the status of the listed applications.
@@ -411,7 +411,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_evaluation.html:195
 #, python-format
 msgid "Yes (<a class=\"twl-links\" href=\"%(parent_url)s\">previous application</a>)"
-msgstr ""
+msgstr "Jo (<a class=\"twl-links\" href=\"%(parent_url)s\">vireg Demanden</a>)"
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
@@ -426,12 +426,12 @@ msgstr ""
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:227
 msgid "Recent Applications (last 90 days)"
-msgstr ""
+msgstr "Rezent Demanden (lescht 90 Deeg)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:264
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "Den Demandeur huet an de leschten 90 Deeg keng Demande gemaach"
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:268
@@ -569,7 +569,7 @@ msgstr "Lescht Säit"
 #: TWLight/applications/templates/applications/application_list_include.html:33
 #: TWLight/users/templates/users/my_applications.html:43
 msgid "Imported application"
-msgstr ""
+msgstr "Importéiert Demande"
 
 #. Translators: On the page listing applications, this shows next to an application which was previously reviewed. Don't translate reviewer or review_date.
 #. Translators: If an application was previously reviewed by a coordinator, this text displays the date and the name of the coordinator.
@@ -607,12 +607,12 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:102
 #: TWLight/users/templates/users/my_applications.html:92
 msgid "No applications right now."
-msgstr ""
+msgstr "Keng Demanden am Moment."
 
 #. Translators: This labels the column description that lists the partner (and the corresponding collection, if any) of the listed applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:13
 msgid "Partner (Collection)"
-msgstr ""
+msgstr "Partner (Sammlung)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15
@@ -648,7 +648,7 @@ msgstr ""
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown above the drop-down menu for the status they want to set.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:83
 msgid "Status for all selected applications"
-msgstr ""
+msgstr "Status fir all ausgewielt Demanden"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is found on a button that users click after selecting multiple applications and a status change.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:97
@@ -1364,7 +1364,7 @@ msgstr "Filteren"
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
 msgid "Filter collections"
-msgstr "Kollektioune filteren"
+msgstr "Sammlunge filteren"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -1639,7 +1639,7 @@ msgstr "Partner duerchsichen"
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_list.html:20
 msgid "Suggest a partner"
-msgstr "Ee Partner proposéieren"
+msgstr "E Partner proposéieren"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_list.html:29
@@ -1661,13 +1661,13 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_users.html:33
 #: TWLight/resources/templates/resources/partner_users.html:73
 msgid "Application date"
-msgstr ""
+msgstr "Datum vun der Demande"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading for date an application was approved by a coordinator.
 #: TWLight/resources/templates/resources/partner_users.html:35
 #: TWLight/resources/templates/resources/partner_users.html:75
 msgid "Application approved"
-msgstr ""
+msgstr "Demande ugeholl"
 
 #. Translators: On the page where coordinators can view data on applications to a partner they coordinate, this is a table column heading denoting whether an application was a renewal.
 #: TWLight/resources/templates/resources/partner_users.html:37
@@ -1743,7 +1743,7 @@ msgstr ""
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
 #: TWLight/resources/views.py:323
 msgid "This partner is currently not open for applications"
-msgstr ""
+msgstr "Dëse Partner hëlt am Moment keng Demanden un"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
 #: TWLight/resources/views.py:415
@@ -1753,7 +1753,7 @@ msgstr ""
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
 #: TWLight/resources/views.py:428
 msgid "This partner is now available for applications"
-msgstr ""
+msgstr "Dëse Partner hëlt elo Demanden un"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
 #: TWLight/resources/views.py:554
@@ -2030,7 +2030,7 @@ msgstr "Wikipedia-Library-Twittersäit"
 #: TWLight/templates/contact.html:48
 #, python-format
 msgid "(If you would like to suggest a partner, <a class=\"twl-links\" href=\"%(suggest)s\"><strong>go here</strong></a>.)"
-msgstr ""
+msgstr "(Wann Dir e Partner proposéiere wëllt, <a class=\"twl-links\" href=\"%(suggest)s\"><strong>klickt hei</strong></a>.)"
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
 #: TWLight/templates/eds_search_endpoint.html:7
@@ -2059,13 +2059,13 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
 #: TWLight/templates/header_partial_b4.html:107
 msgid "Suggest a collection"
-msgstr ""
+msgstr "Eng Sammlung proposéieren"
 
 #. Translators: A button to log out of The Wikipedia Library.
 #: TWLight/templates/header_partial_b4.html:120
 #: TWLight/users/templates/users/eligibility_modal.html:65
 msgid "Log out"
-msgstr ""
+msgstr "Ausloggen"
 
 #. Translators: This text will show when a user clicks on the More Info button and the partner description shows.
 #: TWLight/templates/homepage.html:374
@@ -2087,16 +2087,16 @@ msgstr "D'Wikipedia-Bibliothéik"
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr ""
+msgstr "Méi wéi 100 vun de weltwäit beschten abonnementsflichtegen Datebanken, mat Contenu op %(no_of_languages)s Sproochen, gratis fir Wikipedianer vun all Hannergrond"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
 msgid "Meet these criteria for automatic access"
-msgstr ""
+msgstr "Dir musst déi follgend Krittären erfëlle fir Zougang ze kréien"
 
 #: TWLight/templates/login_partial.html:69
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
-msgstr ""
+msgstr "Mat dëse Krittäre kritt Dir Zougang op verschidde Sammlungen, awer net op s'alleguer. Fir eng Rei Sammlunge muss een eng eenzel Demande maachen."
 
 #: TWLight/templates/login_partial.html:89
 msgid "Login via Wikipedia"
@@ -2133,7 +2133,7 @@ msgstr "Benotzungsbedingungen an Dateschutzrichtlinnen"
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:119
 msgid "Translate the Library"
-msgstr ""
+msgstr "Iwwersetzt d'Wikipedia-Bibliothéik"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
@@ -2254,7 +2254,7 @@ msgstr ""
 #. Translators: this message is displayed to users that don't have accounts and clicked on a proxied link.
 #: TWLight/users/oauth.py:420
 msgid "To view this link you need to be an eligible library user. Please login to continue."
-msgstr ""
+msgstr "Fir dëse Link ze gesinn, muss Dir eligibel si fir d'Bibliothéik ze benotzen. Loggt Iech wgl. a fir virunzefueren."
 
 #. Translators: This warning message is shown to users when the response received from Wikimedia OAuth servers is not a valid one.
 #: TWLight/users/oauth.py:462
@@ -2320,7 +2320,7 @@ msgstr "Disponibel Sammlungen"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a link that will take you to the applications.
 #: TWLight/users/templates/users/collections_section.html:31
 msgid "View my applications >"
-msgstr ""
+msgstr "Meng Demandë weisen >"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), a title that indicates the start of the expired collections section.
 #: TWLight/users/templates/users/collections_section.html:54
@@ -2331,7 +2331,7 @@ msgstr ""
 #. Translators: Users viewing their own profile can click this button to go to the browse partners page.
 #: TWLight/users/templates/users/editor_detail.html:15
 msgid "Start new application"
-msgstr ""
+msgstr "Nei Demande ufänken"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their collection page.
 #. Translators: A button on the 'your applications' page which when clicked takes users their collection page.
@@ -2350,7 +2350,7 @@ msgstr ""
 #: TWLight/users/templates/users/editor_detail.html:36
 #: TWLight/users/templates/users/my_applications.html:10
 msgid "My applications"
-msgstr ""
+msgstr "Meng Demanden"
 
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their collection.
 #: TWLight/users/templates/users/editor_detail.html:40
@@ -2894,11 +2894,11 @@ msgstr ""
 
 #: TWLight/users/templates/users/user_collection_tile.html:32
 msgid "Remove this collection from favorites"
-msgstr ""
+msgstr "Dës Sammlung bei de Favoritten ewechhuelen"
 
 #: TWLight/users/templates/users/user_collection_tile.html:38
 msgid "Add this collection to favorites"
-msgstr ""
+msgstr "Dës Sammlung bei d'Favoritten derbäisetzen"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels when a subscription on a collection expired.
 #: TWLight/users/templates/users/user_collection_tile.html:102
@@ -2923,7 +2923,7 @@ msgstr ""
 #: TWLight/users/templates/users/user_collection_tile.html:134
 #: TWLight/users/templates/users/user_collection_tile.html:161
 msgid "Access collection"
-msgstr ""
+msgstr "Op d'Sammlung zougräifen"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/user_collection_tile.html:146
@@ -3014,17 +3014,17 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
 msgid "500+ edits"
-msgstr "Méi wéi 500 Ännerungen"
+msgstr "Mindestens 500 Ännerungen"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:886 TWLight/views.py:45
 msgid "6+ months editing"
-msgstr ""
+msgstr "Säit mindestens 6 Méint aktiv"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
 #: TWLight/users/views.py:888
 msgid "10+ edits in the last month"
-msgstr "Méi wéi 10 Ännerungen am leschte Mount"
+msgstr "Mindestens 10 Ännerungen am leschte Mount"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
 #: TWLight/users/views.py:890 TWLight/views.py:49
@@ -3034,5 +3034,5 @@ msgstr "Keng aktiv Spären"
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last 30 days from their Wikimedia account.
 #: TWLight/views.py:47
 msgid "10+ edits in the last 30 days"
-msgstr "Méi wéi 10 Ännerungen an de leschten 30 Deeg"
+msgstr "Mindestens 10 Ännerungen an de leschten 30 Deeg"
 
