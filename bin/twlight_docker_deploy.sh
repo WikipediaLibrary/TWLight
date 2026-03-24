@@ -26,7 +26,7 @@ then
         git reset --hard origin
     fi
     git pull
-    docker stack deploy --detach=false -c docker-compose.yml -c "docker-compose.${env}.yml" "${env}"
+    docker stack deploy -c docker-compose.yml -c "docker-compose.${env}.yml" "${env}"
 # Report if the local image is already up to date.
 elif echo "${pull}" | grep "Status: Image is up to date for quay.io/wikipedialibrary/twlight:${tag}" >/dev/null
 then
