@@ -2409,6 +2409,14 @@
             ],
             "Patois"
         ],
+        "jax": [
+            "Latn",
+            [
+                "AS",
+                "PA"
+            ],
+            "Jambi"
+        ],
         "jbo": [
             "Latn",
             [
@@ -4191,6 +4199,13 @@
             ],
             "pinayuanan"
         ],
+        "pwo": [
+            "Mymr",
+            [
+                "AS"
+            ],
+            "ဖျိၩ့ၡိ"
+        ],
         "pzh": [
             "Latn",
             [
@@ -4611,6 +4626,13 @@
             ],
             "Sängö"
         ],
+        "sgh": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "xuɣ̌nůni"
+        ],
         "sgs": [
             "Latn",
             [
@@ -4871,6 +4893,13 @@
             ],
             "SiSwati"
         ],
+        "ssy": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "Saaho"
+        ],
         "st": [
             "Latn",
             [
@@ -4924,6 +4953,13 @@
         "swh": [
             "sw"
         ],
+        "sxr": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Hla'alua"
+        ],
         "sxu": [
             "Latn",
             [
@@ -4975,6 +5011,13 @@
                 "AS"
             ],
             "தமிழ்"
+        ],
+        "tao": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Ciriciring No Tao"
         ],
         "taq": [
             "taq-tfng"
@@ -5080,6 +5123,13 @@
                 "AF"
             ],
             "ትግሬ"
+        ],
+        "tiv": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "tiv"
         ],
         "tji": [
             "Latn",
@@ -5231,6 +5281,13 @@
                 "AS"
             ],
             "Sinūg"
+        ],
+        "tsu": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "cou"
         ],
         "tt": [
             "Cyrl",
@@ -5568,6 +5625,13 @@
                 "PA"
             ],
             "Manado"
+        ],
+        "xnb": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Kanakanavu"
         ],
         "xon": [
             "Latn",
@@ -6367,6 +6431,7 @@
             "tig",
             "ar",
             "aa",
+            "ssy",
             "byn"
         ],
         "ES": [
@@ -6680,9 +6745,11 @@
             "ccp",
             "bfq",
             "njo",
+            "wsg",
             "bo",
             "bpy",
             "bft",
+            "mrh",
             "sa",
             "dv",
             "dz",
@@ -6763,7 +6830,8 @@
         "JO": [
             "ar",
             "apc",
-            "en"
+            "en",
+            "ady"
         ],
         "JP": [
             "ja",
@@ -6940,6 +7008,7 @@
             "kac",
             "rhg",
             "mnw",
+            "mrh",
             "pi"
         ],
         "MN": [
@@ -7059,6 +7128,7 @@
             "ig",
             "yo",
             "ff",
+            "tiv",
             "efi",
             "ibb",
             "ha-arab",
@@ -7257,43 +7327,52 @@
         ],
         "RU": [
             "ru",
+            "en",
             "tt",
-            "ba",
             "cv",
-            "hy",
             "ce",
+            "hy",
+            "ba",
+            "de",
             "av",
-            "udm",
-            "mhr",
-            "sah",
-            "os",
+            "uk",
             "kbd",
             "myv",
-            "dar",
-            "mdf",
             "kum",
-            "kv",
-            "lez",
-            "krc",
+            "sah",
+            "dar",
+            "os",
             "inh",
-            "tyv",
             "az-cyrl",
             "az",
+            "lez",
+            "mdf",
+            "kk-cyrl",
+            "krc",
+            "mhr",
+            "tyv",
+            "udm",
+            "uz",
+            "tg",
+            "kv",
             "ady",
-            "krl",
+            "xal",
             "lbe",
-            "koi",
-            "pnt",
-            "mrj",
+            "ka",
             "alt",
+            "be",
+            "pnt",
+            "koi",
+            "mrj",
             "fi",
+            "krl",
             "sr-cyrl",
-            "vep",
             "mn",
+            "vep",
+            "cu",
             "kaa",
             "izh",
-            "vot",
-            "cu"
+            "vot"
         ],
         "RW": [
             "rw",
