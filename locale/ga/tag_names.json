@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aindriu80"
+		]
+	},
+	"languages-and-literature_tag": "Teangacha agus Litríocht",
+	"multidisciplinary_tag": "Il-dhisciplíneach",
+	"physical-sciences_tag": "Eolaíochtaí Fisiceacha",
+	"music_tag": "Ceol",
+	"art_tag": "Ealaín",
+	"business-and-economics_tag": "Gnó agus Eacnamaíocht",
+	"law_tag": "Dlí",
+	"education_tag": "Oideachas",
+	"philosophy-and-religion_tag": "Fealsúnacht agus Reiligiún",
+	"social-sciences_tag": "Eolaíochtaí Sóisialta",
+	"history_tag": "Stair",
+	"culture_tag": "Cultúr",
+	"life-sciences_tag": "Eolaíochtaí Beatha",
+	"health-sciences_tag": "Eolaíochtaí Sláinte",
+	"earth-sciences_tag": "Eolaíochtaí Domhain",
+	"technology_tag": "Teicneolaíocht"
+}
