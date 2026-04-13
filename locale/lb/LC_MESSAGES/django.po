@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-04-06 12:30:23+0000\n"
+"PO-Revision-Date: 2026-04-13 12:30:33+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2160,7 +2160,7 @@ msgstr "Passwuert änneren"
 #: TWLight/templates/registration/password_reset_form.html:10
 #: TWLight/templates/registration/password_reset_form.html:19
 msgid "Reset password"
-msgstr "Passwuert zrécksetzen"
+msgstr "Passwuert zerécksetzen"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
