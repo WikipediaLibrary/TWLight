@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-04-06 12:30:26+0000\n"
+"PO-Revision-Date: 2026-04-16 12:29:59+0000\n"
 "Language: uk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1118,13 +1118,13 @@ msgstr "Ваша заявка до Бібліотеки Вікіпедії"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr ""
+msgstr "<p>Привіт,</p> <p>Наразі ми проводимо опитування, щоб зрозуміти, як редактори використовують Бібліотеку Вікіпедії. Згідно з нашими даними, ви входили до Бібліотеки Вікіпедії принаймні один раз, тому ми будемо раді почути вашу думку!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>Ми щиро цінуємо ваш відгук — це опитування допоможе нам зрозуміти, як зараз використовується Бібліотека Вікіпедії та де її можна покращити. Ваші відповіді безпосередньо вплинуть на те, як Фонд Вікімедіа визначатиме пріоритети технічної та партнерської роботи для цього проєкту.</p> <p>На заповнення опитування має знадобитися 5-10 хвилин.</p> <p>Якщо ви бажаєте відмовитися від майбутніх опитувань Бібліотеки Вікіпедії, повідомте нас про це, надіславши електронного листа на адресу wikipedialibrary@wikimedia.org, і ми видалимо вас із будь-якої подальшої розсилки.</p> <p>Дякуємо,</p> <p>Команда бібліотеки Вікіпедії</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "Привіт! Ми зараз проводимо опитування, щоб зрозуміти, як редактори використовують Бібліотеку Вікіпедії. Згідно з нашими даними, ви входили до Бібліотеки Вікіпедії принаймні один раз, тому ми будемо раді почути вашу думку! %(link)s Ми дуже цінуємо ваш відгук – це опитування допоможе нам зрозуміти, як Бібліотека Вікіпедії зараз використовується та де її можна покращити. Ваші відповіді безпосередньо вплинуть на те, як Фонд Вікімедіа надає пріоритети технічній та партнерській роботі для цього проєкту. Заповнення опитування має зайняти 5-10 хвилин. Якщо ви хочете відмовитися від майбутніх опитувань Бібліотеки Вікіпедії, повідомте нас про це, надіславши електронного листа на адресу wikipedialibrary@wikimedia.org, і ми видалимо вас з будь-якої подальшої розсилки. Дякуємо, команда Бібліотеки Вікіпедії"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: email subject line
