@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-04-06 12:30:26+0000\n"
+"PO-Revision-Date: 2026-04-27 12:35:59+0000\n"
 "Language: ta\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -215,21 +215,18 @@ msgstr "செல்லுபடியாகாத"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
-#, fuzzy
 msgid "1 month"
-msgstr "மாதம்"
+msgstr "1 மாதம்"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 3 months in this case.
 #: TWLight/applications/models.py:122
-#, fuzzy
 msgid "3 months"
-msgstr "மாதம்"
+msgstr "3 மாதங்கள்"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 6 months in this case.
 #: TWLight/applications/models.py:124
-#, fuzzy
 msgid "6 months"
-msgstr "மாதம்"
+msgstr "6 மாதங்கள்"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 12 months in this case.
 #: TWLight/applications/models.py:126
@@ -239,7 +236,7 @@ msgstr "12 மாதங்கள்"
 #. Translators: This is the status of an application that has been finalized upon approval.
 #: TWLight/applications/models.py:159
 msgid "Finalized"
-msgstr ""
+msgstr "இறுதி செய்யப்பட்டது"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user a programmatically generated link to a resource.
 #: TWLight/applications/models.py:325
@@ -314,15 +311,13 @@ msgstr "நிலை"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
-#, fuzzy
 msgid "Access duration"
-msgstr "தொழில்"
+msgstr "அணுகல் கால அளவு"
 
 #. Translators: This adds the word 'month(s)' next to the actual number of months.
 #: TWLight/applications/templates/applications/application_evaluation.html:96
-#, fuzzy
 msgid "month(s)"
-msgstr "மாதம்"
+msgstr "மாதம்(கள்)"
 
 #. Translators: This labels the section of an application showing which partner the user requested access to.
 #. Translators: Partner is the resource a user will access.
@@ -358,9 +353,8 @@ msgstr "மேலும் தொடருமுன் விண்ணப்ப�
 
 #. Translators: This labels the section of an application showing the total number of accounts available for a partner or their collection.
 #: TWLight/applications/templates/applications/application_evaluation.html:134
-#, fuzzy
 msgid "Accounts available"
-msgstr "கிடைக்கப் பெறுவதில்லை"
+msgstr "கணக்குகள் கிடைக்கின்றன"
 
 #. Translators: This labels the section of an application showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_evaluation.html:145
@@ -427,9 +421,8 @@ msgstr "ஆம் (<a class=\"twl-links\" href=\"%(parent_url)s\">முந்�
 
 #. Translators: This labels the section of the application showing the length of access remaining on the user's previous authorization.
 #: TWLight/applications/templates/applications/application_evaluation.html:208
-#, fuzzy
 msgid "Previous access expiry date"
-msgstr "முந்தைய பக்கம்"
+msgstr "முந்தைய அணுகல் காலாவதி தேதி"
 
 #. Translators: This labels the section of an application containing the additional comments submitted by the user when applying.
 #: TWLight/applications/templates/applications/application_evaluation.html:218
@@ -438,14 +431,13 @@ msgstr "பயனரின் கருத்துகள்"
 
 #. Translators: This is the title of the section of an application page which contains the Recent Applications made by the applicant in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:227
-#, fuzzy
 msgid "Recent Applications (last 90 days)"
-msgstr "அனுப்பிய விண்ணப்பங்கள்"
+msgstr "சமீபத்திய விண்ணப்பங்கள் (கடந்த 90 நாட்களில்)"
 
 #. Translators: This text is shown to Coordinators when applicant has not made any application in the last 90 days.
 #: TWLight/applications/templates/applications/application_evaluation.html:264
 msgid "No applications were made in last 90 days by the applicant"
-msgstr ""
+msgstr "விண்ணப்பதாரரால் கடந்த 90 நாட்களில் எந்த விண்ணப்பமும் செய்யப்படவில்லை."
 
 #. Translators: This is the title of the section of an application page which contains the comment thread between the user and account coordinator.
 #: TWLight/applications/templates/applications/application_evaluation.html:268
@@ -552,9 +544,8 @@ msgstr "முந்தைய பக்கம்"
 #. Translators: This is the label for a button which goes to the previous page of applications.
 #: TWLight/applications/templates/applications/application_list.html:119
 #: TWLight/applications/templates/applications/application_list.html:125
-#, fuzzy
 msgid "Previous"
-msgstr "முந்தைய பக்கம்"
+msgstr "முந்தைய"
 
 #. Translators: On the page which shows a list of applications, coordinators can click Next to go to the next page of applications.
 #. Translators: This is the label for a button which goes to the next page of applications.
@@ -631,21 +622,18 @@ msgstr "கூட்டாளர் (சேகரிப்பு)"
 
 #. Translators: This labels the column description that indicates the last review date of the applications.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:15
-#, fuzzy
 msgid "Last reviewed"
-msgstr "இன்னமும் மீளாய்வு செய்யப்படவில்லை."
+msgstr "இறுதி மீளாய்வு"
 
 #. Translators: This labels the column description that lists the date the applications have been made.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:17
-#, fuzzy
 msgid "Date applied"
 msgstr "விண்ணப்ப தேதி"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "பயன்பாட்டு விதிமுறைகளுடன் உடன்பட்டார்"
+msgstr "பயன்பாட்டு விதிமுறைகளுடன் உடன்பட்டாரா?"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
@@ -1218,7 +1206,7 @@ msgstr ""
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "தலைப்புகள்"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
@@ -1327,7 +1315,7 @@ msgstr "கிடைக்கப் பெறுவதில்லை"
 #: TWLight/users/templates/users/available_collection_tile.html:44
 #: TWLight/users/templates/users/user_collection_tile.html:56
 msgid "Language(s) not known"
-msgstr ""
+msgstr "தெரியாத மொழி(கள்)"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this badge is shown when a collection is not available.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this badge is shown when a collection is not available.
@@ -1885,7 +1873,7 @@ msgstr ""
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:51
 msgid "Who can receive access?"
-msgstr ""
+msgstr "யார் அணுகலைப் பெற முடியும்?"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
@@ -2022,7 +2010,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
 #: TWLight/templates/about.html:214 TWLight/templates/new_base.html:131
 msgid "Contact us"
-msgstr ""
+msgstr "எங்களைத் தொடர்பு கொள்ளுங்கள்"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:218
@@ -2178,7 +2166,7 @@ msgstr ""
 #. Translators: This link is at the bottom of every page and can be clicked by users to translate The Wikipedia Library's translatable content.
 #: TWLight/templates/new_base.html:119
 msgid "Translate the Library"
-msgstr ""
+msgstr "நூலகத்தை மொழிபெயர்க்கவும்"
 
 #. Translators: This is a filter of featured collections of The Wikipedia Library.
 #: TWLight/templates/partner_carousel.html:16
@@ -2439,7 +2427,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's username.
 #: TWLight/users/templates/users/editor_detail_data.html:17
 msgid "Username *"
-msgstr ""
+msgstr "பயனர் பெயர் *"
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is a button for viewing a Wikipedian's account information through https://meta.wikimedia.org/wiki/Special:CentralAuth/)
 #: TWLight/users/templates/users/editor_detail_data.html:24
@@ -2525,7 +2513,7 @@ msgstr ""
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the edit current count of the user across all Wikimedia projects. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:198
 msgid "Current global edit count *"
-msgstr ""
+msgstr "தற்போதைய உலகளாவிய திருத்த எண்ணிக்கை *"
 
 #. Translators: this links to a Tools page with edit stats for a given wikipedia editor.
 #: TWLight/users/templates/users/editor_detail_data.html:205
@@ -2632,7 +2620,7 @@ msgstr ""
 #. Translators: Users click this button to set their interface language.
 #: TWLight/users/templates/users/language_form.html:26
 msgid "Set language"
-msgstr ""
+msgstr "மொழியைத் அமைக்க"
 
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
@@ -2970,9 +2958,8 @@ msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:117
-#, fuzzy
 msgid "Go to application"
-msgstr "விண்ணப்ப தேதி"
+msgstr "விண்ணப்பத்திற்குச் செல்க"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:131
@@ -3076,7 +3063,7 @@ msgstr ""
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
 msgid "500+ edits"
-msgstr ""
+msgstr "500+ திருத்தங்கள்"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
 #: TWLight/users/views.py:886 TWLight/views.py:45
