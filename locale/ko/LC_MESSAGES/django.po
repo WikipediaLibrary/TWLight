@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-05-04 12:21:45+0000\n"
+"PO-Revision-Date: 2026-05-07 12:26:33+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1122,9 +1122,8 @@ msgstr ""
 #. Translators: email subject line
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
 #: TWLight/users/management/commands/survey_active_users.py:118
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "위키백과 도서관 홈"
+msgstr "위키백과 도서관은 여러분의 도움이 필요합니다!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1477,9 +1476,8 @@ msgstr ""
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:130
 #: TWLight/resources/templates/resources/partner_detail_apply.html:144
-#, fuzzy
 msgid "Access Collection"
-msgstr "모음집"
+msgstr "모음집에 접근"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:133
@@ -1701,9 +1699,8 @@ msgid "Merge"
 msgstr ""
 
 #: TWLight/resources/templates/resources/suggest.html:43
-#, fuzzy
 msgid "Filter suggestions"
-msgstr "필터 모음"
+msgstr "필터 제안"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
@@ -2095,9 +2092,9 @@ msgstr "위키백과 도서관"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "모든 위키백과 사용자가 무료로 이용하는, 세계 최고의 90개 이상의 구독 전용 데이터베이스"
+msgstr "%(no_of_languages)s개 언어의 컨텐츠가 포함된, 모든 위키백과 사용자가 무료로 이용하는 세계 최고의 100개 이상의 구독 전용 데이터베이스"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2287,9 +2284,8 @@ msgstr "요청 토큰이 없습니다."
 
 #. Translators: This message is shown when the OAuth login process fails.
 #: TWLight/users/oauth.py:530
-#, fuzzy
 msgid "Access token generation failed, please try logging in again."
-msgstr "핸드셰이커가 초기화되지 않았습니다. 로그인을 다시 시도해 보십시오."
+msgstr "접근 토큰 생성에 실패했습니다. 로그인을 다시 시도해 보십시오."
 
 #. Translators: If the user tries to log in, but their account does not meet certain requirements, they cannot login.
 #: TWLight/users/oauth.py:546
@@ -2732,9 +2728,8 @@ msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:114
-#, fuzzy
 msgid "Applying via Your Wikipedia Library Card Account"
-msgstr "위키백과 도서관 카드 계정 신청"
+msgstr "위키백과 도서관 카드 계정을 통해 신청"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:118
@@ -2922,9 +2917,8 @@ msgstr ""
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to an open application.
 #: TWLight/users/templates/users/user_collection_tile.html:117
-#, fuzzy
 msgid "Go to application"
-msgstr "신청일"
+msgstr "신청으로 이동"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:131
@@ -2934,9 +2928,8 @@ msgstr "사이트로 이동"
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:134
 #: TWLight/users/templates/users/user_collection_tile.html:161
-#, fuzzy
 msgid "Access collection"
-msgstr "접속 코드"
+msgstr "모음집에 접근"
 
 #. Translators: Labels a button users can click to renew an expired account.
 #: TWLight/users/templates/users/user_collection_tile.html:146
