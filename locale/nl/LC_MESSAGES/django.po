@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-05-18 12:58:56+0000\n"
+"PO-Revision-Date: 2026-05-25 12:27:21+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -258,7 +258,7 @@ msgstr "U ontvangt de toegangsgegevens binnen een week of twee na de verwerking 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr "Deze partner is lid geworden van de Bibliotheekbundel, waardoor er geen aparte aanvraag meer nodig is. Uw aanvraag wordt daarom als ongeldig gemarkeerd."
+msgstr "Deze partner is lid geworden van de Bibliotheekbundel, waardoor er geen aparte aanvraag meer nodig is. Uw aanvraag wordt daarom als incorrect gemarkeerd."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
@@ -2463,7 +2463,7 @@ msgstr "(vrijstelling verleend)"
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "Het lijkt erop dat u een actieve blokkering op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a class=\"twl-links\" href=\"%(contact_url)s\">neem contact met ons op</a>."
+msgstr "Het lijkt erop dat u een actieve blokkade op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a class=\"twl-links\" href=\"%(contact_url)s\">neem contact met ons op</a>."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
@@ -2555,7 +2555,7 @@ msgstr "Is akkoord gegaan met de <a href=\"%(terms)s\" class=\"text-danger\">geb
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "Het lijkt erop dat u een actieve blokkering op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a href=\"%(contact_url)s\">neem contact met ons op</a>."
+msgstr "Het lijkt erop dat u een actieve blokkade op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a href=\"%(contact_url)s\">neem contact met ons op</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -2724,7 +2724,7 @@ msgstr "Toegang tot bronnen via de Wikipedia-bibliotheek is gereserveerd voor le
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:94
 msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
-msgstr "Bovendien, als u momenteel bent geblokkeerd of verbannen uit een Wikimedia-project, kunnen aanvragen voor bronnen worden afgewezen of beperkt. Als u een account in de Wikipedia-bibliotheek verkrijgt, maar er vervolgens een blokkering of verbod op u wordt ingesteld voor een van de projecten, kunt u de toegang tot uw account in de Wikipedia-bibliotheek kwijtraken."
+msgstr "Bovendien, als u momenteel bent geblokkeerd of verbannen uit een Wikimedia-project, kunnen aanvragen voor bronnen worden afgewezen of beperkt. Als u een account in de Wikipedia-bibliotheek verkrijgt, maar er vervolgens een blokkade of verbod op u wordt ingesteld voor een van de projecten, kunt u de toegang tot uw account in de Wikipedia-bibliotheek kwijtraken."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:104
