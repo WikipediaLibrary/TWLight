@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-05-25 12:27:21+0000\n"
+"PO-Revision-Date: 2026-06-01 12:45:41+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1865,12 +1865,12 @@ msgstr "Wie kan toegang krijgen?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr "Elke actieve redacteur met een goede reputatie kan toegang krijgen. Voor uitgevers met een beperkt aantal accounts worden aanvragen beoordeeld op basis van de behoeften en bijdragen van de redacteur. Als u denkt dat u toegang tot een van onze partnerbronnen zou kunnen gebruiken en een actieve redacteur bent in een project dat wordt ondersteund door de Wikimedia Foundation, meld u dan aan."
+msgstr "Elke actieve bewerker met een goede reputatie kan toegang krijgen. Voor uitgevers met een beperkt aantal accounts worden aanvragen beoordeeld op basis van de behoeften en bijdragen van de bewerker. Als u denkt dat u toegang tot een van onze partnerbronnen zou kunnen gebruiken en een actieve bewerker bent in een project dat wordt ondersteund door de Wikimedia Foundation, meld u dan aan."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
 msgid "Any editor can use the library if they meet a few basic requirements:"
-msgstr "Elke redacteur kan de bibliotheek gebruiken als deze aan een paar basisvereisten voldoet:"
+msgstr "Elke bewerker kan de bibliotheek gebruiken als deze aan een paar basisvereisten voldoet:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -2376,7 +2376,7 @@ msgstr "Gebruikersgegevens"
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:49
 msgid "Editor data"
-msgstr "Data van redacteur"
+msgstr "Bewerkersgegevens"
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:59

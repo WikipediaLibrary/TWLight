@@ -28,7 +28,7 @@
 	"79_short_description": "<strong>Civilica</strong>는 과학 저널과 학술대회 논문집의 출판사입니다. 700,000편 이상의 출판 논문에 대한 전체 접근권이 제공됩니다.",
 	"15_short_description": "<strong>Cochrane</strong>은 의학 주제의 6개 데이터베이스 컬렉션인 Cochrane Library에 대한 접근을 제공합니다. 여기에는 체계적 검토와 평가 데이터베이스가 포함됩니다.",
 	"105_short_description": "<strong>De Gruyter</strong>는 학술 문헌을 전문으로 하는 학술 출판사입니다. 계정은 예술, 인문학, 사회과학, 자연과학, 신학/종교, 의학, 수학, 법학, 일반 참고 분야의 전자책과 저널을 포함하는 De Gruyter Online의 전자 자료에 접근할 수 있습니다.",
-	"83_short_description": "<strong>ZEIT ONLINE</strong>은 독일 주간지 Die Zeit의 온라인 버전입니다.",
+	"83_short_description": "<strong>Die Zeit</strong>는 독일의 주간지입니다.",
 	"57_short_description": "<strong>EBSCO Information Services</strong>는 미국 기반의 주요 도서관 자료 및 정보 서비스 제공업체입니다. EBSCO와 The Wikipedia Library의 제휴에는 여러 데이터베이스에 대한 접근이 포함됩니다.",
 	"57_description": "이용 가능한 데이터베이스:\n<ul>\n<li>Academic Search Complete</li>\n<li>America: History and Life</li>\n<li>Applied Science &amp; Technology Source</li>\n<li>Al-Kotob Arabic eBooks Collection</li>\n<li>Arab World Research Source: Al Masdar</li>\n<li>Art Source</li>\n<li>Book Review Digest Plus</li>\n<li>Business Search Complete</li>\n<li>Caribbean Search</li>\n<li>CINAHL Complete</li>\n<li>Communications and Mass Media Complete</li>\n<li>DynaMed Plus</li>\n<li>Education Research Complete</li>\n<li>Enfermería al Día</li>\n<li>ERIC (Education Resource Information Center)</li>\n<li>Fuente Académica Premier</li>\n<li>Humanities Full Text</li>\n<li>LGBT Life with Full Text</li>\n<li>Life Magazine Archive</li>\n<li>Literary Reference Center Plus</li>\n<li>MasterFILE Complete</li>\n<li>MedicLatina</li>\n<li>MEDLINE Complete</li>\n<li>Nursing Reference Center</li>\n<li>Patient Education Reference Center</li>\n<li>Psychology &amp; Behavioral Sciences Collection</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX with Full Text</li>\n<li>SportDiscus with Full Text</li>\n</ul>",
 	"71_short_description": "<strong>Economic &amp; Political Weekly</strong>는 매주 발행되는 사회과학 저널입니다. 접근권에는 1949년까지 거슬러 올라가는 아카이브와 최근 출판물이 모두 포함됩니다. 인도 관련 주제에 기여하는 편집자에게 우선권이 주어집니다.",
@@ -159,5 +159,6 @@
 	"179_short_description": "<strong>Newslaundry</strong>는 미디어 비평, 보도, 논평을 제공하는 인도 플랫폼입니다.",
 	"180_short_description": "<strong>The News Minute</strong>는 인도의 문제를 보도하고 글을 쓰는 디지털 뉴스 플랫폼으로, 특히 남부 5개 주에 중점을 둡니다.",
 	"181_short_description": "<strong>Havard Business Review</strong>는 Harvard Business Publishing이 발행하는 리더십 및 경영 잡지입니다. 이 제휴에는 아카이브를 포함한 핵심 HBR 콘텐츠와 데이터, 시각 자료, Insider 및 Best of the Issue 뉴스레터에 대한 온라인 및 모바일 접근권이 포함됩니다.",
-	"182_short_description": "<strong>Swissdox</strong>는 스위스의 주요 신문과 잡지의 언론 기사뿐 아니라 독일어와 프랑스어 라디오 및 텔레비전 보도 데이터베이스입니다."
+	"182_short_description": "<strong>Swissdox</strong>는 스위스의 주요 신문과 잡지의 언론 기사뿐 아니라 독일어와 프랑스어 라디오 및 텔레비전 보도 데이터베이스입니다.",
+	"183_short_description": "<strong>The Telegraph</strong>는 수상한 전적이 있는, 영국과 국제적으로 유통되는 멀티미디어 뉴스 브랜드입니다."
 }
