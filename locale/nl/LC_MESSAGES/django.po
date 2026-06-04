@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-06-01 12:45:41+0000\n"
+"PO-Revision-Date: 2026-06-04 12:27:22+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1844,7 +1844,7 @@ msgstr "Over de Wikipedia bibliotheek"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
 msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
-msgstr "Dit platform is onze centrale tool om de toegang tot onze beschikbare collecties te vergemakkelijken. Hier kunt u zien welke partnerschappen beschikbaar zijn, de inhoud ervan doorzoeken en de partnerschappen aanvragen en openen waarin u geïnteresseerd bent."
+msgstr "Dit platform is ons centrale hulpmiddel om de toegang tot onze beschikbare collecties te vergemakkelijken. Hier kunt u zien welke partnerschappen beschikbaar zijn, de inhoud ervan doorzoeken en de partnerschappen aanvragen en openen waarin u geïnteresseerd bent."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
@@ -2595,7 +2595,7 @@ msgstr "Taal instellen"
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
 msgid "You can help translate the tool at <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
-msgstr "U kunt de tool helpen vertalen op <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
+msgstr "U kunt het hulpmiddel helpen vertalen op <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
