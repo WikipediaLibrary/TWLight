@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-06-08 12:29:00+0000\n"
+"PO-Revision-Date: 2026-06-11 12:29:11+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -248,7 +248,7 @@ msgstr "Afgerond"
 #: TWLight/applications/models.py:325
 #, python-brace-format
 msgid "Access URL: {access_url}"
-msgstr "Toegangs-URL: {access_url}"
+msgstr "Toegangs-url: {access_url}"
 
 #. Translators: This text goes into account approval emails in the case that we need to send the user's details to a publisher for manual account setup.
 #: TWLight/applications/models.py:331
@@ -1115,7 +1115,7 @@ msgstr "Uw aanvraag voor de Wikipedia Library"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr "<p>Hallo,</p> <p>We vragen u een vragenlijst in te vullen om te begrijpen hoe redacteuren de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer ingelogd op de Wikipedia-bibliotheek, dus we horen graag uw mening!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We stellen uw terugkoppeling zeer op prijs. Deze vragenlijst helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben direct invloed op de manier waarop de Wikimedia Foundation prioriteit geeft aan technische werkzaamheden en samenwerking voor dit project.</p> <p>Het invullen van de vragenlijst duurt 5-10 minuten.</p> <p>Als u in de toekomst geen vragenlijsten meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We zullen u dan van onze mailinglijst verwijderen.</p> <p>Bedankt,</p> <p>Het Wikipedia-bibliotheekteam</p>"
+msgstr "<p>Hallo,</p> <p>We vragen u een vragenlijst in te vullen om te begrijpen hoe bewerkers de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer ingelogd op de Wikipedia-bibliotheek, dus we horen graag uw mening!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We stellen uw terugkoppeling zeer op prijs. Deze vragenlijst helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben direct invloed op de manier waarop de Wikimedia Foundation prioriteit geeft aan technische werkzaamheden en samenwerking voor dit project.</p> <p>Het invullen van de vragenlijst duurt 5-10 minuten.</p> <p>Als u in de toekomst geen vragenlijsten meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We zullen u dan van onze mailinglijst verwijderen.</p> <p>Bedankt,</p> <p>Het Wikipedia-bibliotheekteam</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
@@ -1183,12 +1183,12 @@ msgstr "Gebruikersnaam ontbreekt"
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is invalid.
 #: TWLight/ezproxy/views.py:55
 msgid "Invalid EZProxy target URL."
-msgstr "Ongeldige EZProxy target URL"
+msgstr "Ongeldige doel-url voor EZProxy"
 
 #. Translators: Error text displayed to users when the target URL to access proxied publisher resources is missing.
 #: TWLight/ezproxy/views.py:60
 msgid "Missing EZProxy target URL."
-msgstr "Ontbrekende EXProxy target URL"
+msgstr "Ontbrekende doel-url voor EXProxy"
 
 #. Translators: Shown in the search button.
 #: TWLight/forms.py:56 TWLight/templates/header_partial_b4.html:48
@@ -1329,7 +1329,7 @@ msgstr "Niet beschikbaar"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr "Met de Wikipedia-bibliotheek hebben actieve redacteuren gratis toegang tot een breed scala aan collecties van betrouwbare bronnen achter een betaalmuur!"
+msgstr "Met de Wikipedia-bibliotheek hebben actieve bewerkers gratis toegang tot een breed scala aan collecties van betrouwbare bronnen achter een betaalmuur!"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
@@ -1386,7 +1386,7 @@ msgstr "Suggesties samenvoegen"
 #: TWLight/resources/templates/resources/merge_suggestion.html:64
 #: TWLight/resources/templates/resources/suggest.html:72
 msgid "URL"
-msgstr "URL"
+msgstr "Url"
 
 #: TWLight/resources/templates/resources/merge_suggestion.html:70
 #: TWLight/resources/templates/resources/suggest.html:78
@@ -1910,7 +1910,7 @@ msgstr "Wat doe ik nadat ik toegang heb gekregen?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:114
 msgid "Approved editors <i>may</i> use their access to:"
-msgstr "Goedgekeurde redacteuren <i>mogen</i> hun toegang gebruiken om:"
+msgstr "Goedgekeurde bewerkers <i>mogen</i> hun toegang gebruiken om:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:118
@@ -1930,7 +1930,7 @@ msgstr "Enkele exemplaren van de inhoud van partners afdrukken"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:132
 msgid "Approved editors <i>should not</i>:"
-msgstr "Goedgekeurde redacteuren <i>mogen niet</i>:"
+msgstr "Goedgekeurde bewerkers <i>mogen niet</i>:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:136
@@ -1990,7 +1990,7 @@ msgstr "Referentie-praktijken"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:206
 msgid "Citation practices vary by project and even by article. Generally, we support editors citing where they found information, in a form that allows others to check it for themselves. That often means providing both original source details as well as a link to the partner database in which the source was found."
-msgstr "Het toepassen van referenties verschilt per project en zelfs per pagina. Over het algemeen ondersteunen we redacteuren die vermelden waar ze informatie hebben gevonden, in een vorm die anderen in staat stelt deze zelf te controleren. Dat betekent vaak het verstrekken van zowel originele brongegevens als een koppeling naar de partnerdatabase waarin de bron is gevonden."
+msgstr "Het toepassen van referenties verschilt per project en zelfs per pagina. Over het algemeen ondersteunen we bewerkers die vermelden waar ze informatie hebben gevonden, in een vorm die anderen in staat stelt deze zelf te controleren. Dat betekent vaak het verstrekken van zowel oorspronkelijke brongegevens als een koppeling naar de partnerdatabase waarin de bron is gevonden."
 
 #. Translators: This is the heading for a section on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #. Translators: This link is at the bottom of every page and can be clicked by users to contact the wikipedia library team.
@@ -2704,7 +2704,7 @@ msgstr "Gebruiksvoorwaarden en privacyverklaring van Wikipedia-bibliotheekkaart"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:51
 msgid "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\"> The Wikipedia Library </a> has partnered with publishers around the world to allow users to access otherwise paywalled resources. This website allows Wikipedia editors to search and access these resources."
-msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\"> De Wikipedia-bibliotheek </a> werkt samen met uitgevers over de hele wereld om gebruikers toegang te geven tot bronnen die anders een betaalmuur zouden zitten. Deze website stelt Wikipedia-redacteuren in staat om deze bronnen te doorzoeken en te openen."
+msgstr "<a class=\"twl-links\" href=\"https://meta.wikimedia.org/wiki/The_Wikipedia_Library\"> De Wikipedia-bibliotheek </a> werkt samen met uitgevers over de hele wereld om gebruikers toegang te geven tot bronnen die anders een betaalmuur zouden zitten. Deze website stelt Wikipedia-bewerkers in staat om deze bronnen te doorzoeken en te openen."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:63
@@ -2876,7 +2876,7 @@ msgstr "De Wikimedia Foundation is een non-profitorganisatie gevestigd in San Fr
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:392
 msgid "Please note that in the event of any differences in meaning or interpretation between the original English version of these terms and a translation, the original English version takes precedence."
-msgstr "Houd er rekening mee dat bij eventuele verschillen in betekenis of interpretatie tussen de originele Engelse versie van deze voorwaarden en een vertaling, de originele Engelse versie voorrang heeft."
+msgstr "Houd er rekening mee dat bij eventuele verschillen in betekenis of interpretatie tussen de oorspronkelijke Engelse versie van deze voorwaarden en een vertaling, de oorspronkelijke Engelse versie voorrang heeft."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated.
 #: TWLight/users/templates/users/terms.html:403
@@ -2949,7 +2949,7 @@ msgstr "Verlengen"
 #. Translators: This is the heading of the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:11
 msgid "Delete all data"
-msgstr "Verwijder alle data"
+msgstr "Alle gegevens verwijderen"
 
 #. Translators: This message is displayed on the page where users can request the deletion of their data.
 #: TWLight/users/templates/users/user_confirm_delete.html:17
