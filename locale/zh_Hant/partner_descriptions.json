@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
+			"LowensteinYang",
 			"Sean0115"
 		]
 	},
@@ -26,7 +27,7 @@
 	"79_short_description": "<strong>Civilica</strong> 是科學期刊與會議論文集的出版商。提供超過 70 萬篇已發表論文的完整取用權限。",
 	"15_short_description": "<strong>考科藍</strong>提供對考科藍圖書館的取用，有收集 6 個包含對系統性回顧、評估、估算資料庫的醫學主題資。",
 	"105_short_description": "<strong>德古意特</strong>是一間專門出版學術文獻的學術出版商，帳號可用來取用德古意特線上的電子資源，包含像是藝術、人文、社會科學、自然科學、神學/宗教、醫學、數學、法律和一般參考文獻的電子書與期刊。",
-	"83_short_description": "<strong>ZEIT ONLINE</strong> 是德國週報《時代週報》（Die Zeit）的線上版本。",
+	"83_short_description": "<strong>Die Zeit</strong> 是一個德國的週報。",
 	"57_short_description": "<strong>EBSCO 資訊服務</strong>是位在美國一間主要的圖書館資源與資訊服務提供商。EBSCO 與維基百科圖書館之間有存取多個資料庫的合作夥伴關係。",
 	"57_description": "可用資料庫：\n<ul>\n<li>Academic Search Complete</li>\n<li>America: History and Life</li>\n<li>Applied Science &amp; Technology Source</li>\n<li>Al-Kotob Arabic eBooks Collection</li>\n<li>Arab World Research Source: Al Masdar</li>\n<li>Art Source</li>\n<li>Book Review Digest Plus</li>\n<li>Business Search Complete</li>\n<li>Caribbean Search</li>\n<li>CINAHL Complete</li>\n<li>Communications and Mass Media Complete</li>\n<li>DynaMed Plus</li>\n<li>Education Research Complete</li>\n<li>Enfermería al Día</li>\n<li>ERIC（Education Resource Information Center）</li>\n<li>Fuente Académica Premier</li>\n<li>Humanities Full Text</li>\n<li>LGBT Life with Full Text</li>\n<li>Life Magazine Archive</li>\n<li>Literary Reference Center Plus</li>\n<li>MasterFILE Complete</li>\n<li>MedicLatina</li>\n<li>MEDLINE Complete</li>\n<li>Nursing Reference Center</li>\n<li>Patient Education Reference Center</li>\n<li>Psychology &amp; Behavioral Sciences Collection</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX with Full Text</li>\n<li>SportDiscus with Full Text</li>\n</ul>",
 	"71_short_description": "<strong>Economic &amp; Political Weekly</strong> 是每週出版的社會科學期刊，可取用自 1949 年以來至今的出版物。會對印度相關主題做出貢獻的編輯者給予優先。",
@@ -156,5 +157,7 @@
 	"178_short_description": "<strong>Inlibra</strong> 提供來自 100 多家出版商的學術內容，包括 50000 多本電子書與 120 種學術期刊。",
 	"179_short_description": "<strong>Newslaundry</strong> 是一個提供媒體批判、報導和評論的印度平台。",
 	"180_short_description": "<strong>The News Minute</strong> 是一個數位新聞平台，報導和撰寫有關印度的各種問題，並特別關注在印度南部五邦。",
-	"181_short_description": "<strong>《哈佛商業評論》</strong>是由哈佛商業出版社出版的領導與管理雜誌。此合作包括線上和行動裝置取用《哈佛商業評論》的核心內容，包括歷史存檔、資料、圖表，以及內幕和精選新聞簡報。"
+	"181_short_description": "<strong>《哈佛商業評論》</strong>是由哈佛商業出版社出版的領導與管理雜誌。此合作包括線上和行動裝置取用《哈佛商業評論》的核心內容，包括歷史存檔、資料、圖表，以及內幕和精選新聞簡報。",
+	"182_short_description": "<strong>Swissdox</strong> 是一個收錄了瑞士主要報紙、雜誌，以及瑞士當地德語、法語廣播與電視報導文章的資料庫。",
+	"183_short_description": "《<strong>每日電訊報</strong>》是一個在英國和國際上發行，獲得多項獎項的多媒體新聞品牌。"
 }

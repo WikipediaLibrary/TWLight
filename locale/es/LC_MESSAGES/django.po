@@ -28,6 +28,7 @@
 # Author: Rossnyev
 # Author: Ryo567
 # Author: Samwalton9 (WMF)
+# Author: Sophocrat
 # Author: Suecarmol
 # Author: TehFrog
 # Author: Tiberius1701
@@ -37,13 +38,13 @@ msgstr ""
 ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-03-16 12:38+0000\n"
-"PO-Revision-Date: 2026-03-19 12:30:14+0000\n"
+"POT-Creation-Date: 2026-04-02 12:38+0000\n"
+"PO-Revision-Date: 2026-06-04 12:27:17+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2026-03-16 14:30:39+0000\n"
-"X-Generator: MediaWiki 1.46.0-alpha; Translate 2025-07-31\n"
+"X-POT-Import-Date: 2026-04-02 14:30:37+0000\n"
+"X-Generator: MediaWiki 1.47.0-alpha; Translate 2025-07-31\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
@@ -654,9 +655,8 @@ msgstr "Fecha aplicada"
 
 #. Translators: This labels the column description showing whether the user had agreed to the terms of use or not.
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:19
-#, fuzzy
 msgid "Has agreed to the terms of use?"
-msgstr "Aceptó las condiciones de uso"
+msgstr "Aceptó las condiciones de uso?"
 
 #. Translators: Coordinators can change the status of multiple applications at one time. This text is shown next to a checkbox located above the list, which users can click to automatically select or deselect all applications in the list.
 #. Translators: On the page where coordinators can send applications to partners, this text labels the checkbox, which checks or unchecks all the other checkboxes.
@@ -2835,7 +2835,6 @@ msgstr "Retención y Manejo de Datos"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
 msgstr "La Wikimedia Foundation y nuestros proveedores de servicio utilizan su información para el propósito legítimo de proporcionarle a La Biblioteca de Wikipedia servicios en soporte de nuestra misión benéfica. Cuándo  solicite una cuenta de Biblioteca de la Wikipedia, o use su cuenta de La Biblioteca de Wikipedia, podemos rutinariamente recoger la siguiente información: su nombre de usuario, dirección de correo electrónico, cantidad de ediciones, fecha de registro, número de identificación de usuario, grupos a los cuales pertenece, y cualesquier derechos de usuario especiales; su nombre, país de residencia, ocupación, y/o afiliación, si lo requiere un socio que esté solicitando; su descripción narrativa de sus contribuciones y razones para solicitar acceso a recursos de un socio; y la fecha en la que acepte estos términos de uso."
 

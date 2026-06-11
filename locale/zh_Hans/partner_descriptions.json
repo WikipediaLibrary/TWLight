@@ -7,6 +7,7 @@
 			"Huajing",
 			"Lantianjialiang",
 			"Mishidexfc",
+			"Peterxy",
 			"Peterxy12",
 			"Sean0115",
 			"Shizhao",
@@ -39,7 +40,7 @@
 	"79_short_description": "<strong>Civilica</strong> 是科学期刊和会议论文集的出版商。可以完全访问超过700,000种已发表的论文。",
 	"15_short_description": "<strong>Cochrane</strong>提供对Cochrane图书馆的访问；包含有关医学主题的6个数据库的馆藏，包括系统的评审，评估和评价数据库。",
 	"105_short_description": "<strong>De Gruyter</strong>是一家学术出版商，专门出版学术文献。帐户可以访问通过De Gruyter Online提供的电子资源，包括艺术、人文、社会科学、自然科学、神学/宗教、医学、数学、法律和参考资料的电子书和期刊。",
-	"83_short_description": "<strong>ZEIT ONLINE</strong>是德国周报Die Zeit的线上版本。",
+	"83_short_description": "<strong>Die Zeit</strong>是一款德国周报。",
 	"57_short_description": "<strong>EBSCO Information Services</strong>是美国一家主要的图书馆资源和信息服务提供商。EBSCO与维基百科图书馆的合作关系包括访问多个数据库。",
 	"57_description": "可用的数据库：\n<ul>\n<li>全部学术搜索</li>\n<li>美国：历史与生活</li>\n<li>应用科学与工程技术来源</li>\n<li>Al-Kotob阿拉伯语电子书馆藏</li>\n<li>阿拉伯世界研究来源：Al Masdar</li>\n<li>艺术来源</li>\n<li>Digest Plus书评</li>\n<li>全部企业搜索</li>\n<li>加勒比海搜索</li>\n<li>全部CINAHL</li>\n<li>全部传播与大众传媒</li>\n<li>DynaMed Plus</li>\n<li>全部教育研究</li>\n<li>Enfermería al Día</li>\n<li>ERIC (教育资源信息中心)</li>\n<li>Fuente Académica Premier</li>\n<li>人文类全文</li>\n<li>LGBT Life全文</li>\n<li>Life Magazine存档</li>\n<li>文学参考中心增强版</li>\n<li>全部MasterFILE</li>\n<li>MedicLatina</li>\n<li>全部MEDLINE</li>\n<li>护理参考中心</li>\n<li>患者教育参考中心</li>\n<li>心理学与行为科学馆藏</li>\n<li>Referencia Latina</li>\n<li>Research Starters Business</li>\n<li>Research Starters Education</li>\n<li>Research Starters Sociology</li>\n<li>Salud en Español</li>\n<li>SocINDEX全文</li>\n<li>SportDiscus全文</li>\n</ul>",
 	"71_short_description": "<strong>Economic &amp; Political Weekly</strong>是每周出版的社会科学杂志。可访问包括1949年以来的所有出版物。将优先考虑对印度相关主题做出贡献的编者。",
@@ -170,5 +171,6 @@
 	"179_short_description": "<strong>Newslaundry</strong>是一个提供媒体批判、报道和评论的印度平台。",
 	"180_short_description": "<strong>The News Minute</strong>是一个数字新闻平台，报导和撰写有关印度的各种问题，并特别聚焦于印度南部五邦。",
 	"181_short_description": "<strong>《哈佛商业评论》</strong>是由哈佛商业出版社出版的领导与管理杂志。此合作包括在线和移动端访问《哈佛商业评论》的核心内容，包括历史存档、数据、图表，以及内幕和精选新闻简报。",
-	"182_short_description": "<strong>Swissdox</strong>是一个数据库，收录了瑞士主流报纸、杂志以及广播电视的德语和法语新闻文章。"
+	"182_short_description": "<strong>Swissdox</strong>是一个数据库，收录了瑞士主流报纸、杂志以及广播电视的德语和法语新闻文章。",
+	"183_short_description": "<strong>The Telegraph</strong>在英国和国际发行，是一个屡获奖项的多媒体新闻品牌。"
 }

@@ -1,0 +1,22 @@
+{
+	"@metadata": {
+		"authors": [
+			"ElangoRamanujam"
+		]
+	},
+	"languages-and-literature_tag": "மொழிகளும் இலக்கியங்களும்",
+	"physical-sciences_tag": "இயற்பியல் அறிவியல்",
+	"music_tag": "இசை",
+	"art_tag": "கலை",
+	"business-and-economics_tag": "வணிகம் மற்றும் பொருளாதாரம்",
+	"law_tag": "சட்டம்",
+	"education_tag": "கல்வி",
+	"philosophy-and-religion_tag": "தத்துவமும் மதமும்",
+	"social-sciences_tag": "சமூக அறிவியல்",
+	"history_tag": "வரலாறு",
+	"culture_tag": "கலாச்சாரம்",
+	"life-sciences_tag": "உயிர் அறிவியல்",
+	"health-sciences_tag": "சுகாதார அறிவியல்",
+	"earth-sciences_tag": "புவி அறிவியல்",
+	"technology_tag": "தொழில்நுட்பம்"
+}

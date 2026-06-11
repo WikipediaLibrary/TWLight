@@ -14,6 +14,7 @@
 # Author: Ice bulldog
 # Author: Isabelle Belato
 # Author: Lc97
+# Author: Leosls
 # Author: Luk3
 # Author: Mariagarbin
 # Author: MuratTheTurkish
@@ -29,13 +30,13 @@ msgstr ""
 ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-03-16 12:38+0000\n"
-"PO-Revision-Date: 2026-03-19 12:30:19+0000\n"
+"POT-Creation-Date: 2026-04-02 12:38+0000\n"
+"PO-Revision-Date: 2026-05-18 12:58:57+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2026-03-16 14:30:39+0000\n"
-"X-Generator: MediaWiki 1.46.0-alpha; Translate 2025-07-31\n"
+"X-POT-Import-Date: 2026-04-02 14:30:37+0000\n"
+"X-Generator: MediaWiki 1.47.0-alpha; Translate 2025-07-31\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
@@ -1123,21 +1124,20 @@ msgstr "Sua candidatura da biblioteca da Wikipédia"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr ""
+msgstr "<p>Olá,</p> <p>Estamos realizando uma pesquisa para entender como os editores usam a Biblioteca da Wikipédia. De acordo com nossos registros, você já acessou a Biblioteca da Wikipédia pelo menos uma vez, então gostaríamos muito de ouvir sua opinião!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>Agradecemos muito seu feedback. Esta pesquisa nos ajudará a entender como a Biblioteca da Wikipédia está sendo usada atualmente e onde ela pode ser aprimorada. Suas respostas impactarão diretamente a forma como a Fundação Wikimedia prioriza o trabalho técnico e de parcerias para este projeto.</p> <p>A pesquisa leva de 5 a 10 minutos para ser concluída.</p> <p>Se você não quiser mais receber nossas pesquisas sobre a Biblioteca da Wikipédia, envie um e-mail para wikipedialibrary@wikimedia.org e removeremos seu endereço de nossas listas de e-mail.</p> <p>Obrigado,</p> <p>Equipe da Biblioteca da Wikipédia</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "Olá! Estamos realizando uma pesquisa para entender como os editores usam a Biblioteca da Wikipédia. De acordo com nossos registros, você já acessou a Biblioteca da Wikipédia pelo menos uma vez, então gostaríamos muito de ouvir sua opinião! %(link)s Agradecemos muito o seu feedback. Esta pesquisa nos ajudará a entender como a Biblioteca da Wikipédia está sendo usada atualmente e onde ela pode ser aprimorada. Suas respostas impactarão diretamente a forma como a Fundação Wikimedia prioriza o trabalho técnico e de parcerias para este projeto. A pesquisa leva de 5 a 10 minutos para ser concluída. Se você não quiser mais receber nossas pesquisas sobre a Biblioteca da Wikipédia, envie um e-mail para wikipedialibrary@wikimedia.org e removeremos seu endereço de nossas listas de e-mails. Obrigado, Equipe da Biblioteca da Wikipédia"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: email subject line
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
 #: TWLight/users/management/commands/survey_active_users.py:118
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "Página inicial da Biblioteca da Wikipédia"
+msgstr "A Biblioteca da Wikipédia precisa da sua ajuda!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -1222,7 +1222,7 @@ msgstr "Tópicos"
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
 msgid "All tags"
-msgstr ""
+msgstr "Todas as etiquetas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many languages a collection supports.
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this text is shown to indicate how many languages a collection supports.
@@ -1236,9 +1236,8 @@ msgstr "Idiomas"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific language filter is selected.
 #: TWLight/resources/filters.py:39
-#, fuzzy
 msgid "All languages"
-msgstr "Idiomas"
+msgstr "Todos os idiomas"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
 #. Translators: This indicates that a collection included in the centralized search tool (https://meta.wikimedia.org/wiki/Talk:Library_Card_platform/Search)
@@ -2102,15 +2101,14 @@ msgstr "Mais informações"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
-#, fuzzy
 msgid " The Wikipedia Library"
-msgstr "A biblioteca da Wikipédia"
+msgstr "A Biblioteca da Wikipédia"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
-#, fuzzy, python-format
+#, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Mais de 90 dos melhores bancos de dados do mundo, de acesso por assinatura, com conteúdo em %(no_of_languages)s idiomas, agora livres para wikipedistas de todas as origens"
+msgstr "Mais de 100 das principais bases de dados do mundo, disponíveis apenas por assinatura, com conteúdo em %(no_of_languages)s idiomas, gratuitas para wikipedistas de todas as origens."
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2255,7 +2253,7 @@ msgstr "Não é possível adicionar o(a) parceiro(a) {partner} aos seus favorito
 #: TWLight/users/oauth.py:257
 #, python-brace-format
 msgid "There was a problem with the access token. Please try again later or {contact_link} if the problem persists."
-msgstr ""
+msgstr "Ocorreu um problema com o token de acesso. Tente novamente mais tarde ou {contact_link} se o problema persistir."
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
@@ -2468,7 +2466,7 @@ msgstr "Não está bloqueado em nenhum projeto?"
 #. Translators: If a user has received an exemption against a criterion, this is shown next to "No" on their user page and applications next to this criterion.
 #: TWLight/users/templates/users/editor_detail_data.html:132
 msgid "(exemption granted)"
-msgstr ""
+msgstr "(isenção concedida)"
 
 #. Translators: This message is shown on a user's profile if their Wikimedia account is blocked on one or more projects. They may still be granted access to the Library Bundle, but need to contact Wikipedia Library staff to verify.
 #: TWLight/users/templates/users/editor_detail_data.html:137
@@ -2829,15 +2827,14 @@ msgstr "Retenção e Manipulação de Dados"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:245
-#, fuzzy
 msgid "The Wikimedia Foundation and our service providers use your information for the legitimate purpose of providing Wikipedia Library services in support of our charitable mission. When you apply for a Wikipedia Library account, or use your Wikipedia Library account, we may routinely collect the following information: your username, email address, edit count, registration date, user ID number, groups to which you belong, and any special user rights; your name, country of residence, and/or affiliation, if required by a partner to which you are applying; your narrative description of your contributions and reasons for applying for access to partner resources; and the date you agree to these terms of use."
-msgstr "A Fundação Wikimedia e seus provedores de serviços usam suas informações com a finalidade de fornecer serviços da Biblioteca Wikipedia em apoio à nossa missão de caridade. Quando você solicita uma conta nesta/ou usa sua conta da Biblioteca, coletaremos as seguintes informações: nome de usuário, endereço de e-mail, contagem de edições, data de registro, número de identificação do usuário, grupos aos quais você pertence e qualquer nível especial de usuário; seu nome, país de residência, ocupação e/ou afiliação (se exigido por um parceiro ao qual você está se candidatando); descrição de suas contribuições e razões para solicitar acesso aos recursos do parceiro, e; a data em que você concorda com estes termos de uso."
+msgstr "A Fundação Wikimedia e nossos provedores de serviços usam suas informações para o propósito legítimo de fornecer os serviços da Biblioteca Wikipédia em apoio à nossa missão beneficente. Ao solicitar uma conta na Biblioteca Wikipédia ou ao usar sua conta, podemos coletar rotineiramente as seguintes informações: seu nome de usuário, endereço de e-mail, número de edições, data de registro, número de identificação do usuário, grupos aos quais você pertence e quaisquer direitos especiais de usuário; seu nome, país de residência e/ou afiliação, se exigido por um parceiro ao qual você esteja se candidatando; uma descrição narrativa de suas contribuições e os motivos pelos quais você está solicitando acesso aos recursos do parceiro; e a data em que você concorda com estes termos de uso."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:262
-#, fuzzy, python-format
+#, python-format
 msgid "Each publisher who is a member of the Wikipedia Library program requires different specific information in the application. Some publishers may request only an email address, while others request more detailed data, such as your name, location, or institutional affiliation. When you complete your application, you will only be asked to supply information required by the publishers you have chosen, and each publisher will only receive the information they require for providing you with access. Please see our <a class=\"twl-links\" href=\"%(all_partners_url)s\">partner information</a> pages to learn what information is required by each publisher to gain access to their resources."
-msgstr "Cada editora que é membro do programa Biblioteca da Wikipédia requer informação específica na candidatura, algumas podem pedir só um endereço de e-mail, enquanto outras pedem dados mais detalhados, como o seu nome, localização, ocupação ou filiação em instituições. Será pedida a informação exigida de acordo com as editoras que escolheu, e cada só receberá a informação que requereu para lhe conceder acesso. Consulte as nossas páginas de <a class=\"twl-links\" href=\"%(all_partners_url)s\">informações de parceiros</a> para saber que informação é exigida por cada editora para obter acesso aos recursos da mesma."
+msgstr "Cada editora membro do programa Biblioteca da Wikipédia exige informações específicas diferentes no formulário de inscrição. Algumas editoras podem solicitar apenas um endereço de e-mail, enquanto outras solicitam dados mais detalhados, como seu nome, localização ou afiliação institucional. Ao preencher o formulário, você só precisará fornecer as informações exigidas pelas editoras que você escolheu, e cada editora receberá apenas as informações necessárias para lhe conceder acesso. Consulte nossas <a class=\"twl-links\" href=\"%(all_partners_url)s\">páginas de informações do parceiro</a> para saber quais informações são exigidas por cada editora para que você possa acessar seus recursos."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Wikimedia Foundation should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:277
@@ -2852,9 +2849,8 @@ msgstr "Para administrar o programa da Biblioteca da Wikipédia reteremos os dad
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:305
-#, fuzzy
 msgid "If you decide to disable your Wikipedia Library account, you can use the delete button on your profile to delete certain personal information associated with your account. We will delete your real name, institutional affiliation, and country of residence. Please note that the system will retain a record of your username, the publishers to which you applied or had access, and the dates of that access. Note that deletion is not reversible. Deletion of your Wikipedia Library account may also correspond with the removal of any resource access to which you were eligible or approved. If you request the deletion of account information and later wish to apply for a new account, you will need to provide the necessary information again."
-msgstr "Se você decidir desativar sua conta da Biblioteca da Wikipédia, poderá usar o botão Excluir no seu perfil para excluir determinadas informações pessoais associadas à sua conta. Excluiremos seu nome real, profissão, afiliação institucional e país de residência. Observe que o sistema manterá um registro do seu nome de usuário, dos editores aos quais você aplicou ou teve acesso e as datas desse acesso. Observe que a exclusão não é reversível. A exclusão da sua conta da Biblioteca da Wikipédia também pode corresponder à remoção de qualquer acesso a recursos aos quais você foi elegível ou aprovado. Se você solicitar a exclusão de informações da conta e posteriormente desejar solicitar uma nova conta, precisará fornecer as informações necessárias novamente."
+msgstr "Se você decidir desativar sua conta da Biblioteca da Wikipédia, poderá usar o botão de exclusão em seu perfil para remover certas informações pessoais associadas à sua conta. Excluiremos seu nome real, sua afiliação institucional e seu país de residência. Observe que o sistema manterá um registro do seu nome de usuário, das editoras às quais você se candidatou ou teve acesso e as datas desse acesso. Observe também que a exclusão é irreversível. A exclusão da sua conta da Biblioteca da Wikipédia pode resultar na remoção de qualquer acesso a recursos aos quais você tinha direito ou que tenha sido aprovado. Se você solicitar a exclusão das informações da conta e, posteriormente, desejar solicitar uma nova conta, precisará fornecer as informações necessárias novamente."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). WMF should not be translated. Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:321

@@ -21,13 +21,13 @@ msgstr ""
 ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-03-16 12:37+0000\n"
-"PO-Revision-Date: 2026-03-19 12:30:19+0000\n"
+"POT-Creation-Date: 2026-04-02 12:38+0000\n"
+"PO-Revision-Date: 2026-06-08 12:29:00+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2026-03-16 14:30:39+0000\n"
-"X-Generator: MediaWiki 1.46.0-alpha; Translate 2025-07-31\n"
+"X-POT-Import-Date: 2026-04-02 14:30:37+0000\n"
+"X-Generator: MediaWiki 1.47.0-alpha; Translate 2025-07-31\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
@@ -217,7 +217,7 @@ msgstr "Aan partner verstuurd"
 #. Translators: This is the status of an application that has been marked as invalid, therefore not as such declined.
 #: TWLight/applications/models.py:64
 msgid "Invalid"
-msgstr "Ongeldig"
+msgstr "Onjuist"
 
 #. Translators: One of four choices users can choose from as the preferred duration of how long they would like their access to a particular resource to last. 1 month in this case.
 #: TWLight/applications/models.py:120
@@ -258,7 +258,7 @@ msgstr "U ontvangt de toegangsgegevens binnen een week of twee na de verwerking 
 #. Translators: This comment is added to open applications when a partner joins the Library Bundle, which does not require applications.
 #: TWLight/applications/signals.py:247
 msgid "This partner joined the Library Bundle, which does not require applications. This application will be marked as invalid."
-msgstr "Deze partner is lid geworden van de Bibliotheekbundel, waardoor er geen aparte aanvraag meer nodig is. Uw aanvraag wordt daarom als ongeldig gemarkeerd."
+msgstr "Deze partner is lid geworden van de Bibliotheekbundel, waardoor er geen aparte aanvraag meer nodig is. Uw aanvraag wordt daarom als incorrect gemarkeerd."
 
 #. Translators: This is shown to users if the application is to a partner for which we have run out of available accounts. The application is therefore on a 'waitlist', and will be reviewed when more accounts are available.
 #: TWLight/applications/templates/applications/application_evaluation.html:29
@@ -881,7 +881,7 @@ msgstr "Kies ten minste één aanvraag."
 #. Translators: After a coordinator has changed the status of a number of applications, this message appears.
 #: TWLight/applications/views.py:1046
 msgid "Batch update of application(s) {} successful."
-msgstr "Batchupdate van aanvraag/aanvragen {} succesvol."
+msgstr "Batchupdate van aanvraag/aanvragen {} geslaagd."
 
 #. Translators: After a coordinator has changed the status of a number of applications to APPROVED, if the corresponding partner(s) is/are waitlisted or has no accounts for distribution, this message appears.
 #: TWLight/applications/views.py:1055
@@ -1115,13 +1115,13 @@ msgstr "Uw aanvraag voor de Wikipedia Library"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr "<p>Hallo,</p> <p>We houden momenteel een enquête om te begrijpen hoe redacteuren de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer ingelogd op de Wikipedia-bibliotheek, dus we horen graag uw mening!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We stellen uw feedback zeer op prijs. Deze enquête helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben direct invloed op de manier waarop de Wikimedia Foundation prioriteit geeft aan technische werkzaamheden en samenwerking voor dit project.</p> <p>Het invullen van de enquête duurt 5-10 minuten.</p> <p>Als u in de toekomst geen enquêtes meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We zullen u dan van onze mailinglijst verwijderen.</p> <p>Bedankt,</p> <p>Het Wikipedia-bibliotheekteam</p>"
+msgstr "<p>Hallo,</p> <p>We vragen u een vragenlijst in te vullen om te begrijpen hoe redacteuren de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer ingelogd op de Wikipedia-bibliotheek, dus we horen graag uw mening!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We stellen uw terugkoppeling zeer op prijs. Deze vragenlijst helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben direct invloed op de manier waarop de Wikimedia Foundation prioriteit geeft aan technische werkzaamheden en samenwerking voor dit project.</p> <p>Het invullen van de vragenlijst duurt 5-10 minuten.</p> <p>Als u in de toekomst geen vragenlijsten meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We zullen u dan van onze mailinglijst verwijderen.</p> <p>Bedankt,</p> <p>Het Wikipedia-bibliotheekteam</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr "Hallo, we houden momenteel een enquête om te begrijpen hoe redacteuren de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer aangemeld bij de Wikipedia-bibliotheek, dus we horen graag uw mening! %(link)s We stellen uw terugkoppeling zeer op prijs - deze enquête helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben directe invloed op de prioriteiten van de Wikimedia Foundation op het gebied van technische werkzaamheden en samenwerking voor dit project. Het invullen van de enquête duurt vijf tot tien minuten. Als u in de toekomst geen enquêtes meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We verwijderen u dan van onze mailinglijst. Bedankt, het team van de Wikipedia-bibliotheek"
+msgstr "Hallo, vragen u een vragenlijst in te vullen om te begrijpen hoe bewerkers de Wikipedia-bibliotheek gebruiken. Volgens onze gegevens bent u minstens één keer aangemeld bij de Wikipedia-bibliotheek, dus we horen graag uw mening! %(link)s We stellen uw terugkoppeling zeer op prijs - deze vragenlijst helpt ons te begrijpen hoe de Wikipedia-bibliotheek momenteel wordt gebruikt en waar verbeteringen mogelijk zijn. Uw antwoorden hebben directe invloed op de prioriteiten van de Wikimedia Foundation op het gebied van technische werkzaamheden en samenwerking voor dit project. Het invullen van de vragenlijst duurt vijf tot tien minuten. Als u in de toekomst geen vragenlijsten meer wilt ontvangen over de Wikipedia-bibliotheek, kunt u ons dit laten weten door een e-mail te sturen naar wikipedialibrary@wikimedia.org. We verwijderen u dan van onze mailinglijst. Bedankt, het team van de Wikipedia-bibliotheek"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: email subject line
@@ -1844,7 +1844,7 @@ msgstr "Over de Wikipedia bibliotheek"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:20
 msgid "This platform is our central tool for facilitating access to our available collections. Here you can see which partnerships are available, search their contents, and apply for and access the ones you’re interested in."
-msgstr "Dit platform is onze centrale tool om de toegang tot onze beschikbare collecties te vergemakkelijken. Hier kunt u zien welke partnerschappen beschikbaar zijn, de inhoud ervan doorzoeken en de partnerschappen aanvragen en openen waarin u geïnteresseerd bent."
+msgstr "Dit platform is ons centrale hulpmiddel om de toegang tot onze beschikbare collecties te vergemakkelijken. Hier kunt u zien welke partnerschappen beschikbaar zijn, de inhoud ervan doorzoeken en de partnerschappen aanvragen en openen waarin u geïnteresseerd bent."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:29
@@ -1865,12 +1865,12 @@ msgstr "Wie kan toegang krijgen?"
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Wikimedia Foundation should not be translated.
 #: TWLight/templates/about.html:55
 msgid "Any active editor in good standing can receive access. For publishers with limited numbers of accounts, applications are reviewed based on the editor’s needs and contributions. If you think you could use access to one of our partner resources and are an active editor in any project supported by the Wikimedia Foundation, please apply."
-msgstr "Elke actieve redacteur met een goede reputatie kan toegang krijgen. Voor uitgevers met een beperkt aantal accounts worden aanvragen beoordeeld op basis van de behoeften en bijdragen van de redacteur. Als u denkt dat u toegang tot een van onze partnerbronnen zou kunnen gebruiken en een actieve redacteur bent in een project dat wordt ondersteund door de Wikimedia Foundation, meld u dan aan."
+msgstr "Elke actieve bewerker met een goede reputatie kan toegang krijgen. Voor uitgevers met een beperkt aantal accounts worden aanvragen beoordeeld op basis van de behoeften en bijdragen van de bewerker. Als u denkt dat u toegang tot een van onze partnerbronnen zou kunnen gebruiken en een actieve bewerker bent in een project dat wordt ondersteund door de Wikimedia Foundation, meld u dan aan."
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:65
 msgid "Any editor can use the library if they meet a few basic requirements:"
-msgstr "Elke redacteur kan de bibliotheek gebruiken als deze aan een paar basisvereisten voldoet:"
+msgstr "Elke bewerker kan de bibliotheek gebruiken als deze aan een paar basisvereisten voldoet:"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:71
@@ -1950,7 +1950,7 @@ msgstr "Systematisch gedrukte of elektronische kopieën maken van meerdere fragm
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/). Stub is a technical term for a short Wikipedia article, use the appropriate Wikipedia term in your language.
 #: TWLight/templates/about.html:148
 msgid "Datamine metadata without permission, in order, for instance, to use metadata for auto-created stub articles"
-msgstr "Metadata dataminen zonder toestemming, om bijvoorbeeld metadata te gebruiken voor automatisch aangemaakte beginnetjes-artikelen"
+msgstr "Metagegevens dataminen zonder toestemming, om bijvoorbeeld metagegevens te gebruiken voor automatisch aangemaakte beginnetje-pagina's"
 
 #. Translators: This text is found on the About page (https://wikipedialibrary.wmflabs.org/about/).
 #: TWLight/templates/about.html:154
@@ -2376,7 +2376,7 @@ msgstr "Gebruikersgegevens"
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:49
 msgid "Editor data"
-msgstr "Data van redacteur"
+msgstr "Bewerkersgegevens"
 
 #. Translators: This is shown on editor profiles, in their profile page or on applications.
 #: TWLight/users/templates/users/editor_detail.html:59
@@ -2463,7 +2463,7 @@ msgstr "(vrijstelling verleend)"
 #: TWLight/users/templates/users/editor_detail_data.html:137
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a class=\"twl-links\" href=\"%(contact_url)s\">contact us</a>."
-msgstr "Het lijkt erop dat u een actieve blokkering op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a class=\"twl-links\" href=\"%(contact_url)s\">neem contact met ons op</a>."
+msgstr "Het lijkt erop dat u een actieve blokkade op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a class=\"twl-links\" href=\"%(contact_url)s\">neem contact met ons op</a>."
 
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this is the heading for a Yes/No program eligibility question.
 #: TWLight/users/templates/users/editor_detail_data.html:153
@@ -2555,7 +2555,7 @@ msgstr "Is akkoord gegaan met de <a href=\"%(terms)s\" class=\"text-danger\">geb
 #: TWLight/users/templates/users/eligibility_modal.html:40
 #, python-format
 msgid "It looks like you have an active block on your account. If you meet the other criteria you may still be permitted access to the library - please <a href=\"%(contact_url)s\">contact us</a>."
-msgstr "Het lijkt erop dat u een actieve blokkering op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a href=\"%(contact_url)s\">neem contact met ons op</a>."
+msgstr "Het lijkt erop dat u een actieve blokkade op uw account heeft. Als u aan de andere criteria voldoet, krijgt u mogelijk nog steeds toegang tot de bibliotheek - <a href=\"%(contact_url)s\">neem contact met ons op</a>."
 
 #. Translators: Instructions to refresh a user's data.
 #: TWLight/users/templates/users/eligibility_modal.html:50
@@ -2595,7 +2595,7 @@ msgstr "Taal instellen"
 #. Translators: This text on the user page helps users naviage to the TranslateWiki Wikipedia Library Card platform translation page.
 #: TWLight/users/templates/users/language_form.html:31
 msgid "You can help translate the tool at <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
-msgstr "U kunt de tool helpen vertalen op <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
+msgstr "U kunt het hulpmiddel helpen vertalen op <a class=\"twl-links\" href=\"https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
 #: TWLight/users/templates/users/my_applications.html:65
@@ -2719,12 +2719,12 @@ msgstr "Vereisten voor een account in de Wikipedia-bibliotheek"
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:78
 msgid "Access to resources via The Wikipedia Library is reserved for community members who have demonstrated their commitment to the Wikimedia projects, and who will use their access to these resources to improve project content. To that end, in order to be eligible for The Wikipedia Library, we require that you be registered for a user account on the projects, with at least 500 edits, six (6) months of activity, and 10+ edits in the last month. We ask that you do not request access to any publishers with a limited number of available accounts whose resources you can already access for free through your local library or university, or another institution or organization, in order to provide that opportunity to others."
-msgstr "Toegang tot bronnen via de Wikipedia-bibliotheek is gereserveerd voor leden van de gemeenschap die hun betrokkenheid bij de Wikimedia-projecten hebben getoond en die hun toegang tot deze bronnen zullen gebruiken om de projectinhoud te verbeteren. Om in aanmerking te komen voor de Wikipedia-bibliotheek, vereisen we daarom dat u geregistreerd bent met een gebruikersaccount voor de projecten, met ten minste 500 bewerkingen, zes maanden activiteit en 10+ bewerkingen in de afgelopen maand. We vragen u geen toegang te vragen van uitgevers met een beperkt aantal beschikbare accounts waarvan u al gratis toegang heeft via uw plaatselijke bibliotheek of universiteit, of een andere instelling of organisatie, zodat we die mogelijkheid aan anderen kunnen bieden."
+msgstr "Toegang tot bronnen via de Wikipedia-bibliotheek is gereserveerd voor leden van de gemeenschap die hun betrokkenheid bij de Wikimedia-projecten hebben aangetoond en die hun toegang tot deze bronnen zullen gebruiken om de projectinhoud te verbeteren. Om in aanmerking te komen voor de Wikipedia-bibliotheek, vereisen we daarom dat u geregistreerd bent met een gebruikersaccount voor de projecten, met ten minste 500 bewerkingen, zes maanden activiteit en 10+ bewerkingen in de afgelopen maand. We vragen u geen toegang te vragen van uitgevers met een beperkt aantal beschikbare accounts waarvan u al gratis toegang heeft via uw plaatselijke bibliotheek of universiteit, of een andere instelling of organisatie, zodat we die mogelijkheid aan anderen kunnen bieden."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:94
 msgid "Additionally, if you are currently blocked or banned from a Wikimedia project, applications to resources may be rejected or restricted. If you obtain a Wikipedia Library account, but a block or ban is subsequently instituted against you on one of the projects, you may lose access to your Wikipedia Library account."
-msgstr "Bovendien, als u momenteel bent geblokkeerd of verbannen uit een Wikimedia-project, kunnen aanvragen voor bronnen worden afgewezen of beperkt. Als u een account in de Wikipedia-bibliotheek verkrijgt, maar er vervolgens een blokkering of verbod op u wordt ingesteld voor een van de projecten, kunt u de toegang tot uw account in de Wikipedia-bibliotheek kwijtraken."
+msgstr "Bovendien, als u momenteel bent geblokkeerd of verbannen uit een Wikimedia-project, kunnen aanvragen voor bronnen worden afgewezen of beperkt. Als u een account in de Wikipedia-bibliotheek verkrijgt, maar er vervolgens een blokkade of verbod op u wordt ingesteld voor een van de projecten, kunt u de toegang tot uw account in de Wikipedia-bibliotheek kwijtraken."
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:104
@@ -2789,7 +2789,7 @@ msgstr "Het systematisch beschikbaar stellen van gedrukte of elektronische kopie
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/).
 #: TWLight/users/templates/users/terms.html:204
 msgid "Data mining metadata without permission—for example, in order to use metadata for auto-created stub articles;"
-msgstr "Datamining van metadata zonder toestemming, bijvoorbeeld om metadata te gebruiken voor automatisch gemaakte beginnetjes-artikelen;"
+msgstr "Datamining van metagegevens zonder toestemming, bijvoorbeeld om metagegevens te gebruiken voor automatisch gemaakte beginnetje-pagina's;"
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
 #: TWLight/users/templates/users/terms.html:211

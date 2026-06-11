@@ -8,6 +8,7 @@
 			"Escargot bleu",
 			"Framawiki",
 			"Gomoko",
+			"Lenchanteur",
 			"Mahabarata",
 			"Melimeli",
 			"SaldırganSincap",
@@ -168,5 +169,6 @@
 	"178_short_description": "<strong>Inlibra</strong> propose des contenus académiques provenant d'une centaine d'éditeurs, avec plus de 50 000 livres électroniques et 120 revues académiques.",
 	"179_short_description": "<strong>Newslaundry</strong> est une plateforme indienne proposant des analyses, des reportages et des commentaires sur les médias.",
 	"180_short_description": "<strong>The News Minute</strong> est une plateforme d'information numérique qui traite de sujets en Inde, en particulier dans les cinq États du sud.",
-	"181_short_description": "<strong>Harvard Business Review</strong> est un magazine de leadership et de management publié par Harvard Business Publishing. Notre partenariat inclut un accès à son contenu principal, notamment aux archives, ainsi qu'aux données, aux visuels et aux newsletters Insider et Best of the Issue."
+	"181_short_description": "<strong>Harvard Business Review</strong> est un magazine de leadership et de management publié par Harvard Business Publishing. Notre partenariat inclut un accès à son contenu principal, notamment aux archives, ainsi qu'aux données, aux visuels et aux newsletters Insider et Best of the Issue.",
+	"182_short_description": "<strong>Swissdox</strong> est une base de données d'articles de presse provenant des principaux journaux et magazines ainsi que des rapports de radio et de télévisions de la Suisse en allemand et en français."
 }

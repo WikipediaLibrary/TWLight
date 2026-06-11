@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Huajing"
+			"Huajing",
+			"Rabea-Lorina Dehning (WMDE)"
 		]
 	},
 	"24_short_description": "Short description of The American Association for the Advancement of Science.\n\nWebsites:\n* https://www.aaas.org/\n* https://sciencemag.org\n\nEnglish Wikipedia:\n* [[:w:en:American Association for the Advancement of Science|American Association for the Advancement of Science]]\n* [[:w:en:Science (journal)|Science (journal)]]",
@@ -26,7 +27,7 @@
 	"79_short_description": "Short description of Civilica.\n\nWebsite: https://civilica.com/\n\nEnglish Wikipedia: [[:w:en:Civilica|Civilica]]\n\nPersian Wikipedia: [[:w:fa:سیویلیکا|سیویلیکا]]",
 	"15_short_description": "Short description of Cochrane.\n\nWebsite: https://www.cochrane.org/\n\nEnglish Wikipedia: [[:w:en:Cochrane Library|Cochrane Library]]",
 	"105_short_description": "Short description of De Gruyter.\n\nWebsite: https://www.degruyter.com/\n\nEnglish Wikipedia: [[:w:en:De Gruyter|De Gruyter]]\n\nGerman Wikipedia: [[:w:de:Walter de Gruyter (Verlag)|Walter de Gruyter (Verlag)]]",
-	"83_short_description": "Short description of ZEIT ONLINE.\n\nWebsite: https://www.zeit.de\n\nEnglish Wikipedia: [[:w:en:Die Zeit|Die Zeit]]\n\nGerman Wikipedia: [[:w:de:Die Zeit|Die Zeit]]",
+	"83_short_description": "Short description of DIE ZEIT.\n\nWebsite: https://www.zeit.de\n\nEnglish Wikipedia: [[:w:en:Die Zeit|Die Zeit]]\n\nGerman Wikipedia: [[:w:de:Die Zeit|Die Zeit]]",
 	"57_short_description": "Short description of EBSCO.\n\nWebsite: https://www.ebsco.com/\n\nEnglish Wikipedia: [[:w:en:EBSCO Information Services|EBSCO Information Services]]",
 	"57_description": "Additional description text for EBSCO Information Services.",
 	"71_short_description": "Short description of Economic & Political Weekly.\n\nWebsite: https://www.epw.in\n\nEnglish Wikipedia: [[:w:en:Economic and Political Weekly|Economic and Political Weekly]]",
@@ -147,5 +148,6 @@
 	"179_short_description": "Short description of Newslaundry.\n\n* Website: https://www.newslaundry.com/",
 	"180_short_description": "Short description of News Minute.\n\n* Website: https://www.thenewsminute.com/",
 	"181_short_description": "Short description of Harvard Business Review.\n\n* Website: https://hbr.org/",
-	"182_short_description": "Short description of Swissdox.\n\n* Website: https://swissdox.ch/"
+	"182_short_description": "Short description of Swissdox.\n\n* Website: https://swissdox.ch/",
+	"183_short_description": "Short description of The Telegraph.\n\n* Website: https://telegraph.co.uk/"
 }
