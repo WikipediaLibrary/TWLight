@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2026-05-18 12:58:54+0000\n"
+"PO-Revision-Date: 2026-06-15 12:29:53+0000\n"
 "X-POT-Import-Date: 2026-04-02 14:30:37+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -300,7 +300,7 @@ msgstr "Roj ji roja ku miraciet hatiye girtin ve"
 #: TWLight/applications/templates/applications/application_evaluation.html:82
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:8
 msgid "Status"
-msgstr "Rewş"
+msgstr "Hal"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
@@ -458,7 +458,7 @@ msgstr "Bikarhêner"
 #. Translators: This is the title of the section of an application page which lists the history of status changes.
 #: TWLight/applications/templates/applications/application_evaluation.html:309
 msgid "Revision history"
-msgstr "Dîroka guhartoyê"
+msgstr "Tarîxa revîzyonan"
 
 #. Translators: Applications have a revision history section. This message denotes when the application was submitted and who submitted it. Don't translate submit_user or review_date.
 #: TWLight/applications/templates/applications/application_evaluation.html:325
@@ -1316,7 +1316,7 @@ msgstr "Ne berdest e"
 #: TWLight/templates/about.html:12
 #: TWLight/users/templates/users/filter_section.html:13
 msgid "The Wikipedia Library allows active editors to access a wide range of collections of paywalled reliable sources for free!"
-msgstr "Kitêbxaneya Wîkîpediyayê destûr dide ku edîtorên aktîv belaş bigihîjin koleksiyoneke berfireh a çavkaniyên pêbawer ên bipere."
+msgstr "Kitêbxaneya Wîkîpediyayê îznê dide ku edîtorên aktîv belaş bigihîjin koleksiyoneke berfireh a çavkaniyên pêbawer ên bipere."
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this introduces users to The Wikipedia Library.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this introduces users to The Wikipedia Library.
@@ -1638,7 +1638,7 @@ msgstr "Li Partneran Binêre"
 #. Translators: On the 'browse partners' page this button is above the partner list and can be clicked by users to navigate to the partner suggestions page.
 #: TWLight/resources/templates/resources/partner_list.html:20
 msgid "Suggest a partner"
-msgstr "Partneran pêşniyaz bike"
+msgstr "Partneran tewsiye bike"
 
 #. Translators: This text is shown to users when no partners meet the filtering criteria.
 #: TWLight/resources/templates/resources/partner_list.html:29
@@ -1683,7 +1683,7 @@ msgstr ""
 #. Translators: This is the title of the form where users can submit partner suggestions.
 #: TWLight/resources/templates/resources/suggest.html:15
 msgid "Suggest partners"
-msgstr "Partneran pêşniyaz bike"
+msgstr "Partneran tewsiye bike"
 
 #. Translators: This is the text that appears in the button for staff to merge.
 #: TWLight/resources/templates/resources/suggest.html:37
@@ -1692,12 +1692,12 @@ msgstr "Bike yek"
 
 #: TWLight/resources/templates/resources/suggest.html:43
 msgid "Filter suggestions"
-msgstr "Pêşniyazan parzûn bike"
+msgstr "Tewsiyeyan parzûn bike"
 
 #. Translators: This is the title of the panel where user suggestions are displayed.
 #: TWLight/resources/templates/resources/suggest.html:47
 msgid "Browse and support suggestions"
-msgstr "Li pêşniyazan binêre û piştgirî bide"
+msgstr "Li tewsiyeyan binêre û piştgirî bide"
 
 #. Translators: This text will show when there are no matches in a suggestion search.
 #: TWLight/resources/templates/resources/suggest.html:51
@@ -2058,7 +2058,7 @@ msgstr ""
 #. Translators: Shown in the top bar of almost every page, taking users to a page where they can suggest new collections to the Library.
 #: TWLight/templates/header_partial_b4.html:107
 msgid "Suggest a collection"
-msgstr "koleksiyonek pêşniyaz bike"
+msgstr "koleksiyonek tewsiye bike"
 
 #. Translators: A button to log out of The Wikipedia Library.
 #: TWLight/templates/header_partial_b4.html:120
@@ -2069,13 +2069,13 @@ msgstr "Derkeve"
 #. Translators: This text will show when a user clicks on the More Info button and the partner description shows.
 #: TWLight/templates/homepage.html:374
 msgid "Less info"
-msgstr "Kêmtir agahî"
+msgstr "Kêmtir malûmat"
 
 #. Translators: A button that reveals more information about a collection.
 #: TWLight/templates/homepage.html:377
 #: TWLight/templates/partner_carousel.html:82
 msgid "More info"
-msgstr "Zêdetir agahî"
+msgstr "Zêdetir malûmat"
 
 #. Translators: Alt text for the Wikipedia Library shown in the top left of all pages.
 #: TWLight/templates/login_partial.html:12
@@ -2086,7 +2086,7 @@ msgstr "Kitêbxaneya Wîkîpediyayê"
 #: TWLight/templates/login_partial.html:53 TWLight/templates/new_base.html:21
 #, python-format
 msgid "More than 100 of the world's top subscription-only databases, with content in %(no_of_languages)s languages, free for Wikipedians of all backgrounds"
-msgstr "Zêdetirî 100 databasên bi abonetî yên herî mezin ên dinyayê bi naveroka %(no_of_languages)s zimanan, ji bo hemû Wîkîpedîvanên belaş e"
+msgstr "Zêdetirî 100 databasên bi abonetî yên herî mezin ên dinyayê bi naveroka %(no_of_languages)s zimanan, ji bo hemû Wîkîpedîvanan belaş e"
 
 #. Translators: Information about The Wikipedia Library.
 #: TWLight/templates/login_partial.html:64
@@ -2095,7 +2095,7 @@ msgstr "Ji bo gihaniya otomatîk ev krîter hewce ne"
 
 #: TWLight/templates/login_partial.html:69
 msgid "These criteria grant you access to certain collections but not all. Some collections are accessible on a per application basis only."
-msgstr "Ev krîter destûr dide bigihîjî hin koleksiyonên belî lê ne hemû. Hin koleksiyon tenê piştî miraciatê dikarî bigihîjî."
+msgstr "Ev krîter îznê dide bigihîjî hin koleksiyonên belî lê ne hemû. Hin koleksiyon tenê piştî miraciatê dikarî bigihîjî."
 
 #: TWLight/templates/login_partial.html:89
 msgid "Login via Wikipedia"
@@ -2164,7 +2164,7 @@ msgstr "Şîfreyê nû bike"
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
 msgid "Forgot your password? Enter your email address below, and we'll email instructions for setting a new one."
-msgstr "Şîfreya xwe ji bîr kir? Hesabê xwe yê e-nameyê li jêr binivîse û em ê ji te re talîmatên çêkirina şîfreya nû bişînin"
+msgstr "Şîfreya xwe ji bîr kir? Hesabê xwe yê e-postayê li jêr binivîse û em ê ji te re talîmatên çêkirina şîfreya nû bişînin"
 
 #. Translators: This is the label for a button that users click to update their public information.
 #: TWLight/users/forms.py:36
@@ -2219,7 +2219,7 @@ msgstr ""
 #. Translators: This labels a button which users click to change their email.
 #: TWLight/users/forms.py:232
 msgid "Update email"
-msgstr "E-nameyê rojane bike"
+msgstr "E-postayê rojane bike"
 
 #. Translators: Shown if the current user tried to 'favorite' a partner they can't access. Do not translate '{partner}'
 #: TWLight/users/models.py:241
@@ -2341,7 +2341,7 @@ msgstr "Kitêbxaneya Min"
 #. Translators: Line two of two, explaining the purpose of the page in a button on users' profile page which when clicked takes users to a page with their available collections.
 #: TWLight/users/templates/users/editor_detail.html:28
 msgid "A collective list of collections you are authorized to access"
-msgstr "Lîsteyeke kolektîv a koleksiyonên ku destûra te heye bigihîjî"
+msgstr "Lîsteyeke kolektîv a koleksiyonên ku îzna te heye bigihîjî"
 
 #. Translators: Line one of two in a button on users' profile page which when clicked takes users to their applications page.
 #. Translators: Heading of the applications page where users can view all of their applications listed with other relevant info.
@@ -2358,7 +2358,7 @@ msgstr ""
 #. Translators: This is the heading for user information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:47
 msgid "User information"
-msgstr "Agahiyên bikarhêner"
+msgstr "Malûmatên bikarhêner"
 
 #. Translators: This is the heading for Wikipedia account information on profile and application pages.
 #: TWLight/users/templates/users/editor_detail.html:49
@@ -3007,7 +3007,7 @@ msgstr ""
 #. Translators: This message is shown once the access to a partner has successfully been returned.
 #: TWLight/users/views.py:805
 msgid "Access to {} has been returned."
-msgstr "Gihiştina {} hate destûrdan."
+msgstr "Gihiştina {} hate îzindan"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
 #: TWLight/users/views.py:884 TWLight/views.py:43
