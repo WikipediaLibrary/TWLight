@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Indonesian (Bahasa Indonesia)
 # Exported from translatewiki.net
 #
+# Author: AF1011
 # Author: Adhiwangsa
 # Author: Agam Riyandana
 # Author: Bennylin
@@ -31,7 +32,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-05-18 12:58:53+0000\n"
+"PO-Revision-Date: 2026-06-18 12:26:42+0000\n"
 "Language: id\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1132,9 +1133,8 @@ msgstr ""
 #. Translators: email subject line
 #: TWLight/emails/templates/emails/survey_active_user-subject.html:4
 #: TWLight/users/management/commands/survey_active_users.py:118
-#, fuzzy
 msgid "The Wikipedia Library needs your help!"
-msgstr "Beranda Perpustakaan Wikipedia"
+msgstr "Perpustakaan Wikipedia membutuhkan bantuan anda!"
 
 #. Translators: This email is sent to users when they have an account that is soon to expire. Don't translate Jinja variables in curly braces like partner_name or partner_link; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/user_renewal_notice-body-html.html:5
@@ -2254,9 +2254,8 @@ msgstr ""
 
 #. Translators: The message shown for the contact link to the team when errors logging in.
 #: TWLight/users/oauth.py:264
-#, fuzzy
 msgid "contact The Wikipedia Library team"
-msgstr "Tim Perpustakaan Wikipedia"
+msgstr "Hubungi Tim Perpustakaan Wikipedia"
 
 #. Translators: This message is shown when the OAuth login process fails because the request came from the wrong website. Don't translate {domain}.
 #: TWLight/users/oauth.py:328 TWLight/users/oauth.py:476
