@@ -65,8 +65,6 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
-coordinators = get_coordinators()
-
 PARTNERS_SESSION_KEY = "applications_request__partner_ids"
 
 
@@ -80,7 +78,7 @@ class EditorAutocompleteView(autocomplete.Select2QuerySetView):
                 editor_qs = editor_qs.filter(wp_username__istartswith=self.q).order_by(
                     "wp_username"
                 )
-        elif coordinators in self.request.user.groups.all():
+        elif get_coordinators() in self.request.user.groups.all():
             editor_qs = Editor.objects.filter(
                 applications__partner__coordinator__pk=self.request.user.pk
             ).order_by("wp_username")
@@ -106,7 +104,7 @@ class PartnerAutocompleteView(autocomplete.Select2QuerySetView):
                 partner_qs = partner_qs.filter(
                     company_name__istartswith=self.q
                 ).order_by("company_name")
-        elif coordinators in self.request.user.groups.all():
+        elif get_coordinators() in self.request.user.groups.all():
             partner_qs = Partner.objects.filter(
                 coordinator__pk=self.request.user.pk
             ).order_by("company_name")

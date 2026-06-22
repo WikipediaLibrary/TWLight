@@ -55,8 +55,6 @@ from .models import Application
 
 logger = logging.getLogger(__name__)
 
-coordinators = get_coordinators()
-
 
 class StylableSubmit(BaseInput):
     """
@@ -256,7 +254,7 @@ class ApplicationAutocomplete(forms.ModelForm):
                 "company_name"
             )
 
-        elif coordinators in user.groups.all():
+        elif get_coordinators() in user.groups.all():
             self.fields["editor"].queryset = Editor.objects.filter(
                 applications__partner__coordinator__pk=user.pk
             ).order_by("wp_username")
