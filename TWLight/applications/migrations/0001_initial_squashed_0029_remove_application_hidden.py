@@ -6,7 +6,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 import django.db.models.manager
 import django.utils.timezone
-from django.utils.timezone import utc
 
 
 # Functions from the following migrations need manual copying.
@@ -92,7 +91,7 @@ class Migration(migrations.Migration):
                     models.DateField(
                         auto_now_add=True,
                         default=datetime.datetime(
-                            2016, 4, 26, 15, 54, 22, 38710, tzinfo=utc
+                            2016, 4, 26, 15, 54, 22, 38710, tzinfo=datetime.timezone.utc
                         ),
                     ),
                 ),
