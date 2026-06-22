@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-06-15 12:29:51+0000\n"
+"PO-Revision-Date: 2026-06-22 12:29:06+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -54,7 +54,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:42
 #: TWLight/users/templates/users/available_collection_tile.html:89
 msgid "Apply"
-msgstr "Postuler"
+msgstr "Demander un accès"
 
 #. Translators: This labels a section of a form where we ask users to enter personal information (such as their country of residence) when making an application.
 #: TWLight/applications/forms.py:171
@@ -77,7 +77,7 @@ msgstr "Votre candidature d’accès à {partner}"
 #: TWLight/applications/forms.py:221
 #, python-brace-format
 msgid "You must register at {url} before applying."
-msgstr "Vous devez vous enregistrer sur {url} avant de postuler."
+msgstr "Vous devez vous inscrire sur {url} avant de demander un accès."
 
 #. Translators: Label of the field where coordinators can enter the username of a user
 #. Translators: This labels the column description that lists the name of the applicants.
@@ -795,7 +795,7 @@ msgstr "Il n’y a aucune candidature approuvée mais pas encore envoyée."
 #. Translators: When a user renews their resource, they receive this message if none are currently available. They are instead placed on a 'waitlist' for later approval.
 #: TWLight/applications/views.py:141 TWLight/applications/views.py:1294
 msgid "This partner does not have any access grants available at this time. You may still apply for access; your application will be reviewed when access grants become available."
-msgstr "Il n’y a actuellement aucun compte disponible pour ce partenaire. Vous pouvez cependant postuler pour l’accès ; nous traiterons votre candidature lorsque les droits d’accès seront disponibles."
+msgstr "Il n’y a actuellement aucun compte disponible pour ce partenaire. Vous pouvez cependant demander un accès aujourd'hui ; et nous y répondrons lorsque de nouveaux accès seront disponibles."
 
 #. Translators: This message is shown to users once they've successfully submitted their application for review.
 #: TWLight/applications/views.py:164
@@ -1420,7 +1420,7 @@ msgstr "Retour aux partenaires"
 #: TWLight/resources/templates/resources/partner_detail.html:36
 #: TWLight/resources/templates/resources/partner_detail_apply.html:17
 msgid "There are no access grants available for this partner at this time. You can still apply for access; applications will be processed when access is available."
-msgstr "Il n’y a aucun accès disponible pour ce partenaire en ce moment. Vous pouvez quand même postuler pour l’accès ; les candidatures seront traitées lorsque des accès seront disponibles."
+msgstr "Il n’y a actuellement aucun compte disponible pour ce partenaire. Vous pouvez cependant demander un accès aujourd'hui ; et nous y répondrons lorsque de nouveaux accès seront disponibles."
 
 #. Translators: This text links to the minimum user requirements and terms of use on the partner page.
 #: TWLight/resources/templates/resources/partner_detail.html:48
@@ -1471,12 +1471,12 @@ msgstr "<strong>%(coordinator)s</strong> traite les applications de %(partner)s.
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to their Talk page on Wikipedia, and should be translated to the text used for Talk pages in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:95
 msgid "Talk page"
-msgstr "Page de discussion"
+msgstr "Contacter sur sa page de discussion"
 
 #. Translators: When a coordinator is assigned to a partner, their details are shown on the page. This text labels a link to Special:EmailUser on Wikipedia, and should be translated to the text of https://en.wikipedia.org/wiki/Special:EmailUser in the language you are translating to.
 #: TWLight/resources/templates/resources/partner_detail_apply.html:103
 msgid "Special:EmailUser page"
-msgstr "Page Special:EmailUser"
+msgstr "Contacter par courriel"
 
 #. Translators: If no account coordinator is assigned to a partner, the Wikipedia Library team will coordinate signups. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/resources/templates/resources/partner_detail_apply.html:112
@@ -1633,7 +1633,7 @@ msgstr "%(publisher)s exige que vous spécifiez un titre particulier auquel vous
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:187
 #, python-format
 msgid "%(publisher)s requires that you sign up for an account before applying for access."
-msgstr "%(publisher)s exige que vous vous inscriviez avec un compte avant de postuler pour l’accès."
+msgstr "%(publisher)s demande que vous vous inscriviez avec un compte sur son site, avant de demander un accès."
 
 #. Translators: If a partner has their location listed, this message is a label for that location
 #: TWLight/resources/templates/resources/partner_detail_timeline.html:206
@@ -2140,7 +2140,7 @@ msgstr "Vous avez demandé une restriction sur le traitement de vos données. La
 #: TWLight/templates/message_partial.html:37
 #, python-format
 msgid "You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will not be processed and you won't be able to apply or access resources you are approved for."
-msgstr "Vous n’avez pas accepté les <a class=\"twl-links\" href=\"%(terms_url)s\">conditions d’utilisation</a> de ce site. Vos candidatures ne seront pas traitées et vous ne pourrez pas vous accéder aux ressources pour lesquelles vous êtes approuvé, ni même y postuler."
+msgstr "Vous n’avez pas accepté les <a class=\"twl-links\" href=\"%(terms_url)s\">conditions d’utilisation</a> de ce site. Vos candidatures ne peuvent donc pas être traitées et vous ne pouvez pas accéder aux ressources pour lesquelles vous êtes approuvé, ni y demander un accès."
 
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
 #: TWLight/templates/new_base.html:107
