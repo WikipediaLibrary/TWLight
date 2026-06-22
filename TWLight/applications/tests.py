@@ -463,8 +463,7 @@ class SubmitApplicationTest(BaseApplicationViewTest):
             self.assertEqual(response.url, expected_url)
         else:
             self.assertFormError(
-                response,
-                "form",
+                response.context["form"],
                 "partner_{id}_rationale".format(id=p1.id),
                 "This field consists only of restricted text.",
             )
