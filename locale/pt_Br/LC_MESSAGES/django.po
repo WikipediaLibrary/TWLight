@@ -31,7 +31,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-04-02 12:38+0000\n"
-"PO-Revision-Date: 2026-05-18 12:58:57+0000\n"
+"PO-Revision-Date: 2026-06-25 12:28:28+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2169,7 +2169,7 @@ msgstr "Mais"
 #. Translators: On the login page, this message directs users to log in to the website using their Wikipedia account (via OAuth)
 #: TWLight/templates/registration/login.html:17
 msgid "Log in with your Wikipedia account"
-msgstr "Entre com sua conta da Wikipedia"
+msgstr "Entre com sua conta da Wikipédia"
 
 #. Translators: Found on the password reset page.
 #: TWLight/templates/registration/password_change_form.html:14
@@ -2517,7 +2517,7 @@ msgstr "Registro Meta-Wiki ou data de mesclagem SUL *"
 #. Translators: When viewing a user's profile (e.g. https://wikipedialibrary.wmflabs.org/users/ when logged in), this labels the user's Wikipedia User ID. Don't remove the *
 #: TWLight/users/templates/users/editor_detail_data.html:244
 msgid "Wikipedia user ID *"
-msgstr "ID do usuário da Wikipedia *"
+msgstr "ID do usuário da Wikipédia *"
 
 #. Translators: This is a heading for a section of the user profile which contains personal data about the user, such as their real name.
 #: TWLight/users/templates/users/editor_detail_data.html:255
