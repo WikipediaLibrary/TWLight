@@ -6,7 +6,7 @@ services:
       - 'db'
     volumes:
       - type: bind
-        source: /data/project/prod
+        source: /usr/local/backup
         target: /app/backup
       - type: bind
         source: ./media
