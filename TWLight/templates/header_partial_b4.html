@@ -115,10 +115,13 @@
               </a>
             </li>
             <li role="presentation" class="mobile-menu align-middle nav-item">
-              {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
-              <a class="nav-link nav-links" href="{% url 'auth_logout' %}?next=/">
-                {% trans "Log out" %}
-              </a>
+              <form action="{% url 'auth_logout' %}?next=/" method="post" class="nav-logout-form">
+                {% csrf_token %}
+                {% comment %}Translators: Shown in the top bar to let users log out of The Wikipedia Library. {% endcomment %}
+                <button type="submit" class="nav-link nav-links">
+                  {% trans "Log out" %}
+                </button>
+              </form>
             </li>
           {% else %}
             <li role="presentation" class="mobile-menu align-middle nav-item">

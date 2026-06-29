@@ -8,6 +8,9 @@ set -euo pipefail
     # print the date for logging purposes
     echo "[$(date)]"
 
+    # print the Django version
+    echo "Django version: $(python -c 'import django; print(django.get_version())')"
+
     # Load virtual environment
     if source "${TWLIGHT_HOME}/bin/virtualenv_activate.sh"
     then

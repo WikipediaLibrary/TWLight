@@ -973,8 +973,6 @@ class Authorization(models.Model):
         verbose_name = "authorization"
         verbose_name_plural = "authorizations"
 
-    coordinators = get_coordinators()
-
     # Users may have multiple authorizations.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

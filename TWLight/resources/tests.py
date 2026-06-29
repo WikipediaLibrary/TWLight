@@ -681,7 +681,7 @@ class PartnerViewTests(TestCase):
 
         cls.partner = PartnerFactory()
         editor = EditorFactory()
-        cls.user = UserFactory(editor=editor)
+        cls.user = UserFactory()
         cls.coordinator = UserFactory()
         cls.coordinator2 = UserFactory()
 
@@ -1260,7 +1260,7 @@ class PartnerSuggestionViewTests(TestCase):
         cls.suggestion_to_delete = SuggestionFactory()
         cls.editor = EditorCraftRoom(cls, Terms=True, Coordinator=True)
         cls.upvoter = EditorCraftRoom(cls, Terms=True)
-        cls.user = UserFactory(editor=cls.editor)
+        cls.user = UserFactory()
         cls.suggestion.author = cls.editor.user
         cls.suggestion_to_delete.author = cls.editor.user
 

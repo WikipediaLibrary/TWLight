@@ -58,6 +58,17 @@ COMMON CONTENT BLOCK CSS
     text-align: right;
 }
 
+.nav-logout-form {
+  display: inline;
+  margin: 0;
+}
+.nav-logout-form button.nav-link {
+  background: none;
+  border: none;
+  margin: 0;
+  -webkit-appearance: none;
+}
+
 .twl-btn {
   white-space: nowrap;
   font-family: Roboto;

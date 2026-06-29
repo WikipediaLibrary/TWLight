@@ -6,7 +6,6 @@ from django.conf import settings
 import django.core.validators
 from django.db import migrations, models
 import django.db.models.manager
-from django.utils.timezone import utc
 import django_countries.fields
 
 
@@ -172,7 +171,7 @@ class Migration(migrations.Migration):
                     models.DateField(
                         auto_now_add=True,
                         default=datetime.datetime(
-                            2016, 5, 9, 19, 18, 3, 475335, tzinfo=utc
+                            2016, 5, 9, 19, 18, 3, 475335, tzinfo=datetime.timezone.utc
                         ),
                     ),
                 ),

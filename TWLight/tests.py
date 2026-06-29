@@ -41,9 +41,6 @@ from .view_mixins import (
 )
 
 
-coordinators = get_coordinators()
-
-
 class ObjGet(object):
     """
     Some view mixins assume that the thing they're mixed with will define
@@ -121,7 +118,7 @@ class ViewMixinTests(TestCase):
         PartnerCoordinatorOrSelf should allow coordinators.
         """
         user = UserFactory()
-        coordinators.user_set.add(user)
+        get_coordinators().user_set.add(user)
 
         req = RequestFactory()
         req.user = user
@@ -194,7 +191,7 @@ class ViewMixinTests(TestCase):
         CoordinatorsOnly should allow coordinators.
         """
         user = UserFactory()
-        coordinators.user_set.add(user)
+        get_coordinators().user_set.add(user)
 
         req = RequestFactory()
         req.user = user
@@ -558,7 +555,7 @@ class AuthorizationBaseTestCase(TestCase):
 
         # Editor 5 is a coordinator without a session and with no designated partners.
         cls.editor5 = EditorFactory()
-        coordinators.user_set.add(cls.editor5.user)
+        get_coordinators().user_set.add(cls.editor5.user)
 
         # Create applications.
         cls.app1 = ApplicationFactory(
