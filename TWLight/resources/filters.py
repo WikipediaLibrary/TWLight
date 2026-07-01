@@ -74,7 +74,7 @@ class PartnerFilter(MainPartnerFilter):
     """
 
     searchable = django_filters.MultipleChoiceFilter(
-        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
+        # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable in the "global search bar" present in the top of the Library website. It indexes some of the partners content to list all results from the different partners in one page.
         label=_("Indexed in the Library's search engine"),
         choices=Partner.SEARCHABLE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
