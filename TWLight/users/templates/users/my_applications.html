@@ -76,7 +76,7 @@
                 <a class="btn twl-secondary-btn btn-sm" href="{% url 'applications:renew' app.pk %}">{% trans "Request renewal" %}</a>
               {% else %}
                 {% comment %}Translators: On the page listing applications, this text explains a user they cannot renew their application since they've already requested a renewal or there aren't any renewals available.{% endcomment %}
-                <em>{% trans "Renewals are either not required, not available right now, or you have already requested a renewal." %}</em>
+                <em>{% trans "It is not possible to request a renewal because it is not necessary, you have already requested one, or it is not currently available." %}</em>
               {% endif %}
             </div>
           {% endif %}
