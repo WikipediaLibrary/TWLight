@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Addonian1123",
 			"Kly",
 			"LowensteinYang",
 			"Sean0115"
@@ -159,5 +160,9 @@
 	"180_short_description": "<strong>The News Minute</strong> 是一個數位新聞平台，報導和撰寫有關印度的各種問題，並特別關注在印度南部五邦。",
 	"181_short_description": "<strong>《哈佛商業評論》</strong>是由哈佛商業出版社出版的領導與管理雜誌。此合作包括線上和行動裝置取用《哈佛商業評論》的核心內容，包括歷史存檔、資料、圖表，以及內幕和精選新聞簡報。",
 	"182_short_description": "<strong>Swissdox</strong> 是一個收錄了瑞士主要報紙、雜誌，以及瑞士當地德語、法語廣播與電視報導文章的資料庫。",
-	"183_short_description": "《<strong>每日電訊報</strong>》是一個在英國和國際上發行，獲得多項獎項的多媒體新聞品牌。"
+	"183_short_description": "《<strong>每日電訊報</strong>》是一個在英國和國際上發行，獲得多項獎項的多媒體新聞品牌。",
+	"184_short_description": "<strong>Marg</strong>是印度歷史最悠久的藝術雜誌。本館藏收錄了 80 年來關於印度及南亞藝術與文化的出版物，涵蓋建築、考古學、表演藝術、紡織品、城市研究、電影、視覺藝術等多元領域。",
+	"185_short_description": "<strong>The Tribune</strong>是一份在昌迪加爾、賈朗達爾、巴丁達和古爾岡印刷與發行的英文日報。它是印度主要的報紙之一，發行量遍及全球。",
+	"186_short_description": "<strong>Punjabi Tribune</strong>是一份在昌迪加爾、賈朗達爾、巴丁達和古爾岡印刷與發行的旁遮普語日報。它是北印度領先的旁遮普語報紙，發行量十分廣泛。",
+	"187_short_description": "<strong>Dainik Tribune</strong>是一份在昌迪加爾和古爾岡印刷與發行的印地語日報。它是北印度領先的印地語報紙，發行量十分廣泛。"
 }
