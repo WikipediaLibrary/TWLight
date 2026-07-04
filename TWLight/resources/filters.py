@@ -13,7 +13,7 @@ ACCESS_CHOICES = (
     # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
     (INSTANT, _("Instant (proxy) access")),
     # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
-    (MULTI_STEP, _("Multi-step access")),
+    (MULTI_STEP, _("Access upon application")),
 )
 
 
@@ -75,7 +75,7 @@ class PartnerFilter(MainPartnerFilter):
 
     searchable = django_filters.MultipleChoiceFilter(
         # Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate if a collection is searchable.
-        label=_("Searchable"),
+        label=_("Indexed in the Library's search engine"),
         choices=Partner.SEARCHABLE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
     )
