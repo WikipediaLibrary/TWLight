@@ -302,6 +302,9 @@
             ],
             "العربية"
         ],
+        "ar-001": [
+            "ar"
+        ],
         "arc": [
             "Syrc",
             [
@@ -2381,6 +2384,13 @@
             ],
             "ižoran keel"
         ],
+        "izr": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "Izere"
+        ],
         "ja": [
             "Jpan",
             [
@@ -2409,6 +2419,14 @@
             ],
             "Patois"
         ],
+        "jax": [
+            "Latn",
+            [
+                "AS",
+                "PA"
+            ],
+            "Jambi"
+        ],
         "jbo": [
             "Latn",
             [
@@ -2433,6 +2451,13 @@
                 "AS"
             ],
             "제주말"
+        ],
+        "juk": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "Nene Wapan"
         ],
         "jut": [
             "Latn",
@@ -2597,6 +2622,13 @@
             ],
             "Kaingáng"
         ],
+        "kha": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Khasi"
+        ],
         "khk": [
             "mn"
         ],
@@ -2629,6 +2661,13 @@
                 "ME"
             ],
             "Kırmancki"
+        ],
+        "kix": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Khiamniungan"
         ],
         "kj": [
             "Latn",
@@ -4191,6 +4230,13 @@
             ],
             "pinayuanan"
         ],
+        "pwo": [
+            "Mymr",
+            [
+                "AS"
+            ],
+            "ဖျိၩ့ၡိ"
+        ],
         "pzh": [
             "Latn",
             [
@@ -4286,6 +4332,16 @@
                 "AS"
             ],
             "𐴌𐴟𐴇𐴥𐴝𐴚𐴒𐴙𐴝"
+        ],
+        "rhg-arab": [
+            "Arab",
+            [
+                "AS"
+            ],
+            "رُحَ࣪ڠۡگَ࣪ࢬ عَرࣤبِي لࣦكَ࣪"
+        ],
+        "rhg-rohg": [
+            "rhg"
         ],
         "rif": [
             "Latn",
@@ -4542,11 +4598,28 @@
             "Scots"
         ],
         "sd": [
+            "sd-arab"
+        ],
+        "sd-arab": [
             "Arab",
             [
                 "AS"
             ],
             "سنڌي"
+        ],
+        "sd-deva": [
+            "Deva",
+            [
+                "AS"
+            ],
+            "सिंधी"
+        ],
+        "sd-sind": [
+            "Sind",
+            [
+                "AS"
+            ],
+            "𑋝𑋡𑋟𑋐𑋢"
         ],
         "sdc": [
             "Latn",
@@ -4610,6 +4683,13 @@
                 "AF"
             ],
             "Sängö"
+        ],
+        "sgh": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "xuɣ̌nůni"
         ],
         "sgs": [
             "Latn",
@@ -4871,6 +4951,13 @@
             ],
             "SiSwati"
         ],
+        "ssy": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "Saaho"
+        ],
         "st": [
             "Latn",
             [
@@ -4924,6 +5011,13 @@
         "swh": [
             "sw"
         ],
+        "sxr": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Hla'alua"
+        ],
         "sxu": [
             "Latn",
             [
@@ -4975,6 +5069,13 @@
                 "AS"
             ],
             "தமிழ்"
+        ],
+        "tao": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Ciriciring No Tao"
         ],
         "taq": [
             "taq-tfng"
@@ -5080,6 +5181,13 @@
                 "AF"
             ],
             "ትግሬ"
+        ],
+        "tiv": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "tiv"
         ],
         "tji": [
             "Latn",
@@ -5232,6 +5340,20 @@
             ],
             "Sinūg"
         ],
+        "tsu": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "cou"
+        ],
+        "tsw": [
+            "Latn",
+            [
+                "AF"
+            ],
+            "Tsishingini"
+        ],
         "tt": [
             "Cyrl",
             [
@@ -5379,6 +5501,9 @@
             ],
             "oʻzbekcha"
         ],
+        "uz-arab": [
+            "uzs"
+        ],
         "uz-cyrl": [
             "Cyrl",
             [
@@ -5391,6 +5516,13 @@
         ],
         "uzn": [
             "uz"
+        ],
+        "uzs": [
+            "Arab",
+            [
+                "AS"
+            ],
+            "اۉزبېکچه"
         ],
         "vai": [
             "Vaii",
@@ -5568,6 +5700,13 @@
                 "PA"
             ],
             "Manado"
+        ],
+        "xnb": [
+            "Latn",
+            [
+                "AS"
+            ],
+            "Kanakanavu"
         ],
         "xon": [
             "Latn",
@@ -5829,6 +5968,7 @@
             "Orya",
             "Rohg",
             "Saur",
+            "Sind",
             "Sinh",
             "Sylo",
             "Taml",
@@ -5912,6 +6052,7 @@
         "AF": [
             "fa",
             "ps",
+            "uzs",
             "uz",
             "tk",
             "bgn",
@@ -6069,6 +6210,7 @@
             "pt",
             "en",
             "de",
+            "hrx",
             "it",
             "vec",
             "ja",
@@ -6367,6 +6509,7 @@
             "tig",
             "ar",
             "aa",
+            "ssy",
             "byn"
         ],
         "ES": [
@@ -6669,20 +6812,24 @@
             "ks",
             "knn",
             "gbm",
-            "sd",
+            "sd-arab",
             "doi",
             "tcy",
+            "sd-deva",
             "brx",
             "mni",
             "raj",
             "hoc",
+            "kha",
             "saz",
             "ccp",
             "bfq",
             "njo",
+            "wsg",
             "bo",
             "bpy",
             "bft",
+            "mrh",
             "sa",
             "dv",
             "dz",
@@ -6763,7 +6910,8 @@
         "JO": [
             "ar",
             "apc",
-            "en"
+            "en",
+            "ady"
         ],
         "JP": [
             "ja",
@@ -6940,6 +7088,7 @@
             "kac",
             "rhg",
             "mnw",
+            "mrh",
             "pi"
         ],
         "MN": [
@@ -7059,6 +7208,7 @@
             "ig",
             "yo",
             "ff",
+            "tiv",
             "efi",
             "ibb",
             "ha-arab",
@@ -7166,7 +7316,7 @@
             "pa",
             "en",
             "ps",
-            "sd",
+            "sd-arab",
             "skr-arab",
             "hno",
             "brh",
@@ -7257,43 +7407,52 @@
         ],
         "RU": [
             "ru",
+            "en",
             "tt",
-            "ba",
             "cv",
-            "hy",
             "ce",
+            "hy",
+            "ba",
+            "de",
             "av",
-            "udm",
-            "mhr",
-            "sah",
-            "os",
+            "uk",
             "kbd",
             "myv",
-            "dar",
-            "mdf",
             "kum",
-            "kv",
-            "lez",
-            "krc",
+            "sah",
+            "dar",
+            "os",
             "inh",
-            "tyv",
             "az-cyrl",
             "az",
+            "lez",
+            "mdf",
+            "kk-cyrl",
+            "krc",
+            "mhr",
+            "tyv",
+            "udm",
+            "uz",
+            "tg",
+            "kv",
             "ady",
-            "krl",
+            "xal",
             "lbe",
-            "koi",
-            "pnt",
-            "mrj",
+            "ka",
             "alt",
+            "be",
+            "pnt",
+            "koi",
+            "mrj",
             "fi",
+            "krl",
             "sr-cyrl",
-            "vep",
             "mn",
+            "vep",
+            "cu",
             "kaa",
             "izh",
-            "vot",
-            "cu"
+            "vot"
         ],
         "RW": [
             "rw",
@@ -7334,7 +7493,19 @@
             "en",
             "zh",
             "ms",
+            "nan",
             "ta",
+            "hak",
+            "tl",
+            "yue",
+            "id",
+            "jv",
+            "bn",
+            "cdo",
+            "th",
+            "ja",
+            "cpx",
+            "mad",
             "ml",
             "pa"
         ],
@@ -7679,5 +7850,6 @@
             "ve",
             "tn"
         ]
-    }
+    },
+    "version": "2026-08-18T14:09:37+00:00"
 }
