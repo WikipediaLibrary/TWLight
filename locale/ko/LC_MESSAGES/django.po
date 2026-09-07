@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-08-26 20:18+0000\n"
-"PO-Revision-Date: 2026-08-27 12:30:41+0000\n"
+"PO-Revision-Date: 2026-09-07 12:38:11+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -964,13 +964,13 @@ msgstr "위키백과 도서관 접근 코드"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access on your My Library page: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
 msgstr "<p>%(user)s님께,</p> <p>위키백과 도서관을 통해 %(partner)s 리소스 접근을 신청해 주셔서 감사합니다. 신청이 승인되었음을 알려 드립니다.</p> <p>%(user_instructions)s</p> <p>승인된 모음집은 내 도서관에서 확인할 수 있습니다: %(link)s</p> <p>감사합니다!</p> <p>위키백과 도서관</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access on your My Library page: %(link)s Cheers! The Wikipedia Library"
 msgstr "%(user)s님께, 위키백과 도서관을 통해 %(partner)s 리소스 접근을 신청해 주셔서 감사합니다. 신청이 승인되었음을 알려 드립니다. %(user_instructions)s 승인된 모음집은 내 도서관에서 확인할 수 있습니다: %(link)s 감사합니다! 위키백과 도서관"
 
@@ -1197,7 +1197,6 @@ msgstr ""
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
-#, fuzzy
 msgid "Application required"
 msgstr "검토할 요청"
 
