@@ -1,4 +1,4 @@
-FROM quay.io/wikipedialibrary/python:3.11-slim-bullseye-updated
+FROM quay.io/wikipedialibrary/python:3.11-slim-trixie-updated
 ARG EXPIRES=never
 LABEL quay.expires-after=${EXPIRES}
 ARG REQUIREMENTS_FILE=wmf.txt
@@ -38,6 +38,7 @@ WORKDIR ${TWLIGHT_HOME}
 
 COPY bin /app/bin/
 COPY conf/bashrc /root/.bashrc
+COPY conf/client.cnf /etc/mysql/conf.d/client.cnf
 COPY locale /app/locale
 COPY TWLight /app/TWLight
 COPY twlight_cssjanus /app/twlight_cssjanus

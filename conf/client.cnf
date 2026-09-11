@@ -1,0 +1,5 @@
+# Our db has no TLS configured, but the mariadb-client shipped with the
+# trixie base image requires TLS on TCP by default.
+# @TODO: Delete this file once the db gets a cert.
+[client]
+skip-ssl
