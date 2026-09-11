@@ -7,10 +7,11 @@ ENV REQUIREMENTS_FILE=${REQUIREMENTS_FILE} \
     PYTHONUNBUFFERED=1 \
     PATH="/opt/perl/bin:${PATH}"
 
-# Build + runtime dependencies. gcc / python3-dev are pulled in for
-# pip's C-extension builds and dropped after install. mariadb-client is
-# runtime for the backup/restore scripts; node/npm are runtime for the
-# LTR->RTL CSS generation done at collectstatic time.
+# Build + runtime dependencies. gcc is pulled in for pip's C-extension
+# builds and dropped after install; the python headers come from the base
+# image, not Debian. mariadb-client is runtime for the backup/restore
+# scripts; node/npm are runtime for the LTR->RTL CSS generation done at
+# collectstatic time.
 COPY requirements /requirements
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -25,10 +26,9 @@ RUN apt-get update \
         tar \
         wget \
         gcc \
-        python3-dev \
     && python -m pip install --no-cache-dir --upgrade setuptools wheel pip \
     && pip install --no-cache-dir -r /requirements/${REQUIREMENTS_FILE} \
-    && apt-get purge -y gcc python3-dev \
+    && apt-get purge -y gcc \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
