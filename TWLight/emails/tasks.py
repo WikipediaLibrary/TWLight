@@ -44,7 +44,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, UserLoginRetrieval
+from TWLight.users.signals import Notice
 from django.conf import settings
 from djmail.core import _safe_send_message
 from djmail.models import Message
@@ -99,10 +99,6 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
-
-
-class UserRetrieveMonthlyLogins(template_mail.TemplateMail):
-    name = "user_retrieve_monthly_logins"
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -579,15 +575,3 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
                 status__in=[Application.PENDING, Application.QUESTION]
             ):
                 send_waitlist_notification_email(app)
-
-
-@receiver(UserLoginRetrieval.user_retrieve_monthly_logins)
-def send_user_login_retrieval_email(sender, **kwargs):
-    monthly_users = kwargs["monthly_users"]
-    email = UserRetrieveMonthlyLogins()
-    logger.info("Email constructed.")
-    email.send(
-        os.environ.get("TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"),
-        {"monthly_users": monthly_users},
-    )
-    logger.info("Email queued.")
