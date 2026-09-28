@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-08-26 20:18+0000\n"
-"PO-Revision-Date: 2026-09-14 12:09:17+0000\n"
+"PO-Revision-Date: 2026-09-28 12:06:38+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1201,7 +1201,7 @@ msgstr "搜尋"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 msgid "Instant access via the proxy"
-msgstr ""
+msgstr "透過代理即時取用"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
@@ -1379,7 +1379,7 @@ msgstr "篩選"
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
 msgid "Search collection descriptions"
-msgstr ""
+msgstr "搜尋館藏描述"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
