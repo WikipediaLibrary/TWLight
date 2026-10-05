@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-08-26 20:18+0000\n"
-"PO-Revision-Date: 2026-09-14 12:09:15+0000\n"
+"PO-Revision-Date: 2026-10-05 12:06:05+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -968,15 +968,15 @@ msgstr "Twój kod dostępu do Biblioteki Wikipedia"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access on your My Library page: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Witaj %(user)s!</p> <p>Dziękujemy za złożenie wniosku o dostęp do zasobów %(partner)s poprzez Bibliotekę Wikipedia. Z radością zawiadamiamy, że wniosek został przyjęty.</p> <p>%(user_instructions)s</p> <p>Kolekcje, do których masz dostęp, możesz przeglądać w swojej bibliotece: %(link)s</p> <p>Z pozdrowieniami,</p> <p>Biblioteka Wikipedia</p>"
+msgstr "<p>Witaj, %(user)s!</p> <p>Dziękujemy za złożenie wniosku o dostęp do zasobów %(partner)s poprzez Bibliotekę Wikipedia. Z radością zawiadamiamy, że wniosek został przyjęty.</p> <p>%(user_instructions)s</p> <p>Kolekcje, do których masz dostęp, możesz przeglądać w swojej bibliotece: %(link)s</p> <p>Z pozdrowieniami,</p> <p>Biblioteka Wikipedia</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access on your My Library page: %(link)s Cheers! The Wikipedia Library"
-msgstr "Witaj %(user)s! Dziękujemy za złożenie wniosku o dostęp do zasobów %(partner)s poprzez Bibliotekę Wikipedia. Z radością zawiadamiamy, że wniosek został przyjęty. %(user_instructions)s Kolekcje, do których masz dostęp, możesz przeglądać w swojej bibliotece: %(link)s Z pozdrowieniami, Biblioteka Wikipedia"
+msgstr "Witaj, %(user)s! Dziękujemy za złożenie wniosku o dostęp do zasobów %(partner)s poprzez Bibliotekę Wikipedia. Z radością zawiadamiamy, że wniosek został przyjęty. %(user_instructions)s Kolekcje, do których masz dostęp, możesz przeglądać w swojej bibliotece: %(link)s Z pozdrowieniami, Biblioteka Wikipedia"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1203,13 +1203,12 @@ msgstr "Szukaj"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 msgid "Instant access via the proxy"
-msgstr ""
+msgstr "Automatyczny (poprzez serwer proxy)"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
-#, fuzzy
 msgid "Application required"
-msgstr "Zgłoszenia do rozpatrzenia"
+msgstr "Wymaga złożenia wniosku"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
@@ -1382,7 +1381,7 @@ msgstr "Filtruj"
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
 msgid "Search collection descriptions"
-msgstr ""
+msgstr "Szukaj w opisach kolekcji"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
