@@ -1317,6 +1317,83 @@ class PartnerSuggestionViewTests(TestCase):
         self.assertContains(response, new_suggested_partner["suggested_company_name"])
         self.assertContains(response, new_suggested_partner["company_url"])
 
+    def _post_valid_suggestion(self, editor):
+        factory = RequestFactory()
+        request = factory.post(
+            reverse("suggest"),
+            {
+                "suggested_company_name": "Eligibility Test Company",
+                "description": "A description",
+                "company_url": "https://www.testing123.com",
+                "next": reverse("suggest"),
+            },
+        )
+        request.user = editor.user
+        return PartnerSuggestionView.as_view()(request)
+
+    def test_partner_suggestion_view_post_eligible(self):
+        """
+        Tests that users meeting the edit count, account age, and block
+        criteria can add a suggestion, even without enough recent edits.
+        """
+        editor = EditorFactory()
+        editor.wp_valid = True
+        editor.wp_enough_recent_edits = False
+        editor.save()
+
+        response = self._post_valid_suggestion(editor)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            Suggestion.objects.filter(
+                suggested_company_name="Eligibility Test Company"
+            ).exists()
+        )
+
+    def test_partner_suggestion_view_post_ineligible(self):
+        """
+        Tests that users not meeting the eligibility criteria cannot add a
+        suggestion and are shown an error.
+        """
+        editor = EditorFactory()
+        editor.wp_valid = False
+        editor.save()
+
+        with patch("TWLight.resources.views.messages.add_message") as mock_message:
+            response = self._post_valid_suggestion(editor)
+
+        self.assertEqual(response.status_code, 200)
+        mock_message.assert_called_once()
+        self.assertEqual(
+            mock_message.call_args.args[2],
+            "You must be eligible to use The Wikipedia Library to submit new partner suggestions.",
+        )
+        self.assertFalse(
+            Suggestion.objects.filter(
+                suggested_company_name="Eligibility Test Company"
+            ).exists()
+        )
+
+    def test_partner_suggestion_view_post_ineligible_staff(self):
+        """
+        Tests that staff can add a suggestion even if they do not meet the
+        eligibility criteria.
+        """
+        editor = EditorFactory()
+        editor.wp_valid = False
+        editor.save()
+        editor.user.is_staff = True
+        editor.user.save()
+
+        response = self._post_valid_suggestion(editor)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(
+            Suggestion.objects.filter(
+                suggested_company_name="Eligibility Test Company"
+            ).exists()
+        )
+
     def test_partner_suggestion_upvote_view(self):
         """
         Tests that upvoting a partner suggestion works properly
