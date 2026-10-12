@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-08-26 20:18+0000\n"
+"POT-Creation-Date: 2026-10-12 10:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1102,8 +1102,9 @@ msgstr ""
 #, python-format
 msgid ""
 "<p style=\"color: #500050\">%(submit_date)s - %(commenter)s</p> "
-"<blockquote><p>%(comment)s</p></blockquote> See it at <a href=\"%(app_url)s"
-"\">%(app_url)s</a>. Thanks for helping review Wikipedia Library applications!"
+"<blockquote><p>%(comment)s</p></blockquote> See it at <a "
+"href=\"%(app_url)s\">%(app_url)s</a>. Thanks for helping review Wikipedia "
+"Library applications!"
 msgstr ""
 
 #. Translators: This email is sent to users when an application they commented on receives another comment. Don't translate Jinja variables in curly braces like app_url. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1165,11 +1166,11 @@ msgstr[1] ""
 #: TWLight/emails/templates/emails/coordinator_reminder_notification-body-html.html:39
 #, python-format
 msgid ""
-"<p>This is a gentle reminder that you may review applications at <a href="
-"\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders under "
-"'preferences' in your user profile.</p> <p>If you received this message in "
-"error, drop us a line at wikipedialibrary@wikimedia.org.</p> <p>Thanks for "
-"helping review Wikipedia Library applications!</p>"
+"<p>This is a gentle reminder that you may review applications at <a "
+"href=\"%(link)s\">%(link)s</a>.</p> <p>You can customise your reminders "
+"under 'preferences' in your user profile.</p> <p>If you received this "
+"message in error, drop us a line at wikipedialibrary@wikimedia.org.</p> "
+"<p>Thanks for helping review Wikipedia Library applications!</p>"
 msgstr ""
 
 #. Translators: This text is part of a scheduled reminder email sent to coordinators who have applications requiring action. Don't translate Jinja variables in curly braces like total_apps, or user.
@@ -1284,8 +1285,8 @@ msgid ""
 "will soon expire and you may lose access. If you want to continue making use "
 "of your free account, you can request renewal of your account by clicking "
 "the Renew button at %(partner_link)s. Best, The Wikipedia Library You can "
-"disable these emails in your user page preferences: https://wikipedialibrary."
-"wmflabs.org/users/"
+"disable these emails in your user page preferences: https://"
+"wikipedialibrary.wmflabs.org/users/"
 msgstr ""
 
 #. Translators: This is the subject of an email sent to users when they have an account that is soon to expire. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
@@ -1580,8 +1581,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:29
 #, python-format
 msgid ""
-"Before applying, please review the <strong><a class=\"twl-links\" href="
-"\"%(about)s#req\">minimum requirements</a></strong> for access and our "
+"Before applying, please review the <strong><a class=\"twl-links\" "
+"href=\"%(about)s#req\">minimum requirements</a></strong> for access and our "
 "<strong><a class=\"twl-links\" href=\"%(terms)s\">terms of use</a></strong>."
 msgstr ""
 
@@ -1589,16 +1590,16 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail.html:69
 #, python-format
 msgid ""
-"View the status of your access in <strong><a class=\"twl-links\" href="
-"\"%(library_url)s\">My Library</a></strong> page."
+"View the status of your access in <strong><a class=\"twl-links\" "
+"href=\"%(library_url)s\">My Library</a></strong> page."
 msgstr ""
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
 #: TWLight/resources/templates/resources/partner_detail.html:78
 #, python-format
 msgid ""
-"View the status of your application(s) on your <strong><a class=\"twl-links"
-"\" href=\"%(applications_url)s\">My Applications</a></strong> page."
+"View the status of your application(s) on your <strong><a class=\"twl-"
+"links\" href=\"%(applications_url)s\">My Applications</a></strong> page."
 msgstr ""
 
 #. Translators: This message is shown when a user has authorizations, linking to their respective collections page.
@@ -1613,8 +1614,8 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:60
 #, python-format
 msgid ""
-"View the status of your application(s) on your <strong><a href="
-"\"%(applications_url)s\">My Applications</a></strong> page."
+"View the status of your application(s) on your <strong><a "
+"href=\"%(applications_url)s\">My Applications</a></strong> page."
 msgstr ""
 
 #. Translators: One the partner detail page, this text labels the button which coordinators can click to remove a partner from waitlisted status.
@@ -1646,8 +1647,9 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:112
 msgid ""
 "The Wikipedia Library team will process this application. Want to help? <a "
-"class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/Wikipedia:"
-"The_Wikipedia_Library/Coordinators/Signup\">Sign up as a coordinator.</a>"
+"class=\"twl-links\" href=\"https://en.wikipedia.org/wiki/"
+"Wikipedia:The_Wikipedia_Library/Coordinators/Signup\">Sign up as a "
+"coordinator.</a>"
 msgstr ""
 
 #. Translators: This text labels a button coordinators can click to view a list of users who have applied for access for a particular partner
@@ -1686,9 +1688,9 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:152
 #, python-format
 msgid ""
-"You are not eligible to access Library Bundle partners. Visit the <a class="
-"\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the eligibility "
-"criteria."
+"You are not eligible to access Library Bundle partners. Visit the <a "
+"class=\"twl-links\" href=\"%(homepage)s\">homepage</a> to check the "
+"eligibility criteria."
 msgstr ""
 
 #. Translators: Buttton prompting users to log in.
@@ -1701,9 +1703,9 @@ msgstr ""
 #: TWLight/resources/templates/resources/partner_detail_apply.html:168
 #, python-format
 msgid ""
-"This resource is part of our <a class=\"twl-links\" href=\"%(about)s"
-"\">Library Bundle</a>, which you can access if you meet our minimum "
-"eligibility criteria. Log in to find out if you are eligible."
+"This resource is part of our <a class=\"twl-links\" "
+"href=\"%(about)s\">Library Bundle</a>, which you can access if you meet our "
+"minimum eligibility criteria. Log in to find out if you are eligible."
 msgstr ""
 
 #. Translators: This is the label for a number which shows the total active accounts for one partner. (e.g. https://wikipedialibrary.wmflabs.org/partners/8/).
@@ -1993,11 +1995,12 @@ msgstr ""
 msgid ""
 "If you think we should know what to do with that, please email us about this "
 "error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
-"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-"
-"links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Bad%%20Request\">Phabricator</a>"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</"
+"a> or report it to us on <a class=\"twl-links\" href=\"https://"
+"phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-"
+"Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Bad%%20Request\">Phabricator</"
+"a>"
 msgstr ""
 
 #. Translators: Alt text for an image shown on the 400 error page.
@@ -2021,13 +2024,14 @@ msgstr ""
 #, python-format
 msgid ""
 "If you think your account should be able to do that, please email us about "
-"this error at <a class=\"twl-links\" href=\"mailto:"
-"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20%(path)s"
-"%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</a> or report it "
-"to us on <a class=\"twl-links\" href=\"https://phabricator.wikimedia.org/"
-"maniphest/task/edit/form/1/?projectPHIDs=Library-Card-"
-"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied"
-"\">Phabricator</a>"
+"this error at <a class=\"twl-links\" "
+"href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">wikipedialibrary@wikimedia.org</"
+"a> or report it to us on <a class=\"twl-links\" href=\"https://"
+"phabricator.wikimedia.org/maniphest/task/edit/form/1/?projectPHIDs=Library-"
+"Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Permission%%20denied\">Phabricator</"
+"a>"
 msgstr ""
 
 #. Translators: Shown on the website's 404 page, when a user attempts to navigate to a page that doesn't exist.
@@ -2047,10 +2051,11 @@ msgid ""
 "If you are certain that something should be here, please email us about this "
 "error at <a class=\"twl-links\" href=\"mailto:wikipedialibrary@wikimedia.org?"
 "Subject=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\"> "
-"wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-links"
-"\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
-"projectPHIDs=Library-Card-Platform&title=Wikipedia%%20Library%%20%(path)s"
-"%%20Not%%20found\">Phabricator</a>"
+"wikipedialibrary@wikimedia.org</a> or report it to us on <a class=\"twl-"
+"links\" href=\"https://phabricator.wikimedia.org/maniphest/task/edit/form/1/?"
+"projectPHIDs=Library-Card-"
+"Platform&title=Wikipedia%%20Library%%20%(path)s%%20Not%%20found\">Phabricator</"
+"a>"
 msgstr ""
 
 #. Translators: Alt text for an image shown on the 404 error page.
@@ -2328,8 +2333,8 @@ msgstr ""
 #: TWLight/templates/contact.html:48
 #, python-format
 msgid ""
-"(If you would like to suggest a partner, <a class=\"twl-links\" href="
-"\"%(suggest)s\"><strong>go here</strong></a>.)"
+"(If you would like to suggest a partner, <a class=\"twl-links\" "
+"href=\"%(suggest)s\"><strong>go here</strong></a>.)"
 msgstr ""
 
 #. Translators: On a special 'link to search' page, this message is shown if JavaScript is disabled.
@@ -2410,9 +2415,9 @@ msgstr ""
 #, python-format
 msgid ""
 "You don't have an email on file. We can't finalize your access to partner "
-"resources, and you won't be able to <a class=\"twl-links\" href="
-"\"%(contact_us_url)s\">contact us</a> without an email. Please <a class="
-"\"twl-links\" href=\"%(email_url)s\">update your email</a>."
+"resources, and you won't be able to <a class=\"twl-links\" "
+"href=\"%(contact_us_url)s\">contact us</a> without an email. Please <a "
+"class=\"twl-links\" href=\"%(email_url)s\">update your email</a>."
 msgstr ""
 
 #. Translators: Shown if the current user has requested the processing of their data should be restricted.
@@ -2428,9 +2433,10 @@ msgstr ""
 #: TWLight/templates/message_partial.html:37
 #, python-format
 msgid ""
-"You have not agreed to the <a class=\"twl-links\" href=\"%(terms_url)s"
-"\">terms of use</a> of this site. Your applications will not be processed "
-"and you won't be able to apply or access resources you are approved for."
+"You have not agreed to the <a class=\"twl-links\" "
+"href=\"%(terms_url)s\">terms of use</a> of this site. Your applications will "
+"not be processed and you won't be able to apply or access resources you are "
+"approved for."
 msgstr ""
 
 #. Translators: This link is at the bottom of every page and links to the 'About' page (https://wikipedialibrary.wmflabs.org/about/)
@@ -2950,8 +2956,8 @@ msgstr ""
 #: TWLight/users/templates/users/language_form.html:31
 msgid ""
 "You can help translate the tool at <a class=\"twl-links\" href=\"https://"
-"translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform"
-"\">translatewiki.net</a>."
+"translatewiki.net/wiki/"
+"Translating:Wikipedia_Library_Card_Platform\">translatewiki.net</a>."
 msgstr ""
 
 #. Translators: When the user starts a new application and submits the application, the user can view the application and withdraw if need be. This changes the label for the Withdraw button.
@@ -3306,9 +3312,10 @@ msgid ""
 "download it in JSON format. You may access, update, restrict, or delete this "
 "information at any time, except for the information that is automatically "
 "retrieved from the projects. If you have any questions or concerns about the "
-"handling of your data, please contact <a class=\"twl-links\" href=\"mailto:"
-"wikipedialibrary@wikimedia.org?Subject=Wikipedia%%20Library%%20Card"
-"%%20account%%20deactivation\"> wikipedialibrary@wikimedia.org </a>."
+"handling of your data, please contact <a class=\"twl-links\" "
+"href=\"mailto:wikipedialibrary@wikimedia.org?"
+"Subject=Wikipedia%%20Library%%20Card%%20account%%20deactivation\"> "
+"wikipedialibrary@wikimedia.org </a>."
 msgstr ""
 
 #. Translators: This is a section of the Terms of Use (https://wikipedialibrary.wmflabs.org/terms/). Translate Wikipedia Library in the same way as the global branch is named in the language you are translating (click through the language from https://meta.wikimedia.org/wiki/The_Wikipedia_Library/Global). If the language is not available, do not translate Wikipedia Library.
