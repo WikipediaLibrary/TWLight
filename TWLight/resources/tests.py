@@ -1419,8 +1419,12 @@ class SuggestionMergeViewTests(TestCase):
             SuggestionFactory(company_url=random.choice(cls.company_urls))
             for _ in range(cls.suggestion_merge_count)
         ]
-        for suggestion in cls.secondary_suggestions:
-            upvoter_or_author = random.choice(cls.upvoters_or_authors)
+        # Cycle through upvoters/authors so each is used at least once,
+        # keeping the merged upvoter count deterministic.
+        for i, suggestion in enumerate(cls.secondary_suggestions):
+            upvoter_or_author = cls.upvoters_or_authors[
+                i % len(cls.upvoters_or_authors)
+            ]
             suggestion.author = upvoter_or_author.user
             suggestion.upvoted_users.add(upvoter_or_author.user)
             suggestion.save()
