@@ -1,6 +1,7 @@
 # Translation of Wikipedia Library Card Platform - Website to Slovak (slovenčina)
 # Exported from translatewiki.net
 #
+# Author: KormiSK
 # Author: Oujon
 # Author: Wizzard
 msgid ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-10-14 13:22+0000\n"
-"PO-Revision-Date: 2026-10-15 12:06:51+0000\n"
+"PO-Revision-Date: 2026-10-19 12:07:24+0000\n"
 "Language: sk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2217,7 +2218,7 @@ msgstr "Odznačením tohto políčka a kliknutím na „Aktualizovať“ si mô�
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Zadajte platnú e-mailovú adresu."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
