@@ -12,9 +12,11 @@ from django.contrib import admin
 from django.contrib.admindocs import urls as admindocs
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.views import shortcut
 from django.urls import path
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
+from django_comments.views.comments import post_comment, comment_done
 
 from TWLight.api.urls import urlpatterns as api_urls
 from TWLight.applications.urls import urlpatterns as applications_urls
@@ -58,7 +60,9 @@ urlpatterns = [
         name="password_reset",
     ),
     # Third-party --------------------------------------------------------------
-    path("comments/", include("django_comments.urls")),
+    path("post/", post_comment, name="comments-post-comment"),
+    path("posted/", comment_done, name="comments-comment-done"),
+    re_path(r"^cr/(\d+)/(.+)/$", shortcut, name="comments-url-redirect"),
     # TWLight apps -------------------------------------------------------------
     # This makes our custom set language form  available.
     path("i18n/", include("TWLight.i18n.urls")),
