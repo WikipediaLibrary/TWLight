@@ -31,7 +31,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-10-14 13:21+0000\n"
-"PO-Revision-Date: 2026-10-15 12:06:49+0000\n"
+"PO-Revision-Date: 2026-10-22 12:06:53+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -2254,7 +2254,7 @@ msgstr "بريدك الالكتروني فارغ، لا يزال بإمكانك 
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "أدخل عنوان بريد إلكتروني صحيح."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
