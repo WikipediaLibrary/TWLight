@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-10-14 13:21+0000\n"
-"PO-Revision-Date: 2026-10-15 12:06:49+0000\n"
+"PO-Revision-Date: 2026-10-26 12:05:59+0000\n"
 "Language: ga\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2224,7 +2224,7 @@ msgstr "Trí dhíthiceáil an bhosca seo agus cliceáil ar “Nuashonraigh” is
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Cuir isteach seoladh ríomhphoist bailí."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
