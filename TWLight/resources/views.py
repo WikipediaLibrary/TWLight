@@ -550,8 +550,10 @@ class PartnerSuggestionView(FormView):
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
+                # fmt: off
                 # Translators: Shown to users when they successfully add a new partner suggestion.
-                _("Your suggestion has been added."),
+                _("Your suggestion has been added. Please note that we will primarily prioritise highly upvoted suggestions, and we cannot predict how long it will take to fulfill a suggestion."),
+                # fmt: on
             )
             return HttpResponseRedirect(reverse("suggest"))
         except (AssertionError, AttributeError) as e:
