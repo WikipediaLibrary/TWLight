@@ -1,3 +1,5 @@
+import re
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Column, Row
 
@@ -200,6 +202,14 @@ class EmailChangeForm(forms.Form):
 
     email = forms.EmailField(required=False)
     use_wp_email = forms.BooleanField(required=False)
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        # Valid per RFC 5322, but never legitimate here. Blocks markup in stored emails.
+        if re.search(r"[<>\"'`\s]", email):
+            # Translators: Error shown when a user enters an email address containing disallowed characters.
+            raise forms.ValidationError(_("Enter a valid email address."))
+        return email
 
     def __init__(self, user, *args, **kwargs):
         super(EmailChangeForm, self).__init__(*args, **kwargs)

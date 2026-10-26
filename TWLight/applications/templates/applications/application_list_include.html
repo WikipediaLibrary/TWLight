@@ -25,7 +25,7 @@
       {% endif %}
       {% if app.user.email %}
       Email:
-        <a class="twl-links" href="mailto:{{ app.user.email|urlencode|safe }}">{{ app.user.email|safe }}</a>
+        <a class="twl-links" href="mailto:{{ app.user.email|urlencode }}">{{ app.user.email }}</a>
       <br />
       {% endif %}
       {% if app.imported %}
