@@ -10,6 +10,7 @@ from unittest.mock import patch
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser, User
 from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.urls import reverse
 from django.db import IntegrityError
@@ -858,6 +859,41 @@ class CSVUploadTest(TestCase):  # Migrated from staff dashboard test
 
         access_codes = AccessCode.objects.all()
         self.assertEqual(access_codes.count(), 0)
+
+    def _post_csv(self, client):
+        csv_file = SimpleUploadedFile(
+            "accesscodes.csv",
+            "ABCD-EFGH-IJKL,{pk}\n".format(pk=self.partner1_pk).encode("utf-8"),
+            content_type="text/csv",
+        )
+        return client.post(self.url, {"access_code_csv": csv_file})
+
+    def test_csv_upload_anonymous(self):
+        """
+        Logged out users should be redirected to the admin login page,
+        and shouldn't be able to upload anything.
+        """
+        client = Client()
+
+        response = self._post_csv(client)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse("admin:login"), response.url)
+        self.assertEqual(AccessCode.objects.count(), 0)
+
+    def test_csv_upload_non_staff(self):
+        """
+        Logged in users who aren't staff should be redirected to the admin
+        login page, and shouldn't be able to upload anything.
+        """
+        client = Client()
+        client.force_login(self.user)
+
+        response = self._post_csv(client)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse("admin:login"), response.url)
+        self.assertEqual(AccessCode.objects.count(), 0)
 
 
 class AutoWaitlistDisableTest(TestCase):

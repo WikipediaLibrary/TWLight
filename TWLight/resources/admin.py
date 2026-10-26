@@ -107,7 +107,7 @@ class AccessCodeAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super(AccessCodeAdmin, self).get_urls()
-        my_urls = [path("import/", self.import_csv)]
+        my_urls = [path("import/", self.admin_site.admin_view(self.import_csv))]
         return my_urls + urls
 
     def import_csv(self, request):
