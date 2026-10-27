@@ -898,6 +898,41 @@ class AuthorizationTestCase(AuthorizationBaseTestCase):
         # The most recent email should contain the assigned access code.
         self.assertTrue(self.access_code.code in mail.outbox[-1].body)
 
+    def test_access_codes_email_user_instructions(self):
+        # For access code partners, when applications are marked sent,
+        # the email should contain user_instructions
+        self.partner3.user_instructions = "Some instructions for the user."
+        self.partner3.save()
+
+        # outbox already has messages in the outbox from creating approved
+        # applications during setup. So let's get a starting count.
+        starting_message_count = len(mail.outbox)
+
+        request = RequestFactory().post(
+            reverse("applications:send_partner", kwargs={"pk": self.app9.partner.pk}),
+            data={
+                "accesscode": [
+                    "{app_pk}_{code}".format(
+                        app_pk=self.app9.pk, code=self.access_code.code
+                    )
+                ]
+            },
+        )
+        request.user = self.editor4.user
+
+        # Mark as sent
+        response = TWLight.applications.views.SendReadyApplicationsView.as_view()(
+            request, pk=self.app9.partner.pk
+        )
+        # verify that was successful
+        self.assertEqual(response.status_code, 302)
+
+        # We expect one additional email should now be sent.
+        self.assertEqual(len(mail.outbox), starting_message_count + 1)
+
+        # The most recent email should contain user_instructions.
+        self.assertTrue(self.app9.partner.user_instructions in mail.outbox[-1].body)
+
     def test_authorization_expiry_date(self):
         # For a partner with a set account length we should set the expiry
         # date correctly for its authorizations.

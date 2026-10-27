@@ -830,6 +830,29 @@ class ViewsTestCase(TestCase):
         self.assertEqual(self.user_editor2.userprofile.approved_app_reminders, True)
 
 
+class EmailChangeSecurityTest(TestCase):
+    def test_form_rejects_markup(self):
+        from .forms import EmailChangeForm
+
+        user = UserFactory()
+        for bad in [
+            '"<svg/onload=alert(1)>"@e.co',
+            '"a b"@e.co',
+            '"\'x"@e.co',
+            '"`x`"@e.co',
+        ]:
+            form = EmailChangeForm(user, data={"email": bad})
+            self.assertFalse(form.is_valid(), bad)
+            self.assertIn("email", form.errors)
+
+    def test_form_accepts_normal_email(self):
+        from .forms import EmailChangeForm
+
+        user = UserFactory()
+        form = EmailChangeForm(user, data={"email": "first.last+tag@example.org"})
+        self.assertTrue(form.is_valid(), form.errors)
+
+
 class UserProfileModelTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
