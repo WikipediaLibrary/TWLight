@@ -28,13 +28,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-10-14 13:22+0000\n"
-"PO-Revision-Date: 2026-10-12 12:05:55+0000\n"
+"POT-Creation-Date: 2026-10-26 14:04+0000\n"
+"PO-Revision-Date: 2026-10-26 12:05:59+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2026-10-12 10:30:23+0000\n"
-"X-Generator: MediaWiki 1.47.0-alpha; Translate 2026-09-08\n"
+"X-POT-Import-Date: 2026-10-14 14:30:31+0000\n"
+"X-Generator: MediaWiki 1.48.0-alpha; Translate 2026-09-08\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
@@ -1499,7 +1499,7 @@ msgstr "پیغام شما فرستاده شد. به زودی به شما پاس�
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:562
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:564
 msgid "You must be a Wikipedia editor to do that."
 msgstr "برای اینکار باید یکی از ویرایشگران ویکی‌پدیا باشید."
 
@@ -2187,12 +2187,15 @@ msgid "This partner is now available for applications"
 msgstr "این پایگاه آمادهٔ دریافت درخواست‌ها است."
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:554
-msgid "Your suggestion has been added."
-msgstr "پیشنهاد شما اضافه شد."
+#: TWLight/resources/views.py:555
+msgid ""
+"Your suggestion has been added. Please note that we will primarily "
+"prioritise highly upvoted suggestions, and we cannot predict how long it "
+"will take to fulfill a suggestion."
+msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:578
+#: TWLight/resources/views.py:580
 msgid "Suggestion has been deleted."
 msgstr "پیشنهاد حذف شد."
 
@@ -2810,7 +2813,7 @@ msgstr "تغییر رمز عبور"
 #: TWLight/templates/registration/password_reset_form.html:10
 #: TWLight/templates/registration/password_reset_form.html:19
 msgid "Reset password"
-msgstr "تنظیم مجدد رمز عبور"
+msgstr "بازنشانی گذرواژه"
 
 #. Translators: If a user goes to reset their password, this message asks them to enter their email to do so.
 #: TWLight/templates/registration/password_reset_form.html:13
@@ -4191,3 +4194,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Your suggestion has been added."
+#~ msgstr "پیشنهاد شما اضافه شد."

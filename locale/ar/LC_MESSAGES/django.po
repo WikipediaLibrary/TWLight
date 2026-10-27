@@ -29,8 +29,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-10-14 13:21+0000\n"
-"PO-Revision-Date: 2026-10-12 12:05:55+0000\n"
+"POT-Creation-Date: 2026-10-26 14:03+0000\n"
+"PO-Revision-Date: 2026-10-22 12:06:53+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
@@ -40,8 +40,8 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == "
 "2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= "
 "99) ? 4 : 5 ) ) ) );\n"
-"X-POT-Import-Date: 2026-10-12 10:30:23+0000\n"
-"X-Generator: MediaWiki 1.47.0-alpha; Translate 2026-09-08\n"
+"X-POT-Import-Date: 2026-10-14 14:30:31+0000\n"
+"X-Generator: MediaWiki 1.48.0-alpha; Translate 2026-09-08\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -1516,7 +1516,7 @@ msgstr "تم إرسال رسالتك. سوف نعود إليك قريبا!"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:562
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:564
 msgid "You must be a Wikipedia editor to do that."
 msgstr "يجب أن تكون محررا في ويكيبيديا للقيام بذلك."
 
@@ -2194,12 +2194,15 @@ msgid "This partner is now available for applications"
 msgstr "هذا الشريك متاح حاليا لإستلام الطلبات"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:554
-msgid "Your suggestion has been added."
-msgstr "لقد تمت إضافة اقتراحك."
+#: TWLight/resources/views.py:555
+msgid ""
+"Your suggestion has been added. Please note that we will primarily "
+"prioritise highly upvoted suggestions, and we cannot predict how long it "
+"will take to fulfill a suggestion."
+msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:578
+#: TWLight/resources/views.py:580
 msgid "Suggestion has been deleted."
 msgstr "تم حذف الاقتراح."
 
@@ -2864,7 +2867,7 @@ msgstr ""
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "أدخل عنوان بريد إلكتروني صحيح."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
@@ -4159,3 +4162,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Your suggestion has been added."
+#~ msgstr "لقد تمت إضافة اقتراحك."

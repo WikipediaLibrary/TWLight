@@ -27,8 +27,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-10-14 13:21+0000\n"
-"PO-Revision-Date: 2026-10-12 12:05:55+0000\n"
+"POT-Creation-Date: 2026-10-26 14:04+0000\n"
+"PO-Revision-Date: 2026-10-15 12:06:49+0000\n"
 "Last-Translator: FULL NAME\n"
 "Language-Team: LANGUAGE\n"
 "Language: fr\n"
@@ -36,8 +36,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-POT-Import-Date: 2026-10-12 10:30:23+0000\n"
-"X-Generator: MediaWiki 1.47.0-alpha; Translate 2026-09-08\n"
+"X-POT-Import-Date: 2026-10-14 14:30:31+0000\n"
+"X-Generator: MediaWiki 1.48.0-alpha; Translate 2026-09-08\n"
 "X-Translation-Project: translatewiki.net <https://translatewiki.net>\n"
 
 #. Translators: Labels the button users click to apply for a partner's resources.
@@ -1576,7 +1576,7 @@ msgstr "Votre message a été envoyé. Nous reviendrons bientôt vers vous !"
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:562
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:564
 msgid "You must be a Wikipedia editor to do that."
 msgstr "Vous devez être un contributeur Wikipédia pour faire cela."
 
@@ -2268,12 +2268,15 @@ msgid "This partner is now available for applications"
 msgstr "Ce partenaire est maintenant disponible pour les candidatures"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:554
-msgid "Your suggestion has been added."
-msgstr "Votre suggestion a été ajoutée."
+#: TWLight/resources/views.py:555
+msgid ""
+"Your suggestion has been added. Please note that we will primarily "
+"prioritise highly upvoted suggestions, and we cannot predict how long it "
+"will take to fulfill a suggestion."
+msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:578
+#: TWLight/resources/views.py:580
 msgid "Suggestion has been deleted."
 msgstr "Suggestion supprimée."
 
@@ -4369,3 +4372,6 @@ msgstr ""
 #: tests/shunit/data/bad_i18n_newline_6.py:5
 msgid "6"
 msgstr ""
+
+#~ msgid "Your suggestion has been added."
+#~ msgstr "Votre suggestion a été ajoutée."
