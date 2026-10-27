@@ -836,6 +836,26 @@ class ListApplicationsTest(BaseApplicationViewTest):
             sorted([item.pk for item in allow_qs]),
         )
 
+    def test_applicant_email_is_escaped(self):
+        """
+        Applicant emails are user-controlled and must not render as HTML.
+        """
+        payload = '"<svg/onload=alert(1)>"@e.co'
+        app = ApplicationFactory(status=Application.NOT_APPROVED)
+        app.user.email = payload
+        app.user.save()
+        app.partner.coordinator = self.coordinator
+        app.partner.save()
+
+        request = RequestFactory().get(reverse("applications:list_rejected"))
+        request.user = self.coordinator
+        response = views.ListRejectedApplicationsView.as_view()(request)
+        response.render()
+        content = response.content.decode()
+
+        self.assertNotIn("<svg/onload", content)
+        self.assertIn("&lt;svg/onload", content)
+
     def test_queryset_unfiltered(self):
         """
         Make sure that ListApplicationsView has the correct queryset in context

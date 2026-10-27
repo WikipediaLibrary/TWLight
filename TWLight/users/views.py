@@ -25,6 +25,7 @@ from django.views.generic.edit import UpdateView, FormView, DeleteView
 from django.views.generic.list import ListView
 from django.utils.cache import learn_cache_key
 from django.utils.decorators import classonlymethod, method_decorator
+from django.utils.html import escape
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext_lazy as _
 from django_comments.models import Comment
@@ -478,7 +479,7 @@ class EmailChangeView(SelfOnly, FormView):
                 messages.SUCCESS,
                 # Translators: Shown to users when they successfully modify their email. Don't translate {email}.
                 _("Your email has been changed to {email}.").format(
-                    email=self.request.user.email
+                    email=escape(self.request.user.email)
                 ),
             )
             return _redirect_to_next_param(self.request)

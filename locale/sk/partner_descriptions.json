@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"KormiSK",
 			"Wizzard"
 		]
 	},
@@ -162,5 +163,6 @@
 	"185_short_description": "<strong>The Tribune</strong> je anglický denník vydávaný a tlačený v Čandígarhe, Džalandhare, Bathinde a Gurugrame. Je to významný indický denník s celosvetovým nákladom.",
 	"186_short_description": "<strong>Punjabi Tribune</strong> je pandžábsky denník vydávaný a tlačený v Čandígarhe, Džalandhare, Bathinde a Gurugrame. Je to popredné pandžábske noviny v severnej Indii so širokým nákladom.",
 	"187_short_description": "<strong>Dainik Tribune</strong> je hindský denník vydávaný a tlačený v Čandígarhe a Gurugrame. Je to popredné hindské noviny v severnej Indii so širokým nákladom.",
-	"188_short_description": "<strong>The Chronicle of Higher Education</strong> je zdrojom nezávislej žurnalistiky, kariérneho rozvoja a výhľadových informácií týkajúcich sa akademického prostredia. Od svojho založenia v roku 1966 sa The Chronicle rozrástol natoľko, že slúži miliónom pedagógov, administrátorov, výskumníkov a tvorcov politík, ktorí sa spoliehajú na jeho poznatky pri vedení, výučbe, štúdiu a inováciách. Nezávislá redakcia The Chronicle – najväčšia v krajine, ktorá sa venuje spravodajstvu o vysokých školách a univerzitách – je domovom ocenených novinárov a dátových analytikov."
+	"188_short_description": "<strong>The Chronicle of Higher Education</strong> je zdrojom nezávislej žurnalistiky, kariérneho rozvoja a výhľadových informácií týkajúcich sa akademického prostredia. Od svojho založenia v roku 1966 sa The Chronicle rozrástol natoľko, že slúži miliónom pedagógov, administrátorov, výskumníkov a tvorcov politík, ktorí sa spoliehajú na jeho poznatky pri vedení, výučbe, štúdiu a inováciách. Nezávislá redakcia The Chronicle – najväčšia v krajine, ktorá sa venuje spravodajstvu o vysokých školách a univerzitách – je domovom ocenených novinárov a dátových analytikov.",
+	"189_short_description": "<strong>Datawrapper</strong> je webová aplikácia na vizualizáciu dát, ktorá umožňuje používateľom vytvárať interaktívne grafy a mapy bez znalosti programovania alebo dizajnu."
 }
