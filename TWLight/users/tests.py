@@ -36,7 +36,7 @@ from .helpers.validation import validate_partners
 from .helpers.authorizations import get_all_bundle_authorizations
 from .factories import EditorFactory, UserFactory
 from .groups import get_coordinators, get_restricted
-from .models import UserProfile, Editor, Authorization
+from .models import UserProfile, Editor, Authorization, PartnerTermsAgreement
 from .views import MyLibraryView, UserEligibility
 
 from TWLight.users.helpers.editor_data import (
@@ -2988,3 +2988,151 @@ class UserEligibilityAPITest(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data, expected_json)
+
+
+class PartnerTermsAgreementTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            agreement_with_terms_of_use=True,
+            target_url="https://example.com/",
+        )
+        cls.editor = EditorFactory()
+        cls.editor.wp_bundle_eligible = True
+        cls.editor.save()
+        cls.user = cls.editor.user
+        cls.access_url = reverse("users:partner_access", kwargs={"pk": cls.partner.pk})
+        cls.library_url = "{library}#tou-{pk}".format(
+            library=reverse("users:my_library"), pk=cls.partner.pk
+        )
+
+    def setUp(self):
+        self.client.force_login(self.user)
+
+    def test_access_without_agreement_goes_to_my_library(self):
+        response = self.client.get(self.access_url)
+        self.assertRedirects(response, self.library_url, fetch_redirect_response=False)
+
+    def test_agreeing_records_agreement_and_continues_to_partner(self):
+        response = self.client.post(self.access_url)
+        self.assertRedirects(
+            response, self.partner.get_access_url, fetch_redirect_response=False
+        )
+        agreement = PartnerTermsAgreement.objects.get(
+            user=self.user, partner=self.partner
+        )
+        self.assertIsNotNone(agreement.date_agreed)
+
+    def test_agreeing_twice_keeps_one_agreement(self):
+        first = self.client.post(self.access_url)
+        second = self.client.post(self.access_url)
+        self.assertEqual(first.status_code, 302)
+        self.assertEqual(second.status_code, 302)
+        self.assertEqual(
+            PartnerTermsAgreement.objects.filter(
+                user=self.user, partner=self.partner
+            ).count(),
+            1,
+        )
+
+    def test_access_after_agreement_goes_to_partner(self):
+        PartnerTermsAgreement.objects.create(user=self.user, partner=self.partner)
+        response = self.client.get(self.access_url)
+        self.assertRedirects(
+            response, self.partner.get_access_url, fetch_redirect_response=False
+        )
+
+    def test_agreement_is_per_user(self):
+        other_user = EditorFactory().user
+        PartnerTermsAgreement.objects.create(user=other_user, partner=self.partner)
+        response = self.client.get(self.access_url)
+        self.assertRedirects(response, self.library_url, fetch_redirect_response=False)
+
+    def test_partner_without_agreement_setting_is_not_gated(self):
+        partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            agreement_with_terms_of_use=False,
+            target_url="https://example.org/ungated/",
+        )
+        url = reverse("users:partner_access", kwargs={"pk": partner.pk})
+        response = self.client.get(url)
+        self.assertRedirects(
+            response, partner.get_access_url, fetch_redirect_response=False
+        )
+        self.client.post(url)
+        self.assertFalse(PartnerTermsAgreement.objects.exists())
+
+    def test_non_bundle_partner_is_not_gated(self):
+        # Application based partners ask for agreement during the application.
+        partner = PartnerFactory(
+            authorization_method=Partner.PROXY,
+            agreement_with_terms_of_use=True,
+            target_url="https://example.net/proxy/",
+        )
+        url = reverse("users:partner_access", kwargs={"pk": partner.pk})
+        response = self.client.get(url)
+        self.assertRedirects(
+            response, partner.get_access_url, fetch_redirect_response=False
+        )
+
+    def test_partner_without_access_url_is_not_found(self):
+        partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            agreement_with_terms_of_use=True,
+            target_url=None,
+        )
+        url = reverse("users:partner_access", kwargs={"pk": partner.pk})
+        self.assertEqual(self.client.get(url).status_code, 404)
+
+    def test_anonymous_user_is_sent_to_login(self):
+        self.client.logout()
+        response = self.client.get(self.access_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(str(settings.LOGIN_URL), response.url)
+        self.assertFalse(PartnerTermsAgreement.objects.exists())
+
+    def test_saving_agreement_clears_my_library_cache(self):
+        with patch.object(UserProfile, "delete_my_library_cache") as mock_delete:
+            PartnerTermsAgreement.objects.create(user=self.user, partner=self.partner)
+        mock_delete.assert_called_once()
+
+    def test_terms_agreement_requires_terms_link(self):
+        partner = Partner(
+            company_name="No terms",
+            authorization_method=Partner.BUNDLE,
+            agreement_with_terms_of_use=True,
+            terms_of_use="",
+            target_url="https://example.com/",
+        )
+        with self.assertRaises(ValidationError):
+            partner.clean()
+
+    def _render_my_library(self):
+        # Sending the application creates the user's authorization.
+        coordinator = UserFactory(username="Jon Snow")
+        get_coordinators().user_set.add(coordinator)
+        ApplicationFactory(
+            status=Application.SENT,
+            editor=self.editor,
+            partner=self.partner,
+            sent_by=coordinator,
+        )
+        request = RequestFactory().get(reverse("users:my_library"))
+        request.user = self.user
+        response = MyLibraryView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
+        return response.render().content.decode("utf-8")
+
+    def test_my_library_tile_prompts_before_agreement(self):
+        content = self._render_my_library()
+        self.assertIn('data-tou-partner-pk="{}"'.format(self.partner.pk), content)
+        self.assertIn('href="{}"'.format(self.access_url), content)
+        self.assertIn(escape(self.partner.terms_of_use), content)
+
+    def test_my_library_tile_does_not_prompt_after_agreement(self):
+        PartnerTermsAgreement.objects.create(user=self.user, partner=self.partner)
+        content = self._render_my_library()
+        self.assertNotIn('data-tou-partner-pk="{}"'.format(self.partner.pk), content)
+        self.assertIn('href="{}"'.format(self.access_url), content)

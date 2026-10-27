@@ -5,7 +5,12 @@ from django.dispatch import receiver, Signal
 from django.db import transaction
 from django.db.models.signals import pre_save, post_save
 from TWLight.users.helpers.authorizations import get_all_bundle_authorizations
-from TWLight.users.models import Authorization, UserProfile, Session
+from TWLight.users.models import (
+    Authorization,
+    PartnerTermsAgreement,
+    UserProfile,
+    Session,
+)
 from TWLight.resources.models import Partner
 
 """
@@ -41,6 +46,12 @@ def clear_inactive_user_sessions(sender, instance, **kwargs):
 @receiver(post_save, sender=Authorization)
 def delete_my_library_cache(sender, instance, **kwargs):
     """Authorizations directly impact resources in my_library, so delete my_library page cache after saving."""
+    instance.user.userprofile.delete_my_library_cache()
+
+
+@receiver(post_save, sender=PartnerTermsAgreement)
+def delete_my_library_cache_on_terms_agreement(sender, instance, **kwargs):
+    """The My Library tiles prompt for agreement, so the cached page is stale once a user agrees."""
     instance.user.userprofile.delete_my_library_cache()
 
 

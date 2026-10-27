@@ -58,6 +58,11 @@ urlpatterns = [
         name="withdraw",
     ),
     path(
+        "partner_access/<int:pk>/",
+        login_required(views.PartnerAccessView.as_view()),
+        name="partner_access",
+    ),
+    path(
         "favorite_collection/",
         login_required(views.FavoriteCollectionView.as_view()),
         name="favorite_collection",
