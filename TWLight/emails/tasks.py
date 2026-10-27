@@ -23,11 +23,9 @@ settings.DJMAIL_REAL_BACKEND.
 """
 
 from djmail import template_mail
-from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
+from djmail.template_mail import MagicMailBuilder
 from concurrent.futures import Future
 import logging
-import os
-from uuid import uuid4
 from reversion.models import Version
 
 from django_comments.models import Comment
@@ -35,7 +33,6 @@ from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import get_connection
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
