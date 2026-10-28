@@ -413,6 +413,10 @@ TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get("TWLIGHT_OAUTH_PROVIDER_URL", None)
 TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get("TWLIGHT_OAUTH_CONSUMER_KEY", None)
 TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get("TWLIGHT_OAUTH_CONSUMER_SECRET", None)
 
+TWLIGHT_OAUTH_TIMESTAMP_LEEWAY = int(
+    os.environ.get("TWLIGHT_OAUTH_TIMESTAMP_LEEWAY", 15)
+)
+
 # API CONFIGURATION
 # ------------------------------------------------------------------------------
 
