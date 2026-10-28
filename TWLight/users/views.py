@@ -826,14 +826,18 @@ class WithdrawApplication(RedirectView):
     """
 
     url = "/"
+    # State change: must not run on GET (CSRF).
+    http_method_names = ["post"]
 
     def get_redirect_url(self, *args, **kwargs):
         withdraw_id = kwargs["id"]
         application_id = kwargs["pk"]
-        applications = Application.objects.filter(pk=withdraw_id)
-        for application in applications:
-            application.status = Application.INVALID
-            application.save()
+        # Only the owner can withdraw. 404 hides whether the ID exists.
+        application = get_object_or_404(
+            Application, pk=withdraw_id, editor__user=self.request.user
+        )
+        application.status = Application.INVALID
+        application.save()
         message = f"Your application has been withdrawn successfully. Head over to <a class='twl-links' href='/users/my_applications/{application_id}'>My Applications</a> to view the status."
         messages.add_message(self.request, messages.SUCCESS, message)
         return super().get_redirect_url(*args, **kwargs)

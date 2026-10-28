@@ -19,6 +19,7 @@ from django.core.exceptions import (
 )
 from django.urls import resolve, reverse, reverse_lazy
 from django.core.management import call_command
+from django.http import Http404
 from django.test import TestCase, Client, RequestFactory, override_settings
 from django.utils.translation import get_language
 from django.utils.html import escape
@@ -329,7 +330,7 @@ class ViewsTestCase(TestCase):
         )
 
         factory = RequestFactory()
-        request = factory.get(
+        request = factory.post(
             reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id": app.pk})
         )
         request.user = self.user_editor
@@ -340,6 +341,42 @@ class ViewsTestCase(TestCase):
         # withdrawing application should set date closed
         self.assertNotEqual(app.date_closed, None)
         self.assertEqual(app.status, Application.INVALID)
+
+    def test_withdraw_application_not_owner(self):
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+
+        factory = RequestFactory()
+        request = factory.post(
+            reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id": app.pk})
+        )
+        request.user = self.user_editor2
+        with self.assertRaises(Http404):
+            views.WithdrawApplication.as_view()(request, pk=self.editor1.pk, id=app.pk)
+        app.refresh_from_db()
+        self.assertEqual(app.status, Application.PENDING)
+
+    def test_withdraw_application_get_not_allowed(self):
+        app = ApplicationFactory(
+            status=Application.PENDING,
+            partner=PartnerFactory(authorization_method=Partner.BUNDLE),
+            editor=self.user_editor.editor,
+        )
+
+        factory = RequestFactory()
+        request = factory.get(
+            reverse("users:withdraw", kwargs={"pk": self.editor1.pk, "id": app.pk})
+        )
+        request.user = self.user_editor
+        response = views.WithdrawApplication.as_view()(
+            request, pk=self.editor1.pk, id=app.pk
+        )
+        self.assertEqual(response.status_code, 405)
+        app.refresh_from_db()
+        self.assertEqual(app.status, Application.PENDING)
 
     def test_sent_application(self):
         app = ApplicationFactory(
