@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404, redirect
 
 from TWLight.applications.models import Application
 from TWLight.users.groups import get_coordinators
-from TWLight.users.models import Authorization, User
+from TWLight.users.models import Authorization, PartnerTermsAgreement, User
 from TWLight.view_mixins import (
     CoordinatorsOnly,
     PartnerCoordinatorOrSelf,
@@ -260,6 +260,7 @@ class PartnersDetailView(DetailView):
             # If the user has no authorization, no special behaviour.
             except Authorization.DoesNotExist:
                 pass
+
             # There should never be multiple authorizations for a resource
             except Authorization.MultipleObjectsReturned:
                 logger.info(
@@ -275,6 +276,14 @@ class PartnersDetailView(DetailView):
                     _("Multiple authorizations were returned – something's wrong. Please contact us and don't forget to mention this message."),
                     # fmt: on
                 )
+
+        context["needs_terms_agreement"] = (
+            self.request.user.is_authenticated
+            and partner.requires_first_access_agreement
+            and not PartnerTermsAgreement.objects.filter(
+                user=self.request.user, partner=partner
+            ).exists()
+        )
 
         return context
 

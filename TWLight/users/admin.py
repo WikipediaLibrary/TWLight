@@ -9,6 +9,7 @@ from TWLight.users.models import (
     EditorLog,
     UserProfile,
     Authorization,
+    PartnerTermsAgreement,
     get_company_name,
     Session,
 )
@@ -113,6 +114,16 @@ class AuthorizationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Authorization, AuthorizationAdmin)
+
+
+class PartnerTermsAgreementAdmin(admin.ModelAdmin):
+    list_display = ("user", "partner", "date_agreed")
+    search_fields = ("user__editor__wp_username", "partner__company_name")
+    raw_id_fields = ("user", "partner")
+    readonly_fields = ("date_agreed",)
+
+
+admin.site.register(PartnerTermsAgreement, PartnerTermsAgreementAdmin)
 
 
 class AuthorizationInline(admin.StackedInline):

@@ -1,0 +1,39 @@
+{% load i18n %}
+<div class="modal fade" id="tou-modal" tabindex="-1" role="dialog" aria-labelledby="tou-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tou-modal-title">
+          {% comment %}Translators: Title of a popup shown on the My Library page when a user must agree to a partner's terms of use before accessing the partner's collection for the first time. {% endcomment %}
+          {% trans "Agree to the terms of use" %}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{% trans 'Close' %}">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          {% comment %}Translators: Shown in a popup when a user must agree to a partner's terms of use before accessing the partner's collection for the first time. The partner's name is filled in automatically. {% endcomment %}
+          {% blocktranslate trimmed %}
+            To access <strong class="tou-partner-name"></strong>, you must agree
+            to its <a class="tou-link" href="#" target="_blank" rel="noopener">terms of use</a>.
+            You will only be asked this once.
+          {% endblocktranslate %}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+          {% comment %}Translators: A button that closes a popup without agreeing to the terms of use. {% endcomment %}
+          {% trans "Close" %}
+        </button>
+        <form id="tou-form" method="post" action="" target="_blank">
+          {% csrf_token %}
+          <button type="submit" class="btn twl-btn">
+            {% comment %}Translators: A button users click to agree to a partner's terms of use and continue to the partner's collection. {% endcomment %}
+            {% trans "I agree" %}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

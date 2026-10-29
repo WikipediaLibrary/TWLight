@@ -329,8 +329,8 @@ class Partner(models.Model):
     )
     agreement_with_terms_of_use = models.BooleanField(
         default=False,
-        help_text="Mark as true if this partner requires applicants to agree "
-        "with the partner's terms of use.",
+        help_text="Mark as true if the user must agree to the partner's terms of "
+        "use during their application or on first access",
     )
     account_email = models.BooleanField(
         default=False,
@@ -420,6 +420,17 @@ class Partner(models.Model):
     @property
     def is_not_available(self):
         return self.status == self.NOT_AVAILABLE
+
+    @property
+    def requires_first_access_agreement(self):
+        """
+        Bundle partners have no application step, so users agree to the
+        partner's terms of use the first time they access the collection.
+        """
+        return (
+            self.authorization_method == self.BUNDLE
+            and self.agreement_with_terms_of_use
+        )
 
     @property
     def get_access_url(self):
