@@ -23,11 +23,9 @@ settings.DJMAIL_REAL_BACKEND.
 """
 
 from djmail import template_mail
-from djmail.template_mail import MagicMailBuilder, InlineCSSTemplateMail
+from djmail.template_mail import MagicMailBuilder
 from concurrent.futures import Future
 import logging
-import os
-from uuid import uuid4
 from reversion.models import Version
 
 from django_comments.models import Comment
@@ -35,7 +33,6 @@ from django_comments.signals import comment_was_posted
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import get_connection
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404
@@ -44,7 +41,7 @@ from TWLight.applications.models import Application
 from TWLight.applications.signals import Reminder
 from TWLight.resources.models import AccessCode, Partner
 from TWLight.users.groups import get_restricted
-from TWLight.users.signals import Notice, UserLoginRetrieval
+from TWLight.users.signals import Notice
 from django.conf import settings
 from djmail.core import _safe_send_message
 from djmail.models import Message
@@ -99,10 +96,6 @@ class CoordinatorReminderNotification(template_mail.TemplateMail):
 
 class UserRenewalNotice(template_mail.TemplateMail):
     name = "user_renewal_notice"
-
-
-class UserRetrieveMonthlyLogins(template_mail.TemplateMail):
-    name = "user_retrieve_monthly_logins"
 
 
 @receiver(Reminder.coordinator_reminder)
@@ -579,15 +572,3 @@ def notify_applicants_when_waitlisted(sender, instance, **kwargs):
                 status__in=[Application.PENDING, Application.QUESTION]
             ):
                 send_waitlist_notification_email(app)
-
-
-@receiver(UserLoginRetrieval.user_retrieve_monthly_logins)
-def send_user_login_retrieval_email(sender, **kwargs):
-    monthly_users = kwargs["monthly_users"]
-    email = UserRetrieveMonthlyLogins()
-    logger.info("Email constructed.")
-    email.send(
-        os.environ.get("TWLIGHT_ERROR_MAILTO", "wikipedialibrary@wikimedia.org"),
-        {"monthly_users": monthly_users},
-    )
-    logger.info("Email queued.")
