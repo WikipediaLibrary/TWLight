@@ -1131,23 +1131,6 @@ class Authorization(models.Model):
             except Application.DoesNotExist:
                 return None
 
-    @property
-    def about_to_expire(self):
-        """
-        Determines whether an Authorization is soon to expire. This is
-        currently defined as fewer than 30 days from now (and not
-        already expired).
-        """
-        today = date.today()
-        if (
-            self.date_expires
-            and self.date_expires - today < timedelta(days=30)
-            and not self.date_expires < today
-        ):
-            return True
-        else:
-            return False
-
     def get_authorization_method(self):
         """
         For this authorization, returns the linked authorization
