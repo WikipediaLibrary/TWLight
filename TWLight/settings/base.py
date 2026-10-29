@@ -26,10 +26,7 @@ import sys
 from django.contrib import messages
 
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
 from django.utils.translation import to_language
-
-import django_dkim
 
 # Import available locales from Faker, so we can determine what languages we fake in tests.
 from faker.config import AVAILABLE_LOCALES as FAKER_AVAILABLE_LOCALES
@@ -204,7 +201,7 @@ MIDDLEWARE = [
 # DEBUG
 # ------------------------------------------------------------------------------
 
-# By setting this an an environment variable, it is easy to switch debug on in
+# By setting this in an environment variable, it is easy to switch debug on in
 # servers to do a quick test.
 # DEBUG SHOULD BE FALSE ON PRODUCTION for security reasons.
 
@@ -240,7 +237,7 @@ if (
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # WMF sysadmins strongly prefer mysql, so use that.
 # If you're deploying to Heroku, heroku.py will override this.
@@ -263,7 +260,7 @@ DATABASES = {
 }
 
 # Auto-created primary key used when not defining a primary key type.
-# In Django 3.2, the default changed from from Autofield to BigAutoField.
+# In Django 3.2, the default changed from AutoField to BigAutoField.
 # This just keeps our existing fields as they are so we don't have to migrate
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -308,7 +305,7 @@ SECURE_REFERRER_POLICY = "origin"
 # INTERNATIONALIZATION CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
+# https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = "en"  # Sets site default language.
 
@@ -367,7 +364,7 @@ TEMPLATES = [
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, "collectedstatic")
 STATIC_URL = "/static/"
@@ -377,7 +374,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # MEDIA FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 
-# https://docs.djangoproject.com/en/1.8/topics/files/
+# https://docs.djangoproject.com/en/5.2/topics/files/
 
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 MEDIA_URL = "/media/"
@@ -411,6 +408,10 @@ TWLIGHT_OAUTH_PROVIDER_URL = os.environ.get("TWLIGHT_OAUTH_PROVIDER_URL", None)
 
 TWLIGHT_OAUTH_CONSUMER_KEY = os.environ.get("TWLIGHT_OAUTH_CONSUMER_KEY", None)
 TWLIGHT_OAUTH_CONSUMER_SECRET = os.environ.get("TWLIGHT_OAUTH_CONSUMER_SECRET", None)
+
+TWLIGHT_OAUTH_TIMESTAMP_LEEWAY = int(
+    os.environ.get("TWLIGHT_OAUTH_TIMESTAMP_LEEWAY", 15)
+)
 
 # API CONFIGURATION
 # ------------------------------------------------------------------------------

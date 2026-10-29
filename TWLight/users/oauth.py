@@ -245,7 +245,9 @@ class OAuthBackend(object):
         # we have no password.)
         logger.info("Identifying user...")
         try:
-            identity = handshaker.identify(access_token, 15)
+            identity = handshaker.identify(
+                access_token, settings.TWLIGHT_OAUTH_TIMESTAMP_LEEWAY
+            )
         except OAuthException as e:
             contact_url = reverse("contact")
             logger.warning(e)
