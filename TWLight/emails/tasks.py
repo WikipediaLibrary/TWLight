@@ -82,10 +82,6 @@ class RejectionNotification(template_mail.TemplateMail):
     name = "rejection_notification"
 
 
-class SurveyActiveUser(template_mail.TemplateMail):
-    name = "survey_active_user"
-
-
 class Test(template_mail.TemplateMail):
     name = "test"
 
@@ -198,41 +194,6 @@ def send_user_renewal_notice_emails(sender, **kwargs):
             return False
 
     return bool(result)
-
-
-def send_survey_active_user_email(connection=email_connection(), **kwargs):
-    """
-    Any time the related managment command is run, this sends a survey
-    invitation to qualifying editors.
-    """
-    user_email = kwargs["user_email"]
-    user_lang = kwargs["user_lang"]
-    survey_id = kwargs["survey_id"]
-    survey_langs = kwargs["survey_langs"]
-
-    # Default survey language is english
-    survey_lang = "en"
-
-    # Set survey language to user language if available
-    if user_lang in survey_langs:
-        survey_lang = user_lang
-
-    base_url = "https://wikimediafoundation.limesurvey.net/"
-    link = "{base}{id}?lang={lang}".format(
-        base=base_url, id=survey_id, lang=survey_lang
-    )
-
-    template_email = SurveyActiveUser()
-
-    email = template_email.make_email_object(
-        user_email,
-        {
-            "lang": user_lang,
-            "link": link,
-        },
-    )
-    message = Message.from_email_message(email)
-    _safe_send_message(message, connection=connection)
 
 
 def send_test(connection=email_connection(), **kwargs):
