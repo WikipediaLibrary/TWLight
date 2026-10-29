@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  // Partners which need agreement to their terms of use on first access
+  var touModal = $("#tou-modal");
+  var touForm = document.getElementById("tou-form");
+
+  function openTouModal(link) {
+    touModal.find(".tou-partner-name").text(link.dataset.touPartnerName);
+    touModal.find(".tou-link").attr("href", link.dataset.touUrl);
+    touForm.action = link.getAttribute("href");
+    touForm.dataset.partnerPk = link.dataset.touPartnerPk;
+    touModal.modal("show");
+  }
+
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("a[data-tou-partner-pk]");
+    if (link) {
+      event.preventDefault();
+      openTouModal(link);
+    }
+  });
+
+  touForm.addEventListener("submit", function () {
+    // The new tab saves the agreement. This page is already loaded, so
+    // stop asking for this partner here too.
+    document.querySelectorAll('a[data-tou-partner-pk="' + this.dataset.partnerPk + '"]').forEach(function (link) {
+      link.removeAttribute("data-tou-partner-pk");
+    });
+    touModal.modal("hide");
+  });
+
+  touModal.on("hidden.bs.modal", function () {
+    if (window.location.hash.indexOf("#tou-") === 0) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  });
+
+  // Users sent here by the access view, e.g. without JavaScript
+  var touHash = window.location.hash.match(/^#tou-(\d+)$/);
+  if (touHash) {
+    var touLink = document.querySelector('a[data-tou-partner-pk="' + touHash[1] + '"]');
+    if (touLink) {
+      openTouModal(touLink);
+    }
+  }
+</script>

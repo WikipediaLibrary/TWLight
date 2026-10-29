@@ -24,6 +24,7 @@
 {% endblock %}
 
 {% block javascript %}
+  {% include "users/terms_agreement_script.html" %}
   <script type="text/javascript">
     // Dynamically add classes to the django-filter generated labels
     labelLanguages = document.querySelector("[for=id_languages]");
@@ -31,50 +32,6 @@
 
     labelLanguages.classList.add("collection-filter-label");
     labelTags.classList.add("collection-filter-label");
-
-    // Partners which need agreement to their terms of use on first access
-    var touModal = $("#tou-modal");
-    var touForm = document.getElementById("tou-form");
-
-    function openTouModal(link) {
-      touModal.find(".tou-partner-name").text(link.dataset.touPartnerName);
-      touModal.find(".tou-link").attr("href", link.dataset.touUrl);
-      touForm.action = link.getAttribute("href");
-      touForm.dataset.partnerPk = link.dataset.touPartnerPk;
-      touModal.modal("show");
-    }
-
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest("a[data-tou-partner-pk]");
-      if (link) {
-        event.preventDefault();
-        openTouModal(link);
-      }
-    });
-
-    touForm.addEventListener("submit", function () {
-      // The new tab saves the agreement. This page is already loaded, so
-      // stop asking for this partner here too.
-      document.querySelectorAll('a[data-tou-partner-pk="' + this.dataset.partnerPk + '"]').forEach(function (link) {
-        link.removeAttribute("data-tou-partner-pk");
-      });
-      touModal.modal("hide");
-    });
-
-    touModal.on("hidden.bs.modal", function () {
-      if (window.location.hash.indexOf("#tou-") === 0) {
-        history.replaceState(null, "", window.location.pathname + window.location.search);
-      }
-    });
-
-    // Users sent here from a partner page by the access view
-    var touHash = window.location.hash.match(/^#tou-(\d+)$/);
-    if (touHash) {
-      var touLink = document.querySelector('a[data-tou-partner-pk="' + touHash[1] + '"]');
-      if (touLink) {
-        openTouModal(touLink);
-      }
-    }
 
     // Live search functionality
     var search_input = document.getElementById("collection-live-search");

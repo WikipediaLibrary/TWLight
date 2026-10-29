@@ -3136,3 +3136,28 @@ class PartnerTermsAgreementTest(TestCase):
         content = self._render_my_library()
         self.assertNotIn('data-tou-partner-pk="{}"'.format(self.partner.pk), content)
         self.assertIn('href="{}"'.format(self.access_url), content)
+
+    def test_partner_page_prompts_before_agreement(self):
+        url = reverse("partners:detail", kwargs={"pk": self.partner.pk})
+        content = self.client.get(url).content.decode("utf-8")
+        self.assertIn('data-tou-partner-pk="{}"'.format(self.partner.pk), content)
+        self.assertIn('id="tou-modal"', content)
+        self.assertIn('href="{}"'.format(self.access_url), content)
+
+    def test_partner_page_does_not_prompt_after_agreement(self):
+        PartnerTermsAgreement.objects.create(user=self.user, partner=self.partner)
+        url = reverse("partners:detail", kwargs={"pk": self.partner.pk})
+        content = self.client.get(url).content.decode("utf-8")
+        self.assertNotIn('data-tou-partner-pk="{}"'.format(self.partner.pk), content)
+        self.assertNotIn('id="tou-modal"', content)
+        self.assertIn('href="{}"'.format(self.access_url), content)
+
+    def test_partner_page_does_not_prompt_without_agreement_setting(self):
+        partner = PartnerFactory(
+            authorization_method=Partner.BUNDLE,
+            agreement_with_terms_of_use=False,
+            target_url="https://example.org/plain/",
+        )
+        url = reverse("partners:detail", kwargs={"pk": partner.pk})
+        content = self.client.get(url).content.decode("utf-8")
+        self.assertNotIn('id="tou-modal"', content)

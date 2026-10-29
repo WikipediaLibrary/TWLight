@@ -125,7 +125,12 @@
         {% if user.is_authenticated %}
           {% if user.editor.wp_bundle_eligible %}
             {% comment %}Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource. {% endcomment %}
-            <a class="btn twl-btn btn-lg btn-block" href="{% if partner.requires_first_access_agreement %}{% url 'users:partner_access' partner.pk %}{% else %}{{ partner.get_access_url }}{% endif %}" target="_blank" rel="noopener">
+            <a class="btn twl-btn btn-lg btn-block" href="{% if partner.requires_first_access_agreement %}{% url 'users:partner_access' partner.pk %}{% else %}{{ partner.get_access_url }}{% endif %}" target="_blank" rel="noopener"
+              {% if needs_terms_agreement %}
+              data-tou-partner-pk="{{ partner.pk }}"
+              data-tou-partner-name="{{ partner.company_name }}"
+              data-tou-url="{{ partner.terms_of_use }}"
+              {% endif %}>
               {% trans "Access Collection" %}
             </a><br />
             {% comment %}Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle. {% endcomment %}
