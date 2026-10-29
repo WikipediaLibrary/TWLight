@@ -528,6 +528,20 @@ class PartnerSuggestionView(FormView):
         # Adding an extra check to ensure the user is a wikipedia editor.
         try:
             assert self.request.user.editor
+            # Users must meet the edit count, account age, and block criteria
+            # to post suggestions. Recent edits are not required. Staff can
+            # always post.
+            user = self.request.user
+            if not (user.editor.wp_valid or user.is_staff):
+                messages.add_message(
+                    self.request,
+                    messages.ERROR,
+                    # fmt: off
+                    # Translators: This message is shown to users who attempt to submit a partner suggestion without meeting the eligibility criteria.
+                    _("You must be eligible to use The Wikipedia Library to submit new partner suggestions."),
+                    # fmt: on
+                )
+                return self.form_invalid(form)
             suggestion = Suggestion()
             suggestion.suggested_company_name = bleach.clean(
                 form.cleaned_data["suggested_company_name"],
