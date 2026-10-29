@@ -157,9 +157,12 @@ def update_existing_bundle_authorizations(sender, instance, **kwargs):
                     authorization.partners.add(instance)
 
         elif remove_from_auths:
-            with transaction.atomic():
-                for authorization in authorizations_to_update:
-                    authorization.partners.remove(instance)
+            # Act on the m2m table itself, rather than iterating through
+            # authorizations. One db query instead of tens of thousands.
+            # https://phabricator.wikimedia.org/T441309
+            Authorization.partners.through.objects.filter(
+                partner_id=instance.pk
+            ).delete()
 
         elif delete_defunct_authorizations:
             all_partner_authorizations = (
