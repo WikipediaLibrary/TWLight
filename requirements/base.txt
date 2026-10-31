@@ -1,4 +1,4 @@
-black==25.1.0
+black==26.10.1
 bleach==6.4.0
 click==8.0.4 # This version of click has to be set because 8.1 breaks black formatting
 defusedxml==0.7.1
