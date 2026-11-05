@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-10-29 14:48+0000\n"
-"PO-Revision-Date: 2026-11-02 12:06:34+0000\n"
+"PO-Revision-Date: 2026-11-05 12:05:44+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -979,15 +979,15 @@ msgstr "Dein Wikipedia-Library-Zugangscode"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access on your My Library page: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>Hallo %(user)s!</p> <p>Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung war erfolgreich. </p> <p>%(user_instructions)s</p> <p>Du kannst die zugänglichen Inhalte in „Meine Zugänge“ einsehen: %(link)s</p> <p>Herzlich willkommen!</p> <p>The Wikipedia Library</p>"
+msgstr "<p>Hallo %(user)s!</p> <p>Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung war erfolgreich.</p> <p>%(user_instructions)s</p> <p>Du kannst die zugänglichen Inhalte in „Meine Zugänge“ einsehen: %(link)s</p> <p>Herzlich willkommen!</p> <p>The Wikipedia Library</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access on your My Library page: %(link)s Cheers! The Wikipedia Library"
-msgstr "Hallo %(user)s! Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung wurde erfolgreich angenommen.  %(user_instructions)s Du kannst deine zugängliche Literatur in „Meine Zugänge“ einsehen: %(link)s Willkommen! The Wikipedia Library"
+msgstr "Hallo %(user)s! Danke für deine Bewerbung für einen Zugang zu %(partner)s über „The Wikipedia Library“. Deine Bewerbung wurde erfolgreich angenommen. %(user_instructions)s Du kannst deine zugängliche Literatur in „Meine Zugänge“ einsehen: %(link)s Willkommen! The Wikipedia Library"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1783,7 +1783,7 @@ msgstr "Dieser Partner nimmt neue Bewerbungen an."
 #. Translators: Shown to users when they successfully add a new partner suggestion.
 #: TWLight/resources/views.py:555
 msgid "Your suggestion has been added. Please note that we will primarily prioritise highly upvoted suggestions, and we cannot predict how long it will take to fulfill a suggestion."
-msgstr ""
+msgstr "Dein Vorschlag wurde hinzugefügt. Bitte beachte, dass wir Vorschläge mit vielen positiven Bewertungen vorrangig behandeln und nicht vorhersagen können, wie lange es dauern wird, bis ein Vorschlag umgesetzt werden kann."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
 #: TWLight/resources/views.py:580
@@ -2239,7 +2239,7 @@ msgstr "Wenn du das Häkchen hier entfernst und „Update“ anklickst, kannst d
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Gib eine gültige E-Mail-Adresse an."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
