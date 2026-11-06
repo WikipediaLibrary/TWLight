@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
-"POT-Creation-Date: 2026-11-05 21:36+0000\n"
+"POT-Creation-Date: 2026-11-06 21:42+0000\n"
 "PO-Revision-Date: 2026-11-02 12:06:35+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,8 +48,8 @@ msgstr ""
 #: TWLight/applications/forms.py:119
 #: TWLight/applications/templates/applications/request_for_application.html:65
 #: TWLight/applications/templates/applications/request_for_application.html:67
-#: TWLight/resources/templates/resources/partner_detail.html:58
 #: TWLight/resources/templates/resources/partner_detail.html:61
+#: TWLight/resources/templates/resources/partner_detail.html:64
 #: TWLight/resources/templates/resources/partner_detail_apply.html:39
 #: TWLight/resources/templates/resources/partner_detail_apply.html:42
 #: TWLight/users/templates/users/available_collection_tile.html:89
@@ -383,7 +383,7 @@ msgstr "提携組織"
 #: TWLight/applications/templates/applications/application_evaluation.html:108
 #: TWLight/applications/templates/applications/request_for_application.html:53
 #: TWLight/resources/templates/resources/collection_tile.html:51
-#: TWLight/resources/templates/resources/partner_detail.html:33
+#: TWLight/resources/templates/resources/partner_detail.html:36
 #: TWLight/resources/templates/resources/partner_detail_apply.html:14
 #: TWLight/users/templates/users/available_collection_tile.html:58
 #: TWLight/users/templates/users/user_collection_tile.html:70
@@ -757,7 +757,7 @@ msgstr ""
 #: TWLight/resources/templates/resources/suggestion_confirm_delete.html:17
 #: TWLight/users/templates/users/authorization_confirm_return.html:19
 #: TWLight/users/templates/users/user_confirm_delete.html:27
-#: TWLight/users/views.py:537
+#: TWLight/users/views.py:539
 msgid "Confirm"
 msgstr "確定"
 
@@ -1539,7 +1539,7 @@ msgstr "メッセージを送信しました。返答までしばらくお待ち
 
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to the contact us form.
 #. Translators: This message is shown to non-wikipedia editors who attempt to post data to suggestion form.
-#: TWLight/emails/views.py:59 TWLight/resources/views.py:564
+#: TWLight/emails/views.py:59 TWLight/resources/views.py:573
 msgid "You must be a Wikipedia editor to do that."
 msgstr "手続きはウィキペディアの編集者に限定されます。"
 
@@ -1645,32 +1645,32 @@ msgid "Partially searchable"
 msgstr "検索可能な部分あり"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:532
+#: TWLight/resources/models.py:543
 msgid "Service information"
 msgstr "サービス情報"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:534
+#: TWLight/resources/models.py:545
 msgid "Service issue"
 msgstr "サービスの問題"
 
 #. Translators: Expandable element with information about the status of this partner
-#: TWLight/resources/models.py:536
+#: TWLight/resources/models.py:547
 msgid "Temporarily unavailable"
 msgstr "一時的に利用できません"
 
 #. Translators: information about the current status of this partner
-#: TWLight/resources/models.py:541
+#: TWLight/resources/models.py:552
 msgid "Ongoing work may impact access"
 msgstr "アクセスに影響しうる作業が行なわれています"
 
 #. Translators: information about a current issue with this partner
-#: TWLight/resources/models.py:543
+#: TWLight/resources/models.py:554
 msgid "An issue is impacting access"
 msgstr "アクセスに影響する問題があります"
 
 #. Translators: information about a current outage for this partner
-#: TWLight/resources/models.py:545
+#: TWLight/resources/models.py:556
 msgid "Access is currently unavailable"
 msgstr "現在、アクセスできません"
 
@@ -1773,16 +1773,16 @@ msgstr "提案者"
 msgid "Upvotes"
 msgstr "支持票"
 
-#: TWLight/resources/templates/resources/partner_detail.html:17
+#: TWLight/resources/templates/resources/partner_detail.html:20
 msgid "Back to My Library"
 msgstr "「私の図書館」へ戻る"
 
-#: TWLight/resources/templates/resources/partner_detail.html:22
+#: TWLight/resources/templates/resources/partner_detail.html:25
 msgid "Back to partners"
 msgstr "提携組織一覧に戻る"
 
 #. Translators: If we have no available accounts for a partner, the coordinator can change the application system to a waiting list.
-#: TWLight/resources/templates/resources/partner_detail.html:36
+#: TWLight/resources/templates/resources/partner_detail.html:39
 #: TWLight/resources/templates/resources/partner_detail_apply.html:17
 msgid ""
 "There are no access grants available for this partner at this time. You can "
@@ -1793,7 +1793,7 @@ msgstr ""
 "ん。アクセス権の提供再開に伴い、申請の処理が開始されます。"
 
 #. Translators: This text links to the minimum user requirements and terms of use on the partner page.
-#: TWLight/resources/templates/resources/partner_detail.html:48
+#: TWLight/resources/templates/resources/partner_detail.html:51
 #: TWLight/resources/templates/resources/partner_detail_apply.html:29
 #, python-format
 msgid ""
@@ -1807,7 +1807,7 @@ msgstr ""
 "査ください。"
 
 #. Translators: This text refers to the page containing the content a user is authorized to access.
-#: TWLight/resources/templates/resources/partner_detail.html:69
+#: TWLight/resources/templates/resources/partner_detail.html:72
 #, python-format
 msgid ""
 "View the status of your access in <strong><a class=\"twl-links\" "
@@ -1817,7 +1817,7 @@ msgstr ""
 "href=\"%(library_url)s\">私の図書館</a></strong>ページをご覧ください。"
 
 #. Translators: This message is shown when a user has open applications, linking to their respective applications page.
-#: TWLight/resources/templates/resources/partner_detail.html:78
+#: TWLight/resources/templates/resources/partner_detail.html:81
 #, python-format
 msgid ""
 "View the status of your application(s) on your <strong><a class=\"twl-"
@@ -1892,27 +1892,27 @@ msgid "List applications"
 msgstr "申請一覧"
 
 #. Translators: This text labels a button authenticated, bundle eligible users can click to access the proxied resource.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:130
-#: TWLight/resources/templates/resources/partner_detail_apply.html:144
+#: TWLight/resources/templates/resources/partner_detail_apply.html:135
+#: TWLight/resources/templates/resources/partner_detail_apply.html:149
 msgid "Access Collection"
 msgstr "コレクションを開く"
 
 #. Translators: This is the name of the authorization method whereby users access resources automatically via the library bundle.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:133
-#: TWLight/resources/templates/resources/partner_detail_apply.html:146
-#: TWLight/resources/templates/resources/partner_detail_apply.html:162
+#: TWLight/resources/templates/resources/partner_detail_apply.html:138
+#: TWLight/resources/templates/resources/partner_detail_apply.html:151
+#: TWLight/resources/templates/resources/partner_detail_apply.html:167
 msgid "Library Bundle"
 msgstr "図書館バンドル制度"
 
 #. Translators: Alt text for the Library Bundle icon shown on the collection page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:135
-#: TWLight/resources/templates/resources/partner_detail_apply.html:148
-#: TWLight/resources/templates/resources/partner_detail_apply.html:164
+#: TWLight/resources/templates/resources/partner_detail_apply.html:140
+#: TWLight/resources/templates/resources/partner_detail_apply.html:153
+#: TWLight/resources/templates/resources/partner_detail_apply.html:169
 msgid "Library bundle access"
 msgstr "図書館バンドルアクセス"
 
 #. Translators: Text shown to authenticated, bundle eligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:138
+#: TWLight/resources/templates/resources/partner_detail_apply.html:143
 msgid ""
 "You are eligible to access Library Bundle partners. Click the button above "
 "to access the collection."
@@ -1921,7 +1921,7 @@ msgstr ""
 "するには、上のボタンを押します。"
 
 #. Translators: Text shown to authenticated, bundle ineligible users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:152
+#: TWLight/resources/templates/resources/partner_detail_apply.html:157
 #, python-format
 msgid ""
 "You are not eligible to access Library Bundle partners. Visit the <a "
@@ -1933,13 +1933,13 @@ msgstr ""
 "でご確認ください。"
 
 #. Translators: Buttton prompting users to log in.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:160
+#: TWLight/resources/templates/resources/partner_detail_apply.html:165
 #: TWLight/templates/header_partial_b4.html:130
 msgid "Log in"
 msgstr "ログイン"
 
 #. Translators: Text shown to unauthenticated users when they visit a Bundle partner page.
-#: TWLight/resources/templates/resources/partner_detail_apply.html:168
+#: TWLight/resources/templates/resources/partner_detail_apply.html:173
 #, python-format
 msgid ""
 "This resource is part of our <a class=\"twl-links\" "
@@ -2203,7 +2203,7 @@ msgid "Are you sure you want to delete <b>%(object)s</b>?"
 msgstr "本当に<b>%(object)s</b>を削除しますか？"
 
 #. Translators: If multiple authorizations where returned for a collection, this message is shown to a user
-#: TWLight/resources/views.py:275
+#: TWLight/resources/views.py:276
 msgid ""
 "Multiple authorizations were returned – something's wrong. Please contact us "
 "and don't forget to mention this message."
@@ -2212,22 +2212,22 @@ msgstr ""
 "いただき、このメッセージが表示されたことを必ずお伝えください。"
 
 #. Translators: This message is shown when user tries to access a NOT_AVAILABLE Partner
-#: TWLight/resources/views.py:323
+#: TWLight/resources/views.py:332
 msgid "This partner is currently not open for applications"
 msgstr "この提携組織では現在、申請を受け付けていません"
 
 #. Translators: When an account coordinator changes a partner from being open to applications to having a 'waitlist', they are shown this message.
-#: TWLight/resources/views.py:415
+#: TWLight/resources/views.py:424
 msgid "This partner is now waitlisted"
 msgstr "この提携組織への受付は現在、待機リストに追加されます"
 
 #. Translators: When an account coordinator changes a partner from having a 'waitlist' to being open for applications, they are shown this message.
-#: TWLight/resources/views.py:428
+#: TWLight/resources/views.py:437
 msgid "This partner is now available for applications"
 msgstr "この提携組織では現在、申請を受け付け中です"
 
 #. Translators: Shown to users when they successfully add a new partner suggestion.
-#: TWLight/resources/views.py:555
+#: TWLight/resources/views.py:564
 msgid ""
 "Your suggestion has been added. Please note that we will primarily "
 "prioritise highly upvoted suggestions, and we cannot predict how long it "
@@ -2235,7 +2235,7 @@ msgid ""
 msgstr ""
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
-#: TWLight/resources/views.py:580
+#: TWLight/resources/views.py:589
 msgid "Suggestion has been deleted."
 msgstr "提案を削除しました。"
 
@@ -3441,7 +3441,7 @@ msgstr "パスワード"
 #. Translators: This is the button users click to confirm changes to their personal information.
 #: TWLight/users/templates/users/preferences.html:66
 #: TWLight/users/templates/users/user_email_preferences.html:25
-#: TWLight/users/views.py:401
+#: TWLight/users/views.py:403
 msgid "Update"
 msgstr "更新"
 
@@ -4027,6 +4027,32 @@ msgstr ""
 "図書館ならびに利用者がウィキペディア図書館プログラムを経由してアクセス権を得"
 "る出版社のサービスにおいて、それぞれの規約順守に同意することに賛成します。"
 
+#. Translators: Title of a popup shown on the My Library page when a user must agree to a partner's terms of use before accessing the partner's collection for the first time.
+#: TWLight/users/templates/users/terms_agreement_modal.html:8
+#, fuzzy
+#| msgid "Has agreed to the terms of use?"
+msgid "Agree to the terms of use"
+msgstr "利用規約に同意済みですか？"
+
+#. Translators: A button that closes a popup without agreeing to the terms of use.
+#: TWLight/users/templates/users/terms_agreement_modal.html:10
+#: TWLight/users/templates/users/terms_agreement_modal.html:27
+msgid "Close"
+msgstr ""
+
+#. Translators: Shown in a popup when a user must agree to a partner's terms of use before accessing the partner's collection for the first time. The partner's name is filled in automatically.
+#: TWLight/users/templates/users/terms_agreement_modal.html:17
+msgid ""
+"To access <strong class=\"tou-partner-name\"></strong>, you must agree to "
+"its <a class=\"tou-link\" href=\"#\" target=\"_blank\" "
+"rel=\"noopener\">terms of use</a>. You will only be asked this once."
+msgstr ""
+
+#. Translators: A button users click to agree to a partner's terms of use and continue to the partner's collection.
+#: TWLight/users/templates/users/terms_agreement_modal.html:33
+msgid "I agree"
+msgstr ""
+
 #: TWLight/users/templates/users/user_collection_tile.html:32
 msgid "Remove this collection from favorites"
 msgstr "このコレクションをお気に入りから削除する"
@@ -4056,7 +4082,7 @@ msgstr "サイトを訪問"
 
 #. Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site.
 #: TWLight/users/templates/users/user_collection_tile.html:134
-#: TWLight/users/templates/users/user_collection_tile.html:161
+#: TWLight/users/templates/users/user_collection_tile.html:166
 msgid "Access collection"
 msgstr "コレクションを開く"
 
@@ -4119,7 +4145,7 @@ msgid "Coordinators only"
 msgstr "コーディネーター限定"
 
 #. Translators: This message is shown on user's own profile page, encouraging them to make sure their information is up to date, so that account coordinators can use the information to judge applications.
-#: TWLight/users/views.py:181
+#: TWLight/users/views.py:183
 #, python-brace-format
 msgid ""
 "Please <a class='twl-links' href='{url}'>update your contributions</a> to "
@@ -4130,7 +4156,7 @@ msgstr ""
 "さい。"
 
 #. Translators: Coordinators are shown this message when they unselect all three types of reminder email options under preferences.
-#: TWLight/users/views.py:293
+#: TWLight/users/views.py:295
 msgid ""
 "You have chosen not to receive reminder emails. As a coordinator, you should "
 "receive at least one type of reminder emails, so consider changing your "
@@ -4140,38 +4166,38 @@ msgstr ""
 "を1種類は受信する必要があり、ぜひ個人設定の変更をご検討ください。"
 
 #. Translators: Coordinators are shown this message when they make changes to their reminder email options under preferences.
-#: TWLight/users/views.py:301
+#: TWLight/users/views.py:303
 msgid "Your reminder email preferences are updated."
 msgstr "メール通知の個人設定が更新されました。"
 
 #. Translators: This message is shown to users who attempt to update their personal information without being logged in.
 #. Translators: If a user tries to do something (such as updating their email) when not logged in, this message is presented.
 #. Translators: This message is shown to users who attempt to update their data processing without being logged in.
-#: TWLight/users/views.py:383 TWLight/users/views.py:469
-#: TWLight/users/views.py:522
+#: TWLight/users/views.py:385 TWLight/users/views.py:471
+#: TWLight/users/views.py:524
 msgid "You must be logged in to do that."
 msgstr "その処理にはログインが必要です。"
 
 #. Translators: Shown to the user when they successfully modify their personal information.
-#: TWLight/users/views.py:416
+#: TWLight/users/views.py:418
 msgid "Your information has been updated."
 msgstr "個人情報が更新されました。"
 
 #. Translators: If a user tries to save the 'email change form' without entering one and checking the 'use my Wikipedia email address' checkbox, this message is presented.
-#: TWLight/users/views.py:453
+#: TWLight/users/views.py:455
 msgid "Both the values cannot be blank. Either enter a email or check the box."
 msgstr ""
 "どちらの値も記入が必須です。メールアドレスを記入するかボックスを押して色を変"
 "えてください。"
 
 #. Translators: Shown to users when they successfully modify their email. Don't translate {email}.
-#: TWLight/users/views.py:481
+#: TWLight/users/views.py:483
 #, python-brace-format
 msgid "Your email has been changed to {email}."
 msgstr "メールアドレスが{email}に変更されました。"
 
 #. Translators: If the user has not filled out their email, they can browse the website but cannot apply for access to resources.
-#: TWLight/users/views.py:492
+#: TWLight/users/views.py:494
 msgid ""
 "Your email is blank. You can still explore the site, but you won't be able "
 "to apply for access to partner resources without an email."
@@ -4180,27 +4206,27 @@ msgstr ""
 "の登録をするまで提携組織の情報源にアクセス権を申請できません。"
 
 #. Translators: This message is shown once the access to a partner has successfully been returned.
-#: TWLight/users/views.py:806
+#: TWLight/users/views.py:808
 msgid "Access to {} has been returned."
 msgstr "{}へのアクセスが成功しました。"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:885 TWLight/views.py:43
+#: TWLight/users/views.py:887 TWLight/views.py:43
 msgid "500+ edits"
 msgstr "編集履歴が500回以上あること"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:887 TWLight/views.py:45
+#: TWLight/users/views.py:889 TWLight/views.py:45
 msgid "6+ months editing"
 msgstr "6ヵ月超の編集活動"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:889
+#: TWLight/users/views.py:891
 msgid "10+ edits in the last month"
 msgstr "前月に10回以上の編集実績があること"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:891 TWLight/views.py:49
+#: TWLight/users/views.py:893 TWLight/views.py:49
 msgid "No active blocks"
 msgstr "現状でブロックを受けていないこと"
 
