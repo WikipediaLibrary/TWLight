@@ -12,8 +12,8 @@
     "technology_used": "Django, Python, Javascript",
     "tool_type": "web app",
     "developer_docs_url": "https://github.com/WikipediaLibrary/TWLight/wiki",
-    "feedback_url": "https://meta.wikimedia.org/wiki/Talk:Library_Card_platform",
+    "feedback_url": "https://meta.wikimedia.org/wiki/Talk:The_Wikipedia_Library",
     "privacy_policy_url": "https://wikipedialibrary.wmflabs.org/terms/",
     "translate_url": "https://translatewiki.net/wiki/Translating:Wikipedia_Library_Card_Platform",
-    "bugtracker_url": "https://phabricator.wikimedia.org/project/view/2765/"
+    "bugtracker_url": "https://phabricator.wikimedia.org/project/view/1270/"
 }
