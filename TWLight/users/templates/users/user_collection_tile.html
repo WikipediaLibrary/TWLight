@@ -156,7 +156,12 @@
       {% elif not user_collection.partner_phabricator_disabled %}
         <div class="col-12" style="padding: 0px;">
           <a href="{{ user_collection.partner_access_url }}" class="btn btn-sm twl-btn access-apply-button"
-                  type="button" name="button" target="_blank" rel="noopener">
+                  type="button" name="button" target="_blank" rel="noopener"
+                  {% if user_collection.partner_needs_terms_agreement %}
+                  data-tou-partner-pk="{{ user_collection.partner_pk }}"
+                  data-tou-partner-name="{{ user_collection.partner_name }}"
+                  data-tou-url="{{ user_collection.partner_terms_of_use }}"
+                  {% endif %}>
               {% comment %}Translators: On the My Library page (https://wikipedialibrary.wmflabs.org/users/my_library), this labels the text on a button which takes the user to the partner's site. {% endcomment %}
               {% trans "Access collection" %}
           </a>

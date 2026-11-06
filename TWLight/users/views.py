@@ -16,6 +16,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, resolve, Resolver404, reverse
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.decorators.vary import vary_on_headers
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -38,6 +39,7 @@ from TWLight.resources.models import Partner, PartnerLogo
 from TWLight.view_mixins import (
     PartnerCoordinatorOrSelf,
     SelfOnly,
+    ToURequired,
     test_func_coordinators_only,
 )
 from TWLight.users.groups import get_coordinators, get_restricted
@@ -59,7 +61,7 @@ from .forms import (
     UserEmailForm,
     CoordinatorEmailForm,
 )
-from .models import Editor, UserProfile, Authorization
+from .models import Editor, UserProfile, Authorization, PartnerTermsAgreement
 from .serializers import (
     FavoriteCollectionSerializer,
     UserSerializer,
@@ -1000,6 +1002,11 @@ class MyLibraryView(TemplateView):
         """
         user_authorization_obj = []
         favorites_obj = []
+        agreed_partner_ids = set(
+            PartnerTermsAgreement.objects.filter(user=self.request.user).values_list(
+                "partner_id", flat=True
+            )
+        )
 
         for user_authorization in authorization_queryset:
             partner_filtered_list = PartnerFilter(
@@ -1042,6 +1049,14 @@ class MyLibraryView(TemplateView):
                         language_code, user_authorization_partner.new_tags
                     )
                     access_url = user_authorization_partner.get_access_url
+                    requires_agreement = (
+                        user_authorization_partner.requires_first_access_agreement
+                    )
+                    if requires_agreement:
+                        access_url = reverse(
+                            "users:partner_access",
+                            kwargs={"pk": user_authorization_partner.pk},
+                        )
                     user_auth_dict = {
                         "auth_pk": user_authorization.pk,
                         "auth_date_authorized": user_authorization.date_authorized,
@@ -1069,6 +1084,9 @@ class MyLibraryView(TemplateView):
                         "partner_tags": translated_tags,
                         "partner_authorization_method": user_authorization_partner.authorization_method,
                         "partner_access_url": access_url,
+                        "partner_needs_terms_agreement": requires_agreement
+                        and user_authorization_partner.pk not in agreed_partner_ids,
+                        "partner_terms_of_use": user_authorization_partner.terms_of_use,
                         "partner_is_not_available": user_authorization_partner.is_not_available,
                         "partner_is_waitlisted": user_authorization_partner.is_waitlisted,
                         "searchable": user_authorization_partner.searchable,
@@ -1245,6 +1263,46 @@ class MyLibraryView(TemplateView):
         context["partner_search_list"] = json.dumps(partner_search_list)
 
         return context
+
+
+class PartnerAccessView(ToURequired, View):
+    """
+    Entry point for access buttons of partners that need users to agree to
+    their terms of use on first access. Linking here instead of straight to
+    the partner keeps the cached My Library page from letting users skip the
+    agreement.
+    """
+
+    def _get_partner(self, pk):
+        partner = get_object_or_404(Partner.even_not_available, pk=pk)
+        if not partner.get_access_url:
+            raise Http404
+        return partner
+
+    def get(self, request, pk):
+        partner = self._get_partner(pk)
+        if (
+            partner.requires_first_access_agreement
+            and not PartnerTermsAgreement.objects.filter(
+                user=request.user, partner=partner
+            ).exists()
+        ):
+            # The fragment tells My Library to open this partner's agreement
+            # popup. It isn't sent to the server, so the page cache is unaffected.
+            return HttpResponseRedirect(
+                "{library}#tou-{pk}".format(
+                    library=reverse("users:my_library"), pk=partner.pk
+                )
+            )
+        return HttpResponseRedirect(partner.get_access_url)
+
+    def post(self, request, pk):
+        partner = self._get_partner(pk)
+        if partner.requires_first_access_agreement:
+            PartnerTermsAgreement.objects.get_or_create(
+                user=request.user, partner=partner
+            )
+        return HttpResponseRedirect(partner.get_access_url)
 
 
 class FavoriteCollectionView(APIView):

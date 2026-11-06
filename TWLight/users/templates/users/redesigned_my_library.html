@@ -9,6 +9,8 @@
     {% include "users/eligibility_modal.html" %}
   {% endif %}
 
+  {% include "users/terms_agreement_modal.html" %}
+
   <div class="row">
     <div class="col-lg-2 col-md-3">
       {% include "users/filter_section.html" %}
@@ -22,6 +24,7 @@
 {% endblock %}
 
 {% block javascript %}
+  {% include "users/terms_agreement_script.html" %}
   <script type="text/javascript">
     // Dynamically add classes to the django-filter generated labels
     labelLanguages = document.querySelector("[for=id_languages]");

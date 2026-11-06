@@ -9,6 +9,9 @@
 {% block content %}
   {% include "header_partial_b4.html" %}
   {% include "message_partial.html" %}
+  {% if needs_terms_agreement %}
+    {% include "users/terms_agreement_modal.html" %}
+  {% endif %}
   <div id="partner-detail-content">
     <h1 class="mb-4">{{ object }}</h1>
     {% if user.is_authenticated %}
@@ -108,3 +111,9 @@
     {% endif %}
   </div>
 {% endblock content %}
+
+{% block javascript %}
+  {% if needs_terms_agreement %}
+    {% include "users/terms_agreement_script.html" %}
+  {% endif %}
+{% endblock javascript %}

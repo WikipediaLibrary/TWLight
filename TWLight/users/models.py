@@ -1209,3 +1209,37 @@ class Authorization(models.Model):
         # only verify this on object creation.
         else:
             validate_authorizer(self.authorizer)
+
+
+class PartnerTermsAgreement(models.Model):
+    """
+    Records that a user agreed to a partner's terms of use on first access
+    to the collection.
+    """
+
+    class Meta:
+        app_label = "users"
+        verbose_name = "partner terms agreement"
+        verbose_name_plural = "partner terms agreements"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "partner"], name="unique_user_partner_terms_agreement"
+            )
+        ]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="partner_terms_agreements",
+    )
+    partner = models.ForeignKey(
+        Partner,
+        on_delete=models.CASCADE,
+        related_name="terms_agreements",
+    )
+    date_agreed = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{user} agreed to terms of {partner}".format(
+            user=self.user, partner=self.partner
+        )
