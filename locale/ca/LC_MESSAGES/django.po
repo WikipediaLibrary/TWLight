@@ -11,6 +11,7 @@
 # Author: Medol
 # Author: Mguix
 # Author: Qllach
+# Author: Soniettte
 # Author: Vfc
 # Author: Xavier Dengra
 msgid ""
@@ -19,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-11-06 21:42+0000\n"
-"PO-Revision-Date: 2026-11-09 12:06:19+0000\n"
+"PO-Revision-Date: 2026-11-12 12:07:10+0000\n"
 "Language: ca\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2912,7 +2913,6 @@ msgstr "En marcar aquesta casella i fer clic a «Envia», accepteu que heu llegi
 
 #. Translators: Title of a popup shown on the My Library page when a user must agree to a partner's terms of use before accessing the partner's collection for the first time.
 #: TWLight/users/templates/users/terms_agreement_modal.html:8
-#, fuzzy
 msgid "Agree to the terms of use"
 msgstr "Ha acceptat les condicions d'ús?"
 

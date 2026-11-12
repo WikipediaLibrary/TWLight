@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-11-06 21:41+0000\n"
-"PO-Revision-Date: 2026-11-09 12:06:21+0000\n"
+"PO-Revision-Date: 2026-11-12 12:07:12+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2909,9 +2909,8 @@ msgstr "Door dit vakje aan te vinken en op \"Verzenden\" te klikken, gaat u erme
 
 #. Translators: Title of a popup shown on the My Library page when a user must agree to a partner's terms of use before accessing the partner's collection for the first time.
 #: TWLight/users/templates/users/terms_agreement_modal.html:8
-#, fuzzy
 msgid "Agree to the terms of use"
-msgstr "Is akkoord met de gebruiksvoorwaarden?"
+msgstr "Akkoord gaan met de gebruiksvoorwaarden"
 
 #. Translators: A button that closes a popup without agreeing to the terms of use.
 #: TWLight/users/templates/users/terms_agreement_modal.html:10

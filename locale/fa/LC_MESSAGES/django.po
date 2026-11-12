@@ -30,7 +30,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-11-06 21:41+0000\n"
-"PO-Revision-Date: 2026-11-09 12:06:19+0000\n"
+"PO-Revision-Date: 2026-11-12 12:07:10+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -973,15 +973,15 @@ msgstr "کد دسترسی کتابخانهٔ ویکی‌پدیای شما"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner; don't translate html tags either. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-html.html:5
-#, fuzzy, python-format
+#, python-format
 msgid "<p>Dear %(user)s,</p> <p>Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved.</p> <p>%(user_instructions)s</p> <p>You can view the collections you're authorized to access on your My Library page: %(link)s</p> <p>Cheers!</p> <p>The Wikipedia Library</p>"
-msgstr "<p>%(user)s گرامی،</p> <p>با سپاس از شما برای درخواست دسترسی به منابع %(partner)s از طریق کتابخانهٔ ویکی‌پدیا. خوشحالیم که به شما اطلاع دهیم که درخواست‌تان تأیید شده است.</p> <p>%(user_instructions)s</p>\n<p>می‌توانید مجموعه‌هایی که به آن‌ها دسترسی دارید را از طریق کتابخانهٔ من مشاهده کنید: %(link)s</p>\n<p>با احترام،</p> <p>کتابخانهٔ ویکی‌پدیا</p>"
+msgstr "<p>%(user)s گرامی،</p> <p>از اینکه برای دسترسی به منابع %(partner)s از طریق کتابخانهٔ ویکی‌پدیا درخواست دادید سپاسگزاریم. خوشحالیم به شما اطلاع دهیم که درخواستتان تأیید شده است.</p> <p>%(user_instructions)s</p> <p>می‌توانید مجموعه‌هایی را که مجاز به دسترسی به آن‌ها هستید در صفحهٔ «کتابخانهٔ من» ببینید: %(link)s</p> <p>با آرزوی بهترین‌ها،</p> <p>کتابخانهٔ ویکی‌پدیا</p>"
 
 #. Translators: This email is sent to users when their application is approved. Don't translate Jinja variables in curly braces like user or partner. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-body-text.html:3
-#, fuzzy, python-format
+#, python-format
 msgid "Dear %(user)s, Thank you for applying for access to %(partner)s resources through The Wikipedia Library. We are happy to inform you that your application has been approved. %(user_instructions)s You can view the collections you're authorized to access on your My Library page: %(link)s Cheers! The Wikipedia Library"
-msgstr "%(user)s گرامی، با سپاس از شما برای درخواست دسترسی به منابع\n %(partner)s از طریق کتابخانهٔ ویکی‌پدیا. خوشحالیم که به شما اطلاع دهیم که درخواست‌تان تأیید شده است. %(user_instructions)s \n<p>می‌توانید مجموعه‌هایی که به آن‌ها دسترسی دارید را از طریق کتابخانهٔ من مشاهده کنید: %(link)s</p>\nبا احترام! کتابخانهٔ ویکی‌پدیا"
+msgstr "%(user)s گرامی، از اینکه برای دسترسی به منابع %(partner)s از طریق کتابخانهٔ ویکی‌پدیا درخواست دادید سپاسگزاریم. خوشحالیم به شما اطلاع دهیم که درخواستتان تأیید شده است. %(user_instructions)s می‌توانید مجموعه‌هایی را که مجاز به دسترسی به آن‌ها هستید در صفحهٔ «کتابخانهٔ من» ببینید: %(link)s با آرزوی بهترین‌ها، کتابخانهٔ ویکی‌پدیا"
 
 #. Translators: This is the subject of an email which is sent to users when their application has been approved. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/approval_notification-subject.html:4
@@ -1119,13 +1119,13 @@ msgstr "درخواست کتابخانهٔ ویکی‌پدیای شما"
 #: TWLight/emails/templates/emails/survey_active_user-body-html.html:5
 #, python-format
 msgid "<p>Hi,</p> <p>We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project.</p> <p>The survey should take 5-10 minutes to complete.</p> <p>If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing.</p> <p>Thanks,</p> <p>The Wikipedia Library team</p>"
-msgstr ""
+msgstr "<p>سلام،</p> <p>در حال برگزاری نظرسنجی‌ای هستیم تا بدانیم ویرایشگران چگونه از کتابخانهٔ ویکی‌پدیا استفاده می‌کنند. طبق سوابق ما، شما دست‌کم یک بار به کتابخانهٔ ویکی‌پدیا وارد شده‌اید؛ بنابراین مشتاقیم نظرتان را بدانیم!</p> <p><a href=\"%(link)s\">%(link)s</a></p> <p>بازخورد شما برایمان بسیار ارزشمند است. این نظرسنجی به ما کمک می‌کند بدانیم کتابخانهٔ ویکی‌پدیا در حال حاضر چگونه استفاده می‌شود و چه بخش‌هایی نیاز به بهبود دارند. پاسخ‌های شما مستقیماً بر اولویت‌بندی فعالیت‌های فنی و همکاری‌های بنیاد ویکی‌مدیا برای این پروژه تأثیر می‌گذارند.</p> <p>تکمیل نظرسنجی حدود ۵ تا ۱۰ دقیقه زمان می‌برد.</p> <p>اگر نمی‌خواهید در آینده برای نظرسنجی‌های کتابخانهٔ ویکی‌پدیا با شما تماس بگیریم، لطفاً با ارسال ایمیل به wikipedialibrary@wikimedia.org به ما اطلاع دهید تا شما را از فهرست ارسال‌های بعدی حذف کنیم.</p> <p>با سپاس،</p> <p>تیم کتابخانهٔ ویکی‌پدیا</p>"
 
 #. Translators: This email is sent to users when we invite them to respond to a survey. Don't translate Jinja variables in curly braces like link. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #: TWLight/emails/templates/emails/survey_active_user-body-text.html:3
 #, python-format
 msgid "Hi, We are currently running a survey to understand how editors use The Wikipedia Library. According to our records, you have logged in to The Wikipedia Library at least once, so we would love to hear from you! %(link)s We really appreciate your feedback - this survey will help us understand how The Wikipedia Library is currently being used, and where it could use improvement. Your responses will directly impact how the Wikimedia Foundation prioritises technical and partnership work for this project. The survey should take 5-10 minutes to complete. If you would like to opt-out of being contacted with future Wikipedia Library surveys, please let us know by emailing wikipedialibrary@wikimedia.org and we will remove you from any future mailing. Thanks, The Wikipedia Library team"
-msgstr ""
+msgstr "سلام، در حال برگزاری نظرسنجی‌ای هستیم تا بدانیم ویرایشگران چگونه از کتابخانهٔ ویکی‌پدیا استفاده می‌کنند. طبق سوابق ما، شما دست‌کم یک بار به کتابخانهٔ ویکی‌پدیا وارد شده‌اید؛ بنابراین مشتاقیم نظرتان را بدانیم! %(link)s بازخورد شما برایمان بسیار ارزشمند است. این نظرسنجی به ما کمک می‌کند بدانیم کتابخانهٔ ویکی‌پدیا در حال حاضر چگونه استفاده می‌شود و چه بخش‌هایی نیاز به بهبود دارند. پاسخ‌های شما مستقیماً بر اولویت‌بندی فعالیت‌های فنی و همکاری‌های بنیاد ویکی‌مدیا برای این پروژه تأثیر می‌گذارند. تکمیل نظرسنجی حدود ۵ تا ۱۰ دقیقه زمان می‌برد. اگر نمی‌خواهید در آینده برای نظرسنجی‌های کتابخانهٔ ویکی‌پدیا با شما تماس بگیریم، لطفاً با ارسال ایمیل به wikipedialibrary@wikimedia.org به ما اطلاع دهید تا شما را از فهرست ارسال‌های بعدی حذف کنیم. با سپاس، تیم کتابخانهٔ ویکی‌پدیا"
 
 #. Translators: This is the subject of an email sent to users when we invite them to respond to a survey. Translate Wikipedia Library in the same way as the global branch is named (click through from https://meta.wikimedia.org/wiki/The_Wikipedia_Library).
 #. Translators: email subject line
@@ -1202,13 +1202,12 @@ msgstr "جستجو"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed immediately.
 #: TWLight/resources/filters.py:14
 msgid "Instant access via the proxy"
-msgstr ""
+msgstr "دسترسی فوری از طریق پراکسی"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this indicates that a collection may be accessed only after additional steps, such as submitting an application and awaiting approval.
 #: TWLight/resources/filters.py:16
-#, fuzzy
 msgid "Application required"
-msgstr "درخواست‌های نیازمند بررسی"
+msgstr "نیازمند ثبت درخواست"
 
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
@@ -1381,7 +1380,7 @@ msgstr "پالایش"
 #: TWLight/resources/templates/resources/filter_section.html:54
 #: TWLight/users/templates/users/filter_section.html:82
 msgid "Search collection descriptions"
-msgstr ""
+msgstr "جست‌وجو در توضیحات مجموعه‌ها"
 
 #. Translators: This is the title of the form where coordiantors can merge partner suggestions.
 #: TWLight/resources/templates/resources/merge_suggestion.html:34
@@ -1775,7 +1774,7 @@ msgstr "این پایگاه آمادهٔ دریافت درخواست‌ها اس
 #. Translators: Shown to users when they successfully add a new partner suggestion.
 #: TWLight/resources/views.py:564
 msgid "Your suggestion has been added. Please note that we will primarily prioritise highly upvoted suggestions, and we cannot predict how long it will take to fulfill a suggestion."
-msgstr ""
+msgstr "پیشنهاد شما اضافه شد. توجه داشته باشید که در درجهٔ اول، پیشنهادهایی را در اولویت قرار می‌دهیم که رأی مثبت بیشتری گرفته‌اند و نمی‌توانیم پیش‌بینی کنیم که اجرای هر پیشنهاد چقدر زمان خواهد برد."
 
 #. Translators: Shown to coordinators when they successfully delete a partner suggestion
 #: TWLight/resources/views.py:589
@@ -2231,7 +2230,7 @@ msgstr "با علامت نزدن این کادر و کلیک روی «به‌ر�
 #. Translators: Error shown when a user enters an email address containing disallowed characters.
 #: TWLight/users/forms.py:211
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "یک نشانی ایمیل معتبر وارد کنید."
 
 #. Translators: Users click this button to set their website email address to the one linked to their Wikipedia account.
 #: TWLight/users/forms.py:221
@@ -2914,25 +2913,24 @@ msgstr "با علامت زدن این کادر و کلیک روی «ارسال»
 
 #. Translators: Title of a popup shown on the My Library page when a user must agree to a partner's terms of use before accessing the partner's collection for the first time.
 #: TWLight/users/templates/users/terms_agreement_modal.html:8
-#, fuzzy
 msgid "Agree to the terms of use"
-msgstr "با شرایط استفاده موافقت شده؟"
+msgstr "موافقت با شرایط استفاده"
 
 #. Translators: A button that closes a popup without agreeing to the terms of use.
 #: TWLight/users/templates/users/terms_agreement_modal.html:10
 #: TWLight/users/templates/users/terms_agreement_modal.html:27
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 #. Translators: Shown in a popup when a user must agree to a partner's terms of use before accessing the partner's collection for the first time. The partner's name is filled in automatically.
 #: TWLight/users/templates/users/terms_agreement_modal.html:17
 msgid "To access <strong class=\"tou-partner-name\"></strong>, you must agree to its <a class=\"tou-link\" href=\"#\" target=\"_blank\" rel=\"noopener\">terms of use</a>. You will only be asked this once."
-msgstr ""
+msgstr "برای دسترسی به <strong class=\"tou-partner-name\"></strong>، باید با <a class=\"tou-link\" href=\"#\" target=\"_blank\" rel=\"noopener\">شرایط استفاده</a>ٔ آن موافقت کنید. این پرسش فقط یک بار از شما پرسیده می‌شود."
 
 #. Translators: A button users click to agree to a partner's terms of use and continue to the partner's collection.
 #: TWLight/users/templates/users/terms_agreement_modal.html:33
 msgid "I agree"
-msgstr ""
+msgstr "موافقم"
 
 #: TWLight/users/templates/users/user_collection_tile.html:32
 msgid "Remove this collection from favorites"
