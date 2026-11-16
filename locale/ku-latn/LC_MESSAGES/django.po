@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2026-11-09 12:06:20+0000\n"
-"X-POT-Import-Date: 2026-11-06 22:30:30+0000\n"
+"PO-Revision-Date: 2026-11-16 12:08:11+0000\n"
+"X-POT-Import-Date: 2026-11-12 20:30:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ku-Latn\n"
@@ -3035,22 +3035,22 @@ msgid "Access to {} has been returned."
 msgstr "Gihiştina {} hate îzindan"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 500 edits from their Wikimedia account.
-#: TWLight/users/views.py:887 TWLight/views.py:43
+#: TWLight/users/views.py:891 TWLight/views.py:43
 msgid "500+ edits"
 msgstr "500+ guhartin"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has Wikimedia account that is at least 6 months old.
-#: TWLight/users/views.py:889 TWLight/views.py:45
+#: TWLight/users/views.py:893 TWLight/views.py:45
 msgid "6+ months editing"
 msgstr "6+ meh guhartin"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user has made more than 10 edits within the last month (30 days) from their Wikimedia account.
-#: TWLight/users/views.py:891
+#: TWLight/users/views.py:895
 msgid "10+ edits in the last month"
 msgstr "10+ guhartin di meha borî de"
 
 #. Translators: This text is shown next to a tick or cross denoting whether the current user's Wikimedia account has been blocked on any project.
-#: TWLight/users/views.py:893 TWLight/views.py:49
+#: TWLight/users/views.py:897 TWLight/views.py:49
 msgid "No active blocks"
 msgstr "Ti blokkirinên aktîv tine"
 
