@@ -8,6 +8,7 @@
 # Author: Tahmid
 # Author: Titodutta
 # Author: Yahya
+# Author: আজিজ
 # Author: আফতাবুজ্জামান
 # Author: কমলেশ মন্ডল
 # Author: খাত্তাব হাসান
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Wikipedia Library Card Platform - Website\n"
 "Report-Msgid-Bugs-To: translatewiki.net\n"
 "POT-Creation-Date: 2026-11-12 19:14+0000\n"
-"PO-Revision-Date: 2026-11-16 12:08:09+0000\n"
+"PO-Revision-Date: 2026-11-19 12:07:14+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -308,7 +309,7 @@ msgstr "আবেদন বন্ধ হওয়ার পর থেকে দ�
 #: TWLight/applications/templates/applications/application_evaluation.html:82
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:8
 msgid "Status"
-msgstr "অবস্থা"
+msgstr "স্থিতি"
 
 #. Translators: This labels the section of the application showing the length of the account (expiry) requested by the user.
 #: TWLight/applications/templates/applications/application_evaluation.html:91
@@ -407,12 +408,12 @@ msgstr ""
 #. Translators: This message is shown next to the 'Why the editor wants access' label if the user did not include that information in their application.
 #: TWLight/applications/templates/applications/application_evaluation.html:183
 msgid "Not stated"
-msgstr ""
+msgstr "উল্লেখ করা হয়নি"
 
 #. Translators: This labels the section of an application denoting whether the application is for renewing a user's access, or not. Answers are Yes or No.
 #: TWLight/applications/templates/applications/application_evaluation.html:189
 msgid "Renewal of existing access grant?"
-msgstr ""
+msgstr "বিদ্যমান প্রবেশাধিকার অনুদানের নবায়ন?"
 
 #. Translators: This message is shown next to the 'Renewal of existing access grant?' label if the application is a renewal. Don't translate HTML tags or parent_url.
 #: TWLight/applications/templates/applications/application_evaluation.html:195
@@ -535,7 +536,7 @@ msgstr "কোনটিই নয়"
 #. Translators: On the page which shows a list of applications, this text shows next to the page navigation buttons.
 #: TWLight/applications/templates/applications/application_list.html:113
 msgid "Page navigation"
-msgstr ""
+msgstr "পাতা পরিভ্রমণ"
 
 #: TWLight/applications/templates/applications/application_list.html:117
 #: TWLight/applications/templates/applications/application_list.html:124
@@ -605,7 +606,7 @@ msgstr ""
 #: TWLight/applications/templates/applications/application_list_reviewable_include.html:55
 #: TWLight/users/templates/users/my_applications.html:58
 msgid "Not yet reviewed."
-msgstr ""
+msgstr "এখনও অপর্যালোচিত।"
 
 #. Translators: On the page listing applications, this text is displayed when there are no applications to be shown.
 #. Translators: On the page listing applications, this text is displayed when there are no app;ications to be shown.
@@ -1206,7 +1207,7 @@ msgstr "আবেদনের তারিখ"
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this text is shown to indicate how many subject areas a collection covers.
 #: TWLight/resources/filters.py:27
 msgid "Topics"
-msgstr ""
+msgstr "প্রসঙ্গসমূহ"
 
 #. Translators: On the My Library page, this text is shown as the default option when no specific tag filter is selected.
 #: TWLight/resources/filters.py:31
@@ -1355,7 +1356,7 @@ msgstr "আলোচনা করুন"
 #: TWLight/resources/templates/resources/filter_section.html:36
 #: TWLight/users/templates/users/filter_section.html:65
 msgid "Filters"
-msgstr ""
+msgstr "ছাঁকনি"
 
 #. Translators: On the Browse Partners page (https://wikipedialibrary.wmflabs.org/partners/), this link will reset the filters for the collections.
 #. Translators: On the MyLibrary page (https://wikipedialibrary.wmflabs.org/users/my_library), this link will reset the filters for the collections.
@@ -1389,7 +1390,7 @@ msgstr "ইউআরএল"
 #: TWLight/resources/templates/resources/merge_suggestion.html:70
 #: TWLight/resources/templates/resources/suggest.html:78
 msgid "Proposer"
-msgstr ""
+msgstr "প্রস্তাবক"
 
 #. Translators: This is the text that shows upvotes for a suggestion
 #: TWLight/resources/templates/resources/merge_suggestion.html:87
