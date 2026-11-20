@@ -14,4 +14,4 @@ See the [Local setup](https://github.com/WikipediaLibrary/TWLight/wiki/Local-set
 
 ## Documentation
 
-Further project documentation is available in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [Library-Card-Platform Phabricator](https://phabricator.wikimedia.org/project/board/2765/) board.
+Further project documentation is available in the [Wiki](https://github.com/WikipediaLibrary/TWLight/wiki). Our issue tracking takes place on the [The-Wikipedia-Library Phabricator](https://phabricator.wikimedia.org/project/board/1270/) board.
